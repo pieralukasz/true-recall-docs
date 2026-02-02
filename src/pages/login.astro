@@ -1,0 +1,96 @@
+---
+export const prerender = true;
+
+import AppLayout from '../layouts/AppLayout.astro';
+---
+
+<AppLayout title="Sign In">
+	<div class="auth-container">
+		<h1>Welcome back</h1>
+		<p class="subtitle">Sign in to access your dashboard</p>
+
+		<div class="card">
+			<div id="error-message" class="error-message" style="display: none;"></div>
+			<div id="success-message" class="success-message" style="display: none;"></div>
+
+			<form id="login-form">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" required placeholder="you@example.com" />
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" required placeholder="Your password" />
+				</div>
+
+				<button type="submit" class="btn" style="width: 100%;">Sign In</button>
+			</form>
+		</div>
+
+		<p class="alt-action">
+			Don't have an account? <a href="/register">Sign up</a>
+		</p>
+	</div>
+</AppLayout>
+
+<script>
+	import { supabase } from '../lib/supabase';
+
+	const form = document.getElementById('login-form') as HTMLFormElement;
+	const errorMessage = document.getElementById('error-message') as HTMLDivElement;
+	const successMessage = document.getElementById('success-message') as HTMLDivElement;
+
+	// Check if already logged in
+	supabase.auth.getSession().then(({ data: { session } }) => {
+		if (session) {
+			window.location.href = '/dashboard';
+		}
+	});
+
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		errorMessage.style.display = 'none';
+		successMessage.style.display = 'none';
+
+		const email = (document.getElementById('email') as HTMLInputElement).value;
+		const password = (document.getElementById('password') as HTMLInputElement).value;
+
+		const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+		submitBtn.disabled = true;
+		submitBtn.textContent = 'Signing in...';
+
+		try {
+			const { data, error } = await supabase.auth.signInWithPassword({
+				email,
+				password,
+			});
+
+			if (error) {
+				errorMessage.textContent = error.message;
+				errorMessage.style.display = 'block';
+				submitBtn.disabled = false;
+				submitBtn.textContent = 'Sign In';
+				return;
+			}
+
+			if (data.session) {
+				// Store tokens in cookies for SSR access
+				document.cookie = `sb-access-token=${data.session.access_token}; path=/; max-age=${60 * 60}; secure; samesite=lax`;
+				document.cookie = `sb-refresh-token=${data.session.refresh_token}; path=/; max-age=${60 * 60 * 24 * 7}; secure; samesite=lax`;
+
+				successMessage.textContent = 'Success! Redirecting...';
+				successMessage.style.display = 'block';
+
+				setTimeout(() => {
+					window.location.href = '/dashboard';
+				}, 500);
+			}
+		} catch (err) {
+			errorMessage.textContent = 'An unexpected error occurred. Please try again.';
+			errorMessage.style.display = 'block';
+			submitBtn.disabled = false;
+			submitBtn.textContent = 'Sign In';
+		}
+	});
+</script>

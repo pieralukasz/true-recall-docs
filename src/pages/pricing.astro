@@ -1,0 +1,64 @@
+---
+export const prerender = true;
+
+import AppLayout from '../layouts/AppLayout.astro';
+
+// TODO: Implement Stripe integration
+// See: /true-recall/.claude/plans/stripe.md for full implementation plan
+//
+// Required Stripe setup:
+// 1. Create Stripe account and get API keys
+// 2. Create products/prices in Stripe dashboard
+// 3. Set up webhook endpoint at /api/webhooks/stripe
+// 4. Add environment variables:
+//    - STRIPE_SECRET_KEY
+//    - STRIPE_PUBLISHABLE_KEY
+//    - STRIPE_WEBHOOK_SECRET
+---
+
+<AppLayout title="Pricing">
+	<div class="pricing">
+		<h1>Buy Credits</h1>
+		<p>Use credits to generate flashcards without your own API key.</p>
+
+		<div class="plans">
+			<div class="plan">
+				<h2>Starter</h2>
+				<div class="price">$2.50</div>
+				<p>500 credits</p>
+				<button class="btn" disabled>Coming Soon</button>
+			</div>
+
+			<div class="plan popular">
+				<span class="badge">Popular</span>
+				<h2>Pro</h2>
+				<div class="price">$10.00</div>
+				<p>2,500 credits + 500 bonus</p>
+				<button class="btn" disabled>Coming Soon</button>
+			</div>
+
+			<div class="plan">
+				<h2>Power User</h2>
+				<div class="price">$25.00</div>
+				<p>7,000 credits + 1,500 bonus</p>
+				<button class="btn" disabled>Coming Soon</button>
+			</div>
+		</div>
+
+		<p class="note">
+			Payment integration coming soon. For now, use your own
+			<a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter API key</a>
+			in the True Recall plugin settings.
+		</p>
+
+		<div class="card" style="max-width: 600px; margin: 2rem auto 0; text-align: left;">
+			<h2 style="margin-bottom: 1rem;">How Credits Work</h2>
+			<ul style="color: var(--color-text-muted); line-height: 1.8; padding-left: 1.25rem;">
+				<li>Credits are used when generating flashcards via the True Recall plugin</li>
+				<li>1 credit = approximately 1 flashcard generated</li>
+				<li>Credits never expire and carry over month-to-month</li>
+				<li>Bring your own API key? You won't need credits at all!</li>
+			</ul>
+		</div>
+	</div>
+</AppLayout>

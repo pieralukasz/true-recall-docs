@@ -77,10 +77,10 @@ During review sessions, these shortcuts speed up your workflow:
 
 You've mastered the basics! Here's where to go next:
 
-- **[AI Generation](/true-recall-docs/features/ai-generation/)**: Customize prompts and explore advanced generation options
-- **[Review System](/true-recall-docs/features/review-system/)**: Learn about card states and scheduling
-- **[FSRS Algorithm](/true-recall-docs/features/fsrs-algorithm/)**: Understand and optimize the spaced repetition algorithm
-- **[Projects](/true-recall-docs/features/projects/)**: Organize flashcards into study groups
+- **[AI Generation](/features/ai-generation/)**: Customize prompts and explore advanced generation options
+- **[Review System](/features/review-system/)**: Learn about card states and scheduling
+- **[FSRS Algorithm](/features/fsrs-algorithm/)**: Understand and optimize the spaced repetition algorithm
+- **[Projects](/features/projects/)**: Organize flashcards into study groups
 
 ## Tips for Success
 

@@ -67,4 +67,4 @@ All your flashcard data is stored in `.true-recall/true-recall.db`:
 
 ## Next Steps
 
-Ready to get started? Continue to [Installation](/true-recall-docs/getting-started/installation/) to set up True Recall in your Obsidian vault.
+Ready to get started? Continue to [Installation](/getting-started/installation/) to set up True Recall in your Obsidian vault.

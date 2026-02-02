@@ -1,0 +1,110 @@
+---
+export const prerender = false;
+
+import { createClient } from '@supabase/supabase-js';
+import AppLayout from '../layouts/AppLayout.astro';
+
+// Server-side session check
+const accessToken = Astro.cookies.get('sb-access-token')?.value;
+const refreshToken = Astro.cookies.get('sb-refresh-token')?.value;
+
+let user = null;
+
+if (accessToken) {
+	const supabase = createClient(
+		import.meta.env.PUBLIC_SUPABASE_URL,
+		import.meta.env.PUBLIC_SUPABASE_ANON_KEY
+	);
+
+	const { data } = await supabase.auth.getUser(accessToken);
+	user = data.user;
+}
+
+// Redirect to login if not authenticated
+if (!user) {
+	return Astro.redirect('/login');
+}
+
+// TODO: Fetch credits from Supabase
+// Create these tables in Supabase:
+//
+// CREATE TABLE user_credits (
+//   user_id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+//   balance INTEGER NOT NULL DEFAULT 0,
+//   lifetime_purchased INTEGER NOT NULL DEFAULT 0,
+//   lifetime_used INTEGER NOT NULL DEFAULT 0,
+//   created_at TIMESTAMPTZ DEFAULT NOW(),
+//   updated_at TIMESTAMPTZ DEFAULT NOW()
+// );
+//
+// CREATE TABLE credit_transactions (
+//   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+//   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+//   type TEXT NOT NULL CHECK (type IN ('purchase', 'usage', 'refund', 'bonus')),
+//   amount INTEGER NOT NULL,
+//   balance_after INTEGER NOT NULL,
+//   description TEXT,
+//   stripe_session_id TEXT,
+//   created_at TIMESTAMPTZ DEFAULT NOW()
+// );
+//
+// -- Enable RLS
+// ALTER TABLE user_credits ENABLE ROW LEVEL SECURITY;
+// ALTER TABLE credit_transactions ENABLE ROW LEVEL SECURITY;
+//
+// -- Policies
+// CREATE POLICY "Users can view their own credits"
+//   ON user_credits FOR SELECT
+//   USING (auth.uid() = user_id);
+//
+// CREATE POLICY "Users can view their own transactions"
+//   ON credit_transactions FOR SELECT
+//   USING (auth.uid() = user_id);
+
+// MOCK: Replace with actual Supabase query
+const credits = { balance: 0 };
+---
+
+<AppLayout title="Dashboard">
+	<div class="dashboard">
+		<h1>Welcome back!</h1>
+		<p>Signed in as {user.email}</p>
+
+		<div class="credits-card">
+			<h2>Your Credits</h2>
+			<span class="balance">{credits.balance}</span>
+			<span class="label">credits available</span>
+			<a href="/pricing" class="btn">Buy Credits</a>
+		</div>
+
+		<div class="card" style="margin-top: 2rem;">
+			<h2 style="margin-bottom: 1rem;">Quick Actions</h2>
+			<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+				<a href="/" class="btn btn-secondary">View Documentation</a>
+				<button id="logout" class="btn btn-secondary">Sign Out</button>
+			</div>
+		</div>
+
+		<div class="card" style="margin-top: 1.5rem;">
+			<h2 style="margin-bottom: 0.5rem;">Using Credits</h2>
+			<p style="color: var(--color-text-muted); font-size: 0.9rem;">
+				Credits are used to generate flashcards when you don't have your own API key configured in the True Recall plugin.
+				Each flashcard generation uses approximately 1-5 credits depending on the content length.
+			</p>
+		</div>
+	</div>
+</AppLayout>
+
+<script>
+	import { supabase } from '../lib/supabase';
+
+	document.getElementById('logout')?.addEventListener('click', async () => {
+		await supabase.auth.signOut();
+
+		// Clear cookies
+		document.cookie = 'sb-access-token=; Max-Age=0; path=/';
+		document.cookie = 'sb-refresh-token=; Max-Age=0; path=/';
+
+		window.location.href = '/login';
+	});
+</script>

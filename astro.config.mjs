@@ -2,11 +2,13 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightThemeObsidian from 'starlight-theme-obsidian';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://pieralukasz.github.io',
-	base: '/true-recall-docs',
+	site: 'https://truerecall.app',
+	output: 'server',
+	adapter: vercel(),
 	integrations: [
 		starlight({
 			title: 'True Recall',

@@ -88,4 +88,4 @@ After installation, you should see:
 
 ## Next Steps
 
-Now that True Recall is installed, continue to [Quick Start](/true-recall-docs/getting-started/quick-start/) to create your first flashcards.
+Now that True Recall is installed, continue to [Quick Start](/getting-started/quick-start/) to create your first flashcards.
