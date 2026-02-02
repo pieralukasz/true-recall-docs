@@ -3,3 +3,274 @@
 	--sl-color-accent-high: #a78bfa;
 	--sl-color-accent-low: #4c1d95;
 }
+
+/* User Auth Icon in Starlight header */
+.header .right-group user-auth-icon {
+	padding-inline-start: 1rem;
+	border-inline-start: 1px solid var(--sl-color-gray-5);
+}
+
+/* ============================================
+   Auth Pages (Login, Register, Dashboard)
+   ============================================ */
+
+.auth-container {
+	max-width: 400px;
+	margin: 2rem auto;
+}
+
+.auth-container h1 {
+	font-size: 1.75rem;
+	margin-bottom: 0.5rem;
+}
+
+.auth-container .subtitle {
+	color: var(--sl-color-gray-3);
+	margin-bottom: 2rem;
+}
+
+.auth-container .alt-action {
+	text-align: center;
+	color: var(--sl-color-gray-3);
+	margin-top: 1.5rem;
+}
+
+/* Forms */
+.form-group {
+	margin-bottom: 1.5rem;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--sl-color-gray-3);
+	font-size: 0.875rem;
+}
+
+.form-group input {
+	width: 100%;
+	padding: 0.75rem 1rem;
+	background: var(--sl-color-gray-6);
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+	color: var(--sl-color-white);
+	font-size: 1rem;
+}
+
+.form-group input:focus {
+	outline: none;
+	border-color: var(--sl-color-accent);
+}
+
+.form-group input::placeholder {
+	color: var(--sl-color-gray-4);
+}
+
+/* Cards */
+.card {
+	background: var(--sl-color-gray-6);
+	border-radius: 0.75rem;
+	padding: 2rem;
+	border: 1px solid var(--sl-color-gray-5);
+}
+
+/* Buttons */
+.btn {
+	display: inline-block;
+	padding: 0.75rem 1.5rem;
+	background: var(--sl-color-accent);
+	color: white;
+	border: none;
+	border-radius: 0.5rem;
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: filter 0.2s;
+	text-decoration: none;
+}
+
+.btn:hover {
+	filter: brightness(1.1);
+	text-decoration: none;
+}
+
+.btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.btn-secondary {
+	background: transparent;
+	border: 1px solid var(--sl-color-gray-5);
+	color: var(--sl-color-white);
+}
+
+.btn-secondary:hover {
+	background: var(--sl-color-gray-6);
+}
+
+/* Messages */
+.error-message {
+	background: rgba(239, 68, 68, 0.1);
+	border: 1px solid #ef4444;
+	color: #ef4444;
+	padding: 0.75rem 1rem;
+	border-radius: 0.5rem;
+	margin-bottom: 1rem;
+	font-size: 0.875rem;
+}
+
+.success-message {
+	background: rgba(16, 185, 129, 0.1);
+	border: 1px solid #10b981;
+	color: #10b981;
+	padding: 0.75rem 1rem;
+	border-radius: 0.5rem;
+	margin-bottom: 1rem;
+	font-size: 0.875rem;
+}
+
+/* ============================================
+   Dashboard
+   ============================================ */
+
+.dashboard {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.dashboard h1 {
+	font-size: 2rem;
+	margin-bottom: 0.5rem;
+}
+
+.dashboard > p {
+	color: var(--sl-color-gray-3);
+	margin-bottom: 2rem;
+}
+
+.credits-card {
+	background: linear-gradient(135deg, var(--sl-color-accent) 0%, #5b21b6 100%);
+	border-radius: 0.75rem;
+	padding: 2rem;
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.credits-card h2 {
+	font-size: 1rem;
+	font-weight: 400;
+	opacity: 0.9;
+	margin-bottom: 0.5rem;
+}
+
+.credits-card .balance {
+	font-size: 4rem;
+	font-weight: 700;
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.credits-card .label {
+	font-size: 1.25rem;
+	opacity: 0.9;
+	display: block;
+	margin-bottom: 1.5rem;
+}
+
+.credits-card .btn {
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.credits-card .btn:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   Pricing
+   ============================================ */
+
+.pricing {
+	text-align: center;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.pricing h1 {
+	font-size: 2.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.pricing > p {
+	color: var(--sl-color-gray-3);
+	margin-bottom: 3rem;
+	font-size: 1.125rem;
+}
+
+.plans {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+}
+
+.plan {
+	background: var(--sl-color-gray-6);
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.75rem;
+	padding: 2rem;
+	position: relative;
+}
+
+.plan.popular {
+	border-color: var(--sl-color-accent);
+}
+
+.plan .badge {
+	position: absolute;
+	top: -10px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: var(--sl-color-accent);
+	color: white;
+	padding: 0.25rem 0.75rem;
+	border-radius: 999px;
+	font-size: 0.75rem;
+	font-weight: 600;
+}
+
+.plan h2 {
+	font-size: 1.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.plan .price {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: var(--sl-color-accent);
+	margin-bottom: 0.5rem;
+}
+
+.plan p {
+	color: var(--sl-color-gray-3);
+	margin-bottom: 1.5rem;
+}
+
+.plan .btn {
+	width: 100%;
+}
+
+.note {
+	color: var(--sl-color-gray-3);
+	font-size: 0.875rem;
+}
+
+/* Loading state */
+.loading-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 200px;
+	color: var(--sl-color-gray-3);
+}

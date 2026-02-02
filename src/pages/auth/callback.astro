@@ -1,120 +1,94 @@
 ---
-export const prerender = false;
+export const prerender = true;
 
-// This page handles OAuth and magic link callbacks
-// The actual token exchange happens client-side with Supabase JS
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Authenticating... | True Recall</title>
-		<style>
-			body {
-				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-				background: #1a1a2e;
-				color: #eaeaea;
-				min-height: 100vh;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin: 0;
-			}
-			.container {
-				text-align: center;
-				padding: 2rem;
-			}
-			.spinner {
-				width: 40px;
-				height: 40px;
-				border: 3px solid #2d2d44;
-				border-top-color: #7c3aed;
-				border-radius: 50%;
-				animation: spin 1s linear infinite;
-				margin: 0 auto 1rem;
-			}
-			@keyframes spin {
-				to { transform: rotate(360deg); }
-			}
-			.error {
-				color: #ef4444;
-				margin-top: 1rem;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="spinner"></div>
-			<p id="status">Completing sign in...</p>
-			<p id="error" class="error" style="display: none;"></p>
-		</div>
+<StarlightPage frontmatter={{ title: 'Authenticating', editUrl: false, tableOfContents: false }}>
+	<div class="auth-container" style="text-align: center;">
+		<div class="spinner"></div>
+		<p id="status">Completing sign in...</p>
+		<p id="error" class="error-message" style="display: none;"></p>
+	</div>
+</StarlightPage>
 
-		<script>
-			import { supabase } from '../../lib/supabase';
+<style>
+	.spinner {
+		width: 40px;
+		height: 40px;
+		border: 3px solid var(--sl-color-gray-5);
+		border-top-color: var(--sl-color-accent);
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+		margin: 2rem auto 1rem;
+	}
+	@keyframes spin {
+		to { transform: rotate(360deg); }
+	}
+</style>
 
-			async function handleCallback() {
-				const status = document.getElementById('status') as HTMLParagraphElement;
-				const error = document.getElementById('error') as HTMLParagraphElement;
+<script>
+	import { supabase } from '../../lib/supabase';
 
-				try {
-					// Get the session from URL hash (for OAuth) or from code exchange (for magic link)
-					const hashParams = new URLSearchParams(window.location.hash.substring(1));
-					const queryParams = new URLSearchParams(window.location.search);
+	async function handleCallback() {
+		const status = document.getElementById('status') as HTMLParagraphElement;
+		const error = document.getElementById('error') as HTMLParagraphElement;
 
-					// Check for error in URL
-					const urlError = hashParams.get('error') || queryParams.get('error');
-					const urlErrorDescription = hashParams.get('error_description') || queryParams.get('error_description');
+		try {
+			// Get the session from URL hash (for OAuth) or from code exchange (for magic link)
+			const hashParams = new URLSearchParams(window.location.hash.substring(1));
+			const queryParams = new URLSearchParams(window.location.search);
 
-					if (urlError) {
-						throw new Error(urlErrorDescription || urlError);
-					}
+			// Check for error in URL
+			const urlError = hashParams.get('error') || queryParams.get('error');
+			const urlErrorDescription = hashParams.get('error_description') || queryParams.get('error_description');
 
-					// Check for code (PKCE flow)
-					const code = queryParams.get('code');
-
-					if (code) {
-						status.textContent = 'Exchanging code for session...';
-						const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
-						if (exchangeError) throw exchangeError;
-					}
-
-					// Get the session
-					const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-
-					if (sessionError) throw sessionError;
-
-					if (session) {
-						// Store tokens in cookies for SSR access
-						document.cookie = `sb-access-token=${session.access_token}; path=/; max-age=${60 * 60}; secure; samesite=lax`;
-						document.cookie = `sb-refresh-token=${session.refresh_token}; path=/; max-age=${60 * 60 * 24 * 7}; secure; samesite=lax`;
-
-						status.textContent = 'Success! Redirecting to dashboard...';
-						setTimeout(() => {
-							window.location.href = '/dashboard';
-						}, 500);
-					} else {
-						// No session found, redirect to login
-						status.textContent = 'No session found. Redirecting to login...';
-						setTimeout(() => {
-							window.location.href = '/login';
-						}, 1000);
-					}
-				} catch (err) {
-					console.error('Auth callback error:', err);
-					status.style.display = 'none';
-					error.textContent = err instanceof Error ? err.message : 'Authentication failed';
-					error.style.display = 'block';
-
-					// Redirect to login after showing error
-					setTimeout(() => {
-						window.location.href = '/login';
-					}, 3000);
-				}
+			if (urlError) {
+				throw new Error(urlErrorDescription || urlError);
 			}
 
-			handleCallback();
-		</script>
-	</body>
-</html>
+			// Check for code (PKCE flow)
+			const code = queryParams.get('code');
+
+			if (code) {
+				status.textContent = 'Exchanging code for session...';
+				const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+				if (exchangeError) throw exchangeError;
+			}
+
+			// Get the session
+			const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+			if (sessionError) throw sessionError;
+
+			if (session) {
+				// Store tokens in cookies for SSR access
+				document.cookie = `sb-access-token=${session.access_token}; path=/; max-age=${60 * 60}; secure; samesite=lax`;
+				document.cookie = `sb-refresh-token=${session.refresh_token}; path=/; max-age=${60 * 60 * 24 * 7}; secure; samesite=lax`;
+
+				status.textContent = 'Success! Redirecting to dashboard...';
+				setTimeout(() => {
+					window.location.href = '/dashboard';
+				}, 500);
+			} else {
+				// No session found, redirect to login
+				status.textContent = 'No session found. Redirecting to login...';
+				setTimeout(() => {
+					window.location.href = '/login';
+				}, 1000);
+			}
+		} catch (err) {
+			console.error('Auth callback error:', err);
+			status.style.display = 'none';
+			error.textContent = err instanceof Error ? err.message : 'Authentication failed';
+			error.style.display = 'block';
+
+			// Redirect to login after showing error
+			setTimeout(() => {
+				window.location.href = '/login';
+			}, 3000);
+		}
+	}
+
+	handleCallback();
+</script>

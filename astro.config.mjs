@@ -7,13 +7,16 @@ import vercel from '@astrojs/vercel';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://truerecall.app',
-	output: 'server',
+	output: 'static',
 	adapter: vercel(),
 	integrations: [
 		starlight({
 			title: 'True Recall',
 			description: 'AI-powered flashcard generation and spaced repetition for Obsidian',
 			plugins: [starlightThemeObsidian()],
+			components: {
+				Header: './src/components/starlight/Header.astro',
+			},
 			logo: {
 				src: './src/assets/logo.svg',
 			},

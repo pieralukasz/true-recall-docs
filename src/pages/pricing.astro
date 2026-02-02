@@ -1,22 +1,10 @@
 ---
 export const prerender = true;
 
-import AppLayout from '../layouts/AppLayout.astro';
-
-// TODO: Implement Stripe integration
-// See: /true-recall/.claude/plans/stripe.md for full implementation plan
-//
-// Required Stripe setup:
-// 1. Create Stripe account and get API keys
-// 2. Create products/prices in Stripe dashboard
-// 3. Set up webhook endpoint at /api/webhooks/stripe
-// 4. Add environment variables:
-//    - STRIPE_SECRET_KEY
-//    - STRIPE_PUBLISHABLE_KEY
-//    - STRIPE_WEBHOOK_SECRET
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
 
-<AppLayout title="Pricing">
+<StarlightPage frontmatter={{ title: 'Pricing', editUrl: false, tableOfContents: false }}>
 	<div class="pricing">
 		<h1>Buy Credits</h1>
 		<p>Use credits to generate flashcards without your own API key.</p>
@@ -53,7 +41,7 @@ import AppLayout from '../layouts/AppLayout.astro';
 
 		<div class="card" style="max-width: 600px; margin: 2rem auto 0; text-align: left;">
 			<h2 style="margin-bottom: 1rem;">How Credits Work</h2>
-			<ul style="color: var(--color-text-muted); line-height: 1.8; padding-left: 1.25rem;">
+			<ul style="color: var(--sl-color-gray-3); line-height: 1.8; padding-left: 1.25rem;">
 				<li>Credits are used when generating flashcards via the True Recall plugin</li>
 				<li>1 credit = approximately 1 flashcard generated</li>
 				<li>Credits never expire and carry over month-to-month</li>
@@ -61,4 +49,4 @@ import AppLayout from '../layouts/AppLayout.astro';
 			</ul>
 		</div>
 	</div>
-</AppLayout>
+</StarlightPage>

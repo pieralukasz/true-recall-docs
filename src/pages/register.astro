@@ -1,10 +1,10 @@
 ---
 export const prerender = true;
 
-import AppLayout from '../layouts/AppLayout.astro';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
 
-<AppLayout title="Create Account">
+<StarlightPage frontmatter={{ title: 'Create Account', editUrl: false, tableOfContents: false }}>
 	<div class="auth-container">
 		<h1>Create an account</h1>
 		<p class="subtitle">Sign up to start using True Recall credits</p>
@@ -37,7 +37,7 @@ import AppLayout from '../layouts/AppLayout.astro';
 			Already have an account? <a href="/login">Sign in</a>
 		</p>
 	</div>
-</AppLayout>
+</StarlightPage>
 
 <script>
 	import { supabase } from '../lib/supabase';

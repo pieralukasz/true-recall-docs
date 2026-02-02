@@ -44,26 +44,67 @@ Automatically backup when plugin loads:
 
 **Recommendation**: Keep enabled for safety.
 
-### Maximum Backups
-
-Number of backup files to keep:
-
-| Setting | Behavior |
-|---------|----------|
-| **5** | Keep last 5 backups |
-| **10** | Keep last 10 backups |
-| **20** | Keep last 20 backups |
-
-Old backups are deleted when limit exceeded.
-
 ### Backup Location
 
-Backups stored at:
+Backups are stored per-device at:
 ```
-<vault>/.true-recall/backups/
+<vault>/.true-recall/backups/<device-id>/
 ```
 
-Filenames: `true-recall-<timestamp>.db`
+Filenames: `true-recall-backup-YYYY-MM-DD-HHmmss.db`
+
+## Background Backup System
+
+True Recall features an advanced background backup system with multiple trigger options and smart retention, similar to Apple's Time Machine.
+
+### Periodic Backups
+
+Enable automatic backups at regular intervals:
+
+| Interval | Use Case |
+|----------|----------|
+| **15 min** | Heavy study sessions |
+| **30 min** | Regular use |
+| **1 hour** | Default, balanced |
+| **2 hours** | Light usage |
+| **4 hours** | Minimal usage |
+
+**Smart dirty tracking**: Backups only occur when data has changed since the last backup, preventing unnecessary duplicates.
+
+**Default**: Disabled (enable in settings)
+
+### Activity-Triggered Backups
+
+Trigger backups based on review activity instead of (or in addition to) time intervals:
+
+- Automatically backs up after N reviews
+- Default threshold: **50 reviews**
+- Minimum: 10 reviews
+- Works independently of periodic backups
+
+**When to use**: Ideal if you do intensive review sessions and want backups tied to actual usage rather than time.
+
+### Smart Retention Policy
+
+The retention policy uses a multi-tier approach that keeps recent backups densely and older ones sparsely:
+
+| Tier | Description | Default | Range |
+|------|-------------|---------|-------|
+| **Hourly** | One backup per hour | 24 hours | 0-48 |
+| **Daily** | One backup per day | 7 days | 0-30 |
+| **Weekly** | One backup per week | 4 weeks | 0-12 |
+
+**How it works**:
+1. For each tier, the system selects the **newest** backup within each time bucket
+2. Backups can be kept by multiple tiers (a backup from today counts for hourly AND daily)
+3. Backups not selected by any tier are automatically deleted
+
+**Example with defaults (24h/7d/4w)**:
+- Last 24 hours: Keep one backup per hour (up to 24 backups)
+- Last 7 days: Keep one backup per day (up to 7 backups)
+- Last 4 weeks: Keep one backup per week (up to 4 backups)
+
+This means you might have ~35 backups total, with dense coverage recently and sparse coverage historically.
 
 ## Backup Operations
 
@@ -82,10 +123,11 @@ Recover previous database state:
 1. Click "Restore from Backup"
 2. Select backup from list
 3. Confirm restoration
-4. Database replaced with backup
+4. **Safety backup automatically created** before restoration
+5. Reload Obsidian to apply changes
 
-:::caution
-Restoration overwrites current data. Create a backup first if unsure.
+:::tip[Safety First]
+Restoration automatically creates a safety backup before overwriting your current data. You can always go back if the restored backup wasn't what you needed.
 :::
 
 ### Managing Backups
@@ -94,6 +136,12 @@ Backup files can be:
 - Viewed in file explorer
 - Manually deleted if needed
 - Copied for external storage
+
+### Delete Individual Backups
+
+Remove specific backups you no longer need:
+- Useful for cleaning up large backups
+- Doesn't affect retention policy
 
 ## Device Management
 
@@ -246,12 +294,17 @@ If no backups available:
 
 ## Best Practices
 
-### Backup Strategy
+### Recommended Backup Configuration
 
-1. Enable auto-backup
-2. Keep 10-20 backups
-3. Periodically export
-4. Consider external backup
+For most users:
+1. Enable **periodic backups** at 1-hour interval
+2. Enable **activity-triggered backups** at 50 reviews
+3. Use default retention policy (24h/7d/4w)
+
+For heavy users:
+1. Enable **periodic backups** at 30-minute interval
+2. Enable **activity-triggered backups** at 25 reviews
+3. Increase hourly retention to 48 hours
 
 ### Before Major Changes
 
@@ -263,9 +316,9 @@ Create manual backup before:
 
 ### Regular Maintenance
 
-- Check backup count monthly
+- Check backup status in settings
 - Vacuum database quarterly
-- Verify backups work
+- Verify backups work periodically
 - Monitor database size
 
 ## Troubleshooting
@@ -290,3 +343,11 @@ If restoration fails:
 - Backup file may be corrupted
 - Try different backup
 - Check file permissions
+
+### Backups Not Running
+
+If automatic backups aren't working:
+- Verify periodic backup is enabled in settings
+- Check that interval is not set to 0
+- Confirm changes have been made (dirty flag tracking prevents unnecessary backups)
+- Check console for error messages
