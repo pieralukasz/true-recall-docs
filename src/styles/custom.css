@@ -4,6 +4,12 @@
 	--sl-color-accent-low: #4c1d95;
 }
 
+/* Hero image size */
+.hero .hero-image img {
+	max-height: 200px;
+	width: auto;
+}
+
 /* Navigation links in Starlight header */
 .header .right-group nav-links {
 	padding-inline-start: 1rem;
