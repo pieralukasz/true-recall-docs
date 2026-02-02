@@ -16,6 +16,7 @@ export default defineConfig({
 			plugins: [starlightThemeObsidian()],
 			components: {
 				Header: './src/components/starlight/Header.astro',
+				Head: './src/components/starlight/Head.astro',
 			},
 			logo: {
 				src: './src/assets/simple-logo.svg',
