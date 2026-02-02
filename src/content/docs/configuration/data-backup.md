@@ -255,12 +255,12 @@ By design:
 - Enables offline use
 - Sync unifies data
 
-### Syncing Databases
+### Syncing Databases (Coming Soon)
 
-With cloud sync enabled:
-- Local changes push to cloud
-- Cloud changes pull to local
-- Conflicts resolved automatically
+With cloud sync enabled (planned feature):
+- Local changes will push to cloud
+- Cloud changes will pull to local
+- Conflicts will be resolved automatically
 
 ### Database Per Device vs Shared
 
@@ -288,7 +288,7 @@ If database won't load:
 ### Lost All Data
 
 If no backups available:
-1. Check cloud sync (if enabled)
+1. Check cloud sync (when available)
 2. Check vault sync backups
 3. May need to regenerate cards
 

@@ -13,7 +13,7 @@ True Recall turns your Obsidian vault into an intelligent learning system:
 - **Review with spaced repetition** using the FSRS v6 algorithm
 - **Track your progress** with comprehensive statistics
 - **Organize with projects** to group related content
-- **Sync across devices** with optional cloud sync
+- **Sync across devices** with optional cloud sync (coming soon)
 
 ## Who is it for?
 

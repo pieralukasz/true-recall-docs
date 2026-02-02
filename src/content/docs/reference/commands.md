@@ -121,14 +121,13 @@ Creates a timestamped backup of your flashcard database.
 - **Shortcut**: None
 - **When to use**: Before major changes, regular backups
 
-### Sync Cloud Data
+### Sync Cloud Data (Coming Soon)
 
 Synchronizes flashcards with True Recall Cloud (pull + push).
 
 - **Command**: `True Recall: Sync cloud data`
-- **Shortcut**: None
-- **When to use**: Keep devices in sync
-- **Requires**: Cloud account
+- **Status**: Planned feature, not yet available
+- **When available**: Will keep devices in sync
 
 ## History
 
@@ -157,7 +156,7 @@ Reverts the most recent flashcard action (edit, delete, rating).
 | Open orphaned cards | View | Orphan management |
 | Add note to project | Organize | Project assignment |
 | Create backup | Data | Database backup |
-| Sync cloud data | Data | Cloud synchronization |
+| Sync cloud data | Data | Cloud synchronization (coming soon) |
 | Undo action | History | Revert changes |
 
 ## Customizing Shortcuts

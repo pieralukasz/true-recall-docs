@@ -51,6 +51,38 @@ Every flashcard in True Recall has one of four states:
 The algorithm learns from your ratings. Don't inflate ratings—it hurts your long-term retention.
 :::
 
+## Queue Order
+
+When you start a review session, cards are ordered in a specific way to maximize learning efficiency:
+
+### Queue Priority
+
+```
+1. Due Learning Cards → 2. Review + New Cards → 3. Pending Learning Cards
+```
+
+| Priority | Card Type | Description |
+|----------|-----------|-------------|
+| **1st** | Due Learning | Learning/Relearning cards that are actually due (time has passed) |
+| **2nd** | Due Reviews | Review cards due for today |
+| **2nd** | New Cards | New cards (mixed with reviews based on settings) |
+| **3rd** | Pending Learning | Learning cards scheduled for later (e.g., "due in 15 min") |
+
+### Why This Order?
+
+- **Learning cards first**: When actually due, they need immediate attention for optimal learning
+- **Reviews and new cards**: Your main study content
+- **Pending learning last**: If you've pressed "Again" on a card, it goes to the end and you'll see it only after reviewing other available cards
+
+:::note Waiting Screen
+When all due cards are reviewed and only pending Learning cards remain, you'll see a **waiting screen** with a countdown. This ensures learning steps are respected (e.g., a 30-minute step actually waits 30 minutes).
+:::
+
+### Learn-Ahead Behavior
+
+- **Review cards**: Can be studied up to 20 minutes early (learn-ahead window)
+- **Learning cards**: Must be actually due—no early review. This respects the spacing effect during initial learning.
+
 ## Session Types
 
 ### Standard Review
