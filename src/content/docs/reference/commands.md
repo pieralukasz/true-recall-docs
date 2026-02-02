@@ -1,0 +1,195 @@
+---
+title: Commands Reference
+description: Complete list of all True Recall commands available in Obsidian
+---
+
+True Recall provides 15 commands accessible via the Command Palette (`Cmd/Ctrl+P`).
+
+## Flashcard Management
+
+### Open Flashcard Panel
+
+Opens the sidebar panel showing flashcards for the current note.
+
+- **Command**: `True Recall: Open flashcard panel`
+- **Shortcut**: None (customize in Hotkeys)
+- **When to use**: View/manage cards from current note
+
+### Generate Flashcards for Current Note
+
+Opens the flashcard panel and triggers AI generation for the active note.
+
+- **Command**: `True Recall: Generate flashcards for current note`
+- **Shortcut**: None
+- **When to use**: Create cards from note content
+- **Requires**: OpenRouter API key
+
+### Add Flashcard UID to Current Note
+
+Adds a unique identifier to the note's frontmatter, enabling flashcard linking.
+
+- **Command**: `True Recall: Add flashcard UID to current note`
+- **Shortcut**: None
+- **When to use**: Before creating cards for a new note
+- **Effect**: Adds `flashcard_uid: <uuid>` to frontmatter
+
+## Review Commands
+
+### Start Review Session
+
+Opens the session builder to configure and start a review.
+
+- **Command**: `True Recall: Start review session`
+- **Shortcut**: None
+- **When to use**: Begin daily review or custom session
+
+### Review Flashcards from Current Note
+
+Starts a review session with only cards from the currently open note.
+
+- **Command**: `True Recall: Review flashcards from current note`
+- **Shortcut**: None
+- **When to use**: Focus review on specific content
+
+### Review Today's New Cards
+
+Reviews flashcards created today regardless of scheduling.
+
+- **Command**: `True Recall: Review today's new cards`
+- **Shortcut**: None
+- **When to use**: Same-day reinforcement of new cards
+
+## Views & Panels
+
+### Open Statistics Panel
+
+Opens the analytics dashboard with charts and metrics.
+
+- **Command**: `True Recall: Open statistics panel`
+- **Shortcut**: None
+- **When to use**: Check progress and retention
+
+### Open Projects Panel
+
+Shows all projects with card counts and review options.
+
+- **Command**: `True Recall: Open projects panel`
+- **Shortcut**: None
+- **When to use**: Manage project-based learning
+
+### Open Card Browser
+
+Opens the full-featured browser to search, filter, and manage all flashcards.
+
+- **Command**: `True Recall: Open card browser`
+- **Shortcut**: None
+- **When to use**: Find and manage specific cards
+
+### Open FSRS Simulator
+
+Launches the interactive simulator to visualize FSRS scheduling.
+
+- **Command**: `True Recall: Open FSRS simulator`
+- **Shortcut**: None
+- **When to use**: Understand algorithm behavior
+
+### Open Orphaned Cards Panel
+
+Shows cards without valid source notes for management.
+
+- **Command**: `True Recall: Open orphaned cards panel`
+- **Shortcut**: None
+- **When to use**: Clean up disconnected cards
+
+## Organization
+
+### Add Current Note to Project
+
+Opens a modal to add/remove the current note from projects.
+
+- **Command**: `True Recall: Add current note to project`
+- **Shortcut**: None
+- **When to use**: Organize notes into study groups
+
+## Data Management
+
+### Create Database Backup
+
+Creates a timestamped backup of your flashcard database.
+
+- **Command**: `True Recall: Create database backup`
+- **Shortcut**: None
+- **When to use**: Before major changes, regular backups
+
+### Sync Cloud Data
+
+Synchronizes flashcards with True Recall Cloud (pull + push).
+
+- **Command**: `True Recall: Sync cloud data`
+- **Shortcut**: None
+- **When to use**: Keep devices in sync
+- **Requires**: Cloud account
+
+## History
+
+### Undo Last Flashcard Action
+
+Reverts the most recent flashcard action (edit, delete, rating).
+
+- **Command**: `True Recall: Undo last flashcard action`
+- **Shortcut**: `Cmd/Ctrl+Z` (during review)
+- **When to use**: Correct mistakes
+
+## Command Summary Table
+
+| Command | Category | Description |
+|---------|----------|-------------|
+| Open flashcard panel | View | Show sidebar panel |
+| Generate flashcards | Create | AI generation |
+| Add flashcard UID | Create | Enable note linking |
+| Start review session | Review | Open session builder |
+| Review from current note | Review | Note-specific review |
+| Review today's new cards | Review | Same-day cards |
+| Open statistics | View | Analytics dashboard |
+| Open projects | View | Project management |
+| Open card browser | View | Card management |
+| Open FSRS simulator | View | Algorithm visualization |
+| Open orphaned cards | View | Orphan management |
+| Add note to project | Organize | Project assignment |
+| Create backup | Data | Database backup |
+| Sync cloud data | Data | Cloud synchronization |
+| Undo action | History | Revert changes |
+
+## Customizing Shortcuts
+
+Add custom hotkeys for any command:
+
+1. Open Settings → Hotkeys
+2. Search for "True Recall"
+3. Click the hotkey field
+4. Press your desired shortcut
+5. Confirm assignment
+
+### Recommended Shortcuts
+
+| Command | Suggested Shortcut |
+|---------|-------------------|
+| Start review session | `Cmd/Ctrl+Shift+R` |
+| Open flashcard panel | `Cmd/Ctrl+Shift+F` |
+| Generate flashcards | `Cmd/Ctrl+Shift+G` |
+| Open statistics | `Cmd/Ctrl+Shift+S` |
+
+## Tips
+
+### Frequent Commands
+Pin frequently used commands to your workflow:
+- Add to quick switcher favorites
+- Create custom hotkeys
+- Use ribbon icons when available
+
+### Command Execution
+Commands can be:
+- Run from Command Palette
+- Triggered by hotkeys
+- Accessed via ribbon icons (some)
+- Used in templates/automation

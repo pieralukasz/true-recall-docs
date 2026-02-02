@@ -1,0 +1,60 @@
+---
+title: True Recall
+description: AI-powered flashcard generation and spaced repetition for Obsidian
+template: splash
+hero:
+  tagline: "Operating System for the Mind — UNDERSTAND, REMEMBER, CREATE"
+  image:
+    file: ../../assets/logo.svg
+  actions:
+    - text: Get Started
+      link: /true-recall-docs/getting-started/introduction/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/lukaszpiera/true-recall
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Why True Recall?
+
+True Recall transforms your Obsidian vault into an intelligent learning system. Create flashcards with AI, review them with state-of-the-art spaced repetition, and track your progress with comprehensive analytics.
+
+<CardGrid stagger>
+	<Card title="AI-Powered Generation" icon="pencil">
+		Generate high-quality flashcards from any note using 7 AI models via OpenRouter.
+		Supports Gemini, GPT, Claude, and Llama.
+	</Card>
+	<Card title="FSRS v6 Algorithm" icon="setting">
+		State-of-the-art spaced repetition with 21 trainable parameters.
+		More efficient than Anki's SM-2 algorithm.
+	</Card>
+	<Card title="Local-First Storage" icon="document">
+		All data stored in portable SQLite database within your vault.
+		Your data stays with you, always.
+	</Card>
+	<Card title="Comprehensive Analytics" icon="seti:graphql">
+		Track retention, forecast workload, and visualize progress with
+		interactive charts and calendar heatmaps.
+	</Card>
+	<Card title="Projects System" icon="list-format">
+		Organize flashcards into projects spanning multiple notes.
+		Review cards by topic or subject area.
+	</Card>
+	<Card title="Cloud Sync" icon="rocket">
+		Optional cross-device synchronization via True Recall Cloud.
+		Study on any device, anywhere.
+	</Card>
+</CardGrid>
+
+## Quick Start
+
+1. **Install** the plugin in Obsidian
+2. **Configure** your OpenRouter API key
+3. **Generate** flashcards from any note
+4. **Review** with spaced repetition
+5. **Track** your progress
+
+Ready to supercharge your learning? [Get started now](/true-recall-docs/getting-started/introduction/).
