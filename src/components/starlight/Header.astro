@@ -6,7 +6,7 @@ import Search from 'virtual:starlight/components/Search';
 import SiteTitle from 'virtual:starlight/components/SiteTitle';
 import SocialIcons from 'virtual:starlight/components/SocialIcons';
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
-import UserAuthIcon from '../UserAuthIcon.astro';
+import NavLinks from '../NavLinks.astro';
 
 /**
  * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
@@ -26,7 +26,7 @@ const shouldRenderSearch =
 		<div class="sl-flex social-icons">
 			<SocialIcons />
 		</div>
-		<UserAuthIcon />
+		<NavLinks />
 		<ThemeSelect />
 		<LanguageSelect />
 	</div>

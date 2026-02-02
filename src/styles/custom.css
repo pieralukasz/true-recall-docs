@@ -4,8 +4,8 @@
 	--sl-color-accent-low: #4c1d95;
 }
 
-/* User Auth Icon in Starlight header */
-.header .right-group user-auth-icon {
+/* Navigation links in Starlight header */
+.header .right-group nav-links {
 	padding-inline-start: 1rem;
 	border-inline-start: 1px solid var(--sl-color-gray-5);
 }
