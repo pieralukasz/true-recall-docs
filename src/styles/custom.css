@@ -4,6 +4,16 @@
 	--sl-color-accent-low: #4c1d95;
 }
 
+/* Site title / logo styling */
+.site-title {
+	gap: 0.5rem;
+}
+
+.site-title img {
+	height: 2rem;
+	width: auto;
+}
+
 /* Hero image size */
 .hero .hero-image img {
 	max-height: 200px;

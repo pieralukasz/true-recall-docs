@@ -18,8 +18,8 @@ export default defineConfig({
 				Header: './src/components/starlight/Header.astro',
 			},
 			logo: {
-				src: './src/assets/logo-with-text.svg',
-				replacesTitle: true,
+				src: './src/assets/simple-logo.svg',
+				replacesTitle: false,
 			},
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/pieralukasz/true-recall' },
