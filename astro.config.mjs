@@ -5,7 +5,7 @@ import starlightThemeObsidian from 'starlight-theme-obsidian';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://lukaszpiera.github.io',
+	site: 'https://pieralukasz.github.io',
 	base: '/true-recall-docs',
 	integrations: [
 		starlight({
@@ -16,7 +16,7 @@ export default defineConfig({
 				src: './src/assets/logo.svg',
 			},
 			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/lukaszpiera/true-recall' },
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/pieralukasz/true-recall' },
 			],
 			sidebar: [
 				{

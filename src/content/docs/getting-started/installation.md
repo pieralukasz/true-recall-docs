@@ -7,7 +7,7 @@ True Recall can be installed manually or from source. Community plugin installat
 
 ## Manual Installation (Recommended)
 
-1. **Download the latest release** from [GitHub Releases](https://github.com/lukaszpiera/true-recall/releases)
+1. **Download the latest release** from [GitHub Releases](https://github.com/pieralukasz/true-recall/releases)
 
 2. **Locate your vault's plugins folder**:
    - Open Obsidian
@@ -36,7 +36,7 @@ For developers or those who want the latest features:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/lukaszpiera/true-recall.git
+   git clone https://github.com/pieralukasz/true-recall.git
    cd true-recall
    ```
 
