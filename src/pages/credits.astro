@@ -1,0 +1,469 @@
+---
+export const prerender = true;
+
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'Credits', template: 'splash', editUrl: false, tableOfContents: false }}>
+	<div class="credits-page">
+		<p class="subtitle">Use credits to generate flashcards without managing your own API key.</p>
+
+		<div class="plans">
+			<div class="plan">
+				<div class="plan-header">
+					<h2>Starter</h2>
+					<p class="plan-desc">Perfect for a single exam session</p>
+				</div>
+				<div class="plan-price">
+					<span class="currency">$</span><span class="amount">2.50</span>
+				</div>
+				<ul class="plan-features">
+					<li>500 credits</li>
+					<li>$0.005 per credit</li>
+					<li>~500 flashcards from your notes</li>
+					<li class="highlight">Never expires</li>
+				</ul>
+				<button class="plan-btn" disabled>Coming Soon</button>
+			</div>
+
+			<div class="plan featured">
+				<span class="plan-badge">Most Popular</span>
+				<div class="plan-header">
+					<h2>Pro</h2>
+					<p class="plan-desc">Covers an entire semester</p>
+				</div>
+				<div class="plan-price">
+					<span class="currency">$</span><span class="amount">10</span>
+				</div>
+				<ul class="plan-features">
+					<li><strong>3,000 credits</strong></li>
+					<li>Includes 500 bonus</li>
+					<li>Best price per credit</li>
+					<li class="highlight">Never expires</li>
+				</ul>
+				<button class="plan-btn" disabled>Coming Soon</button>
+			</div>
+
+			<div class="plan">
+				<div class="plan-header">
+					<h2>Power User</h2>
+					<p class="plan-desc">For med/law students & researchers</p>
+				</div>
+				<div class="plan-price">
+					<span class="currency">$</span><span class="amount">25</span>
+				</div>
+				<ul class="plan-features">
+					<li><strong>8,500 credits</strong></li>
+					<li>Includes 1,500 bonus</li>
+					<li>~8,500 flashcards</li>
+					<li class="highlight">Never expires</li>
+				</ul>
+				<button class="plan-btn" disabled>Coming Soon</button>
+			</div>
+		</div>
+
+		<div class="byok-section">
+			<div class="byok-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+				</svg>
+			</div>
+			<h3>Zero subscription? Use your own API key</h3>
+			<p>
+				Power users: connect your <a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a> or OpenAI key directly.
+				Pay only for what you use, no markup.
+			</p>
+			<a href="/credits-pricing/bring-your-own-key/" class="byok-link">Set up BYOK</a>
+		</div>
+
+		<div class="comparison-section">
+			<h3>Credits vs BYOK: Which is right for you?</h3>
+			<div class="comparison-table">
+				<table>
+					<thead>
+						<tr>
+							<th>Feature</th>
+							<th>Credits</th>
+							<th>Own API Key (BYOK)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Setup</td>
+							<td><span class="check">Instant</span></td>
+							<td>Requires API key</td>
+						</tr>
+						<tr>
+							<td>Cost</td>
+							<td>Fixed price</td>
+							<td><span class="check">Pay per use</span></td>
+						</tr>
+						<tr>
+							<td>Convenience</td>
+							<td><span class="check">Zero config</span></td>
+							<td>Manage your own key</td>
+						</tr>
+						<tr>
+							<td>Best for</td>
+							<td>Most users</td>
+							<td>Power users & devs</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="faq-section">
+			<h3>Frequently Asked Questions</h3>
+			<div class="faq-grid">
+				<div class="faq-item">
+					<h4>Are my notes secure?</h4>
+					<p>Your notes never leave your device. Only the text you select is sent to AI for processing.</p>
+				</div>
+				<div class="faq-item">
+					<h4>Which AI model generates flashcards?</h4>
+					<p>We use Claude 3.5 Sonnet via OpenRouter for optimal quality/cost ratio.</p>
+				</div>
+				<div class="faq-item">
+					<h4>Do credits expire?</h4>
+					<p>No! Credits never expire. Buy once, use whenever you need.</p>
+				</div>
+				<div class="faq-item">
+					<h4>Can I get a refund?</h4>
+					<p>If you're unsatisfied with the quality, contact us within 7 days for a full refund.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</StarlightPage>
+
+<style>
+	.credits-page {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 1rem;
+	}
+
+	.subtitle {
+		font-size: 1.25rem;
+		color: var(--sl-color-gray-2);
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.plans {
+		display: flex;
+		gap: 1.5rem;
+		margin-bottom: 4rem;
+		justify-content: center;
+		align-items: center;
+	}
+
+	@media (max-width: 900px) {
+		.plans {
+			flex-direction: column;
+			align-items: center;
+		}
+		.plan.featured {
+			transform: none !important;
+			order: -1;
+		}
+	}
+
+	.plan {
+		background: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 1rem;
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		transition: all 0.3s ease;
+		flex: 1;
+		max-width: 320px;
+		opacity: 0.85;
+	}
+
+	.plan:hover {
+		opacity: 1;
+		transform: translateY(-5px);
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+	}
+
+	.plan.featured {
+		border: 2px solid var(--sl-color-accent);
+		background: linear-gradient(180deg, var(--sl-color-gray-6) 0%, rgba(124, 58, 237, 0.15) 100%);
+		transform: scale(1.05);
+		z-index: 10;
+		box-shadow: 0 0 40px rgba(124, 58, 237, 0.25);
+		opacity: 1;
+	}
+
+	.plan.featured:hover {
+		transform: scale(1.05) translateY(-5px);
+		box-shadow: 0 0 50px rgba(124, 58, 237, 0.35), 0 12px 40px rgba(0, 0, 0, 0.3);
+	}
+
+	.plan-badge {
+		position: absolute;
+		top: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--sl-color-accent);
+		color: white;
+		padding: 0.35rem 1rem;
+		border-radius: 2rem;
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.plan-header {
+		text-align: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.plan-header h2 {
+		font-size: 1.5rem;
+		margin: 0 0 0.25rem;
+		color: var(--sl-color-white);
+	}
+
+	.plan-desc {
+		color: var(--sl-color-gray-3);
+		margin: 0;
+		font-size: 0.9rem;
+	}
+
+	.plan-price {
+		text-align: center;
+		margin-bottom: 1.5rem;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		gap: 0.1rem;
+	}
+
+	.plan-price .currency {
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--sl-color-accent);
+		margin-top: 0.5rem;
+	}
+
+	.plan-price .amount {
+		font-size: 3.5rem;
+		font-weight: 700;
+		color: var(--sl-color-accent);
+		font-variant-numeric: tabular-nums;
+		line-height: 1;
+	}
+
+	.plan-features {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 2rem;
+		flex-grow: 1;
+	}
+
+	.plan-features li {
+		padding: 0.5rem 0;
+		color: var(--sl-color-gray-2);
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.plan-features li::before {
+		content: "\2713";
+		color: var(--sl-color-accent);
+		font-weight: bold;
+	}
+
+	.plan-features li.highlight {
+		color: #22c55e;
+		font-weight: 500;
+	}
+
+	.plan-features li.highlight::before {
+		content: "\221E";
+		color: #22c55e;
+	}
+
+	.plan-features li strong {
+		color: var(--sl-color-white);
+	}
+
+	.plan-btn {
+		width: 100%;
+		padding: 0.875rem 1.5rem;
+		border: 2px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s;
+		background: transparent;
+		color: var(--sl-color-gray-3);
+	}
+
+	.plan.featured .plan-btn {
+		background: var(--sl-color-accent);
+		border-color: var(--sl-color-accent);
+		color: white;
+	}
+
+	.plan.featured .plan-btn:not(:disabled):hover {
+		filter: brightness(1.1);
+	}
+
+	.plan-btn:disabled {
+		cursor: not-allowed;
+		opacity: 0.7;
+	}
+
+	/* BYOK Section - Enhanced */
+	.byok-section {
+		text-align: center;
+		padding: 2.5rem;
+		background: linear-gradient(135deg, var(--sl-color-gray-6) 0%, rgba(124, 58, 237, 0.08) 100%);
+		border-radius: 1rem;
+		border: 2px solid var(--sl-color-accent);
+		margin-bottom: 3rem;
+	}
+
+	.byok-icon {
+		color: var(--sl-color-accent);
+		margin-bottom: 1rem;
+	}
+
+	.byok-section h3 {
+		margin: 0 0 0.75rem;
+		color: var(--sl-color-white);
+		font-size: 1.5rem;
+	}
+
+	.byok-section p {
+		color: var(--sl-color-gray-2);
+		margin: 0 0 1.5rem;
+		max-width: 500px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.byok-section a {
+		color: var(--sl-color-accent);
+	}
+
+	.byok-link {
+		display: inline-block;
+		background: var(--sl-color-accent);
+		color: white !important;
+		font-weight: 600;
+		text-decoration: none;
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		transition: all 0.2s;
+	}
+
+	.byok-link:hover {
+		filter: brightness(1.1);
+		text-decoration: none;
+		transform: translateY(-2px);
+	}
+
+	/* Comparison Section */
+	.comparison-section {
+		margin-bottom: 3rem;
+	}
+
+	.comparison-section h3 {
+		text-align: center;
+		color: var(--sl-color-white);
+		margin-bottom: 1.5rem;
+		font-size: 1.25rem;
+	}
+
+	.comparison-table {
+		overflow-x: auto;
+	}
+
+	.comparison-table table {
+		width: 100%;
+		border-collapse: collapse;
+		background: var(--sl-color-gray-6);
+		border-radius: 0.75rem;
+		overflow: hidden;
+	}
+
+	.comparison-table th,
+	.comparison-table td {
+		padding: 1rem 1.5rem;
+		text-align: left;
+		border-bottom: 1px solid var(--sl-color-gray-5);
+	}
+
+	.comparison-table th {
+		background: var(--sl-color-gray-5);
+		color: var(--sl-color-white);
+		font-weight: 600;
+	}
+
+	.comparison-table td {
+		color: var(--sl-color-gray-2);
+	}
+
+	.comparison-table tr:last-child td {
+		border-bottom: none;
+	}
+
+	.comparison-table .check {
+		color: #22c55e;
+		font-weight: 500;
+	}
+
+	/* FAQ Section */
+	.faq-section {
+		margin-bottom: 2rem;
+	}
+
+	.faq-section h3 {
+		text-align: center;
+		color: var(--sl-color-white);
+		margin-bottom: 2rem;
+		font-size: 1.5rem;
+	}
+
+	.faq-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.5rem;
+	}
+
+	@media (max-width: 700px) {
+		.faq-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.faq-item {
+		background: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+	}
+
+	.faq-item h4 {
+		color: var(--sl-color-white);
+		margin: 0 0 0.5rem;
+		font-size: 1rem;
+	}
+
+	.faq-item p {
+		color: var(--sl-color-gray-3);
+		margin: 0;
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+</style>

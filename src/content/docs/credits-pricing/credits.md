@@ -41,7 +41,7 @@ Credits are **NOT** consumed when you:
 
 Ready to get started?
 
-<a href="/pricing" class="sl-link-button">Buy Credits →</a>
+<a href="/credits" class="sl-link-button">Buy Credits →</a>
 
 :::note[Coming Soon]
 Payment integration is currently in development. For now, you can use your own [OpenRouter API key](/credits-pricing/bring-your-own-key/) to generate flashcards.

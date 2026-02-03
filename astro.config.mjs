@@ -86,7 +86,7 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'Credits & Pricing',
+					label: 'Credits',
 					items: [
 						{ slug: 'credits-pricing/bring-your-own-key' },
 						{ slug: 'credits-pricing/credits' },
