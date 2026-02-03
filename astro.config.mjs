@@ -85,6 +85,13 @@ export default defineConfig({
 						{ slug: 'advanced/orphaned-cards' },
 					],
 				},
+				{
+					label: 'Credits & Pricing',
+					items: [
+						{ slug: 'credits-pricing/bring-your-own-key' },
+						{ slug: 'credits-pricing/credits' },
+					],
+				},
 			],
 			customCss: ['./src/styles/custom.css'],
 		}),

@@ -8,25 +8,29 @@
 </nav-links>
 
 <script>
-	import { supabase } from '../lib/supabase';
+	import { supabase } from "../lib/supabase";
 
 	class NavLinksElement extends HTMLElement {
 		async connectedCallback() {
 			try {
-				const { data: { session } } = await supabase.auth.getSession();
-				const authLink = this.querySelector('[data-auth-link]') as HTMLAnchorElement;
+				const {
+					data: { session },
+				} = await supabase.auth.getSession();
+				const authLink = this.querySelector(
+					"[data-auth-link]",
+				) as HTMLAnchorElement;
 
 				if (session) {
-					authLink.href = '/dashboard';
-					authLink.textContent = 'Dashboard';
+					authLink.href = "/dashboard";
+					authLink.textContent = "Dashboard";
 				}
 			} catch (error) {
-				console.error('Error checking auth state:', error);
+				console.error("Error checking auth state:", error);
 			}
 		}
 	}
 
-	customElements.define('nav-links', NavLinksElement);
+	customElements.define("nav-links", NavLinksElement);
 </script>
 
 <style>

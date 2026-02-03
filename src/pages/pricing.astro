@@ -4,49 +4,251 @@ export const prerender = true;
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
 
-<StarlightPage frontmatter={{ title: 'Pricing', editUrl: false, tableOfContents: false }}>
-	<div class="pricing">
-		<h1>Buy Credits</h1>
-		<p>Use credits to generate flashcards without your own API key.</p>
+<StarlightPage frontmatter={{ title: 'Pricing', template: 'splash', editUrl: false, tableOfContents: false }}>
+	<div class="pricing-page">
+		<p class="subtitle">Use credits to generate flashcards without managing your own API key.</p>
 
 		<div class="plans">
 			<div class="plan">
-				<h2>Starter</h2>
-				<div class="price">$2.50</div>
-				<p>500 credits</p>
-				<button class="btn" disabled>Coming Soon</button>
+				<div class="plan-header">
+					<h2>Starter</h2>
+					<p class="plan-desc">For trying out</p>
+				</div>
+				<div class="plan-price">
+					<span class="amount">$2.50</span>
+				</div>
+				<ul class="plan-features">
+					<li>500 credits</li>
+					<li>$0.005 per credit</li>
+					<li>~500 flashcards</li>
+					<li>Never expires</li>
+				</ul>
+				<button class="plan-btn" disabled>Coming Soon</button>
 			</div>
 
-			<div class="plan popular">
-				<span class="badge">Popular</span>
-				<h2>Pro</h2>
-				<div class="price">$10.00</div>
-				<p>2,500 credits + 500 bonus</p>
-				<button class="btn" disabled>Coming Soon</button>
+			<div class="plan featured">
+				<span class="plan-badge">Most Popular</span>
+				<div class="plan-header">
+					<h2>Pro</h2>
+					<p class="plan-desc">Best value</p>
+				</div>
+				<div class="plan-price">
+					<span class="amount">$10</span>
+				</div>
+				<ul class="plan-features">
+					<li><strong>3,000 credits</strong></li>
+					<li>Includes 500 bonus</li>
+					<li>~3,000 flashcards</li>
+					<li>Never expires</li>
+				</ul>
+				<button class="plan-btn" disabled>Coming Soon</button>
 			</div>
 
 			<div class="plan">
-				<h2>Power User</h2>
-				<div class="price">$25.00</div>
-				<p>7,000 credits + 1,500 bonus</p>
-				<button class="btn" disabled>Coming Soon</button>
+				<div class="plan-header">
+					<h2>Power User</h2>
+					<p class="plan-desc">For heavy users</p>
+				</div>
+				<div class="plan-price">
+					<span class="amount">$25</span>
+				</div>
+				<ul class="plan-features">
+					<li><strong>8,500 credits</strong></li>
+					<li>Includes 1,500 bonus</li>
+					<li>~8,500 flashcards</li>
+					<li>Never expires</li>
+				</ul>
+				<button class="plan-btn" disabled>Coming Soon</button>
 			</div>
 		</div>
 
-		<p class="note">
-			Payment integration coming soon. For now, use your own
-			<a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter API key</a>
-			in the True Recall plugin settings.
-		</p>
-
-		<div class="card" style="max-width: 600px; margin: 2rem auto 0; text-align: left;">
-			<h2 style="margin-bottom: 1rem;">How Credits Work</h2>
-			<ul style="color: var(--sl-color-gray-3); line-height: 1.8; padding-left: 1.25rem;">
-				<li>Credits are used when generating flashcards via the True Recall plugin</li>
-				<li>1 credit = approximately 1 flashcard generated</li>
-				<li>Credits never expire and carry over month-to-month</li>
-				<li>Bring your own API key? You won't need credits at all!</li>
-			</ul>
+		<div class="byok-section">
+			<h3>Prefer to use your own API key?</h3>
+			<p>
+				Configure your <a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a> or OpenAI key directly in the plugin settings.
+				No credits needed!
+			</p>
+			<a href="/credits-pricing/bring-your-own-key/" class="byok-link">Learn about BYOK →</a>
 		</div>
 	</div>
 </StarlightPage>
+
+<style>
+	.pricing-page {
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 1rem;
+	}
+
+	.subtitle {
+		font-size: 1.25rem;
+		color: var(--sl-color-gray-2);
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.plans {
+		display: flex;
+		gap: 1.5rem;
+		margin-bottom: 3rem;
+		justify-content: center;
+	}
+
+	@media (max-width: 900px) {
+		.plans {
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	.plan {
+		background: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 1rem;
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		transition: transform 0.2s, box-shadow 0.2s;
+		flex: 1;
+		max-width: 320px;
+	}
+
+	.plan:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+	}
+
+	.plan.featured {
+		border-color: var(--sl-color-accent);
+		background: linear-gradient(180deg, var(--sl-color-gray-6) 0%, rgba(138, 99, 210, 0.1) 100%);
+	}
+
+	.plan-badge {
+		position: absolute;
+		top: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--sl-color-accent);
+		color: white;
+		padding: 0.35rem 1rem;
+		border-radius: 2rem;
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.plan-header {
+		text-align: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.plan-header h2 {
+		font-size: 1.5rem;
+		margin: 0 0 0.25rem;
+		color: var(--sl-color-white);
+	}
+
+	.plan-desc {
+		color: var(--sl-color-gray-3);
+		margin: 0;
+		font-size: 0.9rem;
+	}
+
+	.plan-price {
+		text-align: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.plan-price .amount {
+		font-size: 3rem;
+		font-weight: 700;
+		color: var(--sl-color-accent);
+	}
+
+	.plan-features {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 2rem;
+		flex-grow: 1;
+	}
+
+	.plan-features li {
+		padding: 0.5rem 0;
+		color: var(--sl-color-gray-2);
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.plan-features li::before {
+		content: "✓";
+		color: var(--sl-color-accent);
+		font-weight: bold;
+	}
+
+	.plan-features li strong {
+		color: var(--sl-color-white);
+	}
+
+	.plan-btn {
+		width: 100%;
+		padding: 0.875rem 1.5rem;
+		border: none;
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s;
+		background: var(--sl-color-gray-5);
+		color: var(--sl-color-gray-3);
+	}
+
+	.plan.featured .plan-btn {
+		background: var(--sl-color-accent);
+		color: white;
+	}
+
+	.plan.featured .plan-btn:not(:disabled):hover {
+		filter: brightness(1.1);
+	}
+
+	.plan-btn:disabled {
+		cursor: not-allowed;
+		opacity: 0.7;
+	}
+
+	.byok-section {
+		text-align: center;
+		padding: 2rem;
+		background: var(--sl-color-gray-6);
+		border-radius: 1rem;
+		border: 1px solid var(--sl-color-gray-5);
+	}
+
+	.byok-section h3 {
+		margin: 0 0 0.5rem;
+		color: var(--sl-color-white);
+	}
+
+	.byok-section p {
+		color: var(--sl-color-gray-3);
+		margin: 0 0 1rem;
+	}
+
+	.byok-section a {
+		color: var(--sl-color-accent);
+	}
+
+	.byok-link {
+		display: inline-block;
+		color: var(--sl-color-accent);
+		font-weight: 500;
+		text-decoration: none;
+	}
+
+	.byok-link:hover {
+		text-decoration: underline;
+	}
+</style>
