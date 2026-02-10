@@ -30,6 +30,7 @@ Answers can span multiple lines. Just keep writing without blank lines:
 
 ```markdown
 What are the three laws of thermodynamics? #flashcard
+
 1. Energy cannot be created or destroyed, only transformed.
 2. Entropy of an isolated system always increases.
 3. Entropy approaches a constant as temperature approaches absolute zero.
@@ -41,11 +42,13 @@ For longer questions, write the question across multiple lines and place the `#f
 
 ````markdown
 Given the following code:
+
 ```python
 x = [1, 2, 3]
 y = x
 y.append(4)
 ```
+
 What is the value of `x`? #flashcard
 `[1, 2, 3, 4]` — because `y = x` creates a reference,
 not a copy. Both variables point to the same list.
@@ -60,7 +63,7 @@ After writing flashcards in your note:
 3. Cards are stored in the database and linked to the note
 
 :::tip
-You can also create cards manually via the **+ Add Card** button in the panel without using the `#flashcard` tag syntax.
+You can also create cards manually via the **+ Add Card** button in the panel.
 :::
 
 ## Examples
@@ -105,11 +108,13 @@ mitochondria, and endoplasmic reticulum.
 
 ````markdown
 What does this function return? #flashcard
+
 ```javascript
 function mystery(arr) {
   return arr.reduce((a, b) => a + b, 0) / arr.length;
 }
 ```
+
 It returns the arithmetic mean (average) of the array elements.
 ````
 
@@ -117,12 +122,12 @@ It returns the arithmetic mean (average) of the array elements.
 
 Basic flashcards display the question first. Press **Space** or click **Show Answer** to reveal the answer, then rate your recall:
 
-| Rating | Meaning |
-|--------|---------|
+| Rating        | Meaning                            |
+| ------------- | ---------------------------------- |
 | **1 (Again)** | Forgot completely — see again soon |
-| **2 (Hard)** | Struggled to recall |
-| **3 (Good)** | Recalled with some effort |
-| **4 (Easy)** | Recalled instantly |
+| **2 (Hard)**  | Struggled to recall                |
+| **3 (Good)**  | Recalled with some effort          |
+| **4 (Easy)**  | Recalled instantly                 |
 
 ## Editing Cards
 
