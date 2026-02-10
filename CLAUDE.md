@@ -40,3 +40,7 @@ Two Starlight components are overridden in `src/components/starlight/`:
 
 - Custom CSS: `src/styles/custom.css` (accent color `#7c3aed`, site title, hero, auth/dashboard styles)
 - Starlight CSS variables are used throughout (e.g., `--sl-color-accent`, `--sl-color-gray-*`)
+
+### Site Map
+
+See [SITEMAP.md](./SITEMAP.md) for the full site structure with all pages and descriptions. **This file must be kept in sync whenever pages are added, removed, renamed, or moved.**
