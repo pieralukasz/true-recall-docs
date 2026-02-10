@@ -18,7 +18,7 @@ The Flashcard Panel is your primary interface for viewing and managing flashcard
 │ [Note Title]                │
 │ Cards: 12  Due: 3  New: 2   │
 ├─────────────────────────────┤
-│ [+ Add Card] [AI Generate]  │
+│ [+ Add Card] [Collect]      │
 ├─────────────────────────────┤
 │ ┌─────────────────────────┐ │
 │ │ Q: What is X?           │ │
@@ -45,7 +45,7 @@ The Flashcard Panel is your primary interface for viewing and managing flashcard
 | Button | Action |
 |--------|--------|
 | **+ Add Card** | Create new flashcard manually |
-| **AI Generate** | Generate cards with AI |
+| **Collect** | Collect `#flashcard` tagged cards from the note |
 | **Review** | Start review of this note's cards |
 
 ## Card List
@@ -89,13 +89,11 @@ Click the menu button on each card:
 3. Enter answer in the Answer field
 4. Click **Save**
 
-### AI Generation
+### Collecting from Notes
 
-1. Click **AI Generate** button
-2. Optionally enter instructions
-3. Wait for AI to process
-4. Review generated cards
-5. Click **Save All** or select specific cards
+1. Write flashcards in your note using `#flashcard` tags
+2. Click **Collect** in the panel
+3. Cards are detected and imported automatically
 
 ## Editing Cards
 
@@ -166,7 +164,7 @@ After review session:
 ### Efficient Workflow
 1. Open note you want to study
 2. Open panel to see card count
-3. Generate or add cards
+3. Add or collect cards
 4. Start review from panel
 
 ### Organization

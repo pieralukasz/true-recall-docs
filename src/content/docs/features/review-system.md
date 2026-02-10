@@ -126,7 +126,6 @@ Access these with keyboard shortcuts or long-press:
 | Bury Note | `=` | Bury all cards from same source |
 | Edit | `E` | Open card editor |
 | Move | `M` | Move to different note |
-| Generate | `G` | AI generate related card |
 | Branch | `B` | Duplicate the card |
 | New Card | `N` | Create card manually |
 

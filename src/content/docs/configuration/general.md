@@ -87,27 +87,6 @@ Hour when a new "day" begins (24-hour format).
 
 **Recommendation**: Keep default unless you have unusual schedule.
 
-## Floating Button
-
-### Enable Floating Button
-
-Toggle the AI generation button on text selection:
-- **On**: Button appears when selecting text
-- **Off**: No floating button
-
-### Minimum Selection Length
-
-Characters required to show floating button:
-- **Default**: 50 characters
-- **Lower**: More sensitive trigger
-- **Higher**: Only longer selections
-
-### Direct Generation
-
-Skip preview modal when generating:
-- **On**: Generate and save immediately
-- **Off**: Show preview for review (recommended)
-
 ## Content Collection
 
 ### Remove Content After Collection
@@ -152,8 +131,6 @@ True Recall adapts to your Obsidian theme:
 New cards/day: 10
 Reviews/day: 100
 Day boundary: 4 AM
-Floating button: On
-Direct generation: Off
 ```
 
 ### For Power Users

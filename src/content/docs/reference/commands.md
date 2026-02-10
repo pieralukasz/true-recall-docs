@@ -3,7 +3,7 @@ title: Commands Reference
 description: Complete list of all True Recall commands available in Obsidian
 ---
 
-True Recall provides 15 commands accessible via the Command Palette (`Cmd/Ctrl+P`).
+True Recall provides commands accessible via the Command Palette (`Cmd/Ctrl+P`).
 
 ## Flashcard Management
 
@@ -14,15 +14,6 @@ Opens the sidebar panel showing flashcards for the current note.
 - **Command**: `True Recall: Open flashcard panel`
 - **Shortcut**: None (customize in Hotkeys)
 - **When to use**: View/manage cards from current note
-
-### Generate Flashcards for Current Note
-
-Opens the flashcard panel and triggers AI generation for the active note.
-
-- **Command**: `True Recall: Generate flashcards for current note`
-- **Shortcut**: None
-- **When to use**: Create cards from note content
-- **Requires**: OpenRouter API key
 
 ### Add Flashcard UID to Current Note
 
@@ -77,13 +68,6 @@ Shows all projects with card counts and review options.
 - **Shortcut**: None
 - **When to use**: Manage project-based learning
 
-### Open Card Browser
-
-Opens the full-featured browser to search, filter, and manage all flashcards.
-
-- **Command**: `True Recall: Open card browser`
-- **Shortcut**: None
-- **When to use**: Find and manage specific cards
 
 ### Open FSRS Simulator
 
@@ -144,7 +128,6 @@ Reverts the most recent flashcard action (edit, delete, rating).
 | Command | Category | Description |
 |---------|----------|-------------|
 | Open flashcard panel | View | Show sidebar panel |
-| Generate flashcards | Create | AI generation |
 | Add flashcard UID | Create | Enable note linking |
 | Start review session | Review | Open session builder |
 | Review from current note | Review | Note-specific review |
@@ -175,7 +158,6 @@ Add custom hotkeys for any command:
 |---------|-------------------|
 | Start review session | `Cmd/Ctrl+Shift+R` |
 | Open flashcard panel | `Cmd/Ctrl+Shift+F` |
-| Generate flashcards | `Cmd/Ctrl+Shift+G` |
 | Open statistics | `Cmd/Ctrl+Shift+S` |
 
 ## Tips

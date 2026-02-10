@@ -248,19 +248,31 @@ Export cards and history:
 
 ## Multi-Device Considerations
 
+:::caution[Important Warning]
+**Each device has its own separate SQLite database.** Obsidian Sync and other cloud sync services do NOT reliably sync SQLite databases.
+
+**What can happen if you use multiple devices:**
+- Database may not sync correctly
+- You might see different data on different devices
+- Example: Do reviews on desktop, open on mobile → progress may be missing
+
+**Recommendation**: Use True Recall on one primary device until official Cloud Sync is available. See [Cloud Sync](/features/cloud-sync/) for more details.
+:::
+
 ### Each Device Has Own Database
 
-By design:
-- Prevents conflicts
-- Enables offline use
-- Sync unifies data
+This architecture is intentional:
+- Prevents database corruption from sync conflicts
+- Enables full offline functionality
+- Official Cloud Sync will properly handle synchronization
 
 ### Syncing Databases (Coming Soon)
 
-With cloud sync enabled (planned feature):
+With official cloud sync (planned feature):
 - Local changes will push to cloud
 - Cloud changes will pull to local
 - Conflicts will be resolved automatically
+- Security layer will protect your data
 
 ### Database Per Device vs Shared
 

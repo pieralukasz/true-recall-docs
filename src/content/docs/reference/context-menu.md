@@ -79,7 +79,6 @@ When multiple files are selected:
 
 In the note editor, True Recall doesn't add context menu items. Use:
 - Command Palette for commands
-- Floating button for generation
 - Panel for card management
 
 ## Tab Context Menu
@@ -96,7 +95,6 @@ When right-clicking a tab:
 | Review from note | ✅ Quick access | ✅ Works from any context |
 | Create project | ✅ Uses note name | ✅ Manual naming |
 | Open panel | ✅ Direct | ✅ Available |
-| Generate cards | ❌ Not available | ✅ Available |
 | Open browser | ❌ Not available | ✅ Available |
 
 ## Tips
@@ -119,7 +117,7 @@ For daily review:
 
 Combine with other features:
 1. Right-click → Open panel
-2. Generate new cards
+2. Add or collect cards
 3. Right-click → Review from note
 
 ## Mobile Considerations

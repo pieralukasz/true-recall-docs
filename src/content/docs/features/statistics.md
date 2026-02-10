@@ -134,7 +134,7 @@ Ask questions about your data in plain English:
 4. View results in the panel
 
 :::note
-Requires AI API key for natural language queries.
+Requires an OpenRouter API key configured in settings for natural language queries.
 :::
 
 ## Exportable Data

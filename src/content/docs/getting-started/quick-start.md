@@ -5,38 +5,26 @@ description: Create and review your first flashcards in 5 minutes
 
 This guide will walk you through creating and reviewing your first flashcards with True Recall.
 
-## Step 1: Configure Your API Key
-
-True Recall uses OpenRouter to access AI models for flashcard generation.
-
-1. **Get an API key** from [OpenRouter](https://openrouter.ai/keys)
-2. **Open Settings** → True Recall → AI tab
-3. **Paste your API key** in the "OpenRouter API Key" field
-4. **Select a model** (Gemini 3 Flash recommended for best value)
-
-:::tip
-OpenRouter offers free credits for new users. Flashcard generation costs approximately $0.001-0.01 per note depending on length and model.
+:::note[Not installed yet?]
+See the [Installation guide](/getting-started/installation/) for instructions on installing True Recall via BRAT or manually.
 :::
 
-## Step 2: Generate Flashcards
+## Step 1: Write Your First Flashcard
 
-Open any note you want to learn from, then:
+Open any note and write a flashcard using the `#flashcard` tag:
 
-### Option A: Floating Button
-1. **Select text** in your note (minimum 50 characters)
-2. **Click the brain button** that appears
-3. **Review generated cards** and click "Save All"
+```markdown
+What is spaced repetition? #flashcard
+A learning technique that reviews information at increasing intervals
+to optimize long-term retention.
+```
 
-### Option B: Command Palette
-1. **Open Command Palette** (`Cmd/Ctrl+P`)
-2. **Search for** "True Recall: Generate flashcards for current note"
-3. **Wait for AI** to generate flashcards
-4. **Review and save** the generated cards
+The format is: **Question** `#flashcard` on one line, followed by the **answer** on the next line(s).
 
-### Option C: Flashcard Panel
-1. **Click the brain ribbon icon** (purple) in the left sidebar
-2. **Click "Generate"** button in the panel
-3. **Review and save** the flashcards
+## Step 2: Collect Flashcards
+
+1. **Open the Flashcard Panel** — click the brain ribbon icon in the left sidebar
+2. **Click "Collect"** — the panel will detect `#flashcard` tags in your note and import them
 
 ## Step 3: Start Reviewing
 
@@ -77,7 +65,8 @@ During review sessions, these shortcuts speed up your workflow:
 
 You've mastered the basics! Here's where to go next:
 
-- **[AI Generation](/features/ai-generation/)**: Customize prompts and explore advanced generation options
+- **[Cloze Deletions](/features/cloze-deletions/)**: Create fill-in-the-blank cards with `{{c1::text}}` syntax
+- **[Reversed Cards](/features/reversed-cards/)**: Auto-generate bidirectional cards with `#flashcard-reverse`
 - **[Review System](/features/review-system/)**: Learn about card states and scheduling
 - **[FSRS Algorithm](/features/fsrs-algorithm/)**: Understand and optimize the spaced repetition algorithm
 - **[Projects](/features/projects/)**: Organize flashcards into study groups
@@ -85,7 +74,7 @@ You've mastered the basics! Here's where to go next:
 ## Tips for Success
 
 1. **Review daily**: Consistency beats intensity. 10 minutes daily is better than 1 hour weekly.
-2. **Generate from quality notes**: Better notes = better flashcards.
+2. **Write clear questions**: Good flashcards have specific questions with concise answers.
 3. **Rate honestly**: Don't inflate your ratings—the algorithm learns from your honesty.
 4. **Use projects**: Group related notes for focused study sessions.
 5. **Check stats weekly**: Monitor retention and adjust your study habits.

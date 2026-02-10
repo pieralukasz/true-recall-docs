@@ -30,7 +30,6 @@ These shortcuts work during active review sessions:
 | `E` | Edit | Open card editor |
 | `M` | Move | Transfer to different note |
 | `N` | New Card | Create card manually |
-| `G` | Generate | AI generate related card |
 | `B` | Branch | Duplicate the card |
 
 ### Navigation
@@ -53,7 +52,7 @@ These shortcuts work during active review sessions:
 ├─────────────────────────────────────────┤
 │  ACTIONS    │  ! Suspend  - Bury        │
 │             │  = Bury Note  E Edit      │
-│             │  M Move  N New  G AI      │
+│             │  M Move  N New  B Branch  │
 ├─────────────────────────────────────────┤
 │  NAVIGATION │  Ctrl+Z Undo  Esc Close   │
 └─────────────────────────────────────────┘
@@ -94,20 +93,6 @@ These shortcuts work during active review sessions:
 |-------|--------|
 | `Shift+1` (!) | Suspend card |
 
-## Browser Shortcuts
-
-In the Card Browser view:
-
-| Key | Action |
-|-----|--------|
-| `↑` / `↓` | Navigate cards |
-| `Enter` | Open card editor |
-| `Delete` | Delete selected |
-| `S` | Toggle suspend |
-| `B` | Bury selected |
-| `Escape` | Clear selection |
-| `Cmd/Ctrl+A` | Select all |
-| `Cmd/Ctrl+F` | Focus search |
 
 ## Global Shortcuts
 
@@ -119,7 +104,6 @@ Assign custom shortcuts in Settings → Hotkeys:
 |--------|-------------------|
 | Start review | `Cmd/Ctrl+Shift+R` |
 | Open panel | `Cmd/Ctrl+Shift+F` |
-| Generate cards | `Cmd/Ctrl+Shift+G` |
 | Statistics | `Cmd/Ctrl+Shift+S` |
 
 ## Setting Up Custom Hotkeys

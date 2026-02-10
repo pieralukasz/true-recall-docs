@@ -3,8 +3,17 @@ title: Cloud Sync
 description: Synchronize your flashcards across devices with True Recall Cloud
 ---
 
-:::note[Coming Soon]
-Cloud Sync is currently in development and will be available in a future release.
+:::caution[Important: Current Database Architecture]
+**Each device has its own SQLite database.** This is NOT shared automatically between devices.
+
+Obsidian Sync and other cloud sync services don't reliably sync SQLite databases. If you enable sync, you may experience:
+- Database not syncing correctly between devices
+- Different data appearing on different devices
+- Example: Work on desktop, open on mobile → cards may be missing
+
+**Recommendation**: Use True Recall on one primary device until official Cloud Sync is available. If you want to use multiple devices now, you can enable it in Settings, but be aware of these risks.
+
+We're building a secure sync solution with proper conflict resolution. Until then, the safest approach is single-device use.
 :::
 
 True Recall Cloud will enable cross-device synchronization, letting you study on any device while keeping your progress in sync.

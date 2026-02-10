@@ -12,7 +12,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'True Recall',
-			description: 'AI-powered flashcard generation and spaced repetition for Obsidian',
+			description: 'Spaced repetition for Obsidian with FSRS v6',
 			plugins: [starlightThemeObsidian()],
 			components: {
 				Header: './src/components/starlight/Header.astro',
@@ -35,12 +35,22 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Migration',
+					items: [
+						{ slug: 'migration/from-anki' },
+						{ slug: 'migration/from-obsidian-to-anki' },
+						{ slug: 'migration/from-remnote' },
+						{ slug: 'migration/from-logseq' },
+					],
+				},
+				{
 					label: 'Features',
 					items: [
-						{ slug: 'features/ai-generation' },
+						{ slug: 'features/cloze-deletions' },
+						{ slug: 'features/reversed-cards' },
 						{ slug: 'features/review-system' },
 						{ slug: 'features/fsrs-algorithm' },
-						{ slug: 'features/card-browser' },
+
 						{ slug: 'features/statistics' },
 						{ slug: 'features/projects' },
 						{ slug: 'features/cloud-sync' },
@@ -53,7 +63,7 @@ export default defineConfig({
 						{ slug: 'views/review-view' },
 						{ slug: 'views/statistics-view' },
 						{ slug: 'views/session-builder' },
-						{ slug: 'views/card-browser' },
+
 						{ slug: 'views/projects-view' },
 						{ slug: 'views/fsrs-simulator' },
 					],
@@ -62,7 +72,6 @@ export default defineConfig({
 					label: 'Configuration',
 					items: [
 						{ slug: 'configuration/general' },
-						{ slug: 'configuration/ai-settings' },
 						{ slug: 'configuration/scheduling' },
 						{ slug: 'configuration/fsrs-parameters' },
 						{ slug: 'configuration/data-backup' },
@@ -83,13 +92,6 @@ export default defineConfig({
 						{ slug: 'advanced/easy-days' },
 						{ slug: 'advanced/load-balancing' },
 						{ slug: 'advanced/orphaned-cards' },
-					],
-				},
-				{
-					label: 'Credits',
-					items: [
-						{ slug: 'credits-pricing/bring-your-own-key' },
-						{ slug: 'credits-pricing/credits' },
 					],
 				},
 			],

@@ -146,7 +146,7 @@ Ask questions about your data:
 - "Compare this week to last week"
 
 :::note
-Requires AI API key configuration.
+Requires an OpenRouter API key configured in settings.
 :::
 
 ## Interpreting Your Data

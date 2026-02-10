@@ -1,6 +1,6 @@
 ---
 title: True Recall
-description: AI-powered flashcard generation and spaced repetition for Obsidian
+description: Spaced repetition for Obsidian with FSRS v6
 template: splash
 hero:
   tagline: "The next-gen spaced repetition system for Obsidian."
@@ -20,16 +20,12 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Features
 
-Transform your Obsidian vault into an intelligent learning system. Create flashcards with AI, review them with state-of-the-art spaced repetition, and track your progress with comprehensive analytics.
+Transform your Obsidian vault into an intelligent learning system. Write flashcards directly in your notes, review them with state-of-the-art spaced repetition, and track your progress with comprehensive analytics.
 
 <CardGrid stagger>
-	<Card title="AI-Powered Generation" icon="pencil">
-		Generate high-quality flashcards from any note using 7 AI models via OpenRouter.
-		Supports Gemini, GPT, Claude, and Llama.
-	</Card>
 	<Card title="FSRS v6 Algorithm" icon="setting">
 		State-of-the-art spaced repetition with 21 trainable parameters.
-		More efficient than Anki's SM-2 algorithm.
+		Unlike Anki, your flashcards live inside your notes — source and knowledge unified.
 	</Card>
 	<Card title="Local-First Storage" icon="document">
 		All data stored in portable SQLite database within your vault.
@@ -37,11 +33,15 @@ Transform your Obsidian vault into an intelligent learning system. Create flashc
 	</Card>
 	<Card title="Comprehensive Analytics" icon="seti:graphql">
 		Track retention, forecast workload, and visualize progress with
-		interactive charts and calendar heatmaps.
+		interactive charts. Query your learning data with natural language.
 	</Card>
 	<Card title="Projects System" icon="list-format">
 		Organize flashcards into projects spanning multiple notes.
 		Review cards by topic or subject area.
+	</Card>
+	<Card title="Cloze Deletions & Reversed Cards" icon="pencil">
+		Create cloze deletions and reversed cards directly in your notes
+		using simple tags.
 	</Card>
 	<Card title="Cloud Sync (Coming Soon)" icon="rocket">
 		Optional cross-device synchronization via True Recall Cloud.
@@ -52,26 +52,8 @@ Transform your Obsidian vault into an intelligent learning system. Create flashc
 ## Quick Start
 
 1. **Install** the plugin in Obsidian
-2. **Configure** your OpenRouter API key
-3. **Generate** flashcards from any note
-4. **Review** with spaced repetition
-5. **Track** your progress
+2. **Write** flashcards in your notes using `#flashcard` tags
+3. **Review** with spaced repetition
+4. **Track** your progress
 
 Ready to supercharge your learning? [Get started now](/getting-started/introduction/).
-
-## Credits
-
-True Recall offers flexible options for AI-powered flashcard generation:
-
-<CardGrid>
-	<Card title="Bring Your Own Key" icon="open-book">
-		Use your own OpenRouter API key for unlimited flashcard generation.
-		No subscription needed — pay only for what you use directly to OpenRouter.
-	</Card>
-	<Card title="True Recall Credits" icon="star">
-		Don't have an API key? Purchase credits to generate flashcards instantly.
-		Starting at just $2.50 for 500 credits.
-	</Card>
-</CardGrid>
-
-[View credits options](/credits) or [create an account](/register) to get started.

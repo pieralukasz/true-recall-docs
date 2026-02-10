@@ -218,7 +218,7 @@ Review a specific project:
 
 ### Quality Control
 - Review new cards same day
-- Check AI-generated content
+- Check card content quality
 - Edit as you review
 
 ## Troubleshooting

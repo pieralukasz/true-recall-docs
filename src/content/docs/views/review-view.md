@@ -128,7 +128,6 @@ Below each button shows the next interval:
 | `E` | Edit card |
 | `M` | Move card |
 | `N` | New card |
-| `G` | AI generate |
 | `B` | Branch/copy |
 
 ### Navigation
@@ -167,12 +166,6 @@ Transfers card to different note.
 - Choose destination note
 - Updates source linkage
 - Card remains in review
-
-### Generate
-Creates new AI-generated card.
-- Uses current card as context
-- Enter instructions
-- Review and save
 
 ### Branch
 Duplicates the card.
