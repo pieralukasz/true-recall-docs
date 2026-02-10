@@ -1,6 +1,9 @@
 ---
 title: Context Menu
 description: Right-click menu options for flashcard operations
+links:
+  - /reference/commands/
+  - /views/flashcard-panel/
 ---
 
 True Recall adds context menu options when right-clicking files in Obsidian, providing quick access to common operations.

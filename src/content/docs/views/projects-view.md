@@ -1,6 +1,9 @@
 ---
 title: Projects View
 description: Manage and review flashcards organized by project with hierarchical sub-projects
+links:
+  - /features/projects/
+  - /views/session-builder/
 ---
 
 The Projects View displays all your projects as a tree with card counts and provides quick access to project-based review sessions. Sub-projects appear nested under their parents with aggregated statistics.

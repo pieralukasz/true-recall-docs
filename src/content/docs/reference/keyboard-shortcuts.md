@@ -1,6 +1,9 @@
 ---
 title: Keyboard Shortcuts
 description: Complete reference for all keyboard shortcuts in True Recall
+links:
+  - /views/review-view/
+  - /reference/commands/
 ---
 
 True Recall provides keyboard shortcuts for efficient reviewing and card management.

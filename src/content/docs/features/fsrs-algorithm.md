@@ -1,6 +1,10 @@
 ---
 title: FSRS Algorithm
 description: Understanding the Free Spaced Repetition Scheduler v6 algorithm
+links:
+  - /advanced/fsrs-optimization/
+  - /configuration/fsrs-parameters/
+  - /features/review-system/
 ---
 
 True Recall uses **FSRS v6** (Free Spaced Repetition Scheduler), the most advanced open-source spaced repetition algorithm available. It's more efficient than Anki's SM-2, adapting to your learning patterns for optimal retention.

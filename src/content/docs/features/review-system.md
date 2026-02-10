@@ -1,6 +1,10 @@
 ---
 title: Review System
 description: How the spaced repetition review system works in True Recall
+links:
+  - /views/review-view/
+  - /features/fsrs-algorithm/
+  - /configuration/scheduling/
 ---
 
 True Recall's review system uses spaced repetition to help you remember information efficiently. Cards are shown at optimal intervals based on how well you remember them.

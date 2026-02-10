@@ -1,6 +1,9 @@
 ---
 title: Statistics View
 description: The analytics dashboard for tracking your learning progress
+links:
+  - /features/statistics/
+  - /features/fsrs-algorithm/
 ---
 
 The Statistics View provides comprehensive analytics about your flashcard collection and learning progress.

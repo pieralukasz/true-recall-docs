@@ -1,6 +1,9 @@
 ---
 title: Projects & Sub-projects
 description: Organize flashcards into hierarchical study groups spanning multiple notes
+links:
+  - /views/projects-view/
+  - /views/session-builder/
 ---
 
 Projects help you organize flashcards into logical groups for focused study. A project can span multiple notes, a note can belong to multiple projects, and projects can be nested inside other projects — forming a flexible hierarchy (like Anki decks).

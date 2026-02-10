@@ -1,6 +1,10 @@
 ---
 title: FSRS Simulator
 description: Interactive visualization of the FSRS spaced repetition algorithm
+links:
+  - /features/fsrs-algorithm/
+  - /advanced/fsrs-optimization/
+  - /configuration/fsrs-parameters/
 ---
 
 The FSRS Simulator helps you understand and visualize how the FSRS algorithm schedules your flashcards. Experiment with different parameters to see their effects.

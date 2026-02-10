@@ -1,6 +1,9 @@
 ---
 title: Statistics & Analytics
 description: Track your learning progress with comprehensive statistics
+links:
+  - /views/statistics-view/
+  - /features/review-system/
 ---
 
 True Recall provides comprehensive statistics to help you understand your learning progress and optimize your study habits.

@@ -1,6 +1,10 @@
 ---
 title: Flashcard Panel
 description: The main sidebar panel for managing flashcards
+links:
+  - /features/cloze-deletions/
+  - /features/reversed-cards/
+  - /views/review-view/
 ---
 
 The Flashcard Panel is your primary interface for viewing and managing flashcards associated with the current note.

@@ -1,6 +1,10 @@
 ---
 title: Scheduling Settings
 description: Configure how cards progress through learning stages
+links:
+  - /features/review-system/
+  - /features/fsrs-algorithm/
+  - /configuration/fsrs-parameters/
 ---
 
 Scheduling settings control how cards move through learning stages, from new cards to long-term review.

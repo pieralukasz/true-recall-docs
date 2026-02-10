@@ -1,6 +1,9 @@
 ---
 title: Session Builder
 description: Create custom review sessions with advanced filtering options
+links:
+  - /views/review-view/
+  - /features/projects/
 ---
 
 The Session Builder allows you to create customized review sessions by filtering cards based on various criteria.

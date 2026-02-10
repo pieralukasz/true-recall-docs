@@ -1,6 +1,9 @@
 ---
 title: Cloze Deletions
 description: Create fill-in-the-blank flashcards using cloze deletion syntax
+links:
+  - /features/reversed-cards/
+  - /views/flashcard-panel/
 ---
 
 Cloze deletions let you create fill-in-the-blank flashcards directly in your notes. Instead of writing separate question and answer fields, you mark the key terms inline and True Recall generates the cards automatically.

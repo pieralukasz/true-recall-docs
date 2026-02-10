@@ -1,6 +1,9 @@
 ---
 title: Reversed Cards
 description: Automatically generate bidirectional flashcards for two-way recall
+links:
+  - /features/cloze-deletions/
+  - /views/flashcard-panel/
 ---
 
 Reversed cards automatically create a second flashcard with the question and answer swapped. This is useful for vocabulary, translations, definitions, and any content where you want to practice recall in both directions.

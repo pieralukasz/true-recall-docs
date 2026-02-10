@@ -1,6 +1,9 @@
 ---
 title: Orphaned Cards
 description: Managing flashcards that have lost their source note connection
+links:
+  - /views/card-browser/
+  - /reference/commands/
 ---
 
 Orphaned cards are flashcards whose source note has been deleted, renamed, or no longer contains the linking identifier. Learn how to detect, manage, and prevent orphaned cards.

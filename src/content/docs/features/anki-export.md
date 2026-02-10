@@ -1,6 +1,9 @@
 ---
 title: Exporting Cards
 description: Export your flashcards to Anki (.apkg) or CSV/TSV format
+links:
+  - /migration/from-anki/
+  - /migration/from-obsidian-to-anki/
 ---
 
 True Recall can export your flashcards as Anki deck packages (`.apkg`) or as CSV/TSV files. Exports support filtering by project or note, and preserve your review progress.

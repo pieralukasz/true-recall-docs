@@ -1,6 +1,9 @@
 ---
 title: General Settings
 description: Configure basic True Recall behavior and display options
+links:
+  - /getting-started/quick-start/
+  - /configuration/scheduling/
 ---
 
 General settings control the basic behavior of True Recall, including review interface options, daily limits, and UI preferences.

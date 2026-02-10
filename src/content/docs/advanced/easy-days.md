@@ -1,6 +1,9 @@
 ---
 title: Easy Days
 description: Reduce review workload on specific days while maintaining scheduling integrity
+links:
+  - /configuration/scheduling/
+  - /advanced/load-balancing/
 ---
 
 Easy Days let you reduce review load on certain days—weekends, holidays, or busy periods—while redistributing cards to maintain your learning schedule.

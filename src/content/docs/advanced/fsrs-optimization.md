@@ -1,6 +1,10 @@
 ---
 title: FSRS Optimization
 description: Train FSRS parameters on your review history for personalized scheduling
+links:
+  - /features/fsrs-algorithm/
+  - /configuration/fsrs-parameters/
+  - /views/fsrs-simulator/
 ---
 
 FSRS optimization analyzes your review history to calculate personalized algorithm parameters, improving scheduling accuracy for your learning patterns.

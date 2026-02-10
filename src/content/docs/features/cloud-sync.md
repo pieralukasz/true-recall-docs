@@ -1,6 +1,8 @@
 ---
 title: Cloud Sync
 description: Synchronize your flashcards across devices with True Recall Cloud
+links:
+  - /configuration/data-backup/
 ---
 
 :::caution[Important: Current Database Architecture]

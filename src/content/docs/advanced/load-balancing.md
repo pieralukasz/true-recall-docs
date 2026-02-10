@@ -1,6 +1,9 @@
 ---
 title: Load Balancing
 description: Automatically distribute reviews evenly across days
+links:
+  - /configuration/scheduling/
+  - /advanced/easy-days/
 ---
 
 Load Balancing automatically spreads your reviews across days, preventing workload spikes and creating a more sustainable study rhythm.

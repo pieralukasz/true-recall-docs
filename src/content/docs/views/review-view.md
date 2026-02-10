@@ -1,6 +1,10 @@
 ---
 title: Review View
 description: The flashcard review interface for spaced repetition study
+links:
+  - /features/review-system/
+  - /views/session-builder/
+  - /reference/keyboard-shortcuts/
 ---
 
 The Review View is where you study your flashcards using spaced repetition. It presents cards one at a time and schedules them based on your performance.

@@ -1,6 +1,10 @@
 ---
 title: FSRS Parameters
 description: Configure FSRS algorithm parameters and optimization
+links:
+  - /features/fsrs-algorithm/
+  - /advanced/fsrs-optimization/
+  - /views/fsrs-simulator/
 ---
 
 FSRS parameters control how the spaced repetition algorithm schedules your cards. Advanced configuration for users who want to fine-tune their learning.
