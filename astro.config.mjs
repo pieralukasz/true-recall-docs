@@ -69,7 +69,7 @@ export default defineConfig({
 					label: 'Migration',
 					items: [
 						{ slug: 'migration/from-anki' },
-						{ slug: 'migration/from-obsidian-to-anki' },
+						// { slug: 'migration/from-obsidian-to-anki' },
 						// { slug: 'migration/from-remnote' },
 						// { slug: 'migration/from-logseq' },
 					],
@@ -77,9 +77,10 @@ export default defineConfig({
 				{
 					label: 'Features',
 					items: [
-						{ slug: 'features/batch-adding' },
+						{ slug: 'features/basic-flashcards' },
 						{ slug: 'features/cloze-deletions' },
 						{ slug: 'features/reversed-cards' },
+						{ slug: 'features/batch-adding' },
 						{ slug: 'features/review-system' },
 						{ slug: 'features/fsrs-algorithm' },
 

@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/starlight": "^0.37.6",
     "@astrojs/vercel": "^9.0.4",
+    "@pagefind/darwin-arm64": "^1.4.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.93.3",
     "@vercel/analytics": "^1.6.1",
