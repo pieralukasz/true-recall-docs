@@ -53,6 +53,7 @@ export default defineConfig({
 
 						{ slug: 'features/statistics' },
 						{ slug: 'features/projects' },
+						{ slug: 'features/anki-export' },
 						{ slug: 'features/cloud-sync' },
 					],
 				},
@@ -60,6 +61,7 @@ export default defineConfig({
 					label: 'Views & Panels',
 					items: [
 						{ slug: 'views/flashcard-panel' },
+						{ slug: 'views/card-browser' },
 						{ slug: 'views/review-view' },
 						{ slug: 'views/statistics-view' },
 						{ slug: 'views/session-builder' },

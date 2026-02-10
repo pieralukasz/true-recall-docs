@@ -21,7 +21,7 @@ All paths are relative to `src/content/docs/`.
 - `migration/from-remnote.md` — Migrating from RemNote
 - `migration/from-logseq.md` — Migrating from Logseq
 
-## Features (7 pages)
+## Features (8 pages)
 
 - `features/cloze-deletions.md` — Cloze deletion syntax (`{{c1::text}}`)
 - `features/reversed-cards.md` — Auto-generated bidirectional cards
@@ -29,6 +29,7 @@ All paths are relative to `src/content/docs/`.
 - `features/fsrs-algorithm.md` — FSRS v6 algorithm explanation
 - `features/statistics.md` — Analytics and progress tracking
 - `features/projects.md` — Project-based organization
+- `features/anki-export.md` — Exporting cards to Anki (.apkg) and CSV/TSV
 - `features/cloud-sync.md` — Cloud sync (planned feature)
 
 ## Views & Panels (6 pages)

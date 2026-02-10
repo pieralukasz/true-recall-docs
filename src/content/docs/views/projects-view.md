@@ -1,9 +1,9 @@
 ---
 title: Projects View
-description: Manage and review flashcards organized by project
+description: Manage and review flashcards organized by project with hierarchical sub-projects
 ---
 
-The Projects View displays all your projects with card counts and provides quick access to project-based review sessions.
+The Projects View displays all your projects as a tree with card counts and provides quick access to project-based review sessions. Sub-projects appear nested under their parents with aggregated statistics.
 
 ## Opening Projects View
 
@@ -12,216 +12,202 @@ The Projects View displays all your projects with card counts and provides quick
 ## Interface
 
 ```
-┌─────────────────────────────────────┐
-│           Your Projects             │
-├─────────────────────────────────────┤
-│ ┌─────────────────────────────────┐ │
-│ │ 📚 Spanish Course               │ │
-│ │ 45 cards | Due: 12 | New: 5     │ │
-│ │ [Review] [•••]                  │ │
-│ └─────────────────────────────────┘ │
-│ ┌─────────────────────────────────┐ │
-│ │ 🧠 Machine Learning             │ │
-│ │ 128 cards | Due: 23 | New: 0    │ │
-│ │ [Review] [•••]                  │ │
-│ └─────────────────────────────────┘ │
-│ ┌─────────────────────────────────┐ │
-│ │ 📖 Book: Deep Work              │ │
-│ │ 32 cards | Due: 0 | New: 8      │ │
-│ │ [Review] [•••]                  │ │
-│ └─────────────────────────────────┘ │
-│                                     │
-│         [+ Create Project]          │
-└─────────────────────────────────────┘
+┌──────────────────────────────────────────┐
+│  Projects                    [👁] [↻] [+]│
+├──────────────────────────────────────────┤
+│  🔍 Search projects...                   │
+├──────────────────────────────────────────┤
+│  ▼ Machine Learning                      │
+│     12 notes · 3 new · 2 learning · 8 due│
+│     [+] [📁+] [🗑] [⚙] [▶]              │
+│                                          │
+│     ▼ Neural Networks                    │
+│       5 notes · 1 new · 0 learning · 3 due
+│       [+] [📁+] [🗑] [⚙] [▶]            │
+│                                          │
+│       ├─ backpropagation.md  1·0·2       │
+│       └─ attention-paper.md  0·0·1       │
+│                                          │
+│     ▼ Decision Trees                     │
+│       2 notes · 0 new · 1 learning · 1 due
+│       [+] [📁+] [🗑] [⚙] [▶]            │
+│                                          │
+│     ├─ feature-engineering.md  2·1·4     │
+│     └─ data-preprocessing.md   0·0·0    │
+│                                          │
+│  ▶ Spanish Course                        │
+│     45 cards · 5 new · 3 learning · 12 due
+│     [+] [📁+] [🗑] [⚙] [▶]              │
+│                                          │
+│  ── Unassigned ──────────────────────    │
+│     3 notes · 0 new · 0 learning · 2 due │
+│                                          │
+│  ── Empty projects ──────────────────    │
+│  ▶ New Topic                             │
+│     0 notes                              │
+└──────────────────────────────────────────┘
 ```
 
-## Project Cards
+### Layout Sections
 
-Each project shows:
+| Section | Description |
+|---------|-------------|
+| **Root projects with cards** | Top-level projects (not sub-projects of anything) with active cards, sorted by name |
+| **Unassigned** | Notes with flashcards but no project assignment |
+| **Empty projects** | Projects with no cards due |
 
-### Header
-- **Icon**: Visual indicator
-- **Name**: Project name
+## Tree Structure
 
-### Statistics
-- **Total cards**: All cards in project
-- **Due**: Cards due for review
-- **New**: Unreviewed cards
-- **Learning**: Cards in learning (optional)
+Projects are displayed as a **collapsible tree**. Clicking a project toggles its children:
 
-### Actions
-- **Review**: Start project review
-- **Menu (•••)**: Additional options
+- **Root projects** appear at the top level
+- **Sub-projects** appear indented under their parent when expanded
+- **Notes** appear indented under their project when expanded
+- **Multi-parent projects** appear under each parent (duplicated in tree)
+
+The chevron icon indicates expandable items:
+- **▶** — collapsed (has children or notes)
+- **▼** — expanded
+
+### Indentation
+
+Each level of nesting adds visual indentation. A sub-project of a sub-project appears further indented than a direct child.
+
+### Statistics Aggregation
+
+Parent project statistics include all descendant sub-project cards:
+- "Machine Learning" shows the combined count of its own notes PLUS Neural Networks' notes PLUS Decision Trees' notes
+- This matches Anki's behavior where a parent deck shows total cards from all sub-decks
 
 ## Project Actions
 
-### Review Project
+Each project row has action buttons:
 
-Click "Review" to start a filtered session:
-- Opens session builder
-- Project pre-selected
-- Start immediately or customize
-
-### Menu Options
-
-| Action | Description |
-|--------|-------------|
-| **Add Notes** | Add more notes to project |
-| **View Notes** | See all notes in project |
-| **Rename** | Change project name |
-| **Delete** | Remove project |
-
-## Creating Projects
-
-### From Projects View
-
-1. Click **+ Create Project**
-2. Enter project name
-3. Optionally add notes
-4. Click **Create**
-
-### From Note
-
-1. Open a note
-2. Command: "Add current note to project"
-3. Type new project name
-4. Project created with note
-
-### From Context Menu
-
-1. Right-click file in explorer
-2. Select "Create project from this note"
-3. Project named after note
-
-## Managing Projects
-
-### Adding Notes
-
-1. Open project menu
-2. Click "Add Notes"
-3. Search for notes
-4. Select notes to add
-5. Click "Add"
-
-### Viewing Notes
-
-1. Open project menu
-2. Click "View Notes"
-3. See all associated notes
-4. Click note to open
-
-### Renaming
-
-1. Open project menu
-2. Click "Rename"
-3. Enter new name
-4. Click "Save"
-
-### Deleting
-
-1. Open project menu
-2. Click "Delete"
-3. Confirm deletion
-4. Notes remain, association removed
+| Button | Icon | Description |
+|--------|------|-------------|
+| **Add notes** | `+` | Add existing notes to this project |
+| **Create sub-project** | `folder-plus` | Create a new project nested under this one |
+| **Delete** | `trash` | Remove project (notes and cards remain) |
+| **Custom study** | `sliders` | Open Session Builder scoped to this project |
+| **Review** | `play` | Start a review session for this project |
 
 :::note
-Deleting a project doesn't delete cards or notes—just the grouping.
+The **Review** and **Custom study** buttons only appear for projects with active cards.
 :::
 
-## Project Statistics
+### Create Sub-Project
 
-### Card Counts
+1. Click the **folder-plus** icon on the parent project
+2. Select a note from the modal
+3. The note becomes a sub-project with:
+   - A **self-reference** (makes it a project)
+   - The **parent project** in its frontmatter (nests it)
 
-Calculated from all notes in project:
-- Counts cards linked to project notes
-- Updates in real-time
-- Includes all card states
+### Delete Project
 
-### Due Cards
+1. Click the **trash** icon
+2. Confirm deletion
+3. The project is removed from all notes' frontmatter
+4. Notes and their cards remain untouched
 
-Cards due for review today:
-- From all project notes
-- Respects scheduling
-- Quick indicator of workload
+:::caution
+Deleting a parent project does NOT delete its sub-projects. Sub-projects become root-level projects.
+:::
 
-### New Cards
+## Reviewing Projects
 
-Never-reviewed cards:
-- Ready to learn
-- Subject to daily limits
-- Prioritize or defer
+### Cascading Review
 
-## Project Workflows
+Clicking **play** on a project starts a review session that includes:
+1. Cards from notes **directly** in this project
+2. Cards from all **sub-projects**, recursively
 
-### Study Planning
+This means reviewing "Machine Learning" includes cards from "Neural Networks", "Decision Trees", and all their nested sub-projects.
 
-Use project stats to plan:
-- High due count = priority
-- Many new cards = time investment
-- Zero due = maintenance mode
+### Custom Study
 
-### Exam Prep
+Clicking **sliders** opens the Session Builder pre-scoped to the project. You can further filter by:
+- Card state (new, learning, due)
+- Difficulty range
+- Creation date
+- And more
 
-1. Create project: "Exam: [Subject]"
-2. Add all relevant notes
-3. Review project daily
-4. Increase intensity before exam
+## Selection Mode
 
-### Ongoing Learning
+Long-press or right-click a note to enter selection mode:
 
-1. Create topic projects
-2. Add notes as you learn
-3. Regular project reviews
-4. Archive when complete
+1. **Select multiple notes** across projects
+2. **Footer appears** with:
+   - Card count summary (new/learning/due)
+   - **Add to Project** — batch-add selected notes to a project
+   - **Review Selected** — start a session with just the selected notes
 
-## Sorting Projects
+## Search
 
-Projects can be sorted by:
-- **Name**: Alphabetically
-- **Card count**: Most to least
-- **Due count**: Most urgent first
-- **Recent**: Recently reviewed
+The search bar (desktop only) filters projects by name:
+- Type to filter the project list
+- Matching projects and their ancestors are shown
+- Non-matching projects are hidden
 
-## Filtering
+## Show/Hide Completed Notes
 
-### Show Empty
-Toggle to show/hide projects with no due cards.
+Toggle the **eye** icon in the header to show or hide notes that have no cards due:
+- **Eye visible**: All notes shown (including completed ones)
+- **Eye hidden**: Only notes with active cards shown
 
-### Search
-Type to filter projects by name.
+## Unassigned Notes
+
+Notes with flashcards but no project assignment appear in the **Unassigned** section:
+- Click to expand and see individual notes
+- Click **play** to review all unassigned cards
+- Use selection mode to batch-add them to projects
 
 ## Tips
 
-### Naming Convention
-Use consistent prefixes:
-- `Book: Title`
-- `Course: Name`
-- `Topic: Subject`
-- `Project: Name`
+### Use Project Notes as MOCs
 
-### Regular Review
-- Check projects weekly
-- Archive completed projects
-- Keep active list manageable
+Since every project is a note, use it as a **Map of Content**:
+- Write overview content
+- Link to key resources
+- Track study goals
+- Add exam dates or deadlines
 
-### Focused Sessions
-- Use projects for topic focus
-- One project per session
-- Build subject expertise
+### Review Strategy
+
+- Review **root projects** for broad daily practice
+- Review **sub-projects** when you want to focus on a specific topic
+- Check **aggregated stats** on parent projects to spot areas needing attention
+
+### Keep Hierarchy Shallow
+
+- 2-3 levels of nesting is usually enough
+- Deep hierarchies are harder to navigate
+- Start flat, nest only when a project has many sub-topics
 
 ## Troubleshooting
 
 ### Project Shows Wrong Count
-- Check note frontmatter
-- Verify note has cards
-- Reload plugin
 
-### Project Not Appearing
-- Check note has project in frontmatter
+- Stats aggregate from all sub-projects — this is by design
+- Check that sub-projects are correctly linked (self-reference + parent)
+- Reload the plugin to rebuild the index
+
+### Sub-Project Not Appearing Under Parent
+
+- The sub-project note must have **both**:
+  1. A self-reference: `"[[Sub-Project Name]]"`
+  2. The parent project: `"[[Parent Project]]"`
+- The parent must also be a valid project (with its own self-reference)
 - Project names are case-sensitive
-- Remove trailing spaces
+
+### Project Not Appearing at All
+
+- Check that the note has `projects` in its frontmatter
+- Ensure at least one note belongs to the project
+- Remove trailing spaces from project names
 
 ### Can't Add Notes
-- Verify note has flashcard_uid
+
+- Verify the note has a `flashcard_uid` in frontmatter
 - Check for existing assignment
-- Try manual frontmatter edit
+- Try editing frontmatter directly

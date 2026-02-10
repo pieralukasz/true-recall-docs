@@ -1,13 +1,13 @@
 ---
-title: Projects System
-description: Organize flashcards into study groups spanning multiple notes
+title: Projects & Sub-projects
+description: Organize flashcards into hierarchical study groups spanning multiple notes
 ---
 
-Projects help you organize flashcards into logical groups for focused study. A project can span multiple notes, and a note can belong to multiple projects.
+Projects help you organize flashcards into logical groups for focused study. A project can span multiple notes, a note can belong to multiple projects, and projects can be nested inside other projects — forming a flexible hierarchy (like Anki decks).
 
 ## What Are Projects?
 
-Projects are named collections like:
+Projects are named collections of notes. Examples:
 - "Spanish Course"
 - "Machine Learning Fundamentals"
 - "Book: Atomic Habits"
@@ -17,23 +17,129 @@ Projects are named collections like:
 
 - **Notes belong to projects** (not individual cards)
 - **Cards inherit** their source note's project memberships
-- **Many-to-many**: Notes can be in multiple projects
-- **Review by project**: Study a specific topic area
+- **Many-to-many**: A note can be in multiple projects
+- **Nestable**: A project can be a sub-project of another project
+- **Review cascading**: Reviewing a parent project includes all sub-project cards
+
+## How Projects Work
+
+Projects are stored as wikilinks in note frontmatter:
+
+```yaml
+---
+projects:
+  - "[[Machine Learning]]"
+  - "[[Python Course]]"
+---
+```
+
+True Recall uses `[[wikilinks]]` so Obsidian creates backlinks automatically — you can see which notes belong to a project by checking the project note's backlinks.
+
+### Project = Note with Self-Reference
+
+A note becomes a **project** when it references itself in its `projects` field. For example, a note named `Machine Learning.md` with:
+
+```yaml
+---
+projects:
+  - "[[Machine Learning]]"
+---
+```
+
+This self-reference tells True Recall: "this note IS a project, not just a member of one."
+
+### Sub-Projects (Nesting)
+
+A project becomes a **sub-project** when its project-note also belongs to another project. For example, `Neural Networks.md`:
+
+```yaml
+---
+projects:
+  - "[[Neural Networks]]"
+  - "[[Machine Learning]]"
+---
+```
+
+This means:
+- "Neural Networks" is a project (self-reference)
+- "Neural Networks" belongs to "Machine Learning" — it's a sub-project
+
+### Full Hierarchy Example
+
+```
+Machine Learning/                        ← root project
+├── Neural Networks/                     ← sub-project of ML
+│   ├── backpropagation-notes.md         ← regular note
+│   └── CNN Architectures/              ← sub-sub-project
+│       └── resnet-paper.md              ← regular note
+├── Decision Trees/                      ← sub-project of ML
+│   └── random-forests.md               ← regular note
+└── feature-engineering.md               ← regular note in ML
+```
+
+The frontmatter for each:
+
+```yaml
+# Machine Learning.md (root project)
+---
+projects:
+  - "[[Machine Learning]]"
+---
+
+# Neural Networks.md (sub-project of ML)
+---
+projects:
+  - "[[Neural Networks]]"
+  - "[[Machine Learning]]"
+---
+
+# CNN Architectures.md (sub-project of Neural Networks)
+---
+projects:
+  - "[[CNN Architectures]]"
+  - "[[Neural Networks]]"
+---
+
+# backpropagation-notes.md (regular note in Neural Networks)
+---
+projects:
+  - "[[Neural Networks]]"
+---
+```
+
+### It's a Graph, Not a Tree
+
+Unlike Anki's strict deck tree, True Recall projects form a **directed graph**:
+- A project can have **multiple parents** (e.g., "Linear Algebra" belongs to both "Machine Learning" and "Mathematics")
+- A note can belong to **multiple projects** at any depth
+- This mirrors how knowledge actually connects — topics don't fit neatly into one hierarchy
+
+```yaml
+# Linear Algebra.md — belongs to two parent projects
+---
+projects:
+  - "[[Linear Algebra]]"
+  - "[[Machine Learning]]"
+  - "[[Mathematics]]"
+---
+```
+
+In the Projects View, "Linear Algebra" appears under both "Machine Learning" and "Mathematics".
 
 ## Creating Projects
 
-### From a Note
+### From Projects View
 
-1. **Open the note** you want to add to a project
-2. **Command Palette** → "Add current note to project"
-3. **Type a new project name** or select existing
-4. **Confirm** to add
+1. Click the **+** button in the Projects panel header
+2. Select a note to become the project
+3. The note gets a self-reference in its `projects` frontmatter
 
-### From Context Menu
+### Creating Sub-Projects
 
-1. **Right-click** a file in the file explorer
-2. **Select** "Create project from this note"
-3. **Project created** with note's name
+1. In the Projects View, find the parent project
+2. Click the **folder-plus** icon (Create sub-project)
+3. Select a note to become the sub-project
+4. The note gets both a self-reference AND the parent project in its frontmatter
 
 ### Manual Frontmatter
 
@@ -41,202 +147,143 @@ Add directly to note frontmatter:
 
 ```yaml
 ---
-true_recall_projects:
-  - Machine Learning
-  - Python Course
-  - My Research
+projects:
+  - "[[My Project]]"
 ---
 ```
 
-## Managing Projects
+To make it a sub-project, add the parent too:
 
-### Projects View
-
-Open via Command Palette → "Open projects panel":
-
-- **All projects listed** with card counts
-- **Due/New cards** per project
-- **Click to review** project's cards
-- **Rename or delete** projects
-
-### Adding Notes to Projects
-
-Multiple methods:
-
-1. **Command**: "Add current note to project"
-2. **Modal**: Select notes from project modal
-3. **Frontmatter**: Edit YAML directly
-
-### Removing Notes
-
-1. Open the note
-2. Edit frontmatter
-3. Remove project from `true_recall_projects` array
-
-Or use the project modal interface.
+```yaml
+---
+projects:
+  - "[[My Project]]"
+  - "[[Parent Project]]"
+---
+```
 
 ## Reviewing by Project
 
+### Cascading Review
+
+When you review a project, True Recall includes cards from:
+1. **Direct notes** — notes that belong to this project
+2. **Sub-project notes** — all notes in sub-projects, recursively
+
+Example: Reviewing "Machine Learning" includes cards from:
+- `feature-engineering.md` (direct note)
+- `backpropagation-notes.md` (in sub-project Neural Networks)
+- `resnet-paper.md` (in sub-sub-project CNN Architectures)
+- `random-forests.md` (in sub-project Decision Trees)
+
 ### Start Project Review
 
-1. **Open Projects view**
-2. **Click a project** name
-3. **Custom session opens** filtered to that project
-4. **Start reviewing**
+1. Open the **Projects View** panel
+2. Click the **play** button on any project
+3. A review session opens filtered to that project (including all sub-projects)
 
-### Session Builder
+### Custom Study
 
-Use the session builder for more control:
-
-1. Open session builder
-2. Select "Project" filter
-3. Choose one or more projects
-4. Configure other options
-5. Start review
+For more control:
+1. Click the **sliders** icon on a project
+2. The Session Builder opens scoped to that project
+3. Configure additional filters (new only, due only, etc.)
 
 ## Project Statistics
 
-Each project shows:
-- **Total cards**: All cards in project
-- **New**: Unreviewed cards
-- **Due**: Cards due for review
-- **Learning**: Cards in learning phase
+Each project shows **aggregated statistics** that include sub-project cards:
 
-## Use Cases
+| Stat | Color | Description |
+|------|-------|-------------|
+| **New** | Blue | Cards never reviewed |
+| **Learning** | Orange | Cards in learning/relearning phase |
+| **Due** | Green | Review cards due today |
+| **Total** | — | All active cards |
 
-### Course Organization
+A parent project's counts are the sum of its own cards plus all descendant sub-project cards.
 
-```yaml
-true_recall_projects:
-  - CS 101: Algorithms
-  - CS 101: Data Structures
-  - Semester 3
-```
+## Comparison with Anki Decks
 
-### Book Notes
-
-```yaml
-true_recall_projects:
-  - "Book: Deep Work"
-  - Productivity
-  - Career
-```
-
-### Language Learning
-
-```yaml
-true_recall_projects:
-  - Spanish
-  - Spanish: Vocabulary
-  - Spanish: Grammar
-```
-
-### Research
-
-```yaml
-true_recall_projects:
-  - PhD Research
-  - Literature Review
-  - Methodology
-```
+| Feature | Anki | True Recall |
+|---------|------|-------------|
+| **Structure** | Strict tree (`::` separator) | Flexible graph (multi-parent) |
+| **Nesting** | Via deck name: `A::B::C` | Via frontmatter membership |
+| **Multi-parent** | Not possible | Supported |
+| **Storage** | SQLite `decks` table | Note frontmatter (wikilinks) |
+| **Backlinks** | None | Obsidian backlinks work |
+| **Review cascade** | Yes | Yes |
+| **Stats aggregation** | Yes | Yes |
 
 ## Best Practices
 
+### Start Simple
+
+- Create a few broad projects first
+- Add sub-projects only when a project grows large
+- Too many levels of nesting = harder to navigate
+
+### Use Obsidian Notes as Projects
+
+Since projects ARE notes, you can:
+- Write overview content in the project note
+- Use the project note as a MOC (Map of Content)
+- Link to related resources
+- Add study goals or exam dates
+
 ### Naming Conventions
 
-Use consistent prefixes:
-- `Book: <title>` for book notes
+Use consistent names:
+- `Book: <title>` for book reading projects
 - `Course: <name>` for educational content
-- `Project: <name>` for work projects
-- `Topic: <name>` for subject areas
-
-### Hierarchy Through Naming
-
-Create pseudo-hierarchy:
-```
-Spanish
-Spanish: Vocabulary
-Spanish: Vocabulary: Verbs
-Spanish: Grammar
-Spanish: Grammar: Conjugation
-```
-
-### Don't Over-Organize
-
-- Start with a few broad projects
-- Add specificity as needed
-- Too many projects = fragmentation
+- `Exam: <subject> <date>` for exam preparation
 
 ### Review Rotation
 
-- Review main projects daily
-- Rotate through secondary projects weekly
-- Archive completed projects (remove from notes)
-
-## Project Workflows
-
-### Exam Preparation
-
-1. Create project: "Exam: [Subject] [Date]"
-2. Add all relevant notes
-3. Set higher daily limits for project
-4. Review project exclusively before exam
-5. Archive after exam
-
-### Book Reading
-
-1. Create project when starting book
-2. Add notes as you read
-3. Review project to reinforce learning
-4. Keep project active until finished
-
-### Ongoing Learning
-
-1. Create topic projects
-2. Add notes from various sources
-3. Regular project reviews
-4. Update as you learn more
+- Review root projects for broad coverage
+- Review sub-projects for focused deep dives
+- Use the aggregated stats to spot which areas need attention
 
 ## Technical Details
 
-### Storage
+### How Hierarchy Is Determined
 
-Projects are stored in note frontmatter:
-```yaml
-true_recall_projects:
-  - Project A
-  - Project B
-```
+1. True Recall scans all notes' `projects` frontmatter
+2. A note with a self-reference (basename in own projects) is a **project-note**
+3. Other projects listed in that note's frontmatter become **parent projects**
+4. Parent-child relationships are computed at runtime — no separate database
 
-### Indexing
+### Cycle Protection
 
-True Recall indexes project associations on load:
-- Builds project → note map
-- Builds note → cards map
-- Enables fast project queries
+If Project A belongs to Project B, and Project B belongs to Project A, True Recall handles this gracefully with visited-set tracking. No infinite loops.
 
-### Sync
+### Performance
 
-Projects sync with cloud (if enabled):
-- Frontmatter changes sync with vault
-- No separate project database
+- Project graph is built once during `loadProjects()` and cached in state
+- Stats aggregation uses a single pass over all cards
+- Descendant computation uses DFS with cycle protection
 
 ## Troubleshooting
 
-### Project Not Showing Cards
+### Project Not Showing as Sub-Project
 
-- Verify notes are in project (check frontmatter)
-- Ensure notes have linked flashcards
-- Rebuild index: reload plugin
+- Verify the child project note has **both** a self-reference AND the parent project in frontmatter
+- Both the child and parent must be valid project-notes (with self-reference)
+- Check for case differences: "Machine Learning" vs "machine learning"
+
+### Stats Don't Aggregate
+
+- Ensure the parent-child relationship is valid (both notes have self-references)
+- Reload the plugin to rebuild the index
+- Check the Projects View — sub-projects should appear indented under the parent
+
+### Cards Not Appearing in Parent Review
+
+- Verify the note belongs to the sub-project (check frontmatter)
+- The sub-project must be a valid project-note (self-reference)
+- The sub-project must list the parent in its frontmatter
 
 ### Duplicate Projects
 
 - Check for case differences ("Project" vs "project")
-- Check for trailing spaces
-- Standardize naming
-
-### Cards in Wrong Project
-
-- Check source note's frontmatter
-- Cards follow their source note
-- Edit frontmatter to correct
+- Check for trailing spaces in frontmatter
+- Standardize naming across notes

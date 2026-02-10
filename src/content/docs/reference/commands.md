@@ -95,6 +95,34 @@ Opens a modal to add/remove the current note from projects.
 - **Shortcut**: None
 - **When to use**: Organize notes into study groups
 
+## Import & Export
+
+### Import Anki Deck
+
+Imports an `.apkg` file from Anki with cards, scheduling, and media.
+
+- **Command**: `True Recall: Import Anki deck (.apkg)`
+- **Shortcut**: None
+- **When to use**: Migrate from Anki or import shared decks
+- **Details**: See [Migrating from Anki](/migration/from-anki/)
+
+### Export to Anki
+
+Exports cards as an Anki deck package with hierarchical deck structure.
+
+- **Command**: `True Recall: Export to Anki (.apkg)`
+- **Shortcut**: None
+- **When to use**: Share decks, backup, or use with Anki mobile
+- **Details**: See [Exporting Cards](/features/anki-export/)
+
+### Export as CSV/TSV
+
+Exports cards as a text file for use with spreadsheets or other tools.
+
+- **Command**: `True Recall: Export as CSV/TSV`
+- **Shortcut**: None
+- **When to use**: Data analysis, sharing in plain text format
+
 ## Data Management
 
 ### Create Database Backup
@@ -138,6 +166,9 @@ Reverts the most recent flashcard action (edit, delete, rating).
 | Open FSRS simulator | View | Algorithm visualization |
 | Open orphaned cards | View | Orphan management |
 | Add note to project | Organize | Project assignment |
+| Import Anki deck | Import/Export | Import `.apkg` with cards and scheduling |
+| Export to Anki | Import/Export | Export as `.apkg` with deck hierarchy |
+| Export as CSV/TSV | Import/Export | Export cards as text file |
 | Create backup | Data | Database backup |
 | Sync cloud data | Data | Cloud synchronization (coming soon) |
 | Undo action | History | Revert changes |
