@@ -21,6 +21,7 @@
     "starlight-theme-obsidian": "^0.4.1"
   },
   "overrides": {
-    "path-to-regexp": "6.3.0"
+    "path-to-regexp": "6.3.0",
+    "picomatch": "^4.0.3"
   }
 }
