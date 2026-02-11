@@ -2,11 +2,12 @@
 title: Cloze Deletions
 description: Create fill-in-the-blank flashcards using cloze deletion syntax
 links:
+  - /features/basic-flashcards/
   - /features/reversed-cards/
   - /views/flashcard-panel/
 ---
 
-Cloze deletions let you create fill-in-the-blank flashcards directly in your notes. Instead of writing separate question and answer fields, you mark the key terms inline and True Recall generates the cards automatically.
+Fill-in-the-blank flashcards. Mark key terms inline with `{{c1::text}}` and True Recall generates cards automatically — no separate question and answer fields needed.
 
 ## Syntax
 
@@ -104,33 +105,18 @@ const doubled = numbers.{{c1::map}}(n => n * 2);
 #flashcard
 ````
 
-## How It Works
-
-1. **Write cloze syntax** in your note using `{{cN::text}}` or `{{cN::text::hint}}`
-2. **Add the `#flashcard` tag** at the end of the line (or on the last line for multi-line questions)
-3. **Collect flashcards** from the panel — True Recall parses the template and generates one card per unique cloze index
-4. **Review normally** — cloze cards appear with blanks during review and show the filled answer when revealed
-
-:::tip
-Cloze deletions work great for facts with multiple related pieces of information. Instead of creating 3 separate Q&A cards, write one cloze sentence with `c1`, `c2`, `c3` and get 3 interconnected cards.
-:::
-
 ## During Review
 
-Cloze cards display a small **"Cloze N"** label above the question so you know which blank to focus on. The question shows your text with the target term replaced by `[...]` (or `[hint]` if you provided one), and all other cloze terms are shown in plain text.
+Cloze cards show a **"Cloze N"** label so you know which blank to focus on. The target term is replaced by `[...]` (or `[hint]`), and all other cloze terms stay visible. The hidden term appears in **bold** when revealed.
 
-When you reveal the answer, the hidden term appears in **bold**.
+Edit cloze cards the same way as regular cards — press `E` during review or use the card menu.
 
-## Editing Cloze Cards
-
-You can edit cloze cards the same way as regular cards — press `E` during review or use the card menu in the panel. The question and answer fields contain the pre-rendered text (with blanks and bold), so edits apply to that specific card.
-
-## Duplicate Prevention
-
-True Recall tracks cloze cards by their source note, template text, and cloze index. If you collect flashcards from the same note again, existing cloze cards won't be duplicated.
+:::tip
+Instead of creating 3 separate Q&A cards, write one cloze sentence with `c1`, `c2`, `c3` and get 3 interconnected cards from a single line.
+:::
 
 ## Limitations
 
-- Cloze deletions cannot be combined with `#flashcard-reverse` — if both are present, only cloze cards are generated
+- Cannot combine with `#flashcard-reverse` — if both are present, only cloze cards are generated
 - Nested cloze syntax (`{{c1::outer {{c2::inner}}}}`) is not supported
 - Cloze indices must be positive integers (`c1`, `c2`, etc.)

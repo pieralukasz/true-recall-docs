@@ -2,15 +2,14 @@
 title: Reversed Cards
 description: Automatically generate bidirectional flashcards for two-way recall
 links:
+  - /features/basic-flashcards/
   - /features/cloze-deletions/
   - /views/flashcard-panel/
 ---
 
-Reversed cards automatically create a second flashcard with the question and answer swapped. This is useful for vocabulary, translations, definitions, and any content where you want to practice recall in both directions.
+Use `#flashcard-reverse` instead of `#flashcard` and True Recall creates two cards — the original plus a version with question and answer swapped. Perfect for vocabulary, translations, and anything you need to recall in both directions.
 
-## How to Create Reversed Cards
-
-Use the `#flashcard-reverse` tag instead of `#flashcard`:
+## Creating Reversed Cards
 
 ```markdown
 Apple #flashcard-reverse
@@ -80,30 +79,15 @@ A new array with each element transformed by the callback function.
 
 ## During Review
 
-Reversed cards display a small **"Reversed"** label above the question so you can tell them apart from the original card. Both cards are scheduled independently — you might see the original card today and the reversed version tomorrow, depending on your review history.
+Reversed cards show a **"Reversed"** label so you can tell them apart. Both cards are scheduled independently — you might review the original today and the reversed version tomorrow.
 
-## Editing Reversed Cards
+## Editing and Deleting
 
-When you edit a reversed card, the paired card is automatically updated with the swapped content. For example:
+Editing a reversed card automatically updates its pair. If you change "Apple" → "Jabłko" to "Apple" → "Jabłko (fruit)", the reversed card updates to "Jabłko (fruit)" → "Apple" automatically.
 
-1. Original card: Q="Apple", A="Jabłko"
-2. You edit the original to: Q="Apple", A="Jabłko (fruit)"
-3. The reversed card automatically updates to: Q="Jabłko (fruit)", A="Apple"
-
-This keeps both directions in sync without manual work.
-
-## Deleting Reversed Cards
-
-- **Deleting the original card** also deletes the reversed card (cascade delete)
-- **Deleting the reversed card** keeps the original intact
-
-This reflects the fact that the reversed card depends on the original, but not the other way around.
-
-## Duplicate Prevention
-
-When collecting flashcards, True Recall checks for existing cards with the same question text. If either the original or reversed card already exists, it won't be created again.
+Deleting the original card also deletes its reversed version. Deleting the reversed card keeps the original.
 
 ## Limitations
 
-- Reversed cards cannot be combined with cloze deletions — if a question contains `{{c1::...}}` syntax and uses `#flashcard-reverse`, only cloze cards are generated
-- Both the original and reversed card must have non-empty content for the reverse to be created
+- Cannot combine with cloze deletions — if `{{c1::...}}` syntax is present with `#flashcard-reverse`, only cloze cards are generated
+- Both question and answer must be non-empty for the reverse to be created

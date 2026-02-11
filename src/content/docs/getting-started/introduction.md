@@ -1,93 +1,94 @@
 ---
 title: Introduction
 description: Learn what True Recall is and how it can help you remember everything you learn
+links:
+  - /getting-started/installation/
+  - /features/review-system/
+  - /features/fsrs-algorithm/
 ---
 
-True Recall is an Obsidian plugin that combines **manual flashcard creation** with **spaced repetition (FSRS v6)**. It's a note-taking system where **each note contains its flashcards** — your knowledge and source material live together.
+```markdown
+# My Study Notes
 
-## What is True Recall?
+What is the mitochondria? #flashcard
+The powerhouse of the cell. It generates most of the cell's
+ATP through oxidative phosphorylation.
 
-True Recall turns your Obsidian vault into an intelligent learning system:
+What does DNA stand for? #flashcard
+Deoxyribonucleic acid — the molecule that carries genetic
+instructions for growth, development, and reproduction.
+```
 
-- **Write flashcards in your notes** using `#flashcard` tags
-- **Review with spaced repetition** using the FSRS v6 algorithm
-- **Track your progress** with comprehensive statistics
-- **Organize with projects** to group related content
-- **Sync across devices** with optional cloud sync (coming soon)
+True Recall is an Obsidian plugin for spaced repetition. You write flashcards directly in your notes with `#flashcard` tags, and the plugin schedules reviews using FSRS (Free Spaced Repetition Scheduler) — the most advanced open-source algorithm for long-term memory.
 
-## Who is it for?
+## Your note is the deck
 
-True Recall is perfect for:
+In Anki, flashcards live in decks separate from your study material. In True Recall, the note itself is the deck.
 
-- **Students** studying for exams or learning new subjects
-- **Researchers** retaining information from papers and articles
-- **Language learners** building vocabulary
-- **Professionals** keeping up with industry knowledge
-- **Lifelong learners** who want to remember what they read
+```markdown
+# Chapter 3: Cell Biology          ← this note is the deck
 
-## Core Concept: Note = Deck
+What is the mitochondria? #flashcard
+The powerhouse of the cell.
 
-Unlike traditional flashcard apps where decks contain cards:
+What is the cell membrane? #flashcard
+A lipid bilayer that controls what enters and exits the cell.
 
-- **In Anki**: A deck contains many flashcards (separate from source material)
-- **In True Recall**: A **note is the deck** — flashcards live inside your notes
+What is apoptosis? #flashcard
+Programmed cell death — the body's way of removing
+damaged or unnecessary cells.
+```
 
-This enables:
-- Flashcards stay with their source content
-- Same note can belong to multiple projects
-- Your knowledge graph and flashcards are unified
+Your flashcards stay next to the material they came from. When you revisit a note months later, the cards are right there — not buried in a separate app.
 
-## Project-Based Organization
+## How it works
 
-Projects allow you to group notes across your vault:
+```
+Write cards → Collect → Review → FSRS schedules next review
+```
 
-- One note can belong to multiple projects
-- Review all flashcards from a project together
-- Unlike Anki where one card belongs to one deck
+1. **Write** flashcards in any note using `#flashcard` tags
+2. **Collect** them with one click in the Flashcard Panel
+3. **Review** when they come due — rate each card Again, Hard, Good, or Easy
+4. **FSRS v6** calculates the optimal time to show each card again based on your performance
 
-## Comparing Spaced Repetition Tools
+The algorithm tracks two things per card: **stability** (how long until you might forget) and **difficulty** (how hard this card is for you). Every review refines these values, so your schedule gets more accurate over time.
 
-| Feature | True Recall | Anki | RemNote | Logseq | Obsidian-to-Anki |
-|---------|-------------|------|---------|--------|------------------|
-| **Core Model** | Note = Deck | Deck → Cards | Document → Cards | Block → Cards | Note → Anki Deck |
-| **Algorithm** | FSRS v6 | FSRS v6 (supported) | SM-2 | SM-2 | Uses Anki |
-| **Notes + Cards** | Unified in note | Separate app | Unified | Unified | Synced separately |
-| **Obsidian Native** | Yes | No | No | No | Plugin (bridge) |
-| **Local-First** | Yes (SQLite per device) | Yes | Cloud-first | Yes | Via Anki |
-| **Multi-Project** | Yes (same note in many) | No (1 card = 1 deck) | Limited | Limited | No |
-| **Source in Card** | Yes (embedded) | No | Yes | Yes | No |
+## Projects group notes together
 
-### Coming from Another Tool?
+A project is a collection of notes you want to study together. One note can belong to multiple projects.
 
-See our [migration guides](/migration/from-anki/) for step-by-step instructions on transitioning from Anki, Obsidian-to-Anki, RemNote, or Logseq.
+```
+Project: "Biology Exam"
+  ├── Chapter 3: Cell Biology       (12 cards)
+  ├── Chapter 4: Genetics           (8 cards)
+  └── Lab Notes: Microscopy         (5 cards)
 
-## Key Features at a Glance
+Project: "Science Fundamentals"
+  ├── Chapter 3: Cell Biology       (same 12 cards)
+  └── Physics: Thermodynamics       (10 cards)
+```
 
-### Flashcard Creation
-Write flashcards directly in your notes using simple markup:
-- Add `#flashcard` after a question line, then write the answer below
-- Use `#flashcard-reverse` for automatically creating reversed cards
-- Support for cloze deletions with `#flashcard` tag
+"Chapter 3: Cell Biology" appears in both projects. The cards are the same — no duplication.
 
-### FSRS v6 Algorithm
-The Free Spaced Repetition Scheduler version 6 is the most advanced open-source scheduling algorithm:
-- **Stability-based**: Tracks how well you know each card
-- **Difficulty-aware**: Adapts to your learning patterns
-- **Optimizable**: Train parameters on your review history
+## True Recall vs Anki
 
-### Local-First Data
-All your flashcard data is stored in `.true-recall/true-recall.db`:
-- Portable SQLite database
-- No vendor lock-in
-- Works offline
-- Backs up with your vault
+| | True Recall | Anki |
+|---|---|---|
+| **Where cards live** | Inside your notes | Separate from source material |
+| **Algorithm** | FSRS v6 | FSRS v6 (optional) or SM-2 |
+| **Organization** | Notes belong to multiple projects | 1 card = 1 deck |
+| **Runs in** | Obsidian | Standalone app |
+| **Data storage** | Local SQLite in your vault | Local database |
 
-### Comprehensive Statistics
-- Retention curves
-- Workload forecasts
-- Calendar heatmaps
-- Natural language queries
+:::tip[Coming from Anki?]
+See the [migration guide](/migration/from-anki/) for step-by-step instructions.
+:::
 
-## Next Steps
+## Local-first data
 
-Ready to get started? Continue to [Installation](/getting-started/installation/) to set up True Recall in your Obsidian vault.
+Your flashcard data lives in `.true-recall/true-recall.db` inside your vault — a portable SQLite database. Nothing leaves your machine unless you opt into cloud sync. It backs up with the rest of your vault.
+
+## Next steps
+
+Head to [Installation](/getting-started/installation/) to set up True Recall, then follow the [Quick Start](/getting-started/quick-start/) to create your first cards.

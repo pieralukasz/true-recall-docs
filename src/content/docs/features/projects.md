@@ -4,25 +4,14 @@ description: Organize flashcards into hierarchical study groups spanning multipl
 links:
   - /views/projects-view/
   - /views/session-builder/
+  - /configuration/fsrs-presets/
 ---
 
-Projects help you organize flashcards into logical groups for focused study. A project can span multiple notes, a note can belong to multiple projects, and projects can be nested inside other projects — forming a flexible hierarchy (like Anki decks).
+Projects group notes together for focused study. A project can span multiple notes, a note can belong to multiple projects, and projects nest inside other projects — like Anki decks, but more flexible.
 
 ## What Are Projects?
 
-Projects are named collections of notes. Examples:
-- "Spanish Course"
-- "Machine Learning Fundamentals"
-- "Book: Atomic Habits"
-- "Exam: Biology 101"
-
-### Key Concepts
-
-- **Notes belong to projects** (not individual cards)
-- **Cards inherit** their source note's project memberships
-- **Many-to-many**: A note can be in multiple projects
-- **Nestable**: A project can be a sub-project of another project
-- **Review cascading**: Reviewing a parent project includes all sub-project cards
+A project is a named collection of notes. Notes belong to projects (not individual cards), and cards inherit their source note's project memberships.
 
 ## How Projects Work
 

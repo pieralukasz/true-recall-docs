@@ -1,115 +1,96 @@
 ---
 title: Installation
 description: How to install True Recall in your Obsidian vault
+links:
+  - /getting-started/quick-start/
 ---
 
-True Recall can be installed via BRAT, manually, or from source. Community plugin installation will be available after Obsidian review approval.
+## Install via BRAT (Recommended)
 
-## Installation via BRAT (Recommended)
+[BRAT](https://github.com/TfTHacker/obsidian42-brat) (Beta Reviewers Auto-update Tool) handles installation and auto-updates for you.
 
-[BRAT](https://github.com/TfTHacker/obsidian42-brat) (Beta Reviewers Auto-update Tool) is the easiest way to install and keep True Recall updated.
+Open Obsidian **Settings → Community plugins → Browse**, search for "BRAT", and install it. Then:
 
-1. **Install BRAT** from Obsidian Community Plugins
-   - Settings → Community plugins → Browse
-   - Search for "BRAT"
-   - Install and enable it
+```
+Settings → BRAT → Add Beta Plugin → Enter: pieralukasz/true-recall → Add Plugin
+```
 
-2. **Add True Recall via BRAT**
-   - Settings → BRAT → Add Beta Plugin
-   - Enter: `pieralukasz/true-recall`
-   - Click "Add Plugin"
+Finally, enable the plugin:
 
-3. **Enable True Recall**
-   - Settings → Community plugins
-   - Find "True Recall" and toggle it on
+```
+Settings → Community plugins → Find "True Recall" → Toggle on
+```
 
-:::tip[Auto-Updates]
-BRAT automatically checks for updates. When a new version is released, BRAT will notify you and can update the plugin automatically.
+That's it. BRAT will notify you when updates are available and can install them automatically.
+
+:::tip
+Community plugin directory installation will be available after Obsidian review approval. For now, BRAT is the smoothest path.
 :::
 
-## Manual Installation (Alternative)
+## Manual Installation
 
-If you prefer not to use BRAT:
+Download the latest release from [GitHub Releases](https://github.com/pieralukasz/true-recall/releases), then drop the files into your vault's plugin folder:
 
-1. **Download the latest release** from [GitHub Releases](https://github.com/pieralukasz/true-recall/releases)
+```
+<your-vault>/.obsidian/plugins/true-recall/
+├── main.js
+├── styles.css
+└── manifest.json
+```
 
-2. **Locate your vault's plugins folder**:
-   - Open Obsidian
-   - Go to Settings → Community plugins
-   - Click the folder icon next to "Installed plugins" to open the plugins folder
-   - Or navigate to `<your-vault>/.obsidian/plugins/`
+You can find this folder through **Settings → Community plugins → folder icon** next to "Installed plugins". Create the `true-recall` directory if it doesn't exist.
 
-3. **Create the plugin folder**:
-   ```bash
-   mkdir true-recall
-   ```
+Enable the plugin in **Settings → Community plugins → True Recall → Toggle on**.
 
-4. **Copy the files** into the `true-recall` folder:
-   - `main.js`
-   - `styles.css`
-   - `manifest.json`
+## Install from Source
 
-5. **Enable the plugin**:
-   - Go to Settings → Community plugins
-   - Find "True Recall" in the list
-   - Toggle it on
+For developers who want the latest unreleased changes:
 
-## Installation from Source
+```bash
+git clone https://github.com/pieralukasz/true-recall.git
+cd true-recall
+npm install
+npm run build
+```
 
-For developers or those who want the latest features:
+Copy the output into your vault:
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/pieralukasz/true-recall.git
-   cd true-recall
-   ```
+```bash
+cp main.js styles.css manifest.json <your-vault>/.obsidian/plugins/true-recall/
+```
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+Enable the plugin in Obsidian settings.
 
-3. **Build the plugin**:
-   ```bash
-   npm run build
-   ```
+## Verify It Works
 
-4. **Copy to your vault**:
-   ```bash
-   cp main.js styles.css manifest.json <your-vault>/.obsidian/plugins/true-recall/
-   ```
+Once installed, you should see three things:
 
-5. **Enable the plugin** in Obsidian settings
+- **Ribbon icons** — a brain icon (purple) and a chart icon (orange) in the left sidebar
+- **Commands** — open the Command Palette (`Cmd/Ctrl+P`) and search "True Recall"
+- **Settings tab** — Settings → True Recall with configuration options
 
-## Verify Installation
-
-After installation, you should see:
-
-1. **Ribbon icons**: A brain icon (purple) and a chart icon (orange) in the left sidebar
-2. **Commands**: Open Command Palette (`Cmd/Ctrl+P`) and search for "True Recall"
-3. **Settings tab**: Settings → True Recall with configuration options
+If all three are there, you're good to go.
 
 ## System Requirements
 
-- **Obsidian**: Version 0.15.0 or later
-- **Operating System**: Windows, macOS, or Linux
-- **Mobile**: iOS and Android via Obsidian Mobile
+- **Obsidian** 0.15.0 or later
+- **OS** — Windows, macOS, or Linux
+- **Mobile** — iOS and Android via Obsidian Mobile
 
 ## Troubleshooting
 
 ### Plugin doesn't appear
-- Ensure all three files (`main.js`, `styles.css`, `manifest.json`) are in the folder
-- Check that the folder is named exactly `true-recall`
-- Try restarting Obsidian
+
+Make sure all three files (`main.js`, `styles.css`, `manifest.json`) are inside a folder named exactly `true-recall` in your vault's `.obsidian/plugins/` directory. Restart Obsidian if needed.
 
 ### Build errors
-- Make sure you have Node.js 18+ installed
-- Delete `node_modules` and run `npm install` again
 
-### Performance issues
-- Large vaults (10,000+ notes) may take longer on first load
-- The plugin indexes flashcard links on startup
+You need Node.js 18+. If something breaks, delete `node_modules` and run `npm install` again.
+
+:::caution
+Large vaults (10,000+ notes) may take longer on first load — the plugin indexes flashcard links on startup. This only happens once.
+:::
 
 ## Next Steps
 
-Now that True Recall is installed, continue to [Quick Start](/getting-started/quick-start/) to create your first flashcards.
+Head to [Quick Start](/getting-started/quick-start/) to create your first flashcards.

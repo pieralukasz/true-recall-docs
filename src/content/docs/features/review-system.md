@@ -7,195 +7,135 @@ links:
   - /configuration/scheduling/
 ---
 
-True Recall's review system uses spaced repetition to help you remember information efficiently. Cards are shown at optimal intervals based on how well you remember them.
+```
+         ┌─────┐    learn    ┌──────────┐   graduate   ┌────────┐
+         │ New │ ──────────▶ │ Learning │ ───────────▶ │ Review │
+         └─────┘             └──────────┘              └────────┘
+                                  ▲                        │
+                                  │        forget          │
+                                  │    ┌────────────┐      │
+                                  └────│ Relearning │◀─────┘
+                                       └────────────┘
+```
 
-## Card States
+Every card flows through this lifecycle. You create it (**New**), study it through short intervals (**Learning**), then it graduates to long-term scheduling (**Review**). Forget one? It drops into **Relearning** -- a faster path back to Review than starting from scratch.
 
-Every flashcard in True Recall has one of four states:
+## Card States in Practice
 
-### New
-- Cards that have never been reviewed
-- Shown during new card learning sessions
-- Subject to daily new card limits
+```markdown
+## My Biology Note
 
-### Learning
-- Cards currently being learned
-- Short intervals (minutes to hours)
-- Go through learning steps before graduation
+Q: What organelle produces ATP?
+A: The mitochondria
 
-### Review
-- Cards that have graduated from learning
-- Intervals measured in days
-- Your main long-term memory cards
+<!-- This card's journey: -->
+<!-- Day 1: New → rated Good → Learning (see again in 1 min) -->
+<!-- Day 1: Learning → rated Good → Learning (see again in 10 min) -->
+<!-- Day 1: Learning → rated Good → Review (see again tomorrow) -->
+<!-- Day 4: Review → rated Good → Review (see again in 4 days) -->
+<!-- Day 8: Review → rated Again → Relearning (forgot it!) -->
+```
 
-### Relearning
-- Previously known cards that were forgotten
-- Re-enter learning phase
-- Shorter graduation path than new cards
+**New** -- never reviewed, waiting for you to study it. Subject to your daily new card limit.
 
-## Review Session Flow
+**Learning** -- short intervals (minutes to hours) while the memory forms. Goes through learning steps before graduating.
 
-1. **Start session** via ribbon icon or command palette
-2. **See card count**: "New: 5 | Learning: 3 | Due: 12"
-3. **View question** and think of the answer
-4. **Reveal answer** with Space or click
-5. **Rate your recall** (1-4)
-6. **Repeat** until session complete
+**Review** -- graduated to long-term scheduling. Intervals measured in days. This is where most of your cards live.
+
+**Relearning** -- you forgot a Review card, so it re-enters a shorter learning phase to get back on track.
+
+## How a Review Session Works
+
+```
+┌─────────────────────────────────────┐
+│  New: 5  |  Learning: 3  |  Due: 12 │
+├─────────────────────────────────────┤
+│                                     │
+│  Q: What organelle produces ATP?    │
+│                                     │
+│         [ Show Answer ]             │
+│                                     │
+├─────────────────────────────────────┤
+│  Again(1)  Hard(2)  Good(3)  Easy(4)│
+└─────────────────────────────────────┘
+```
+
+Start a session from the ribbon icon or command palette. You see the question, think of the answer, reveal it, then rate how well you remembered. The header tracks your progress -- **New** cards left to introduce, **Learning** cards in progress, and **Due** reviews for today.
 
 ## Rating Scale
 
-| Rating | Name | Meaning | Scheduling Effect |
-|--------|------|---------|-------------------|
-| **1** | Again | Forgot completely | Reset to learning |
-| **2** | Hard | Struggled to recall | Shorter interval |
-| **3** | Good | Recalled with effort | Normal interval |
-| **4** | Easy | Recalled instantly | Longer interval |
+| Rating | Name | Meaning | What Happens |
+|--------|------|---------|--------------|
+| **1** | Again | Forgot completely | Card resets to learning |
+| **2** | Hard | Had to struggle | Shorter next interval |
+| **3** | Good | Recalled with some effort | Normal interval |
+| **4** | Easy | Instant recall | Longer interval |
 
-:::tip Rating Honestly
-The algorithm learns from your ratings. Don't inflate ratings—it hurts your long-term retention.
-:::
+FSRS (Free Spaced Repetition Scheduler) uses these ratings to calculate your optimal review timing. Rate honestly -- inflated ratings teach the algorithm wrong patterns and hurt your retention over time.
 
 ## Queue Order
 
-When you start a review session, cards are ordered in a specific way to maximize learning efficiency:
-
-### Queue Priority
-
 ```
-1. Due Learning Cards → 2. Review + New Cards → 3. Pending Learning Cards
+Due Learning cards → Reviews + New cards → Pending Learning cards
 ```
 
-| Priority | Card Type | Description |
-|----------|-----------|-------------|
-| **1st** | Due Learning | Learning/Relearning cards that are actually due (time has passed) |
-| **2nd** | Due Reviews | Review cards due for today |
-| **2nd** | New Cards | New cards (mixed with reviews based on settings) |
-| **3rd** | Pending Learning | Learning cards scheduled for later (e.g., "due in 15 min") |
+Learning cards that are actually due come first because they need timely review. Reviews and new cards make up the bulk of your session. Cards you recently got wrong ("pending learning") appear last -- this gives them time to breathe before you see them again.
 
-### Why This Order?
-
-- **Learning cards first**: When actually due, they need immediate attention for optimal learning
-- **Reviews and new cards**: Your main study content
-- **Pending learning last**: If you've pressed "Again" on a card, it goes to the end and you'll see it only after reviewing other available cards
-
-:::note Waiting Screen
-When all due cards are reviewed and only pending Learning cards remain, you'll see a **waiting screen** with a countdown. This ensures learning steps are respected (e.g., a 30-minute step actually waits 30 minutes).
-:::
-
-### Learn-Ahead Behavior
-
-- **Review cards**: Can be studied up to 20 minutes early (learn-ahead window)
-- **Learning cards**: Must be actually due—no early review. This respects the spacing effect during initial learning.
+If only pending learning cards remain, you'll see a waiting screen with a countdown. Review cards can be studied up to 20 minutes early, but learning cards must be actually due to preserve the spacing effect.
 
 ## Session Types
 
-### Standard Review
-- Reviews all due cards
-- Respects daily limits
-- Mixes new, learning, and review cards
+**Standard review** runs all your due cards while respecting daily limits. This is what you'll use most days.
 
-### Custom Session
-Advanced filtering options:
-- **By source note**: Review cards from specific notes
-- **By state**: Only new, learning, or review cards
-- **By project**: Review a specific project
-- **Ignore limits**: Override daily new/review limits
-- **Bypass scheduling**: Study cards regardless of due date
+**Custom sessions** let you filter by source note, card state, or project. You can also ignore daily limits or bypass scheduling entirely to study cards that aren't due yet.
 
-### Quick Sessions
-- **From current note**: Review only active note's cards
-- **Today's new cards**: Cards created today
-- **Weak cards**: Low retrievability cards
-
-## Progress Header
-
-During review, the header shows:
+**Quick sessions** are one-click shortcuts:
 
 ```
-New: 5 | Learning: 3 | Due: 12
+From current note    →  review only the active note's cards
+Today's new cards    →  cards you created today
+Weak cards           →  cards with low retrievability
 ```
-
-- **New**: Unreviewed cards to learn today
-- **Learning**: Cards in learning/relearning phase
-- **Due**: Review cards due for today
 
 ## Card Actions During Review
 
-Access these with keyboard shortcuts or long-press:
-
 | Action | Shortcut | Description |
 |--------|----------|-------------|
-| Suspend | `!` (Shift+1) | Remove from queue indefinitely |
+| Suspend | `!` (Shift+1) | Remove from review indefinitely |
 | Bury | `-` | Hide until tomorrow |
-| Bury Note | `=` | Bury all cards from same source |
+| Bury Note | `=` | Bury all cards from the same source |
 | Edit | `E` | Open card editor |
-| Move | `M` | Move to different note |
+| Move | `M` | Move to a different note |
 | Branch | `B` | Duplicate the card |
-| New Card | `N` | Create card manually |
+| New Card | `N` | Create a card manually |
+
+Spot a typo mid-review? Press `E` to fix it. Card not relevant anymore? `!` suspends it until you manually unsuspend. Need to skip something for today? `-` buries it and it comes back tomorrow.
 
 ## Undo
 
-Made a rating mistake? Undo it:
+```
+Cmd/Ctrl+Z  →  undo last rating
+```
 
-- **Shortcut**: `Cmd/Ctrl+Z`
-- **Button**: Click the undo button in header
-
-Undo restores the previous card state and lets you rate again.
+Tapped "Again" by accident? Undo restores the card's previous state so you can rate again.
 
 ## Review Modes
 
-### Fullscreen Mode
-- Takes over the main content area
-- Distraction-free review
-- Good for focused study sessions
+**Fullscreen** takes over Obsidian's main content area for distraction-free study.
 
-### Panel Mode
-- Opens as a side panel
-- Keep your notes visible
-- Good for reference while reviewing
+**Panel** opens as a side panel so you can keep your notes visible while reviewing -- useful when cards reference content you want to look up.
 
-Configure in Settings → True Recall → General → Review Mode.
+Set your preference in **Settings -> True Recall -> General -> Review Mode**.
 
 ## Daily Limits
 
-Control your daily workload:
+```
+New cards/day:  20    ← how many new cards to introduce
+Reviews/day:   200    ← maximum reviews per session
+```
 
-- **New cards/day**: How many new cards to introduce
-- **Reviews/day**: Maximum review cards per day
+Set these in **Settings -> True Recall -> General**.
 
-Set in Settings → True Recall → General.
-
-:::note About Limits
-Learning cards don't count against limits—they're always shown because they need frequent review to graduate.
+:::tip
+Learning cards don't count against daily limits. They always appear because they need frequent review to graduate properly.
 :::
-
-## Scheduling Details
-
-### Learning Steps
-Default: 1 minute, 10 minutes
-
-New cards go through these steps:
-1. First review → 1 min wait
-2. Second review → 10 min wait
-3. Third review → Graduate to review state
-
-### Graduating Interval
-Default: 1 day
-
-After completing learning steps, the card's first review interval.
-
-### Review Intervals
-Calculated by FSRS based on:
-- Your rating
-- Card difficulty
-- Current stability
-- Desired retention
-
-## Tips for Effective Review
-
-1. **Review at the same time daily** for habit formation
-2. **Don't cram**—respect the limits
-3. **Rate honestly** for accurate scheduling
-4. **Use bury** for cards you need to skip temporarily
-5. **Use suspend** for cards with errors to fix later
-6. **Check stats** weekly to monitor retention

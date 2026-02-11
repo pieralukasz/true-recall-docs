@@ -3,90 +3,54 @@ title: Scheduling Settings
 description: Configure how cards progress through learning stages
 links:
   - /features/review-system/
-  - /features/fsrs-algorithm/
   - /configuration/fsrs-presets/
   - /configuration/fsrs-parameters/
 ---
 
-Scheduling settings control how cards move through learning stages, from new cards to long-term review.
+Scheduling settings control how cards move through learning stages, from new cards to long-term review. You'll find them under **Settings > True Recall > Scheduling**.
 
 :::note
-Learning and relearning steps are configured **per preset**. Each [FSRS preset](/configuration/fsrs-presets/) has its own step configuration. To configure: Settings → True Recall → FSRS tab → select preset.
+Learning and relearning steps are configured **per preset**. Each [FSRS preset](/configuration/fsrs-presets/) has its own step configuration. To configure: Settings > True Recall > FSRS tab > select preset.
 :::
-
-## Accessing Settings
-
-1. Open Obsidian Settings (`Cmd/Ctrl+,`)
-2. Scroll to "True Recall"
-3. Select "Scheduling" tab
 
 ## Learning Steps
 
-### What Are Learning Steps?
-
-Learning steps are short intervals for new cards before they "graduate" to the review phase. They help you learn new material before long-term scheduling kicks in.
-
-### Learning Steps Configuration
+Learning steps are short intervals a new card goes through before it "graduates" into the review phase. They give you repeated exposure to fresh material before FSRS takes over long-term scheduling.
 
 Default: `1, 10` (minutes)
 
-The card progresses:
-1. First review → Wait 1 minute
-2. Second review → Wait 10 minutes
-3. Third review → Graduate (first review interval)
+Here's how a card with the default steps progresses:
 
-### Customizing Steps
+1. First review -- wait 1 minute
+2. Second review -- wait 10 minutes
+3. Third review -- graduate (moves to first review interval)
 
-**More steps** (e.g., `1, 10, 60, 1440`):
-- Slower graduation
-- More initial reinforcement
-- Better for difficult material
+**More steps** like `1, 10, 60, 1440` mean slower graduation and stronger initial reinforcement. Great for difficult material.
 
-**Fewer steps** (e.g., `10`):
-- Faster graduation
-- Less initial review
-- For easier material
+**Fewer steps** like `10` mean faster graduation and less upfront review. Works well for easier material.
 
-**Format**: Comma-separated minutes
-
-### Examples
+Steps are written as comma-separated minutes.
 
 | Steps | Progression | Use Case |
 |-------|-------------|----------|
-| `1, 10` | 1m → 10m → graduate | Default, most content |
-| `1, 10, 60` | 1m → 10m → 1h → graduate | Moderate difficulty |
-| `5, 30, 1440` | 5m → 30m → 1day → graduate | Difficult content |
-| `10` | 10m → graduate | Easy content |
+| `1, 10` | 1m > 10m > graduate | Default, most content |
+| `1, 10, 60` | 1m > 10m > 1h > graduate | Moderate difficulty |
+| `5, 30, 1440` | 5m > 30m > 1day > graduate | Difficult content |
+| `10` | 10m > graduate | Easy content |
 
 ## Relearning Steps
 
-### What Are Relearning Steps?
-
-When you rate a review card "Again" (forgot), it enters relearning. These steps are similar to learning but typically shorter.
-
-### Relearning Steps Configuration
+When you rate a review card "Again" (forgot it), the card enters relearning. These steps work just like learning steps but are typically shorter since you've seen the material before.
 
 Default: `10` (minutes)
 
-### Customizing Relearning
-
-**Longer relearning** (e.g., `10, 60`):
-- More reinforcement after lapse
-- Helps prevent repeated failures
-
-**Shorter relearning** (e.g., `5`):
-- Quick re-exposure
-- Faster return to review
+Use **longer relearning** like `10, 60` for more reinforcement after a lapse. Use **shorter relearning** like `5` for a quick re-exposure before returning to normal review.
 
 ## Graduating Interval
 
-### What Is It?
-
-The first review interval after a card completes learning steps.
+The first review interval after a card completes all its learning steps.
 
 Default: `1` day
-
-### Customizing
 
 | Setting | Effect |
 |---------|--------|
@@ -94,17 +58,13 @@ Default: `1` day
 | **2-3 days** | Longer initial wait |
 | **Same day** | (Not recommended) |
 
-**Recommendation**: Keep at 1 day for optimal retention.
+Keep this at 1 day for optimal retention.
 
 ## Easy Interval
 
-### What Is It?
-
-When you rate a new card "Easy" during learning, it skips to this interval.
+When you rate a new card "Easy" during learning, it skips ahead to this interval instead of going through the remaining steps.
 
 Default: `4` days
-
-### Customizing
 
 | Setting | Effect |
 |---------|--------|
@@ -112,7 +72,7 @@ Default: `4` days
 | **7 days** | Larger skip |
 | **2 days** | Smaller skip |
 
-**Use**: For cards you already know well.
+Use this for cards you already know well and don't need to drill through learning steps.
 
 ## Card Order Settings
 
@@ -126,7 +86,7 @@ How new cards are introduced:
 | **Oldest First** | Oldest created first |
 | **Newest First** | Most recent first |
 
-**Recommendation**: Random prevents patterns.
+Random is recommended -- it prevents you from forming patterns based on card position.
 
 ### Review Order
 
@@ -139,7 +99,7 @@ How review cards are presented:
 | **Due Date + Random** | Overdue first, then random |
 | **By Retrievability** | Lowest recall probability first |
 
-**Recommendation**: Due Date for efficient scheduling.
+Due Date is recommended for efficient scheduling.
 
 ### New/Review Mix
 
@@ -151,23 +111,23 @@ How new cards mix with reviews:
 | **Show After Reviews** | Reviews first, then new |
 | **Show Before Reviews** | New cards first |
 
-**Recommendation**: Mix for varied sessions.
+Mix is recommended for varied sessions that keep you engaged.
 
 ## Understanding Card Flow
 
 ```
 NEW CARD
-    │
-    ▼
+    |
+    v
 LEARNING (steps: 1m, 10m)
-    │ ← Rate "Again": restart
-    ▼ Rate "Good": continue
+    | <- Rate "Again": restart
+    v Rate "Good": continue
 GRADUATED (interval: 1 day)
-    │
-    ▼
+    |
+    v
 REVIEW (FSRS intervals)
-    │ ← Rate "Again": RELEARNING
-    ▼ Rate "Good": longer interval
+    | <- Rate "Again": RELEARNING
+    v Rate "Good": longer interval
 LONG-TERM REVIEW
 ```
 
@@ -208,47 +168,3 @@ Easy interval: 3 days
 :::tip
 Save frequently-used configurations as [FSRS presets](/configuration/fsrs-presets/). For example, create a "Medical" preset with thorough steps and a "Vocabulary" preset with quick steps, then assign them to different projects or notes.
 :::
-
-## Tips
-
-### Finding Your Steps
-
-1. Start with defaults
-2. Monitor graduation rate
-3. If forgetting after graduation, add steps
-4. If bored during learning, reduce steps
-
-### Avoiding Overload
-
-- More learning steps = more daily reviews
-- Balance thoroughness with time
-- Consider your available study time
-
-### Adapting Over Time
-
-- Adjust based on experience
-- Different subjects may need different steps
-- Review your retention statistics
-
-## Common Issues
-
-### Cards Not Graduating
-
-If cards stay in learning:
-- Check you're rating "Good" or better
-- Verify steps are achievable
-- Consider shorter steps
-
-### Forgetting After Graduation
-
-If retention drops after graduation:
-- Add more learning steps
-- Check graduating interval
-- Review note quality
-
-### Too Many Learning Cards
-
-If learning pile grows:
-- Reduce new cards per day
-- Simplify learning steps
-- Clear backlog before adding new

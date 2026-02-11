@@ -18,25 +18,16 @@ Obsidian Sync and other cloud sync services don't reliably sync SQLite databases
 We're building a secure sync solution with proper conflict resolution. Until then, the safest approach is single-device use.
 :::
 
-True Recall Cloud will enable cross-device synchronization, letting you study on any device while keeping your progress in sync.
-
-## Planned Features
-
-Cloud sync will allow you to:
-
-- **Study on multiple devices** (desktop, laptop, mobile)
-- **Keep progress synchronized** automatically
-- **Recover from data loss** with cloud backup
-- **Switch devices** seamlessly
+True Recall Cloud will let you study on any device — desktop, laptop, mobile — while keeping your progress in sync.
 
 ## How It Will Work
 
-Each device will maintain a local database that syncs with the cloud server:
+Each device maintains a local database that syncs with the cloud:
 
 ```
 Device A ←→ True Recall Cloud ←→ Device B
    ↓              ↓                 ↓
-Local DB    Supabase Server     Local DB
+Local DB      Cloud Server      Local DB
 ```
 
 ### What Will Sync
@@ -55,23 +46,6 @@ Local DB    Supabase Server     Local DB
 
 ## Current Status
 
-Cloud Sync is the next major feature planned for True Recall. We're building the infrastructure to ensure:
+Cloud Sync is the next major feature in development. The focus is on reliable conflict resolution, encrypted data transfer, and a privacy-first approach.
 
-- **Reliable synchronization** with conflict resolution
-- **Secure data transfer** with encryption
-- **Privacy-first approach** with minimal data collection
-
-## Stay Updated
-
-Cloud Sync will be announced when ready. In the meantime, True Recall works fully offline with local-first data storage in your Obsidian vault.
-
-## FAQ
-
-**Q: Is cloud sync required?**
-A: No, True Recall works fully locally. Cloud will be optional.
-
-**Q: Will there be a free tier?**
-A: Yes, basic sync will be free.
-
-**Q: Can I self-host?**
-A: This is being considered for future development.
+In the meantime, True Recall works fully offline with local-first storage in your vault.

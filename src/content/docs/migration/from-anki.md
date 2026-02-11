@@ -1,6 +1,10 @@
 ---
 title: Migrating from Anki
 description: Import your Anki decks into True Recall with full card and scheduling support
+links:
+  - /getting-started/quick-start/
+  - /features/projects/
+  - /views/card-browser/
 ---
 
 True Recall can import `.apkg` files directly from Anki, preserving your cards, review history, and deck structure.

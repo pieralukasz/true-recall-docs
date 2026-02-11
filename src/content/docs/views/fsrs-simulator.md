@@ -7,13 +7,7 @@ links:
   - /configuration/fsrs-parameters/
 ---
 
-The FSRS Simulator helps you understand and visualize how the FSRS algorithm schedules your flashcards. Experiment with different parameters to see their effects.
-
-## Opening the Simulator
-
-- **Command Palette**: `Cmd/Ctrl+P` → "True Recall: Open FSRS simulator"
-
-## Interface
+The FSRS Simulator lets you play with FSRS (Free Spaced Repetition Scheduler) parameters and instantly see how they change your review schedule. Open it from the Command Palette: `Cmd/Ctrl+P` then search "True Recall: Open FSRS simulator".
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -41,9 +35,11 @@ The FSRS Simulator helps you understand and visualize how the FSRS algorithm sch
 
 ## Parameters
 
+Tweak the sliders on the left, hit **Simulate**, and watch the results table and chart update on the right.
+
 ### Desired Retention
 
-Target probability of recall when cards are due.
+How likely you want to remember a card when it comes due.
 
 | Value | Effect |
 |-------|--------|
@@ -54,7 +50,7 @@ Target probability of recall when cards are due.
 
 ### Initial Stability
 
-Starting stability for new cards (days).
+Starting stability for new cards, measured in days.
 
 | Value | Effect |
 |-------|--------|
@@ -64,7 +60,7 @@ Starting stability for new cards (days).
 
 ### Initial Difficulty
 
-Starting difficulty for new cards (0-10).
+Starting difficulty for new cards on a 0--10 scale.
 
 | Value | Effect |
 |-------|--------|
@@ -72,18 +68,11 @@ Starting difficulty for new cards (0-10).
 | **Default (5)** | Normal growth |
 | **High (7)** | Slower stability growth |
 
-### FSRS Weights
-
-Choose parameter set:
-- **Default**: Standard FSRS parameters
-- **Your Optimized**: Parameters from your data
-- **Custom**: Enter custom values
+You can also pick which weight set to use: **Default** (standard FSRS), **Your Optimized** (trained on your reviews), or **Custom** (enter values manually).
 
 ## Simulation Output
 
-### Results Table
-
-Shows scheduling progression:
+The results table shows what happens at each review:
 
 | Column | Description |
 |--------|-------------|
@@ -93,167 +82,31 @@ Shows scheduling progression:
 | **Stability** | Current stability value |
 | **Difficulty** | Current difficulty value |
 
-### Interval Chart
-
-Visual representation of:
-- Interval growth over reviews
-- Comparison with different parameters
-- Projected long-term schedule
-
-## Running Simulations
-
-### Basic Simulation
-
-1. Set desired retention
-2. Click **Simulate**
-3. View results table
-4. Analyze chart
-
-### Comparing Parameters
-
-1. Run simulation with current settings
-2. Change a parameter
-3. Run again
-4. Compare results side-by-side
-
-### Testing Scenarios
-
-Simulate different review patterns:
-- Always "Good" (normal progression)
-- Mixed ratings (realistic)
-- Some "Again" (with lapses)
-
-## Understanding Results
-
-### Interval Growth
-
-Healthy pattern shows:
-- Exponential-like growth initially
-- Gradual tapering as intervals lengthen
-- Approaching maximum interval
-
-### Retrievability
-
-At each review:
-- Should be near desired retention
-- Lower = card was overdue
-- Higher = reviewed early
-
-### Stability Evolution
-
-After each "Good" rating:
-- Stability increases
-- Rate depends on difficulty
-- Affects next interval
-
-## Use Cases
-
-### Before Optimization
-
-Check current scheduling:
-1. Enter your current weights
-2. Simulate typical pattern
-3. Identify issues
-
-### After Optimization
-
-Verify new parameters:
-1. Enter optimized weights
-2. Compare to old weights
-3. Confirm improvement
-
-### Learning FSRS
-
-Understand the algorithm:
-1. Try extreme values
-2. See effects
-3. Build intuition
+The interval chart plots how quickly your review gaps grow over time. Steep growth means easy material or low retention targets. Flat growth means hard material or a high retention target.
 
 ## Practical Examples
 
-### High Retention Need
+Need rock-solid recall for exam material? Set retention to **0.95**. You will review more often, but very little slips through.
 
-For critical material:
 ```
 Retention: 0.95
 Result: More frequent reviews, shorter intervals
 ```
 
-### Bulk Learning
+Studying something low-stakes? Drop retention to **0.85** and let the intervals stretch out.
 
-For less critical material:
 ```
 Retention: 0.85
 Result: Fewer reviews, longer intervals
 ```
 
-### Difficult Cards
+Want to see how the algorithm handles tough cards? Crank initial difficulty up to **8** and watch intervals grow more slowly.
 
-Simulating hard material:
 ```
 Initial Difficulty: 8
 Result: Slower interval growth
 ```
 
-## Chart Analysis
-
-### Steep Growth
-- Cards getting longer intervals quickly
-- May indicate easy material
-- Or low desired retention
-
-### Flat Growth
-- Intervals not increasing much
-- May indicate difficult material
-- Or very high retention target
-
-### Plateaus
-- Intervals stabilizing
-- Normal at high stability
-- May hit maximum interval
-
-## Tips
-
-### Start with Defaults
-- Default parameters work for most
-- Only adjust if needed
-- Optimization usually better
-
-### Small Changes
-- Adjust one parameter at a time
-- Observe effect
-- Don't over-tune
-
-### Real Data Priority
-- Simulation is approximate
-- Your review data is real
-- Use optimization when possible
-
-## Limitations
-
-### Simplified Model
-- Assumes consistent rating
-- Real behavior varies
-- Use for understanding, not prediction
-
-### No Lapse Simulation
-- Doesn't show forgetting
-- Real learning includes lapses
-- Factor this into expectations
-
-## Troubleshooting
-
-### Simulation Won't Run
-- Check all parameters filled
-- Ensure valid ranges
-- Try resetting defaults
-
-### Chart Not Displaying
-- Wait for calculation
-- Check browser compatibility
-- Reload if stuck
-
-### Unexpected Results
-- Verify parameter values
-- Compare to defaults
-- Check weight format
+:::note
+The simulator is great for building intuition. For real scheduling improvements, run [FSRS optimization](/advanced/fsrs-optimization/) on your actual review data.
+:::

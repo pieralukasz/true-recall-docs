@@ -6,18 +6,11 @@ links:
   - /features/fsrs-algorithm/
 ---
 
-The Statistics View provides comprehensive analytics about your flashcard collection and learning progress.
-
-## Opening Statistics
-
-- **Ribbon icon**: Click the orange chart icon
-- **Command Palette**: `Cmd/Ctrl+P` → "True Recall: Open statistics panel"
+The Statistics View is your learning dashboard. It shows you what you've done today, how your retention is trending, and what's coming up next. Open it from the ribbon (the orange chart icon) or run `Cmd/Ctrl+P` and search for "True Recall: Open statistics panel".
 
 ## Dashboard Components
 
-### Today's Summary Card
-
-Quick overview of your current session:
+At the top you get a quick snapshot of your current session:
 
 ```
 ┌─────────────────────────────────────┐
@@ -30,48 +23,21 @@ Quick overview of your current session:
 └─────────────────────────────────────┘
 ```
 
-### Card State Distribution
+Below that, several charts give you the full picture.
 
-Pie chart showing collection breakdown:
-- **New** (blue): Never reviewed
-- **Learning** (yellow): In learning phase
-- **Review** (green): Graduated cards
-- **Suspended** (gray): Paused cards
-- **Buried** (brown): Hidden today
+**Card State Distribution** is a pie chart of your collection: New (blue), Learning (yellow), Review (green), Suspended (gray), and Buried (brown). At a glance you can see where your cards live.
 
-### Retention Over Time
+**Retention Over Time** plots your actual success rate against your desired retention target. When the two lines are close together, FSRS is well-calibrated for you.
 
-Line chart tracking success rate:
-- X-axis: Time (days/weeks/months)
-- Y-axis: Retention percentage
-- Target line: Your desired retention
-- Actual line: Your real performance
+**Future Workload** forecasts your next 30 days of reviews as a bar chart. Each bar is how many cards are due that day, so you can plan your study time.
 
-### Future Workload
+**Calendar Heatmap** shows your past year of activity. Darker squares mean more reviews. Click any day to see the details.
 
-Bar chart forecasting upcoming reviews:
-- Shows next 30 days
-- Height = cards due that day
-- Helps plan study time
-
-### Calendar Heatmap
-
-Activity visualization:
-- Shows past year
-- Darker = more reviews
-- Click day for details
-
-### Additional Charts
-
-Depending on data available:
-- Reviews over time
-- Card creation vs review
-- Difficulty distribution
-- Interval distribution
+Depending on how much data you have, you may also see charts for reviews over time, card creation vs review, difficulty distribution, and interval distribution.
 
 ## Time Range Filters
 
-Switch between periods:
+You can switch the dashboard between different periods:
 
 | Filter | Shows |
 |--------|-------|
@@ -83,162 +49,51 @@ Switch between periods:
 ## Metrics Explained
 
 ### Reviewed Today
-Total cards reviewed in current session.
+
+Total cards you reviewed in the current session.
 
 ### New Cards Learned
-New cards that entered learning phase today.
+
+Cards that entered the learning phase for the first time today.
 
 ### Time Spent
-Total active review time today.
+
+Your total active review time today. Idle time doesn't count.
 
 ### Accuracy
-Percentage of Good + Easy ratings.
+
+The percentage of your ratings that were Good or Easy.
 
 ```
-Accuracy = (Good + Easy) / Total × 100
+Accuracy = (Good + Easy) / Total x 100
 ```
 
 ### Retention Rate
-Success rate on cards due for review (not learning).
+
+Your success rate on cards that were due for review (excludes cards still in learning).
 
 ### True Retention
-Actual vs FSRS-predicted retention:
-- Close = well-calibrated
-- Lower = underperforming
-- Higher = over-reviewing
+
+How your actual retention compares to what FSRS predicted. If the numbers are close, your parameters are well-calibrated. A lower actual rate means you're underperforming predictions. A higher one suggests you might be over-reviewing.
 
 ### Review Burden
-Average daily reviews to maintain collection.
+
+The average number of daily reviews needed to maintain your collection at its current size.
 
 ### Learning Load
-New cards currently in learning phase.
 
-## Chart Interactions
-
-### Hover
-- Shows tooltip with exact values
-- Date and count details
-
-### Click
-- Some charts allow drill-down
-- Calendar shows day details
-
-### Zoom
-- Scroll to zoom time charts
-- Drag to pan
-
-### Export
-- Right-click → Save as image
-- Copy to clipboard
+How many new cards are currently working through the learning phase.
 
 ## Natural Language Query
 
-Ask questions about your data:
+You can ask questions about your data in plain English. Click the query input, type something like "What's my retention this week?" or "How many cards did I review yesterday?", and press Enter.
 
-### How to Use
-1. Click the query input
-2. Type your question
-3. Press Enter
-4. View AI response
+Some other things you can ask:
 
-### Example Questions
-- "What's my retention this week?"
-- "How many cards did I review yesterday?"
 - "What are my hardest cards?"
 - "Show my busiest review days"
 - "Compare this week to last week"
 
 :::note
-Requires an OpenRouter API key configured in settings.
+This feature requires an OpenRouter API key. OpenRouter is a unified API gateway that gives you access to AI models. You need a free API key from [openrouter.ai](https://openrouter.ai). Once you have one, add it in the plugin settings.
 :::
-
-## Interpreting Your Data
-
-### Healthy Patterns
-- Retention 85-95%
-- Consistent daily reviews
-- Growing mature cards
-- Stable workload
-
-### Warning Signs
-- Retention below 80%
-- Large review backlogs
-- Many cards relearning
-- Increasing difficulty
-
-### Action Items
-
-**Low retention:**
-- Review rating honesty
-- Consider parameter optimization
-- Check for problem cards
-
-**Growing backlog:**
-- Reduce new cards/day
-- Increase review time
-- Use load balancing
-
-**Many suspended:**
-- Audit suspended cards
-- Fix or delete problem cards
-- Reset if needed
-
-## Export Options
-
-### Chart Images
-- Right-click any chart
-- Save as PNG
-- Share or archive
-
-### Data Export
-- CSV format (if available)
-- Review history
-- Card statistics
-
-## Settings Impact
-
-### Day Boundary
-Affects "today" calculations:
-- Default: 4 AM
-- Reviews before boundary count for previous day
-
-### Desired Retention
-- Target line on retention chart
-- Compare actual vs target
-
-## Tips
-
-### Weekly Review
-Check stats weekly:
-- Monitor retention trends
-- Adjust limits if needed
-- Identify problems early
-
-### Before Optimization
-Before FSRS optimization:
-- Need 400+ reviews
-- Check current retention
-- Review difficulty spread
-
-### Goal Setting
-Use stats to set goals:
-- Cards per day target
-- Retention target
-- Collection size target
-
-## Troubleshooting
-
-### Charts Not Loading
-- Wait for data to process
-- Check for JavaScript errors
-- Try refreshing panel
-
-### Wrong Numbers
-- Verify time zone
-- Check day boundary setting
-- Ensure data synced
-
-### Missing Data
-- Old data may not migrate
-- Check database integrity
-- Some metrics need history

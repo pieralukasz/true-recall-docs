@@ -1,9 +1,12 @@
 ---
 title: Batch Adding Flashcards
 description: How to create many flashcards at once using the Add panel or Collect feature
+links:
+  - /features/basic-flashcards/
+  - /views/flashcard-panel/
 ---
 
-Creating flashcards one at a time is slow. True Recall lets you add dozens of cards in a single action — either by writing them in the **Add** modal or by tagging them directly in your notes and clicking **Collect**.
+Two ways to add many cards at once: write them in the **Add** modal, or tag them in your notes and click **Collect**.
 
 ## Method 1: Add Modal (Batch Write)
 

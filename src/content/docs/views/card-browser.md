@@ -1,15 +1,17 @@
 ---
 title: Card Browser
 description: Table view for browsing, filtering, and managing your entire card collection
+links:
+  - /views/flashcard-panel/
+  - /views/session-builder/
+  - /features/projects/
 ---
 
-The Card Browser gives you a full table view of every card in your collection, with FSRS scheduling data visible at a glance. Use it to find specific cards, inspect scheduling details, and perform bulk operations.
+Every card you've ever created, in one table. The Card Browser lets you search, sort, filter, and bulk-manage your entire collection — with all the FSRS scheduling data right there in the columns.
 
-## Opening the Browser
+FSRS (Free Spaced Repetition Scheduler) is the algorithm True Recall uses to figure out when you should see each card again. The browser exposes its key numbers so you can see exactly what's going on under the hood.
 
-- **Command Palette**: `Cmd/Ctrl+P` → "True Recall: Open card browser"
-
-The browser opens as a main-area tab (like a note).
+Open it from the Command Palette: `Cmd/Ctrl+P` then search for "True Recall: Open card browser". It opens as a regular tab, just like a note.
 
 ## Browser Layout
 
@@ -30,14 +32,13 @@ The browser opens as a main-area tab (like a note).
 └──────────────────────────────────────────────┘
 ```
 
-## Toolbar
+At the top you get a search bar, filter pills, and a card count. The main area is a sortable table. Click any row and a detail panel slides open at the bottom.
 
-### Search
-Type in the search bar to filter cards by question, answer, or source note name. The search is case-insensitive and matches partial text.
+## Search and Filters
 
-### State Filters
+Type in the search bar to filter cards by question, answer, or source note name. It's case-insensitive and matches partial text — just start typing.
 
-Filter pills let you narrow down to a specific card state:
+The filter pills narrow things down by card state:
 
 | Filter | Shows |
 |--------|-------|
@@ -49,93 +50,59 @@ Filter pills let you narrow down to a specific card state:
 | **Suspended** | Cards excluded from review |
 | **Buried** | Cards hidden until tomorrow |
 
-### Card Count
-Shows "X of Y cards" when a filter or search is active, or "Y cards" when showing all.
+When a filter or search is active, the count reads "X of Y cards" so you always know what slice you're looking at.
 
 ## Table Columns
 
-| Column | Description | Sortable |
-|--------|-------------|----------|
-| **Question** | Truncated question text (plain text, no markdown) | Yes |
-| **Answer** | Truncated answer text | Yes |
-| **State** | Color-coded state badge (New, Learning, Review, etc.) | Yes |
-| **Due** | Relative due date ("Today", "In 5d", "3d ago") | Yes |
-| **Interval** | Scheduled interval in days/months/years | Yes |
-| **Lapses** | Number of times the card was forgotten | Yes |
-| **Stab.** | Memory stability in days (FSRS parameter) | Yes |
-| **Diff.** | Card difficulty on a 1–10 scale (FSRS parameter) | Yes |
-| **Source** | Name of the source note | Yes |
+Every column is sortable — click a header to sort, click again to flip the direction. An arrow shows the active sort.
 
-### Sorting
-Click any column header to sort. Click again to toggle ascending/descending. An arrow icon indicates the current sort column and direction.
+| Column | What it tells you |
+|--------|-------------------|
+| **Question** | Truncated question text (plain text, no markdown) |
+| **Answer** | Truncated answer text |
+| **State** | Color-coded badge — New, Learning, Review, etc. |
+| **Due** | Relative due date ("Today", "In 5d", "3d ago") |
+| **Interval** | Scheduled gap between reviews, in days/months/years |
+| **Lapses** | How many times you forgot this card |
+| **Stability** | Memory strength in days — a card with stability of 10d means FSRS estimates a 90% chance you'll recall it after 10 days. Low stability means fragile memory. |
+| **Difficulty** | How hard the card is on a 1-10 scale. High-difficulty cards build stability slower and get scheduled more frequently. |
+| **Source** | Name of the note the card lives in |
 
 ## Card Detail Panel
 
-Click any row to open a preview panel at the bottom of the browser.
+Click any row and a preview panel appears at the bottom of the browser.
 
-### Preview Content
-- **Question & Answer**: Full markdown-rendered content (supports images, code blocks, math)
-- **Metadata grid**: Due, Interval, Stability, Difficulty, Lapses, Reps, Created, Last Review, Projects
-- **Source link**: Click to navigate to the source note
+You get the full question and answer rendered with markdown (images, code blocks, math all work), plus a metadata grid showing Due, Interval, Stability, Difficulty, Lapses, Reps, Created, Last Review, and Projects. There's also a link to jump straight to the source note.
 
-### Preview Actions
+Three actions live in the panel:
 
-| Button | Action |
-|--------|--------|
+| Button | What it does |
+|--------|-------------|
 | **Suspend / Unsuspend** | Toggle card suspension |
-| **Reset** | Reset card to New state (clears scheduling) |
+| **Reset** | Reset card to New state (clears all scheduling data) |
 | **Delete** | Permanently remove the card |
 
-Click **×** or click another row to close the preview.
+Click the **x** button or click another row to close the preview.
 
-## Selection & Bulk Operations
+## Selection and Bulk Operations
 
-### Entering Selection Mode
-- Click a checkbox on any row to enter selection mode
-- In selection mode, click rows or checkboxes to toggle selection
-- Use the header checkbox to select/deselect all filtered cards
+Click a checkbox on any row to enter selection mode. Once you're in, click rows or checkboxes to toggle selection. The header checkbox selects (or deselects) all currently filtered cards at once.
 
-### Bulk Actions
+A footer bar appears with bulk actions:
 
-When cards are selected, a footer bar appears with:
-
-| Action | Description |
+| Action | What it does |
 |--------|-------------|
 | **Suspend** | Suspend all selected cards |
 | **Unsuspend** | Unsuspend all selected cards |
 | **Reset** | Reset all selected cards to New |
 | **Delete** | Delete all selected cards |
 
-Click **×** on the footer to exit selection mode.
+Click the **x** on the footer bar to exit selection mode.
 
-## Tips
-
-### Finding Problem Cards
-- Sort by **Lapses** (descending) to find frequently forgotten cards — these may need rewording
-- Sort by **Difficulty** (descending) to spot the hardest cards
-- Filter by **Suspended** to audit cards you've paused
-
-### Reviewing Scheduling Data
-- **Stability** shows how many days of memory strength a card has — low stability means fragile memory
-- **Interval** shows the gap between reviews — compare with stability to assess card health
-- **Due** date helps you plan study sessions
-
-### Workflow with Other Views
-- Use the Card Browser to find and inspect cards across your entire collection
-- Use the [Flashcard Panel](/views/flashcard-panel) to manage cards from a single note
-- Use the [Session Builder](/views/session-builder) to create custom review sessions with advanced filters
-
-## Troubleshooting
-
-### Browser is Empty
-- Verify you have cards in the database (check the Flashcard Panel for any note)
-- Try the Refresh button in the toolbar
-- Reload the plugin if data seems stale
-
-### Table Feels Slow
-- The table uses virtual scrolling — only visible rows are rendered, so thousands of cards should be smooth
-- If the browser is still slow, try narrowing your search or applying a state filter
-
-### Cards Not Reflecting Changes
-- The browser auto-refreshes when cards change elsewhere in the app
-- If data is stale, click the Refresh button to force a reload
+:::tip[Getting more out of the browser]
+- Sort by **Lapses** (descending) to find your most-forgotten cards — they probably need rewording.
+- Sort by **Difficulty** (descending) to spot the hardest cards in your collection.
+- Filter by **Suspended** to audit cards you've paused.
+- Compare **Stability** and **Interval** side by side to get a feel for card health — if interval is much larger than stability, the card is being pushed.
+- Use the Card Browser for collection-wide work, the [Flashcard Panel](/views/flashcard-panel/) for single-note management, and the [Session Builder](/views/session-builder/) for building custom review sessions.
+:::

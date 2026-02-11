@@ -16,6 +16,7 @@ export default defineConfig({
 				graph: true,
 				graphConfig: {
 					depth: -1,
+					renderUnresolved: false,
 				},
 			})],
 			components: {

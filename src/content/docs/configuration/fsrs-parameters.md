@@ -8,26 +8,13 @@ links:
   - /views/fsrs-simulator/
 ---
 
-FSRS parameters control how the spaced repetition algorithm schedules your cards. Each [FSRS preset](/configuration/fsrs-presets/) contains its own set of parameters, allowing different scheduling strategies for different subjects.
+FSRS (Free Spaced Repetition Scheduler) parameters control how your cards get scheduled. You'll find them in **Obsidian Settings > True Recall > FSRS**, with a preset dropdown at the top. Pick a preset, and everything on the page applies to that preset only.
 
-## Accessing Settings
-
-1. Open Obsidian Settings (`Cmd/Ctrl+,`)
-2. Scroll to "True Recall"
-3. Select "FSRS" tab
-4. Select a **preset** from the dropdown at the top
-
-All settings on this page (retention, max interval, weights, optimization) are **per-preset**. Switching the dropdown changes which preset you're configuring.
+All settings on this page — retention, max interval, weights, optimization — are **per-preset**. Switching the dropdown changes which preset you're configuring.
 
 ## Desired Retention
 
-### What Is It?
-
-Target probability of recalling a card when it's due for review. Configured per preset.
-
-### Configuration
-
-Slider: 0.70 to 0.99
+Your target probability of recalling a card when it comes up for review. Drag the slider anywhere from 0.70 to 0.99.
 
 | Setting | Reviews | Retention |
 |---------|---------|-----------|
@@ -36,22 +23,7 @@ Slider: 0.70 to 0.99
 | **0.85** | Fewer | Acceptable |
 | **0.80** | Minimum | Significant forgetting |
 
-### Choosing Your Retention
-
-**High retention (0.92-0.95)**:
-- Critical information
-- Exam preparation
-- Professional knowledge
-
-**Standard retention (0.88-0.92)**:
-- General learning
-- Hobby knowledge
-- Most use cases
-
-**Lower retention (0.80-0.87)**:
-- Bulk learning
-- Less critical info
-- Time-constrained
+Higher values like 0.92-0.95 make sense for exam prep or professional knowledge. Standard 0.88-0.92 works for most general learning. Lower values like 0.80-0.87 suit bulk learning when you're short on time.
 
 :::tip
 Start with 0.90 and adjust based on actual retention in statistics.
@@ -59,15 +31,9 @@ Start with 0.90 and adjust based on actual retention in statistics.
 
 ## Maximum Interval
 
-### What Is It?
+The longest gap a card can have before its next review. The default is 36500 days (effectively forever).
 
-Longest interval a card can have, preventing indefinitely long gaps. Configured per preset — you might cap exam content at 180 days while leaving general knowledge unlimited.
-
-### Configuration
-
-Default: 36500 days (100 years)
-
-### Customizing
+You might cap exam content at 180 days while leaving general knowledge unlimited. A few common setups:
 
 | Setting | Effect |
 |---------|--------|
@@ -75,70 +41,43 @@ Default: 36500 days (100 years)
 | **365** | Maximum 1 year |
 | **180** | Maximum 6 months |
 
-**When to lower**:
-- Testing retention research
-- Ensuring periodic review
-- Special requirements
-
 ## FSRS Weights
 
-### What Are Weights?
-
-21 numerical parameters that control FSRS algorithm behavior. Each preset has its own weight set, allowing independent optimization per subject area.
-- Initial stability values
-- Stability growth rates
-- Difficulty adjustments
-- Forgetting curve shape
+21 numerical parameters that shape how FSRS behaves — initial stability, growth rates, difficulty adjustments, and the forgetting curve. Each preset has its own weight set, so different subjects can be tuned independently.
 
 ### Default Weights
 
-Pre-calibrated values that work well for most users. Use unless you have optimization data.
+Pre-calibrated values that work well out of the box. Use these unless you have optimization data telling you otherwise.
 
 ### Custom Weights
 
-Enter weights as comma-separated values:
+Paste weights as comma-separated values:
+
 ```
 0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.29, 2.61, 0.11, 0.78, 0.35, 0.77
 ```
 
-### Optimized Weights
+### Weight Groups
 
-Generate personalized weights from your review history. Optimization is **per-preset** — each preset uses only its own reviews.
-
-1. Select the preset in the dropdown
-2. Review at least 400 cards with that preset
-3. Click "Optimize Parameters"
-4. Wait for analysis
-5. Review suggested weights (applies to that preset only)
-6. Click "Apply" to use them
+| Group | Weights | Controls |
+|-------|---------|----------|
+| **Stability** | w0-w3 | Initial stability after Again, Hard, Good, Easy |
+| **Difficulty** | w4-w6 | Initial difficulty, increase factor, decrease factor |
+| **Stability Growth** | w7-w16 | Rate of increase, effect of difficulty, effect of retrievability |
+| **Forgetting** | w17-w20 | Retained stability, effect of time since last review, recovery rate |
 
 ## Parameter Optimization
 
-### Requirements
+You can generate personalized weights from your review history. Optimization is **per-preset** — each preset uses only its own reviews.
 
-- Minimum 400 reviews **per preset**
-- Diverse card history within that preset
-- Consistent rating behavior
+To optimize a preset:
 
-### How It Works
-
-1. Analyzes your review history
-2. Finds patterns in your learning
-3. Calculates optimal parameters
-4. Suggests new weights
-
-### Optimization Results
-
-After optimization, you'll see:
-- New weight values
-- Comparison to defaults
-- Expected improvement
-
-### Applying Optimized Weights
-
-1. Review the suggested weights
-2. Click "Apply" to activate
-3. Or click "Cancel" to keep current
+1. Select the preset in the dropdown
+2. Review at least 400 cards with that preset
+3. Click **Optimize Parameters**
+4. Wait for analysis
+5. Review the suggested weights
+6. Click **Apply** to use them, or **Cancel** to keep your current weights
 
 :::caution
 Optimization requires sufficient data. With few reviews, results may not be meaningful.
@@ -146,138 +85,4 @@ Optimization requires sufficient data. With few reviews, results may not be mean
 
 ## Reset Options
 
-### Reset to Defaults
-
-Restore default FSRS weights:
-1. Click "Reset to Defaults"
-2. Confirm the action
-3. Default weights applied
-
-### When to Reset
-
-- After problematic optimization
-- When starting fresh
-- If experiencing strange scheduling
-
-## Understanding Weight Effects
-
-### Stability Weights (w0-w3)
-
-Control initial stability for different first ratings:
-- w0: Initial stability after "Again"
-- w1: Initial stability after "Hard"
-- w2: Initial stability after "Good"
-- w3: Initial stability after "Easy"
-
-### Difficulty Weights (w4-w6)
-
-Control difficulty calculation:
-- w4: Initial difficulty
-- w5: Difficulty increase factor
-- w6: Difficulty decrease factor
-
-### Stability Growth Weights (w7-w16)
-
-Control how stability grows with reviews:
-- Rate of increase
-- Effect of difficulty
-- Effect of retrievability
-
-### Forgetting Weights (w17-w20)
-
-Control stability after forgetting:
-- How much stability is retained
-- Effect of time since last review
-- Recovery rate
-
-## Monitoring Performance
-
-### Check Your Retention
-
-After changing parameters:
-1. Open Statistics
-2. Compare actual vs target retention
-3. Adjust if significantly different
-
-### True Retention Metric
-
-In statistics, "True Retention" shows:
-- Actual success rate
-- Comparison to FSRS prediction
-- Calibration indicator
-
-### Signs of Good Calibration
-
-- True retention ≈ desired retention
-- Stable retention over time
-- Reasonable interval distribution
-
-### Signs of Poor Calibration
-
-- True retention << desired retention
-- Erratic retention
-- Very short or very long intervals
-
-## Advanced Configurations
-
-### High-Performance Setup
-```
-Desired retention: 0.92
-Maximum interval: 36500
-Weights: Optimized after 1000+ reviews
-```
-
-### Conservative Setup
-```
-Desired retention: 0.95
-Maximum interval: 180
-Weights: Default
-```
-
-### Experimental Setup
-```
-Desired retention: 0.85
-Maximum interval: 365
-Weights: Custom tuned
-```
-
-## Tips
-
-### For Beginners
-
-1. Use the default preset with default weights
-2. Keep retention at 0.90
-3. Focus on consistent reviewing
-4. Add presets only when you notice different needs
-5. Optimize after months of data per preset
-
-### For Experienced Users
-
-1. Optimize periodically (quarterly)
-2. Monitor true retention
-3. Adjust retention based on needs
-4. Don't over-tune
-
-### Common Mistakes
-
-- Optimizing with too few reviews
-- Changing retention frequently
-- Ignoring true retention feedback
-- Using others' weights
-
-## Troubleshooting
-
-### Intervals Too Short
-- Check desired retention
-- Verify weights aren't corrupted
-- Try resetting to defaults
-
-### Intervals Too Long
-- Check maximum interval setting
-- Verify retention isn't too low
-- Review your rating patterns
-
-### Optimization Failed
-- Need more reviews (400+)
-- Check for data issues
-- Try again later with more data
+If optimization goes sideways or you just want a clean slate, click **Reset to Defaults** and confirm. Your weights go back to the pre-calibrated values.

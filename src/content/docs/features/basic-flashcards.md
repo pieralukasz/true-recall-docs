@@ -8,11 +8,11 @@ links:
   - /views/flashcard-panel/
 ---
 
-Basic flashcards are the simplest card type in True Recall — a question on the front and an answer on the back. You write them directly in your Obsidian notes using the `#flashcard` tag.
+The simplest card type — a question on the front, an answer on the back. Write them directly in your notes with the `#flashcard` tag.
 
 ## Syntax
 
-Write the question followed by `#flashcard` on the same line, then the answer on the next line(s):
+Question followed by `#flashcard` on the same line, answer on the next line(s):
 
 ```markdown
 What is spaced repetition? #flashcard
@@ -118,38 +118,12 @@ function mystery(arr) {
 It returns the arithmetic mean (average) of the array elements.
 ````
 
-## During Review
+## Editing and Duplicates
 
-Basic flashcards display the question first. Press **Space** or click **Show Answer** to reveal the answer, then rate your recall:
+Edit any card from the panel (click → **Edit**) or during review (press `E`). Changes apply immediately.
 
-| Rating        | Meaning                            |
-| ------------- | ---------------------------------- |
-| **1 (Again)** | Forgot completely — see again soon |
-| **2 (Hard)**  | Struggled to recall                |
-| **3 (Good)**  | Recalled with some effort          |
-| **4 (Easy)**  | Recalled instantly                 |
+When collecting, True Recall skips cards with the same question text — no duplicates.
 
-## Editing Cards
-
-You can edit any card after creation:
-
-- **From the panel**: Click the card → **Edit** from the menu
-- **During review**: Press `E` to open the editor
-
-Changes are saved immediately and apply to future reviews.
-
-## Duplicate Prevention
-
-True Recall checks for existing cards with the same question text. If a card with the same question already exists for a note, it won't be created again when collecting.
-
-## Tips for Writing Good Flashcards
-
-1. **One concept per card** — Don't cram multiple facts into a single card
-2. **Be specific** — "What is X?" is better than "Tell me about X"
-3. **Keep answers concise** — If the answer is longer than a few lines, consider splitting into multiple cards
-4. **Use context** — Add just enough context so the question isn't ambiguous
-5. **Avoid yes/no questions** — They're too easy to guess; ask "what", "why", or "how" instead
-
-:::note[Next steps]
-Once you're comfortable with basic flashcards, explore [Cloze Deletions](/features/cloze-deletions/) for fill-in-the-blank cards and [Reversed Cards](/features/reversed-cards/) for bidirectional recall. For adding many cards at once, see [Batch Adding](/features/batch-adding/).
+:::tip[Writing good cards]
+One concept per card. Be specific — "What is X?" beats "Tell me about X". Keep answers concise. Avoid yes/no questions — ask "what", "why", or "how" instead.
 :::

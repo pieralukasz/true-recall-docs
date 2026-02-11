@@ -2,18 +2,22 @@
 title: Flashcard Panel
 description: The main sidebar panel for managing flashcards
 links:
+  - /features/basic-flashcards/
   - /features/cloze-deletions/
-  - /features/reversed-cards/
   - /views/review-view/
 ---
 
-The Flashcard Panel is your primary interface for viewing and managing flashcards associated with the current note.
+The Flashcard Panel is the sidebar you'll use most. Open a note, open the panel, and you're looking at every card tied to that note — counts, states, due dates, all of it.
 
 ## Opening the Panel
 
-- **Ribbon icon**: Click the purple brain icon in the left sidebar
-- **Command Palette**: `Cmd/Ctrl+P` → "True Recall: Open flashcard panel"
-- **Context menu**: Right-click a file → "Open flashcard panel"
+Three ways to get there:
+
+- **Ribbon icon** — click the purple brain icon in the left sidebar.
+- **Command Palette** — `Cmd/Ctrl+P` then search "True Recall: Open flashcard panel."
+- **Context menu** — right-click a file and choose "Open flashcard panel."
+
+The panel follows your active note. Switch notes and it switches with you. If no file is open, it shows "No active note."
 
 ## Panel Layout
 
@@ -36,164 +40,71 @@ The Flashcard Panel is your primary interface for viewing and managing flashcard
 └─────────────────────────────┘
 ```
 
-## Header Section
-
-### Note Info
-- **Title**: Current note name
-- **Card count**: Total cards from this note
-- **Due count**: Cards due for review
-- **New count**: Unreviewed cards
-
-### Action Buttons
+The header shows the note title, total card count, due count, and new count. Below that sit the action buttons, and below those, the card list.
 
 | Button | Action |
 |--------|--------|
-| **+ Add Card** | Create new flashcard manually |
+| **+ Add Card** | Create a new flashcard manually |
 | **Collect** | Collect `#flashcard` tagged cards from the note |
-| **Review** | Start review of this note's cards |
-
-## Card List
-
-Each card displays:
-
-### Card Preview
-- **Question**: First line or truncated question
-- **Answer**: First line or truncated answer
-- **Due date**: When the card is scheduled
-
-### Card States
-Visual indicators show:
-- 🆕 **New**: Never reviewed
-- 📚 **Learning**: In learning steps
-- ✅ **Review**: Normal review card
-- 🔁 **Relearning**: Being relearned
-- ⏸️ **Suspended**: Paused
-- 💤 **Buried**: Hidden today
-
-### Card Actions Menu (•••)
-
-Click the menu button on each card:
-
-| Action | Description |
-|--------|-------------|
-| **Edit** | Open card editor |
-| **Preview** | Full card preview modal |
-| **Review** | Start review from this card |
-| **Suspend** | Toggle suspension |
-| **Bury** | Hide until tomorrow |
-| **Move** | Transfer to another note |
-| **Delete** | Remove the card |
+| **Review** | Start a review session for this note's cards |
 
 ## Creating Cards
 
-### Manual Creation
+The fastest path: write cards directly in your note using `#flashcard` tags, then click **Collect**. True Recall detects them and imports them automatically.
 
-1. Click **+ Add Card** button
-2. Enter question in the Question field
-3. Enter answer in the Answer field
-4. Click **Save**
+For one-off cards, click **+ Add Card**, fill in the question and answer fields, and hit **Save**. That's it.
 
-### Collecting from Notes
+:::note
+When you create or collect your first card for a note, True Recall adds a `flashcard_uid` to the note's frontmatter — a unique identifier that links the note with its cards in the database. Don't remove it.
+:::
 
-1. Write flashcards in your note using `#flashcard` tags
-2. Click **Collect** in the panel
-3. Cards are detected and imported automatically
+## Card List
+
+Each card in the list shows a preview of the question, the first line of the answer, and the due date. A colored indicator tells you the card's state at a glance:
+
+- **New** — never reviewed.
+- **Learning** — in learning steps.
+- **Review** — normal review card.
+- **Relearning** — being relearned after a lapse.
+- **Suspended** — paused, won't appear in reviews.
+- **Buried** — hidden until tomorrow.
+
+### Card Actions Menu
+
+Click the **...** button on any card to open its menu.
+
+| Action | Description |
+|--------|-------------|
+| **Edit** | Open the card editor |
+| **Preview** | Full card preview modal |
+| **Review** | Start review from this card |
+| **Suspend** | Toggle suspension on/off |
+| **Bury** | Hide until tomorrow |
+| **Move** | Transfer to another note |
+| **Delete** | Remove the card permanently |
 
 ## Editing Cards
 
-### Quick Edit
-1. Click card in the list
-2. Click **Edit** from menu
-3. Modify question/answer
-4. Click **Save**
+Click a card, choose **Edit** from the menu, change the question or answer, and save. For longer edits, the full editor opens a modal with markdown preview and larger text areas.
 
-### Full Editor
-Opens modal with:
-- Markdown preview
-- Larger text areas
-- Full editing controls
+## Filtering and Search
 
-## Card Filtering
+You can toggle which card states are visible — new, learning, review, suspended, buried. Combine that with the search field to filter by question or answer content.
 
-### By State
-Toggle filters to show/hide:
-- New cards
-- Learning cards
-- Review cards
-- Suspended cards
-- Buried cards
-
-### Search
-Type to filter cards by question or answer content.
+When you have a note with dozens of cards, these filters keep things manageable.
 
 ## Bulk Operations
 
-### Select Multiple
-- Click checkbox on cards
-- Use "Select All" option
+Select multiple cards using their checkboxes (or "Select All"), then apply an action to the batch:
 
-### Available Actions
-- **Suspend all**: Pause selected cards
-- **Delete all**: Remove selected cards
-- **Move all**: Transfer to another note
+- **Suspend all** — pause selected cards.
+- **Delete all** — remove selected cards.
+- **Move all** — transfer selected cards to another note.
 
-## Panel Behavior
-
-### Note Switching
-- Panel updates when active note changes
-- Shows "No cards" for notes without flashcards
-- Shows "No active note" when no file is open
-
-### Auto-refresh
-- Updates when cards are added/edited/deleted
-- Syncs with review session changes
-- Reflects state changes in real-time
+:::caution
+Deleting cards is permanent. There's no undo.
+:::
 
 ## Integration with Review
 
-### Start Review
-From the panel, start review of:
-- All cards from current note
-- Only due cards
-- Only new cards
-
-### Post-Review
-After review session:
-- Card states update
-- Due dates refresh
-- Statistics update
-
-## Tips
-
-### Efficient Workflow
-1. Open note you want to study
-2. Open panel to see card count
-3. Add or collect cards
-4. Start review from panel
-
-### Organization
-- Keep related content in one note
-- Use panel to audit card quality
-- Regular review of suspended cards
-
-### Quality Control
-- Preview cards before review
-- Edit unclear questions
-- Remove duplicate cards
-
-## Troubleshooting
-
-### Panel is Empty
-- Check note has `flashcard_uid` in frontmatter
-- Run "Add flashcard UID to current note" command
-- Verify cards exist in database
-
-### Cards Not Updating
-- Reload the plugin
-- Check for sync issues
-- Verify database integrity
-
-### Panel Won't Open
-- Check plugin is enabled
-- Look for error messages
-- Try restarting Obsidian
+From the panel you can start a review of all cards from the current note, only due cards, or only new cards. After you finish a review session, the panel refreshes automatically — card states update, due dates shift, and the counts in the header reflect reality.

@@ -1,86 +1,45 @@
 ---
 title: FSRS Algorithm
-description: Understanding the Free Spaced Repetition Scheduler v6 algorithm
+description: How FSRS v6 schedules your reviews and what happens behind the scenes
 links:
   - /advanced/fsrs-optimization/
   - /configuration/fsrs-parameters/
   - /features/review-system/
 ---
 
-True Recall uses **FSRS v6** (Free Spaced Repetition Scheduler), the most advanced open-source spaced repetition algorithm available. It's more efficient than Anki's SM-2, adapting to your learning patterns for optimal retention.
-
-## What is FSRS?
-
-FSRS is a modern spaced repetition algorithm developed by the open-source community. It uses machine learning principles to:
-
-- **Predict forgetting probability** for each card
-- **Calculate optimal review intervals** based on your history
-- **Adapt to your learning patterns** over time
-
-## Key Concepts
-
-### Stability (S)
-How many days until you have a 90% chance of forgetting the card. Higher stability = longer intervals.
-
-- New cards start with low stability
-- Successful reviews increase stability
-- Failed reviews (rating "Again") decrease stability
-
-### Difficulty (D)
-How hard the card is for you specifically, on a scale of 0-10.
-
-- Starts at a default value (around 5)
-- "Hard" ratings increase difficulty
-- "Easy" ratings decrease difficulty
-- Affects how quickly stability grows
-
-### Retrievability (R)
-Current probability of successful recall, based on time since last review.
-
-- Starts at 100% right after review
-- Decreases over time following the forgetting curve
-- When it reaches your desired retention, card becomes due
-
-### Desired Retention
-Your target probability of recall when cards are due. Default: 90%
-
-- Higher retention (95%) = more frequent reviews
-- Lower retention (85%) = fewer reviews, more forgetting
-- Trade-off between workload and retention
-
-## FSRS vs SM-2 (Anki)
-
-| Aspect | FSRS | SM-2 (Anki) |
-|--------|------|-------------|
-| **Parameters** | 21 (trainable) | 4 (fixed) |
-| **Adaptability** | Learns from your data | One-size-fits-all |
-| **Forgetting Model** | Power-law decay | Exponential decay |
-| **Difficulty** | Per-card, continuous | Per-card, discrete |
-| **Efficiency** | ~15% fewer reviews | Baseline |
-
-## How Scheduling Works
-
-### New Card Flow
-
 ```
-New → Learning Steps → Graduate → Review
-       (1m, 10m)        (1 day)    (growing)
+Day 1:  You review a card, rate it "Good"
+        → FSRS schedules next review in 1 day
+
+Day 2:  You see it again, rate "Good"
+        → Next review in 3 days
+
+Day 5:  Rate "Good" again
+        → Next review in 8 days
+
+Day 13: Still remember it, "Good"
+        → Next review in 20 days
 ```
 
-1. **New state**: Card never seen
-2. **Learning**: Short intervals (minutes)
-3. **Graduate**: First review interval (default: 1 day)
-4. **Review**: FSRS calculates optimal intervals
+That growing gap between reviews is FSRS at work. It watches how you rate each card and builds a model of your memory -- predicting exactly when you're about to forget so you review at the right moment.
 
-### Review Interval Calculation
+**FSRS v6** (Free Spaced Repetition Scheduler) is the open-source algorithm that powers True Recall. It replaces older systems with a machine-learning approach that adapts to *you*.
 
-When you review a card, FSRS:
+## How FSRS Thinks About Your Memory
 
-1. Updates stability based on your rating
-2. Updates difficulty based on your history
-3. Calculates new interval from stability and desired retention
+FSRS tracks three numbers for every card. Together they decide when you see it next.
 
-### Rating Effects
+**Stability** is how long a memory lasts. Think of it as the number of days until your recall drops to 90%. A card with stability of 20 means FSRS expects you to still remember it 20 days after your last review. Every time you answer correctly, stability grows. Answer "Again" and it shrinks.
+
+**Difficulty** is how hard the card is *for you*, on a scale of 0 to 10. Rating "Easy" pushes difficulty down. Rating "Hard" pushes it up. Harder cards gain stability more slowly, so you see them more often.
+
+**Retrievability** is your probability of remembering the card *right now*. It starts at 100% right after a review and drops over time following a forgetting curve. When retrievability falls to your target (default 90%), the card becomes due.
+
+:::tip
+You don't need to think about these numbers while reviewing. FSRS handles them automatically. But if you're curious, the [Statistics](/features/statistics/) view shows retrievability across your collection.
+:::
+
+## What Your Ratings Do
 
 | Rating | Stability | Difficulty | Next Interval |
 |--------|-----------|------------|---------------|
@@ -89,84 +48,71 @@ When you review a card, FSRS:
 | Good | Increased | Unchanged | Optimal |
 | Easy | More increased | Decreased | Above optimal |
 
-## FSRS Parameters
+"Good" is the sweet spot for most reviews. Use "Again" when you genuinely forgot, and "Easy" when the answer was instant and effortless.
 
-FSRS uses 21 parameters (called "weights") that control:
+## FSRS vs SM-2
 
-- Initial stability values
-- Stability growth rate
-- Difficulty adjustment
-- Forgetting decay rate
-- And more...
+SM-2 is the algorithm Anki has used since the 1990s. FSRS is its modern replacement.
 
-### Default Parameters
-Work well for most users without optimization.
+| | FSRS | SM-2 |
+|---|------|------|
+| **Parameters** | 21 (trainable from your data) | 4 (fixed) |
+| **Adaptability** | Learns your patterns | Same formula for everyone |
+| **Efficiency** | ~15% fewer reviews | Baseline |
+| **Forgetting model** | Power-law decay | Exponential decay |
 
-### Optimized Parameters
-Train on your review history for personalized scheduling:
+The biggest difference is adaptability. SM-2 uses the same formula no matter who you are. FSRS can optimize its 21 parameters based on your review history, giving you a personalized schedule after about 400 reviews.
 
-1. Go to Settings → True Recall → FSRS
-2. Click "Optimize Parameters"
-3. Requires 400+ reviews for meaningful optimization
-4. Review the suggested weights
-5. Apply to use them
+## Desired Retention
 
-## Configuration
-
-### Settings → True Recall → FSRS
-
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Desired Retention** | Target recall probability | 0.9 (90%) |
-| **Maximum Interval** | Longest possible interval | 36500 days |
-| **FSRS Weights** | Custom or optimized parameters | Default |
-
-### Settings → True Recall → Scheduling
-
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Learning Steps** | Minutes for learning phase | 1, 10 |
-| **Relearning Steps** | Minutes for relearning | 10 |
-| **Graduating Interval** | First review interval | 1 day |
-| **Easy Interval** | Interval after "Easy" on new card | 4 days |
-
-## Fuzzing
-
-FSRS applies ±2.5% randomization to intervals to prevent:
-- Cards bunching on the same day
-- Artificial patterns in your schedule
-
-## Understanding Your Data
-
-### Retrievability Distribution
-- Most cards should be 80-95% when due
-- Lower values indicate overdue cards
-- Higher values might mean over-review
-
-### True Retention
-Actual success rate vs predicted:
-- Should be close to desired retention
-- Much lower → difficulty is underestimated
-- Much higher → might be over-reviewing
-
-## Advanced: The Math
-
-For those interested, FSRS uses these core formulas:
-
-**Stability after review:**
 ```
-S' = S × (1 + a × D^b × S^c × (exp(G) - 1))
+desired_retention = 0.9   → cards due at ~90% recall (default)
+desired_retention = 0.95  → more reviews, less forgetting
+desired_retention = 0.85  → fewer reviews, more forgetting
 ```
 
-**Retrievability over time:**
+Desired retention is the recall probability you want when cards come due. At the default 0.9, FSRS schedules reviews so you have a 90% chance of remembering each card.
+
+Raising it means shorter intervals and more daily reviews. Lowering it means longer intervals but more forgotten cards. For most people, 0.85--0.9 is the sweet spot.
+
+## Optimizing Parameters
+
+FSRS works well out of the box with default parameters. After you've done 400+ reviews, you can train it on your data for better scheduling.
+
+```
+Settings → True Recall → FSRS → Optimize Parameters
+```
+
+Optimization analyzes your review history and adjusts FSRS's 21 internal weights to match your actual forgetting patterns. See [FSRS Optimization](/advanced/fsrs-optimization/) for a deeper look.
+
+## Interval Fuzzing
+
+FSRS adds a small random offset (around 2.5%) to every interval. If two cards would both be due on Thursday, fuzzing might push one to Wednesday and the other to Friday. This prevents review pile-ups and keeps your daily workload smooth.
+
+## The Math (Optional)
+
+:::note
+You can skip this section entirely. It's here for the curious.
+:::
+
+FSRS uses two core formulas.
+
+**Retrievability** decays over time `t` (in days) since your last review:
+
 ```
 R = (1 + t/S × FACTOR)^DECAY
 ```
 
-Where `a`, `b`, `c`, `FACTOR`, and `DECAY` are among the 21 trainable parameters.
+**Stability** updates after each review based on your rating:
+
+```
+S' = S × (1 + a × D^b × S^c × (exp(G) - 1))
+```
+
+The variables `a`, `b`, `c`, `FACTOR`, and `DECAY` are among the 21 trainable parameters. When you optimize, these get tuned to your personal forgetting curve.
 
 ## Resources
 
-- [FSRS4Anki Wiki](https://github.com/open-spaced-repetition/fsrs4anki/wiki) - Detailed algorithm documentation
-- [FSRS Paper](https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm) - Technical paper on the algorithm
-- [ts-fsrs](https://github.com/open-spaced-repetition/ts-fsrs) - TypeScript implementation used by True Recall
+- [FSRS4Anki Wiki](https://github.com/open-spaced-repetition/fsrs4anki/wiki) -- Detailed algorithm documentation
+- [FSRS Paper](https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm) -- Technical paper on the algorithm
+- [ts-fsrs](https://github.com/open-spaced-repetition/ts-fsrs) -- TypeScript implementation used by True Recall

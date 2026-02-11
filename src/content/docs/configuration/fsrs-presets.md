@@ -4,23 +4,15 @@ description: Multiple scheduling profiles for different subjects and learning ne
 links:
   - /configuration/fsrs-parameters/
   - /configuration/scheduling/
-  - /configuration/general/
-  - /advanced/fsrs-optimization/
   - /features/projects/
+  - /advanced/fsrs-optimization/
 ---
 
-FSRS presets are named scheduling profiles — similar to Anki's "Deck Options". Each preset holds its own retention target, learning steps, daily limits, and FSRS weights, so you can schedule different subjects with different strategies.
+FSRS presets are named scheduling profiles — like Anki's "Deck Options". Each preset holds its own retention target, learning steps, daily limits, and FSRS weights.
 
-## Accessing Settings
+Settings → True Recall → FSRS tab → **preset dropdown** at the top.
 
-1. Open Obsidian Settings (`Cmd/Ctrl+,`)
-2. Scroll to "True Recall"
-3. Select "FSRS" tab
-4. Use the **preset dropdown** at the top to switch between presets
-
-## What Are Presets?
-
-Each preset is a named collection of scheduling parameters:
+## What's in a Preset
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
@@ -45,34 +37,12 @@ Different subjects need different strategies:
 
 ## Creating & Managing Presets
 
-### Creating a Preset
+Click **"New"** next to the dropdown to create a copy of the current preset. Rename it to something descriptive (e.g. "Medical School") and adjust parameters.
 
-1. Open Settings → True Recall → FSRS tab
-2. Click **"New"** next to the preset dropdown
-3. A copy of the current preset is created with "(copy)" suffix
-4. Rename it to something descriptive (e.g. "Medical School")
-5. Adjust parameters as needed
-
-### Default Preset
-
-- Created automatically on first load (migrated from your existing global settings)
-- Cannot be deleted or renamed
-- Acts as the fallback when no other preset applies
-
-### Editing a Preset
-
-1. Select the preset from the dropdown
-2. Modify any parameter (retention, steps, limits, etc.)
-3. Changes save automatically
-
-### Deleting a Preset
-
-1. Select the preset from the dropdown
-2. Click **"Delete"** (only available for non-default presets)
-3. Cards previously using this preset fall back to the [resolution hierarchy](#resolution-hierarchy)
+The **Default** preset is created automatically, cannot be deleted, and acts as the fallback when no other preset applies. Changes to any preset save automatically.
 
 :::caution
-Deleting a preset does not delete cards. Cards will use the project or default preset instead.
+Deleting a preset does not delete cards. Cards fall back to the [resolution hierarchy](#resolution-hierarchy).
 :::
 
 ## Assigning Presets to Notes
@@ -150,104 +120,14 @@ Assign presets to project notes rather than individual notes. This way entire su
 
 ## Per-Preset Optimization
 
-Each preset tracks its own optimization independently:
+Each preset tracks optimization independently — separate weights, separate review history (`review_log.preset_name`), and a separate **400+ review** threshold before optimization is meaningful.
 
-- **Separate weights**: Optimized weights apply only to the selected preset
-- **Separate history**: The database tracks which preset was used for each review (`review_log.preset_name`)
-- **Separate threshold**: Each preset needs **400+ reviews** before optimization is meaningful
-
-### Running Optimization for a Preset
-
-1. Select the preset in the dropdown
-2. Verify sufficient reviews for that preset
-3. Click **"Optimize Parameters"**
-4. Review suggested weights (applies to that preset only)
-5. Click **"Apply"** or **"Cancel"**
+Select a preset → click **"Optimize Parameters"** → review suggested weights → **Apply** or **Cancel**. Optimize the Default preset first (it usually has the most data), then specialized presets as they accumulate reviews.
 
 :::note
-Historical reviews from before presets were introduced are treated as "Default" preset reviews during optimization.
+Historical reviews from before presets were introduced count as "Default" preset reviews.
 :::
 
-### Optimization Strategy
-
-1. Optimize the **Default** preset first (it usually has the most reviews)
-2. Add specialized presets after identifying different learning needs
-3. Wait for **400+ reviews per preset** before optimizing each one
-4. Re-optimize every 3–6 months per preset
-
-## Practical Examples
-
-### Medical Student
-
-| Preset | Retention | Steps | New/day | Assigned to |
-|--------|-----------|-------|---------|-------------|
-| Anatomy | 0.95 | 1, 10, 60, 1440 | 5 | Project "Anatomy" |
-| Physiology | 0.95 | 1, 10, 60 | 10 | Project "Physiology" |
-| Clinical | 0.93 | 1, 10, 30 | 15 | Project "Clinical" |
-
-### Language Learner
-
-| Preset | Retention | Steps | New/day | Assigned to |
-|--------|-----------|-------|---------|-------------|
-| Vocabulary | 0.90 | 1, 5, 10 | 30 | Project "Vocab" |
-| Grammar | 0.93 | 1, 10, 60 | 10 | Project "Grammar" |
-| Phrases | 0.88 | 5, 30 | 20 | Project "Phrases" |
-
-### Knowledge Worker
-
-| Preset | Retention | Steps | New/day | Assigned to |
-|--------|-----------|-------|---------|-------------|
-| Technical | 0.92 | 1, 10, 30 | 10 | Project "Tech" |
-| General | 0.88 | 10 | 20 | Default preset |
-| Research | 0.90 | 1, 10, 60 | 5 | Project "Research" |
-
-## Tips
-
-### Starting Out
-
-- Begin with the default preset for everything
-- Add presets only when you notice different subjects need different strategies
-- Most users need **2–3 presets** at most
-
-### Naming Conventions
-
-Use clear, descriptive names:
-- "Medical School" not "MS1"
-- "Language Vocab" not "Preset 2"
-
-### Optimization Order
-
-1. Optimize default preset first (most review data)
-2. Create specialized presets as needed
-3. Wait for 400+ reviews per preset before optimizing
-4. Don't optimize all presets simultaneously — stagger by 3–6 months
-
-### Changing Presets
-
-You can reassign a note to a different preset at any time. The next review will use the new preset's parameters. Historical stability and difficulty are preserved.
-
-## Troubleshooting
-
-### Cards Using Wrong Preset
-
-- Check the note's frontmatter for `fsrs_preset` field
-- Verify the project hierarchy — which project note has a preset assigned?
-- If reviewing from a project session, the project's preset takes priority over default
-
-### Preset Not Appearing in List
-
-- Ensure the preset was created and saved in Settings → FSRS tab
-- Check for typos in frontmatter — preset names are case-sensitive
-- Verify the preset wasn't deleted
-
-### "Not Enough Data" for Optimization
-
-- The 400-review threshold is **per preset**, not total
-- Example: 1500 total reviews doesn't help if only 200 used the preset you're optimizing
-- Use the default preset until you accumulate enough data for specialized ones
-
-### Intervals Changed After Switching Presets
-
-- Expected behavior — the new preset's retention and weights take effect immediately
-- Card difficulty and stability are preserved from previous reviews
-- The algorithm uses the new preset's parameters for the next scheduling calculation
+:::tip
+Start with the default preset for everything. Add specialized presets only when you notice different subjects need different strategies — most users need 2–3 presets at most.
+:::

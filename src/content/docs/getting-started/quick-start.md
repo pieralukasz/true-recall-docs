@@ -1,17 +1,21 @@
 ---
 title: Quick Start
 description: Create and review your first flashcards in 5 minutes
+links:
+  - /features/basic-flashcards/
+  - /features/cloze-deletions/
+  - /features/review-system/
 ---
 
-This guide will walk you through creating and reviewing your first flashcards with True Recall.
+Five minutes. That's all you need to go from zero to reviewing your first flashcard.
 
 :::note[Not installed yet?]
-See the [Installation guide](/getting-started/installation/) for instructions on installing True Recall via BRAT or manually.
+Head to the [Installation guide](/getting-started/installation/) first.
 :::
 
-## Step 1: Write Your First Flashcard
+## Write your first flashcard
 
-Open any note and write a flashcard using the `#flashcard` tag:
+Open any note and add a `#flashcard` tag:
 
 ```markdown
 What is spaced repetition? #flashcard
@@ -19,38 +23,46 @@ A learning technique that reviews information at increasing intervals
 to optimize long-term retention.
 ```
 
-The format is: **Question** `#flashcard` on one line, followed by the **answer** on the next line(s).
+Question on the first line with `#flashcard`, answer on the next line(s). That's the whole format.
 
-## Step 2: Collect Flashcards
+Want multiple cards in one note? Just keep going:
 
-1. **Open the Flashcard Panel** — click the brain ribbon icon in the left sidebar
-2. **Click "Collect"** — the panel will detect `#flashcard` tags in your note and import them
+```markdown
+What is spaced repetition? #flashcard
+A learning technique that reviews information at increasing intervals
+to optimize long-term retention.
 
-## Step 3: Start Reviewing
+What does FSRS stand for? #flashcard
+Free Spaced Repetition Scheduler — an open-source algorithm
+that adapts to your memory patterns.
+```
 
-Once you have flashcards, it's time to review them:
+## Collect your cards
 
-1. **Click the brain ribbon icon** or use Command Palette → "Start review session"
-2. **Read the question** displayed on the card
-3. **Think of the answer** before revealing
-4. **Press Space** or click "Show Answer"
-5. **Rate your recall**:
-   - **1 (Again)**: Forgot completely, see again soon
-   - **2 (Hard)**: Struggled to recall
-   - **3 (Good)**: Recalled with some effort
-   - **4 (Easy)**: Recalled instantly
+Click the brain icon in the left ribbon to open the **Flashcard Panel**, then hit **Collect**. True Recall scans your note for `#flashcard` tags and imports every card it finds.
 
-## Step 4: Check Your Progress
+## Start reviewing
 
-After reviewing, check your statistics:
+Open the Command Palette and run **Start review session**, or click the brain ribbon icon.
 
-1. **Click the chart ribbon icon** (orange) in the sidebar
-2. **View today's summary**: Cards reviewed, time spent, accuracy
-3. **Explore charts**: Retention over time, workload forecast, calendar heatmap
+You'll see a question. Think of the answer, then press `Space` to reveal it. Rate how well you recalled it:
 
-## Keyboard Shortcuts
+| Rating | What it means |
+|--------|---------------|
+| **1 (Again)** | Forgot completely -- you'll see it again soon |
+| **2 (Hard)** | Got it, but struggled |
+| **3 (Good)** | Recalled with some effort |
+| **4 (Easy)** | Recalled instantly |
 
-During review sessions, these shortcuts speed up your workflow:
+FSRS (the scheduling algorithm) uses your ratings to figure out the best time to show each card again. Honest ratings make the algorithm work better.
+
+## Check your progress
+
+Click the orange chart icon in the ribbon to open the **Statistics Panel**. You'll see today's summary -- cards reviewed, time spent, accuracy -- plus charts for retention over time, workload forecasts, and a calendar heatmap.
+
+## Keyboard shortcuts
+
+These make review sessions fast:
 
 | Key | Action |
 |-----|--------|
@@ -61,20 +73,14 @@ During review sessions, these shortcuts speed up your workflow:
 | `4` | Rate Easy |
 | `Cmd/Ctrl+Z` | Undo last rating |
 
-## What's Next?
+## What's next?
 
-You've mastered the basics! Here's where to go next:
+Now that you've got the basics down, try [cloze deletions](/features/cloze-deletions/) -- fill-in-the-blank cards you create with `{{c1::text}}` syntax. Or add `#flashcard-reverse` to auto-generate [reversed cards](/features/reversed-cards/) that quiz you in both directions.
 
-- **[Cloze Deletions](/features/cloze-deletions/)**: Create fill-in-the-blank cards with `{{c1::text}}` syntax
-- **[Reversed Cards](/features/reversed-cards/)**: Auto-generate bidirectional cards with `#flashcard-reverse`
-- **[Review System](/features/review-system/)**: Learn about card states and scheduling
-- **[FSRS Algorithm](/features/fsrs-algorithm/)**: Understand and optimize the spaced repetition algorithm
-- **[Projects](/features/projects/)**: Organize flashcards into study groups
+When you're ready to go deeper, read about how the [FSRS algorithm](/features/fsrs-algorithm/) schedules your reviews, or organize your cards into [projects](/features/projects/) for focused study sessions.
 
-## Tips for Success
+## Tips
 
-1. **Review daily**: Consistency beats intensity. 10 minutes daily is better than 1 hour weekly.
-2. **Write clear questions**: Good flashcards have specific questions with concise answers.
-3. **Rate honestly**: Don't inflate your ratings—the algorithm learns from your honesty.
-4. **Use projects**: Group related notes for focused study sessions.
-5. **Check stats weekly**: Monitor retention and adjust your study habits.
+:::tip[The short version]
+Review daily (10 minutes beats a weekly hour), write specific questions with concise answers, and rate honestly. The algorithm learns from your honesty -- inflated ratings hurt your retention, not help it.
+:::
