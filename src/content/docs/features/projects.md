@@ -26,6 +26,8 @@ Projects are named collections of notes. Examples:
 
 ## How Projects Work
 
+![Project → Note → Flashcard relationship diagram](../../../assets/project-note-flashcard.png)
+
 Projects are stored as wikilinks in note frontmatter:
 
 ```yaml
