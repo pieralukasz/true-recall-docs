@@ -4,10 +4,15 @@ description: Configure how cards progress through learning stages
 links:
   - /features/review-system/
   - /features/fsrs-algorithm/
+  - /configuration/fsrs-presets/
   - /configuration/fsrs-parameters/
 ---
 
 Scheduling settings control how cards move through learning stages, from new cards to long-term review.
+
+:::note
+Learning and relearning steps are configured **per preset**. Each [FSRS preset](/configuration/fsrs-presets/) has its own step configuration. To configure: Settings → True Recall → FSRS tab → select preset.
+:::
 
 ## Accessing Settings
 
@@ -199,6 +204,10 @@ Relearning steps: 5, 30
 Graduating interval: 1 day
 Easy interval: 3 days
 ```
+
+:::tip
+Save frequently-used configurations as [FSRS presets](/configuration/fsrs-presets/). For example, create a "Medical" preset with thorough steps and a "Vocabulary" preset with quick steps, then assign them to different projects or notes.
+:::
 
 ## Tips
 

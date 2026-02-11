@@ -24,6 +24,16 @@ Adds a unique identifier to the note's frontmatter, enabling flashcard linking.
 - **When to use**: Before creating cards for a new note
 - **Effect**: Adds `flashcard_uid: <uuid>` to frontmatter
 
+### Set FSRS Preset for Current Note
+
+Assigns a specific FSRS preset to the current note via frontmatter.
+
+- **Command**: `True Recall: Set FSRS preset for current note`
+- **Shortcut**: None
+- **When to use**: Apply different scheduling profiles to different notes
+- **Effect**: Adds or updates `fsrs_preset: "name"` in frontmatter
+- **Details**: See [FSRS Presets](/configuration/fsrs-presets/)
+
 ## Review Commands
 
 ### Start Review Session
@@ -157,6 +167,7 @@ Reverts the most recent flashcard action (edit, delete, rating).
 |---------|----------|-------------|
 | Open flashcard panel | View | Show sidebar panel |
 | Add flashcard UID | Create | Enable note linking |
+| Set FSRS preset | Configure | Assign scheduling profile to note |
 | Start review session | Review | Open session builder |
 | Review from current note | Review | Note-specific review |
 | Review today's new cards | Review | Same-day cards |

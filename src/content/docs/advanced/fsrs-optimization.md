@@ -4,10 +4,15 @@ description: Train FSRS parameters on your review history for personalized sched
 links:
   - /features/fsrs-algorithm/
   - /configuration/fsrs-parameters/
+  - /configuration/fsrs-presets/
   - /views/fsrs-simulator/
 ---
 
 FSRS optimization analyzes your review history to calculate personalized algorithm parameters, improving scheduling accuracy for your learning patterns.
+
+:::note
+**Per-Preset Optimization**: Each [FSRS preset](/configuration/fsrs-presets/) optimizes independently using only reviews from that preset. This means you need 400+ reviews **per preset**, not just 400 total.
+:::
 
 ## What Is Optimization?
 
@@ -22,10 +27,17 @@ FSRS uses 21 parameters to schedule reviews. Optimization:
 ### Minimum Data Requirements
 
 Before optimizing:
-- **400+ reviews** minimum
-- **1000+ reviews** recommended
+- **400+ reviews per preset** minimum
+- **1000+ reviews per preset** recommended
 - **Diverse cards** (various difficulties)
 - **Consistent rating behavior**
+
+### Per-Preset Review Tracking
+
+Since database v22, True Recall tracks which preset was used for each review. This enables per-preset optimization:
+- Each preset builds its own optimization data independently
+- Historical reviews from before presets were introduced count as "Default" preset reviews
+- Switching a card to a different preset means future reviews count toward the new preset
 
 ### Check Your Review Count
 
@@ -38,18 +50,20 @@ Before optimizing:
 ### Step-by-Step
 
 1. Go to **Settings** → **True Recall** → **FSRS**
-2. Click **"Optimize Parameters"**
-3. Wait for analysis (may take a moment)
-4. Review suggested weights
-5. Click **"Apply"** or **"Cancel"**
+2. **Select the preset** from the dropdown at the top
+3. Verify sufficient reviews for that preset
+4. Click **"Optimize Parameters"**
+5. Wait for analysis (may take a moment)
+6. Review suggested weights (applies to that preset only)
+7. Click **"Apply"** or **"Cancel"**
 
 ### What Happens During Optimization
 
 The optimizer:
-1. Loads your review history
-2. Builds a learning model
+1. Loads review history **for the selected preset only**
+2. Builds a learning model from those reviews
 3. Trains on your data
-4. Finds best-fit parameters
+4. Finds best-fit parameters **for that preset**
 5. Returns optimized weights
 
 ## Understanding Results
@@ -88,9 +102,17 @@ The optimizer may show:
 - After changing study habits
 - When retention seems off
 
+### With Multiple Presets
+
+If you use multiple presets, optimize them in order:
+1. **Default preset first** — usually has the most review data
+2. **Specialized presets** after 400+ reviews each
+3. **Stagger** optimizations — don't optimize all presets at once
+4. **Wait 3–6 months** between optimizations per preset
+
 ### Not Recommended
 
-- With fewer than 400 reviews
+- With fewer than 400 reviews per preset
 - After rating behavior changes
 - While learning the system
 - Too frequently (monthly+)
@@ -243,3 +265,12 @@ A: Not recommended—weights are personalized to your learning patterns.
 
 **Q: Should I optimize on mobile too?**
 A: If you sync, optimize on primary device. Weights sync with settings.
+
+**Q: Can I optimize all my presets at once?**
+A: No, optimization is per-preset. Select each preset in the dropdown and optimize individually when it has 400+ reviews.
+
+**Q: I have 2000 reviews total but optimization says "not enough data"?**
+A: Check which preset is selected. You might have 1500 reviews with "Default" and 500 spread across other presets. Each preset needs 400+ reviews independently.
+
+**Q: Will optimizing one preset affect my other presets?**
+A: No. Presets are completely independent — each has its own weights and optimization history.

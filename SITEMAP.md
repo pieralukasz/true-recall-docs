@@ -41,10 +41,11 @@ All paths are relative to `src/content/docs/`.
 - `views/projects-view.md` — Project management interface
 - `views/fsrs-simulator.md` — Interactive FSRS visualization tool
 
-## Configuration (4 pages)
+## Configuration (5 pages)
 
 - `configuration/general.md` — General settings and UI preferences
 - `configuration/scheduling.md` — Learning steps and card progression
+- `configuration/fsrs-presets.md` — Multiple scheduling profiles (like Anki deck options)
 - `configuration/fsrs-parameters.md` — FSRS algorithm parameters and optimization
 - `configuration/data-backup.md` — Database backup and device management
 

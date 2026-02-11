@@ -13,7 +13,10 @@ export default defineConfig({
 			title: 'True Recall',
 			description: 'Spaced repetition for Obsidian with FSRS v6',
 			plugins: [starlightThemeObsidian({
-				graph: false,
+				graph: true,
+				graphConfig: {
+					depth: -1,
+				},
 			})],
 			components: {
 				Header: './src/components/starlight/Header.astro',
@@ -78,6 +81,7 @@ export default defineConfig({
 					items: [
 						{ slug: 'configuration/general' },
 						{ slug: 'configuration/scheduling' },
+						{ slug: 'configuration/fsrs-presets' },
 						{ slug: 'configuration/fsrs-parameters' },
 						{ slug: 'configuration/data-backup' },
 					],

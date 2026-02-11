@@ -4,22 +4,26 @@ description: Configure FSRS algorithm parameters and optimization
 links:
   - /features/fsrs-algorithm/
   - /advanced/fsrs-optimization/
+  - /configuration/fsrs-presets/
   - /views/fsrs-simulator/
 ---
 
-FSRS parameters control how the spaced repetition algorithm schedules your cards. Advanced configuration for users who want to fine-tune their learning.
+FSRS parameters control how the spaced repetition algorithm schedules your cards. Each [FSRS preset](/configuration/fsrs-presets/) contains its own set of parameters, allowing different scheduling strategies for different subjects.
 
 ## Accessing Settings
 
 1. Open Obsidian Settings (`Cmd/Ctrl+,`)
 2. Scroll to "True Recall"
 3. Select "FSRS" tab
+4. Select a **preset** from the dropdown at the top
+
+All settings on this page (retention, max interval, weights, optimization) are **per-preset**. Switching the dropdown changes which preset you're configuring.
 
 ## Desired Retention
 
 ### What Is It?
 
-Target probability of recalling a card when it's due for review.
+Target probability of recalling a card when it's due for review. Configured per preset.
 
 ### Configuration
 
@@ -57,7 +61,7 @@ Start with 0.90 and adjust based on actual retention in statistics.
 
 ### What Is It?
 
-Longest interval a card can have, preventing indefinitely long gaps.
+Longest interval a card can have, preventing indefinitely long gaps. Configured per preset — you might cap exam content at 180 days while leaving general knowledge unlimited.
 
 ### Configuration
 
@@ -80,7 +84,7 @@ Default: 36500 days (100 years)
 
 ### What Are Weights?
 
-21 numerical parameters that control FSRS algorithm behavior:
+21 numerical parameters that control FSRS algorithm behavior. Each preset has its own weight set, allowing independent optimization per subject area.
 - Initial stability values
 - Stability growth rates
 - Difficulty adjustments
@@ -99,20 +103,21 @@ Enter weights as comma-separated values:
 
 ### Optimized Weights
 
-Generate personalized weights from your review history:
+Generate personalized weights from your review history. Optimization is **per-preset** — each preset uses only its own reviews.
 
-1. Review at least 400 cards
-2. Click "Optimize Parameters"
-3. Wait for analysis
-4. Review suggested weights
-5. Click "Apply" to use them
+1. Select the preset in the dropdown
+2. Review at least 400 cards with that preset
+3. Click "Optimize Parameters"
+4. Wait for analysis
+5. Review suggested weights (applies to that preset only)
+6. Click "Apply" to use them
 
 ## Parameter Optimization
 
 ### Requirements
 
-- Minimum 400 reviews
-- Diverse card history
+- Minimum 400 reviews **per preset**
+- Diverse card history within that preset
 - Consistent rating behavior
 
 ### How It Works
@@ -240,10 +245,11 @@ Weights: Custom tuned
 
 ### For Beginners
 
-1. Use default weights
+1. Use the default preset with default weights
 2. Keep retention at 0.90
 3. Focus on consistent reviewing
-4. Optimize after months of data
+4. Add presets only when you notice different needs
+5. Optimize after months of data per preset
 
 ### For Experienced Users
 

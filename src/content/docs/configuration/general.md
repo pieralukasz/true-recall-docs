@@ -49,30 +49,34 @@ Display predicted intervals on rating buttons:
 
 ## Daily Limits
 
+:::note
+Daily limits are configured **per preset**. Each [FSRS preset](/configuration/fsrs-presets/) has its own new cards/day and reviews/day. To configure: Settings → True Recall → FSRS tab → select preset.
+:::
+
 ### New Cards Per Day
 
-Maximum new cards to introduce daily.
+Maximum new cards to introduce daily, per preset.
 
 | Setting | Effect |
 |---------|--------|
 | **5-10** | Conservative, sustainable |
-| **20** | Default, moderate pace |
+| **20** | Moderate pace (default preset) |
 | **50+** | Aggressive, higher workload |
 
-**Recommendation**: Start with 10-20, adjust based on time available.
+**Recommendation**: Start with 10-20, adjust based on time and subject difficulty. Different presets can have different limits (e.g. 5/day for difficult medical content, 30/day for vocabulary).
 
 ### Reviews Per Day
 
-Maximum review cards per day.
+Maximum review cards per day, per preset.
 
 | Setting | Effect |
 |---------|--------|
 | **50** | Light daily commitment |
-| **100** | Default, moderate |
+| **100** | Moderate (default preset) |
 | **200** | Heavy reviewer |
 | **9999** | Unlimited |
 
-**Recommendation**: Set based on available study time (~1 review = 10 seconds).
+**Recommendation**: Set based on available study time (~1 review = 10 seconds). Critical presets might use unlimited reviews to avoid backlog.
 
 ## Day Boundary
 
