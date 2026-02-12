@@ -21,34 +21,35 @@ intervals to optimize long-term retention.
 ```
 
 - **Question**: Everything before `#flashcard` on that line
-- **Answer**: Everything on the following lines until a blank line or the next flashcard
+- **Answer**: Everything on the following lines until a blank line (which ends the card)
 - The `#flashcard` tag itself is not part of the question or answer
 
 ## Multi-line Answers
 
-Answers can span multiple lines. Just keep writing without blank lines:
+Answers can span multiple lines — just keep writing without blank lines:
 
 ```markdown
 What are the three laws of thermodynamics? #flashcard
-
 1. Energy cannot be created or destroyed, only transformed.
 2. Entropy of an isolated system always increases.
 3. Entropy approaches a constant as temperature approaches absolute zero.
 ```
 
+:::caution
+A blank line ends the current flashcard. Everything after a blank line is either regular text or the start of a new card. Never put blank lines inside a single flashcard.
+:::
+
 ## Multi-line Questions
 
-For longer questions, write the question across multiple lines and place the `#flashcard` tag on the last line:
+Write the question across multiple lines and place the `#flashcard` tag on the last line. No blank lines allowed — they would end the card:
 
 ````markdown
 Given the following code:
-
 ```python
 x = [1, 2, 3]
 y = x
 y.append(4)
 ```
-
 What is the value of `x`? #flashcard
 `[1, 2, 3, 4]` — because `y = x` creates a reference,
 not a copy. Both variables point to the same list.
@@ -104,13 +105,11 @@ mitochondria, and endoplasmic reticulum.
 
 ````markdown
 What does this function return? #flashcard
-
 ```javascript
 function mystery(arr) {
   return arr.reduce((a, b) => a + b, 0) / arr.length;
 }
 ```
-
 It returns the arithmetic mean (average) of the array elements.
 ````
 
