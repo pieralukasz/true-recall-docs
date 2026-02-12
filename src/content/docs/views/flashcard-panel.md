@@ -50,9 +50,11 @@ The header shows the note title, total card count, due count, and new count. Bel
 
 ## Creating Cards
 
-The fastest path: write cards directly in your note using `#flashcard` tags, then click **Collect**. True Recall detects them and imports them automatically.
+Click **+ Add Card**, write your question and answer, and save. Cards are linked to the current note automatically.
 
-For one-off cards, click **+ Add Card**, fill in the question and answer fields, and hit **Save**. That's it.
+:::tip[Alternative: Collect from notes]
+If you prefer writing cards inline in your notes using `#flashcard` tags, click **Collect** to import them all at once.
+:::
 
 :::note
 When you create or collect your first card for a note, True Recall adds a `flashcard_uid` to the note's frontmatter — a unique identifier that links the note with its cards in the database. Don't remove it.

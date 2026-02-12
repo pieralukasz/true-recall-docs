@@ -13,9 +13,12 @@ Five minutes. That's all you need to go from zero to reviewing your first flashc
 Head to the [Installation guide](/getting-started/installation/) first.
 :::
 
-## Write your first flashcard
+## Create your first flashcard
 
-Open any note and add a `#flashcard` tag:
+1. Open any note
+2. Click the brain icon in the left ribbon to open the **Flashcard Panel**
+3. Click **+ Add Card**
+4. Write your question and answer in the editor:
 
 ```markdown
 What is spaced repetition? #flashcard
@@ -23,9 +26,9 @@ A learning technique that reviews information at increasing intervals
 to optimize long-term retention.
 ```
 
-Question on the first line with `#flashcard`, answer on the next line(s). That's the whole format.
+5. Click **Save** (or press `Ctrl+Enter`)
 
-Want multiple cards in one note? Just keep going:
+Question on the first line with `#flashcard`, answer on the next line(s). You can add multiple cards at once — separate them with blank lines:
 
 ```markdown
 What is spaced repetition? #flashcard
@@ -36,10 +39,6 @@ What does FSRS stand for? #flashcard
 Free Spaced Repetition Scheduler — an open-source algorithm
 that adapts to your memory patterns.
 ```
-
-## Collect your cards
-
-Click the brain icon in the left ribbon to open the **Flashcard Panel**, then hit **Collect**. True Recall scans your note for `#flashcard` tags and imports every card it finds.
 
 ## Start reviewing
 

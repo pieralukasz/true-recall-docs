@@ -133,10 +133,7 @@ The import creates projects from deck names automatically. You can:
 
 ### Continue Creating Cards
 
-You can mix imported and native cards:
-- Write new cards in your notes using `#flashcard` tags
-- Imported cards and native cards coexist in the same system
-- All cards use the same FSRS scheduling
+Create new cards using the **+ Add Card** button in the Flashcard Panel. Imported and native cards coexist in the same system — all use the same FSRS scheduling.
 
 ## Card Type Handling
 

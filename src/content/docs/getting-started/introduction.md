@@ -7,52 +7,37 @@ links:
   - /features/fsrs-algorithm/
 ---
 
-```markdown
-# My Study Notes
+True Recall is an Obsidian plugin for spaced repetition. Open a note, open the Flashcard Panel, and create cards with the **+ Add Card** button. The plugin schedules reviews using FSRS (Free Spaced Repetition Scheduler) — the most advanced open-source algorithm for long-term memory.
 
-What is the mitochondria? #flashcard
-The powerhouse of the cell. It generates most of the cell's
-ATP through oxidative phosphorylation.
+## Cards are linked to notes
 
-What does DNA stand for? #flashcard
-Deoxyribonucleic acid — the molecule that carries genetic
-instructions for growth, development, and reproduction.
+In Anki, flashcards live in decks separate from your study material. In True Recall, every card is linked to the note you created it from.
+
+```
+Chapter 3: Cell Biology       ← your note
+  ├── What is the mitochondria?      ← card created from this note
+  ├── What is the cell membrane?     ← card created from this note
+  └── What is apoptosis?             ← card created from this note
 ```
 
-True Recall is an Obsidian plugin for spaced repetition. You write flashcards directly in your notes with `#flashcard` tags, and the plugin schedules reviews using FSRS (Free Spaced Repetition Scheduler) — the most advanced open-source algorithm for long-term memory.
-
-## Your note is the deck
-
-In Anki, flashcards live in decks separate from your study material. In True Recall, the note itself is the deck.
-
-```markdown
-# Chapter 3: Cell Biology          ← this note is the deck
-
-What is the mitochondria? #flashcard
-The powerhouse of the cell.
-
-What is the cell membrane? #flashcard
-A lipid bilayer that controls what enters and exits the cell.
-
-What is apoptosis? #flashcard
-Programmed cell death — the body's way of removing
-damaged or unnecessary cells.
-```
-
-Your flashcards stay next to the material they came from. When you revisit a note months later, the cards are right there — not buried in a separate app.
+Open the note, open the Flashcard Panel, and all its cards are right there — not buried in a separate app. You can review, edit, or add more cards without leaving the context of your study material.
 
 ## How it works
 
 ```
-Write cards → Collect → Review → FSRS schedules next review
+Open panel → Add cards → Review → FSRS schedules next review
 ```
 
-1. **Write** flashcards in any note using `#flashcard` tags
-2. **Collect** them with one click in the Flashcard Panel
-3. **Review** when they come due — rate each card Again, Hard, Good, or Easy
+1. **Open** the Flashcard Panel and click **+ Add Card**
+2. **Write** your question and answer, then save
+3. **Review** when cards come due — rate each card Again, Hard, Good, or Easy
 4. **FSRS v6** calculates the optimal time to show each card again based on your performance
 
 The algorithm tracks two things per card: **stability** (how long until you might forget) and **difficulty** (how hard this card is for you). Every review refines these values, so your schedule gets more accurate over time.
+
+:::tip[Prefer writing in your notes?]
+You can also write cards directly in your notes with `#flashcard` tags and click **Collect** in the panel to import them. See [Batch Adding](/features/batch-adding/) for details.
+:::
 
 ## Projects group notes together
 

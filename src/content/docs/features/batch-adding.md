@@ -6,7 +6,7 @@ links:
   - /views/flashcard-panel/
 ---
 
-Two ways to add many cards at once: write them in the **Add** modal, or tag them in your notes and click **Collect**.
+The Add modal lets you create many cards at once. Open it with **+ Add Card** in the Flashcard Panel.
 
 ## Method 1: Add Modal (Batch Write)
 
@@ -92,7 +92,7 @@ This single batch creates:
 
 **Total: 5 cards from 3 entries.**
 
-## Method 2: Collect from Notes (Tag & Collect)
+## Alternative: Collect from Notes
 
 Write flashcards directly in your Obsidian notes as you take them, then import all at once.
 

@@ -8,7 +8,7 @@ links:
   - /views/flashcard-panel/
 ---
 
-The simplest card type — a question on the front, an answer on the back. Write them directly in your notes with the `#flashcard` tag.
+The simplest card type — a question on the front, an answer on the back. Create them with the **+ Add Card** button in the Flashcard Panel.
 
 ## Syntax
 
@@ -54,16 +54,12 @@ What is the value of `x`? #flashcard
 not a copy. Both variables point to the same list.
 ````
 
-## Collecting Flashcards
+## Creating Cards
 
-After writing flashcards in your note:
+Click **+ Add Card** in the Flashcard Panel, write your question with a `#flashcard` tag, the answer below, and save. Cards are linked to the current note automatically.
 
-1. **Open the Flashcard Panel** — click the brain icon in the left sidebar
-2. **Click "Collect"** — True Recall scans the note and imports all tagged cards
-3. Cards are stored in the database and linked to the note
-
-:::tip
-You can also create cards manually via the **+ Add Card** button in the panel.
+:::tip[Alternative: Collect from notes]
+You can also write cards directly in your notes with `#flashcard` tags and click **Collect** in the panel to import them all at once.
 :::
 
 ## Examples
