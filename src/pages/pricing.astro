@@ -1,0 +1,324 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const plans = [
+	{
+		name: "Free",
+		price: "$0",
+		period: "forever",
+		description: "Use your own OpenRouter API key. No limits, no tracking.",
+		features: [
+			"Bring your own API key (BYOK)",
+			"All AI models supported",
+			"Unlimited flashcard generation",
+			"Pay only for what you use on OpenRouter",
+		],
+		cta: "Get Started",
+		ctaHref: "/getting-started/installation",
+		popular: false,
+		secondary: true,
+	},
+	{
+		name: "Starter",
+		price: "$5",
+		period: "/month",
+		description: "Perfect for casual learners. ~200 AI flashcard generations per month.",
+		features: [
+			"~500K tokens / month",
+			"All AI models included",
+			"No API key needed",
+			"Usage dashboard",
+			"Email support",
+		],
+		cta: "Subscribe",
+		ctaHref: "#", // Will be replaced with Polar.sh checkout URL
+		popular: false,
+		secondary: false,
+	},
+	{
+		name: "Pro",
+		price: "$10",
+		period: "/month",
+		description: "For power users. ~600 generations + natural language queries.",
+		features: [
+			"~1.5M tokens / month",
+			"All AI models included",
+			"No API key needed",
+			"Natural language queries",
+			"Usage dashboard",
+			"Priority support",
+		],
+		cta: "Subscribe",
+		ctaHref: "#", // Will be replaced with Polar.sh checkout URL
+		popular: true,
+		secondary: false,
+	},
+];
+
+const faqs = [
+	{
+		q: "What are tokens?",
+		a: "Tokens are the units AI models use to process text. Roughly 1 token = 0.75 words. A typical flashcard generation uses ~500-1,000 tokens depending on the source text length and model.",
+	},
+	{
+		q: "Can I still use my own API key?",
+		a: "Absolutely! The Free tier lets you use your own OpenRouter API key with no restrictions. Paid tiers are for users who prefer a managed experience without dealing with API keys.",
+	},
+	{
+		q: "What happens when I run out of tokens?",
+		a: "You'll see a notification in the plugin. You can either wait for the monthly reset, buy a token top-up ($3 for ~250K extra tokens), or switch to your own API key.",
+	},
+	{
+		q: "Which AI models are included?",
+		a: "All models available in True Recall — Gemini Flash, GPT-4o, Claude Sonnet, Llama, and more. The budget is in dollars, so cheaper models give you more generations.",
+	},
+	{
+		q: "Can I cancel anytime?",
+		a: "Yes. Cancel anytime from your dashboard. You'll keep access until the end of your billing period.",
+	},
+	{
+		q: "How do I activate my subscription in Obsidian?",
+		a: "After subscribing, you'll get a subscription key on your dashboard. Paste it into True Recall settings → AI → Subscription Key. That's it!",
+	},
+];
+---
+
+<BaseLayout title="Pricing" description="True Recall subscription plans for AI-powered flashcard generation">
+	<div class="credits">
+		<h1>Simple, transparent pricing</h1>
+		<p>Generate AI flashcards without managing API keys. Or bring your own — it's free.</p>
+
+		<div class="plans">
+			{plans.map((plan) => (
+				<div class:list={["plan", { popular: plan.popular }]}>
+					{plan.popular && <span class="badge">Most Popular</span>}
+					<h2>{plan.name}</h2>
+					<div class="price">
+						{plan.price}<span class="period">{plan.period}</span>
+					</div>
+					<p>{plan.description}</p>
+					<ul class="features">
+						{plan.features.map((f) => (
+							<li>{f}</li>
+						))}
+					</ul>
+					<a
+						href={plan.ctaHref}
+						class:list={["btn", { "btn-secondary": plan.secondary }]}
+					>
+						{plan.cta}
+					</a>
+				</div>
+			))}
+		</div>
+
+		<p class="note">
+			All plans include access to all AI models. Token budgets are measured in API cost — cheaper models give you more generations.
+		</p>
+	</div>
+
+	<div class="faq-section">
+		<h2>Frequently Asked Questions</h2>
+		<div class="faq-list">
+			{faqs.map((faq) => (
+				<details class="faq-item">
+					<summary>{faq.q}</summary>
+					<p>{faq.a}</p>
+				</details>
+			))}
+		</div>
+	</div>
+</BaseLayout>
+
+<style>
+	/* Reuse .credits, .plans, .plan from custom.css — extend here */
+	.credits {
+		text-align: center;
+		max-width: 900px;
+		margin: 0 auto;
+		padding-top: 2rem;
+	}
+
+	.credits h1 {
+		font-size: 2.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.credits > p {
+		color: var(--sl-color-gray-3);
+		margin-bottom: 3rem;
+		font-size: 1.125rem;
+	}
+
+	.plans {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+		text-align: left;
+	}
+
+	.plan {
+		background: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: var(--tr-radius-md);
+		padding: 2rem;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.plan.popular {
+		border-color: var(--sl-color-accent);
+	}
+
+	.plan .badge {
+		position: absolute;
+		top: -10px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--sl-color-accent);
+		color: var(--sl-color-white);
+		padding: 0.25rem 0.75rem;
+		border-radius: var(--tr-radius-pill);
+		font-size: 0.75rem;
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
+	.plan h2 {
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.price {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: var(--sl-color-accent);
+		margin-bottom: 0.5rem;
+	}
+
+	.price .period {
+		font-size: 1rem;
+		font-weight: 400;
+		color: var(--sl-color-gray-3);
+	}
+
+	.plan > p {
+		color: var(--sl-color-gray-3);
+		margin-bottom: 1.5rem;
+		font-size: 0.875rem;
+	}
+
+	.features {
+		list-style: none;
+		margin-bottom: 2rem;
+		flex: 1;
+	}
+
+	.features li {
+		padding: 0.375rem 0;
+		padding-left: 1.5rem;
+		position: relative;
+		font-size: 0.9375rem;
+		color: var(--sl-color-gray-2);
+	}
+
+	.features li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		color: var(--tr-color-success);
+		font-weight: 600;
+	}
+
+	.btn {
+		display: block;
+		text-align: center;
+		padding: 0.75rem 1.5rem;
+		background: var(--sl-color-accent);
+		color: var(--sl-color-white);
+		border: none;
+		border-radius: var(--tr-radius-sm);
+		font-size: 1rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: filter 0.2s;
+		text-decoration: none;
+	}
+
+	.btn:hover {
+		filter: brightness(1.1);
+		text-decoration: none;
+	}
+
+	.btn-secondary {
+		background: transparent;
+		border: 1px solid var(--sl-color-gray-5);
+	}
+
+	.btn-secondary:hover {
+		background: var(--sl-color-gray-6);
+	}
+
+	.note {
+		color: var(--sl-color-gray-4);
+		font-size: 0.875rem;
+	}
+
+	/* FAQ Section */
+	.faq-section {
+		max-width: 700px;
+		margin: 4rem auto 0;
+	}
+
+	.faq-section h2 {
+		font-size: 1.75rem;
+		margin-bottom: 1.5rem;
+		text-align: center;
+	}
+
+	.faq-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.faq-item {
+		background: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: var(--tr-radius-sm);
+		padding: 1rem 1.25rem;
+	}
+
+	.faq-item summary {
+		cursor: pointer;
+		font-weight: 500;
+		font-size: 1rem;
+		list-style: none;
+	}
+
+	.faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq-item summary::before {
+		content: "+";
+		display: inline-block;
+		width: 1.25rem;
+		font-weight: 600;
+		color: var(--sl-color-accent);
+	}
+
+	.faq-item[open] summary::before {
+		content: "−";
+	}
+
+	.faq-item p {
+		margin-top: 0.75rem;
+		color: var(--sl-color-gray-3);
+		font-size: 0.9375rem;
+		line-height: 1.6;
+		padding-left: 1.25rem;
+	}
+</style>

@@ -1,0 +1,169 @@
+---
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
+	Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<title>{title} | True Recall</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+		/>
+		<Analytics />
+		<SpeedInsights />
+	</head>
+	<body>
+		<nav class="top-nav">
+			<a href="/" class="nav-logo">
+				<img src="/simple-logo.svg" alt="True Recall" width="28" height="28" />
+				<span>True Recall</span>
+			</a>
+			<div class="nav-links">
+				<a href="/getting-started/introduction">Docs</a>
+				<a href="/pricing">Pricing</a>
+				<a href="/login" class="btn btn-small">Sign In</a>
+			</div>
+		</nav>
+
+		<main class="page-content">
+			<slot />
+		</main>
+
+		<footer class="page-footer">
+			<p>&copy; {new Date().getFullYear()} True Recall. All rights reserved.</p>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--sl-color-accent: #7c3aed;
+		--sl-color-accent-high: #a78bfa;
+		--sl-color-accent-low: #4c1d95;
+		--sl-color-white: #ffffff;
+		--sl-color-gray-1: #e0e0e0;
+		--sl-color-gray-2: #c0c0c0;
+		--sl-color-gray-3: #9ca3af;
+		--sl-color-gray-4: #6b7280;
+		--sl-color-gray-5: #374151;
+		--sl-color-gray-6: #1f2937;
+		--sl-color-gray-7: #111827;
+		--sl-color-bg: #0f172a;
+		--tr-color-error: #ef4444;
+		--tr-color-success: #10b981;
+		--tr-color-accent-deep: #5b21b6;
+		--tr-radius-sm: 0.5rem;
+		--tr-radius-md: 0.75rem;
+		--tr-radius-pill: 999px;
+		--tr-overlay-light: rgba(255, 255, 255, 0.2);
+		--tr-overlay-light-hover: rgba(255, 255, 255, 0.3);
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+		background: var(--sl-color-bg);
+		color: var(--sl-color-white);
+		line-height: 1.6;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	a {
+		color: var(--sl-color-accent-high);
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+</style>
+
+<style>
+	.top-nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem 2rem;
+		border-bottom: 1px solid var(--sl-color-gray-5);
+	}
+
+	.nav-logo {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--sl-color-white);
+		font-weight: 600;
+		font-size: 1.125rem;
+		text-decoration: none;
+	}
+
+	.nav-logo:hover {
+		text-decoration: none;
+	}
+
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.nav-links a {
+		color: var(--sl-color-gray-2);
+		font-size: 0.875rem;
+	}
+
+	.nav-links a:hover {
+		color: var(--sl-color-white);
+		text-decoration: none;
+	}
+
+	.btn-small {
+		display: inline-block;
+		padding: 0.5rem 1rem;
+		background: var(--sl-color-accent);
+		color: var(--sl-color-white) !important;
+		border-radius: var(--tr-radius-sm);
+		font-weight: 500;
+		font-size: 0.875rem;
+	}
+
+	.btn-small:hover {
+		filter: brightness(1.1);
+	}
+
+	.page-content {
+		flex: 1;
+		padding: 2rem;
+	}
+
+	.page-footer {
+		padding: 2rem;
+		text-align: center;
+		color: var(--sl-color-gray-4);
+		font-size: 0.875rem;
+		border-top: 1px solid var(--sl-color-gray-5);
+	}
+</style>

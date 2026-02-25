@@ -59,6 +59,7 @@ export default defineConfig({
 						{ slug: 'features/fsrs-algorithm' },
 
 						{ slug: 'features/statistics' },
+						{ slug: 'features/editor-widgets' },
 						{ slug: 'features/projects' },
 						{ slug: 'features/anki-export' },
 						{ slug: 'features/cloud-sync' },

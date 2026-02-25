@@ -1,0 +1,82 @@
+import { LITELLM_PROXY_URL, LITELLM_MASTER_KEY } from "./constants";
+
+interface GenerateKeyParams {
+	userId: string;
+	maxBudget: number;
+	budgetDuration?: string;
+	metadata?: Record<string, string>;
+}
+
+interface KeyInfo {
+	key: string;
+	token: string;
+	max_budget: number;
+	spend: number;
+	budget_duration: string | null;
+	expires: string | null;
+}
+
+async function litellmFetch(path: string, options: RequestInit = {}) {
+	const url = `${LITELLM_PROXY_URL}${path}`;
+	const res = await fetch(url, {
+		...options,
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${LITELLM_MASTER_KEY}`,
+			...options.headers,
+		},
+	});
+
+	if (!res.ok) {
+		const body = await res.text();
+		throw new Error(`LiteLLM ${path} failed (${res.status}): ${body}`);
+	}
+
+	return res.json();
+}
+
+export async function generateKey(params: GenerateKeyParams): Promise<KeyInfo> {
+	return litellmFetch("/key/generate", {
+		method: "POST",
+		body: JSON.stringify({
+			user_id: params.userId,
+			max_budget: params.maxBudget,
+			budget_duration: params.budgetDuration ?? "30d",
+			metadata: params.metadata ?? {},
+		}),
+	});
+}
+
+export async function updateKeyBudget(
+	keyId: string,
+	maxBudget: number,
+): Promise<void> {
+	await litellmFetch("/key/update", {
+		method: "POST",
+		body: JSON.stringify({
+			key: keyId,
+			max_budget: maxBudget,
+			spend: 0,
+		}),
+	});
+}
+
+export async function deleteKey(keyId: string): Promise<void> {
+	await litellmFetch("/key/delete", {
+		method: "POST",
+		body: JSON.stringify({ keys: [keyId] }),
+	});
+}
+
+export async function getKeyInfo(apiKey: string): Promise<{
+	spend: number;
+	max_budget: number;
+	budget_duration: string | null;
+	expires: string | null;
+	metadata: Record<string, string>;
+}> {
+	return litellmFetch(`/key/info`, {
+		method: "GET",
+		headers: { Authorization: `Bearer ${apiKey}` },
+	});
+}
