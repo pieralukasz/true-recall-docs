@@ -78,8 +78,7 @@ export async function getKeyInfo(apiKey: string): Promise<{
 	expires: string | null;
 	metadata: Record<string, string>;
 }> {
-	return litellmFetch(`/key/info`, {
+	return litellmFetch(`/key/info?key=${encodeURIComponent(apiKey)}`, {
 		method: "GET",
-		headers: { Authorization: `Bearer ${apiKey}` },
 	});
 }
