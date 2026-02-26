@@ -36,14 +36,17 @@ async function litellmFetch(path: string, options: RequestInit = {}) {
 }
 
 export async function generateKey(params: GenerateKeyParams): Promise<KeyInfo> {
+	const payload: Record<string, unknown> = {
+		user_id: params.userId,
+		max_budget: params.maxBudget,
+		metadata: params.metadata ?? {},
+	};
+	if (params.budgetDuration !== undefined) {
+		payload.budget_duration = params.budgetDuration;
+	}
 	return litellmFetch("/key/generate", {
 		method: "POST",
-		body: JSON.stringify({
-			user_id: params.userId,
-			max_budget: params.maxBudget,
-			budget_duration: params.budgetDuration ?? "30d",
-			metadata: params.metadata ?? {},
-		}),
+		body: JSON.stringify(payload),
 	});
 }
 

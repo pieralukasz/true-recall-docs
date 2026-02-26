@@ -51,9 +51,9 @@ const { data: subscription } = await supabase
 	.eq("user_id", user!.id)
 	.single();
 
-const tier = subscription?.tier ?? "free";
+const tier = subscription?.tier ?? "none";
 const apiKey = subscription?.litellm_api_key ?? null;
-const budgetMax = tier === "starter" ? 3.5 : tier === "pro" ? 7.0 : 0;
+const budgetMax = tier === "starter" ? 3.5 : tier === "pro" ? 7.0 : tier === "free" ? 0.20 : 0;
 const periodEnd = subscription?.current_period_end
 	? new Date(subscription.current_period_end).toLocaleDateString("en-US", {
 			month: "long",
@@ -86,19 +86,25 @@ if (Astro.request.method === "POST") {
 			</form>
 		</div>
 
-		{tier !== "free" && apiKey ? (
+		{apiKey ? (
 			<div class="credits-card">
-				<h2>Your Subscription Key</h2>
+				<h2>{tier === "free" ? "Your Free Trial Key" : "Your Subscription Key"}</h2>
 				<div class="key-display">
 					<code id="api-key">{apiKey}</code>
 					<button class="copy-btn" id="copy-btn" type="button">Copy</button>
 				</div>
 				<p class="key-hint">Paste this key in Obsidian → True Recall Settings → AI → Subscription Key</p>
+				{tier === "free" && (
+					<p class="key-hint" style="margin-top: 0.5rem; opacity: 0.9;">
+						Free trial includes ~30 one-time AI generations.
+						<a href="/pricing" style="color: inherit; text-decoration: underline;">Upgrade</a> for unlimited monthly access.
+					</p>
+				)}
 			</div>
 		) : (
 			<div class="no-sub-card">
 				<h2>No Active Subscription</h2>
-				<p>You're using the free tier. Subscribe to get a managed AI key with no setup required.</p>
+				<p>Sign up for a plan to get a managed AI key with no setup required.</p>
 				<a href="/pricing" class="btn">View Plans</a>
 			</div>
 		)}
@@ -124,7 +130,7 @@ if (Astro.request.method === "POST") {
 				<h3>Usage</h3>
 				<div class="info-value">
 					<div class="usage-bar-container" id="usage-container">
-						{tier !== "free" ? (
+						{apiKey ? (
 							<>
 								<div class="usage-bar">
 									<div class="usage-fill" id="usage-fill" style="width: 0%"></div>
@@ -132,7 +138,7 @@ if (Astro.request.method === "POST") {
 								<span class="usage-text" id="usage-text">Loading...</span>
 							</>
 						) : (
-							<span class="usage-text">N/A (BYOK)</span>
+							<span class="usage-text">N/A</span>
 						)}
 					</div>
 				</div>
@@ -146,7 +152,13 @@ if (Astro.request.method === "POST") {
 			</div>
 		</div>
 
-		{tier !== "free" && (
+		{tier === "free" ? (
+			<div class="actions">
+				<a href="/pricing" class="btn">
+					Upgrade Plan
+				</a>
+			</div>
+		) : tier !== "none" && (
 			<div class="actions">
 				<a href={POLAR_CUSTOMER_PORTAL_URL} class="btn" target="_blank" rel="noopener">
 					Manage Subscription
@@ -170,7 +182,7 @@ if (Astro.request.method === "POST") {
 	});
 
 	// Fetch live usage from status API
-	if (tier !== "free" && apiKey) {
+	if (apiKey) {
 		fetch(`/api/subscription/status?key=${encodeURIComponent(apiKey)}`)
 			.then((r) => r.json())
 			.then((data) => {

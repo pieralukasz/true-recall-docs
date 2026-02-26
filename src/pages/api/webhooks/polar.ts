@@ -35,6 +35,7 @@ function tierFromProductName(productName: string): string | null {
 	const lower = productName.toLowerCase();
 	if (lower.includes("starter")) return "starter";
 	if (lower.includes("pro")) return "pro";
+	if (lower.includes("free")) return "free";
 	return null;
 }
 
@@ -113,7 +114,7 @@ export const POST: APIRoute = async ({ request }) => {
 				const keyResult = await generateKey({
 					userId,
 					maxBudget: budget,
-					budgetDuration: "30d",
+					budgetDuration: tier === "free" ? undefined : "30d",
 					metadata: { tier, email },
 				});
 
