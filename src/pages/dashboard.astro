@@ -39,6 +39,7 @@ if (authError || !user) {
 			sameSite: "lax",
 			maxAge: 60 * 60 * 24 * 30,
 		});
+		return Astro.redirect("/dashboard");
 	} else {
 		return Astro.redirect("/login");
 	}

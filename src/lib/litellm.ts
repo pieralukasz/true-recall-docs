@@ -78,7 +78,10 @@ export async function getKeyInfo(apiKey: string): Promise<{
 	expires: string | null;
 	metadata: Record<string, string>;
 }> {
-	return litellmFetch(`/key/info?key=${encodeURIComponent(apiKey)}`, {
-		method: "GET",
-	});
+	// Master key + ?key= param returns { key, info: {...} } — extract .info
+	const response = await litellmFetch(
+		`/key/info?key=${encodeURIComponent(apiKey)}`,
+		{ method: "GET" },
+	);
+	return response.info;
 }
