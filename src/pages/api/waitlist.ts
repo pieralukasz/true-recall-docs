@@ -44,8 +44,13 @@ export const POST: APIRoute = async ({ request }) => {
 
 	const resendKey = import.meta.env.RESEND_API_KEY;
 	if (resendKey) {
+		const resend = new Resend(resendKey);
 		try {
-			const resend = new Resend(resendKey);
+			await resend.contacts.create({ email });
+		} catch (contactError) {
+			console.error("Resend contacts error:", contactError);
+		}
+		try {
 			await resend.emails.send({
 				from: "waitlist@truerecall.app",
 				to: "pieralukasz@gmail.com",
@@ -57,7 +62,7 @@ export const POST: APIRoute = async ({ request }) => {
 				`,
 			});
 		} catch (emailError) {
-			console.error("Resend error:", emailError);
+			console.error("Resend email error:", emailError);
 		}
 	}
 
