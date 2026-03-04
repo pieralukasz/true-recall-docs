@@ -53,28 +53,25 @@ export const POST: APIRoute = async ({ request }) => {
 		}
 
 		try {
-			await resend.emails.send({
-				from: "waitlist@truerecall.app",
-				to: "pieralukasz@gmail.com",
-				subject: `New waitlist signup: ${email}`,
-				html: `
-					<h2>New True Recall waitlist signup</h2>
-					<p><strong>Email:</strong> ${email}</p>
-					${message ? `<p><strong>Message:</strong> ${message}</p>` : "<p><em>No message provided</em></p>"}
-				`,
-			});
-		} catch (notifyError) {
-			console.error("Resend notification error:", notifyError);
-		}
-
-				try {
-			await resend.emails.send({
-				from: "waitlist@truerecall.app",
-				to: email,
-				template: { id: "welcome-to-true-recall" },
-			});
-		} catch (welcomeError) {
-			console.error("Resend welcome email error:", welcomeError);
+			await resend.batch.send([
+				{
+					from: "noreply@truerecall.app",
+					to: email,
+					template: { id: "welcome-to-true-recall" },
+				},
+				{
+					from: "waitlist@truerecall.app",
+					to: "pieralukasz@gmail.com",
+					subject: `New waitlist signup: ${email}`,
+					html: `
+						<h2>New True Recall waitlist signup</h2>
+						<p><strong>Email:</strong> ${email}</p>
+						${message ? `<p><strong>Message:</strong> ${message}</p>` : "<p><em>No message provided</em></p>"}
+					`,
+				},
+			]);
+		} catch (emailError) {
+			console.error("Resend batch error:", emailError);
 		}
 
 
