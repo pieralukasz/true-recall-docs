@@ -55,11 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
 				to: email,
 				template: { id: "welcome-to-true-recall" },
 			});
-		} catch (welcomeError) {
-			console.error("Resend welcome email error:", welcomeError);
-		}
-		let notificationError: string | null = null;
-		try {
+
 			await resend.emails.send({
 				from: "waitlist@truerecall.app",
 				to: "pieralukasz@gmail.com",
@@ -70,11 +66,12 @@ export const POST: APIRoute = async ({ request }) => {
 					${message ? `<p><strong>Message:</strong> ${message}</p>` : "<p><em>No message provided</em></p>"}
 				`,
 			});
-		} catch (emailError) {
-			notificationError = emailError instanceof Error ? emailError.message : String(emailError);
+
+		} catch (welcomeError) {
+			console.error("Resend welcome email error:", welcomeError);
 		}
 
-		return new Response(JSON.stringify({ success: true, notificationError }), { status: 200, headers });
+
 	}
 
 	return new Response(JSON.stringify({ success: true }), { status: 200, headers });
