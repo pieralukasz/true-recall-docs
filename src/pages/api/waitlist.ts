@@ -57,7 +57,7 @@ export const POST: APIRoute = async ({ request }) => {
 			});
 
 			await resend.emails.send({
-				from: "waitlist@truerecall.app",
+				from: "waitlist@yanaechifa.resend.app",
 				to: "pieralukasz@gmail.com",
 				subject: `New waitlist signup: ${email}`,
 				html: `
