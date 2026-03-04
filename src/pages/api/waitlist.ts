@@ -50,14 +50,14 @@ export const POST: APIRoute = async ({ request }) => {
 		} catch (contactError) {
 			console.error("Resend contacts error:", contactError);
 		}
-		try {
-			await resend.emails.send({
-				to: email,
-				template: { id: "welcome-to-true-recall" },
-			});
-		} catch (welcomeError) {
-			console.error("Resend welcome email error:", welcomeError);
-		}
+		// try {
+		// 	await resend.emails.send({
+		// 		to: email,
+		// 		template: { id: "welcome-to-true-recall" },
+		// 	});
+		// } catch (welcomeError) {
+		// 	console.error("Resend welcome email error:", welcomeError);
+		// }
 		try {
 			await resend.emails.send({
 				from: "waitlist@truerecall.app",
