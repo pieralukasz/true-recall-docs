@@ -95,6 +95,12 @@ OpenRouter is a unified API gateway that gives you access to AI models (like GPT
 Natural language queries require an OpenRouter API key. Without one, the query box won't appear.
 :::
 
+## Archived Notes
+
+Statistics include cards from **all notes**, including archived ones. Charts like card state distribution, workload forecast, and maturity breakdown reflect your full collection history — archived cards appear as they are (review, suspended, etc.) but won't generate future reviews.
+
+If you've recently archived a large batch of notes, you may notice the workload forecast drops immediately, while the collection-size metrics remain unchanged until those cards naturally age out of the charts.
+
 ## Exporting
 
 Right-click any chart to save it as a PNG or copy it to the clipboard.

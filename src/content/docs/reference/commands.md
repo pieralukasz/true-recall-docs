@@ -14,7 +14,7 @@ All commands are available via the Command Palette (`Cmd/Ctrl+P`).
 |---------|-------------|
 | Open flashcard panel | Opens sidebar panel showing flashcards for the current note |
 | Add flashcard UID to current note | Adds unique identifier to frontmatter, enabling flashcard linking |
-| Set FSRS preset for current note | Assigns specific FSRS preset to note via frontmatter (see [FSRS Presets](/configuration/fsrs-presets/)) |
+| Set FSRS preset for current note | Opens the Preset Inspector showing the full inheritance chain and lets you set or clear the note's preset (see [FSRS Presets](/configuration/fsrs-presets/)) |
 
 ## Review
 

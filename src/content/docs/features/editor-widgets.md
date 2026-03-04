@@ -547,7 +547,7 @@ The most FSRS-specific widget. Use it when you want to see exactly which cards i
 
 ### `true-recall-project`
 
-**Scope:** Project note (requires self-reference in `projects` frontmatter)
+**Scope:** Project note (requires `project: true` in frontmatter)
 
 ````markdown
 ```true-recall-project

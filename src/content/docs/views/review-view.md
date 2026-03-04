@@ -54,6 +54,7 @@ When a card appears, you see the question first. Press Space or click "Show Answ
 │  <1m      <6m      8d       20d     │
 │                                     │
 │  Source: Learning Techniques.md     │
+│  FSRS: Default                      │
 └─────────────────────────────────────┘
 ```
 
@@ -124,6 +125,12 @@ Beyond rating, you can manage cards mid-session without breaking your flow.
 ## Review Modes
 
 The review can run fullscreen for distraction-free study or as a side panel so you can keep your notes visible. Configure this in Settings, then True Recall, then General.
+
+## Preset Indicator
+
+After revealing the answer, a small **FSRS: PresetName** label appears below the card content, next to the source note link. This shows which [FSRS preset](/configuration/fsrs-presets/) is being used to schedule the current card.
+
+Different cards in the same session can use different presets depending on their [resolution hierarchy](/configuration/fsrs-presets/#resolution-hierarchy). The indicator lets you verify which preset is active at a glance.
 
 :::note
 Click the **Source** link below any card to jump straight to the note it came from.

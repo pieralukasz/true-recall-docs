@@ -19,6 +19,16 @@ You need **400+ reviews per preset** minimum before optimizing. **1000+ reviews 
 
 Since database v22, True Recall tracks which preset was used for each review. Each preset builds its own optimization data independently. Historical reviews from before presets were introduced count as "Default" preset reviews.
 
+When a note belongs to multiple projects with different presets, preset attribution is **deterministic** -- the alphabetically first project's preset is used consistently. This ensures optimization data stays clean even for multi-project notes.
+
+:::caution
+Changing a note's preset does **not** transfer historical reviews to the new preset. If you reassign 500 cards from "Default" to a new "Medical" preset, the "Medical" preset starts with 0 reviews for optimization — you'll need to accumulate 400+ reviews under "Medical" before optimizing it. See [What Happens When You Change a Preset](/configuration/fsrs-presets/#what-happens-when-you-change-a-preset) for details.
+:::
+
+:::note
+**Archived notes and optimization**: Review history from archived notes is included in FSRS optimization. This is intentional — your past reviews are valid calibration data for how your memory works, regardless of whether you're currently studying that material. Archiving a note only stops future reviews from being scheduled; it doesn't remove historical data from the optimizer.
+:::
+
 Check your review count in Statistics before optimizing.
 
 ## Running Optimization
