@@ -2,24 +2,18 @@
 title: True Recall
 description: Spaced repetition for Obsidian with FSRS v6
 template: splash
-links:
-  - /getting-started/introduction/
-  - /getting-started/quick-start/
 hero:
   tagline: "The next-gen spaced repetition system for Obsidian."
   image:
     file: ../../assets/simple-logo.svg
   actions:
-    - text: Get Started
-      link: /getting-started/introduction/
-      icon: right-arrow
-      variant: primary
     - text: View on GitHub
       link: https://github.com/pieralukasz/true-recall
       icon: external
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import WaitlistForm from '../../components/WaitlistForm.astro';
 
 ## Features
 
@@ -52,11 +46,4 @@ Transform your Obsidian vault into an intelligent learning system. Create flashc
 	</Card>
 </CardGrid>
 
-## Quick Start
-
-1. **Install** the plugin in Obsidian
-2. **Create** flashcards using the Add panel
-3. **Review** with spaced repetition
-4. **Track** your progress
-
-Ready to supercharge your learning? [Get started now](/getting-started/introduction/).
+<WaitlistForm />

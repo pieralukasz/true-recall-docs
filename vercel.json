@@ -1,0 +1,11 @@
+{
+  "redirects": [
+    { "source": "/getting-started/:path*", "destination": "/", "permanent": false },
+    { "source": "/migration/:path*", "destination": "/", "permanent": false },
+    { "source": "/features/:path*", "destination": "/", "permanent": false },
+    { "source": "/views/:path*", "destination": "/", "permanent": false },
+    { "source": "/configuration/:path*", "destination": "/", "permanent": false },
+    { "source": "/reference/:path*", "destination": "/", "permanent": false },
+    { "source": "/advanced/:path*", "destination": "/", "permanent": false }
+  ]
+}
