@@ -45,19 +45,13 @@ export const POST: APIRoute = async ({ request }) => {
 	const resendKey = import.meta.env.RESEND_API_KEY;
 	if (resendKey) {
 		const resend = new Resend(resendKey);
+		
 		try {
 			await resend.contacts.create({ email });
 		} catch (contactError) {
 			console.error("Resend contacts error:", contactError);
 		}
-		// try {
-		// 	await resend.emails.send({
-		// 		to: email,
-		// 		template: { id: "welcome-to-true-recall" },
-		// 	});
-		// } catch (welcomeError) {
-		// 	console.error("Resend welcome email error:", welcomeError);
-		// }
+
 		try {
 			await resend.emails.send({
 				from: "waitlist@truerecall.app",
@@ -71,6 +65,15 @@ export const POST: APIRoute = async ({ request }) => {
 			});
 		} catch (notifyError) {
 			console.error("Resend notification error:", notifyError);
+		}
+
+				try {
+			await resend.emails.send({
+				to: email,
+				template: { id: "welcome-to-true-recall" },
+			});
+		} catch (welcomeError) {
+			console.error("Resend welcome email error:", welcomeError);
 		}
 
 
