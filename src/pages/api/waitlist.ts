@@ -55,9 +55,12 @@ export const POST: APIRoute = async ({ request }) => {
 				to: email,
 				template: { id: "welcome-to-true-recall" },
 			});
-
+		} catch (welcomeError) {
+			console.error("Resend welcome email error:", welcomeError);
+		}
+		try {
 			await resend.emails.send({
-				from: "waitlist@yanaechifa.resend.app",
+				from: "onboarding@resend.dev",
 				to: "pieralukasz@gmail.com",
 				subject: `New waitlist signup: ${email}`,
 				html: `
@@ -66,9 +69,8 @@ export const POST: APIRoute = async ({ request }) => {
 					${message ? `<p><strong>Message:</strong> ${message}</p>` : "<p><em>No message provided</em></p>"}
 				`,
 			});
-
-		} catch (welcomeError) {
-			console.error("Resend welcome email error:", welcomeError);
+		} catch (notifyError) {
+			console.error("Resend notification error:", notifyError);
 		}
 
 

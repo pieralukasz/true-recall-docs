@@ -154,19 +154,25 @@
   .waitlist-form {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0;
   }
 
   .form-group {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    margin: 0 !important;
+  }
+
+  .form-group + .form-group {
+    margin-top: 0.75rem !important;
   }
 
   .form-label {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--sl-color-gray-2);
+    margin: 0 !important;
   }
 
   .optional {
