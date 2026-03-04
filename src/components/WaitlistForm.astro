@@ -1,241 +1,278 @@
 ---
+
 ---
 
 <section class="waitlist-section">
-	<div class="waitlist-container">
-		<h2 class="waitlist-title">Join the Waitlist</h2>
-		<p class="waitlist-subtitle">
-			Be the first to know when True Recall launches. Tell us what you're looking forward to most.
-		</p>
+  <div class="waitlist-container">
+    <h2 class="waitlist-title">Join the Waitlist</h2>
+    <p class="waitlist-subtitle">
+      Be the first to know when True Recall launches. Tell us what you're
+      looking forward to most.
+    </p>
 
-		<form id="waitlist-form" class="waitlist-form">
-			<div class="form-group">
-				<label for="waitlist-email" class="form-label">Email address</label>
-				<input
-					type="email"
-					id="waitlist-email"
-					name="email"
-					required
-					placeholder="you@example.com"
-					class="form-input"
-					autocomplete="email"
-				/>
-			</div>
+    <form id="waitlist-form" class="waitlist-form">
+      <div class="form-group">
+        <label for="waitlist-email" class="form-label">Email address</label>
+        <input
+          type="email"
+          id="waitlist-email"
+          name="email"
+          required
+          placeholder="you@example.com"
+          class="form-input"
+          autocomplete="email"
+        />
+      </div>
 
-			<div class="form-group">
-				<label for="waitlist-message" class="form-label">
-					What are you most looking forward to? <span class="optional">(optional)</span>
-				</label>
-				<textarea
-					id="waitlist-message"
-					name="message"
-					rows="3"
-					placeholder="e.g. Cloud sync, FSRS algorithm, analytics..."
-					class="form-input form-textarea"
-				></textarea>
-			</div>
+      <div class="form-group">
+        <label for="waitlist-message" class="form-label">
+          What are you most looking forward to? <span class="optional"
+            >(optional)</span
+          >
+        </label>
+        <textarea
+          id="waitlist-message"
+          name="message"
+          rows="3"
+          placeholder="e.g. Cloud sync, FSRS algorithm, analytics..."
+          class="form-input form-textarea"></textarea>
+      </div>
 
-			<button type="submit" id="waitlist-submit" class="waitlist-btn">
-				<span id="btn-text">Join Waitlist</span>
-				<span id="btn-loading" style="display:none">Joining...</span>
-			</button>
-		</form>
+      <button type="submit" id="waitlist-submit" class="waitlist-btn">
+        <span id="btn-text">Join Waitlist</span>
+        <span id="btn-loading" style="display:none">Joining...</span>
+      </button>
+    </form>
 
-		<div id="waitlist-success" class="waitlist-success" style="display:none">
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-			<div>
-				<strong>You're on the list!</strong>
-				<p>We'll reach out as soon as True Recall is ready.</p>
-			</div>
-		</div>
+    <div id="waitlist-success" class="waitlist-success" style="display:none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><polyline points="20 6 9 17 4 12"></polyline></svg
+      >
+      <div>
+        <strong>You're on the list!</strong>
+        <p>We'll reach out as soon as True Recall is ready.</p>
+      </div>
+    </div>
 
-		<div id="waitlist-error" class="waitlist-error" style="display:none"></div>
-	</div>
+    <div id="waitlist-error" class="waitlist-error" style="display:none"></div>
+  </div>
 </section>
 
 <script>
-	const form = document.getElementById("waitlist-form") as HTMLFormElement;
-	const submitBtn = document.getElementById("waitlist-submit") as HTMLButtonElement;
-	const btnText = document.getElementById("btn-text")!;
-	const btnLoading = document.getElementById("btn-loading")!;
-	const successEl = document.getElementById("waitlist-success")!;
-	const errorEl = document.getElementById("waitlist-error")!;
+  const form = document.getElementById("waitlist-form") as HTMLFormElement;
+  const submitBtn = document.getElementById(
+    "waitlist-submit",
+  ) as HTMLButtonElement;
+  const btnText = document.getElementById("btn-text")!;
+  const btnLoading = document.getElementById("btn-loading")!;
+  const successEl = document.getElementById("waitlist-success")!;
+  const errorEl = document.getElementById("waitlist-error")!;
 
-	form.addEventListener("submit", async (e) => {
-		e.preventDefault();
-		errorEl.style.display = "none";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorEl.style.display = "none";
 
-		const email = (document.getElementById("waitlist-email") as HTMLInputElement).value;
-		const message = (document.getElementById("waitlist-message") as HTMLTextAreaElement).value;
+    const email = (
+      document.getElementById("waitlist-email") as HTMLInputElement
+    ).value;
+    const message = (
+      document.getElementById("waitlist-message") as HTMLTextAreaElement
+    ).value;
 
-		submitBtn.disabled = true;
-		btnText.style.display = "none";
-		btnLoading.style.display = "inline";
+    submitBtn.disabled = true;
+    btnText.style.display = "none";
+    btnLoading.style.display = "inline";
 
-		try {
-			const res = await fetch("/api/waitlist", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, message }),
-			});
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, message }),
+      });
 
-			const data = await res.json();
+      const data = await res.json();
 
-			if (data.success) {
-				form.style.display = "none";
-				successEl.style.display = "flex";
-			} else {
-				throw new Error(data.error || "Something went wrong");
-			}
-		} catch (err: unknown) {
-			errorEl.textContent = err instanceof Error ? err.message : "Something went wrong. Please try again.";
-			errorEl.style.display = "block";
-			submitBtn.disabled = false;
-			btnText.style.display = "inline";
-			btnLoading.style.display = "none";
-		}
-	});
+      if (data.success) {
+        form.style.display = "none";
+        successEl.style.display = "flex";
+      } else {
+        throw new Error(data.error || "Something went wrong");
+      }
+    } catch (err: unknown) {
+      errorEl.textContent =
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again.";
+      errorEl.style.display = "block";
+      submitBtn.disabled = false;
+      btnText.style.display = "inline";
+      btnLoading.style.display = "none";
+    }
+  });
 </script>
 
 <style>
-	.waitlist-section {
-		margin: 3rem auto 0;
-		padding: 0 1rem;
-	}
+  .waitlist-section {
+    margin: 3rem auto 0;
+    padding: 0 1rem;
+  }
 
-	.waitlist-container {
-		max-width: 480px;
-		margin: 0 auto;
-		background: var(--sl-color-bg-sidebar);
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 12px;
-		padding: 1.25rem;
-	}
+  .waitlist-container {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--sl-color-bg-sidebar);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
 
-	.waitlist-title {
-		font-size: 1.5rem;
-		font-weight: 700;
-		color: var(--sl-color-white);
-		margin: 0 0 0.35rem;
-		border: none;
-		padding: 0;
-	}
+  .waitlist-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--sl-color-white);
+    margin: 0 0 0.35rem;
+    border: none;
+    padding: 0;
+  }
 
-	.waitlist-subtitle {
-		color: var(--sl-color-gray-2);
-		font-size: 0.95rem;
-		margin: 0 0 1rem;
-		line-height: 1.5;
-	}
+  .waitlist-subtitle {
+    color: var(--sl-color-gray-2);
+    font-size: 0.95rem;
+    margin: 0 0 1rem;
+    line-height: 1.5;
+  }
 
-	.waitlist-form {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
+  .waitlist-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
 
-	.form-group {
-		display: flex;
-		flex-direction: column;
-		gap: 0.4rem;
-	}
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
 
-	.form-label {
-		font-size: 0.875rem;
-		font-weight: 500;
-		color: var(--sl-color-gray-2);
-	}
+  .form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--sl-color-gray-2);
+  }
 
-	.optional {
-		color: var(--sl-color-gray-3);
-		font-weight: 400;
-	}
+  .optional {
+    color: var(--sl-color-gray-3);
+    font-weight: 400;
+  }
 
-	.form-input {
-		background: var(--sl-color-bg);
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 8px;
-		color: var(--sl-color-white);
-		font-size: 0.95rem;
-		padding: 0.65rem 0.875rem;
-		width: 100%;
-		box-sizing: border-box;
-		transition: border-color 0.15s;
-		font-family: inherit;
-	}
+  .form-input {
+    background: var(--sl-color-bg);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    color: var(--sl-color-white);
+    font-size: 0.95rem;
+    padding: 0.65rem 0.875rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+    font-family: inherit;
+  }
 
-	.form-input::placeholder {
-		color: var(--sl-color-gray-3);
-	}
+  .form-input::placeholder {
+    color: var(--sl-color-gray-3);
+  }
 
-	.form-input:focus {
-		outline: none;
-		border-color: var(--sl-color-accent);
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
-	}
+  .form-input:focus {
+    outline: none;
+    border-color: var(--sl-color-accent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
+  }
 
-	.form-textarea {
-		resize: vertical;
-		min-height: 80px;
-	}
+  .form-textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
 
-	.waitlist-btn {
-		background: var(--sl-color-accent);
-		color: white;
-		border: none;
-		border-radius: 8px;
-		padding: 0.75rem 1.5rem;
-		font-size: 1rem;
-		font-weight: 600;
-		cursor: pointer;
-		transition: background 0.15s, opacity 0.15s;
-		width: 100%;
-		font-family: inherit;
-	}
+  .waitlist-btn {
+    background: var(--sl-color-accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    margin-top: 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background 0.15s,
+      opacity 0.15s;
+    width: 100%;
+    font-family: inherit;
+  }
 
-	.waitlist-btn:hover:not(:disabled) {
-		background: var(--sl-color-accent-high);
-	}
+  .waitlist-btn:hover:not(:disabled) {
+    background: var(--sl-color-accent-high);
+  }
 
-	.waitlist-btn:disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-	}
+  .waitlist-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 
-	.waitlist-success {
-		display: flex;
-		align-items: flex-start;
-		gap: 0.75rem;
-		color: var(--tr-color-success, #10b981);
-		padding: 1rem;
-		background: color-mix(in srgb, var(--tr-color-success, #10b981) 10%, transparent);
-		border: 1px solid color-mix(in srgb, var(--tr-color-success, #10b981) 30%, transparent);
-		border-radius: 8px;
-	}
+  .waitlist-success {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--tr-color-success, #10b981);
+    padding: 1rem;
+    background: color-mix(
+      in srgb,
+      var(--tr-color-success, #10b981) 10%,
+      transparent
+    );
+    border: 1px solid
+      color-mix(in srgb, var(--tr-color-success, #10b981) 30%, transparent);
+    border-radius: 8px;
+  }
 
-	.waitlist-success svg {
-		flex-shrink: 0;
-		margin-top: 2px;
-	}
+  .waitlist-success svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
 
-	.waitlist-success strong {
-		display: block;
-		font-weight: 600;
-		margin-bottom: 0.25rem;
-	}
+  .waitlist-success strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
 
-	.waitlist-success p {
-		margin: 0;
-		font-size: 0.9rem;
-		opacity: 0.85;
-	}
+  .waitlist-success p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
 
-	.waitlist-error {
-		color: var(--tr-color-error, #ef4444);
-		background: color-mix(in srgb, var(--tr-color-error, #ef4444) 10%, transparent);
-		border: 1px solid color-mix(in srgb, var(--tr-color-error, #ef4444) 30%, transparent);
-		border-radius: 8px;
-		padding: 0.75rem 1rem;
-		font-size: 0.9rem;
-	}
+  .waitlist-error {
+    color: var(--tr-color-error, #ef4444);
+    background: color-mix(
+      in srgb,
+      var(--tr-color-error, #ef4444) 10%,
+      transparent
+    );
+    border: 1px solid
+      color-mix(in srgb, var(--tr-color-error, #ef4444) 30%, transparent);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
 </style>
