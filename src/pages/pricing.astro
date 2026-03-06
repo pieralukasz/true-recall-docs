@@ -1,16 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+	POLAR_STARTER_CHECKOUT_URL,
+	POLAR_TOPUP_S_CHECKOUT_URL,
+	POLAR_TOPUP_M_CHECKOUT_URL,
+} from "../lib/constants";
 
 const plans = [
 	{
 		name: "Free",
 		price: "$0",
 		period: "forever",
-		description: "Use your own OpenRouter API key. No limits, no tracking.",
+		description: "Use your own OpenRouter API key. Full AI access, no limits.",
 		features: [
 			"Bring your own API key (BYOK)",
-			"All AI models supported",
-			"Unlimited flashcard generation",
+			"Full AI flashcard generation",
+			"Unlimited usage",
 			"Pay only for what you use on OpenRouter",
 		],
 		cta: "Get Started",
@@ -20,57 +25,50 @@ const plans = [
 	},
 	{
 		name: "Starter",
-		price: "$5",
+		price: "$7",
 		period: "/month",
-		description: "Perfect for casual learners. ~200 AI flashcard generations per month.",
+		description: "~350 AI generations per month. No API key needed. Free trial on signup.",
 		features: [
-			"~500K tokens / month",
-			"All AI models included",
-			"No API key needed",
+			"~350 AI generations per month",
+			"No API key or setup needed",
 			"Usage dashboard",
-			"Email support",
+			"Custom prompts",
+			"Free trial (~50 generations)",
 		],
 		cta: "Subscribe",
-		ctaHref: "https://buy.polar.sh/polar_cl_igCjmr9UreAXPQYnlPVMyIPeEkQVBbRJCBvtW38RoUH",
-		popular: false,
-		secondary: false,
-	},
-	{
-		name: "Pro",
-		price: "$10",
-		period: "/month",
-		description: "For power users. ~600 generations + natural language queries.",
-		features: [
-			"~1.5M tokens / month",
-			"All AI models included",
-			"No API key needed",
-			"Natural language queries",
-			"Usage dashboard",
-			"Priority support",
-		],
-		cta: "Subscribe",
-		ctaHref: "https://buy.polar.sh/polar_cl_igCjmr9UreAXPQYnlPVMyIPeEkQVBbRJCBvtW38RoUH",
+		ctaHref: POLAR_STARTER_CHECKOUT_URL,
 		popular: true,
 		secondary: false,
 	},
 ];
 
+const topups = [
+	{
+		name: "Top-up S",
+		price: "$4.99",
+		description: "~280 extra generations",
+		href: POLAR_TOPUP_S_CHECKOUT_URL,
+	},
+	{
+		name: "Top-up M",
+		price: "$9.99",
+		description: "~640 extra generations",
+		href: POLAR_TOPUP_M_CHECKOUT_URL,
+	},
+];
+
 const faqs = [
 	{
-		q: "What are tokens?",
-		a: "Tokens are the units AI models use to process text. Roughly 1 token = 0.75 words. A typical flashcard generation uses ~500-1,000 tokens depending on the source text length and model.",
+		q: "How many generations do I get?",
+		a: "The Starter plan includes ~350 AI generations per month. Each generation creates a set of flashcards from your selected text.",
 	},
 	{
 		q: "Can I still use my own API key?",
-		a: "Absolutely! The Free tier lets you use your own OpenRouter API key with no restrictions. Paid tiers are for users who prefer a managed experience without dealing with API keys.",
+		a: "Absolutely! The Free tier lets you use your own OpenRouter API key with no restrictions. The Starter plan is for users who prefer a managed, no-setup experience.",
 	},
 	{
-		q: "What happens when I run out of tokens?",
-		a: "You'll see a notification in the plugin. You can either wait for the monthly reset, buy a token top-up ($3 for ~250K extra tokens), or switch to your own API key.",
-	},
-	{
-		q: "Which AI models are included?",
-		a: "All models available in True Recall — Gemini Flash, GPT-4o, Claude Sonnet, Llama, and more. The budget is in dollars, so cheaper models give you more generations.",
+		q: "What happens when I run out of generations?",
+		a: "You'll see a notification in the plugin. You can buy a top-up, wait for the monthly reset, or switch to your own API key.",
 	},
 	{
 		q: "Can I cancel anytime?",
@@ -79,6 +77,10 @@ const faqs = [
 	{
 		q: "How do I activate my subscription in Obsidian?",
 		a: "After subscribing, you'll get a subscription key on your dashboard. Paste it into True Recall settings → AI → Subscription Key. That's it!",
+	},
+	{
+		q: "What's the free trial?",
+		a: "Every new account gets ~50 free AI generations. No payment required. Try it before subscribing.",
 	},
 ];
 ---
@@ -113,8 +115,23 @@ const faqs = [
 		</div>
 
 		<p class="note">
-			All plans include access to all AI models. Token budgets are measured in API cost — cheaper models give you more generations.
+			Generation counts are approximate and may vary slightly based on text length.
 		</p>
+
+		<div class="topup-section">
+			<h2>Need more budget?</h2>
+			<p>Top up anytime without changing your plan.</p>
+			<div class="topup-grid">
+				{topups.map((t) => (
+					<div class="topup-card">
+						<div class="topup-name">{t.name}</div>
+						<div class="topup-price">{t.price}</div>
+						<div class="topup-budget">{t.description}</div>
+						<a href={t.href} class="btn btn-secondary topup-btn">Buy</a>
+					</div>
+				))}
+			</div>
+		</div>
 	</div>
 
 	<div class="faq-section">
@@ -264,6 +281,60 @@ const faqs = [
 	.note {
 		color: var(--sl-color-gray-4);
 		font-size: 0.875rem;
+	}
+
+	/* Top-up Section */
+	.topup-section {
+		text-align: center;
+		margin-top: 3rem;
+	}
+
+	.topup-section h2 {
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.topup-section > p {
+		color: var(--sl-color-gray-3);
+		margin-bottom: 1.5rem;
+	}
+
+	.topup-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+		max-width: 500px;
+		margin: 0 auto;
+	}
+
+	.topup-card {
+		background: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: var(--tr-radius-md);
+		padding: 1.5rem;
+		text-align: center;
+	}
+
+	.topup-name {
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.topup-price {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: var(--sl-color-accent);
+		margin-bottom: 0.25rem;
+	}
+
+	.topup-budget {
+		color: var(--sl-color-gray-3);
+		font-size: 0.875rem;
+		margin-bottom: 1rem;
+	}
+
+	.topup-btn {
+		width: 100%;
 	}
 
 	/* FAQ Section */

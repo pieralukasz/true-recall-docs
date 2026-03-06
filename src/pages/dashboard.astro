@@ -3,7 +3,12 @@ export const prerender = false;
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { supabase } from "../lib/supabase";
-import { POLAR_CUSTOMER_PORTAL_URL } from "../lib/constants";
+import {
+	POLAR_CUSTOMER_PORTAL_URL,
+	TIER_BUDGETS,
+	POLAR_TOPUP_S_CHECKOUT_URL,
+	POLAR_TOPUP_M_CHECKOUT_URL,
+} from "../lib/constants";
 
 // Auth check
 const accessToken = Astro.cookies.get("sb-access-token")?.value;
@@ -54,7 +59,8 @@ const { data: subscription } = await supabase
 
 const tier = subscription?.tier ?? "none";
 const apiKey = subscription?.litellm_api_key ?? null;
-const budgetMax = tier === "starter" ? 3.5 : tier === "pro" ? 7.0 : tier === "free" ? 0.20 : 0;
+const budgetMax = TIER_BUDGETS[tier] ?? 0;
+const approxGenerationsMax = budgetMax > 0 ? Math.floor(budgetMax / 0.007) : 0;
 const periodEnd = subscription?.current_period_end
 	? new Date(subscription.current_period_end).toLocaleDateString("en-US", {
 			month: "long",
@@ -89,16 +95,16 @@ if (Astro.request.method === "POST") {
 
 		{apiKey ? (
 			<div class="credits-card">
-				<h2>{tier === "free" ? "Your Free Trial Key" : "Your Subscription Key"}</h2>
+				<h2>{tier === "trial" ? "Your Free Trial Key" : "Your Subscription Key"}</h2>
 				<div class="key-display">
 					<code id="api-key">{apiKey}</code>
 					<button class="copy-btn" id="copy-btn" type="button">Copy</button>
 				</div>
 				<p class="key-hint">Paste this key in Obsidian → True Recall Settings → AI → Subscription Key</p>
-				{tier === "free" && (
+				{tier === "trial" && (
 					<p class="key-hint" style="margin-top: 0.5rem; opacity: 0.9;">
-						Free trial includes ~30 one-time AI generations.
-						<a href="/pricing" style="color: inherit; text-decoration: underline;">Upgrade</a> for unlimited monthly access.
+						Trial includes ~50 one-time AI generations.
+						<a href="/pricing" style="color: inherit; text-decoration: underline;">Subscribe</a> for ~350 generations per month.
 					</p>
 				)}
 			</div>
@@ -121,9 +127,9 @@ if (Astro.request.method === "POST") {
 			</div>
 
 			<div class="info-card">
-				<h3>Monthly Budget</h3>
+				<h3>Monthly Generations</h3>
 				<div class="info-value">
-					{budgetMax > 0 ? `$${budgetMax.toFixed(2)}` : "—"}
+					{approxGenerationsMax > 0 ? `~${approxGenerationsMax}` : "—"}
 				</div>
 			</div>
 
@@ -153,19 +159,22 @@ if (Astro.request.method === "POST") {
 			</div>
 		</div>
 
-		{tier === "free" ? (
+		{tier === "trial" ? (
 			<div class="actions">
 				<a href="/pricing" class="btn">
-					Upgrade Plan
+					Upgrade to Starter ($7/mo)
 				</a>
 			</div>
-		) : tier !== "none" && (
+		) : tier === "starter" && (
 			<div class="actions">
 				<a href={POLAR_CUSTOMER_PORTAL_URL} class="btn" target="_blank" rel="noopener">
 					Manage Subscription
 				</a>
-				<a href="/pricing" class="btn btn-secondary">
-					Buy Token Top-up
+				<a href={POLAR_TOPUP_S_CHECKOUT_URL} class="btn btn-secondary" target="_blank" rel="noopener">
+					Top-up S ($4.99)
+				</a>
+				<a href={POLAR_TOPUP_M_CHECKOUT_URL} class="btn btn-secondary" target="_blank" rel="noopener">
+					Top-up M ($9.99)
 				</a>
 			</div>
 		)}
@@ -193,8 +202,9 @@ if (Astro.request.method === "POST") {
 					const pct = Math.min(100, (data.budget_spent / data.budget_max) * 100);
 					fill.style.width = `${pct}%`;
 					fill.classList.toggle("usage-high", pct > 80);
-					const remaining = (data.budget_max - data.budget_spent).toFixed(2);
-					text.textContent = `$${remaining} remaining of $${data.budget_max.toFixed(2)}`;
+					const remaining = Math.floor((data.budget_max - data.budget_spent) / 0.007);
+					const total = Math.floor(data.budget_max / 0.007);
+					text.textContent = `~${remaining} remaining of ~${total} generations`;
 				}
 			})
 			.catch(() => {
@@ -362,9 +372,9 @@ if (Astro.request.method === "POST") {
 		color: var(--sl-color-accent-high);
 	}
 
-	.tier-pro {
-		background: color-mix(in srgb, var(--sl-color-accent) 30%, transparent);
-		color: var(--sl-color-accent-high);
+	.tier-trial {
+		background: var(--sl-color-gray-5);
+		color: var(--sl-color-gray-2);
 	}
 
 	/* Usage bar */

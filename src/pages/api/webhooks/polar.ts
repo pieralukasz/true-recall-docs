@@ -2,11 +2,17 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { getSupabaseAdmin } from "../../../lib/supabase-admin";
-import { generateKey, updateKeyBudget, deleteKey } from "../../../lib/litellm";
+import {
+	generateKey,
+	resetKeyBudget,
+	incrementKeyBudget,
+	deleteKey,
+} from "../../../lib/litellm";
 import {
 	POLAR_WEBHOOK_SECRET,
 	TIER_BUDGETS,
-	TOPUP_BUDGET,
+	TOPUP_BUDGETS,
+	MANAGED_MODELS,
 } from "../../../lib/constants";
 
 async function verifyWebhookSignature(
@@ -34,9 +40,12 @@ async function verifyWebhookSignature(
 function tierFromProductName(productName: string): string | null {
 	const lower = productName.toLowerCase();
 	if (lower.includes("starter")) return "starter";
-	if (lower.includes("pro")) return "pro";
-	if (lower.includes("free")) return "free";
+	if (lower.includes("trial")) return "trial";
 	return null;
+}
+
+function topupSizeFromProductName(productName: string): "s" | "m" {
+	return productName.toLowerCase().includes("top-up m") ? "m" : "s";
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -67,19 +76,16 @@ export const POST: APIRoute = async ({ request }) => {
 				const isTopup = productName.toLowerCase().includes("top-up");
 
 				if (isTopup) {
-					// Top-up: increase existing user's budget
 					const { data: sub } = await supabase
 						.from("user_subscriptions")
-						.select("litellm_key_hash, tier")
+						.select("litellm_key_hash")
 						.eq("polar_customer_id", data.customer_id)
 						.single();
 
 					if (sub?.litellm_key_hash) {
-						const currentBudget = TIER_BUDGETS[sub.tier] ?? 0;
-						await updateKeyBudget(
-							sub.litellm_key_hash,
-							currentBudget + TOPUP_BUDGET,
-						);
+						const size = topupSizeFromProductName(productName);
+						const topupAmount = TOPUP_BUDGETS[size] ?? TOPUP_BUDGETS.s;
+						await incrementKeyBudget(sub.litellm_key_hash, topupAmount);
 					}
 					break;
 				}
@@ -109,13 +115,24 @@ export const POST: APIRoute = async ({ request }) => {
 					userId = newUser.user.id;
 				}
 
-				// Generate LiteLLM virtual key
-				const budget = TIER_BUDGETS[tier] ?? 3.5;
+				// Prevent double trial grant
+				if (tier === "trial") {
+					const { data: existingSub } = await supabase
+						.from("user_subscriptions")
+						.select("trial_used")
+						.eq("user_id", userId)
+						.single();
+					if (existingSub?.trial_used) break;
+				}
+
+				// Generate LiteLLM virtual key with model restriction
+				const budget = TIER_BUDGETS[tier] ?? 2.5;
 				const keyResult = await generateKey({
 					userId,
 					maxBudget: budget,
-					budgetDuration: tier === "free" ? undefined : "30d",
+					budgetDuration: tier === "trial" ? undefined : "30d",
 					metadata: { tier, email },
+					models: MANAGED_MODELS,
 				});
 
 				// Store in Supabase
@@ -127,6 +144,7 @@ export const POST: APIRoute = async ({ request }) => {
 					litellm_key_hash: keyResult.token,
 					litellm_api_key: keyResult.key,
 					current_period_end: data.current_period_end,
+					trial_used: tier === "trial" ? true : undefined,
 					updated_at: new Date().toISOString(),
 				});
 
@@ -141,8 +159,8 @@ export const POST: APIRoute = async ({ request }) => {
 					.single();
 
 				if (sub?.litellm_key_hash) {
-					const budget = TIER_BUDGETS[sub.tier] ?? 3.5;
-					await updateKeyBudget(sub.litellm_key_hash, budget);
+					const budget = TIER_BUDGETS[sub.tier] ?? 2.5;
+					await resetKeyBudget(sub.litellm_key_hash, budget);
 				}
 				break;
 			}
@@ -190,8 +208,8 @@ export const POST: APIRoute = async ({ request }) => {
 						.single();
 
 					if (sub?.litellm_key_hash) {
-						const budget = TIER_BUDGETS[sub.tier] ?? 3.5;
-						await updateKeyBudget(sub.litellm_key_hash, budget);
+						const budget = TIER_BUDGETS[sub.tier] ?? 2.5;
+						await resetKeyBudget(sub.litellm_key_hash, budget);
 					}
 
 					await supabase

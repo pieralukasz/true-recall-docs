@@ -2,7 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { getKeyInfo } from "../../../lib/litellm";
-import { TIER_BUDGETS } from "../../../lib/constants";
+import { TIER_BUDGETS, MANAGED_MODELS } from "../../../lib/constants";
 
 export const GET: APIRoute = async ({ request }) => {
 	const url = new URL(request.url);
@@ -23,13 +23,18 @@ export const GET: APIRoute = async ({ request }) => {
 		const budgetSpent = info.spend ?? 0;
 		const budgetRemaining = Math.max(0, budgetMax - budgetSpent);
 
+		const isManagedTier = tier === "trial" || tier === "starter";
+
 		return new Response(
 			JSON.stringify({
 				tier,
+				plan_type: isManagedTier ? tier : "byok",
 				budget_max: budgetMax,
 				budget_spent: budgetSpent,
 				budget_remaining: budgetRemaining,
 				expires: info.expires,
+				allowed_models: isManagedTier ? MANAGED_MODELS : null,
+				trial_used: tier === "trial" && budgetSpent > 0,
 			}),
 			{
 				status: 200,

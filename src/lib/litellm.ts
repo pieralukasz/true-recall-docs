@@ -5,6 +5,7 @@ interface GenerateKeyParams {
 	maxBudget: number;
 	budgetDuration?: string;
 	metadata?: Record<string, string>;
+	models?: string[];
 }
 
 interface KeyInfo {
@@ -44,13 +45,16 @@ export async function generateKey(params: GenerateKeyParams): Promise<KeyInfo> {
 	if (params.budgetDuration !== undefined) {
 		payload.budget_duration = params.budgetDuration;
 	}
+	if (params.models !== undefined) {
+		payload.models = params.models;
+	}
 	return litellmFetch("/key/generate", {
 		method: "POST",
 		body: JSON.stringify(payload),
 	});
 }
 
-export async function updateKeyBudget(
+export async function resetKeyBudget(
 	keyId: string,
 	maxBudget: number,
 ): Promise<void> {
@@ -60,6 +64,20 @@ export async function updateKeyBudget(
 			key: keyId,
 			max_budget: maxBudget,
 			spend: 0,
+		}),
+	});
+}
+
+export async function incrementKeyBudget(
+	keyId: string,
+	additionalBudget: number,
+): Promise<void> {
+	const info = await getKeyInfo(keyId);
+	await litellmFetch("/key/update", {
+		method: "POST",
+		body: JSON.stringify({
+			key: keyId,
+			max_budget: (info.max_budget ?? 0) + additionalBudget,
 		}),
 	});
 }
