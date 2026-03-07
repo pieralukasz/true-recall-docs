@@ -21,10 +21,11 @@ export const TOPUP_BUDGETS: Record<string, number> = {
 
 export const MANAGED_MODELS = ["google/gemini-3-flash-preview"];
 
-// TODO: Replace with actual Polar product checkout URLs
+export const BETA_BUDGET = 1.0;
+
 export const POLAR_STARTER_CHECKOUT_URL =
-	"https://buy.polar.sh/polar_cl_igCjmr9UreAXPQYnlPVMyIPeEkQVBbRJCBvtW38RoUH";
+	"https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0";
 export const POLAR_TOPUP_S_CHECKOUT_URL =
-	"https://buy.polar.sh/<TOPUP_S_PRODUCT_ID>";
+	"https://buy.polar.sh/polar_cl_FT4Du1lTHCPXPbwmiS1tbonaFLkg7EAsPDa5x12xkzp";
 export const POLAR_TOPUP_M_CHECKOUT_URL =
-	"https://buy.polar.sh/<TOPUP_M_PRODUCT_ID>";
+	"https://buy.polar.sh/polar_cl_FAbt5poghsqR7kvZwcwrFL1apA1ONsSrx8cgb3MSwDT";

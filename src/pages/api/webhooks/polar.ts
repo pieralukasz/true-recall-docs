@@ -6,6 +6,7 @@ import {
 	generateKey,
 	resetKeyBudget,
 	incrementKeyBudget,
+	updateKeyConfig,
 	deleteKey,
 } from "../../../lib/litellm";
 import {
@@ -75,10 +76,11 @@ export const POST: APIRoute = async ({ request }) => {
 				const tier = tierFromProductName(productName);
 				const isTopup = productName.toLowerCase().includes("top-up");
 
+				// --- Top-up: increment existing key budget + track balance ---
 				if (isTopup) {
 					const { data: sub } = await supabase
 						.from("user_subscriptions")
-						.select("litellm_key_hash")
+						.select("litellm_key_hash, topup_balance")
 						.eq("polar_customer_id", data.customer_id)
 						.single();
 
@@ -86,13 +88,21 @@ export const POST: APIRoute = async ({ request }) => {
 						const size = topupSizeFromProductName(productName);
 						const topupAmount = TOPUP_BUDGETS[size] ?? TOPUP_BUDGETS.s;
 						await incrementKeyBudget(sub.litellm_key_hash, topupAmount);
+
+						await supabase
+							.from("user_subscriptions")
+							.update({
+								topup_balance: (sub.topup_balance ?? 0) + topupAmount,
+								updated_at: new Date().toISOString(),
+							})
+							.eq("polar_customer_id", data.customer_id);
 					}
 					break;
 				}
 
 				if (!tier) break;
 
-				// Find or create Supabase user
+				// --- Find or create Supabase user ---
 				let userId: string;
 				const { data: existingUsers } =
 					await supabase.auth.admin.listUsers();
@@ -115,38 +125,82 @@ export const POST: APIRoute = async ({ request }) => {
 					userId = newUser.user.id;
 				}
 
-				// Prevent double trial grant
+				// Look up existing subscription row (may have trial key)
+				const { data: existingSub } = await supabase
+					.from("user_subscriptions")
+					.select("litellm_key_hash, litellm_api_key, trial_used, tier")
+					.eq("user_id", userId)
+					.single();
+
 				if (tier === "trial") {
-					const { data: existingSub } = await supabase
-						.from("user_subscriptions")
-						.select("trial_used")
-						.eq("user_id", userId)
-						.single();
+					// Prevent double trial grant
 					if (existingSub?.trial_used) break;
+
+					// Trial: always create a fresh key (user has no key yet)
+					const budget = TIER_BUDGETS.trial ?? 0.35;
+					const keyResult = await generateKey({
+						userId,
+						maxBudget: budget,
+						metadata: { tier: "trial", email },
+						models: MANAGED_MODELS,
+					});
+
+					await supabase.from("user_subscriptions").upsert({
+						user_id: userId,
+						polar_customer_id: data.customer_id,
+						tier: "trial",
+						litellm_key_hash: keyResult.token,
+						litellm_api_key: keyResult.key,
+						trial_used: true,
+						topup_balance: 0,
+						updated_at: new Date().toISOString(),
+					});
+				} else if (tier === "starter") {
+					const budget = TIER_BUDGETS.starter ?? 2.5;
+
+					if (existingSub?.litellm_key_hash) {
+						// Upgrade existing key in-place (trial → starter)
+						await updateKeyConfig(existingSub.litellm_key_hash, {
+							max_budget: budget,
+							spend: 0,
+							budget_duration: "30d",
+							metadata: { tier: "starter", email },
+							models: MANAGED_MODELS,
+						});
+
+						await supabase
+							.from("user_subscriptions")
+							.update({
+								polar_customer_id: data.customer_id,
+								polar_subscription_id: data.subscription_id,
+								tier: "starter",
+								current_period_end: data.current_period_end,
+								updated_at: new Date().toISOString(),
+							})
+							.eq("user_id", userId);
+					} else {
+						// Edge case: user skipped trial, create new key
+						const keyResult = await generateKey({
+							userId,
+							maxBudget: budget,
+							budgetDuration: "30d",
+							metadata: { tier: "starter", email },
+							models: MANAGED_MODELS,
+						});
+
+						await supabase.from("user_subscriptions").upsert({
+							user_id: userId,
+							polar_customer_id: data.customer_id,
+							polar_subscription_id: data.subscription_id,
+							tier: "starter",
+							litellm_key_hash: keyResult.token,
+							litellm_api_key: keyResult.key,
+							current_period_end: data.current_period_end,
+							topup_balance: 0,
+							updated_at: new Date().toISOString(),
+						});
+					}
 				}
-
-				// Generate LiteLLM virtual key with model restriction
-				const budget = TIER_BUDGETS[tier] ?? 2.5;
-				const keyResult = await generateKey({
-					userId,
-					maxBudget: budget,
-					budgetDuration: tier === "trial" ? undefined : "30d",
-					metadata: { tier, email },
-					models: MANAGED_MODELS,
-				});
-
-				// Store in Supabase
-				await supabase.from("user_subscriptions").upsert({
-					user_id: userId,
-					polar_customer_id: data.customer_id,
-					polar_subscription_id: data.subscription_id,
-					tier,
-					litellm_key_hash: keyResult.token,
-					litellm_api_key: keyResult.key,
-					current_period_end: data.current_period_end,
-					trial_used: tier === "trial" ? true : undefined,
-					updated_at: new Date().toISOString(),
-				});
 
 				break;
 			}
@@ -154,13 +208,14 @@ export const POST: APIRoute = async ({ request }) => {
 			case "subscription.active": {
 				const { data: sub } = await supabase
 					.from("user_subscriptions")
-					.select("litellm_key_hash, tier")
+					.select("litellm_key_hash, tier, topup_balance")
 					.eq("polar_subscription_id", data.id)
 					.single();
 
 				if (sub?.litellm_key_hash) {
-					const budget = TIER_BUDGETS[sub.tier] ?? 2.5;
-					await resetKeyBudget(sub.litellm_key_hash, budget);
+					const tierBudget = TIER_BUDGETS[sub.tier] ?? 2.5;
+					const totalBudget = tierBudget + (sub.topup_balance ?? 0);
+					await resetKeyBudget(sub.litellm_key_hash, totalBudget);
 				}
 				break;
 			}
@@ -190,6 +245,7 @@ export const POST: APIRoute = async ({ request }) => {
 						tier: "free",
 						litellm_key_hash: null,
 						litellm_api_key: null,
+						topup_balance: 0,
 						updated_at: new Date().toISOString(),
 					})
 					.eq("polar_subscription_id", data.id);
@@ -200,16 +256,17 @@ export const POST: APIRoute = async ({ request }) => {
 				const billingReason: string = data.billing_reason ?? "";
 
 				if (billingReason === "subscription_cycle") {
-					// Monthly renewal — reset budget
+					// Monthly renewal — reset budget but preserve top-ups
 					const { data: sub } = await supabase
 						.from("user_subscriptions")
-						.select("litellm_key_hash, tier")
+						.select("litellm_key_hash, tier, topup_balance")
 						.eq("polar_subscription_id", data.subscription_id)
 						.single();
 
 					if (sub?.litellm_key_hash) {
-						const budget = TIER_BUDGETS[sub.tier] ?? 2.5;
-						await resetKeyBudget(sub.litellm_key_hash, budget);
+						const tierBudget = TIER_BUDGETS[sub.tier] ?? 2.5;
+						const totalBudget = tierBudget + (sub.topup_balance ?? 0);
+						await resetKeyBudget(sub.litellm_key_hash, totalBudget);
 					}
 
 					await supabase

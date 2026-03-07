@@ -82,6 +82,22 @@ export async function incrementKeyBudget(
 	});
 }
 
+export async function updateKeyConfig(
+	keyId: string,
+	updates: {
+		max_budget?: number;
+		spend?: number;
+		budget_duration?: string;
+		metadata?: Record<string, string>;
+		models?: string[];
+	},
+): Promise<void> {
+	await litellmFetch("/key/update", {
+		method: "POST",
+		body: JSON.stringify({ key: keyId, ...updates }),
+	});
+}
+
 export async function deleteKey(keyId: string): Promise<void> {
 	await litellmFetch("/key/delete", {
 		method: "POST",
