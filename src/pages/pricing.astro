@@ -8,18 +8,18 @@ import {
 
 const plans = [
 	{
-		name: "Free",
+		name: "Free Trial",
 		price: "$0",
-		period: "forever",
-		description: "Use your own OpenRouter API key. Full AI access, no limits.",
+		period: "no card required",
+		description: "Sign up to get ~50 free AI generations. Try before you subscribe.",
 		features: [
-			"Bring your own API key (BYOK)",
-			"Full AI flashcard generation",
-			"Unlimited usage",
-			"Pay only for what you use on OpenRouter",
+			"~50 one-time AI generations",
+			"No API key or setup needed",
+			"No credit card required",
+			"Upgrade anytime",
 		],
-		cta: "Get Started",
-		ctaHref: "/getting-started/installation",
+		cta: "Start Free Trial",
+		ctaHref: "/login",
 		popular: false,
 		secondary: true,
 	},
@@ -27,12 +27,12 @@ const plans = [
 		name: "Starter",
 		price: "$7",
 		period: "/month",
-		description: "~350 AI generations per month. No API key needed. Free trial on signup.",
+		description: "~350 AI generations per month. No API key needed.",
 		features: [
 			"~350 AI generations per month",
 			"No API key or setup needed",
 			"Usage dashboard",
-			"Free trial (~50 generations)",
+			"Top-ups available",
 		],
 		cta: "Subscribe",
 		ctaHref: POLAR_STARTER_CHECKOUT_URL,
@@ -79,7 +79,7 @@ const faqs = [
 	},
 	{
 		q: "What's the free trial?",
-		a: "Every new account gets ~50 free AI generations. No payment required. Try it before subscribing.",
+		a: "Sign up and your trial key is generated instantly — no payment required. You get ~50 AI generations to try before subscribing.",
 	},
 ];
 ---

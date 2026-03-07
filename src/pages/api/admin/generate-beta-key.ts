@@ -3,6 +3,7 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { getSupabaseAdmin } from "../../../lib/supabase-admin";
 import { generateKey } from "../../../lib/litellm";
+import { canonicalizeEmail } from "../../../lib/email";
 import {
 	LITELLM_MASTER_KEY,
 	MANAGED_MODELS,
@@ -76,6 +77,8 @@ export const POST: APIRoute = async ({ request }) => {
 			tier: "beta",
 			litellm_key_hash: keyResult.token,
 			litellm_api_key: keyResult.key,
+			canonical_email: canonicalizeEmail(email),
+			trial_used: true,
 			updated_at: new Date().toISOString(),
 		});
 

@@ -3,9 +3,12 @@ export const prerender = false;
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { supabase } from "../lib/supabase";
+import { generateKey } from "../lib/litellm";
+import { canonicalizeEmail } from "../lib/email";
 import {
 	POLAR_CUSTOMER_PORTAL_URL,
 	TIER_BUDGETS,
+	MANAGED_MODELS,
 	POLAR_TOPUP_S_CHECKOUT_URL,
 	POLAR_TOPUP_M_CHECKOUT_URL,
 } from "../lib/constants";
@@ -51,11 +54,67 @@ if (authError || !user) {
 }
 
 // Fetch subscription data
-const { data: subscription } = await supabase
+let { data: subscription } = await supabase
 	.from("user_subscriptions")
 	.select("*")
 	.eq("user_id", user!.id)
 	.single();
+
+// Auto-provision trial key on first visit (with abuse protection)
+let trialBlocked = false;
+if (!subscription?.litellm_api_key && !subscription?.trial_used) {
+	const canonical = canonicalizeEmail(user!.email ?? "");
+	const clientIp = Astro.request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+
+	// Check if any account with this canonical email already used a trial
+	const { count: canonicalCount } = await supabase
+		.from("user_subscriptions")
+		.select("*", { count: "exact", head: true })
+		.eq("canonical_email", canonical)
+		.eq("trial_used", true);
+
+	// Check IP rate limit (max 3 trials per IP per 24h)
+	const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+	const { count: ipCount } = await supabase
+		.from("user_subscriptions")
+		.select("*", { count: "exact", head: true })
+		.eq("trial_ip", clientIp)
+		.gte("created_at", since)
+		.eq("trial_used", true);
+
+	if ((canonicalCount ?? 0) > 0 || (ipCount ?? 0) >= 3) {
+		trialBlocked = true;
+	} else {
+		try {
+			const keyResult = await generateKey({
+				userId: user!.id,
+				maxBudget: TIER_BUDGETS.trial ?? 0.35,
+				metadata: { tier: "trial", email: user!.email ?? "" },
+				models: MANAGED_MODELS,
+			});
+			await supabase.from("user_subscriptions").upsert({
+				user_id: user!.id,
+				tier: "trial",
+				litellm_key_hash: keyResult.token,
+				litellm_api_key: keyResult.key,
+				trial_used: true,
+				canonical_email: canonical,
+				trial_ip: clientIp,
+				topup_balance: 0,
+				updated_at: new Date().toISOString(),
+			});
+			subscription = {
+				...subscription,
+				tier: "trial",
+				litellm_api_key: keyResult.key,
+				litellm_key_hash: keyResult.token,
+				trial_used: true,
+			};
+		} catch (err) {
+			console.error("Trial auto-provisioning failed:", err);
+		}
+	}
+}
 
 const tier = subscription?.tier ?? "none";
 const apiKey = subscription?.litellm_api_key ?? null;
@@ -93,9 +152,15 @@ if (Astro.request.method === "POST") {
 			</form>
 		</div>
 
-		{apiKey ? (
+		{trialBlocked ? (
+			<div class="no-sub-card">
+				<h2>Trial Already Used</h2>
+				<p>A free trial was already activated for this email. Subscribe to continue using AI generations.</p>
+				<a href="/pricing" class="btn">View Plans</a>
+			</div>
+		) : apiKey ? (
 			<div class="credits-card">
-				<h2>{tier === "trial" ? "Your Free Trial Key" : "Your Subscription Key"}</h2>
+				<h2>{tier === "trial" ? "Your Free Trial Key" : tier === "beta" ? "Your Beta Tester Key" : "Your Subscription Key"}</h2>
 				<div class="key-display">
 					<code id="api-key">{apiKey}</code>
 					<button class="copy-btn" id="copy-btn" type="button">Copy</button>
@@ -105,6 +170,12 @@ if (Astro.request.method === "POST") {
 					<p class="key-hint" style="margin-top: 0.5rem; opacity: 0.9;">
 						Trial includes ~50 one-time AI generations.
 						<a href="/pricing" style="color: inherit; text-decoration: underline;">Subscribe</a> for ~350 generations per month.
+					</p>
+				)}
+				{tier === "beta" && (
+					<p class="key-hint" style="margin-top: 0.5rem; opacity: 0.9;">
+						Beta tester key — managed by admin.
+						<a href="/pricing" style="color: inherit; text-decoration: underline;">Subscribe</a> for a permanent key.
 					</p>
 				)}
 			</div>
@@ -159,7 +230,7 @@ if (Astro.request.method === "POST") {
 			</div>
 		</div>
 
-		{tier === "trial" ? (
+		{(tier === "trial" || tier === "beta") ? (
 			<div class="actions">
 				<a href="/pricing" class="btn">
 					Upgrade to Starter ($7/mo)
@@ -372,7 +443,8 @@ if (Astro.request.method === "POST") {
 		color: var(--sl-color-accent-high);
 	}
 
-	.tier-trial {
+	.tier-trial,
+	.tier-beta {
 		background: var(--sl-color-gray-5);
 		color: var(--sl-color-gray-2);
 	}

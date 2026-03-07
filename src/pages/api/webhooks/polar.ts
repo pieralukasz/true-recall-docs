@@ -2,6 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { getSupabaseAdmin } from "../../../lib/supabase-admin";
+import { canonicalizeEmail } from "../../../lib/email";
 import {
 	generateKey,
 	resetKeyBudget,
@@ -152,13 +153,14 @@ export const POST: APIRoute = async ({ request }) => {
 						litellm_key_hash: keyResult.token,
 						litellm_api_key: keyResult.key,
 						trial_used: true,
+						canonical_email: canonicalizeEmail(email),
 						topup_balance: 0,
 						updated_at: new Date().toISOString(),
 					});
 				} else if (tier === "starter") {
 					const budget = TIER_BUDGETS.starter ?? 2.5;
 
-					if (existingSub?.litellm_key_hash) {
+					if (existingSub?.litellm_key_hash && existingSub.tier !== "beta") {
 						// Upgrade existing key in-place (trial → starter)
 						await updateKeyConfig(existingSub.litellm_key_hash, {
 							max_budget: budget,
