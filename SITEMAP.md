@@ -4,6 +4,10 @@
 
 All paths are relative to `src/content/docs/`.
 
+## Special Pages (src/pages/)
+
+- `subscription.astro` — Redirects to https://truerecall.app (linked from header subscription icon)
+
 ## Landing Page
 
 - `index.mdx` — Home/splash page with hero section and feature cards
@@ -14,7 +18,7 @@ All paths are relative to `src/content/docs/`.
 - `getting-started/installation.md` — Installation via BRAT, manual, or from source
 - `getting-started/quick-start.md` — 5-minute quickstart guide
 
-## Creation (8 pages)
+## Creation (9 pages)
 
 - `creation/flashcards.md` — How flashcards work: types, storage, collection, states, and editing
 - `creation/creating-flashcards.md` — Overview: creation surfaces, note types concept, block format, and the collection step
@@ -24,6 +28,7 @@ All paths are relative to `src/content/docs/`.
 - `creation/cloze-deletions.md` — Fill-in-the-blank cards with `{{c1::text}}` syntax
 - `creation/image-occlusion.md` — Cards from images by hiding regions, manual drawing and AI detection
 - `creation/best-practices.md` — How to write effective flashcards — principles, examples, and common mistakes
+- `creation/projects-and-notes.md` — Projects, sub-projects, folder includes, archiving, preset inheritance
 
 ## Migration (4 pages)
 
@@ -63,24 +68,13 @@ All paths are relative to `src/content/docs/`.
 - `configuration/fsrs-parameters.md` — FSRS algorithm parameters and optimization
 - `configuration/data-backup.md` — Database backup and device management
 
-## Organization (1 page)
+## Scheduling (4 pages)
 
-- `organization/projects.md` — Projects, sub-projects, folder includes, archiving, preset inheritance
-
-## Scheduling (9 pages)
-
-- `scheduling/why-fsrs.md` — Why FSRS v6: comparison with Leitner, SM-2, and other algorithms
-- `scheduling/fsrs-algorithm.md` — FSRS v6 algorithm: stability, difficulty, retrievability, weights, and states
+- `scheduling/fsrs-algorithm.md` — FSRS v6 algorithm: why FSRS, core concepts, weights, states, benchmarks
 - `scheduling/overview.md` — Scheduling overview: day boundaries, learning steps, intervals, review order, daily limits
-- `scheduling/presets.md` — FSRS preset configuration for different learning contexts
-- `scheduling/fsrs-optimization.md` — Training FSRS parameters on review history
-- `scheduling/load-balancing.md` — Auto-distributing reviews evenly across days
-- `scheduling/easy-days.md` — Reducing workload on specific days
-- `scheduling/scheduled-breaks.md` — Planning vacation periods with review redistribution
-- `scheduling/sibling-dispersal.md` — Spacing out cards from the same note
+- `scheduling/presets.md` — Presets & optimization: scheduling profiles, parameter training from review history
+- `scheduling/workload-management.md` — Workload management: load balancing, easy days, scheduled breaks, sibling dispersal
 
-## Reference (3 pages)
+## Reference (1 page)
 
-- `reference/commands.md` — Command palette reference
-- `reference/keyboard-shortcuts.md` — Keyboard shortcuts for review
-- `reference/context-menu.md` — Right-click context menu options
+- `reference/frontmatter-fields.md` — All supported frontmatter fields and their usage

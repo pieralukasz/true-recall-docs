@@ -149,10 +149,39 @@ Changes save immediately and the card updates. Press `Escape` to close the edito
 
 Press `T` to toggle type-in mode for the current card. A text input appears — type your answer, then press Enter to submit. True Recall compares your answer to the correct one using:
 
-- **AI semantic grading** — your answer is graded on meaning, not exact wording (requires an API key or a [True Recall subscription](/ai/subscription/))
+- **AI semantic grading** — your answer is graded on meaning, not exact wording (requires an API key or a [True Recall subscription](/subscription/))
 - **Diff view** — your answer and the correct answer are shown side by side with differences highlighted
 
 See [Type-in Mode](/review/type-in-mode/) for full details.
+
+### AI Answer Grading
+
+When AI grading is active, after submitting your answer:
+
+1. AI compares your answer to the correct one and assigns a score (0–100)
+2. Brief feedback explains why points were deducted
+3. Click **Accept** to apply the auto-rating, or **Override** to rate manually
+
+**Auto-rating thresholds:**
+
+| AI Score | Rating Applied |
+|----------|----------------|
+| 90–100 | Good |
+| 70–89 | Hard |
+| 0–69 | Again |
+
+**What AI grading understands:**
+
+- Synonyms ("car" = "automobile")
+- Paraphrases ("turns sunlight into energy" = "converts light to chemical energy")
+- Partial answers — scored proportionally with feedback on what's missing
+- Minor typos — treated as correct at 90%+ similarity
+
+**Cycle through modes:** Press `T` repeatedly to cycle Off → AI Grading → Diff → Off.
+
+**Custom grading prompt:** Settings → AI → Type-in grading prompt. Template variables: `{{correct}}`, `{{student}}`, `{{question}}`.
+
+**When to prefer Diff mode:** exact terminology, spelling practice, or when offline (AI grading requires a network connection).
 
 ---
 

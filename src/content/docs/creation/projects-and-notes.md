@@ -1,7 +1,7 @@
 ---
-title: "Projects"
+title: "Projects & Notes"
 sidebar:
-  order: 0
+  order: 8
 description: "Organize notes into projects using parent relationships, folder includes, and archiving."
 ---
 

@@ -36,7 +36,7 @@ Cards are stored in your notes and linked to the database for scheduling. Manage
 
 ## FSRS Algorithm
 
-**[Free Spaced Repetition Scheduler (FSRS)](/scheduling/why-fsrs/)** is a modern algorithm that predicts when you'll forget something and schedules reviews at the optimal time.
+**[Free Spaced Repetition Scheduler (FSRS)](/scheduling/fsrs-algorithm/)** is a modern algorithm that predicts when you'll forget something and schedules reviews at the optimal time.
 
 ### Key FSRS Concepts
 
@@ -115,4 +115,4 @@ Daily limits prevent overload while ensuring consistent progress.
 - [Flashcards Deep Dive](/creation/flashcards/)
 - [FSRS Algorithm](/scheduling/fsrs-algorithm/)
 - [Note Types](/creation/note-types/)
-- [Projects](/organization/projects/)
+- [Projects](/creation/projects-and-notes/)

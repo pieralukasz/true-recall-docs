@@ -118,5 +118,5 @@ fsrs_preset: intensive
 
 ## Related
 
-- [Projects](/organization/projects/)
-- [Archiving](/organization/projects/#archiving)
+- [Projects](/creation/projects-and-notes/)
+- [Archiving](/creation/projects-and-notes/#archiving)

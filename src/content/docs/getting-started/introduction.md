@@ -40,7 +40,7 @@ The algorithm tracks two things per card: **stability** (how long until you migh
 ## Key Features
 
 - **AI-Powered Generation** — Select text and instantly create Q&A cards, cloze deletions, or reversed cards
-- **[FSRS v6 Algorithm](/scheduling/why-fsrs/)** — State-of-the-art spaced repetition that adapts to your patterns
+- **[FSRS v6 Algorithm](/scheduling/fsrs-algorithm/)** — State-of-the-art spaced repetition that adapts to your patterns
 - **Image Occlusion** — Create flashcards from images by hiding regions, with AI auto-detection
 - **Type-in Mode** — Type answers and get AI-powered semantic grading or diff
 - **Note Types** — Anki-style templates with customizable fields

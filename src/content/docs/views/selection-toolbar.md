@@ -69,7 +69,7 @@ The **IO** button appears when your selection contains an image reference (`![[i
 
 Settings → AI → **Selection toolbar** (enabled by default)
 
-AI generation buttons require an AI configuration — either an API key or a [True Recall subscription](/ai/subscription/).
+AI generation buttons require an AI configuration — either an API key or a [True Recall subscription](/subscription/).
 
 ## Other Creation Methods
 
@@ -123,6 +123,44 @@ Configure AI behavior in Settings → AI:
 | **Model** | Which AI model to use (via OpenRouter or subscription) |
 | **Language** | Output language (auto-detect or specific) |
 | **Density** | How many cards to generate — Essential (~5-10/1000 words), Balanced (~15-25), or Comprehensive (~40-60) |
+
+### Available Models
+
+| Model | Speed | Best For |
+|-------|-------|----------|
+| Gemini Flash | Fastest | Quick generation, high volume |
+| Gemini Pro | Medium | Complex or technical content |
+| GPT-4o | Medium | General use |
+| Claude Sonnet | Medium | Nuanced, conceptual content |
+| GPT-4o mini | Fast | Simple, factual cards |
+
+### Custom Prompts
+
+Override how AI generates each card type in **Settings → AI → Custom Prompts**:
+
+| Prompt | Affects |
+|--------|---------|
+| Basic | Q&A generation |
+| Cloze | Cloze deletion generation |
+| Auto | Format selection logic |
+
+**Template variables:**
+
+| Variable | Value |
+|----------|-------|
+| `{{content}}` | The selected text |
+| `{{language}}` | Target output language |
+| `{{cardCount}}` | Suggested number of cards |
+
+Example:
+
+```
+Generate flashcards from the following content.
+Create 3-5 cards maximum. Focus on key definitions and cause-effect relationships.
+Avoid dates, proper names, and trivial facts.
+
+{{content}}
+```
 
 ## Tips
 

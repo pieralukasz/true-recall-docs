@@ -9,11 +9,9 @@ const sidebar = [
 	{ label: 'Views', autogenerate: { directory: 'views' } },
 	{ label: 'Creation', autogenerate: { directory: 'creation' } },
 	{ label: 'Review', autogenerate: { directory: 'review' } },
-	{ label: 'Organization', autogenerate: { directory: 'organization' } },
+	{ label: 'Scheduling', autogenerate: { directory: 'scheduling' } },
 	{ label: 'Configuration', autogenerate: { directory: 'configuration' } },
 	{ label: 'Data', autogenerate: { directory: 'data' } },
-	{ label: 'AI', autogenerate: { directory: 'ai' } },
-	{ label: 'Scheduling', autogenerate: { directory: 'scheduling' } },
 	{ label: 'Reference', autogenerate: { directory: 'reference' } },
 ];
 

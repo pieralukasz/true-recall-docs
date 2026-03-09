@@ -32,9 +32,14 @@ TODO: PHOTOS
 #type/basic
 Front: What is spaced repetition?
 Back: A learning technique that reviews information at increasing intervals to optimize long-term retention.
+flashcard_uid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
 
 ## <!-- source: Spaced repetition reviews information at increasing intervals -->
 ```
+
+:::note[Don't delete `flashcard_uid`]
+Every flashcard has a unique `flashcard_uid` field added to the block in your note. **True Recall generates it automatically** — you never need to create or edit it. This ID links the block in your note to the card in the database, so deleting it will break that connection. Leave it as-is.
+:::
 
 :::tip[The Flashcard Panel is your home base]
 The [Flashcard Panel](/views/flashcard-panel/) is one of the most important views in True Recall. Keep it open while working — it automatically syncs with whatever note you're editing and shows:
@@ -46,7 +51,7 @@ The [Flashcard Panel](/views/flashcard-panel/) is one of the most important view
 
 ### Manual Alternative
 
-Prefer a form over writing syntax? Click **Add** (+) in the [Flashcard Panel](/views/flashcard-panel/) to open the Add Flashcard Modal — fill in the fields and save. The card is added to the database immediately, no collection step needed.
+Prefer a form over writing syntax? Click **Add** (+) in the [Flashcard Panel](/views/flashcard-panel/) to open the Add Flashcard Modal — fill in the fields and save. The card is added to the note immediately, no collection step needed.
 
 ## Collect your cards
 
@@ -103,7 +108,7 @@ Now that you've got the basics, explore more creation methods:
 - [Cloze deletions](/creation/cloze-deletions/) — fill-in-the-blank cards with `{{c1::text}}` syntax
 - [Image Occlusion](/creation/image-occlusion/) — create cards from images by hiding regions
 
-When you're ready to go deeper, read about how the [FSRS algorithm](/scheduling/fsrs-algorithm/) schedules your reviews, or organize your cards into [projects](/organization/projects/) for focused study sessions.
+When you're ready to go deeper, read about how the [FSRS algorithm](/scheduling/fsrs-algorithm/) schedules your reviews, or organize your cards into [projects](/creation/projects-and-notes/) for focused study sessions.
 
 :::tip[The short version]
 Review daily (10 minutes beats a weekly hour), write specific questions with concise answers, and rate honestly. The algorithm learns from your honesty — inflated ratings hurt your retention, not help it.

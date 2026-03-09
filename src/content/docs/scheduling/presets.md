@@ -1,8 +1,8 @@
 ---
-title: "FSRS Presets"
+title: "Presets & Optimization"
 sidebar:
   order: 1
-description: "Configure different FSRS scheduling profiles for various learning contexts"
+description: "Configure FSRS scheduling profiles and optimize parameters from your review history"
 ---
 
 :::caution[My Notes]
@@ -97,7 +97,7 @@ Note: Default preset cannot be deleted. Notes using a deleted preset fall back t
 
 ### FSRS Weights
 
-Advanced: Customize the 17-21 FSRS weight parameters.
+Advanced: Customize the 17-21 FSRS weight parameters. See [Optimizing Parameters](#optimizing-parameters) for how to train these on your review history.
 
 ## Example Presets
 
@@ -250,3 +250,58 @@ When you change a note's preset:
 
 To reschedule all cards with a new preset:
 Settings -> FSRS -> Preview reschedule
+
+## Optimizing Parameters
+
+FSRS optimization analyzes your review history to calculate personalized algorithm weights. This improves scheduling accuracy by adapting to your specific learning patterns.
+
+:::note[Per-Preset Optimization]
+Each preset optimizes independently using only reviews attributed to that preset. You need 400+ reviews **per preset**, not just 400 total.
+:::
+
+### Prerequisites
+
+You need **400+ reviews per preset** minimum before optimizing. **1000+ reviews per preset** is recommended for reliable results. Check your review count in [Statistics](/views/statistics/) before optimizing.
+
+Since database v22, True Recall tracks which preset was used for each review. Historical reviews from before presets were introduced count as "Default" preset reviews. Preset attribution follows normal resolution order (note → parent → Default).
+
+:::caution[Changing Presets Doesn't Transfer Reviews]
+Reassigning cards to a new preset does **not** move historical reviews. If you move 500 cards from "Default" to a new "Medical" preset, "Medical" starts with 0 reviews for optimization. You'll need to accumulate 400+ new reviews under "Medical" before you can optimize it.
+:::
+
+:::note[Archived Notes Included]
+Review history from archived notes is included in optimization. Past reviews are valid calibration data regardless of whether you're currently studying that material.
+:::
+
+### Running Optimization
+
+1. Go to `Settings → True Recall → FSRS`
+2. Select the preset from the dropdown at the top
+3. Verify the preset has sufficient reviews
+4. Click **"Optimize Parameters"**
+5. Review the suggested weights, then click **"Apply"** or **"Cancel"**
+
+The optimizer loads review history for the selected preset only, builds a learning model, and finds best-fit parameters.
+
+### Understanding Results
+
+After optimization, you'll see suggested weights like `0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49...`. Significant changes from defaults indicate your learning differs from average and personalization will help. Minor changes indicate defaults already work well for you.
+
+The 21 weights control different aspects of the algorithm:
+
+| Weights | Controls |
+|---------|----------|
+| w0-w3 | Initial stability after first rating |
+| w4-w6 | Difficulty calculation |
+| w7-w16 | Stability growth factors |
+| w17-w20 | Stability after forgetting |
+
+### When to Optimize
+
+Optimize after accumulating 1000+ reviews, then every 3-6 months. Also optimize after changing study habits or when retention seems off.
+
+If you use multiple presets, optimize the Default preset first (it usually has the most data), then specialized presets after each reaches 400+ reviews. Don't optimize with fewer than 400 reviews, while learning the system, or too frequently (monthly+).
+
+### Reverting
+
+If optimization didn't help, go to `Settings → FSRS` and click **"Reset to Defaults"** to restore default weights. If you saved previous weights, paste them into the Custom Weights field and save. Check retention in [Statistics](/views/statistics/) to compare pre- and post-optimization performance.

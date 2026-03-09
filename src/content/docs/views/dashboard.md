@@ -191,6 +191,6 @@ Only archive something when you're truly certain you'll never need it again. An 
 
 ## Related
 
-- [Projects](/organization/projects/)
-- [Archiving](/organization/projects/#archiving)
+- [Projects](/creation/projects-and-notes/)
+- [Archiving](/creation/projects-and-notes/#archiving)
 - [Card Browser](/views/card-browser/)

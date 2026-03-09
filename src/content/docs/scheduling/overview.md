@@ -89,13 +89,9 @@ Maximum new cards introduced daily. Default: 20. Higher values = faster learning
 
 Maximum reviews per day. Default: 200. Set to 0 for unlimited. This is a soft limit — due cards remain due.
 
-## Easy Days
+## Workload Management
 
-Reduce workload on specific days (e.g., weekends). Configure which days to reduce (Sun-Sat) and workload multiplier (default: 50%). Cards scheduled for easy days are redistributed to other days.
-
-## Scheduled Breaks
-
-Schedule vacation periods where reviews are redistributed. Add breaks with start date, end date, and redistribution option (before/after).
+True Recall includes tools to shape your daily review load: [load balancing](/scheduling/workload-management/#load-balancing), [easy days](/scheduling/workload-management/#easy-days), [scheduled breaks](/scheduling/workload-management/#scheduled-breaks), and [sibling dispersal](/scheduling/workload-management/#sibling-dispersal). See [Workload Management](/scheduling/workload-management/) for details.
 
 ## Scheduling Tools
 
