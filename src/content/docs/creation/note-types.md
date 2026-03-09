@@ -1,18 +1,18 @@
 ---
-title: Default Note Types
+title: Note Types
 sidebar:
   order: 2
-description: "The four built-in note types: Basic, Basic (Reversed), Cloze, and Image Occlusion."
+description: "The four built-in note types in True Recall: Basic, Basic (Reversed), Cloze, and Image Occlusion."
 ---
 
 :::caution[My Notes]
 :::
 
-A **note type** is a template that defines what fields a flashcard has and how those fields become cards during review. Every flashcard belongs to one note type.
+A **note type** is a template that defines what fields a flashcard has and how those fields become cards during review. Every flashcard in **True Recall** belongs to one note type.
 
 ## One Note, Multiple Cards
 
-A single block in your notes can generate more than one card:
+A single block in your notes can generate more than one card. The note type determines how many:
 
 ```
 #type/basic             →  1 card
@@ -21,15 +21,11 @@ A single block in your notes can generate more than one card:
 #type/image-occlusion   →  1 card per drawn region
 ```
 
-The note type determines how many cards a block creates and what the review experience looks like.
-
 :::tip[Note Type vs Card Type]
-A **note type** is the template (fields + card templates). A **card type** is an individual card generated from it. For example, a "Cloze" note type with 3 cloze deletions generates 3 cards (card types).
+A **note type** is the template (fields + card templates). A **card** is an individual review item generated from it. For example, a Cloze note type with 3 cloze deletions generates 3 separate cards — each scheduled independently.
 :::
 
-## Built-in Note Types
-
-### Basic
+## Basic
 
 One question, one answer. The simplest type.
 
@@ -42,15 +38,15 @@ Back: Central Processing Unit
 ---
 ```
 
-**Review:** You see the Front, recall the answer, then reveal the Back. One card per block.
+**During review:** You see the Front, recall the answer, then reveal the Back. One card per block.
 
-**Best for:** Definitions, facts, concepts with a single correct answer, anything where direction matters (you always ask Front → Back).
+**Best for:** Definitions, facts, concepts with a single correct answer — anything where you always want to test Front → Back.
 
 ---
 
-### Basic (Reversed)
+## Basic (Reversed)
 
-Same as Basic but generates two cards — one in each direction.
+Same as Basic, but generates two cards — one in each direction.
 
 **Fields:** Front, Back
 
@@ -61,21 +57,21 @@ Back: The process by which plants convert sunlight into chemical energy
 ---
 ```
 
-**Review:** Creates two cards:
-- Card 1: "Photosynthesis" → reveal definition
-- Card 2: Definition → recall "Photosynthesis"
+**During review:** Creates two cards:
+- **Card 1:** "Photosynthesis" → reveal definition
+- **Card 2:** Definition → recall "Photosynthesis"
 
 Both cards are scheduled independently. Getting one right doesn't affect the other.
 
-**Best for:** Vocabulary (word ↔ translation), capitals (country ↔ capital), abbreviations (acronym ↔ meaning).
+**Best for:** Vocabulary (word ↔ translation), capitals (country ↔ capital), abbreviations (acronym ↔ meaning) — anything where both directions are worth testing.
 
-:::tip
-You can also create a reversed card from any existing Basic card — right-click the card in the [Flashcard Panel](/views/flashcard-panel/) and select **Make reversed**. To remove the reversed pair later, use **Remove reversed** from the same menu.
+:::tip[Make reversed from any Basic card]
+You can create a reversed pair from an existing Basic card — right-click the card in the [Flashcard Panel](/views/flashcard-panel/) and select **Make reversed**. To remove the reversed pair later, use **Remove reversed** from the same menu.
 :::
 
 ---
 
-### Cloze
+## Cloze
 
 Fill-in-the-blank cards. Each `{{c<number>::text}}` marker is a deletion. Each unique number generates one card.
 
@@ -88,13 +84,13 @@ Extra: Cardiovascular system
 ---
 ```
 
-**Review:** Creates 2 cards:
-- Card 1: "The [___] pumps blood through the body." → heart
-- Card 2: "The heart pumps [___] through the body." → blood
+**During review:** Creates 2 cards:
+- **Card 1:** "The [___] pumps blood through the body." → heart
+- **Card 2:** "The heart pumps [___] through the body." → blood
 
 The Extra field appears on the answer side as additional context.
 
-**Best for:** Lists, sequences, fill-in-the-blank, facts that make more sense in sentence context than as isolated Q&A.
+**Best for:** Lists, sequences, fill-in-the-blank, facts that make more sense in sentence context than as isolated Q&A. See [Cloze Deletions](/creation/cloze-deletions/) for the full syntax guide — hints, grouping, complex examples.
 
 :::caution[Author's note]
 I personally don't use Cloze cards at all. In my experience, they don't add real value for meaningful learning. I'll explain my reasoning in more detail at [lucaspiera.com](https://lucaspiera.com). That said — the community asked for this note type, so here it is.
@@ -102,17 +98,19 @@ I personally don't use Cloze cards at all. In my experience, they don't add real
 
 ---
 
-### Image Occlusion
+## Image Occlusion
 
 Cards created from images by hiding specific regions. Each region becomes one card.
 
 **Fields:** Image, drawn regions
 
-Created through the Image Occlusion editor — not written as plain text.
+Created through the Image Occlusion editor — not written as plain text. You draw rectangles or ellipses over parts of an image (or let AI detect them), and each region becomes a separate review card.
 
-**Review:** You see the image with one region hidden. Recall what's under it, then reveal.
+**During review:** You see the image with one region hidden. Recall what's under it, then reveal.
 
-**Best for:** Anatomy diagrams, maps, labeled charts, any visual material where spatial position is part of what you're learning.
+**Best for:** Anatomy diagrams, maps, labeled charts — any visual material where spatial position is part of what you're learning.
+
+See [Image Occlusion](/creation/image-occlusion/) for the full guide — creation methods, the editor interface, AI detection, and region groups.
 
 ---
 
@@ -123,21 +121,27 @@ Created through the Image Occlusion editor — not written as plain text.
 | Test one specific fact | Basic |
 | Learn both directions (vocabulary, capitals) | Basic (Reversed) |
 | Fill in blanks in a sentence | Cloze |
+| Memorize a list or sequence | Cloze |
 | Label parts of a diagram or image | Image Occlusion |
 
-When in doubt, start with Basic. Cloze is worth learning once you've written a few hundred basic cards and notice which ones feel awkward to review.
+When in doubt, start with Basic. It's the most versatile type and the easiest to write well. Move to Cloze once you've written a few hundred basic cards and notice which ones feel awkward as straight Q&A.
 
 ## The `#type/<slug>` Tag
 
-Each built-in type has a **slug** used in block format:
+Each built-in type has a **slug** used in [block format](/creation/creating-flashcards/#block-format):
 
-| Note type | Slug |
+| Note Type | Slug |
 |-----------|------|
 | Basic | `basic` |
 | Basic (Reversed) | `basic-reversed` |
 | Cloze | `cloze` |
 | Image Occlusion | `image-occlusion` |
 
-Custom types use the slug you define when creating them.
+Custom types use the slug you define when creating them. For custom note types — additional fields, custom templates, and CSS — see [Custom Note Types](/creation/custom-note-types/).
 
-For custom note types — creating your own with additional fields, custom templates, and CSS — see [Custom Note Types](/creation/custom-note-types/).
+## What to Read Next
+
+- [Creating Flashcards](/creation/creating-flashcards/) — the three creation methods and block format syntax
+- [Cloze Deletions](/creation/cloze-deletions/) — full syntax guide for fill-in-the-blank cards
+- [Image Occlusion](/creation/image-occlusion/) — creating cards from images
+- [Custom Note Types](/creation/custom-note-types/) — build your own types with extra fields and templates

@@ -1,14 +1,14 @@
 ---
 title: Image Occlusion
 sidebar:
-  order: 6
-description: Create flashcards from images by hiding specific regions, with manual drawing tools and AI-powered region detection.
+  order: 4
+description: "Create flashcards from images by hiding specific regions, with manual drawing tools and AI-powered detection."
 ---
 
 :::caution[My Notes]
 :::
 
-Image Occlusion lets you create flashcards from images by hiding specific regions. Each region becomes a separate card — you see the image with one area covered and must recall what's underneath.
+**Image Occlusion** lets you create flashcards from images by hiding specific regions. Each region becomes a separate card — you see the image with one area covered and must recall what's underneath.
 
 This type exists because some things can't be tested with text alone. In anatomy, chemistry, or geography, the spatial relationship between a label and its location is part of what you're learning. A basic card that asks "What is the hippocampus?" doesn't test whether you can find it on a brain diagram. Image occlusion does.
 
@@ -21,43 +21,27 @@ This type exists because some things can't be tested with text alone. In anatomy
 
 ## Creating Image Occlusion Cards
 
-### Method 1: From Selection Toolbar
+### From the Selection Toolbar
 
 1. Click on an image in your note
-2. Selection Toolbar appears with **IO** button
+2. The [Selection Toolbar](/views/selection-toolbar/) appears with an **IO** button
 3. Click **IO** to open the Image Occlusion editor
 
-### Method 2: From Command
+### From Command Palette
 
-1. Command Palette → "Create image occlusion card"
+1. `Cmd/Ctrl + P` → "Create image occlusion card"
 2. Select an image from your vault
-3. Image Occlusion editor opens
+3. The editor opens
 
-### Method 3: From Flashcard Panel
+### From the Flashcard Panel
 
-1. Open [Flashcard Panel](/views/flashcard-panel/) for a note with images
+1. Open the [Flashcard Panel](/views/flashcard-panel/) for a note with images
 2. Click **Add Image Occlusion**
 3. Select an image
 
 ## The Image Occlusion Editor
 
-### Interface Overview
-
-```
-+-------------------------------------+
-|  [AI Detect] [Rectangle] [Ellipse]  |  <- Tools
-+-------------------------------------+
-|                                     |
-|         [Image Preview]             |
-|                                     |
-|      +-----------+                  |
-|      | Region 1  |  <- Drawn regions |
-|      +-----------+                  |
-|                                     |
-+-------------------------------------+
-|  Regions: [1] [2] [3]    [Save]     |  <- Region list
-+-------------------------------------+
-```
+TODO PHOTO
 
 ### Drawing Tools
 
@@ -68,28 +52,17 @@ This type exists because some things can't be tested with text alone. In anatomy
 | **Polygon** | Draw custom shapes (coming soon) |
 | **AI Detect** | Auto-detect regions with AI |
 
-### Drawing Regions
-
-1. Select a tool (Rectangle or Ellipse)
-2. Click and drag on the image
-3. Region appears with a number
-4. Repeat for additional regions
-
-Each region becomes a separate card.
+Select a tool, click and drag on the image, and a numbered region appears. Repeat for additional regions.
 
 ### AI Region Detection
 
-Click **AI Detect** to automatically identify regions:
+Click **AI Detect** to automatically identify regions. AI analyzes the image, detects labels, annotations, and structures, then creates regions you can adjust or delete.
 
-1. AI analyzes the image
-2. Detects labels, annotations, structures
-3. Creates regions automatically
-4. You can adjust or delete AI regions
+Works best with anatomy diagrams, labeled charts, and maps with clear boundaries.
 
-Works best with:
-- Anatomy diagrams
-- Labeled charts
-- Maps with clear boundaries
+:::tip[Start with AI, then refine]
+Let AI find regions first, then adjust boundaries, add labels, and remove anything irrelevant. It's faster than drawing everything by hand.
+:::
 
 ### Region Properties
 
@@ -97,23 +70,15 @@ For each region, you can set:
 
 | Property | Description |
 |----------|-------------|
-| **Label** | Text shown on hover |
-| **Hint** | Optional hint for review |
-| **Group** | Group related regions |
+| **Label** | Text shown on hover during review |
+| **Hint** | Optional hint displayed in the blank |
+| **Group** | Group related regions to test together |
 
 ### Region Groups
 
-Group regions to test them together:
-
-1. Select multiple regions
-2. Click **Group**
-3. Grouped regions appear on the same card
-
-Useful for testing multiple related areas at once.
+Group regions to hide them together on one card. Select multiple regions, click **Group**, and they'll be tested as a single unit. Useful for related areas you want to recall at the same time.
 
 ## Card Generation
-
-### One Region = One Card
 
 By default, each region generates one card:
 
@@ -123,28 +88,13 @@ By default, each region generates one card:
 | Card 2 | Region 2 | Regions 1, 3, 4... |
 | Card 3 | Region 3 | Regions 1, 2, 4... |
 
-### Grouped Regions
-
 Grouped regions are hidden together:
 
 | Card | Hidden | Visible |
 |------|--------|---------|
 | Card 1 | Regions 1, 2 (grouped) | Regions 3, 4... |
 
-## During Review
-
-### Question Side
-
-- Image with one region hidden (covered)
-- Other regions visible
-- Label/hint if configured
-
-### Answer Side
-
-- Full image with all regions visible
-- Hidden region highlighted
-
-### Image Occlusion Modes
+## Review Modes
 
 | Mode | Description |
 |------|-------------|
@@ -152,56 +102,16 @@ Grouped regions are hidden together:
 | **Hide All** | Hide all regions, reveal one at a time |
 | **Hide All Group** | Hide all, reveal by group |
 
-## Syntax in Notes
-
-Image occlusion cards are stored in your notes:
-
-```markdown
-![[anatomy-diagram.png]]
-#type/image-occlusion
-regions: [{"id":"r1","shape":"rect","bounds":[100,100,200,180],"label":"Hippocampus"}]
-```
-
-You can edit this manually, but using the editor is recommended.
-
 ## Supported Image Formats
 
-- PNG
-- JPEG/JPG
-- GIF (first frame)
-- WebP
-- SVG (converted to PNG)
+PNG, JPEG/JPG, GIF (first frame), WebP, and SVG (converted to PNG).
 
-## Tips for Best Results
+## Tips
 
-### 1. Use High-Quality Images
-
-- Clear labels and annotations
-- Good contrast
-- Appropriate size (not too small)
-
-### 2. Keep Regions Consistent
-
-- Similar size regions
-- Clear boundaries
-- Avoid overlapping regions
-
-### 3. Add Labels
-
-Labels help during review:
-- Hover to see label
-- Provides context for what's being tested
-
-### 4. Use AI Detection First
-
-Let AI find regions, then:
-- Adjust boundaries
-- Add labels
-- Remove irrelevant regions
-
-### 5. Group Related Areas
-
-For complex images, group related regions to test together.
+- **Use high-quality images** with clear labels and good contrast
+- **Keep regions consistent** in size — avoid overlapping
+- **Add labels** to regions for context during review
+- **Group related areas** in complex images to test them together
 
 ## Common Use Cases
 
@@ -214,22 +124,8 @@ For complex images, group related regions to test together.
 | Art | Artist techniques, periods |
 | Engineering | Diagrams, schematics |
 
-## Troubleshooting
+## What to Read Next
 
-### AI Detection Not Working
-
-1. Ensure AI is configured (API key or subscription)
-2. Try a clearer image
-3. Use manual drawing instead
-
-### Regions Not Saving
-
-1. Check file permissions
-2. Ensure note is saved
-3. Try a simpler image
-
-### Images Not Displaying in Review
-
-1. Check image path is correct
-2. Ensure image exists in vault
-3. Try re-adding the image
+- [Note Types](/creation/note-types/) — all built-in types and when to use each
+- [Creating Flashcards](/creation/creating-flashcards/) — other creation methods and the collection step
+- [Selection Toolbar](/views/selection-toolbar/) — AI-powered card generation from text and images

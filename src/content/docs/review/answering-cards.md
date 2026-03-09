@@ -2,56 +2,29 @@
 title: Answering Cards
 sidebar:
   order: 2
-description: Understand the four-button rating system (Again, Hard, Good, Easy) and how each rating affects FSRS scheduling and card intervals.
+description: "How the four-button rating system works with FSRS — what each rating does to scheduling, learning phases, lapses, and intervals."
 ---
 
 :::caution[My Notes]
 :::
 
-When you review a flashcard, you rate how well you remembered it. This rating determines when you'll see the card next. This page explains the rating system and how it affects scheduling.
+When you review a flashcard, you rate how well you remembered it. That rating feeds into FSRS, which calculates when you'll see the card next. This page explains the mechanics behind each rating — what happens to your card's scheduling data and why honest ratings matter.
 
-## The Rating System
-
-True Recall uses four ratings:
-
-| Rating | Meaning | Typical Interval Effect |
-|--------|---------|------------------------|
-| **Again** | Forgot completely | Reset to learning |
-| **Hard** | Remembered with difficulty | Shorter interval |
-| **Good** | Remembered correctly | Normal interval |
-| **Easy** | Remembered instantly | Longer interval |
-
-## Keyboard Shortcuts
-
-| Key | Rating |
-|-----|--------|
-| `1` | Again |
-| `2` | Hard |
-| `3` or `Space` | Good |
-| `4` | Easy |
+For the review interface itself — opening sessions, actions, keyboard shortcuts — see [Review Interface](/review/review-interface/).
 
 ## How Ratings Affect Scheduling
 
-### FSRS Updates
+After each rating, FSRS updates three parameters on the card:
 
-After each rating, FSRS updates the card's parameters:
+1. **Stability** — How long you'll remember it (higher = longer intervals)
+2. **Difficulty** — How hard the card is for you (higher = more frequent reviews)
+3. **Retrievability** — Current probability you can recall it right now
 
-1. **Stability** -- How long you'll remember it
-2. **Difficulty** -- How hard the card is
-3. **Retrievability** -- Current recall probability
+The next interval depends on your rating, current stability, your desired retention setting, and your FSRS weights.
 
-### Interval Calculation
+## Rating Effects in Detail
 
-The next interval depends on:
-
-- Your rating (Again/Hard/Good/Easy)
-- Current stability
-- Desired retention setting
-- FSRS weights
-
-### Rating Effects
-
-#### Again
+### Again
 
 - **Stability:** Decreases significantly
 - **Difficulty:** Increases
@@ -60,7 +33,7 @@ The next interval depends on:
 
 Use when you completely forgot or got it wrong.
 
-#### Hard
+### Hard
 
 - **Stability:** Slight decrease or small increase
 - **Difficulty:** Increases slightly
@@ -68,7 +41,7 @@ Use when you completely forgot or got it wrong.
 
 Use when you remembered but struggled significantly.
 
-#### Good
+### Good
 
 - **Stability:** Increases based on FSRS calculation
 - **Difficulty:** Minor adjustment
@@ -76,7 +49,7 @@ Use when you remembered but struggled significantly.
 
 Use when you remembered correctly with reasonable effort.
 
-#### Easy
+### Easy
 
 - **Stability:** Increases more than Good
 - **Difficulty:** Decreases
@@ -86,13 +59,7 @@ Use when you remembered instantly with no effort.
 
 ## Interval Preview
 
-Each button shows the predicted next interval:
-
-```
-[Again: <1m]  [Hard: <10m]  [Good: 1.2d]  [Easy: 4d]
-```
-
-### Interval Notation
+Each rating button shows the predicted next interval. The notation:
 
 | Notation | Meaning |
 |----------|---------|
@@ -105,13 +72,11 @@ Each button shows the predicted next interval:
 
 ### Fuzz
 
-Intervals have small random variation (plus or minus 2.5%) to prevent cards from bunching on the same day.
+Intervals have small random variation (±2.5%) to prevent cards from bunching on the same day.
 
 ## Being Honest with Ratings
 
-Accurate ratings improve FSRS predictions.
-
-### Common Mistakes
+Accurate ratings improve FSRS predictions. Common mistakes:
 
 | Mistake | Effect |
 |---------|--------|
@@ -120,18 +85,16 @@ Accurate ratings improve FSRS predictions.
 | Rating Hard to avoid forgetting | More reviews than needed |
 | Rating Again when you knew it | FSRS underestimates your memory |
 
-### Best Practice
-
 Rate based on your actual recall, not what you "should" know:
 
-- **Again** -- You didn't remember
-- **Hard** -- Significant effort, maybe some doubt
-- **Good** -- Correct, normal effort
-- **Easy** -- Instant, automatic recall
+- **Again** — You didn't remember
+- **Hard** — Significant effort, maybe some doubt
+- **Good** — Correct, normal effort
+- **Easy** — Instant, automatic recall
 
 ## Learning Phase
 
-New cards go through learning steps:
+New cards go through learning steps before entering the long-term review queue.
 
 ### Default Steps: [1, 10]
 
@@ -139,9 +102,7 @@ New cards go through learning steps:
 2. Second review → See again in 10 minutes
 3. Graduate → Move to Review state
 
-### Learning Ratings
-
-During learning, ratings work slightly differently:
+### Ratings During Learning
 
 | Rating | Effect |
 |--------|--------|
@@ -152,37 +113,34 @@ During learning, ratings work slightly differently:
 
 ## Review Phase
 
-Once cards graduate, they enter the Review state:
-
-### Review Ratings
-
-| Rating | Effect |
-|--------|--------|
-| Again | Lapse → Relearning |
-| Hard | Shorter interval |
-| Good | Standard interval |
-| Easy | Longer interval |
+Once cards graduate from learning, they enter the Review state with longer, FSRS-calculated intervals.
 
 ### Lapses
 
-A **lapse** is when you forget a review card (rating "Again"):
+A **lapse** is when you forget a review card (rating Again):
 
 1. Card moves to Relearning state
 2. Goes through relearning steps (default: 10 min)
 3. After relearning, returns to Review with reduced stability
 
+Mature cards with good history recover quickly from lapses — a single lapse won't erase months of successful reviews.
+
 ## Rating Strategy by Card Age
 
 ### New Cards
 
-Be strict. If you're unsure, rate Hard or Again to reinforce.
+Be strict. If you're unsure, rate Hard or Again to reinforce early.
 
 ### Young Cards (Learning)
 
-Use Good to graduate. Use Easy only if truly instant.
+Use Good to graduate normally. Use Easy only if recall was truly instant.
 
 ### Mature Cards (Review)
 
-Rate honestly. Mature cards with good history will recover quickly from lapses.
+Rate honestly. Don't be afraid of Again on a card you've known for months — FSRS accounts for this and won't over-penalize.
 
-For an overview of the review view, see [Review Interface](/review/review-interface/).
+## What to Read Next
+
+- [Review Interface](/review/review-interface/) — the review view, actions, and session management
+- [Type-in Mode](/review/type-in-mode/) — type your answers for stricter self-testing
+- [FSRS Algorithm](/scheduling/fsrs-algorithm/) — how the algorithm calculates intervals

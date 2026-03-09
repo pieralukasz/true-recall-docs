@@ -112,7 +112,7 @@ Daily limits prevent overload while ensuring consistent progress.
 
 ## Next Steps
 
-- [Flashcards Deep Dive](/creation/flashcards/)
+- [Creating Flashcards](/creation/creating-flashcards/)
 - [FSRS Algorithm](/scheduling/fsrs-algorithm/)
 - [Note Types](/creation/note-types/)
 - [Projects](/creation/projects-and-notes/)

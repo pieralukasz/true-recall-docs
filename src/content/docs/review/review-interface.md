@@ -2,209 +2,177 @@
 title: Review Interface
 sidebar:
   order: 1
-description: Navigate the review view to study flashcards with spaced repetition, including card display, answer buttons, and session management.
+description: "The flashcard review view — work through due cards, rate your recall, and let FSRS schedule the next review."
 ---
 
 :::caution[My Notes]
 :::
 
-The **Review Interface** is where you study your flashcards using spaced repetition. This page covers the main review view, its components, and how to navigate it.
+The **Review View** is where learning happens. You see one card at a time: read the question, think of the answer, reveal it, then rate how well you recalled it. FSRS uses your rating to calculate the optimal next review date — a few hours away for something you're still learning, or months away for something solid.
 
 ## Opening the Review View
 
-### From Commands
+| Method | Action |
+|--------|--------|
+| Command palette | `Cmd/Ctrl + P` → "Review flashcards from current note" or "Start review session" |
+| [Dashboard](/views/dashboard/) | Click **Study** on any project or note row |
+| [Flashcard Panel](/views/flashcard-panel/) | Click the **Review** button in the header |
 
-- **Cmd/Ctrl + P** → "Review flashcards from current note"
-- **Cmd/Ctrl + P** → "Review today's new cards"
+TODO PHOTO
 
-### From Dashboard
+## The Review Loop
 
-1. Open [Dashboard](/views/dashboard/)
-2. Click **Study** on a project or note
+Every card follows the same cycle:
 
-### From Flashcard Panel
+**1. Question side**
 
-Click the **Review** button at the top of the [Flashcard Panel](/views/flashcard-panel/).
+The card shows only the question (or a cloze with blanks, or an image with a hidden region). Take a moment to actually recall the answer — don't flip immediately. The time you spend retrieving the information is what makes spaced repetition work.
 
-## Review Layout
+Press `Space` to reveal the answer.
 
-```
-+-------------------------------------------------+
-| Header: [<- Close] [New: 5] [Learn: 3] [Due: 12]|
-+-------------------------------------------------+
-|                                                 |
-|              [Card Content Area]                |
-|                                                 |
-|         Question text and/or image              |
-|                                                 |
-|                                                 |
-+-------------------------------------------------+
-|            [Show Answer] - Space                |
-+-------------------------------------------------+
+:::tip[Can't recall? The card might be the problem]
+If you consistently can't remember the answer, the issue might not be your memory. The card could be too complex, too vague, or you might be missing prerequisite knowledge. Consider rewriting it, breaking it into simpler cards, or learning more foundational material first. For more tips on effective flashcard design, visit [lucaspiera.com](https://lucaspiera.com).
+:::
 
-After revealing answer:
-+-------------------------------------------------+
-| Header: [<- Close] [New: 4] [Learn: 2] [Due: 11]|
-+-------------------------------------------------+
-|                                                 |
-|              [Card Content Area]                |
-|                                                 |
-|         Question AND Answer visible             |
-|                                                 |
-|                                                 |
-+-------------------------------------------------+
-|  [Again: <1m]  [Hard: <10m]  [Good: 1d]  [Easy: 4d] |
-|    (1)           (2)          (3)        (4)    |
-+-------------------------------------------------+
-```
+**2. Answer side**
 
-## Header Components
+The full card is shown — both the question and the answer. Compare your mental answer to what's on screen. Be honest — the algorithm works better with accurate ratings than inflated ones.
 
-### Badge Counts
+**3. Rate your recall**
 
-| Badge | Color | Meaning |
-|-------|-------|---------|
-| **New** | Green | Cards never reviewed |
-| **Learn** | Orange | Cards in learning phase |
-| **Due** | Blue | Review cards due today |
+Four buttons appear, each with a preview of the interval that rating would produce:
 
-Counts update after each answer.
+| Rating | Key | What it means |
+|--------|-----|---------------|
+| **Again** | `1` | Forgot — you couldn't recall the answer |
+| **Hard** | `2` | Recalled, but it was a real struggle |
+| **Good** | `3` or `Space` | Recalled with normal effort |
+| **Easy** | `4` | Instant recall, no effort needed |
 
-### Progress Bar
+For how each rating affects FSRS scheduling — stability, difficulty, intervals, learning phases, and lapses — see [Answering Cards](/review/answering-cards/).
 
-Shows session progress (when header stats enabled).
+:::tip[Rate honestly]
+If you peeked at the answer or took an unusually long time, rate **Hard** or **Again**. Inflated ratings make cards disappear from your queue when they shouldn't — you won't remember them when it matters.
+:::
 
-### Close Button
+**4. Next card**
 
-Returns to previous view. Session state is saved.
+The rated card is scheduled and the next due card appears. Repeat until the session is complete.
 
-## Card Content Area
+TODO PHOTO
 
-### Question Side
+## Header Options
 
-- Shows the question/front of the card
-- May include images, formatted text, math
-- For image occlusion: image with one region hidden
+The review header can be customized in `Settings → General`:
 
-### Answer Side
+| Setting | Description |
+|---------|-------------|
+| **Show review header** | Toggle the header bar entirely |
+| **Show header stats** | Badge counts — Learning (orange), Review (blue), New (green) remaining |
+| **Show next review time** | Show interval previews on the rating buttons (e.g., "Good → 4d") |
 
-- Shows both question and answer
-- Answer is highlighted or distinguished
-- For image occlusion: full image with hidden region revealed
+Showing interval previews is especially useful while you're learning FSRS — you can see exactly how your rating affects scheduling.
 
-### Actions Toolbar
+## Actions During Review
 
-Press `?` during review to see available actions:
+### Card Actions
 
 | Action | Key | Description |
 |--------|-----|-------------|
-| Edit | `E` | Edit card inline |
-| Suspend | `!` | Suspend card (remove from reviews) |
+| Edit | `E` | Edit the card inline without leaving the session |
+| Suspend | `!` | Remove card from future reviews (unsuspend from [Card Browser](/views/card-browser/)) |
 | Bury card | `-` | Hide until tomorrow |
-| Bury note | `=` | Hide all sibling cards until tomorrow |
-| Move | `M` | Move card to different note |
-| Add card | `A` | Add new card to current note |
-| Type-in | `T` | Toggle type-in mode |
-| Preset | `P` | Set source note preset (`fsrs_preset` in frontmatter) |
-| Undo | `Cmd/Ctrl+Z` | Undo last answer |
+| Bury note | `=` | Hide all cards from the same note until tomorrow |
+| Move | `M` | Transfer card to a different source note |
+| Add flashcard | `A` | Open the [Flashcard Editor](/views/flashcard-editor/) linked to this card's note |
+| Type-in mode | `T` | Toggle [type-in answer mode](/review/type-in-mode/) |
+| Change preset | `P` | Set the FSRS preset for this card's source note |
 
-## Answer Buttons
+### Session Actions
 
-After revealing the answer, rate your recall:
+| Action | Key | Description |
+|--------|-----|-------------|
+| Undo | `Cmd/Ctrl+Z` | Undo last rating — card returns to queue, scheduling reverted |
+| Close | `Escape` | End the session early |
+| Help | `?` | Show all keyboard shortcuts |
 
-### Again (1)
+## Inline Editing
 
-- **Meaning:** You didn't remember
-- **Effect:** Card goes back to learning/relearning
-- **Interval:** Resets to learning steps
+Press `E` during any card to edit it without leaving the session. A toolbar appears with formatting options:
 
-### Hard (2)
+- **Bold** (`Cmd/Ctrl+B`), **Italic** (`Cmd/Ctrl+I`)
+- Links, images, inline code, math (LaTeX)
 
-- **Meaning:** You remembered with significant effort
-- **Effect:** Shorter than normal interval
-- **Interval:** Reduced from Good interval
+Changes save immediately and the card updates. Press `Escape` to close the editor and continue the session.
 
-### Good (3) - Space
+## Image Occlusion in Review
 
-- **Meaning:** You remembered correctly
-- **Effect:** Normal FSRS interval
-- **Interval:** As calculated by FSRS
+For [image occlusion](/creation/image-occlusion/) cards, the review experience works differently:
 
-### Easy (4)
+- **Question side** — the image is shown with one region masked (covered with a dark rectangle)
+- **Answer side** — the full image is revealed, with the previously masked region highlighted in green
 
-- **Meaning:** You remembered instantly, no effort
-- **Effect:** Longer than normal interval
-- **Interval:** Increased from Good interval
+If you created multiple regions on one image, each region becomes a separate card. They appear in the queue independently.
 
-### Interval Preview
+## Review States
 
-Each button shows the next interval:
-- `<1m` -- Less than 1 minute
-- `10m` -- 10 minutes
-- `1.2d` -- 1.2 days
-- `2.5mo` -- 2.5 months
+### Active Review
 
-Intervals are calculated by FSRS based on your history.
+Normal card-by-card study. Cards appear in a queue ordered by type: learning cards first (they come back fastest), then review cards, then new cards.
 
-## Session States
+### Waiting State
 
-### Active
+Sometimes you finish all due cards but some learning cards are still "cooling down" before their next repetition. The view shows a countdown timer with two options:
 
-Normal review -- cards are being shown.
-
-### Waiting
-
-No cards due right now. Shows:
-- Countdown to next due card
-- "Next card in X hours"
-
-### Complete
-
-All cards reviewed. Shows:
-- Session statistics
-- Time studied
-- Retention rate
-- Option to start another session
-
-## Ending a Session
-
-### Early Exit
-
-Click close button or press Escape. Progress is saved.
+- **Study Ahead** — review the cards now (slightly earlier than optimal)
+- **Close** — end the session and come back later
 
 ### Session Complete
 
-After reviewing all due cards, see the summary screen:
+When all due cards have been answered, a summary screen appears showing:
 
-```
-+-------------------------------------+
-|         Session Complete!           |
-+-------------------------------------+
-|  Cards reviewed: 25                 |
-|  Time: 8 minutes                    |
-|  Retention: 92%                     |
-|                                     |
-|  Again: 2  Hard: 3  Good: 18  Easy: 2|
-+-------------------------------------+
-|     [Review More]  [Close]          |
-+-------------------------------------+
-```
+- Total cards reviewed
+- Session duration
+- True retention rate (correct / total)
+- Rating breakdown (Again / Hard / Good / Easy counts)
+- Time until the next session
 
-## Performance and scaling
+TODO PHOTO
 
-- Preset-based scheduling/preview reuses cached FSRS engines instead of rebuilding them for each card.
-- In global sessions, preset resolution is memoized per source note and reused for sibling cards.
-- Queue and scheduling semantics are unchanged: same limits and same note/project/default preset resolution.
+## Undo
 
-## Fullscreen vs Side Panel
+Press `Cmd/Ctrl+Z` to undo the last rating. The card returns to the end of the queue, and its FSRS parameters are restored to what they were before you rated it. You can undo multiple times in a row, going back through recent ratings.
 
-Configure in Settings → General → Review mode:
+:::note
+Undo only works within the current session. Once you close the Review View, past ratings cannot be undone.
+:::
 
-| Mode | Description |
-|------|-------------|
-| **Fullscreen** | Takes over main editor area |
-| **Side panel** | Opens in right sidebar |
+## Session Persistence
 
-Fullscreen is recommended for focused study.
+If you close Obsidian mid-session, progress is saved automatically. When you open Obsidian again and start a review session, it resumes from where you left off — you won't see cards you already rated in that session.
 
-For more details on rating your answers, see [Answering Cards](/review/answering-cards/). You can also set up [Custom Sessions](/review/custom-sessions/) for filtered study or enable [Type-in Mode](/review/type-in-mode/) to type your answers.
+## Fullscreen vs Panel Mode
+
+`Settings → General → Review mode`:
+
+| Mode | Behavior | Best for |
+|------|----------|----------|
+| **Fullscreen** | Takes over the main editor area | Focused sessions, fewer distractions |
+| **Side Panel** | Opens in the right sidebar | Reviewing while keeping a note visible |
+
+Most people prefer Fullscreen — it's less visually cluttered and easier to focus. Personally, I use only fullscreen mode.
+
+## Performance Notes
+
+- Review uses cached FSRS scheduling engines per preset — switching presets mid-session is fast.
+- In global sessions, preset context is resolved once per source note and reused for sibling cards from the same note.
+- Session start can be the most expensive phase on very large collections (5,000+ cards), because eligible cards must be scanned and prioritized.
+- Changing preset with `P` updates the source note's `fsrs_preset` frontmatter — it does not immediately reschedule all cards. Use `Settings → FSRS → Preview reschedule` for collection-wide rescheduling.
+
+## What to Read Next
+
+- [Answering Cards](/review/answering-cards/) — how each rating affects FSRS scheduling
+- [Type-in Mode](/review/type-in-mode/) — type your answers with AI grading or diff comparison
+- [Cramming](/review/cramming/) — practice without affecting scheduled review dates
+- [Flashcard Panel](/views/flashcard-panel/) — manage cards outside of review sessions
+- [Statistics](/views/statistics/) — review history and retention tracking

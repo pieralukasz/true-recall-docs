@@ -18,17 +18,15 @@ All paths are relative to `src/content/docs/`.
 - `getting-started/installation.md` — Installation via BRAT, manual, or from source
 - `getting-started/quick-start.md` — 5-minute quickstart guide
 
-## Creation (9 pages)
+## Creation (7 pages)
 
-- `creation/flashcards.md` — How flashcards work: types, storage, collection, states, and editing
-- `creation/creating-flashcards.md` — Overview: creation surfaces, note types concept, block format, and the collection step
-- `creation/note-types.md` — Default note types: Basic, Basic (Reversed), Cloze, Image Occlusion — what each produces and when to use it
-- `creation/custom-note-types.md` — Custom note types: fields, card templates, CSS, slugs, and block format usage
-- `creation/basic-cards.md` — Basic and reversed cards in block format
+- `creation/creating-flashcards.md` — Three ways to create flashcards: AI generation, Flashcard Editor, and block format
+- `creation/note-types.md` — Built-in note types: Basic, Basic (Reversed), Cloze, Image Occlusion
 - `creation/cloze-deletions.md` — Fill-in-the-blank cards with `{{c1::text}}` syntax
-- `creation/image-occlusion.md` — Cards from images by hiding regions, manual drawing and AI detection
-- `creation/best-practices.md` — How to write effective flashcards — principles, examples, and common mistakes
-- `creation/projects-and-notes.md` — Projects, sub-projects, folder includes, archiving, preset inheritance
+- `creation/image-occlusion.md` — Cards from images by hiding regions
+- `creation/custom-note-types.md` — Custom note types: fields, card templates, CSS
+- `creation/best-practices.md` — How to write effective flashcards
+- `creation/projects-and-notes.md` — Projects, folder includes, archiving, preset inheritance
 
 ## Migration (4 pages)
 

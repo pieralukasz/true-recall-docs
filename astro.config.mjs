@@ -20,6 +20,9 @@ export default defineConfig({
 	site: 'https://truerecall.app',
 	output: 'static',
 	adapter: vercel(),
+	security: {
+		checkOrigin: false,
+	},
 	markdown: {
 		remarkPlugins: [remarkStripDevNotes],
 	},

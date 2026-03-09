@@ -2,7 +2,12 @@
 export const prerender = false;
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { supabase } from "../../lib/supabase";
+import { createSupabaseServerClient } from "../../lib/supabase-server";
+
+const supabase = createSupabaseServerClient(
+	Astro.cookies,
+	Astro.request.headers.get("cookie"),
+);
 
 const code = Astro.url.searchParams.get("code");
 let error = "";

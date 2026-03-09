@@ -1,7 +1,7 @@
 ---
 title: "Projects & Notes"
 sidebar:
-  order: 8
+  order: 0
 description: "Organize notes into projects using parent relationships, folder includes, and archiving."
 ---
 
@@ -9,6 +9,8 @@ description: "Organize notes into projects using parent relationships, folder in
 :::
 
 Projects in **True Recall** are built from note relationships, not from a separate deck entity. Any note can become a project — it just needs other notes pointing to it as their parent.
+
+Unlike Anki, where each card belongs to exactly one deck, a note in True Recall can belong to **multiple projects at once**. A note on "Cell Biology" can live in both your "Medicine" and "Exam Prep" projects without duplicating any cards. This makes organization flexible — you model how knowledge actually connects, instead of forcing it into a single hierarchy.
 
 ## Core Model
 
@@ -43,11 +45,11 @@ include: folder
 
 This is same-folder only (no recursion into subfolders).
 
-## Dashboard Workflows
+## [Dashboard](/views/dashboard/) Workflows
 
 ### Drag-and-drop
 
-In **Dashboard → Projects**:
+In **[Dashboard](/views/dashboard/) → Projects**:
 
 - note → project: reparent note
 - project → project: reparent project

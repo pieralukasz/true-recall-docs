@@ -2,7 +2,7 @@
 export const prerender = false;
 
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { supabase } from "../lib/supabase";
+import { createSupabaseServerClient } from "../lib/supabase-server";
 import { generateKey } from "../lib/litellm";
 import { canonicalizeEmail } from "../lib/email";
 import {
@@ -12,6 +12,11 @@ import {
 	POLAR_TOPUP_S_CHECKOUT_URL,
 	POLAR_TOPUP_M_CHECKOUT_URL,
 } from "../lib/constants";
+
+const supabase = createSupabaseServerClient(
+	Astro.cookies,
+	Astro.request.headers.get("cookie"),
+);
 
 // Auth check
 const accessToken = Astro.cookies.get("sb-access-token")?.value;

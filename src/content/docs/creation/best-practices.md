@@ -1,7 +1,7 @@
 ---
 title: Best Practices
 sidebar:
-  order: 7
+  order: 6
 description: "How to write effective flashcards that stick — principles, examples, and common mistakes."
 ---
 
@@ -76,13 +76,21 @@ a class should have only one reason to change. Open/Closed means...
 ---
 ```
 
-**Good** — use cloze for lists:
+**Good** — split into independent, contextual cards:
 
 ```markdown
-#type/cloze
-Text: The SOLID principles are: {{c1::Single Responsibility}}, {{c2::Open/Closed}}, {{c3::Liskov Substitution}}, {{c4::Interface Segregation}}, and {{c5::Dependency Inversion}}.
+#type/basic
+Front: Which SOLID principle states that a class should have only one reason to change?
+Back: Single Responsibility Principle
+---
+
+#type/basic
+Front: Which SOLID principle says software entities should be open for extension but closed for modification?
+Back: Open/Closed Principle
 ---
 ```
+
+Each card stands on its own — one question, one answer, enough context in the question to know what's being asked.
 
 ## Add Context to Questions
 
@@ -108,12 +116,7 @@ Back: Global Interpreter Lock — it prevents multiple threads from executing Py
 
 ## Use the Right Card Type
 
-| When you want to... | Use |
-|---|---|
-| Test a single fact | `#type/basic` |
-| Learn both directions (e.g. vocabulary) | `#type/basic-reversed` |
-| Memorize a list or fill-in-the-blank | `#type/cloze` |
-| Learn from a diagram or image | [Image Occlusion](/creation/image-occlusion/) |
+Not sure which type to use? See [Note Types — Choosing the Right Type](/creation/note-types/#choosing-the-right-type) for a comparison table.
 
 ## Common Mistakes
 
@@ -131,3 +134,9 @@ Use the [Selection Toolbar](/views/selection-toolbar/) to generate cards from yo
 ## Learn More
 
 For deeper guides on learning strategies, study techniques, and how to get the most out of spaced repetition, visit [lucaspiera.com](https://lucaspiera.com) — where tutorials on effective learning are published regularly.
+
+## What to Read Next
+
+- [Creating Flashcards](/creation/creating-flashcards/) — the three creation methods
+- [Note Types](/creation/note-types/) — built-in types and when to use each
+- [Selection Toolbar](/views/selection-toolbar/) — AI-powered card generation that follows these principles

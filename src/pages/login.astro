@@ -2,7 +2,12 @@
 export const prerender = false;
 
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { supabase } from "../lib/supabase";
+import { createSupabaseServerClient } from "../lib/supabase-server";
+
+const supabase = createSupabaseServerClient(
+	Astro.cookies,
+	Astro.request.headers.get("cookie"),
+);
 
 let error = "";
 let emailSent = false;
@@ -19,7 +24,7 @@ if (Astro.request.method === "POST") {
 			const { error: otpError } = await supabase.auth.signInWithOtp({
 				email,
 				options: {
-					emailRedirectTo: `${Astro.url.origin}/auth/callback`,
+					emailRedirectTo: `${Astro.url.origin}/auth/confirm`,
 				},
 			});
 			if (otpError) {

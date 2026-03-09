@@ -16,7 +16,7 @@ The **Selection Toolbar** is a floating toolbar that appears above any text sele
 1. Select text in any note (minimum 3 characters)
 2. A floating toolbar appears above your selection
 3. Click a generation button
-4. AI analyzes the text and creates flashcards in [block format](/creation/basic-cards/)
+4. AI analyzes the text and creates flashcards in [block format](/creation/creating-flashcards/#block-format)
 5. Cards appear in your note, ready to collect
 
 TODO PHOTO
@@ -76,7 +76,7 @@ AI generation buttons require an AI configuration — either an API key or a [Tr
 Besides the Selection Toolbar, you can create flashcards by:
 
 - **[Flashcard Editor](/views/flashcard-editor/)** — fill in fields manually, cards go straight to the database
-- **[Block format](/creation/basic-cards/)** — write `#type/basic` blocks directly in your notes, then collect
+- **[Block format](/creation/creating-flashcards/#block-format)** — write `#type/basic` blocks directly in your notes, then collect
 
 ### From a Whole Note
 

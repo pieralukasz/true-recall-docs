@@ -1,7 +1,7 @@
 ---
 title: Custom Note Types
 sidebar:
-  order: 3
+  order: 5
 description: "Create note types with custom fields, card templates, and CSS for domain-specific flashcard layouts."
 ---
 
@@ -102,24 +102,6 @@ A "Language" note type might have two templates:
 
 Both cards use the same field data but test in different directions.
 
-## The Slug
-
-The slug is the short identifier used in block format. You define it when creating the note type.
-
-```
-name: "Japanese Vocabulary"
-slug: japanese
-```
-
-```markdown
-#type/japanese
-Word: 水
-Reading: みず
-Meaning: water
----
-```
-
-Slugs are lowercase, no spaces. Use hyphens for multi-word slugs: `language-card`, `medical-basic`.
 
 ## CSS
 
@@ -174,3 +156,9 @@ You can change the note type of existing cards:
 Create, edit, and delete custom note types using the [Custom Type Modal](/views/custom-type-modal/) — open it from the Command Palette → "Manage note types", or from the type picker in the Flashcard Editor.
 
 Built-in types (Basic, Cloze, Image Occlusion) cannot be deleted.
+
+## What to Read Next
+
+- [Note Types](/creation/note-types/) — the four built-in types and when to use each
+- [Creating Flashcards](/creation/creating-flashcards/) — block format syntax for writing cards in your notes
+- [Custom Type Modal](/views/custom-type-modal/) — the interface for creating and managing custom types
