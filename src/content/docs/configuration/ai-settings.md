@@ -6,7 +6,10 @@ description: "Configure AI features including subscription, API keys, models, an
 ---
 
 :::caution[My Notes]
-:::
+
+- nie ma modeli do wyboru, jest tylko gemini flash ukryty, moze kiedys beda do wyboruy ale teraz nie ma
+- napisac, ze planuje dodac jeszcze modele lokalne
+  :::
 
 Configure AI features in Settings -> True Recall -> AI.
 
@@ -17,6 +20,7 @@ Configure AI features in Settings -> True Recall -> AI.
 Enter your True Recall AI subscription key (format: `tr-xxxxxxxxxxxx`).
 
 After entering key:
+
 - Shows subscription status
 - Tier (Basic, Pro, etc.)
 - Approximate generations remaining
@@ -36,6 +40,7 @@ After entering key:
 Your OpenRouter API key for direct API access.
 
 **When to use:**
+
 - As fallback when subscription exhausted
 - For access to specific models
 - For pay-per-use pricing
@@ -53,13 +58,13 @@ Your OpenRouter API key for direct API access.
 
 AI model for flashcard generation:
 
-| Model | Speed | Quality | Cost |
-|-------|-------|---------|------|
-| Gemini 3 Flash | Fast | Good | Low |
+| Model          | Speed  | Quality   | Cost   |
+| -------------- | ------ | --------- | ------ |
+| Gemini 3 Flash | Fast   | Good      | Low    |
 | Gemini 2.5 Pro | Medium | Excellent | Medium |
-| GPT-4o | Medium | Excellent | Medium |
-| Claude Sonnet | Medium | Excellent | Medium |
-| GPT-4o mini | Fast | Good | Low |
+| GPT-4o         | Medium | Excellent | Medium |
+| Claude Sonnet  | Medium | Excellent | Medium |
+| GPT-4o mini    | Fast   | Good      | Low    |
 
 **Recommended:** Gemini 3 Flash for speed, GPT-4o for quality.
 
@@ -67,12 +72,12 @@ AI model for flashcard generation:
 
 Target language for AI-generated cards:
 
-| Option | Description |
-|--------|-------------|
-| Auto | Detect from input content |
-| English | Force English output |
-| Polish | Force Polish output |
-| etc. | Other languages |
+| Option  | Description               |
+| ------- | ------------------------- |
+| Auto    | Detect from input content |
+| English | Force English output      |
+| Polish  | Force Polish output       |
+| etc.    | Other languages           |
 
 **Recommended:** Auto for most cases.
 
@@ -82,10 +87,10 @@ Target language for AI-generated cards:
 
 Show floating toolbar when text is selected in editor.
 
-| Setting | Effect |
-|---------|--------|
-| On | Toolbar appears above selection |
-| Off | No toolbar (use panel for generation) |
+| Setting | Effect                                |
+| ------- | ------------------------------------- |
+| On      | Toolbar appears above selection       |
+| Off     | No toolbar (use panel for generation) |
 
 **Recommended:** On for quick card creation.
 
@@ -98,6 +103,7 @@ Customize how AI generates cards.
 System prompt for generating basic Q&A cards.
 
 Variables:
+
 - `{{content}}` -- Selected text
 - `{{language}}` -- Target language
 
@@ -118,6 +124,7 @@ System prompt for auto-detecting best card type.
 System prompt for AI answer grading during type-in mode.
 
 Variables:
+
 - `{{correct}}` -- Correct answer
 - `{{student}}` -- Student's answer
 
@@ -150,11 +157,11 @@ For definitions, use basic format.
 
 ## Settings Summary
 
-| Setting | Default | Recommendation |
-|---------|---------|----------------|
-| Subscription key | -- | Add if subscribed |
-| API key | -- | Add as fallback |
-| Model | Gemini 3 Flash | Flash for speed, GPT-4o for quality |
-| Language | Auto | Auto |
-| Selection toolbar | On | On |
-| Custom prompts | Default | Customize if needed |
+| Setting           | Default        | Recommendation                      |
+| ----------------- | -------------- | ----------------------------------- |
+| Subscription key  | --             | Add if subscribed                   |
+| API key           | --             | Add as fallback                     |
+| Model             | Gemini 3 Flash | Flash for speed, GPT-4o for quality |
+| Language          | Auto           | Auto                                |
+| Selection toolbar | On             | On                                  |
+| Custom prompts    | Default        | Customize if needed                 |
