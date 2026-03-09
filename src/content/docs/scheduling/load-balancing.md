@@ -1,5 +1,7 @@
 ---
 title: "Load Balancing"
+sidebar:
+  order: 2
 description: "Automatically distribute reviews evenly across days"
 ---
 
@@ -60,7 +62,7 @@ Average: 98 cards/day
 Max deviation: 18%
 ```
 
-Check **Statistics** > **Workload** to see the smoothed distribution.
+Check **[Statistics](/views/statistics/)** > **Workload** to see the smoothed distribution.
 
 :::note[Works with Easy Days]
 Load balancing complements [Easy Days](/scheduling/easy-days/) -- Easy Days set the base pattern, load balancing smooths within it.

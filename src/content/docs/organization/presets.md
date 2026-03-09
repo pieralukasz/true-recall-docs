@@ -1,5 +1,7 @@
 ---
 title: "FSRS Presets"
+sidebar:
+  order: 3
 description: "Configure different FSRS scheduling profiles for various learning contexts"
 ---
 

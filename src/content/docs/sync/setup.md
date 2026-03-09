@@ -1,5 +1,7 @@
 ---
 title: "Cloud Sync Setup"
+sidebar:
+  order: 1
 description: "Set up True Recall Cloud Sync to keep flashcards synchronized across multiple devices"
 ---
 

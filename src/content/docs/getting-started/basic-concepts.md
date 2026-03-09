@@ -1,5 +1,7 @@
 ---
 title: Basic Concepts
+sidebar:
+  order: 4
 description: Core concepts of True Recall including flashcard types, FSRS algorithm, projects, presets, and day boundaries.
 ---
 
@@ -27,7 +29,7 @@ Cards are stored in your notes and linked to the database for scheduling. Manage
 
 ## FSRS Algorithm
 
-**Free Spaced Repetition Scheduler (FSRS)** is a modern algorithm that predicts when you'll forget something and schedules reviews at the optimal time.
+**[Free Spaced Repetition Scheduler (FSRS)](/concepts/why-fsrs/)** is a modern algorithm that predicts when you'll forget something and schedules reviews at the optimal time.
 
 ### Key FSRS Concepts
 

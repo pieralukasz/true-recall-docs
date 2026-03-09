@@ -1,5 +1,7 @@
 ---
 title: "AI Settings"
+sidebar:
+  order: 3
 description: "Configure AI features including subscription, API keys, models, and custom prompts"
 ---
 

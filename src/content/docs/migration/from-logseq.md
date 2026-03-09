@@ -1,5 +1,7 @@
 ---
 title: Migrating from Logseq
+sidebar:
+  order: 4
 description: How to transition from Logseq to True Recall in Obsidian
 ---
 

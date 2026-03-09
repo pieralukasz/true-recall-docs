@@ -1,5 +1,7 @@
 ---
 title: General Settings
+sidebar:
+  order: 1
 description: Configure True Recall's review interface, editor integration, day boundary, and collection behavior.
 ---
 
@@ -26,7 +28,7 @@ Daily limits are configured **per preset**. Each [FSRS preset](/organization/pre
 |---------|---------|-------------|
 | **Show link status indicators** | On / Off | Inline flashcard counts next to `[[wiki links]]` |
 | **Show status bar widget** | On / Off | Global card counts in Obsidian's bottom bar |
-| **Show quick review in panel** | On / Off | Quick-review section at top of Flashcard Panel |
+| **Show quick review in panel** | On / Off | Quick-review section at top of [Flashcard Panel](/views/flashcard-panel/) |
 
 ## Day Boundary
 

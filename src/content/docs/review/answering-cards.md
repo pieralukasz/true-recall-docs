@@ -1,5 +1,7 @@
 ---
 title: Answering Cards
+sidebar:
+  order: 2
 description: Understand the four-button rating system (Again, Hard, Good, Easy) and how each rating affects FSRS scheduling and card intervals.
 ---
 

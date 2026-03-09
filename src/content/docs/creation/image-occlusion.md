@@ -1,5 +1,7 @@
 ---
 title: Image Occlusion
+sidebar:
+  order: 3
 description: Create flashcards from images by hiding specific regions, with manual drawing tools and AI-powered region detection.
 ---
 
@@ -28,7 +30,7 @@ description: Create flashcards from images by hiding specific regions, with manu
 
 ### Method 3: From Flashcard Panel
 
-1. Open Flashcard Panel for a note with images
+1. Open [Flashcard Panel](/views/flashcard-panel/) for a note with images
 2. Click **Add Image Occlusion**
 3. Select an image
 

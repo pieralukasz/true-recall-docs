@@ -1,5 +1,7 @@
 ---
 title: Custom Sessions
+sidebar:
+  order: 4
 description: Create filtered review sessions with specific parameters to focus on particular projects, tags, card states, or time ranges.
 ---
 

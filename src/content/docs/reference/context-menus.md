@@ -1,131 +1,95 @@
 ---
 title: Context Menus
-description: All right-click context menu actions available throughout True Recall.
+sidebar:
+  order: 2
+description: Current right-click and menu actions available in Dashboard, Flashcard Panel, Review, and file explorer integrations.
 ---
 
-True Recall adds context menu actions throughout Obsidian for quick access to common operations.
+This page lists menu actions that are currently implemented.
 
-## Flashcard Panel Card Menu
+## Dashboard note row menu
 
-Right-click a card in the Flashcard Panel:
+- Study
+- Custom session
+- Go to note
+- Rename
+- Archive / Unarchive
+- Detach from project (project-tree context)
+- Select
 
-| Action | Description |
-|--------|-------------|
-| Edit | Open card in editor |
-| Copy | Copy card content to clipboard |
-| Move | Move card to another note |
-| Change type | Change note type |
-| Delete | Delete the card |
-| Select | Enter selection mode |
+## Dashboard project row menu
 
-### Selection Mode
+- Study project
+- Custom session
+- Go to project note
+- Rename
+- Pick preset
+- Archive project / Unarchive project
 
-When in selection mode: Select all, Deselect all, and Bulk actions (Suspend, Delete, Move, Change type).
+## Flashcard Panel card menu
 
-## Dashboard Note Row Menu
+- Edit
+- Copy
+- Move
+- Change type
+- Make reversed / Remove reversed (when eligible)
+- AI Rewrite
+- Forget
+- Suspend / Unsuspend
+- Delete
+- Select
 
-Right-click a note in Dashboard:
+## Flashcard Panel header menu
 
-| Action | Description |
-|--------|-------------|
-| Study | Start review session |
-| Custom session | Open custom session dialog |
-| Go to note | Navigate to the note |
-| Rename | Rename the note |
-| Archive | Archive the note |
-| Unarchive | Remove archive flag |
-| Detach from project | Remove project assignment |
-| Select | Enter selection mode |
+- Refresh
+- Open source note
+- Generate from highlights (if available)
+- Start review
+- Browse in card browser
+- Copy to clipboard
+- Export as CSV
+- Forget all flashcards
+- Delete all flashcards
 
-### Multi-Select Mode
+## Review actions menu
 
-When notes are selected: Study all, Archive all, Move to project, Delete cards.
+- Type in mode toggle
+- Undo last answer (if available)
+- Move card
+- Suspend card
+- Bury card
+- Bury note
+- Forget card (if available)
+- Edit card
+- Change note type
+- Add flashcard
+- Add image occlusion
+- Open source note
 
-## Dashboard Project Menu
+## File explorer menu additions
 
-Right-click a project in Dashboard:
+Markdown files:
 
-| Action | Description |
-|--------|-------------|
-| Study | Review all cards in project |
-| Custom session | Configure filtered session |
-| Expand/Collapse | Toggle visibility |
-| Set preset | Change FSRS preset |
-| Create sub-project | Add child project |
+- Review flashcards from this note
+- Open flashcard panel
 
-## Card Browser Row Menu
+Folders:
 
-Right-click a card in Card Browser:
+- Create project note (creates folder note with `include: folder`)
 
-| Action | Description |
-|--------|-------------|
-| Edit | Open card editor |
-| Preview | Show in preview panel |
-| Copy | Copy card content |
-| Suspend | Pause reviews |
-| Unsuspend | Resume reviews |
-| Move | Transfer to another note |
-| Change type | Change note type |
-| Change preset | Assign different preset |
-| Delete | Remove card |
+## Card Browser note
 
-### Multi-Select in Card Browser
+Right-click in Card Browser selects rows/cards for bulk actions. There is no dedicated per-row action menu equivalent to older docs.
 
-When cards are selected: Suspend/Unsuspend selected, Delete selected, Move selected, Change type, Change preset.
+## Named actions vs UI labels
 
-## File Explorer Menu
+There are no separate context-menu items named exactly:
 
-Right-click a note in file explorer:
+- Assign to project
+- Move to project
+- Create sub-project
 
-| Action | Description |
-|--------|-------------|
-| Review flashcards | Start review for this note |
-| Open in panel | Open note in Flashcard Panel |
-| Archive | Archive the note |
-| Add flashcard uid | Add UID to frontmatter |
+But these capabilities are available through Dashboard workflows:
 
-## Editor Selection Menu
-
-Right-click selected text in editor:
-
-| Action | Description |
-|--------|-------------|
-| Generate basic card | AI generate Q&A |
-| Generate cloze | AI generate cloze |
-| Generate reversed | AI generate reversed |
-| Quick add | Add as basic card immediately |
-
-Only shows when Selection Toolbar is disabled.
-
-## Review Session Menu
-
-Click menu button during review:
-
-| Action | Description |
-|--------|-------------|
-| Edit card | Edit current card |
-| Suspend card | Pause this card |
-| Bury card | Hide until tomorrow |
-| Bury note | Hide all siblings |
-| Move card | Transfer to another note |
-| Add flashcard | Create new card |
-| Change preset | Switch FSRS preset |
-| Undo | Undo last action |
-| End session | Exit review |
-
-## Statistics Chart Menu
-
-Right-click on charts:
-
-| Action | Description |
-|--------|-------------|
-| Export as PNG | Save chart image |
-| View full data | Show data table |
-| Zoom in/out | Adjust chart view |
-| Reset zoom | Return to default |
-
-## Tips
-
-- Right-click is often faster than finding commands in the palette
-- Select multiple items, then right-click for bulk operations
-- On mobile, long-press instead of right-click
+- assign/move: drag-and-drop reparenting
+- create sub-project structure: note-on-note create-project flow or create-project from selected notes

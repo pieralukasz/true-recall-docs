@@ -1,5 +1,7 @@
 ---
 title: "Backup & Restore"
+sidebar:
+  order: 1
 description: "Protect your flashcard data with automatic and manual backups, and restore from any backup point"
 ---
 
@@ -104,7 +106,7 @@ Settings > Data & Backup > Manual backup > Restore...
 ### After Restore
 
 1. Verify cards appear correctly
-2. Check Dashboard for expected counts
+2. Check [Dashboard](/views/dashboard/) for expected counts
 3. Resume reviewing
 
 ## Backup Status

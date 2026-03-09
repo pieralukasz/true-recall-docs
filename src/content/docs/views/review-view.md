@@ -1,5 +1,7 @@
 ---
 title: Review View
+sidebar:
+  order: 3
 description: The flashcard review interface with keyboard shortcuts, inline editing, undo, and session persistence.
 ---
 
@@ -73,6 +75,18 @@ Press `Cmd/Ctrl+Z` to undo: card returns to queue, FSRS parameters restored. Can
 ## Session Persistence
 
 If you close Obsidian mid-session, progress is saved and the session resumes where you left off.
+
+## Performance and scaling
+
+- Review uses cached FSRS scheduling engines for preset-based scheduling and interval preview.
+- In global sessions, preset context is resolved once per source note and reused for sibling cards.
+- Behavior is unchanged: queue composition, per-preset limits, and note/project/default preset resolution are the same as before.
+
+### Large collection troubleshooting
+
+- Changing preset with `P` updates the source note's `fsrs_preset` assignment; it does not immediately reschedule all cards.
+- Use **Settings -> FSRS -> Preview reschedule** when you need full collection-wide rescheduling.
+- Session start can still be the most expensive phase on very large collections because eligible cards must be scanned.
 
 ## Fullscreen vs Panel
 

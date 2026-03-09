@@ -1,5 +1,7 @@
 ---
 title: "AI Answer Grading"
+sidebar:
+  order: 2
 description: "Semantic evaluation of typed answers during review using AI"
 ---
 

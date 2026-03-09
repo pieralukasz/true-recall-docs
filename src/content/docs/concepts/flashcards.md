@@ -1,5 +1,7 @@
 ---
 title: Flashcards
+sidebar:
+  order: 1
 description: "How flashcards work in True Recall: types, storage, collection, states, and editing."
 ---
 
@@ -64,7 +66,7 @@ When you "collect" a flashcard, True Recall:
 
 The database (`.true-recall/true-recall-{id}.db`) stores FSRS scheduling data, review history, and statistics.
 
-## The Collection Process
+## The [Collection](/creation/collecting/) Process
 
 New flashcard blocks aren't immediately added to the review queue. They must be **collected**:
 
@@ -115,3 +117,7 @@ In the [Card Browser](/views/card-browser/):
 
 1. Select multiple cards (shift-click, ctrl-click)
 2. Use bulk actions: Suspend/Unsuspend, Delete, Change note type, Move to different note, Change preset
+
+## Writing Good Flashcards
+
+Knowing the syntax is only half the story — how you phrase your cards matters just as much. See [Best Practices](/creation/best-practices/) for principles, examples, and common mistakes to avoid.

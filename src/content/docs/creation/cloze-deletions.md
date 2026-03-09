@@ -1,5 +1,7 @@
 ---
 title: Cloze Deletions
+sidebar:
+  order: 2
 description: "Create fill-in-the-blank flashcards using cloze deletion syntax with hints, rich formatting, and multiple deletions."
 ---
 

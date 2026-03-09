@@ -1,5 +1,7 @@
 ---
 title: "FSRS Optimization"
+sidebar:
+  order: 1
 description: "Train FSRS parameters on your review history for personalized scheduling"
 ---
 
@@ -31,7 +33,7 @@ Changing a note's preset does **not** transfer historical reviews to the new pre
 **Archived notes and optimization**: Review history from archived notes is included in FSRS optimization. This is intentional -- your past reviews are valid calibration data for how your memory works, regardless of whether you're currently studying that material. Archiving a note only stops future reviews from being scheduled; it doesn't remove historical data from the optimizer.
 :::
 
-Check your review count in Statistics before optimizing.
+Check your review count in [Statistics](/views/statistics/) before optimizing.
 
 ## Running Optimization
 

@@ -1,5 +1,7 @@
 ---
 title: "Note Types"
+sidebar:
+  order: 2
 description: "Templates that define how flashcards are created from your notes with fields, templates, and styling"
 ---
 

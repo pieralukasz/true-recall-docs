@@ -1,5 +1,7 @@
 ---
 title: Migrating from RemNote
+sidebar:
+  order: 3
 description: How to transition from RemNote to True Recall in Obsidian
 ---
 

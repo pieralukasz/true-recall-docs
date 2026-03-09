@@ -1,5 +1,7 @@
 ---
 title: Keyboard Shortcuts
+sidebar:
+  order: 5
 description: Complete reference for all True Recall keyboard shortcuts during review, in Card Browser, and globally.
 ---
 
@@ -44,7 +46,7 @@ Quick reference for all True Recall keyboard shortcuts.
 | `Escape` | End session |
 | `?` | Show keyboard shortcuts help |
 
-## Card Browser
+## [Card Browser](/views/card-browser/)
 
 | Key | Action |
 |-----|--------|
@@ -55,7 +57,7 @@ Quick reference for all True Recall keyboard shortcuts.
 | `Cmd/Ctrl + A` | Select all |
 | `Escape` | Clear selection |
 
-## Flashcard Panel
+## [Flashcard Panel](/views/flashcard-panel/)
 
 | Key | Action |
 |-----|--------|

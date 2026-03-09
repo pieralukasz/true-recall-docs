@@ -1,5 +1,7 @@
 ---
 title: "CSV Export"
+sidebar:
+  order: 5
 description: "Export flashcards to CSV or TSV format for analysis, backup, or importing into other applications"
 ---
 

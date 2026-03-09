@@ -1,5 +1,7 @@
 ---
 title: "Device Databases"
+sidebar:
+  order: 2
 description: "Work with multiple device databases for different machines or separate study profiles"
 ---
 

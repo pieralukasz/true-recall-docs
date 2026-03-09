@@ -1,5 +1,7 @@
 ---
 title: Migrating from Anki
+sidebar:
+  order: 1
 description: "Complete guide to importing Anki decks: note types, media, scheduling conversion, deck hierarchy, and review history."
 ---
 
@@ -181,7 +183,7 @@ Anki Import/
 - **Leaf notes** have cards linked via `flashcard_uid` in frontmatter
 - Each level gets a hierarchical tag (e.g., `input/Math/Calculus/Integrals`)
 
-Projects are created automatically from deck names, so you can immediately review by project from the Dashboard.
+Projects are created automatically from deck names, so you can immediately review by project from the [Dashboard](/views/dashboard/).
 
 ## Duplicate Detection
 
@@ -211,7 +213,7 @@ Imported and native cards coexist in the same system — all use FSRS scheduling
 
 ### Cards Not Showing After Import
 
-- Open the Flashcard Panel — cards should appear under their source notes
+- Open the [Flashcard Panel](/views/flashcard-panel/) — cards should appear under their source notes
 - Check that notes were created in the `Anki Import` folder
 - Reload the plugin if needed
 

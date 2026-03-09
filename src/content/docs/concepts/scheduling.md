@@ -1,5 +1,7 @@
 ---
 title: Scheduling
+sidebar:
+  order: 2
 description: "How True Recall schedules reviews: day boundaries, learning steps, intervals, review order, and daily limits."
 ---
 

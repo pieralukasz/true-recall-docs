@@ -1,5 +1,7 @@
 ---
 title: "Database Integrity Check"
+sidebar:
+  order: 3
 description: "Scan your database for orphaned cards, missing references, and corrupted data"
 ---
 
@@ -109,7 +111,7 @@ For some issues, you can choose:
 
 ## After Repair
 
-1. Review Dashboard for changes
+1. Review [Dashboard](/views/dashboard/) for changes
 2. Check affected notes
 3. Resume normal use
 

@@ -1,204 +1,89 @@
 ---
 title: Dashboard
-description: Your command center showing today's workload, project hierarchy, notes with flashcards, and a review activity heatmap.
+sidebar:
+  order: 1
+description: "Actual Dashboard behavior in current True Recall builds: project/note workflows, archiving, and limitations."
 ---
 
-The **Dashboard** is your command center for True Recall. It shows today's workload, project hierarchy, all notes with flashcards, and a review heatmap.
+Dashboard is the main operational view for projects, notes, and daily workload.
 
-## Opening the Dashboard
+## Main controls
 
-- **Ribbon icon** -- Click the dashboard icon (layout-grid)
-- **Command** -- Cmd/Ctrl + P → "Open dashboard"
+- Tabs: **Projects**, **Notes**, and conditional **Orphaned**
+- Search for note/project names
+- **Archived** toggle chip to show/hide archived entities
 
-## Dashboard Layout
+## Projects tab (current behavior)
 
-```
-+-------------------------------------------------------------+
-|  [Today: Due 42 | New 15 | Learn 8]  Est. 25 min   [Study] |
-+-------------------------------------------------------------+
-|  Search notes and projects...                                |
-+-------------------------------------------------------------+
-|  [Projects] [Notes]                                          |
-+-------------------------------------------------------------+
-|                                                              |
-|  Project Tree / Note List                                    |
-|                                                              |
-|  +- Biology (120 cards, 15 due)                              |
-|  |  +- Anatomy (45 cards, 8 due)                             |
-|  |  +- Physiology (75 cards, 7 due)                          |
-|  +- Chemistry (80 cards, 12 due)                             |
-|  +- Physics (60 cards, 15 due)                               |
-|                                                              |
-+-------------------------------------------------------------+
-|  [Calendar Heatmap]                                          |
-+-------------------------------------------------------------+
-```
+### Project row context menu
 
-## Top Action Bar
+- Study project
+- Custom session
+- Go to project note
+- Rename
+- Pick preset
+- Archive project / Unarchive project
 
-### Today's Stats
+### Drag-and-drop flows
 
-| Badge | Meaning |
-|-------|---------|
-| **Due** | Review cards due today |
-| **New** | New cards available |
-| **Learn** | Cards in learning phase |
+- project → project (reparent)
+- note → project (reparent)
+- note → note (create new project from two notes)
+- drag to root drop zone (unnest)
 
-### Estimated Time
+## Notes tab (current behavior)
 
-Predicted time to complete today's reviews (based on average review time).
+### Note row context menu
 
-### Study Button
+- Study
+- Custom session
+- Go to note
+- Rename
+- Archive / Unarchive
+- Select
 
-Start reviewing all due cards across all projects.
+`Detach from project` is a project-tree context action (Projects tab note rows).
 
-## Search
+### Selection mode actions
 
-The search bar filters:
+- All
+- Create project
+- Archive
+- Study
+- Cancel
 
-- **Projects** -- By name
-- **Notes** -- By title or path
+## Bottom action bar
 
-Results update as you type.
+Current buttons:
 
-## Projects Tab
+- Get Shared
+- Import File
 
-Shows hierarchical project tree:
+## Archived behavior
 
-### Project Row
+- Archived notes and descendants of archived projects are hidden by default
+- Enabling **Archived** shows them
 
-```
-+- Biology -------------------------------------------------+
-|  120 cards | 15 due | Preset: medical-school            > |
-+-----------------------------------------------------------+
-```
+## Performance and scaling
 
-- **Card count** -- Total cards in project (including children)
-- **Due count** -- Cards due today
-- **Preset indicator** -- Click to change preset
+- Dashboard recompute builds shared in-memory indexes (by source UID and note) and a shared retrievability cache.
+- Project and note rows compute queues from scoped card subsets instead of repeatedly scanning all active cards.
+- Behavior is unchanged: queue rules, daily limits, and note/project/default preset resolution stay the same.
 
-### Project Actions
+## Troubleshooting large collections
 
-Right-click a project:
+- Initial dashboard load/recompute still scales with collection size and can be the most expensive step.
+- The biggest gains should be visible in repeated project/note stats refreshes and tab interactions.
+- If the view is still heavy, keep **Archived** hidden by default and reduce visible rows with search/filter.
 
-| Action | Description |
-|--------|-------------|
-| Study | Start review for this project |
-| Custom session | Configure filtered session |
-| Expand/Collapse | Toggle children visibility |
-| Set preset | Change FSRS preset |
+## Known limitations
 
-### Project Hierarchy
+1. Duplicate basenames can make navigation ambiguous.
+2. Some project-note mapping paths are name-based and can collide on duplicate names.
+3. Assign/move/create-subproject capabilities are exposed as drag-and-drop/selection workflows, not as dedicated menu labels.
 
-Expand parent projects to see children:
+## Related
 
-```
-v Medicine (500 cards, 42 due)
-  +- Anatomy (120 cards, 15 due)
-  |  +- Upper Body (45 cards, 8 due)
-  |  +- Lower Body (75 cards, 7 due)
-  +- Physiology (180 cards, 12 due)
-  +- Pharmacology (200 cards, 15 due)
-```
-
-## Notes Tab
-
-Shows all notes with flashcards:
-
-### Note Row
-
-```
-+- Neural Networks Basics ----------------------------------+
-|  15 cards | 3 new, 2 learning, 10 review                 |
-|  Project: AI/ML | Preset: default                      > |
-+-----------------------------------------------------------+
-```
-
-### Note Columns
-
-| Column | Description |
-|--------|-------------|
-| Title | Note name |
-| Cards | Total flashcards |
-| Status | New/Learning/Review breakdown |
-| Project | Assigned project |
-| Preset | FSRS preset |
-
-### Note Actions
-
-Right-click a note:
-
-| Action | Description |
-|--------|-------------|
-| Study | Review cards from this note |
-| Custom session | Configure session |
-| Go to note | Open in editor |
-| Archive | Exclude from reviews |
-| Detach from project | Remove project assignment |
-| Select | Multi-select for bulk actions |
-
-### Note Sorting
-
-Click column headers to sort:
-- By card count
-- By due count
-- By name
-- By project
-
-### Archive Toggle
-
-Toggle "Show archived" to see/hide archived notes.
-
-## Calendar Heatmap
-
-Bottom of dashboard shows review activity:
-
-```
-Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
-```
-
-- **Empty** -- No reviews
-- **Light** -- Few reviews
-- **Dark** -- Many reviews
-
-Hover a day to see exact count.
-
-## Bottom Action Bar
-
-When items are selected:
-
-| Button | Action |
-|--------|--------|
-| Study | Review selected items |
-| Archive | Archive selected notes |
-| Move | Move to different project |
-| Delete | Delete selected cards |
-
-## Dashboard Widgets in Notes
-
-Embed dashboard views in any note:
-
-````markdown
-```true-recall-dashboard
-```
-````
-
-See [CodeBlock Widgets](/views/codeblock-widgets/) for all options.
-
-## Tips
-
-### 1. Start Here Daily
-
-Make the dashboard your first stop each day to see what's due.
-
-### 2. Use Projects for Organization
-
-Group related notes into projects for focused study sessions.
-
-### 3. Check the Heatmap
-
-The heatmap motivates consistent daily reviews.
-
-### 4. Search Before Creating
-
-Use search to find if you already have cards on a topic.
+- [Projects](/organization/projects/)
+- [Archiving](/organization/archiving/)
+- [Card Browser](/views/card-browser/)

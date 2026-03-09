@@ -1,5 +1,7 @@
 ---
 title: FSRS Settings
+sidebar:
+  order: 2
 description: "Configure FSRS scheduling: presets, retention, daily limits, learning steps, review order, weights, and optimization."
 ---
 

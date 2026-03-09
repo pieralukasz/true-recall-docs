@@ -1,33 +1,34 @@
 ---
 title: Frontmatter Fields Reference
-description: All YAML frontmatter fields used by True Recall for flashcard linking, projects, presets, and archiving.
+sidebar:
+  order: 3
+description: Canonical True Recall frontmatter contract for note IDs, projects, archiving, and FSRS preset inheritance.
 ---
 
-True Recall uses YAML frontmatter to store metadata about notes and their flashcards.
+True Recall currently relies on the following frontmatter fields as canonical API.
 
-## True Recall Fields
+## Canonical fields
 
-### flashcard_uid
+### `flashcard_uid`
 
-Unique identifier linking note to its flashcards.
+Stable note identifier linking cards to the source note.
 
-**Type:** String (auto-generated UUID)
+- Type: string
+- Auto-generated as short hex (8 chars), e.g. `a1b2c3d4`
+- Should stay stable once assigned
 
 ```yaml
 ---
-flashcard_uid: abc123-def456-ghi789
+flashcard_uid: a1b2c3d4
 ---
 ```
 
-- Auto-added when first card is collected
-- Must be unique across vault
-- Don't modify unless you know what you're doing
+### `parents`
 
-### parents
+Assign a note to one or more projects (parent notes).
 
-Assign note to one or more projects by declaring parent notes as wiki-links.
-
-**Type:** Array of wiki-link strings
+- Type: array of wiki-links
+- Multi-parent supported
 
 ```yaml
 ---
@@ -37,32 +38,13 @@ parents:
 ---
 ```
 
-- Each entry is a wiki-link resolved to a note path
-- The referenced note becomes a project in the Dashboard
-- A note can have multiple parents (belongs to multiple projects)
-- Remove all entries (or the field) to make the note unassigned
+### `include`
 
-### fsrs_preset
+Automatically includes notes from the same folder as children.
 
-Set FSRS preset for this note's cards.
-
-**Type:** String (preset name)
-
-```yaml
----
-fsrs_preset: medical-school
----
-```
-
-- Overrides project preset
-- Must match existing preset name
-- Case-sensitive
-
-### include
-
-Auto-include folder contents as children of this note.
-
-**Type:** String (currently only `"folder"` is supported)
+- Type: string
+- Supported value: `folder`
+- Same-folder only, non-recursive
 
 ```yaml
 ---
@@ -70,15 +52,12 @@ include: folder
 ---
 ```
 
-- All notes in the same folder become children of this note
-- No need to add `parents` to each child note
-- Useful for folder-structured vaults
+### `archive`
 
-### archive
+Exclude note from active study.
 
-Exclude note (and its descendants if it's a project) from reviews.
-
-**Type:** String
+- Type: boolean
+- Canonical archive marker: `archive: true`
 
 ```yaml
 ---
@@ -86,82 +65,56 @@ archive: true
 ---
 ```
 
-- Archived notes hidden from Dashboard (by default)
-- Cards not included in review queue
-- Reversible — remove to unarchive
+To unarchive, remove `archive` (or set `false`).
 
-## Field Priority
+### `fsrs_preset`
 
-When multiple fields could apply for FSRS preset resolution:
+Select preset by name for the note.
 
-| Priority | Source |
-|----------|--------|
-| 1 (highest) | Note's `fsrs_preset` |
-| 2 | Immediate parent project's preset |
-| 3 | Grandparent project's preset |
-| 4 | Default preset |
-
-## Complete Example
+- Type: string
+- Must match existing preset name
 
 ```yaml
 ---
-flashcard_uid: abc123-def456-ghi789
-parents:
-  - "[[Medicine/Anatomy]]"
-fsrs_preset: intensive
-tags:
-  - biology
-  - exam-prep
----
-```
-
-## Common Patterns
-
-### Course Notes
-
-```yaml
----
-parents:
-  - "[[Biology 101]]"
-fsrs_preset: exam-prep
----
-```
-
-### Project Note with Folder Inclusion
-
-```yaml
----
-include: folder
 fsrs_preset: medical-school
 ---
 ```
 
-### Shared Notes (Multiple Projects)
+## Preset inheritance
+
+Resolution order:
+
+1. Note `fsrs_preset`
+2. Parent chain (`parents`) nearest ancestor with `fsrs_preset`
+3. Default preset
+
+When review is launched from a specific project context, that project is checked first in parent-tier resolution.
+
+## Canonical example
 
 ```yaml
 ---
+flashcard_uid: a1b2c3d4
 parents:
-  - "[[Medicine/Anatomy]]"
-  - "[[Biology/Systems]]"
+  - "[[Medicine]]"
+include: folder
+archive: true
+fsrs_preset: intensive
 ---
 ```
 
-## Editing Frontmatter
+## Known limitations
 
-### In Obsidian
+1. Avoid aliases in `parents` (for example `[[Target|Alias]]`).
+- Alias form can break parent resolution.
 
-Click "..." at top right of note -> "Edit frontmatter"
+2. Prefer unique basenames for project notes.
+- Duplicate basenames can lead to ambiguous navigation/filtering.
 
-### Manually
+3. `include: folder` does not include subfolders.
 
-Edit YAML content between `---` delimiters at top of note.
+## Related
 
-## Troubleshooting
-
-### flashcard_uid Conflicts
-
-If two notes have same UID: Run [integrity check](/data/integrity-check/) to detect and repair duplicates.
-
-### Invalid YAML
-
-If frontmatter has syntax errors, Obsidian shows a warning. Fix YAML syntax and reload.
+- [Projects concept](/concepts/projects/)
+- [Projects organization](/organization/projects/)
+- [Archiving](/organization/archiving/)

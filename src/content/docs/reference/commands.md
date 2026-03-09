@@ -1,69 +1,59 @@
 ---
 title: Commands Reference
-description: Complete list of all True Recall commands available via Command Palette.
+sidebar:
+  order: 1
+description: Commands currently registered in True Recall and available in Command Palette.
 ---
 
-All commands are available via the Command Palette (`Cmd/Ctrl+P`).
+All commands below are currently registered.
 
-## View Commands
+## View
 
-| Command | Description |
-|---------|-------------|
-| Open dashboard | Open the main dashboard view |
-| Open flashcard panel | Open the sidebar panel for current note |
-| Open card browser | Open the card browser for all flashcards |
-| Open statistics panel | Open the statistics view |
-| Open FSRS simulator | Open the FSRS interval simulator |
+- Open flashcard panel
+- Open dashboard
+- Open card browser
+- Open FSRS simulator
 
-## Review Commands
+## Review
 
-| Command | Description |
-|---------|-------------|
-| Review flashcards from current note | Start review session for active note |
-| Review today's new cards | Start review of all due cards |
+- Review flashcards from current note
+- Review today's new cards
 
-## Card Management Commands
+## Authoring / cards
 
-| Command | Description |
-|---------|-------------|
-| Import flashcards | Open the import studio for AI generation |
-| Create image occlusion card | Open image occlusion editor |
-| Manage note types | Open note type manager |
-| Add flashcard uid to current note | Add `flashcard_uid` to frontmatter |
+- Manage note types
+- Import flashcards
+- Create image occlusion card
+- Add flashcard uid to current note
+- Undo last flashcard action
 
-## Data Commands
+## Data I/O
 
-| Command | Description |
-|---------|-------------|
-| Create database backup | Manually create backup |
-| Import Anki deck (.apkg) | Import from Anki |
-| Export to Anki (.apkg) | Export to Anki format |
-| Export as CSV/TSV | Export to spreadsheet format |
-| Sync cloud data | Synchronize with True Recall Cloud |
+- Create database backup
+- Import Anki deck (.apkg)
+- Export to Anki (.apkg)
+- Export as CSV/TSV
 
-## Note Management Commands
+## Note metadata
 
-| Command | Description |
-|---------|-------------|
-| Set FSRS preset for current note | Set preset via frontmatter |
-| Archive current note | Archive note (exclude from reviews) |
-| Unarchive current note | Remove archive flag |
+- Set FSRS preset for current note
+- Archive current note
+- Unarchive current note
 
-## Utility Commands
+## Dashboard helper commands
 
-| Command | Description |
-|---------|-------------|
-| Undo last flashcard action | Undo most recent operation |
-| Insert project dashboard | Insert dashboard code block |
-| Create master dashboard note | Create new dashboard note |
+- Insert project dashboard
+- Create master dashboard note
 
-## Migration Commands
+`Insert project dashboard` inserts:
 
-| Command | Description |
-|---------|-------------|
-| Migrate legacy projects to parents | Migration utility |
-| Migrate flashcards to block format | Convert inline to block format |
+````markdown
+```true-recall-project
+```
+````
 
----
+## Not currently registered
 
-To assign hotkeys: Settings -> Hotkeys -> search "True Recall".
+- Open statistics panel
+- Sync cloud data
+- Migration commands

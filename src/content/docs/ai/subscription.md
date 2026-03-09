@@ -1,5 +1,7 @@
 ---
 title: "True Recall AI Subscription"
+sidebar:
+  order: 3
 description: "Hassle-free access to AI features without managing API keys"
 ---
 
@@ -14,7 +16,6 @@ The **True Recall AI Subscription** provides hassle-free access to AI features w
 | AI flashcard generation | No | Yes |
 | AI answer grading | No | Yes |
 | AI image occlusion detection | No | Yes |
-| Natural language queries | No | Yes |
 | Priority support | No | Yes |
 
 ## Subscribing
@@ -55,7 +56,6 @@ Each AI operation uses "generations":
 | Generate flashcards (large selection) | 2-3 |
 | AI answer grading | 0.1 |
 | Image occlusion detection | 2 |
-| Natural language query | 0.5 |
 
 ### Approximate Monthly Allowance
 

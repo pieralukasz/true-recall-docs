@@ -14,6 +14,13 @@ All paths are relative to `src/content/docs/`.
 - `getting-started/installation.md` — Installation via BRAT, manual, or from source
 - `getting-started/quick-start.md` — 5-minute quickstart guide
 
+## Creation (4 pages)
+
+- `creation/basic-cards.md` — Block format and inline syntax for basic flashcards
+- `creation/best-practices.md` — How to write effective flashcards — principles, examples, and common mistakes
+- `creation/image-occlusion.md` — Image occlusion card creation
+- `creation/selection-toolbar.md` — AI-powered text selection to card generation
+
 ## Migration (4 pages)
 
 - `migration/from-anki.md` — Migrating from Anki
@@ -36,7 +43,7 @@ All paths are relative to `src/content/docs/`.
 
 - `views/flashcard-panel.md` — Main sidebar panel for card management
 - `views/review-view.md` — Review session interface
-- `views/statistics-view.md` — Analytics dashboard
+- `views/statistics.md` — Comprehensive analytics dashboard with FSRS insights, study patterns, retention tracking, workload forecasting, and cross-project comparison
 - `views/session-builder.md` — Custom review session configuration
 - `views/projects-view.md` — Project management interface
 - `views/fsrs-simulator.md` — Interactive FSRS visualization tool

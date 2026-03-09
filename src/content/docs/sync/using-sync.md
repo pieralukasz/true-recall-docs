@@ -1,5 +1,7 @@
 ---
 title: "Using Cloud Sync"
+sidebar:
+  order: 2
 description: "Daily workflow and best practices for keeping your True Recall data synchronized across devices"
 ---
 
@@ -77,7 +79,7 @@ Before switching:
 
 ### Reviewing Conflicts
 
-In Card Browser:
+In [Card Browser](/views/card-browser/):
 
 1. Search: `conflict:true`
 2. Review cards with conflicts

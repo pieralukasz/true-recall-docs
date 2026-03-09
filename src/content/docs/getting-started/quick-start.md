@@ -1,5 +1,7 @@
 ---
 title: Quick Start
+sidebar:
+  order: 3
 description: Create and review your first flashcards in 5 minutes
 ---
 
@@ -47,13 +49,21 @@ What is the capital of France? ::Paris
 
 ## Collect your cards
 
-New flashcards need to be "collected" into the database:
+New flashcards need to be "[collected](/creation/collecting/)" into the database:
 
 1. Click the brain icon in the left ribbon to open the **[Flashcard Panel](/views/flashcard-panel/)**
 2. Your uncollected flashcards appear in the "Uncollected" section
 3. Click **Collect** to add them to your database
 
 Each card moves to the main list with a green "New" badge.
+
+:::tip[The Flashcard Panel is your home base]
+The [Flashcard Panel](/views/flashcard-panel/) is one of the most important views in True Recall. Keep it open while working — it automatically syncs with whatever note you're editing and shows:
+
+- **Card status** — new, learning, and review counts at a glance
+- **Quick Review** — answer a due card without opening a full session
+- **Collect & Generate** — add cards to the database or generate new ones with AI
+:::
 
 ## Start reviewing
 

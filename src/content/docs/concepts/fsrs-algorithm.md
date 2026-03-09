@@ -1,9 +1,11 @@
 ---
 title: FSRS Algorithm
+sidebar:
+  order: 4
 description: "How FSRS v6 works: stability, difficulty, retrievability, weights, states, and optimization."
 ---
 
-True Recall uses **FSRS v6** (Free Spaced Repetition Scheduler), a modern spaced repetition algorithm that significantly outperforms the classic SM-2 algorithm used by Anki.
+True Recall uses **FSRS v6** (Free Spaced Repetition Scheduler), a modern spaced repetition algorithm that significantly outperforms the classic SM-2 algorithm used by Anki. For a comparison with Leitner, SM-2, and other approaches, see [Why FSRS v6](/concepts/why-fsrs/).
 
 ## What is FSRS?
 

@@ -1,5 +1,7 @@
 ---
 title: Selection Toolbar
+sidebar:
+  order: 4
 description: The most efficient way to create flashcards — select text and let AI generate cards instantly.
 ---
 

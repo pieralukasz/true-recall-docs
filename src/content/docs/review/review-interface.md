@@ -1,5 +1,7 @@
 ---
 title: Review Interface
+sidebar:
+  order: 1
 description: Navigate the review view to study flashcards with spaced repetition, including card display, answer buttons, and session management.
 ---
 
@@ -184,6 +186,12 @@ After reviewing all due cards, see the summary screen:
 |     [Review More]  [Close]          |
 +-------------------------------------+
 ```
+
+## Performance and scaling
+
+- Preset-based scheduling/preview reuses cached FSRS engines instead of rebuilding them for each card.
+- In global sessions, preset resolution is memoized per source note and reused for sibling cards.
+- Queue and scheduling semantics are unchanged: same limits and same note/project/default preset resolution.
 
 ## Fullscreen vs Side Panel
 

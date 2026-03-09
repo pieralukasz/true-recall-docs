@@ -1,5 +1,7 @@
 ---
 title: "AI Flashcard Generation"
+sidebar:
+  order: 1
 description: "Automatically generate flashcards from your notes using AI models"
 ---
 
@@ -53,7 +55,7 @@ Select text in any note and the toolbar appears:
 
 ### 2. Flashcard Panel
 
-1. Open Flashcard Panel
+1. Open [Flashcard Panel](/views/flashcard-panel/)
 2. Click **Generate**
 3. Choose source:
    - **Current note** -- All content

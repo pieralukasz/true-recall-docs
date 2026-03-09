@@ -1,5 +1,7 @@
 ---
 title: Introduction
+sidebar:
+  order: 1
 description: Learn what True Recall is and how it can help you remember everything you learn
 ---
 
@@ -21,7 +23,7 @@ Open the note, open the [Flashcard Panel](/views/flashcard-panel/), and all its 
 ## How it works
 
 1. **Create** flashcards — select text and use the [Selection Toolbar](/creation/selection-toolbar/), or write them manually in [block format](/creation/basic-cards/)
-2. **Collect** cards into the database via the Flashcard Panel
+2. **[Collect](/creation/collecting/)** cards into the database via the Flashcard Panel
 3. **Review** when cards come due — rate each card Again, Hard, Good, or Easy
 4. **FSRS v6** calculates the optimal time to show each card again
 
@@ -30,12 +32,11 @@ The algorithm tracks two things per card: **stability** (how long until you migh
 ## Key Features
 
 - **AI-Powered Generation** — Select text and instantly create Q&A cards, cloze deletions, or reversed cards
-- **FSRS v6 Algorithm** — State-of-the-art spaced repetition that adapts to your patterns
+- **[FSRS v6 Algorithm](/concepts/why-fsrs/)** — State-of-the-art spaced repetition that adapts to your patterns
 - **Image Occlusion** — Create flashcards from images by hiding regions, with AI auto-detection
-- **Type-in Mode** — Type answers and get AI-powered semantic grading
+- **Type-in Mode** — Type answers and get AI-powered semantic grading or diff
 - **Note Types** — Anki-style templates with customizable fields
 - **Projects** — Organize notes into hierarchies with per-project FSRS presets
-- **Natural Language Queries** — Ask about your stats in plain English
 - **Cloud Sync** — Sync progress across devices
 - **25+ Widgets** — Embed analytics and gamification in your notes
 
@@ -58,16 +59,16 @@ Project: "Science Fundamentals"
 
 ## True Recall vs Anki
 
-| | True Recall | Anki |
-|---|---|---|
-| **Where cards live** | Inside your notes | Separate from source material |
-| **Algorithm** | FSRS v6 | FSRS v6 (optional) or SM-2 |
-| **Organization** | Notes belong to multiple projects | 1 card = 1 deck |
-| **AI Generation** | Built-in | No |
-| **Image Occlusion** | Built-in with AI detection | Plugin required |
-| **Type-in Grading** | AI semantic grading | Exact match only |
-| **Cloud Sync** | Built-in | Paid add-on |
-| **Runs in** | Obsidian | Standalone app |
+|                      | True Recall                       | Anki                          |
+| -------------------- | --------------------------------- | ----------------------------- |
+| **Where cards live** | Inside your notes                 | Separate from source material |
+| **Algorithm**        | FSRS v6                           | FSRS v6 (optional) or SM-2    |
+| **Organization**     | Notes belong to multiple projects | 1 card = 1 deck               |
+| **AI Generation**    | Built-in                          | No                            |
+| **Image Occlusion**  | Built-in with AI detection        | Plugin required               |
+| **Type-in Grading**  | AI semantic grading               | Exact match only              |
+| **Cloud Sync**       | Built-in                          | Paid add-on                   |
+| **Runs in**          | Obsidian                          | Standalone app                |
 
 :::tip[Coming from Anki?]
 See the [migration guide](/migration/from-anki/) for a complete walkthrough — note types, media, scheduling, everything transfers.

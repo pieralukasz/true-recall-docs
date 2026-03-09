@@ -1,369 +1,182 @@
 ---
 title: CodeBlock Widgets
-description: Embed 25+ interactive widgets in any note using code blocks to create custom dashboards and track your learning progress.
+sidebar:
+  order: 6
+description: Current registered widget IDs and supported codeblock options in True Recall.
 ---
 
-True Recall provides **25+ embeddable widgets** that you can add to any note using code blocks. Create custom dashboards, track progress, and visualize your learning.
+Widgets are embedded with markdown codeblocks.
 
-## Basic Syntax
+## Config format
 
-````markdown
-```true-recall-<widget-name>
-option: value
-```
-````
+Widgets parse simple `key: value` lines:
 
-## Available Widgets
+- booleans: `true` / `false`
+- numbers: numeric literals
+- strings: plain text values
+- comments: `# ...`
+- unknown keys are ignored
 
-### Analytics Widgets
-
-#### Health Widget
-Shows overall collection health score.
-
-````markdown
-```true-recall-health
-```
-````
-
-#### Heatmap Widget
-Calendar heatmap of review activity.
-
-````markdown
-```true-recall-heatmap
-days: 365
-```
-````
-
-#### Comparison Widget
-Compare stats between time periods.
-
-````markdown
-```true-recall-comparison
-period1: last7days
-period2: previous7days
-```
-````
-
-#### Workload Widget
-Review workload distribution.
+Example:
 
 ````markdown
 ```true-recall-workload
-days: 30
-```
-````
-
-#### Streak Widget
-Current and longest review streak.
-
-````markdown
-```true-recall-streak
-```
-````
-
-### FSRS Widgets
-
-#### True Retention Widget
-True retention rate over time.
-
-````markdown
-```true-recall-retention
-range: 30d
-```
-````
-
-#### Forecast Widget
-Future due cards prediction.
-
-````markdown
-```true-recall-forecast
-days: 30
-project: optional-project-name
-```
-````
-
-#### Preset Info Widget
-Display preset configuration.
-
-````markdown
-```true-recall-preset
-preset: default
-```
-````
-
-#### Problem Cards Widget
-Leeches and difficult cards.
-
-````markdown
-```true-recall-problems
-minLapses: 3
-```
-````
-
-### Project Widgets
-
-#### Dashboard Widget
-Embedded project dashboard.
-
-````markdown
-```true-recall-dashboard
-project: Medicine
-showStats: true
-```
-````
-
-#### Project Widget
-Single project overview.
-
-````markdown
-```true-recall-project
-project: Biology
-```
-````
-
-#### Project Hub Widget
-All projects overview.
-
-````markdown
-```true-recall-projects
-```
-````
-
-#### Unassigned Notes Widget
-Notes without project assignment.
-
-````markdown
-```true-recall-unassigned
-```
-````
-
-### Note Widgets
-
-#### Decay Widget
-Memory decay visualization for a note.
-
-````markdown
-```true-recall-decay
-note: [[Note Name]]
-```
-````
-
-#### Note Health Widget
-Per-note health metrics.
-
-````markdown
-```true-recall-note-health
-note: [[Biology Notes]]
-```
-````
-
-### Gamification Widgets
-
-#### Progress Widget
-Today's study progress.
-
-````markdown
-```true-recall-progress
-```
-````
-
-#### Answer Streak Widget
-Current answer streak during session.
-
-````markdown
-```true-recall-answer-streak
-```
-````
-
-#### Ratings Widget
-Rating distribution chart.
-
-````markdown
-```true-recall-ratings
-range: 7d
-```
-````
-
-#### Maturity Widget
-Card maturity progress (young vs mature).
-
-````markdown
-```true-recall-maturity
-```
-````
-
-#### Countdown Widget
-Countdown to a goal date.
-
-````markdown
-```true-recall-countdown
-goal: 2024-06-01
-label: Exam Day
-```
-````
-
-#### Achievements Widget
-Achievement badges earned.
-
-````markdown
-```true-recall-achievements
-```
-````
-
-#### Leaderboard Widget
-Top performing notes.
-
-````markdown
-```true-recall-leaderboard
-limit: 10
-sortBy: retention
-```
-````
-
-## Widget Options
-
-### Common Options
-
-| Option | Type | Description |
-|--------|------|-------------|
-| `project` | string | Filter by project |
-| `note` | string | Filter by note (wiki-link) |
-| `preset` | string | Filter by preset |
-| `days` | number | Time range in days |
-| `range` | string | Time range (7d, 30d, 90d, 1y) |
-| `limit` | number | Maximum items to show |
-
-### Project Filtering
-
-Most widgets support project filtering:
-
-````markdown
-```true-recall-forecast
-project: Medicine/Anatomy
 days: 14
+showTime: true
 ```
 ````
 
-### Note Filtering
+## Registered widget IDs
 
-Some widgets can target specific notes:
+### Core
 
-````markdown
-```true-recall-note-health
-note: [[Flashcards/Biology]]
-```
-````
+- `true-recall-dashboard`
+- `true-recall-note-stats`
 
-## Creating Custom Dashboards
+### Analytics
 
-Combine widgets in a single note:
+- `true-recall-streak`
+- `true-recall-health`
+- `true-recall-leaderboard`
+- `true-recall-heatmap`
+- `true-recall-comparison`
+- `true-recall-workload`
 
-````markdown
-# Study Dashboard
+### Projects
 
-## Today
-```true-recall-progress
-```
+- `true-recall-project`
+- `true-recall-project-hub`
+- `true-recall-unassigned`
 
-```true-recall-streak
-```
+### Gamification
 
-## Forecast
-```true-recall-forecast
-days: 14
-```
+- `true-recall-progress`
+- `true-recall-achievements`
+- `true-recall-answer-streak`
+- `true-recall-countdown`
+- `true-recall-maturity`
+- `true-recall-ratings`
 
-## Health
-```true-recall-health
-```
+### FSRS
 
-```true-recall-retention
-range: 30d
-```
+- `true-recall-true-retention`
+- `true-recall-preset-info`
+- `true-recall-problem-cards`
+- `true-recall-forecast`
 
-## Projects
-```true-recall-projects
-```
-````
+### Note-level
 
-## Widget Refresh
+- `true-recall-note-health`
+- `true-recall-decay`
 
-Widgets update:
-- **On note open** -- When you open the note
-- **On data change** -- When you review cards
-- **Manual refresh** -- Click the widget
+## Supported options by widget
 
-## Responsive Design
+### `true-recall-streak`
 
-Widgets adapt to:
-- **Desktop** -- Full-width layouts
-- **Mobile** -- Stacked layouts
-- **Sidebar** -- Compact views
+- `showLongest` (bool, default `true`)
+- `showWeekDots` (bool, default `true`)
+- `showTodayRate` (bool, default `true`)
 
-## Tips
+### `true-recall-health`
 
-### 1. Create a Dashboard Note
+- `target` (number, default `90`)
+- `showBuckets` (bool, default `true`)
 
-Make a dedicated note with your favorite widgets for quick reference.
+### `true-recall-leaderboard`
 
-### 2. Use Project Widgets
+- `limit` (number, default `5`)
+- `sort` (string, default `retention`)
+- `order` (string, default `asc`)
+- `warnBelow` (number, default `75`)
+- `dangerBelow` (number, default `65`)
 
-Embed project-specific dashboards in project notes.
+### `true-recall-heatmap`
 
-### 3. Track Goals
+- `months` (number, default `12`)
+- `showLegend` (bool, default `true`)
+- `showTotal` (bool, default `true`)
 
-Use countdown widgets for exam dates and deadlines.
+### `true-recall-comparison`
 
-### 4. Monitor Health
+- `period` (string, default `week`)
+- `showStreak` (bool, default `true`)
 
-Check health and retention widgets regularly.
+### `true-recall-workload`
 
-### 5. Combine with Notes
+- `days` (number, default `14`)
+- `heavyThreshold` (number, default `1.5`)
+- `showTime` (bool, default `true`)
+- `showFlags` (bool, default `true`)
 
-Add context around widgets with regular markdown.
+### `true-recall-progress`
 
-## Example: Exam Prep Dashboard
+- `showTime` (bool, default `true`)
+- `style` (string, default `ring`)
 
-````markdown
-# Medical Board Exam Prep
+### `true-recall-achievements`
 
-**Exam Date:** June 15, 2024
+- `category` (string, default `all`)
+- `showLocked` (bool, default `true`)
+- `limit` (number, default `6`)
 
-```true-recall-countdown
-goal: 2024-06-15
-label: Exam Day
-```
+### `true-recall-answer-streak`
 
-## Daily Progress
-```true-recall-progress
-```
+- `showBest` (bool, default `true`)
+- `showToday` (bool, default `true`)
 
-```true-recall-streak
-```
+### `true-recall-countdown`
 
-## Forecast (Next 14 Days)
-```true-recall-forecast
-project: Medicine
-days: 14
-```
+- `date` (string)
+- `target` (number, default `90`)
+- `label` (string, default `Exam`)
 
-## Weak Areas
-```true-recall-problems
-minLapses: 3
-project: Medicine
-```
+### `true-recall-maturity`
 
-## Retention Trend
-```true-recall-retention
-range: 30d
-project: Medicine
-```
+- `showSuspended` (bool, default `false`)
 
-## Project Overview
-```true-recall-dashboard
-project: Medicine
-showStats: true
-```
-````
+### `true-recall-ratings`
 
-For the main dashboard view, see [Dashboard](/views/dashboard/).
+- `period` (string, default `week`)
+- `style` (string, default `bar`)
+
+### `true-recall-true-retention`
+
+- `days` (number, default `30`)
+- `showSparkline` (bool, default `true`)
+- `showTarget` (bool, default `true`)
+
+### `true-recall-preset-info`
+
+- `preset` (string)
+- `showWeights` (bool, default `false`)
+- `showLimits` (bool, default `true`)
+
+### `true-recall-problem-cards`
+
+- `limit` (number, default `5`)
+- `showType` (bool, default `true`)
+
+### `true-recall-forecast`
+
+- `days` (number, default `14`)
+- `showChart` (bool, default `true`)
+
+### `true-recall-note-health`
+
+- `showActions` (bool, default `true`)
+- `showDetails` (bool, default `true`)
+
+### `true-recall-decay`
+
+- `target` (number, default `0.9`)
+- `limit` (number, default `10`)
+- `sort` (string, default `retrievability`)
+- `showTarget` (bool, default `true`)
+- `showStability` (bool, default `true`)
+
+## Legacy IDs not current
+
+- `true-recall-projects` (use `true-recall-project-hub`)
+- `true-recall-retention` (use `true-recall-true-retention`)
+- `true-recall-preset` (use `true-recall-preset-info`)
+- `true-recall-problems` (use `true-recall-problem-cards`)

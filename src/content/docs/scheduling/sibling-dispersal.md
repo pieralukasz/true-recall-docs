@@ -1,5 +1,7 @@
 ---
 title: "Sibling Dispersal"
+sidebar:
+  order: 5
 description: "Space out cards from the same note to prevent context interference and improve independent recall"
 ---
 

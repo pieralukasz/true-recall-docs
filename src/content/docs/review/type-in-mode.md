@@ -1,5 +1,7 @@
 ---
 title: Type-in Mode
+sidebar:
+  order: 3
 description: Type your answers during review and get them graded with AI semantic evaluation or character-by-character diff comparison.
 ---
 

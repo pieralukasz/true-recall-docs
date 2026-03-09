@@ -1,5 +1,7 @@
 ---
 title: Cramming
+sidebar:
+  order: 5
 description: Practice flashcards without affecting their scheduled review dates, ideal for exam preparation and extra reinforcement.
 ---
 

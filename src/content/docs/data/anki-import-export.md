@@ -1,5 +1,7 @@
 ---
 title: "Anki Import/Export"
+sidebar:
+  order: 4
 description: "Import flashcards from Anki .apkg files and export your cards back to Anki format"
 ---
 
@@ -131,7 +133,7 @@ Note: Some precision is lost in conversion.
 ### After Importing
 
 1. Run [integrity check](/data/integrity-check/)
-2. Review imported cards in Card Browser
+2. Review imported cards in [Card Browser](/views/card-browser/)
 3. Check for missing media
 4. Adjust note types if needed
 

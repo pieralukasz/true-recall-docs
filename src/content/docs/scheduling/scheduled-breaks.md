@@ -1,5 +1,7 @@
 ---
 title: "Scheduled Breaks"
+sidebar:
+  order: 4
 description: "Plan vacation periods or time off where reviews are redistributed to other days"
 ---
 
@@ -140,7 +142,7 @@ Add breaks as soon as you know about them.
 
 For breaks longer than a week, split the redistribution.
 
-### 3. Check Dashboard Before Leaving
+### 3. Check [Dashboard](/views/dashboard/) Before Leaving
 
 See what your pre-break or post-break load looks like.
 

@@ -1,5 +1,7 @@
 ---
 title: "Easy Days"
+sidebar:
+  order: 3
 description: "Reduce review workload on specific days while maintaining scheduling integrity"
 ---
 

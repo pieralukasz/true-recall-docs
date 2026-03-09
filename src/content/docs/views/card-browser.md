@@ -1,93 +1,93 @@
 ---
 title: Card Browser
-description: Browse, search, filter, and manage your entire flashcard collection with advanced search syntax and bulk operations.
+sidebar:
+  order: 4
+description: Current Card Browser filtering syntax, facets, and bulk workflows aligned with implementation.
 ---
 
-The **Card Browser** is a powerful view for managing all your flashcards. Search, filter, sort, and perform bulk operations on your card collection.
+Card Browser supports token-based query filtering, chips, sidebar facets, preview, and bulk actions.
 
-## Opening
+## Query syntax (current)
 
-Cmd/Ctrl + P -> "Open card browser"
+### State tokens
 
-## Search Syntax
+- `is:new`
+- `is:learning`
+- `is:review`
+- `is:relearning`
+- `is:suspended`
+- `is:buried`
+- negation: `-is:suspended`
 
-Full-text search with query syntax:
+Notes:
 
-| Query | Matches |
-|-------|---------|
-| `photosynthesis` | Cards containing "photosynthesis" |
-| `state:new` | New cards only |
-| `state:review` | Review cards only |
-| `preset:medical` | Cards using "medical" preset |
-| `project:Biology` | Cards in Biology project |
-| `due:today` | Cards due today |
-| `due:overdue` | Overdue cards |
-| `created:7d` | Created in last 7 days |
-| `lapses:>3` | More than 3 lapses |
+- `is:due` and `is:overdue` are accepted, but currently behave as review-state aliases rather than strict date-window filters.
 
-Combine with space: `state:new project:Biology`
+### Property filters
 
-## Facets Sidebar
+Format: `prop:<property><operator><value>`
 
-Filter cards by clicking facets:
+Properties:
 
-- **State** — New, Learning, Review, Suspended
-- **Card Type** — Basic, Cloze, Image Occlusion, Reversed
-- **Source Note** — Notes with card counts
-- **Preset** — Filter by FSRS preset
-- **Project** — Filter by project hierarchy
+- `s` / `stability`
+- `d` / `difficulty`
+- `r` / `retrievability`
+- `ivl` / `interval`
+- `reps`
+- `lapses`
 
-## Sort Options
+Operators: `>`, `<`, `>=`, `<=`
 
-| Sort | Order |
-|------|-------|
-| Due date | Earliest first |
-| Created | Newest first |
-| Random | Shuffled |
-| Lapses | Most lapses first |
-| Interval | Longest first |
+Examples:
 
-## Keyboard Navigation
+- `prop:lapses>3`
+- `prop:d<0.5`
+- `prop:reps>=10`
 
-| Key | Action |
-|-----|--------|
-| `j` / Down arrow | Move down |
-| `k` / Up arrow | Move up |
-| `Enter` | Edit card |
-| `Space` | Toggle selection |
-| `Cmd/Ctrl+A` | Select all |
-| `Escape` | Clear selection |
+### Other supported tokens
 
-## Multi-Select
+- `note:"Biology"`
+- `type:basic|cloze|reversed|image-occlusion`
+- `via:ai|manual|anki_import`
+- `added:7`
+- `reviewed:30`
+- plain text terms
 
-- **Click** — Select single card
-- **Shift+Click** — Select range
-- **Ctrl/Cmd+Click** — Toggle selection
+## UI filters and controls
 
-## Bulk Actions
+### Toolbar
 
-When cards are selected:
+- search with suggestions
+- state chips
+- Show archived toggle
+- column picker
 
-| Action | Description |
-|--------|-------------|
-| Suspend | Pause reviews for selected |
-| Unsuspend | Resume reviews |
-| Delete | Remove selected cards |
-| Move | Transfer to another note |
-| Change Type | Change note type |
-| Change Preset | Assign different preset |
+### Sidebar facets
 
-## Card Preview Panel
+- Card States
+- Source Notes
+- Card Type
+- Created Via
+- Remove orphaned cards action
 
-When a card is selected, preview shows full question and answer, source note link, FSRS statistics, review history, and edit/delete actions.
+## Selection and bulk operations
 
-## Orphaned Cards
+Right-click on table/grid items selects them for bulk actions.
 
-Cards whose source note was deleted appear in the "Orphaned" facet. Options: Delete permanently, Move to existing note, or Keep without source.
+Bulk bar actions:
 
-## Tips
+- Suspend
+- Unsuspend
+- Forget
+- Change type
+- Delete
 
-- Combine search filters for precise results: `state:review lapses:>2 due:overdue`
-- Sort by "Lapses" to find cards you keep forgetting
-- Check orphaned cards occasionally and resolve them
-- Select cards and export to CSV for external analysis
+## Known limitations
+
+1. `project:` and `preset:` tokens are parsed/suggested but not currently applied in SQL filtering.
+2. `note:` resolution is basename-based; duplicate note names can be ambiguous.
+3. `is:due` and `is:overdue` are not strict due-date filters today.
+
+## Practical recommendation
+
+Prefer query tokens for state/property/type/source filters, and use chips/facets/toggles for fast narrowing.

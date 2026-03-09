@@ -1,5 +1,7 @@
 ---
 title: Migrating from Obsidian-to-Anki
+sidebar:
+  order: 2
 description: How to transition from the Obsidian-to-Anki plugin to True Recall
 ---
 

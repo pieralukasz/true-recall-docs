@@ -1,5 +1,7 @@
 ---
 title: Basic Cards
+sidebar:
+  order: 1
 description: "Create flashcards using the block format with note types, or the quick inline :: syntax."
 ---
 
@@ -146,7 +148,7 @@ Back: Hippocampus
 
 After writing flashcards, they need to be **collected** into the database:
 
-1. Open the Flashcard Panel (brain icon in the ribbon)
+1. Open the [Flashcard Panel](/views/flashcard-panel/) (brain icon in the ribbon)
 2. Uncollected cards appear in the "Uncollected" section
 3. Click **Collect** on each card (or Collect All)
 
@@ -177,9 +179,4 @@ After collection, cards show status badges:
 
 ## Best Practices
 
-1. **One concept per card** — Keep cards focused on a single fact
-2. **Clear questions** — Avoid ambiguity
-3. **Concise answers** — Don't write essays
-4. **Use formatting** — Bold key terms, use lists for structure
-5. **Add context** — Include relevant background in the question
-6. **Include images** — Visual learning is powerful
+For detailed guidance on writing effective flashcards — with good vs bad examples, common mistakes, and tips — see [Best Practices](/creation/best-practices/).

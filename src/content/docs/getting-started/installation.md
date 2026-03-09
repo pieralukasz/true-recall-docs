@@ -1,5 +1,7 @@
 ---
 title: Installation
+sidebar:
+  order: 2
 description: How to install True Recall in your Obsidian vault
 ---
 

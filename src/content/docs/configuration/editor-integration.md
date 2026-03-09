@@ -1,5 +1,7 @@
 ---
 title: Editor Integration
+sidebar:
+  order: 4
 description: "Link status indicators, status bar widget, selection toolbar, and code block widgets in the editor."
 ---
 
@@ -29,13 +31,13 @@ Hover over a link to see detailed stats: total cards, new/learning/review counts
 
 ### Click Actions
 
-Click the status indicator to open the Flashcard Panel for that note or start review.
+Click the status indicator to open the [Flashcard Panel](/views/flashcard-panel/) for that note or start review.
 
 ## Status Bar Widget
 
 Global card counts in Obsidian's bottom status bar showing due today, new cards, and learning cards.
 
-Enable in Settings -> General -> Show status bar widget. Click the widget to open Dashboard or start today's review.
+Enable in Settings -> General -> Show status bar widget. Click the widget to open [Dashboard](/views/dashboard/) or start today's review.
 
 Numbers change color based on state: Blue when cards are due, Green when only new cards remain, Gray when all done.
 
