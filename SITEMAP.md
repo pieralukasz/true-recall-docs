@@ -63,19 +63,16 @@ All paths are relative to `src/content/docs/`.
 - `configuration/fsrs-parameters.md` — FSRS algorithm parameters and optimization
 - `configuration/data-backup.md` — Database backup and device management
 
-## Organization (5 pages)
+## Organization (1 page)
 
-- `organization/projects-model.md` — Project data model: parents-based relationships, folder includes, preset inheritance
-- `organization/projects.md` — Project workflows: drag-and-drop, detach, create-project actions, known constraints
-- `organization/note-types.md` — Note type templates: fields, templates, and styling
-- `organization/presets.md` — FSRS preset configuration for different learning contexts
-- `organization/archiving.md` — Archiving notes and project-level cascading
+- `organization/projects.md` — Projects, sub-projects, folder includes, archiving, preset inheritance
 
-## Scheduling (8 pages)
+## Scheduling (9 pages)
 
 - `scheduling/why-fsrs.md` — Why FSRS v6: comparison with Leitner, SM-2, and other algorithms
 - `scheduling/fsrs-algorithm.md` — FSRS v6 algorithm: stability, difficulty, retrievability, weights, and states
 - `scheduling/overview.md` — Scheduling overview: day boundaries, learning steps, intervals, review order, daily limits
+- `scheduling/presets.md` — FSRS preset configuration for different learning contexts
 - `scheduling/fsrs-optimization.md` — Training FSRS parameters on review history
 - `scheduling/load-balancing.md` — Auto-distributing reviews evenly across days
 - `scheduling/easy-days.md` — Reducing workload on specific days

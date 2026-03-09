@@ -1,23 +1,49 @@
 ---
-title: "Projects & Sub-projects"
+title: "Projects"
 sidebar:
-  order: 1
-description: Current project workflows in Dashboard, including drag-and-drop, detach, create-project actions, and known constraints.
+  order: 0
+description: "Organize notes into projects using parent relationships, folder includes, and archiving."
 ---
 
 :::caution[My Notes]
 :::
 
-This page documents current operational project workflows in True Recall.
+Projects in **True Recall** are built from note relationships, not from a separate deck entity. Any note can become a project — it just needs other notes pointing to it as their parent.
 
-## Canonical fields
+## Core Model
 
-Use:
+A note becomes a child when it declares a parent in `parents`:
 
-- `parents`
-- `include: folder`
+```yaml
+---
+parents:
+  - "[[Medicine]]"
+---
+```
 
-## Dashboard workflows (current)
+A note can belong to multiple projects:
+
+```yaml
+---
+parents:
+  - "[[Medicine]]"
+  - "[[Exam Prep]]"
+---
+```
+
+## Folder-based Assignment
+
+`include: folder` on a note makes all notes in the same folder its children:
+
+```yaml
+---
+include: folder
+---
+```
+
+This is same-folder only (no recursion into subfolders).
+
+## Dashboard Workflows
 
 ### Drag-and-drop
 
@@ -49,34 +75,61 @@ In **Dashboard → Notes** selection mode:
 
 - **Create project**
 
-### Bulk archive selected notes
+## Archiving
 
-In **Dashboard → Notes** selection mode:
+Archiving excludes notes from active study without deleting cards. Use `archive: true`:
 
-- **Archive**
+```yaml
+---
+archive: true
+---
+```
 
-## Named actions vs UI labels
+To unarchive, remove the field (or set `false`).
 
-The capabilities below are available as workflows (drag-and-drop/selection), even if there is no separate menu item with the exact same label:
+### Archive/unarchive paths
 
-- **Assign to project** = drag note -> project
-- **Move to project** = drag/reparent note or project
-- **Create sub-project** = drag note -> note (create-project flow) or create project from selected notes
+- **Dashboard** — note row: Archive / Unarchive; project row: Archive project / Unarchive project; notes selection mode: bulk Archive
+- **Commands** — Archive current note / Unarchive current note
+- **Frontmatter** — set/remove `archive: true`
 
-## Best practices
+### Project cascading
+
+Archiving a project note excludes descendant notes and cards from active study.
+
+### Card Browser interaction
+
+Archived cards are hidden by default. Use **Show archived** toggle to include them.
+
+## Preset Inheritance
+
+Preset resolution order:
+
+1. Note's own `fsrs_preset`
+2. Nearest parent in the hierarchy with `fsrs_preset`
+3. Default preset
+
+See [FSRS Presets](/scheduling/presets/) for details on creating and managing presets.
+
+## Unassigned Notes
+
+Notes with cards and no project assignment appear in **Unassigned** in the [Dashboard](/views/dashboard/).
+
+## Best Practices
 
 1. Keep project note basenames unique.
 2. Use plain wiki-links in `parents` (`[[Project Note]]`).
 3. Use `include: folder` only when folder boundaries match intended project boundaries.
 
-## Known limitations
+## Known Limitations
 
-1. Duplicate basenames can cause ambiguous filtering/navigation.
-2. Alias wiki-links in `parents` can break matching.
-3. `include: folder` is same-folder only.
+1. Duplicate basenames can cause ambiguous project resolution.
+2. Alias wiki-links in `parents` (`[[Target|Alias]]`) can break matching.
+3. `include: folder` is same-folder only (non-recursive).
+4. Archive visibility is view-toggle dependent.
 
-## Related
+## What to Read Next
 
-- [Projects concept](/organization/projects-model/)
-- [Dashboard](/views/dashboard/)
-- [Archiving](/organization/archiving/)
+- [Dashboard](/views/dashboard/) — manage projects and notes visually
+- [FSRS Presets](/scheduling/presets/) — configure scheduling per project
+- [Frontmatter Fields](/reference/frontmatter-fields/) — full field reference

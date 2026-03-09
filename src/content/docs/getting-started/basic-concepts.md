@@ -114,5 +114,5 @@ Daily limits prevent overload while ensuring consistent progress.
 
 - [Flashcards Deep Dive](/creation/flashcards/)
 - [FSRS Algorithm](/scheduling/fsrs-algorithm/)
-- [Note Types](/organization/note-types/)
-- [Projects](/organization/projects-model/)
+- [Note Types](/creation/note-types/)
+- [Projects](/organization/projects/)

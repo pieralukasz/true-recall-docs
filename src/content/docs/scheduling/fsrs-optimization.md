@@ -11,7 +11,7 @@ description: "Train FSRS parameters on your review history for personalized sche
 FSRS (Free Spaced Repetition Scheduler) optimization analyzes your review history to calculate personalized algorithm parameters. This improves scheduling accuracy by adapting to your specific learning patterns.
 
 :::note
-**Per-Preset Optimization**: Each [FSRS preset](/organization/presets/) optimizes independently using only reviews from that preset. This means you need 400+ reviews **per preset**, not just 400 total.
+**Per-Preset Optimization**: Each [FSRS preset](/scheduling/presets/) optimizes independently using only reviews from that preset. This means you need 400+ reviews **per preset**, not just 400 total.
 :::
 
 ## Prerequisites
@@ -29,7 +29,7 @@ Preset attribution follows normal preset resolution:
 If you start a review session from a specific project, that project context is checked first for cards in that session.
 
 :::caution
-Changing a note's preset does **not** transfer historical reviews to the new preset. If you reassign 500 cards from "Default" to a new "Medical" preset, the "Medical" preset starts with 0 reviews for optimization -- you'll need to accumulate 400+ reviews under "Medical" before optimizing it. See [What Happens When You Change a Preset](/organization/presets/#what-happens-when-you-change-a-preset) for details.
+Changing a note's preset does **not** transfer historical reviews to the new preset. If you reassign 500 cards from "Default" to a new "Medical" preset, the "Medical" preset starts with 0 reviews for optimization -- you'll need to accumulate 400+ reviews under "Medical" before optimizing it. See [What Happens When You Change a Preset](/scheduling/presets/#what-happens-when-you-change-a-preset) for details.
 :::
 
 :::note

@@ -22,7 +22,7 @@ Configure in Settings -> True Recall -> General.
 | **Default type-in mode** | Off / Diff / AI | Type-in mode for new review sessions |
 
 :::note
-Daily limits are configured **per preset**. Each [FSRS preset](/organization/presets/) has its own new cards/day and reviews/day.
+Daily limits are configured **per preset**. Each [FSRS preset](/scheduling/presets/) has its own new cards/day and reviews/day.
 :::
 
 ## Editor Integration

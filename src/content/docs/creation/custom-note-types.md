@@ -147,6 +147,28 @@ Use CSS variables for theme compatibility (light and dark mode):
 }
 ```
 
+## Special Fields
+
+In addition to your custom fields, these built-in variables are available in any template:
+
+| Field | Description |
+|-------|-------------|
+| `{{Tags}}` | Note tags |
+| `{{Type}}` | Note type name |
+| `{{Deck}}` | Project name |
+| `{{Subdeck}}` | Sub-project name |
+
+## Converting Between Note Types
+
+You can change the note type of existing cards:
+
+1. Open [Card Browser](/views/card-browser/)
+2. Select cards to convert
+3. Right-click → Change note type
+4. Select the new note type
+5. Map old fields to new fields
+6. Confirm
+
 ## Managing Custom Types
 
 Create, edit, and delete custom note types using the [Custom Type Modal](/views/custom-type-modal/) — open it from the Command Palette → "Manage note types", or from the type picker in the Flashcard Editor.

@@ -47,7 +47,7 @@ With **21 trainable weights**, FSRS can capture patterns that SM-2's 3 parameter
 
 ### Configurable retention
 
-Set a **desired retention** (default: 90%) and FSRS calculates intervals to maintain that target. Want 95% recall for medical exams? 85% for casual vocabulary? Adjust per [preset](/organization/presets/).
+Set a **desired retention** (default: 90%) and FSRS calculates intervals to maintain that target. Want 95% recall for medical exams? 85% for casual vocabulary? Adjust per [preset](/scheduling/presets/).
 
 Higher retention means more daily reviews. The chart below shows how workload scales — the green zone (75-88%) is efficient, while pushing above 93% (red zone) increases workload dramatically:
 

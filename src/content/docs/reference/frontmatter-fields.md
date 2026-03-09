@@ -118,6 +118,5 @@ fsrs_preset: intensive
 
 ## Related
 
-- [Projects concept](/organization/projects-model/)
-- [Projects organization](/organization/projects/)
-- [Archiving](/organization/archiving/)
+- [Projects](/organization/projects/)
+- [Archiving](/organization/projects/#archiving)

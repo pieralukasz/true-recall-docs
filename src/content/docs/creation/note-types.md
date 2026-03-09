@@ -23,6 +23,10 @@ A single block in your notes can generate more than one card:
 
 The note type determines how many cards a block creates and what the review experience looks like.
 
+:::tip[Note Type vs Card Type]
+A **note type** is the template (fields + card templates). A **card type** is an individual card generated from it. For example, a "Cloze" note type with 3 cloze deletions generates 3 cards (card types).
+:::
+
 ## Built-in Note Types
 
 ### Basic

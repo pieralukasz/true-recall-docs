@@ -24,7 +24,7 @@ Select which preset to configure. Each preset has independent settings.
 | Delete | Delete preset (not available for Default) |
 | Rename | Change preset name |
 
-See [Presets](/organization/presets/) for detailed preset management.
+See [Presets](/scheduling/presets/) for detailed preset management.
 
 ## Algorithm Section
 
