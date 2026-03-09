@@ -1,11 +1,29 @@
 {
   "redirects": [
-    { "source": "/getting-started/:path*", "destination": "/", "permanent": false },
-    { "source": "/migration/:path*", "destination": "/", "permanent": false },
-    { "source": "/features/:path*", "destination": "/", "permanent": false },
-    { "source": "/views/:path*", "destination": "/", "permanent": false },
-    { "source": "/configuration/:path*", "destination": "/", "permanent": false },
-    { "source": "/reference/:path*", "destination": "/", "permanent": false },
-    { "source": "/advanced/:path*", "destination": "/", "permanent": false }
+    { "source": "/features/basic-flashcards", "destination": "/creation/basic-cards/", "permanent": true },
+    { "source": "/features/cloze-deletions", "destination": "/creation/cloze-deletions/", "permanent": true },
+    { "source": "/features/reversed-cards", "destination": "/creation/basic-cards/", "permanent": true },
+    { "source": "/creation/reversed-cards", "destination": "/creation/basic-cards/", "permanent": true },
+    { "source": "/features/review-system", "destination": "/review/review-interface/", "permanent": true },
+    { "source": "/features/fsrs-algorithm", "destination": "/concepts/fsrs-algorithm/", "permanent": true },
+    { "source": "/features/statistics", "destination": "/views/statistics/", "permanent": true },
+    { "source": "/features/projects", "destination": "/organization/projects/", "permanent": true },
+    { "source": "/features/anki-export", "destination": "/data/anki-import-export/", "permanent": true },
+    { "source": "/features/cloud-sync", "destination": "/sync/setup/", "permanent": true },
+    { "source": "/features/editor-widgets", "destination": "/views/codeblock-widgets/", "permanent": true },
+    { "source": "/features/batch-adding", "destination": "/creation/basic-cards/", "permanent": true },
+    { "source": "/views/session-builder", "destination": "/review/custom-sessions/", "permanent": true },
+    { "source": "/views/projects-view", "destination": "/views/dashboard/", "permanent": true },
+    { "source": "/views/statistics-view", "destination": "/views/statistics/", "permanent": true },
+    { "source": "/configuration/data-backup", "destination": "/data/backup-restore/", "permanent": true },
+    { "source": "/configuration/scheduling", "destination": "/configuration/fsrs-settings/", "permanent": true },
+    { "source": "/configuration/fsrs-parameters", "destination": "/configuration/fsrs-settings/", "permanent": true },
+    { "source": "/configuration/fsrs-presets", "destination": "/organization/presets/", "permanent": true },
+    { "source": "/advanced/fsrs-optimization", "destination": "/scheduling/fsrs-optimization/", "permanent": true },
+    { "source": "/advanced/easy-days", "destination": "/scheduling/easy-days/", "permanent": true },
+    { "source": "/advanced/load-balancing", "destination": "/scheduling/load-balancing/", "permanent": true },
+    { "source": "/advanced/orphaned-cards", "destination": "/data/integrity-check/", "permanent": true },
+    { "source": "/reference/keyboard-shortcuts", "destination": "/configuration/keyboard-shortcuts/", "permanent": true },
+    { "source": "/reference/context-menu", "destination": "/reference/context-menus/", "permanent": true }
   ]
 }

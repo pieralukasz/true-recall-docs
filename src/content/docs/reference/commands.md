@@ -1,69 +1,69 @@
 ---
 title: Commands Reference
-description: Complete list of all True Recall commands available in Obsidian
-links:
-  - /views/card-browser/
-  - /reference/keyboard-shortcuts/
+description: Complete list of all True Recall commands available via Command Palette.
 ---
 
 All commands are available via the Command Palette (`Cmd/Ctrl+P`).
 
-## Flashcard Management
+## View Commands
 
 | Command | Description |
 |---------|-------------|
-| Open flashcard panel | Opens sidebar panel showing flashcards for the current note |
-| Add flashcard UID to current note | Adds unique identifier to frontmatter, enabling flashcard linking |
-| Set FSRS preset for current note | Opens the Preset Inspector showing the full inheritance chain and lets you set or clear the note's preset (see [FSRS Presets](/configuration/fsrs-presets/)) |
+| Open dashboard | Open the main dashboard view |
+| Open flashcard panel | Open the sidebar panel for current note |
+| Open card browser | Open the card browser for all flashcards |
+| Open statistics panel | Open the statistics view |
+| Open FSRS simulator | Open the FSRS interval simulator |
 
-## Review
-
-| Command | Description |
-|---------|-------------|
-| Start review session | Opens session builder to configure and start a review |
-| Review flashcards from current note | Starts review session with only cards from currently open note |
-| Review today's new cards | Reviews flashcards created today regardless of scheduling |
-
-## Views & Panels
+## Review Commands
 
 | Command | Description |
 |---------|-------------|
-| Open statistics panel | Opens analytics dashboard with charts and metrics |
-| Open projects panel | Shows all projects with card counts and review options |
-| Open FSRS simulator | Launches interactive simulator to visualize FSRS scheduling |
-| Open orphaned cards panel | Shows cards without valid source notes for management |
+| Review flashcards from current note | Start review session for active note |
+| Review today's new cards | Start review of all due cards |
 
-## Organization
+## Card Management Commands
 
 | Command | Description |
 |---------|-------------|
-| Add current note to project | Opens modal to add/remove current note from projects |
+| Import flashcards | Open the import studio for AI generation |
+| Create image occlusion card | Open image occlusion editor |
+| Manage note types | Open note type manager |
+| Add flashcard uid to current note | Add `flashcard_uid` to frontmatter |
 
-## Import & Export
-
-| Command | Description |
-|---------|-------------|
-| Import Anki deck (.apkg) | Imports Anki deck with cards, scheduling, and media (see [Migrating from Anki](/migration/from-anki/)) |
-| Export to Anki (.apkg) | Exports cards as Anki deck with hierarchical structure (see [Exporting Cards](/features/anki-export/)) |
-| Export as CSV/TSV | Exports cards as text file for spreadsheets or other tools |
-
-## Data Management
+## Data Commands
 
 | Command | Description |
 |---------|-------------|
-| Create database backup | Creates timestamped backup of flashcard database |
-| Sync cloud data | Synchronizes with True Recall Cloud (coming soon) |
+| Create database backup | Manually create backup |
+| Import Anki deck (.apkg) | Import from Anki |
+| Export to Anki (.apkg) | Export to Anki format |
+| Export as CSV/TSV | Export to spreadsheet format |
+| Sync cloud data | Synchronize with True Recall Cloud |
 
-:::note[Backups]
-Create regular backups before major changes or system updates.
-:::
-
-## History
+## Note Management Commands
 
 | Command | Description |
 |---------|-------------|
-| Undo last flashcard action | Reverts most recent action (edit, delete, rating). Default shortcut: `Cmd/Ctrl+Z` during review |
+| Set FSRS preset for current note | Set preset via frontmatter |
+| Archive current note | Archive note (exclude from reviews) |
+| Unarchive current note | Remove archive flag |
+
+## Utility Commands
+
+| Command | Description |
+|---------|-------------|
+| Undo last flashcard action | Undo most recent operation |
+| Insert project dashboard | Insert dashboard code block |
+| Create master dashboard note | Create new dashboard note |
+
+## Migration Commands
+
+| Command | Description |
+|---------|-------------|
+| Migrate legacy projects to parents | Migration utility |
+| Migrate flashcards to block format | Convert inline to block format |
 
 ---
 
-To assign hotkeys: Settings → Hotkeys → search "True Recall".
+To assign hotkeys: Settings -> Hotkeys -> search "True Recall".

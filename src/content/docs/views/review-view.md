@@ -1,137 +1,82 @@
 ---
 title: Review View
-description: The flashcard review interface for spaced repetition study
-links:
-  - /features/review-system/
-  - /views/session-builder/
-  - /reference/keyboard-shortcuts/
+description: The flashcard review interface with keyboard shortcuts, inline editing, undo, and session persistence.
 ---
 
-The Review View is where you actually study. It shows one card at a time and uses FSRS (Free Spaced Repetition Scheduler) to decide when you'll see it next based on how well you recalled it.
+The **Review View** is where you study flashcards using spaced repetition.
 
-## Opening Review
+## Opening Review View
 
-- **Ribbon icon**: Click the purple brain icon in the sidebar
-- **Command Palette**: `Cmd/Ctrl+P` then search "True Recall: Start review session"
-- **Flashcard Panel**: Click the "Review" button
+| Method | Action |
+|--------|--------|
+| Command | "Review flashcards from current note" or "Review today's new cards" |
+| Dashboard | Click **Study** on any project or note |
+| Flashcard Panel | Click **Review** button |
 
-## Interface Layout
+## Review States
 
-When a card appears, you see the question first. Press Space or click "Show Answer" to reveal the answer, then rate yourself.
+### Active Review
 
-### Question View
-```
-┌─────────────────────────────────────┐
-│ New: 5 | Learning: 3 | Due: 12      │
-├─────────────────────────────────────┤
-│                                     │
-│                                     │
-│        What is spaced               │
-│        repetition?                  │
-│                                     │
-│                                     │
-├─────────────────────────────────────┤
-│         [Show Answer]               │
-│                                     │
-│  Source: Learning Techniques.md     │
-│  Projects: [Study Methods] [School] │
-└─────────────────────────────────────┘
-```
+Normal card-by-card study: See question -> Think/type answer -> Reveal answer -> Rate recall.
 
-### Answer View
-```
-┌─────────────────────────────────────┐
-│ New: 5 | Learning: 3 | Due: 12      │
-├─────────────────────────────────────┤
-│        What is spaced               │
-│        repetition?                  │
-│ ─────────────────────────────────── │
-│        A learning technique that    │
-│        spaces out review sessions   │
-│        to optimize memory retention │
-├─────────────────────────────────────┤
-│ [Again]  [Hard]   [Good]   [Easy]   │
-│  <1m      <6m      8d       20d     │
-│                                     │
-│  Source: Learning Techniques.md     │
-│  FSRS: Default                      │
-└─────────────────────────────────────┘
-```
+### Waiting State
 
-## Progress Counters
+When no cards are due but learning cards will come back soon, shows a countdown with "Study Ahead" and "Close" options.
 
-The header bar tracks your session in real time.
+### Session Complete
 
-```
-New: 5 | Learning: 3 | Due: 12
-```
+After finishing all due cards, shows summary: cards reviewed, time, retention, rating breakdown, and next session time.
 
-- **New** -- remaining new cards for today
-- **Learning** -- cards in the learning or relearning phase
-- **Due** -- review cards due today
+## Header Options
 
-The header also has **Undo** (revert last rating), a **Menu** for extra actions, and **Close** (X) to end the session.
+| Setting | Description |
+|---------|-------------|
+| Show review header | Display header at all |
+| Show header stats | Badge counts in header |
+| Show next review time | Intervals on answer buttons |
 
-## Rating Buttons
+## Actions During Review
 
-After revealing the answer, rate how well you recalled it. Each button shows a preview of the next interval underneath (e.g. `<1m`, `8d`, `2mo`).
+### Card Actions
 
-| Button | Key | Meaning | Effect |
-|--------|-----|---------|--------|
-| **Again** | `1` | Forgot | Reset, short interval |
-| **Hard** | `2` | Struggled | Longer interval, +difficulty |
-| **Good** | `3` | Recalled | Normal interval |
-| **Easy** | `4` | Instant | Longer interval, -difficulty |
+| Action | Key | Description |
+|--------|-----|-------------|
+| Edit | `E` | Edit card inline |
+| Suspend | `!` | Remove from reviews |
+| Bury card | `-` | Hide until tomorrow |
+| Bury note | `=` | Hide all siblings until tomorrow |
+| Move | `M` | Transfer to another note |
+| Add flashcard | `A` | Create new card |
+| Type-in mode | `T` | Toggle type-in |
+| Change preset | `P` | Set source note preset (`fsrs_preset` in frontmatter) |
 
-:::caution
-Rate honestly. Inflating your ratings feels good short-term but hurts retention long-term -- FSRS learns from your real performance data.
-:::
+### Session Actions
 
-## Keyboard Shortcuts
+| Action | Key | Description |
+|--------|-----|-------------|
+| Undo | `Cmd/Ctrl+Z` | Undo last answer |
+| Close | `Escape` | End session |
+| Help | `?` | Show shortcuts |
 
-You can drive the entire review session from the keyboard.
+## Inline Editing
 
-| Key | Action |
-|-----|--------|
-| `Space` | Show answer / Rate Good |
-| `Enter` | Show answer |
-| `1` | Rate Again |
-| `2` | Rate Hard |
-| `3` | Rate Good |
-| `4` | Rate Easy |
-| `!` (Shift+1) | Suspend card |
-| `-` | Bury card |
-| `=` | Bury all cards from note |
-| `E` | Edit card |
-| `M` | Move card |
-| `N` | New card |
-| `B` | Branch/copy card |
-| `Cmd/Ctrl+Z` | Undo last |
-| `Escape` | Close review |
+Press `E` to edit the current card with a toolbar for Bold, Italic, Link, Image, Code, and Math formatting.
 
-## Card Actions
+## Image Occlusion in Review
 
-Beyond rating, you can manage cards mid-session without breaking your flow.
+For image occlusion cards: Question side shows the image with one region covered, answer side reveals the full image with the previously hidden region highlighted.
 
-| Action | What it does |
-|--------|-------------|
-| **Suspend** | Removes the card from review indefinitely. Good for cards with errors or ones you want to revise later. Unsuspend via the Card Browser. |
-| **Bury** | Hides the card until tomorrow. Skips it without affecting its schedule. |
-| **Bury Note** | Buries all cards from the same source note at once. |
-| **Edit** | Opens a card editor modal so you can fix typos or clarify wording, then continue reviewing. |
-| **Move** | Transfers the card to a different note while keeping it in your review queue. |
-| **Branch** | Duplicates the card in the same note. The copy starts as a new card. |
+## Undo
 
-## Review Modes
+Press `Cmd/Ctrl+Z` to undo: card returns to queue, FSRS parameters restored. Can undo multiple times.
 
-The review can run fullscreen for distraction-free study or as a side panel so you can keep your notes visible. Configure this in Settings, then True Recall, then General.
+## Session Persistence
 
-## Preset Indicator
+If you close Obsidian mid-session, progress is saved and the session resumes where you left off.
 
-After revealing the answer, a small **FSRS: PresetName** label appears below the card content, next to the source note link. This shows which [FSRS preset](/configuration/fsrs-presets/) is being used to schedule the current card.
+## Fullscreen vs Panel
 
-Different cards in the same session can use different presets depending on their [resolution hierarchy](/configuration/fsrs-presets/#resolution-hierarchy). The indicator lets you verify which preset is active at a glance.
+Settings -> General -> Review mode:
 
-:::note
-Click the **Source** link below any card to jump straight to the note it came from.
-:::
+- **Fullscreen** — Takes over main editor area, fewer distractions (recommended)
+- **Side Panel** — Opens in right sidebar, can see note while reviewing

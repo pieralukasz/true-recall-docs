@@ -11,7 +11,7 @@ If you're moving from RemNote to Obsidian and want to continue spaced repetition
 |---------|---------|-------------|
 | **Platform** | Standalone app | Obsidian plugin |
 | **Note model** | Document → Cards | Note → Cards |
-| **Card creation** | Built-in | Manual (inline with `#flashcard` tags) |
+| **Card creation** | Built-in | `#type/basic` block format, AI toolbar, or `::` inline syntax |
 | **Algorithm** | SM-2 | FSRS v6 |
 | **Data storage** | Cloud-first | Local-first (SQLite) |
 | **Pricing** | Subscription | Free |
@@ -43,7 +43,13 @@ RemNote exports may include special syntax. Review and clean up:
 For each imported note:
 
 1. **Open the note** in Obsidian
-2. **Write flashcards** using `#flashcard` tags (question on one line, answer below)
+2. **Write flashcards** using the `#type/basic` block format:
+   ```markdown
+   #type/basic
+   Front: What is spaced repetition?
+   Back: A learning technique that reviews material at increasing intervals.
+   ---
+   ```
 3. **Open the flashcard panel** and click **Collect** to import them
 4. **Review the cards** to verify quality
 
@@ -68,7 +74,7 @@ After ~500 reviews in True Recall, you can optimize FSRS parameters to match you
 ### Card Creation
 
 - **RemNote**: Create cards using `::` or `/rem` syntax
-- **True Recall**: Write cards inline using `#flashcard` tags
+- **True Recall**: Write cards using `#type/basic` block format, AI selection toolbar, or `::` inline syntax
 
 ### Organization
 

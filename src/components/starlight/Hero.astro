@@ -1,0 +1,43 @@
+---
+import DefaultHero from '@astrojs/starlight/components/Hero.astro';
+---
+
+<DefaultHero><slot /></DefaultHero>
+
+{import.meta.env.DEV && (
+  <div class="dev-docs-link">
+    <a href="/getting-started/introduction/" class="sl-flex">
+      Read the Docs
+    </a>
+  </div>
+)}
+
+<style>
+  .dev-docs-link {
+    display: flex;
+    justify-content: center;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
+  @media (min-width: 50rem) {
+    .dev-docs-link {
+      justify-content: flex-start;
+    }
+  }
+  .dev-docs-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999rem;
+    padding: 0.5rem 1.25rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--sl-color-white);
+    background: var(--sl-color-accent);
+    border: 1px solid var(--sl-color-accent);
+  }
+  .dev-docs-link a:hover {
+    opacity: 0.9;
+  }
+</style>

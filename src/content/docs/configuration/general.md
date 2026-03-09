@@ -1,45 +1,55 @@
 ---
 title: General Settings
-description: Configure basic True Recall behavior and display options
-links:
-  - /getting-started/quick-start/
-  - /configuration/scheduling/
+description: Configure True Recall's review interface, editor integration, day boundary, and collection behavior.
 ---
 
-Settings → True Recall → General tab.
+Configure in Settings -> True Recall -> General.
 
 ## Review Interface
 
 | Setting | Options | Description |
 |---------|---------|-------------|
 | **Review mode** | Fullscreen / Panel | Fullscreen takes over the content area; Panel opens alongside your notes |
-| **Show review header** | On / Off | Progress counts: "New: 5 · Learning: 3 · Due: 12" |
-| **Show header stats** | On / Off | Accuracy and time spent during the session |
+| **Show review header** | On / Off | Progress counts and close button during review |
+| **Show header stats** | On / Off | Badge counts (New, Learn, Due) in review header |
 | **Show next review time** | On / Off | Predicted intervals ("8d", "21d") on rating buttons |
-
-## Daily Limits
+| **Continuous custom reviews** | On / Off | Show "Next Session" button after finishing a custom session |
+| **Default type-in mode** | Off / Diff / AI | Type-in mode for new review sessions |
 
 :::note
-Daily limits are configured **per preset**. Each [FSRS preset](/configuration/fsrs-presets/) has its own new cards/day and reviews/day.
+Daily limits are configured **per preset**. Each [FSRS preset](/organization/presets/) has its own new cards/day and reviews/day.
 :::
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| **New cards/day** | 20 | How many unseen cards to introduce each day |
-| **Reviews/day** | 200 | Cap on due reviews per day (set to 9999 for unlimited) |
-
-Start with 10–20 new cards/day. Each new card creates future reviews — 10 new/day eventually means ~100 reviews/day.
-
-## Day Boundary
-
-Hour when a new "day" begins (24-hour format). Default is **4 AM** (same as Anki) so late-night reviews count for today, not tomorrow.
-
-## Other Settings
+## Editor Integration
 
 | Setting | Options | Description |
 |---------|---------|-------------|
-| **Remove content after collection** | On / Off | **Off** removes only the `#flashcard` tag. **On** removes the entire Q&A block from the note. |
-| **Continuous custom reviews** | On / Off | Show a "Next Session" button after finishing a custom session |
-| **Card preview length** | Short / Medium / Long | How many characters to show in card lists (50 / 100 / 200) |
+| **Show link status indicators** | On / Off | Inline flashcard counts next to `[[wiki links]]` |
+| **Show status bar widget** | On / Off | Global card counts in Obsidian's bottom bar |
+| **Show quick review in panel** | On / Off | Quick-review section at top of Flashcard Panel |
 
-True Recall automatically adapts to your Obsidian theme, including dark/light mode and accent colors.
+## Day Boundary
+
+**Next day starts at** — Hour when a new "day" begins (0-23). Default is **4 AM** (same as Anki) so late-night reviews count for today, not tomorrow.
+
+## Flashcard Collection
+
+| Setting | Options | Description |
+|---------|---------|-------------|
+| **Remove content after collecting** | On / Off | Remove flashcard syntax from note after collection |
+
+## Settings Summary
+
+| Setting | Default | Recommendation |
+|---------|---------|----------------|
+| Review mode | Fullscreen | Fullscreen |
+| Show review header | On | On |
+| Show header stats | On | On |
+| Show next review time | On | On |
+| Continuous custom reviews | On | On |
+| Default type-in mode | Off | Off or AI |
+| Link status indicators | On | On |
+| Status bar widget | On | On |
+| Quick review in panel | On | On |
+| Next day starts at | 4 | 4 |
+| Remove content after collecting | Off | Off |

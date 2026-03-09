@@ -20,7 +20,7 @@ The Obsidian-to-Anki plugin:
 True Recall:
 - **Flashcards live inside your notes** — unified system
 - Review directly in Obsidian — no external app needed
-- Write flashcards inline using `#flashcard` tags
+- Write flashcards using `#type/basic` block format, AI toolbar, or `::` inline syntax
 - Same note can belong to multiple projects
 
 ## Key Benefits of True Recall
@@ -29,7 +29,7 @@ True Recall:
 |---------|-----------------|-------------|
 | **Card location** | Anki (separate app) | Inside your notes |
 | **Review** | In Anki | In Obsidian |
-| **Card creation** | Manual syntax | Inline `#flashcard` tags |
+| **Card creation** | Manual syntax | `#type/basic` block format, AI toolbar, or `::` inline syntax |
 | **Dependencies** | Obsidian + Anki | Obsidian only |
 | **Algorithm** | Anki's FSRS/SM-2 | FSRS v6 |
 
@@ -53,7 +53,13 @@ Before starting, prevent sync conflicts:
 For each note with flashcards:
 
 1. **Open the note** in Obsidian
-2. **Write flashcards** using `#flashcard` tags (question on one line, answer below)
+2. **Write flashcards** using the `#type/basic` block format:
+   ```markdown
+   #type/basic
+   Front: What is spaced repetition?
+   Back: A learning technique that reviews material at increasing intervals.
+   ---
+   ```
 3. **Open the flashcard panel** and click **Collect** to import them
 4. **Review the cards** to verify quality
 
@@ -91,7 +97,7 @@ Your Anki review history cannot be imported, but:
 
 ### Card Content
 
-Your card content still exists in your Obsidian notes. You can write new flashcards using `#flashcard` tags from the same source material.
+Your card content still exists in your Obsidian notes. You can write new flashcards using the `#type/basic` block format from the same source material.
 
 ## Common Questions
 
@@ -117,7 +123,7 @@ Each device has its own database until Cloud Sync is released. See [Cloud Sync](
 
 No automatic conversion exists because:
 - True Recall stores cards differently (database, not markdown syntax)
-- Writing new flashcards with `#flashcard` tags is straightforward
+- Writing new flashcards with the `#type/basic` block format is straightforward
 - It's a good opportunity to improve card quality
 
 ## Need Help?

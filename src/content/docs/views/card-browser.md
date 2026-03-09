@@ -1,108 +1,93 @@
 ---
 title: Card Browser
-description: Table view for browsing, filtering, and managing your entire card collection
-links:
-  - /views/flashcard-panel/
-  - /views/session-builder/
-  - /features/projects/
+description: Browse, search, filter, and manage your entire flashcard collection with advanced search syntax and bulk operations.
 ---
 
-Every card you've ever created, in one table. The Card Browser lets you search, sort, filter, and bulk-manage your entire collection — with all the FSRS scheduling data right there in the columns.
+The **Card Browser** is a powerful view for managing all your flashcards. Search, filter, sort, and perform bulk operations on your card collection.
 
-FSRS (Free Spaced Repetition Scheduler) is the algorithm True Recall uses to figure out when you should see each card again. The browser exposes its key numbers so you can see exactly what's going on under the hood.
+## Opening
 
-Open it from the Command Palette: `Cmd/Ctrl+P` then search for "True Recall: Open card browser". It opens as a regular tab, just like a note.
+Cmd/Ctrl + P -> "Open card browser"
 
-## Browser Layout
+## Search Syntax
 
-```
-┌─────────────────────────────────────────────┐
-│ [🔍 Search cards...]              [↻ Refresh]│
-│ (All) (New) (Learning) (Review) ...  42 cards│
-├──────┬──────┬─────┬────┬────┬────┬────┬──────┤
-│ Question  │Answer│State│Due │Intv│Laps│Stab│Source│
-├──────┬──────┬─────┬────┬────┬────┬────┬──────┤
-│ What is..│ X is │ New │Tmrw│  - │  0 │  - │ Note │
-│ Define Y │ Y is │ Rev │ 5d │ 14d│  1 │ 8.2│ Note │
-│ ...      │ ...  │ ... │ ...│ ...│ ...│ ...│ ...  │
-├──────────────────────────────────────────────┤
-│ Q: What is X?                                │
-│ A: X is...                                   │
-│ Due: Tomorrow │ Stab: 2.1d │ Diff: 5.3 │ ...│
-└──────────────────────────────────────────────┘
-```
+Full-text search with query syntax:
 
-At the top you get a search bar, filter pills, and a card count. The main area is a sortable table. Click any row and a detail panel slides open at the bottom.
+| Query | Matches |
+|-------|---------|
+| `photosynthesis` | Cards containing "photosynthesis" |
+| `state:new` | New cards only |
+| `state:review` | Review cards only |
+| `preset:medical` | Cards using "medical" preset |
+| `project:Biology` | Cards in Biology project |
+| `due:today` | Cards due today |
+| `due:overdue` | Overdue cards |
+| `created:7d` | Created in last 7 days |
+| `lapses:>3` | More than 3 lapses |
 
-## Search and Filters
+Combine with space: `state:new project:Biology`
 
-Type in the search bar to filter cards by question, answer, or source note name. It's case-insensitive and matches partial text — just start typing.
+## Facets Sidebar
 
-The filter pills narrow things down by card state:
+Filter cards by clicking facets:
 
-| Filter | Shows |
-|--------|-------|
-| **All** | Every card in the collection |
-| **New** | Cards never reviewed |
-| **Learning** | Cards in learning steps |
-| **Review** | Graduated review cards |
-| **Relearn** | Cards being relearned after a lapse |
-| **Suspended** | Cards excluded from review |
-| **Buried** | Cards hidden until tomorrow |
+- **State** — New, Learning, Review, Suspended
+- **Card Type** — Basic, Cloze, Image Occlusion, Reversed
+- **Source Note** — Notes with card counts
+- **Preset** — Filter by FSRS preset
+- **Project** — Filter by project hierarchy
 
-When a filter or search is active, the count reads "X of Y cards" so you always know what slice you're looking at.
+## Sort Options
 
-## Table Columns
+| Sort | Order |
+|------|-------|
+| Due date | Earliest first |
+| Created | Newest first |
+| Random | Shuffled |
+| Lapses | Most lapses first |
+| Interval | Longest first |
 
-Every column is sortable — click a header to sort, click again to flip the direction. An arrow shows the active sort.
+## Keyboard Navigation
 
-| Column | What it tells you |
-|--------|-------------------|
-| **Question** | Truncated question text (plain text, no markdown) |
-| **Answer** | Truncated answer text |
-| **State** | Color-coded badge — New, Learning, Review, etc. |
-| **Due** | Relative due date ("Today", "In 5d", "3d ago") |
-| **Interval** | Scheduled gap between reviews, in days/months/years |
-| **Lapses** | How many times you forgot this card |
-| **Stability** | Memory strength in days — a card with stability of 10d means FSRS estimates a 90% chance you'll recall it after 10 days. Low stability means fragile memory. |
-| **Difficulty** | How hard the card is on a 1-10 scale. High-difficulty cards build stability slower and get scheduled more frequently. |
-| **Source** | Name of the note the card lives in |
+| Key | Action |
+|-----|--------|
+| `j` / Down arrow | Move down |
+| `k` / Up arrow | Move up |
+| `Enter` | Edit card |
+| `Space` | Toggle selection |
+| `Cmd/Ctrl+A` | Select all |
+| `Escape` | Clear selection |
 
-## Card Detail Panel
+## Multi-Select
 
-Click any row and a preview panel appears at the bottom of the browser.
+- **Click** — Select single card
+- **Shift+Click** — Select range
+- **Ctrl/Cmd+Click** — Toggle selection
 
-You get the full question and answer rendered with markdown (images, code blocks, math all work), plus a metadata grid showing Due, Interval, Stability, Difficulty, Lapses, Reps, Created, Last Review, and Projects. There's also a link to jump straight to the source note.
+## Bulk Actions
 
-Three actions live in the panel:
+When cards are selected:
 
-| Button | What it does |
+| Action | Description |
 |--------|-------------|
-| **Suspend / Unsuspend** | Toggle card suspension |
-| **Reset** | Reset card to New state (clears all scheduling data) |
-| **Delete** | Permanently remove the card |
+| Suspend | Pause reviews for selected |
+| Unsuspend | Resume reviews |
+| Delete | Remove selected cards |
+| Move | Transfer to another note |
+| Change Type | Change note type |
+| Change Preset | Assign different preset |
 
-Click the **x** button or click another row to close the preview.
+## Card Preview Panel
 
-## Selection and Bulk Operations
+When a card is selected, preview shows full question and answer, source note link, FSRS statistics, review history, and edit/delete actions.
 
-Click a checkbox on any row to enter selection mode. Once you're in, click rows or checkboxes to toggle selection. The header checkbox selects (or deselects) all currently filtered cards at once.
+## Orphaned Cards
 
-A footer bar appears with bulk actions:
+Cards whose source note was deleted appear in the "Orphaned" facet. Options: Delete permanently, Move to existing note, or Keep without source.
 
-| Action | What it does |
-|--------|-------------|
-| **Suspend** | Suspend all selected cards |
-| **Unsuspend** | Unsuspend all selected cards |
-| **Reset** | Reset all selected cards to New |
-| **Delete** | Delete all selected cards |
+## Tips
 
-Click the **x** on the footer bar to exit selection mode.
-
-:::tip[Getting more out of the browser]
-- Sort by **Lapses** (descending) to find your most-forgotten cards — they probably need rewording.
-- Sort by **Difficulty** (descending) to spot the hardest cards in your collection.
-- Filter by **Suspended** to audit cards you've paused.
-- Compare **Stability** and **Interval** side by side to get a feel for card health — if interval is much larger than stability, the card is being pushed.
-- Use the Card Browser for collection-wide work, the [Flashcard Panel](/views/flashcard-panel/) for single-note management, and the [Session Builder](/views/session-builder/) for building custom review sessions.
-:::
+- Combine search filters for precise results: `state:review lapses:>2 due:overdue`
+- Sort by "Lapses" to find cards you keep forgetting
+- Check orphaned cards occasionally and resolve them
+- Select cards and export to CSV for external analysis

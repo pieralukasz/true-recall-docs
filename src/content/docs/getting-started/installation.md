@@ -1,91 +1,50 @@
 ---
 title: Installation
 description: How to install True Recall in your Obsidian vault
-links:
-  - /getting-started/quick-start/
 ---
 
-## Install via BRAT (Recommended)
+## Requirements
 
-[BRAT](https://github.com/TfTHacker/obsidian42-brat) (Beta Reviewers Auto-update Tool) handles installation and auto-updates for you.
+- Obsidian v1.5.0 or later
+- An Obsidian vault
 
-Open Obsidian **Settings → Community plugins → Browse**, search for "BRAT", and install it. Then:
+## Install from Community Plugins
+
+:::note
+True Recall is not yet available in the Obsidian Community Plugins directory. Use [BRAT](#install-via-brat) instead.
+:::
+
+## Install via BRAT
+
+[BRAT](https://github.com/TfTHacker/obsidian42-brat) (Beta Reviewers Auto-update Tool) handles installation and auto-updates for beta releases.
 
 ```
 Settings → BRAT → Add Beta Plugin → Enter: pieralukasz/true-recall → Add Plugin
 ```
 
-Finally, enable the plugin:
+Then enable the plugin in **Settings → Community plugins → True Recall → Toggle on**.
 
-```
-Settings → Community plugins → Find "True Recall" → Toggle on
-```
+## First-Time Setup
 
-That's it. BRAT will notify you when updates are available and can install them automatically.
+After enabling True Recall:
 
-:::tip
-Community plugin directory installation will be available after Obsidian review approval. For now, BRAT is the smoothest path.
-:::
-
-## Manual Installation
-
-Download the latest release from [GitHub Releases](https://github.com/pieralukasz/true-recall/releases), then drop the files into your vault's plugin folder:
-
-```
-<your-vault>/.obsidian/plugins/true-recall/
-├── main.js
-├── styles.css
-└── manifest.json
-```
-
-You can find this folder through **Settings → Community plugins → folder icon** next to "Installed plugins". Create the `true-recall` directory if it doesn't exist.
-
-Enable the plugin in **Settings → Community plugins → True Recall → Toggle on**.
-
-## Install from Source
-
-For developers who want the latest unreleased changes:
-
-```bash
-git clone https://github.com/pieralukasz/true-recall.git
-cd true-recall
-npm install
-npm run build
-```
-
-Copy the output into your vault:
-
-```bash
-cp main.js styles.css manifest.json <your-vault>/.obsidian/plugins/true-recall/
-```
-
-Enable the plugin in Obsidian settings.
+1. **AI Configuration** (Optional) — Go to Settings → True Recall → AI to configure your OpenRouter API key or True Recall subscription for AI features
+2. **FSRS Settings** — Review the default FSRS parameters in Settings → True Recall → FSRS (defaults work well for most users)
+3. **Day Start Hour** — Set when your "day" begins (default: 4 AM, matching Anki behavior)
 
 ## Verify It Works
 
-Once installed, you should see three things:
+Once installed, you should see:
 
 - **Ribbon icons** — a brain icon (purple) and a chart icon (orange) in the left sidebar
 - **Commands** — open the Command Palette (`Cmd/Ctrl+P`) and search "True Recall"
 - **Settings tab** — Settings → True Recall with configuration options
-
-If all three are there, you're good to go.
-
-## System Requirements
-
-- **Obsidian** 0.15.0 or later
-- **OS** — Windows, macOS, or Linux
-- **Mobile** — iOS and Android via Obsidian Mobile
 
 ## Troubleshooting
 
 ### Plugin doesn't appear
 
 Make sure all three files (`main.js`, `styles.css`, `manifest.json`) are inside a folder named exactly `true-recall` in your vault's `.obsidian/plugins/` directory. Restart Obsidian if needed.
-
-### Build errors
-
-You need Node.js 18+. If something breaks, delete `node_modules` and run `npm install` again.
 
 :::caution
 Large vaults (10,000+ notes) may take longer on first load — the plugin indexes flashcard links on startup. This only happens once.

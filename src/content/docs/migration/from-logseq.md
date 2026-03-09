@@ -11,7 +11,7 @@ If you're moving from Logseq to Obsidian and want to continue spaced repetition 
 |---------|--------|-------------|
 | **Platform** | Standalone app | Obsidian plugin |
 | **Note model** | Block → Cards | Note → Cards |
-| **Card creation** | `#card` tags | `#flashcard` tags |
+| **Card creation** | `#card` tags | `#type/basic` block format, AI toolbar, or `::` inline syntax |
 | **Algorithm** | SM-2 | FSRS v6 |
 | **Card syntax** | `#card` tags | Database (no syntax) |
 | **Data storage** | Local Markdown | Local SQLite |
@@ -63,7 +63,13 @@ Look for and handle:
 For each imported note:
 
 1. **Open the note** in Obsidian
-2. **Write flashcards** using `#flashcard` tags (question on one line, answer below)
+2. **Write flashcards** using the `#type/basic` block format:
+   ```markdown
+   #type/basic
+   Front: What is spaced repetition?
+   Back: A learning technique that reviews material at increasing intervals.
+   ---
+   ```
 3. **Open the flashcard panel** and click **Collect** to import cards
 4. **Review the cards** to verify quality
 
@@ -88,7 +94,7 @@ After ~500 reviews, optimize your FSRS parameters for best results.
 ### Card Creation
 
 - **Logseq**: Add `#card` tag to blocks
-- **True Recall**: Write cards inline using `#flashcard` tags
+- **True Recall**: Write cards using `#type/basic` block format, AI selection toolbar, or `::` inline syntax
 
 ### Note Structure
 
@@ -107,7 +113,7 @@ True Recall doesn't require a specific note structure. Write flashcards anywhere
 If you have many `#card` tagged blocks:
 
 1. Review each block in the imported notes
-2. Rewrite the content using `#flashcard` tags
+2. Rewrite the content using the `#type/basic` block format
 3. Open the flashcard panel and click **Collect**
 4. Remove the old `#card` tags
 
