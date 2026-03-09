@@ -103,7 +103,7 @@ Now that you've got the basics, explore more creation methods:
 - [Cloze deletions](/creation/cloze-deletions/) — fill-in-the-blank cards with `{{c1::text}}` syntax
 - [Image Occlusion](/creation/image-occlusion/) — create cards from images by hiding regions
 
-When you're ready to go deeper, read about how the [FSRS algorithm](/concepts/fsrs-algorithm/) schedules your reviews, or organize your cards into [projects](/organization/projects/) for focused study sessions.
+When you're ready to go deeper, read about how the [FSRS algorithm](/scheduling/fsrs-algorithm/) schedules your reviews, or organize your cards into [projects](/organization/projects/) for focused study sessions.
 
 :::tip[The short version]
 Review daily (10 minutes beats a weekly hour), write specific questions with concise answers, and rate honestly. The algorithm learns from your honesty — inflated ratings hurt your retention, not help it.

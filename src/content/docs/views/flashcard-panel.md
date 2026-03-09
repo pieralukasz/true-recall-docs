@@ -7,6 +7,9 @@ description: The main sidebar panel for managing flashcards per note with quick 
 ---
 
 :::caution[My Notes]
+
+- I've changed header, now it has an action button to start review. During review it shows jump to source icon.
+
 :::
 
 The **Flashcard Panel** is one of the most important views in True Recall. This sidebar automatically follows the note you're editing, showing all its flashcards, their review status, and quick actions. It's your hub for collecting new cards, managing existing ones, launching reviews, and generating cards with AI.
@@ -62,16 +65,16 @@ During a review session, a file icon appears in the header indicating the panel 
 
 Click the **...** button to access these actions:
 
-| Action                     | Description                                                                         |
-| -------------------------- | ----------------------------------------------------------------------------------- |
-| Refresh                    | Reload flashcard data from the database                                             |
-| Open source note           | Open the linked source note in a new tab                                            |
-| Generate from highlights   | AI-generate cards from `==highlighted==` text (only shown when highlights exist)     |
-| Browse in card browser     | Open the [Card Browser](/views/card-browser/) filtered to this note                 |
-| Copy to clipboard          | Copy all cards as a numbered `Q: ... A: ...` list                                   |
-| Export as CSV              | Download cards as a CSV file                                                        |
-| Forget all flashcards      | Reset FSRS scheduling for every card to New state (confirmation required)            |
-| Delete all flashcards      | Permanently remove all cards from this note (confirmation required)                  |
+| Action                   | Description                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------- |
+| Refresh                  | Reload flashcard data from the database                                          |
+| Open source note         | Open the linked source note in a new tab                                         |
+| Generate from highlights | AI-generate cards from `==highlighted==` text (only shown when highlights exist) |
+| Browse in card browser   | Open the [Card Browser](/views/card-browser/) filtered to this note              |
+| Copy to clipboard        | Copy all cards as a numbered `Q: ... A: ...` list                                |
+| Export as CSV            | Download cards as a CSV file                                                     |
+| Forget all flashcards    | Reset FSRS scheduling for every card to New state (confirmation required)        |
+| Delete all flashcards    | Permanently remove all cards from this note (confirmation required)              |
 
 ## Card Display
 
@@ -80,23 +83,23 @@ Each card in the list shows:
 - **Question text** rendered as Markdown
 - **Color-coded left border** indicating FSRS state:
 
-| Border Color | State                |
-| ------------ | -------------------- |
-| Green        | New                  |
+| Border Color | State                 |
+| ------------ | --------------------- |
+| Green        | New                   |
 | Orange       | Learning / Relearning |
-| Blue         | Review               |
-| Red          | Suspended            |
+| Blue         | Review                |
+| Red          | Suspended             |
 
 ### Status Badges
 
 Cards may display small badges next to the question:
 
-| Badge      | Meaning                                     |
-| ---------- | ------------------------------------------- |
-| **S**      | Suspended — excluded from reviews           |
+| Badge      | Meaning                                         |
+| ---------- | ----------------------------------------------- |
+| **S**      | Suspended — excluded from reviews               |
 | **B**      | Buried — hidden until tomorrow (hover for date) |
-| **C1, C2** | Cloze card — number indicates cloze index   |
-| **⇄**      | Reversed card                               |
+| **C1, C2** | Cloze card — number indicates cloze index       |
+| **⇄**      | Reversed card                                   |
 
 ### Expanded View
 
@@ -118,18 +121,18 @@ Hover over a card to highlight its original source text in the editor. Click the
 
 Right-click any card (or tap the three-dot icon) to open the context menu:
 
-| Action                          | Description                                                              |
-| ------------------------------- | ------------------------------------------------------------------------ |
-| Edit                            | Open card in the [Flashcard Editor](/views/flashcard-editor/)             |
-| Copy                            | Copy card to clipboard as `Q: ... A: ...`                                |
-| Move                            | Transfer card to a different source note                                 |
-| Change type                     | Convert card to a different note type (e.g., Basic → Cloze)             |
-| Make reversed / Remove reversed | Toggle a reversed pair for Basic cards. Not available for Cloze or IO.   |
-| AI Rewrite                      | Use AI to rewrite or split the card into better cards                    |
-| Forget                          | Reset FSRS scheduling to New state and clear review history              |
-| Suspend / Unsuspend             | Toggle whether the card appears in review sessions                       |
-| Delete                          | Permanently remove the card                                              |
-| Select                          | Enter selection mode with this card selected                             |
+| Action                          | Description                                                            |
+| ------------------------------- | ---------------------------------------------------------------------- |
+| Edit                            | Open card in the [Flashcard Editor](/views/flashcard-editor/)          |
+| Copy                            | Copy card to clipboard as `Q: ... A: ...`                              |
+| Move                            | Transfer card to a different source note                               |
+| Change type                     | Convert card to a different note type (e.g., Basic → Cloze)            |
+| Make reversed / Remove reversed | Toggle a reversed pair for Basic cards. Not available for Cloze or IO. |
+| AI Rewrite                      | Use AI to rewrite or split the card into better cards                  |
+| Forget                          | Reset FSRS scheduling to New state and clear review history            |
+| Suspend / Unsuspend             | Toggle whether the card appears in review sessions                     |
+| Delete                          | Permanently remove the card                                            |
+| Select                          | Enter selection mode with this card selected                           |
 
 :::note
 **Forget** is only available for cards that have been reviewed at least once (non-New state).
@@ -146,27 +149,27 @@ A **selection toolbar** replaces the header, showing the selected count and bulk
 
 ### Bulk Actions
 
-| Action           | Description                                              |
-| ---------------- | -------------------------------------------------------- |
-| Select All       | Select every card in the current note                    |
-| Move             | Move all selected cards to another note                  |
-| Change note type | Convert selected cards to a different type               |
-| AI Rewrite       | AI rewrite all selected cards                            |
-| Suspend          | Suspend all selected cards                               |
-| Unsuspend        | Unsuspend all selected cards                             |
-| Forget           | Reset scheduling for all selected cards                  |
-| Delete           | Delete all selected cards (confirmation required)        |
+| Action           | Description                                       |
+| ---------------- | ------------------------------------------------- |
+| Select All       | Select every card in the current note             |
+| Move             | Move all selected cards to another note           |
+| Change note type | Convert selected cards to a different type        |
+| AI Rewrite       | AI rewrite all selected cards                     |
+| Suspend          | Suspend all selected cards                        |
+| Unsuspend        | Unsuspend all selected cards                      |
+| Forget           | Reset scheduling for all selected cards           |
+| Delete           | Delete all selected cards (confirmation required) |
 
 Press the **X** button in the toolbar to exit selection mode.
 
 ## Card Types
 
-| Type              | Panel Display                                                       |
-| ----------------- | ------------------------------------------------------------------- |
-| Basic             | Question text, expandable answer                                    |
-| Basic Reversed    | Shows **⇄** badge. Original and reversed cards listed separately.   |
-| Cloze             | Shows **C1**, **C2**, etc. badge for each cloze deletion            |
-| Image Occlusion   | Grouped by source image with View and Edit actions                  |
+| Type            | Panel Display                                                     |
+| --------------- | ----------------------------------------------------------------- |
+| Basic           | Question text, expandable answer                                  |
+| Basic Reversed  | Shows **⇄** badge. Original and reversed cards listed separately. |
+| Cloze           | Shows **C1**, **C2**, etc. badge for each cloze deletion          |
+| Image Occlusion | Grouped by source image with View and Edit actions                |
 
 ### Image Occlusion Groups
 
@@ -201,10 +204,10 @@ The panel stays in sync automatically:
 
 ## Export
 
-| Format            | How to Access           | Output                                                 |
-| ----------------- | ----------------------- | ------------------------------------------------------ |
-| Copy to clipboard | More menu → Copy        | Numbered list: `1. Q: ... A: ...`                       |
-| Export as CSV     | More menu → Export CSV  | Downloads `<note-name>-flashcards.csv` with Q/A columns |
+| Format            | How to Access          | Output                                                  |
+| ----------------- | ---------------------- | ------------------------------------------------------- |
+| Copy to clipboard | More menu → Copy       | Numbered list: `1. Q: ... A: ...`                       |
+| Export as CSV     | More menu → Export CSV | Downloads `<note-name>-flashcards.csv` with Q/A columns |
 
 ## Tips
 

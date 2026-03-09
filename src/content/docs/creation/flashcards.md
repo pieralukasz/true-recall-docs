@@ -1,7 +1,7 @@
 ---
 title: Flashcards
 sidebar:
-  order: 1
+  order: 0
 description: "How flashcards work in True Recall: types, storage, collection, states, and editing."
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Projects
 sidebar:
-  order: 3
+  order: 0
 description: How projects are modeled in True Recall using parents-based note relationships and folder includes.
 ---
 
@@ -61,6 +61,6 @@ Notes with cards and no project assignment appear in **Unassigned**.
 
 ## Related
 
-- [Projects organization](/organization/projects/)
+- [Projects & Sub-projects](/organization/projects/)
 - [Dashboard](/views/dashboard/)
 - [Frontmatter fields](/reference/frontmatter-fields/)

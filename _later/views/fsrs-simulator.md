@@ -158,7 +158,7 @@ At 80% you'll see longer intervals — you're accepting a higher chance of forge
 
 ## Related
 
-- [FSRS Algorithm](/concepts/fsrs-algorithm/) — deep dive into stability, difficulty, and retrievability
-- [Why FSRS?](/concepts/why-fsrs/) — how FSRS compares to older algorithms
+- [FSRS Algorithm](/scheduling/fsrs-algorithm/) — deep dive into stability, difficulty, and retrievability
+- [Why FSRS?](/scheduling/why-fsrs/) — how FSRS compares to older algorithms
 - [FSRS Settings](/configuration/fsrs-settings/) — configure weights and retention targets
 - [FSRS Optimization](/scheduling/fsrs-optimization/) — optimize weights from your review history

@@ -14,8 +14,9 @@ All paths are relative to `src/content/docs/`.
 - `getting-started/installation.md` — Installation via BRAT, manual, or from source
 - `getting-started/quick-start.md` — 5-minute quickstart guide
 
-## Creation (7 pages)
+## Creation (8 pages)
 
+- `creation/flashcards.md` — How flashcards work: types, storage, collection, states, and editing
 - `creation/creating-flashcards.md` — Overview: creation surfaces, note types concept, block format, and the collection step
 - `creation/note-types.md` — Default note types: Basic, Basic (Reversed), Cloze, Image Occlusion — what each produces and when to use it
 - `creation/custom-note-types.md` — Custom note types: fields, card templates, CSS, slugs, and block format usage
@@ -62,15 +63,27 @@ All paths are relative to `src/content/docs/`.
 - `configuration/fsrs-parameters.md` — FSRS algorithm parameters and optimization
 - `configuration/data-backup.md` — Database backup and device management
 
+## Organization (5 pages)
+
+- `organization/projects-model.md` — Project data model: parents-based relationships, folder includes, preset inheritance
+- `organization/projects.md` — Project workflows: drag-and-drop, detach, create-project actions, known constraints
+- `organization/note-types.md` — Note type templates: fields, templates, and styling
+- `organization/presets.md` — FSRS preset configuration for different learning contexts
+- `organization/archiving.md` — Archiving notes and project-level cascading
+
+## Scheduling (8 pages)
+
+- `scheduling/why-fsrs.md` — Why FSRS v6: comparison with Leitner, SM-2, and other algorithms
+- `scheduling/fsrs-algorithm.md` — FSRS v6 algorithm: stability, difficulty, retrievability, weights, and states
+- `scheduling/overview.md` — Scheduling overview: day boundaries, learning steps, intervals, review order, daily limits
+- `scheduling/fsrs-optimization.md` — Training FSRS parameters on review history
+- `scheduling/load-balancing.md` — Auto-distributing reviews evenly across days
+- `scheduling/easy-days.md` — Reducing workload on specific days
+- `scheduling/scheduled-breaks.md` — Planning vacation periods with review redistribution
+- `scheduling/sibling-dispersal.md` — Spacing out cards from the same note
+
 ## Reference (3 pages)
 
 - `reference/commands.md` — Command palette reference
 - `reference/keyboard-shortcuts.md` — Keyboard shortcuts for review
 - `reference/context-menu.md` — Right-click context menu options
-
-## Advanced (4 pages)
-
-- `advanced/fsrs-optimization.md` — Training FSRS parameters on review history
-- `advanced/easy-days.md` — Reducing workload on specific days
-- `advanced/load-balancing.md` — Auto-distributing reviews across days
-- `advanced/orphaned-cards.md` — Managing cards without a source note

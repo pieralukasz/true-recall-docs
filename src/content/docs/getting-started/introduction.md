@@ -7,7 +7,11 @@ description: Learn what True Recall is and how it can help you remember everythi
 ---
 
 :::caution[My Notes]
-:::
+
+- Key Features one wszystkie musza miec backlinki bezposrednio do poradnikow.
+- Create flashcards,Review FSRS, dokladnie backlinki.
+- Te markdowny co to wyjasniaja powinny miec zdjecia dodane.
+  :::
 
 True Recall is an Obsidian plugin for spaced repetition. Your flashcards live alongside your notes, scheduled by FSRS v6 — the most advanced open-source algorithm for long-term memory.
 
@@ -36,7 +40,7 @@ The algorithm tracks two things per card: **stability** (how long until you migh
 ## Key Features
 
 - **AI-Powered Generation** — Select text and instantly create Q&A cards, cloze deletions, or reversed cards
-- **[FSRS v6 Algorithm](/concepts/why-fsrs/)** — State-of-the-art spaced repetition that adapts to your patterns
+- **[FSRS v6 Algorithm](/scheduling/why-fsrs/)** — State-of-the-art spaced repetition that adapts to your patterns
 - **Image Occlusion** — Create flashcards from images by hiding regions, with AI auto-detection
 - **Type-in Mode** — Type answers and get AI-powered semantic grading or diff
 - **Note Types** — Anki-style templates with customizable fields

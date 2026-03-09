@@ -77,6 +77,6 @@ The capabilities below are available as workflows (drag-and-drop/selection), eve
 
 ## Related
 
-- [Projects concept](/concepts/projects/)
+- [Projects concept](/organization/projects-model/)
 - [Dashboard](/views/dashboard/)
 - [Archiving](/organization/archiving/)

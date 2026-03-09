@@ -1,5 +1,7 @@
 ---
 title: Why FSRS v6
+sidebar:
+  order: -3
 description: How FSRS v6 compares to Leitner boxes, SM-2, and other spaced repetition algorithms.
 ---
 
@@ -41,7 +43,7 @@ FSRS (Free Spaced Repetition Scheduler) is a machine learning-based algorithm de
 - **Difficulty** — How hard this particular card is for you (0-10)
 - **Retrievability** — Your current probability of recalling the answer (0-100%)
 
-With **21 trainable weights**, FSRS can capture patterns that SM-2's 3 parameters simply cannot. See [FSRS Algorithm](/concepts/fsrs-algorithm/) for a technical deep-dive into each component.
+With **21 trainable weights**, FSRS can capture patterns that SM-2's 3 parameters simply cannot. See [FSRS Algorithm](/scheduling/fsrs-algorithm/) for a technical deep-dive into each component.
 
 ### Configurable retention
 
@@ -98,8 +100,8 @@ FSRS achieves **10-20% better retention** with **15-20% fewer reviews** compared
 
 ## Further reading
 
-- [FSRS Algorithm](/concepts/fsrs-algorithm/) — technical deep-dive into stability, difficulty, weights, and states
-- [Scheduling](/concepts/scheduling/) — how intervals, learning steps, and daily limits work
+- [FSRS Algorithm](/scheduling/fsrs-algorithm/) — technical deep-dive into stability, difficulty, weights, and states
+- [Scheduling](/scheduling/overview/) — how intervals, learning steps, and daily limits work
 - [FSRS Optimization](/scheduling/fsrs-optimization/) — personalizing weights from your review history
 - [FSRS Settings](/configuration/fsrs-settings/) — configuring algorithm parameters
 - [FSRS Simulator](/views/fsrs-simulator/) — interactive visualization of how FSRS schedules cards
