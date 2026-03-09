@@ -1,13 +1,17 @@
 ---
 title: Cloze Deletions
 sidebar:
-  order: 2
+  order: 5
 description: "Create fill-in-the-blank flashcards using cloze deletion syntax with hints, rich formatting, and multiple deletions."
 ---
 
-Cloze deletion cards are fill-in-the-blank style flashcards. They're excellent for memorizing facts, lists, and structured information.
+Cloze deletion cards are fill-in-the-blank style flashcards. They test a term in context — you see the surrounding sentence and must recall the missing piece.
 
-## Block Format (Recommended)
+The difference from basic cards: "The [___] is the powerhouse of the cell" gives you context that "What is the powerhouse of the cell?" does not. This makes cloze better for facts that carry meaning within their sentence, and basic cards better for definitions you want to test in one clean direction.
+
+Cloze cards are also the natural choice for lists and sequences, where the structure of the sentence holds multiple facts worth testing separately.
+
+## Block Format
 
 Use `#type/cloze` with `{{c<number>::text}}` syntax:
 
@@ -64,6 +68,19 @@ Text: The {{c1::Paris::capital of France}} is known as the City of Light.
 
 The hint appears in the blank: `[capital of France]`
 
+Use hints when context alone isn't enough to distinguish similar answers. Don't add hints to every cloze — they reduce the challenge of retrieval.
+
+## Card Generation
+
+Each unique cloze number generates one card:
+
+| Text | Cards Generated |
+|------|-----------------|
+| `{{c1::A}}` | 1 card |
+| `{{c1::A}} {{c2::B}}` | 2 cards |
+| `{{c1::A}} {{c1::B}}` | 1 card (both hidden) |
+| `{{c1::A}} {{c1::B}} {{c2::C}}` | 2 cards |
+
 ## Rich Formatting
 
 Clozes work with Markdown:
@@ -115,17 +132,6 @@ def {{c1::greet}}(name):
 ---
 ````
 
-## Card Generation
-
-Each unique cloze number generates one card:
-
-| Text | Cards Generated |
-|------|-----------------|
-| `{{c1::A}}` | 1 card |
-| `{{c1::A}} {{c2::B}}` | 2 cards |
-| `{{c1::A}} {{c1::B}}` | 1 card (both hidden) |
-| `{{c1::A}} {{c1::B}} {{c2::C}}` | 2 cards |
-
 ## During Review
 
 Cloze cards display:
@@ -135,21 +141,19 @@ Cloze cards display:
 
 When you answer, ALL clozes with that number are revealed together.
 
-## Converting to Cloze
-
-Convert existing text to cloze:
+## Converting Existing Text to Cloze
 
 1. Select the text
-2. Use the [Selection Toolbar](/creation/selection-toolbar/) → **Cloze**
+2. Use the [Selection Toolbar](/views/selection-toolbar/) → **Cloze**
 3. AI generates appropriate cloze markers
 
 Or manually wrap important terms: `{{c1::term}}`
 
-## Best Practices
+## Tips for Good Cloze Cards
 
-### Atomic Clozes
+### One fact per cloze
 
-Each cloze should test ONE piece of information:
+Each deletion should test one piece of information:
 
 ```markdown
 ✅ Good
@@ -159,9 +163,9 @@ The {{c1::Battle of Hastings}} occurred in {{c2::1066}}.
 The {{c1::Battle of Hastings occurred in 1066}}.
 ```
 
-### Natural Sentences
+### Keep sentences natural
 
-Keep the sentence readable when clozes are revealed:
+The sentence should still read well when the cloze is revealed:
 
 ```markdown
 ✅ Good
@@ -171,24 +175,12 @@ Keep the sentence readable when clozes are revealed:
 {{c1::Water}} {{c2::freezes}} {{c3::at}} {{c4::0°C}}.
 ```
 
-### Logical Grouping
+### Group related facts together
 
-Use same numbers for related info:
+Use the same number for facts that belong together:
 
 ```markdown
 The {{c1::Mona Lisa}} was painted by {{c1::Leonardo da Vinci}}.
-```
-
-### Use Hints Sparingly
-
-Hints help when context is unclear:
-
-```markdown
-✅ Good with hint
-{{c1::Java::programming language}} was released in 1995.
-
-❌ Unnecessary hint
-{{c1::Paris::capital of France}} is in Europe.
 ```
 
 ## Common Use Cases

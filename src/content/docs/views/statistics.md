@@ -1,7 +1,7 @@
 ---
 title: Statistics
 sidebar:
-  order: 5
+  order: 7
 description: Comprehensive analytics dashboard with FSRS insights, study patterns, retention tracking, workload forecasting, and cross-project comparison.
 ---
 

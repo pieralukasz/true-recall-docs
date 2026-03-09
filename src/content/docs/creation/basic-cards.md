@@ -1,44 +1,26 @@
 ---
 title: Basic Cards
 sidebar:
-  order: 1
-description: "Create basic flashcards using the Selection Toolbar, Flashcard Editor, or text-based syntax."
+  order: 4
+description: "Write basic and reversed flashcards using block format in your notes."
 ---
 
-Basic cards are the simplest flashcard type — one question, one answer. There are several ways to create them, from AI-powered generation to manual text syntax.
+Basic cards test one specific fact: a question on the front, an answer on the back. They're the right choice when you want to test something in one direction — a definition, a fact, a translation — and a short answer is all you need.
 
-## Selection Toolbar (Recommended)
-
-The fastest way to create flashcards is with the [Selection Toolbar](/creation/selection-toolbar/):
-
-1. Select text in your note
-2. A toolbar appears above your selection
-3. Click **Basic**, **Cloze**, or **Auto**
-4. AI generates cards automatically
-
-Cards are created in block format and appear in the [Flashcard Panel](/views/flashcard-panel/) ready to collect.
-
-## Flashcard Editor (Recommended)
-
-The [Flashcard Editor](/views/flashcard-editor/) lets you create cards by filling in fields directly — pick a note type, enter your content, and save. No syntax to remember.
-
-- Open it from the **Add (+)** button in the [Flashcard Panel](/views/flashcard-panel/)
-- Or press `A` during a review session
-
-Cards created through the editor are added to the database immediately — no collection step needed.
+For vocabulary or anything you want to test in both directions, use [Basic (Reversed)](#reversed-cards). For fill-in-the-blank in a sentence, use [Cloze Deletions](/creation/cloze-deletions/).
 
 ## Block Format
 
-For users who prefer writing cards directly in their notes, the block format uses **note types** with the `#type/` tag:
+Write basic cards using the `#type/basic` block in your notes:
 
 ```markdown
 #type/basic
-Front: What is spaced repetition?
-Back: A learning technique that reviews information at increasing intervals to optimize long-term retention.
+Front: What is photosynthesis?
+Back: The process by which plants convert light energy into chemical energy.
 ---
 ```
 
-Each block starts with `#type/<slug>`, followed by field lines (`FieldName: value`), and ends with `---`.
+Each block starts with `#type/basic`, followed by field lines (`FieldName: value`), and ends with `---`.
 
 ### Multiple Cards
 
@@ -51,28 +33,26 @@ Back: Paris
 ---
 
 #type/basic
-Front: What is the powerhouse of the cell?
-Back: The mitochondria
+Front: What does HTTP stand for?
+Back: HyperText Transfer Protocol
 ---
 ```
 
 ### Multi-Line Fields
 
-For longer content, the field value continues on the next lines:
+Field values continue on the next lines:
 
 ```markdown
 #type/basic
-Front: Explain the process of photosynthesis.
-Back: Photosynthesis is the process by which plants convert light energy into chemical energy.
-
-The light-dependent reactions occur in the thylakoid membrane.
-The Calvin cycle occurs in the stroma.
+Front: Explain the difference between RAM and ROM.
+Back: RAM (Random Access Memory) is volatile — it loses data when power is off.
+ROM (Read-Only Memory) is non-volatile — data persists without power.
 ---
 ```
 
 ### Source Tracking
 
-Add an optional source comment to link a card to exact text in your notes:
+Add a source comment to link a card to specific text in your note:
 
 ```markdown
 #type/basic
@@ -82,9 +62,11 @@ Back: Programmed cell death that occurs in multicellular organisms.
 ---
 ```
 
+The [Selection Toolbar](/views/selection-toolbar/) adds this automatically when generating cards. You can add it manually too.
+
 ### Type-in Mode
 
-Mark a card as requiring a typed answer:
+Mark a card as requiring a typed answer with `@typein`:
 
 ```markdown
 #type/basic
@@ -94,9 +76,11 @@ Back: Free Spaced Repetition Scheduler
 ---
 ```
 
+During review, you'll type your answer instead of just flipping the card.
+
 ## Reversed Cards
 
-Use `#type/basic-reversed` to create two cards — one in each direction (Q→A and A→Q):
+Use `#type/basic-reversed` to create two cards from one block — one in each direction:
 
 ```markdown
 #type/basic-reversed
@@ -111,17 +95,15 @@ This creates:
 
 Both cards are scheduled independently. Good for vocabulary, capitals, abbreviations, and anything where both directions make sense.
 
-## Markdown Formatting
+## Markdown and Images
 
-Cards support full Markdown in block format and in the Flashcard Editor:
+Cards support full Markdown:
 
 - **Bold**, *italic*, ~~strikethrough~~
 - `inline code` and code blocks
-- [Links](url) and ![[images]]
+- Links and `![[images]]`
 - Math (LaTeX): `$$E = mc^2$$`
 - Lists, tables, blockquotes
-
-## Images in Cards
 
 ```markdown
 #type/basic
@@ -131,23 +113,9 @@ Back: Hippocampus
 ---
 ```
 
-## Collecting Cards
+## Card States
 
-Cards written as syntax in your notes (block format) need to be **collected** into the database before they appear in reviews:
-
-1. Open the [Flashcard Panel](/views/flashcard-panel/) (brain icon in the ribbon)
-2. Uncollected cards appear in the "Uncollected" section
-3. Click **Collect** on each card (or Collect All)
-
-Collection adds cards to the database, assigns FSRS scheduling, and links cards to the source note.
-
-:::tip
-Cards created via the [Selection Toolbar](/creation/selection-toolbar/) also need collecting. Cards created via the [Flashcard Editor](/views/flashcard-editor/) skip this step — they go directly into the database.
-:::
-
-## Card Status
-
-After collection, cards show status badges:
+After collecting, cards show status badges:
 
 | Badge | Meaning |
 |-------|---------|
@@ -156,17 +124,17 @@ After collection, cards show status badges:
 | Blue | Review — graduated |
 | Red | Suspended — manually paused |
 
-## Editing Cards
+## Editing and Deleting
 
 - **From source** — Edit the markdown in your note. Changes sync automatically.
 - **From Panel** — Click the edit icon to open the card editor.
 - **During review** — Press `E` to edit the current card inline.
 
-## Deleting Cards
+To delete: use the trash icon in the Flashcard Panel, or delete the block from your note (the card becomes orphaned and can be removed from the Panel).
 
-- **From source** — Delete the markdown. The card becomes orphaned and can be removed.
-- **From Panel** — Click the trash icon and confirm.
-- **During review** — Press `!` to suspend, or use the actions menu.
+:::note[Collection required]
+Cards written in block format need to be collected before they appear in reviews. See [Creating Flashcards](/creation/creating-flashcards/#the-collection-step) for how collection works.
+:::
 
 ## Best Practices
 

@@ -22,8 +22,8 @@ Open the note, open the [Flashcard Panel](/views/flashcard-panel/), and all its 
 
 ## How it works
 
-1. **Create** flashcards — select text and use the [Selection Toolbar](/creation/selection-toolbar/), or click **Add** in the [Flashcard Panel](/views/flashcard-panel/) to open the Add Flashcard Modal
-2. **[Collect](/creation/collecting/)** cards into the database via the Flashcard Panel
+1. **Create** flashcards — select text and use the [Selection Toolbar](/views/selection-toolbar/), or click **Add** in the [Flashcard Panel](/views/flashcard-panel/) to open the Add Flashcard Modal
+2. **[Collect](/creation/creating-flashcards/#the-collection-step)** cards into the database via the Flashcard Panel
 3. **Review** when cards come due — rate each card Again, Hard, Good, or Easy
 4. **FSRS v6** calculates the optimal time to show each card again
 

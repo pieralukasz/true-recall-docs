@@ -22,14 +22,14 @@ The fastest way is with the **Selection Toolbar**:
 
 The generated card is added directly to your note in block format and immediately appears in the **[Flashcard Panel](/views/flashcard-panel/)** where you can manage and review it:
 
-<!-- TODO Add Photos and Video -->
+TODO: PHOTOS
 
 ```markdown
 #type/basic
 Front: What is spaced repetition?
 Back: A learning technique that reviews information at increasing intervals to optimize long-term retention.
-<!-- source: Spaced repetition reviews information at increasing intervals -->
----
+
+## <!-- source: Spaced repetition reviews information at increasing intervals -->
 ```
 
 :::tip[The Flashcard Panel is your home base]
@@ -38,7 +38,7 @@ The [Flashcard Panel](/views/flashcard-panel/) is one of the most important view
 - **Card status** — new, learning, and review counts at a glance
 - **Quick Review** — answer a due card without opening a full session
 - **Collect & Generate** — add cards to the database or generate new ones with AI
-:::
+  :::
 
 ### Manual Alternative
 
@@ -46,7 +46,7 @@ Prefer a form over writing syntax? Click **Add** (+) in the [Flashcard Panel](/v
 
 ## Collect your cards
 
-New flashcards need to be "[collected](/creation/collecting/)" into the database:
+New flashcards need to be "[collected](/creation/creating-flashcards/#the-collection-step)" into the database:
 
 1. Click the brain icon in the left ribbon to open the **[Flashcard Panel](/views/flashcard-panel/)**
 2. Your uncollected flashcards appear in the "Uncollected" section
@@ -95,7 +95,7 @@ These make review sessions fast:
 
 Now that you've got the basics, explore more creation methods:
 
-- [Selection Toolbar](/creation/selection-toolbar/) — the most efficient way to create cards from any text
+- [Selection Toolbar](/views/selection-toolbar/) — the most efficient way to create cards from any text
 - [Cloze deletions](/creation/cloze-deletions/) — fill-in-the-blank cards with `{{c1::text}}` syntax
 - [Image Occlusion](/creation/image-occlusion/) — create cards from images by hiding regions
 

@@ -1,7 +1,7 @@
 ---
 title: Review View
 sidebar:
-  order: 3
+  order: 5
 description: The flashcard review interface with keyboard shortcuts, inline editing, undo, and session persistence.
 ---
 

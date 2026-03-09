@@ -1,7 +1,7 @@
 ---
 title: Flashcard Panel
 sidebar:
-  order: 2
+  order: 3
 description: The main sidebar panel for managing flashcards per note with quick review, collection, and AI generation.
 ---
 

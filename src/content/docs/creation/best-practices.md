@@ -1,7 +1,7 @@
 ---
 title: Best Practices
 sidebar:
-  order: 5
+  order: 7
 description: "How to write effective flashcards that stick — principles, examples, and common mistakes."
 ---
 
@@ -122,7 +122,7 @@ Back: Global Interpreter Lock — it prevents multiple threads from executing Py
 | Never editing cards | Bad cards stay bad | Edit or delete cards that feel wrong during review |
 
 :::tip[Let AI help]
-Use the [Selection Toolbar](/creation/selection-toolbar/) to generate cards from your notes. AI follows these principles automatically — then you can edit the result to match your voice.
+Use the [Selection Toolbar](/views/selection-toolbar/) to generate cards from your notes. AI follows these principles automatically — then you can edit the result to match your voice.
 :::
 
 ## Learn More

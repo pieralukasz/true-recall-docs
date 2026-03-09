@@ -62,7 +62,7 @@ When you "collect" a flashcard, True Recall:
 
 The database (`.true-recall/true-recall-{id}.db`) stores FSRS scheduling data, review history, and statistics.
 
-## The [Collection](/creation/collecting/) Process
+## The [Collection](/creation/creating-flashcards/#the-collection-step) Process
 
 New flashcard blocks aren't immediately added to the review queue. They must be **collected**:
 

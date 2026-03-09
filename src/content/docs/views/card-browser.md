@@ -1,7 +1,7 @@
 ---
 title: Card Browser
 sidebar:
-  order: 4
+  order: 6
 description: Current Card Browser filtering syntax, facets, and bulk workflows aligned with implementation.
 ---
 

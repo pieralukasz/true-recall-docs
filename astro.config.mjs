@@ -5,9 +5,9 @@ import starlightThemeObsidian from 'starlight-theme-obsidian';
 import vercel from '@astrojs/vercel';
 const devSidebar = [
 	{ label: 'Getting Started', autogenerate: { directory: 'getting-started' } },
+	{ label: 'Views', autogenerate: { directory: 'views' } },
 	{ label: 'Creation', autogenerate: { directory: 'creation' } },
 	{ label: 'Review', autogenerate: { directory: 'review' } },
-	{ label: 'Views', autogenerate: { directory: 'views' } },
 	{ label: 'Organization', autogenerate: { directory: 'organization' } },
 	{ label: 'Configuration', autogenerate: { directory: 'configuration' } },
 	{ label: 'Data', autogenerate: { directory: 'data' } },

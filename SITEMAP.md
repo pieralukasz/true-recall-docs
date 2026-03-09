@@ -14,12 +14,15 @@ All paths are relative to `src/content/docs/`.
 - `getting-started/installation.md` — Installation via BRAT, manual, or from source
 - `getting-started/quick-start.md` — 5-minute quickstart guide
 
-## Creation (4 pages)
+## Creation (7 pages)
 
-- `creation/basic-cards.md` — Block format and inline syntax for basic flashcards
+- `creation/creating-flashcards.md` — Overview: creation surfaces, note types concept, block format, and the collection step
+- `creation/note-types.md` — Default note types: Basic, Basic (Reversed), Cloze, Image Occlusion — what each produces and when to use it
+- `creation/custom-note-types.md` — Custom note types: fields, card templates, CSS, slugs, and block format usage
+- `creation/basic-cards.md` — Basic and reversed cards in block format
+- `creation/cloze-deletions.md` — Fill-in-the-blank cards with `{{c1::text}}` syntax
+- `creation/image-occlusion.md` — Cards from images by hiding regions, manual drawing and AI detection
 - `creation/best-practices.md` — How to write effective flashcards — principles, examples, and common mistakes
-- `creation/image-occlusion.md` — Image occlusion card creation
-- `creation/selection-toolbar.md` — AI-powered text selection to card generation
 
 ## Migration (4 pages)
 
@@ -39,8 +42,9 @@ All paths are relative to `src/content/docs/`.
 - `features/anki-export.md` — Exporting cards to Anki (.apkg) and CSV/TSV
 - `features/cloud-sync.md` — Cloud sync (planned feature)
 
-## Views & Panels (7 pages)
+## Views & Panels (9 pages)
 
+- `views/selection-toolbar.md` — AI-powered floating toolbar: generate Basic, Cloze, or Auto cards from any text selection
 - `views/flashcard-panel.md` — Main sidebar panel for card management
 - `views/flashcard-editor.md` — Form-based modal for creating and editing flashcards
 - `views/review-view.md` — Review session interface
@@ -48,6 +52,7 @@ All paths are relative to `src/content/docs/`.
 - `views/session-builder.md` — Custom review session configuration
 - `views/projects-view.md` — Project management interface
 - `views/fsrs-simulator.md` — Interactive FSRS visualization tool
+- `views/custom-type-modal.md` — Modal for creating and managing custom note types: fields, templates, CSS
 
 ## Configuration (5 pages)
 

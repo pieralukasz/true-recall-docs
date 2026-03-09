@@ -207,7 +207,7 @@ Projects are created from deck names automatically. From the [Dashboard](/views/
 
 ### Continue Creating Cards
 
-Imported and native cards coexist in the same system — all use FSRS scheduling. Create new cards with the [Selection Toolbar](/creation/selection-toolbar/) or by writing [block format](/creation/basic-cards/) in your notes.
+Imported and native cards coexist in the same system — all use FSRS scheduling. Create new cards with the [Selection Toolbar](/views/selection-toolbar/) or by writing [block format](/creation/basic-cards/) in your notes.
 
 ## Troubleshooting
 

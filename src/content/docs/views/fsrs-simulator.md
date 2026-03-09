@@ -1,7 +1,7 @@
 ---
 title: FSRS Simulator
 sidebar:
-  order: 7
+  order: 9
 description: Interactive FSRS visualization to simulate review sequences and experiment with algorithm parameters.
 ---
 

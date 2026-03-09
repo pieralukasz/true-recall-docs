@@ -1,11 +1,11 @@
 ---
 title: Selection Toolbar
 sidebar:
-  order: 4
-description: The most efficient way to create flashcards — select text and let AI generate cards instantly.
+  order: 2
+description: A floating toolbar that appears when you select text — generate Basic, Cloze, or Auto cards with AI, or open the Flashcard Editor.
 ---
 
-The **Selection Toolbar** is the most efficient way to create flashcards. Select text, click a button, and AI generates properly formatted cards from your content.
+The **Selection Toolbar** is a floating toolbar that appears above any text selection in your notes. Select text, click a button, and AI generates properly formatted cards from your content.
 
 ## How It Works
 
@@ -51,11 +51,10 @@ AI generation buttons require an AI configuration — either an API key or a [Tr
 
 ## Other Creation Methods
 
-The selection toolbar is the fastest approach, but there are two other ways to create flashcards:
+Besides the Selection Toolbar, you can create flashcards by:
 
-### From Highlights
-
-Select specific passages in your notes and use the toolbar to generate cards from just those highlights. This gives you precise control over which content becomes flashcards.
+- **[Flashcard Editor](/views/flashcard-editor/)** — fill in fields manually, cards go straight to the database
+- **[Block format](/creation/basic-cards/)** — write `#type/basic` blocks directly in your notes, then collect
 
 ### From a Whole Note
 
@@ -94,7 +93,6 @@ Configure AI behavior in Settings → AI:
 | **Model** | Which AI model to use (via OpenRouter or subscription) |
 | **Language** | Output language (auto-detect or specific) |
 | **Density** | How many cards to generate — Essential (~5-10/1000 words), Balanced (~15-25), or Comprehensive (~40-60) |
-| **Custom prompts** | Override default generation instructions |
 
 ## Tips
 

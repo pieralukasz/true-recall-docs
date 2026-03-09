@@ -1,7 +1,7 @@
 ---
 title: Flashcard Editor
 sidebar:
-  order: 3
+  order: 4
 description: A form-based modal for creating and editing flashcards without writing syntax.
 ---
 

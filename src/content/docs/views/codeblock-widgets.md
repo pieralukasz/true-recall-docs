@@ -1,7 +1,7 @@
 ---
 title: CodeBlock Widgets
 sidebar:
-  order: 6
+  order: 8
 description: Current registered widget IDs and supported codeblock options in True Recall.
 ---
 
