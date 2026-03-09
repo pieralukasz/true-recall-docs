@@ -5,6 +5,9 @@ sidebar:
 description: "Daily workflow and best practices for keeping your True Recall data synchronized across devices"
 ---
 
+:::caution[My Notes]
+:::
+
 Once Cloud Sync is set up, this guide covers daily usage and best practices for keeping your data synchronized.
 
 ## Daily Workflow

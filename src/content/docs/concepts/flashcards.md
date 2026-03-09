@@ -5,6 +5,9 @@ sidebar:
 description: "How flashcards work in True Recall: types, storage, collection, states, and editing."
 ---
 
+:::caution[My Notes]
+:::
+
 Flashcards are the core learning unit in True Recall. This page explains how flashcards work, where they're stored, and how they connect to your notes.
 
 ## Card Types

@@ -1,9 +1,13 @@
 ---
 title: Basic Concepts
 sidebar:
+  label: "Basic Concepts (P)"
   order: 4
 description: Core concepts of True Recall including flashcard types, FSRS algorithm, projects, presets, and day boundaries.
 ---
+
+:::caution[My Notes]
+:::
 
 Before diving deeper, understanding these core concepts will help you get the most out of True Recall.
 

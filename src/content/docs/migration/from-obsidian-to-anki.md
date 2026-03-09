@@ -5,6 +5,9 @@ sidebar:
 description: How to transition from the Obsidian-to-Anki plugin to True Recall
 ---
 
+:::caution[My Notes]
+:::
+
 If you've been using the Obsidian-to-Anki plugin, this guide explains how to transition to True Recall and why you might want to.
 
 ## Why Switch?
@@ -109,17 +112,6 @@ Technically yes, but not recommended:
 - Creates confusion about which system to use
 - Duplicate cards possible
 - Better to fully transition to one system
-
-### What about Anki mobile?
-
-True Recall works on Obsidian mobile:
-- Install Obsidian on iOS/Android
-- Enable True Recall plugin
-- Your flashcards are available
-
-:::caution[Database Note]
-Each device has its own database until Cloud Sync is released. See [Cloud Sync](/features/cloud-sync/) for details.
-:::
 
 ### Is the syntax conversion automatic?
 

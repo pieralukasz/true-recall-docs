@@ -5,6 +5,9 @@ sidebar:
 description: "Reduce review workload on specific days while maintaining scheduling integrity"
 ---
 
+:::caution[My Notes]
+:::
+
 Easy Days reduce review load on specific days -- weekends, holidays, or busy periods -- while redistributing cards to adjacent days to maintain your learning schedule. Cards shift by 1-2 days with minimal impact on retention.
 
 ## How It Works

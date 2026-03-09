@@ -5,6 +5,9 @@ sidebar:
 description: Comprehensive analytics dashboard with FSRS insights, study patterns, retention tracking, workload forecasting, and cross-project comparison.
 ---
 
+:::caution[My Notes]
+:::
+
 The **Statistics** view is your analytics hub. It provides deep insights into your learning progress, FSRS algorithm behavior, study patterns, and retention predictions — organized across five focused tabs.
 
 ## Opening Statistics
@@ -83,6 +86,8 @@ Six KPI cards sit below the filter bar, providing at-a-glance metrics.
 | **Cards Mature** | % of review-state cards with interval ≥ 21 days | Delta vs previous period |
 
 Hover any card for a tooltip with the exact formula and raw numbers. Click **True Retention** to jump to the Predictions tab. Click **Health Score** to expand a breakdown popover.
+
+TODO PHOTO
 
 ---
 
@@ -184,6 +189,8 @@ Minutes
 
 ---
 
+TODO PHOTO
+
 ## Activity Tab
 
 Detailed study pattern analysis to optimize when and how you study.
@@ -276,6 +283,8 @@ The chart highlights your best- and worst-performing card type.
 :::
 
 ---
+
+TODO PHOTO
 
 ## FSRS Tab
 
@@ -413,6 +422,8 @@ Shows whether your actual forgetting is faster or slower than what FSRS predicts
 
 ---
 
+TODO PHOTO
+
 ## Cards Tab
 
 Collection composition and interval analysis.
@@ -545,6 +556,8 @@ Shows a comparison like "Mature cards have 10% lower lapse rate than young cards
 :::
 
 ---
+
+TODO PHOTO
 
 ## Predictions Tab
 

@@ -5,6 +5,9 @@ sidebar:
 description: Complete reference for all True Recall keyboard shortcuts during review, in Card Browser, and globally.
 ---
 
+:::caution[My Notes]
+:::
+
 Quick reference for all True Recall keyboard shortcuts.
 
 ## During Review

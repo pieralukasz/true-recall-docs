@@ -5,6 +5,9 @@ sidebar:
 description: Canonical archive behavior in True Recall using archive:true, including project-level cascading.
 ---
 
+:::caution[My Notes]
+:::
+
 Archiving excludes notes from active study without deleting cards.
 
 ## Canonical field

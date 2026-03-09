@@ -5,6 +5,9 @@ sidebar:
 description: How to transition from RemNote to True Recall in Obsidian
 ---
 
+:::caution[My Notes]
+:::
+
 If you're moving from RemNote to Obsidian and want to continue spaced repetition learning, this guide will help you set up True Recall.
 
 ## RemNote vs True Recall

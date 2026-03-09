@@ -5,6 +5,9 @@ sidebar:
 description: Canonical True Recall frontmatter contract for note IDs, projects, archiving, and FSRS preset inheritance.
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall currently relies on the following frontmatter fields as canonical API.
 
 ## Canonical fields

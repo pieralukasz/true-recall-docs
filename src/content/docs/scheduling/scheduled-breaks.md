@@ -5,6 +5,9 @@ sidebar:
 description: "Plan vacation periods or time off where reviews are redistributed to other days"
 ---
 
+:::caution[My Notes]
+:::
+
 **Scheduled Breaks** let you plan vacation periods or time off where reviews are redistributed to other days. Unlike Easy Days, breaks are one-time or finite periods.
 
 ## When to Use Scheduled Breaks

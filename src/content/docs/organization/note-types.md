@@ -5,6 +5,9 @@ sidebar:
 description: "Templates that define how flashcards are created from your notes with fields, templates, and styling"
 ---
 
+:::caution[My Notes]
+:::
+
 **Note Types** are templates that define how flashcards are created from your notes. They're similar to Anki's note types, with fields, templates, and styling.
 
 ## What is a Note Type?

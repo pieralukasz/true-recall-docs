@@ -5,6 +5,9 @@ sidebar:
 description: Understand the four-button rating system (Again, Hard, Good, Easy) and how each rating affects FSRS scheduling and card intervals.
 ---
 
+:::caution[My Notes]
+:::
+
 When you review a flashcard, you rate how well you remembered it. This rating determines when you'll see the card next. This page explains the rating system and how it affects scheduling.
 
 ## The Rating System

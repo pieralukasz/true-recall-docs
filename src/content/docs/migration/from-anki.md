@@ -5,6 +5,9 @@ sidebar:
 description: "Complete guide to importing Anki decks: note types, media, scheduling conversion, deck hierarchy, and review history."
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall imports `.apkg` files from Anki, preserving your cards, review history, media, and deck structure. This guide covers everything that happens during import.
 
 ## What Gets Imported

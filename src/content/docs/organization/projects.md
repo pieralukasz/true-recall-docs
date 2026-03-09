@@ -5,6 +5,9 @@ sidebar:
 description: Current project workflows in Dashboard, including drag-and-drop, detach, create-project actions, and known constraints.
 ---
 
+:::caution[My Notes]
+:::
+
 This page documents current operational project workflows in True Recall.
 
 ## Canonical fields

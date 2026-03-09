@@ -5,6 +5,9 @@ sidebar:
 description: "Semantic evaluation of typed answers during review using AI"
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall can use AI to grade your typed answers during review. This provides semantic evaluation that understands meaning, not just exact matches.
 
 ## How AI Grading Works

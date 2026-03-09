@@ -5,6 +5,9 @@ sidebar:
 description: Configure True Recall's review interface, editor integration, day boundary, and collection behavior.
 ---
 
+:::caution[My Notes]
+:::
+
 Configure in Settings -> True Recall -> General.
 
 ## Review Interface

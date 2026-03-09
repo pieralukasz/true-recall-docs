@@ -5,6 +5,9 @@ sidebar:
 description: "Train FSRS parameters on your review history for personalized scheduling"
 ---
 
+:::caution[My Notes]
+:::
+
 FSRS (Free Spaced Repetition Scheduler) optimization analyzes your review history to calculate personalized algorithm parameters. This improves scheduling accuracy by adapting to your specific learning patterns.
 
 :::note

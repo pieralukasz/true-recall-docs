@@ -5,6 +5,9 @@ sidebar:
 description: "Space out cards from the same note to prevent context interference and improve independent recall"
 ---
 
+:::caution[My Notes]
+:::
+
 **Sibling Dispersal** spaces out cards from the same note so you don't see related cards too close together. This prevents context interference and improves independent recall.
 
 ## What are Siblings?

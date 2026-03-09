@@ -5,6 +5,9 @@ sidebar:
 description: "Create fill-in-the-blank flashcards using cloze deletion syntax with hints, rich formatting, and multiple deletions."
 ---
 
+:::caution[My Notes]
+:::
+
 Cloze deletion cards are fill-in-the-blank style flashcards. They test a term in context — you see the surrounding sentence and must recall the missing piece.
 
 The difference from basic cards: "The [___] is the powerhouse of the cell" gives you context that "What is the powerhouse of the cell?" does not. This makes cloze better for facts that carry meaning within their sentence, and basic cards better for definitions you want to test in one clean direction.

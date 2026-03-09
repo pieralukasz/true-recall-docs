@@ -3,6 +3,9 @@ title: Why FSRS v6
 description: How FSRS v6 compares to Leitner boxes, SM-2, and other spaced repetition algorithms.
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall uses **FSRS v6** — the most advanced open-source spaced repetition algorithm. This page explains why it matters and how it compares to older approaches.
 
 ## The problem with older algorithms

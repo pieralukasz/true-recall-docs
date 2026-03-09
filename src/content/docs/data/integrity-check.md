@@ -5,6 +5,9 @@ sidebar:
 description: "Scan your database for orphaned cards, missing references, and corrupted data"
 ---
 
+:::caution[My Notes]
+:::
+
 The **Integrity Check** scans your database for issues like orphaned cards, missing references, and corrupted data.
 
 ## Common Issues

@@ -5,6 +5,9 @@ sidebar:
 description: "Automatically generate flashcards from your notes using AI models"
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall uses AI to automatically generate flashcards from your notes. This page covers generation methods, models, and customization.
 
 ## How AI Generation Works

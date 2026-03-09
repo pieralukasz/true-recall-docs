@@ -5,6 +5,9 @@ sidebar:
 description: "Configure AI features including subscription, API keys, models, and custom prompts"
 ---
 
+:::caution[My Notes]
+:::
+
 Configure AI features in Settings -> True Recall -> AI.
 
 ## True Recall AI Subscription

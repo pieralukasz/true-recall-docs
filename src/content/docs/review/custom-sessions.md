@@ -5,6 +5,9 @@ sidebar:
 description: Create filtered review sessions with specific parameters to focus on particular projects, tags, card states, or time ranges.
 ---
 
+:::caution[My Notes]
+:::
+
 **Custom Sessions** let you create filtered review sessions with specific parameters. Instead of reviewing all due cards, you can focus on particular subsets.
 
 ## Opening Custom Session

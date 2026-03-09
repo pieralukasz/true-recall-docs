@@ -5,6 +5,9 @@ sidebar:
 description: "Create note types with custom fields, card templates, and CSS for domain-specific flashcard layouts."
 ---
 
+:::caution[My Notes]
+:::
+
 The four [built-in note types](/creation/note-types/) cover most use cases. Custom note types are for when you need something they can't do — extra fields, a different card structure, or a layout specific to your subject.
 
 Common reasons to create a custom type:

@@ -5,6 +5,9 @@ sidebar:
 description: "How True Recall schedules reviews: day boundaries, learning steps, intervals, review order, and daily limits."
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall uses FSRS v6 to schedule flashcard reviews. This page explains how scheduling works, including day boundaries, learning steps, and interval calculation.
 
 ## The Scheduling System

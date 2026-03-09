@@ -5,6 +5,9 @@ sidebar:
 description: "Import flashcards from Anki .apkg files and export your cards back to Anki format"
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall can import flashcards from Anki `.apkg` files and export your cards back to Anki format.
 
 ## Importing from Anki

@@ -5,6 +5,9 @@ sidebar:
 description: Current right-click and menu actions available in Dashboard, Flashcard Panel, Review, and file explorer integrations.
 ---
 
+:::caution[My Notes]
+:::
+
 This page lists menu actions that are currently implemented.
 
 ## Dashboard note row menu

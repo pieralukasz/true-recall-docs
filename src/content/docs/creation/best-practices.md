@@ -5,6 +5,9 @@ sidebar:
 description: "How to write effective flashcards that stick — principles, examples, and common mistakes."
 ---
 
+:::caution[My Notes]
+:::
+
 The difference between flashcards that work and flashcards that waste your time comes down to how you write them. These principles will help you create cards that are easy to review and hard to forget.
 
 ## One Concept Per Card

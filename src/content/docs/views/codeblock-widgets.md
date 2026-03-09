@@ -5,9 +5,43 @@ sidebar:
 description: Current registered widget IDs and supported codeblock options in True Recall.
 ---
 
-Widgets are embedded with markdown codeblocks.
+:::caution[My Notes]
+:::
 
-## Config format
+Widgets are live True Recall components embedded directly in your Obsidian notes using markdown codeblocks. Drop a widget into any note — your home page, a project dashboard, a study tracker — and it renders in real time with your actual review data. No separate app, no switching views.
+
+Use them to build a personal dashboard, add a retention meter to a project note, or put an exam countdown on your study page.
+
+TODO PHOTO
+
+## Example: A Study Dashboard Note
+
+Create a note called `Study Dashboard.md` and paste this to build a quick overview:
+
+````markdown
+# My Study Dashboard
+
+```true-recall-streak
+showLongest: true
+```
+
+```true-recall-workload
+days: 14
+showTime: true
+```
+
+```true-recall-progress
+style: ring
+```
+
+```true-recall-forecast
+days: 30
+```
+````
+
+Each widget renders independently and updates whenever you complete a review session.
+
+## Config Format
 
 Widgets parse simple `key: value` lines:
 

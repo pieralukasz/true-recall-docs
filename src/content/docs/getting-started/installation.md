@@ -1,9 +1,13 @@
 ---
 title: Installation
 sidebar:
+  label: "Installation (P)"
   order: 2
 description: How to install True Recall in your Obsidian vault
 ---
+
+:::caution[My Notes]
+:::
 
 ## Requirements
 
@@ -17,6 +21,10 @@ True Recall is not yet available in the Obsidian Community Plugins directory. Us
 :::
 
 ## Install via BRAT
+
+:::note[Invite only]
+True Recall is currently in private beta — available by invitation only. If you have an invite, follow the steps below.
+:::
 
 [BRAT](https://github.com/TfTHacker/obsidian42-brat) (Beta Reviewers Auto-update Tool) handles installation and auto-updates for beta releases.
 

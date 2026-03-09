@@ -1,9 +1,13 @@
 ---
 title: Flashcard Editor
 sidebar:
+  label: "Flashcard Editor (P)"
   order: 4
 description: A form-based modal for creating and editing flashcards without writing syntax.
 ---
+
+:::caution[My Notes]
+:::
 
 The **Flashcard Editor** is a modal dialog for creating and editing flashcards through a form interface. Instead of writing block format syntax, you fill in fields directly — pick a note type, type your content, and save.
 
@@ -25,6 +29,8 @@ From top to bottom, the editor contains:
 2. **Formatting toolbar** — Text formatting buttons, type-in toggle
 3. **Fields** — Dynamic form fields based on the selected note type
 4. **Footer** — Management buttons, card count preview, save
+
+TODO PHOTO
 
 ### Action Bar
 
@@ -70,6 +76,8 @@ When a Cloze note type is selected, the editor displays syntax help for cloze de
 4. Fill in the fields
 5. Click **Save** or press `Cmd/Ctrl + Enter`
 
+TODO PHOTO
+
 After saving:
 - A notification confirms how many cards were created (e.g., "Created 2 cards" for a reversed card)
 - **Unpinned fields** are cleared automatically
@@ -78,6 +86,10 @@ After saving:
 
 :::tip[Rapid card creation]
 Pin the fields you want to reuse (e.g., a shared context or topic), then only change the unique content between saves. This is much faster than writing block syntax for a series of related cards.
+:::
+
+:::note[No source highlighting]
+Cards created through the Flashcard Editor don't have a `<!-- source: -->` comment, so they **won't highlight text in your note** when you hover over them in the Flashcard Panel. If you want hover-highlighting, create cards via the [Selection Toolbar](/views/selection-toolbar/) or AI generation instead — those methods automatically embed a source reference linking each card back to the original text.
 :::
 
 ### Card Count Preview

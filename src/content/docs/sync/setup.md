@@ -5,6 +5,9 @@ sidebar:
 description: "Set up True Recall Cloud Sync to keep flashcards synchronized across multiple devices"
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall Cloud Sync keeps your flashcards synchronized across multiple devices using Supabase backend.
 
 ## Prerequisites

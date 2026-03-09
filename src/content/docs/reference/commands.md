@@ -5,6 +5,9 @@ sidebar:
 description: Commands currently registered in True Recall and available in Command Palette.
 ---
 
+:::caution[My Notes]
+:::
+
 All commands below are currently registered.
 
 ## View

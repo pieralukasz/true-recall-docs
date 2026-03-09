@@ -1,9 +1,13 @@
 ---
 title: Flashcard Panel
 sidebar:
+  label: "Flashcard Panel (P)"
   order: 3
 description: The main sidebar panel for managing flashcards per note with quick review, collection, and AI generation.
 ---
+
+:::caution[My Notes]
+:::
 
 The **Flashcard Panel** is one of the most important views in True Recall. This sidebar automatically follows the note you're editing, showing all its flashcards, their review status, and quick actions. It's your hub for collecting new cards, managing existing ones, launching reviews, and generating cards with AI.
 
@@ -19,10 +23,11 @@ The panel opens in the right sidebar and immediately syncs with the active note.
 The panel has these sections from top to bottom:
 
 1. **Header** — Card count badges, search bar, action buttons, more menu
-2. **Quick Review** — One due card with rating buttons (optional, collapsible)
-3. **Flashcards** — All collected cards with state badges and actions
-4. **Image Occlusion Groups** — IO cards grouped by source image
-5. **Empty State** — Generation options when no cards exist
+2. **Flashcards** — All collected cards with state badges and actions
+3. **Image Occlusion Groups** — IO cards grouped by source image
+4. **Empty State** — Generation options when no cards exist
+
+TODO PHOTO
 
 ## Header
 
@@ -41,6 +46,7 @@ Color-coded badges show card counts by FSRS state:
 On the right side of the header:
 
 - **Collect** — Appears when uncollected flashcards exist in the note. Shows a count badge with a pulsing animation. Click to collect all detected flashcard syntax into the database.
+- **Review** — Launch a [review session](/review/review-session/) for this note's cards.
 - **Add (+)** — Opens the [Flashcard Editor](/views/flashcard-editor/) to create a new card via a form.
 - **More (...)** — Opens the [actions menu](#header-more-menu).
 
@@ -61,7 +67,6 @@ Click the **...** button to access these actions:
 | Refresh                    | Reload flashcard data from the database                                             |
 | Open source note           | Open the linked source note in a new tab                                            |
 | Generate from highlights   | AI-generate cards from `==highlighted==` text (only shown when highlights exist)     |
-| Start review               | Launch a full [review session](/review/review-session/) for this note's cards       |
 | Browse in card browser     | Open the [Card Browser](/views/card-browser/) filtered to this note                 |
 | Copy to clipboard          | Copy all cards as a numbered `Q: ... A: ...` list                                   |
 | Export as CSV              | Download cards as a CSV file                                                        |
@@ -103,6 +108,8 @@ Click a card to expand it and reveal:
 - **Lapses** — times the card was forgotten (if any)
 - **Note type** name
 
+TODO PHOTO
+
 ### Source Text Highlighting
 
 Hover over a card to highlight its original source text in the editor. Click the card to jump to the source location in the note.
@@ -134,7 +141,6 @@ Right-click any card (or tap the three-dot icon) to open the context menu:
 ### Entering Selection Mode
 
 - Right-click a card → **Select**
-- On mobile: long-press a card
 
 A **selection toolbar** replaces the header, showing the selected count and bulk action buttons.
 
@@ -152,30 +158,6 @@ A **selection toolbar** replaces the header, showing the selected count and bulk
 | Delete           | Delete all selected cards (confirmation required)        |
 
 Press the **X** button in the toolbar to exit selection mode.
-
-## Quick Review
-
-A collapsible section above the card list that lets you review due cards without opening a full review session.
-
-### Setup
-
-Enable in **Settings → General → "Show quick review in panel"**.
-
-### How It Works
-
-1. Shows one due card at a time, prioritized by: Learning/Relearning → Review → New
-2. Click **Show Answer** to reveal the answer
-3. Rate with one of four buttons — each shows a preview of the next interval:
-   - **Again** (red) — failed, restart learning
-   - **Hard** (orange) — difficult, shorter interval
-   - **Good** (green) — normal recall
-   - **Easy** (cyan) — effortless, longer interval
-4. The next due card appears automatically
-5. Shows "All caught up!" when no cards remain
-
-:::tip[Tip]
-Quick review automatically hides when a formal review session is active, so the two never overlap.
-:::
 
 ## Card Types
 
@@ -202,27 +184,11 @@ Use **More menu → Generate** or the empty state button to generate flashcards 
 
 ### Generate from Highlights
 
-Use **More menu → Generate from highlights** to create cards only from `==highlighted==` text in the note. Highlights already covered by existing cards are automatically skipped.
+Use **More menu → Generate from highlights** to create cards only from `==highlighted==` text in the note. Highlights already covered by existing cards are automatically skipped — this means you won't generate duplicate flashcards from the same highlights. This is one of the most efficient ways to create flashcards in True Recall.
 
 ### AI Rewrite
 
 Right-click any card → **AI Rewrite** to have the AI improve, rewrite, or split a card into multiple better cards. Also available as a bulk action in selection mode.
-
-### Streaming
-
-During generation, new cards appear in the list in real time with word-by-word animation. A counter shows how many cards have been generated. Cards are automatically deduplicated against existing ones.
-
-:::note
-AI generation requires either a True Recall AI subscription or an OpenRouter API key configured in settings.
-:::
-
-## Collection
-
-True Recall detects flashcard syntax written directly in your notes (e.g., `#flashcard` blocks).
-
-- When uncollected cards are detected, the **Collect** button appears in the header with a count badge and pulsing animation
-- Click to collect all detected cards into the database at once
-- Optionally, collected content can be removed from the note after collection (configurable in **Settings → General → "Remove flashcard content after collect"**)
 
 ## Panel Sync
 
@@ -232,14 +198,6 @@ The panel stays in sync automatically:
 - **Review session** — follows the current review card's source note (file icon indicator in header)
 - **Data changes** — reloads reactively when cards are added, edited, or deleted (via signals, no polling)
 - **Editor changes** — re-scans for uncollected flashcard syntax after edits (500ms debounce)
-
-## Mobile
-
-On mobile devices the panel adapts:
-
-- **Header hidden** — card counts (New/Learning/Review) appear in the view title bar instead
-- **Pane menu** — swipe down or tap **...** for actions: Refresh, Browse, Copy, Export, Open file, Delete all
-- **Long-press** a card to enter selection mode
 
 ## Export
 
@@ -251,7 +209,6 @@ On mobile devices the panel adapts:
 ## Tips
 
 - Leave the panel open while editing to see card status update in real time
-- Use quick review for just a few due cards instead of opening a full session
 - Collect regularly — uncollected cards are not scheduled for review
 - Use selection mode for efficient bulk operations on multiple cards
 - Hover over cards to highlight their source text in the editor

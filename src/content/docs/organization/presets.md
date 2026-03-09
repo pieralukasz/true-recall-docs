@@ -5,6 +5,9 @@ sidebar:
 description: "Configure different FSRS scheduling profiles for various learning contexts"
 ---
 
+:::caution[My Notes]
+:::
+
 **Presets** are collections of FSRS settings that you can assign to projects and notes. Use different presets for different learning contexts.
 
 ## What is a Preset?

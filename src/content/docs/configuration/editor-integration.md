@@ -5,6 +5,9 @@ sidebar:
 description: "Link status indicators, status bar widget, selection toolbar, and code block widgets in the editor."
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall integrates with Obsidian's editor to show flashcard status and provide quick actions.
 
 ## Link Status Indicators

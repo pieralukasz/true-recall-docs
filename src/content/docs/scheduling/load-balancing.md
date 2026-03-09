@@ -5,6 +5,9 @@ sidebar:
 description: "Automatically distribute reviews evenly across days"
 ---
 
+:::caution[My Notes]
+:::
+
 Without load balancing, your workload can spike unpredictably -- some days 150 cards, other days 20. Load balancing smooths this by redistributing reviews within FSRS constraints, creating a steady, sustainable rhythm.
 
 ## Configuration

@@ -1,9 +1,13 @@
 ---
 title: Quick Start
 sidebar:
+  label: "Quick Start (P)"
   order: 3
 description: Create and review your first flashcards in 5 minutes
 ---
+
+:::caution[My Notes]
+:::
 
 Five minutes. That's all you need to go from zero to reviewing your first flashcard.
 

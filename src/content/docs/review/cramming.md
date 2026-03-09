@@ -5,6 +5,9 @@ sidebar:
 description: Practice flashcards without affecting their scheduled review dates, ideal for exam preparation and extra reinforcement.
 ---
 
+:::caution[My Notes]
+:::
+
 **Cramming** lets you practice cards without affecting their scheduled review dates. Perfect for extra practice before exams or reinforcing difficult material.
 
 ## What is Cramming?

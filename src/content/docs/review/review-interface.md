@@ -5,6 +5,9 @@ sidebar:
 description: Navigate the review view to study flashcards with spaced repetition, including card display, answer buttons, and session management.
 ---
 
+:::caution[My Notes]
+:::
+
 The **Review Interface** is where you study your flashcards using spaced repetition. This page covers the main review view, its components, and how to navigate it.
 
 ## Opening the Review View

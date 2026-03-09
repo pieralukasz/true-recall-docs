@@ -5,6 +5,9 @@ sidebar:
 description: Type your answers during review and get them graded with AI semantic evaluation or character-by-character diff comparison.
 ---
 
+:::caution[My Notes]
+:::
+
 **Type-in Mode** lets you type your answers during review instead of just thinking them. True Recall can compare your typed answer with the correct one using either diff comparison or AI semantic grading.
 
 ## Enabling Type-in Mode

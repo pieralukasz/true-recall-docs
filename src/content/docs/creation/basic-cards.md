@@ -5,6 +5,9 @@ sidebar:
 description: "Write basic and reversed flashcards using block format in your notes."
 ---
 
+:::caution[My Notes]
+:::
+
 Basic cards test one specific fact: a question on the front, an answer on the back. They're the right choice when you want to test something in one direction — a definition, a fact, a translation — and a short answer is all you need.
 
 For vocabulary or anything you want to test in both directions, use [Basic (Reversed)](#reversed-cards). For fill-in-the-blank in a sentence, use [Cloze Deletions](/creation/cloze-deletions/).

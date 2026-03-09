@@ -5,6 +5,9 @@ sidebar:
 description: "Work with multiple device databases for different machines or separate study profiles"
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall supports multiple device databases, allowing you to work on different machines or maintain separate study profiles.
 
 ## How Device Databases Work

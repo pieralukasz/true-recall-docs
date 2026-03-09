@@ -5,6 +5,9 @@ sidebar:
 description: "Export flashcards to CSV or TSV format for analysis, backup, or importing into other applications"
 ---
 
+:::caution[My Notes]
+:::
+
 Export your flashcards to CSV or TSV format for analysis, backup, or importing into other applications.
 
 ## Opening CSV Export

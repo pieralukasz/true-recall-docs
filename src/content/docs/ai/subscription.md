@@ -5,6 +5,9 @@ sidebar:
 description: "Hassle-free access to AI features without managing API keys"
 ---
 
+:::caution[My Notes]
+:::
+
 The **True Recall AI Subscription** provides hassle-free access to AI features without managing API keys.
 
 ## What's Included

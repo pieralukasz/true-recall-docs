@@ -5,6 +5,9 @@ sidebar:
 description: "Configure FSRS scheduling: presets, retention, daily limits, learning steps, review order, weights, and optimization."
 ---
 
+:::caution[My Notes]
+:::
+
 Configure FSRS scheduling in Settings -> True Recall -> FSRS.
 
 All settings on this page are **per-preset**. Use the dropdown at the top to select which preset you're configuring.

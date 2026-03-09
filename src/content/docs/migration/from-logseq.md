@@ -5,6 +5,9 @@ sidebar:
 description: How to transition from Logseq to True Recall in Obsidian
 ---
 
+:::caution[My Notes]
+:::
+
 If you're moving from Logseq to Obsidian and want to continue spaced repetition learning, this guide will help you set up True Recall.
 
 ## Logseq vs True Recall

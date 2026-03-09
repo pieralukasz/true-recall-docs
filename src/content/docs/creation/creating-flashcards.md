@@ -5,6 +5,9 @@ sidebar:
 description: "How flashcard creation works in True Recall — note types, block format, and the collection step."
 ---
 
+:::caution[My Notes]
+:::
+
 Flashcards in True Recall can be created in two ways: through a form-based interface, or by writing directly in your notes. Both produce the same result — a card in the database ready for review.
 
 ## Two Ways to Create Cards
@@ -19,7 +22,7 @@ Block format: write in note  →  collect  →  database
 
 **Block format** — Write cards as structured text directly in your notes. They live alongside the material they came from. Before they appear in reviews, you **collect** them — a deliberate step that moves them from your note into the database.
 
-Most workflows combine both: AI generation for bulk creation from existing notes, and block format for adding cards while writing new ones.
+Most workflows combine all three: AI generation for bulk creation from existing notes, the [Flashcard Editor](/views/flashcard-editor/) for crafting individual cards by hand, and block format for adding cards while writing new ones.
 
 ## Note Types
 

@@ -5,6 +5,9 @@ sidebar:
 description: "The four built-in note types: Basic, Basic (Reversed), Cloze, and Image Occlusion."
 ---
 
+:::caution[My Notes]
+:::
+
 A **note type** is a template that defines what fields a flashcard has and how those fields become cards during review. Every flashcard belongs to one note type.
 
 ## One Note, Multiple Cards
@@ -62,6 +65,10 @@ Both cards are scheduled independently. Getting one right doesn't affect the oth
 
 **Best for:** Vocabulary (word ↔ translation), capitals (country ↔ capital), abbreviations (acronym ↔ meaning).
 
+:::tip
+You can also create a reversed card from any existing Basic card — right-click the card in the [Flashcard Panel](/views/flashcard-panel/) and select **Make reversed**. To remove the reversed pair later, use **Remove reversed** from the same menu.
+:::
+
 ---
 
 ### Cloze
@@ -84,6 +91,10 @@ Extra: Cardiovascular system
 The Extra field appears on the answer side as additional context.
 
 **Best for:** Lists, sequences, fill-in-the-blank, facts that make more sense in sentence context than as isolated Q&A.
+
+:::caution[Author's note]
+I personally don't use Cloze cards at all. In my experience, they don't add real value for meaningful learning. I'll explain my reasoning in more detail at [lucaspiera.com](https://lucaspiera.com). That said — the community asked for this note type, so here it is.
+:::
 
 ---
 

@@ -1,9 +1,13 @@
 ---
 title: Selection Toolbar
 sidebar:
+  label: "Selection Toolbar (P)"
   order: 2
 description: A floating toolbar that appears when you select text — generate Basic, Cloze, or Auto cards with AI, or open the Flashcard Editor.
 ---
+
+:::caution[My Notes]
+:::
 
 The **Selection Toolbar** is a floating toolbar that appears above any text selection in your notes. Select text, click a button, and AI generates properly formatted cards from your content.
 
@@ -15,6 +19,22 @@ The **Selection Toolbar** is a floating toolbar that appears above any text sele
 4. AI analyzes the text and creates flashcards in [block format](/creation/basic-cards/)
 5. Cards appear in your note, ready to collect
 
+TODO PHOTO
+
+## Workflow Example
+
+Here's the full flow for a biology lecture note:
+
+1. You're reading your note on cellular respiration
+2. Select a paragraph: *"The mitochondria produces ATP through a process called oxidative phosphorylation..."*
+3. The toolbar floats above the selection
+4. Click **Auto** — AI reads the passage and generates two cards: one Q&A about ATP production, one cloze about oxidative phosphorylation
+5. The cards are inserted into your note as block format text
+6. The **Flashcard Panel** shows a pulsing **Collect** button — click it to add the cards to the database
+7. The cards are now scheduled for review
+
+Total time: about 10 seconds.
+
 ## Toolbar Buttons
 
 | Button | What It Does |
@@ -25,6 +45,8 @@ The **Selection Toolbar** is a floating toolbar that appears above any text sele
 | **IO** | Create [image occlusion](/creation/image-occlusion/) card (appears when an image is in the selection) |
 | **Edit** | Open the selection in the flashcard editor |
 | **Quick+** | Instantly add as a basic flashcard (no AI) |
+
+TODO PHOTO
 
 ### AI Buttons (Basic, Cloze, Auto)
 
@@ -58,7 +80,15 @@ Besides the Selection Toolbar, you can create flashcards by:
 
 ### From a Whole Note
 
-Use the command palette (Cmd/Ctrl + P → "Generate flashcards from note") to generate cards from an entire note at once. Good for processing lecture notes or study material in bulk.
+Use the command palette (Cmd/Ctrl + P → "Generate flashcards from note") to generate cards from an entire note at once.
+
+:::note[Least personalized method]
+Whole-note generation is the least optimal way to create personalized flashcards — the AI decides what matters, not you. Use it when a note is short and you believe **everything** in it is worth remembering.
+
+For the most accurate results, **generate from selections** instead. Highlighting specific passages lets you control exactly what becomes a card, and the output is noticeably more precise.
+:::
+
+You can control how many cards the AI produces per note in **Settings → AI → Note generation density** — choose between Essential, Balanced, or Comprehensive (see [Generation Settings](#generation-settings) below).
 
 ## What AI Generates
 

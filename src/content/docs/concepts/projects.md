@@ -5,6 +5,9 @@ sidebar:
 description: How projects are modeled in True Recall using parents-based note relationships and folder includes.
 ---
 
+:::caution[My Notes]
+:::
+
 Projects in True Recall are built from note relationships, not from a separate deck entity.
 
 ## Core model

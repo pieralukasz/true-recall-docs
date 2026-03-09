@@ -1,9 +1,13 @@
 ---
 title: Introduction
 sidebar:
+  label: "Introduction (P)"
   order: 1
 description: Learn what True Recall is and how it can help you remember everything you learn
 ---
+
+:::caution[My Notes]
+:::
 
 True Recall is an Obsidian plugin for spaced repetition. Your flashcards live alongside your notes, scheduled by FSRS v6 — the most advanced open-source algorithm for long-term memory.
 

@@ -5,6 +5,9 @@ sidebar:
 description: "Protect your flashcard data with automatic and manual backups, and restore from any backup point"
 ---
 
+:::caution[My Notes]
+:::
+
 True Recall provides comprehensive backup options to protect your flashcard data and review history.
 
 ## Where Data is Stored
