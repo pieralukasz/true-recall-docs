@@ -20,7 +20,9 @@ The fastest way is with the **Selection Toolbar**:
 3. A toolbar appears above your selection
 4. Click **Basic** — AI generates a flashcard
 
-The generated card appears in your note in block format:
+The generated card is added directly to your note in block format and immediately appears in the **[Flashcard Panel](/views/flashcard-panel/)** where you can manage and review it:
+
+<!-- TODO Add Photos and Video -->
 
 ```markdown
 #type/basic
@@ -30,22 +32,17 @@ Back: A learning technique that reviews information at increasing intervals to o
 ---
 ```
 
+:::tip[The Flashcard Panel is your home base]
+The [Flashcard Panel](/views/flashcard-panel/) is one of the most important views in True Recall. Keep it open while working — it automatically syncs with whatever note you're editing and shows:
+
+- **Card status** — new, learning, and review counts at a glance
+- **Quick Review** — answer a due card without opening a full session
+- **Collect & Generate** — add cards to the database or generate new ones with AI
+:::
+
 ### Manual Alternative
 
-You can also write cards directly in block format:
-
-```markdown
-#type/basic
-Front: What does FSRS stand for?
-Back: Free Spaced Repetition Scheduler
----
-```
-
-Or use the quick inline syntax for simple cards:
-
-```markdown
-What is the capital of France? ::Paris
-```
+Prefer a form over writing syntax? Click **Add** (+) in the [Flashcard Panel](/views/flashcard-panel/) to open the Add Flashcard Modal — fill in the fields and save. The card is added to the database immediately, no collection step needed.
 
 ## Collect your cards
 
@@ -57,26 +54,18 @@ New flashcards need to be "[collected](/creation/collecting/)" into the database
 
 Each card moves to the main list with a green "New" badge.
 
-:::tip[The Flashcard Panel is your home base]
-The [Flashcard Panel](/views/flashcard-panel/) is one of the most important views in True Recall. Keep it open while working — it automatically syncs with whatever note you're editing and shows:
-
-- **Card status** — new, learning, and review counts at a glance
-- **Quick Review** — answer a due card without opening a full session
-- **Collect & Generate** — add cards to the database or generate new ones with AI
-:::
-
 ## Start reviewing
 
 Open the Command Palette and run **Start review session**, or click the review button in the Flashcard Panel.
 
 You'll see a question. Think of the answer, then press `Space` to reveal it. Rate how well you recalled it:
 
-| Rating | What it means |
-|--------|---------------|
+| Rating        | What it means                                |
+| ------------- | -------------------------------------------- |
 | **1 (Again)** | Forgot completely — you'll see it again soon |
-| **2 (Hard)** | Got it, but struggled |
-| **3 (Good)** | Recalled with some effort |
-| **4 (Easy)** | Recalled instantly |
+| **2 (Hard)**  | Got it, but struggled                        |
+| **3 (Good)**  | Recalled with some effort                    |
+| **4 (Easy)**  | Recalled instantly                           |
 
 FSRS uses your ratings to figure out the best time to show each card again. Honest ratings make the algorithm work better.
 
@@ -93,14 +82,14 @@ Open the **[Dashboard](/views/dashboard/)** (Cmd/Ctrl + P → "Open dashboard") 
 
 These make review sessions fast:
 
-| Key | Action |
-|-----|--------|
-| `Space` | Show answer / Rate Good |
-| `1` | Rate Again |
-| `2` | Rate Hard |
-| `3` | Rate Good |
-| `4` | Rate Easy |
-| `Cmd/Ctrl+Z` | Undo last rating |
+| Key          | Action                  |
+| ------------ | ----------------------- |
+| `Space`      | Show answer / Rate Good |
+| `1`          | Rate Again              |
+| `2`          | Rate Hard               |
+| `3`          | Rate Good               |
+| `4`          | Rate Easy               |
+| `Cmd/Ctrl+Z` | Undo last rating        |
 
 ## What's next?
 

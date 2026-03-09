@@ -13,7 +13,7 @@ If you're moving from RemNote to Obsidian and want to continue spaced repetition
 |---------|---------|-------------|
 | **Platform** | Standalone app | Obsidian plugin |
 | **Note model** | Document → Cards | Note → Cards |
-| **Card creation** | Built-in | `#type/basic` block format, AI toolbar, or `::` inline syntax |
+| **Card creation** | Built-in | `#type/basic` block format, AI toolbar, or [Flashcard Editor](/views/flashcard-editor/) |
 | **Algorithm** | SM-2 | FSRS v6 |
 | **Data storage** | Cloud-first | Local-first (SQLite) |
 | **Pricing** | Subscription | Free |
@@ -76,7 +76,7 @@ After ~500 reviews in True Recall, you can optimize FSRS parameters to match you
 ### Card Creation
 
 - **RemNote**: Create cards using `::` or `/rem` syntax
-- **True Recall**: Write cards using `#type/basic` block format, AI selection toolbar, or `::` inline syntax
+- **True Recall**: Write cards using `#type/basic` block format, AI selection toolbar, or [Flashcard Editor](/views/flashcard-editor/)
 
 ### Organization
 

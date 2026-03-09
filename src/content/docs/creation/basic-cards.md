@@ -2,14 +2,34 @@
 title: Basic Cards
 sidebar:
   order: 1
-description: "Create flashcards using the block format with note types, or the quick inline :: syntax."
+description: "Create basic flashcards using the Selection Toolbar, Flashcard Editor, or text-based syntax."
 ---
 
-Basic cards are the simplest flashcard type — one question, one answer.
+Basic cards are the simplest flashcard type — one question, one answer. There are several ways to create them, from AI-powered generation to manual text syntax.
 
-## Block Format (Recommended)
+## Selection Toolbar (Recommended)
 
-The primary way to create flashcards uses **note types** with the `#type/` tag:
+The fastest way to create flashcards is with the [Selection Toolbar](/creation/selection-toolbar/):
+
+1. Select text in your note
+2. A toolbar appears above your selection
+3. Click **Basic**, **Cloze**, or **Auto**
+4. AI generates cards automatically
+
+Cards are created in block format and appear in the [Flashcard Panel](/views/flashcard-panel/) ready to collect.
+
+## Flashcard Editor (Recommended)
+
+The [Flashcard Editor](/views/flashcard-editor/) lets you create cards by filling in fields directly — pick a note type, enter your content, and save. No syntax to remember.
+
+- Open it from the **Add (+)** button in the [Flashcard Panel](/views/flashcard-panel/)
+- Or press `A` during a review session
+
+Cards created through the editor are added to the database immediately — no collection step needed.
+
+## Block Format
+
+For users who prefer writing cards directly in their notes, the block format uses **note types** with the `#type/` tag:
 
 ```markdown
 #type/basic
@@ -91,42 +111,9 @@ This creates:
 
 Both cards are scheduled independently. Good for vocabulary, capitals, abbreviations, and anything where both directions make sense.
 
-## Inline Syntax (Quick Alternative)
-
-For fast, single-line cards, use `::` to separate question and answer:
-
-```markdown
-What is the capital of France? ::Paris
-```
-
-Everything before `::` is the question, everything after is the answer.
-
-### Multi-Line Inline
-
-```markdown
-What are the three branches of government?
-::
-1. Legislative — makes laws
-2. Executive — enforces laws
-3. Judicial — interprets laws
-```
-
-:::note
-The inline `::` syntax creates basic cards. For reversed, cloze, or image occlusion cards, use the block format or the [Selection Toolbar](/creation/selection-toolbar/).
-:::
-
-## Easiest Way: Selection Toolbar
-
-The fastest way to create flashcards is with the [Selection Toolbar](/creation/selection-toolbar/):
-
-1. Select text in your note
-2. A toolbar appears above your selection
-3. Click **Basic**, **Cloze**, or **Auto**
-4. AI generates cards in block format automatically
-
 ## Markdown Formatting
 
-Cards support full Markdown in both block and inline formats:
+Cards support full Markdown in block format and in the Flashcard Editor:
 
 - **Bold**, *italic*, ~~strikethrough~~
 - `inline code` and code blocks
@@ -146,13 +133,17 @@ Back: Hippocampus
 
 ## Collecting Cards
 
-After writing flashcards, they need to be **collected** into the database:
+Cards written as syntax in your notes (block format) need to be **collected** into the database before they appear in reviews:
 
 1. Open the [Flashcard Panel](/views/flashcard-panel/) (brain icon in the ribbon)
 2. Uncollected cards appear in the "Uncollected" section
 3. Click **Collect** on each card (or Collect All)
 
 Collection adds cards to the database, assigns FSRS scheduling, and links cards to the source note.
+
+:::tip
+Cards created via the [Selection Toolbar](/creation/selection-toolbar/) also need collecting. Cards created via the [Flashcard Editor](/views/flashcard-editor/) skip this step — they go directly into the database.
+:::
 
 ## Card Status
 

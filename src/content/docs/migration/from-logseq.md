@@ -13,7 +13,7 @@ If you're moving from Logseq to Obsidian and want to continue spaced repetition 
 |---------|--------|-------------|
 | **Platform** | Standalone app | Obsidian plugin |
 | **Note model** | Block → Cards | Note → Cards |
-| **Card creation** | `#card` tags | `#type/basic` block format, AI toolbar, or `::` inline syntax |
+| **Card creation** | `#card` tags | `#type/basic` block format, AI toolbar, or [Flashcard Editor](/views/flashcard-editor/) |
 | **Algorithm** | SM-2 | FSRS v6 |
 | **Card syntax** | `#card` tags | Database (no syntax) |
 | **Data storage** | Local Markdown | Local SQLite |
@@ -96,7 +96,7 @@ After ~500 reviews, optimize your FSRS parameters for best results.
 ### Card Creation
 
 - **Logseq**: Add `#card` tag to blocks
-- **True Recall**: Write cards using `#type/basic` block format, AI selection toolbar, or `::` inline syntax
+- **True Recall**: Write cards using `#type/basic` block format, AI selection toolbar, or [Flashcard Editor](/views/flashcard-editor/)
 
 ### Note Structure
 

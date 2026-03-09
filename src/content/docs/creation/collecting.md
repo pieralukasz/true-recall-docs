@@ -45,7 +45,6 @@ True Recall detects two syntaxes:
 | Syntax | Example |
 |--------|---------|
 | Block format | `#type/basic` + field lines + `---` |
-| Inline format | `Question ::Answer` |
 
 The panel re-scans for uncollected cards after every edit (with a short debounce), so the badge updates in real time as you write.
 

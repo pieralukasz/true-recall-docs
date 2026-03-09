@@ -39,9 +39,10 @@ All paths are relative to `src/content/docs/`.
 - `features/anki-export.md` — Exporting cards to Anki (.apkg) and CSV/TSV
 - `features/cloud-sync.md` — Cloud sync (planned feature)
 
-## Views & Panels (6 pages)
+## Views & Panels (7 pages)
 
 - `views/flashcard-panel.md` — Main sidebar panel for card management
+- `views/flashcard-editor.md` — Form-based modal for creating and editing flashcards
 - `views/review-view.md` — Review session interface
 - `views/statistics.md` — Comprehensive analytics dashboard with FSRS insights, study patterns, retention tracking, workload forecasting, and cross-project comparison
 - `views/session-builder.md` — Custom review session configuration

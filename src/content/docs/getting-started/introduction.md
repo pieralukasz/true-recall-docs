@@ -22,7 +22,7 @@ Open the note, open the [Flashcard Panel](/views/flashcard-panel/), and all its 
 
 ## How it works
 
-1. **Create** flashcards — select text and use the [Selection Toolbar](/creation/selection-toolbar/), or write them manually in [block format](/creation/basic-cards/)
+1. **Create** flashcards — select text and use the [Selection Toolbar](/creation/selection-toolbar/), or click **Add** in the [Flashcard Panel](/views/flashcard-panel/) to open the Add Flashcard Modal
 2. **[Collect](/creation/collecting/)** cards into the database via the Flashcard Panel
 3. **Review** when cards come due — rate each card Again, Hard, Good, or Easy
 4. **FSRS v6** calculates the optimal time to show each card again
@@ -37,7 +37,7 @@ The algorithm tracks two things per card: **stability** (how long until you migh
 - **Type-in Mode** — Type answers and get AI-powered semantic grading or diff
 - **Note Types** — Anki-style templates with customizable fields
 - **Projects** — Organize notes into hierarchies with per-project FSRS presets
-- **Cloud Sync** — Sync progress across devices
+- **Cloud Sync** — Sync progress across devices (Coming soon)
 - **25+ Widgets** — Embed analytics and gamification in your notes
 
 ## Projects group notes together

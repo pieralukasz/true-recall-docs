@@ -115,16 +115,6 @@ def {{c1::greet}}(name):
 ---
 ````
 
-## Inline Syntax (Quick Alternative)
-
-For quick single-line cloze cards, you can write them directly:
-
-```markdown
-The {{c1::mitochondria}} is the {{c2::powerhouse}} of the cell.
-```
-
-True Recall auto-detects cloze syntax and creates the appropriate card.
-
 ## Card Generation
 
 Each unique cloze number generates one card:

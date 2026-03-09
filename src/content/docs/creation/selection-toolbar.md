@@ -47,7 +47,7 @@ The **IO** button appears when your selection contains an image reference (`![[i
 
 Settings → AI → **Selection toolbar** (enabled by default)
 
-AI generation buttons require an AI configuration — either an API key or a True Recall subscription.
+AI generation buttons require an AI configuration — either an API key or a [True Recall subscription](/ai/subscription/).
 
 ## Other Creation Methods
 

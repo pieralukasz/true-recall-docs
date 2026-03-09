@@ -41,7 +41,7 @@ Color-coded badges show card counts by FSRS state:
 On the right side of the header:
 
 - **Collect** — Appears when uncollected flashcards exist in the note. Shows a count badge with a pulsing animation. Click to collect all detected flashcard syntax into the database.
-- **Add (+)** — Create a new flashcard manually via the note editor modal.
+- **Add (+)** — Opens the [Flashcard Editor](/views/flashcard-editor/) to create a new card via a form.
 - **More (...)** — Opens the [actions menu](#header-more-menu).
 
 ### Search Bar
@@ -113,7 +113,7 @@ Right-click any card (or tap the three-dot icon) to open the context menu:
 
 | Action                          | Description                                                              |
 | ------------------------------- | ------------------------------------------------------------------------ |
-| Edit                            | Open card in the note editor modal                                       |
+| Edit                            | Open card in the [Flashcard Editor](/views/flashcard-editor/)             |
 | Copy                            | Copy card to clipboard as `Q: ... A: ...`                                |
 | Move                            | Transfer card to a different source note                                 |
 | Change type                     | Convert card to a different note type (e.g., Basic → Cloze)             |

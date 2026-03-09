@@ -30,7 +30,18 @@ Then enable the plugin in **Settings → Community plugins → True Recall → T
 
 After enabling True Recall:
 
-1. **AI Configuration** (Optional) — Go to Settings → True Recall → AI to configure your OpenRouter API key or True Recall subscription for AI features
+1. **AI Configuration** (Optional) — AI features require either a True Recall account or your own API key. You have two options:
+
+   **Option A — True Recall account (recommended for new users)**
+   1. Visit [truerecall.app](https://truerecall.app) and create a free account
+   2. You'll receive free credits to try AI features — no payment needed upfront
+   3. Copy your subscription key from the dashboard (format: `tr-xxxxxxxxxxxx`)
+   4. In Obsidian: Settings → True Recall → AI → paste your key into **Subscription key**
+   5. After testing, decide whether to continue with a paid plan
+
+   **Option B — OpenRouter API key**
+   1. Get an API key from [openrouter.ai](https://openrouter.ai)
+   2. In Obsidian: Settings → True Recall → AI → paste your key into **API key**
 2. **FSRS Settings** — Review the default FSRS parameters in Settings → True Recall → FSRS (defaults work well for most users)
 3. **Day Start Hour** — Set when your "day" begins (default: 4 AM, matching Anki behavior)
 

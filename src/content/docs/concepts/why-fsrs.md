@@ -32,19 +32,37 @@ Problems with SM-2:
 
 FSRS (Free Spaced Repetition Scheduler) is a machine learning-based algorithm developed by [Jarrett Ye](https://github.com/open-spaced-repetition/fsrs4anki). Instead of a single ease factor, it models memory with three components:
 
+![3D visualization of how stability increase depends on difficulty, current stability, and retrievability](../../../assets/concepts/fsrs-stability-increase-3d.png)
+
 - **Stability** — How long until you're likely to forget (in days)
 - **Difficulty** — How hard this particular card is for you (0-10)
 - **Retrievability** — Your current probability of recalling the answer (0-100%)
 
-With **21 trainable weights**, FSRS can capture patterns that SM-2's 3 parameters simply cannot.
+With **21 trainable weights**, FSRS can capture patterns that SM-2's 3 parameters simply cannot. See [FSRS Algorithm](/concepts/fsrs-algorithm/) for a technical deep-dive into each component.
 
 ### Configurable retention
 
 Set a **desired retention** (default: 90%) and FSRS calculates intervals to maintain that target. Want 95% recall for medical exams? 85% for casual vocabulary? Adjust per [preset](/organization/presets/).
 
+Higher retention means more daily reviews. The chart below shows how workload scales — the green zone (75-88%) is efficient, while pushing above 93% (red zone) increases workload dramatically:
+
+![Workload vs Desired Retention — green zone is efficient, yellow is moderate, red requires significantly more daily study time](../../../assets/concepts/fsrs-workload-retention.png)
+
 ### Personal optimization
 
 After 400+ reviews, FSRS can [optimize its weights](/scheduling/fsrs-optimization/) from your actual review history. The algorithm literally learns how your memory works and adapts accordingly.
+
+### Stability after forgetting
+
+When you forget a card, FSRS doesn't reset to zero. The post-lapse stability function models how much memory strength remains after a lapse, factoring in the card's difficulty and previous stability.
+
+![Post-lapse stability function — stability after forgetting converges to an upper limit based on difficulty and previous stability](../../../assets/concepts/fsrs-post-lapse-stability.png)
+
+### Handling overdue reviews
+
+FSRS models what happens when you review a card later than scheduled. Unlike SM-2's linear multiplier, FSRS uses a bounded function where stability increase converges to an upper limit — reviewing a card months late doesn't give infinite credit.
+
+![FSRS stability increase (red) vs SM-2's linear model (blue) for overdue reviews — FSRS converges while SM-2 grows without bound](../../../assets/concepts/fsrs-forgetting-curve.png)
 
 ## What's new in v6
 
@@ -69,7 +87,11 @@ These improvements are especially noticeable during intensive study sessions wit
 
 ## Real-world performance
 
-Benchmarks show FSRS achieves **10-20% better retention** with **15-20% fewer reviews** compared to SM-2. You remember more while studying less.
+Benchmarks on 9,999 Anki user collections show FSRS consistently outperforms all other algorithms. The matrix below shows the percentage of users for whom algorithm A (row) outperforms algorithm B (column):
+
+![Superiority matrix — FSRS-5 outperforms SM-2 in over 91% of user collections](../../../assets/concepts/fsrs-superiority-benchmark.png)
+
+FSRS achieves **10-20% better retention** with **15-20% fewer reviews** compared to SM-2. You remember more while studying less.
 
 ## Further reading
 

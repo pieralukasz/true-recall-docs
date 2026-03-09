@@ -22,7 +22,7 @@ The Obsidian-to-Anki plugin:
 True Recall:
 - **Flashcards live inside your notes** — unified system
 - Review directly in Obsidian — no external app needed
-- Write flashcards using `#type/basic` block format, AI toolbar, or `::` inline syntax
+- Write flashcards using `#type/basic` block format, AI toolbar, or [Flashcard Editor](/views/flashcard-editor/)
 - Same note can belong to multiple projects
 
 ## Key Benefits of True Recall
@@ -31,7 +31,7 @@ True Recall:
 |---------|-----------------|-------------|
 | **Card location** | Anki (separate app) | Inside your notes |
 | **Review** | In Anki | In Obsidian |
-| **Card creation** | Manual syntax | `#type/basic` block format, AI toolbar, or `::` inline syntax |
+| **Card creation** | Manual syntax | `#type/basic` block format, AI toolbar, or [Flashcard Editor](/views/flashcard-editor/) |
 | **Dependencies** | Obsidian + Anki | Obsidian only |
 | **Algorithm** | Anki's FSRS/SM-2 | FSRS v6 |
 

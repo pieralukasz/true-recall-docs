@@ -17,18 +17,6 @@ FSRS is a machine learning-based algorithm developed by Jarrett Ye. It models yo
 
 These parameters are updated after each review based on your rating (Again, Hard, Good, Easy).
 
-## How FSRS Differs from SM-2
-
-| Feature | FSRS | SM-2 (Anki) |
-|---------|------|-------------|
-| Parameters | 21 weights | 3 parameters |
-| Adaptability | Learns from your data | Fixed formula |
-| Retention target | Configurable | Not explicit |
-| Interval calculation | Stability-based | Ease factor based |
-| Optimization | ML-based | Manual tuning |
-
-FSRS typically achieves **10-20% better retention** with **15-20% fewer reviews** compared to SM-2.
-
 ## Core Concepts
 
 ### Stability
@@ -69,6 +57,8 @@ The target probability of recall you want to maintain. Default: 90%.
 | 95% | More reviews, less forgetting |
 
 Higher retention = more work. 90% is optimal for most learners.
+
+![Workload vs Desired Retention — the green zone (75-88%) is efficient, while pushing above 93% increases workload dramatically](../../../assets/concepts/fsrs-workload-retention.png)
 
 ## The 21 FSRS Weights
 

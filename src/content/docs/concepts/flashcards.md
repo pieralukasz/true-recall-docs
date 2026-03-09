@@ -50,17 +50,13 @@ Create cards from images by hiding regions. Each region becomes a separate card 
 
 ### In Your Notes
 
-Flashcards are written directly in your Obsidian notes using the `#type/<slug>` block format. This means:
-
-- Cards are version-controlled with your notes
-- You can edit cards in your favorite editor
-- Cards stay close to the source material
+Flashcards are written directly in your Obsidian notes using the `#type/<slug>` block format — they always belong to the note they were created in.
 
 ### In the Database
 
 When you "collect" a flashcard, True Recall:
 
-1. Parses the block format (or inline `::` syntax)
+1. Parses the block format syntax
 2. Creates a database entry with scheduling data
 3. Links the card to its source note via `flashcard_uid`
 
