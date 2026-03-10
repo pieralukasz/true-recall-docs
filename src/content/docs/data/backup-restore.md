@@ -78,6 +78,6 @@ For extra safety, periodically copy the `.true-recall/backups/` folder to extern
 
 ## What to Read Next
 
+- [Import & Export](/data/import-export/) — import from Anki or export to CSV/Anki format
 - [Device Databases](/data/device-databases/) — multi-device setup and database management
 - [Database Integrity Check](/data/integrity-check/) — scan for orphaned cards and corrupted data
-- [Cloud Sync Setup](/sync/setup/) — automatic syncing between devices

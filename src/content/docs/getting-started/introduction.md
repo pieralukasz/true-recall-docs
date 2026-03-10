@@ -88,4 +88,6 @@ Your flashcard data lives in `.true-recall/true-recall.db` inside your vault —
 
 ## Next steps
 
-Head to [Installation](/getting-started/installation/) to set up True Recall, then follow the [Quick Start](/getting-started/quick-start/) to create your first cards.
+- [Why True Recall](/getting-started/why-true-recall/) — why spaced repetition works and how True Recall compares to alternatives
+- [Installation](/getting-started/installation/) — set up True Recall
+- [Quick Start](/getting-started/quick-start/) — create your first cards in 5 minutes

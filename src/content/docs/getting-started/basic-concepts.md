@@ -102,6 +102,10 @@ A **Preset** is a collection of FSRS settings including:
 
 You can have multiple presets (e.g., "Intensive" for exam prep, "Casual" for general learning). See [Presets](/scheduling/presets/) for configuration details.
 
+## Leeches
+
+A **leech** is a card you keep forgetting — after multiple lapses (default: 8), True Recall flags it so you can fix or replace it. Leeches indicate that the card needs rewriting, not just more repetition. See [Leeches](/review/leeches/) for detection settings and strategies.
+
 ## The Review Loop
 
 1. **Due cards** appear in your [review queue](/review/review-interface/)

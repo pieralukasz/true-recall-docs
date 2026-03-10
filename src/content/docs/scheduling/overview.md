@@ -46,25 +46,62 @@ Configure in Settings -> FSRS -> Learning steps / Relearning steps. Format: comm
 
 ## Interval Calculation
 
-After you rate a card, FSRS calculates the next interval to maintain your [desired retention](/scheduling/fsrs-algorithm/#desired-retention) target. Constraints apply — minimum 1 day, maximum your configured cap (default: effectively unlimited).
+After you rate a card, FSRS calculates the next interval to maintain your [desired retention](/scheduling/fsrs-algorithm/#desired-retention) target. Constraints apply — minimum 1 day, maximum your configured cap (default: effectively unlimited). For how each rating (Again, Hard, Good, Easy) affects intervals and FSRS parameters, see [Answering Cards](/review/answering-cards/).
 
-To prevent cards from bunching on the same day, a small fuzz factor is applied (±2.5% of the interval). For how each rating (Again, Hard, Good, Easy) affects intervals and FSRS parameters, see [Answering Cards](/review/answering-cards/).
+## Interval Fuzz
+
+To prevent cards from bunching on the same day, True Recall applies a small random fuzz (±2.5%) to every calculated interval. A card due in 10 days might land on day 9 or 11 instead. This is invisible and has no effect on retention — but it smooths your future workload.
+
+The fuzz factor is always enabled and cannot be turned off. [Load Balancing](/scheduling/workload-management/#load-balancing) builds on this same mechanism for more aggressive smoothing.
+
+## Sibling Burying
+
+When you answer a cloze or image occlusion card, the remaining sibling cards from the same note are **buried** until the next day. This prevents you from seeing related cards in the same session — which would leak context and reduce the effectiveness of testing.
+
+For example, if a cloze note has 3 deletions (c1, c2, c3) and you answer c1, then c2 and c3 are hidden until tomorrow.
+
+Sibling burying is **enabled by default** and can be configured per [Preset](/scheduling/presets/):
+
+`Settings → FSRS → [Your Preset] → Bury Siblings`
+
+:::note[Burying vs Dispersal]
+Burying only prevents siblings on the *same* day. [Sibling Dispersal](/scheduling/workload-management/#sibling-dispersal) spaces siblings apart by multiple days — it's strictly more effective. If you enable dispersal, burying still acts as a safety net for cases where siblings land on the same day despite dispersal.
+:::
 
 ## Review Order
 
 ### New Card Order
 
-Options: Random, Oldest first, Newest first.
+| Order | Description |
+|-------|-------------|
+| **Random** | Randomized (default) |
+| **Oldest first** | Cards created earliest first |
+| **Newest first** | Most recently created cards first |
 
 ### Review Order
 
-Options: By due date, Random, Due date then random, By retrievability, Most lapses, Relative overdueness, Lowest stability, Order added.
+| Order | Description |
+|-------|-------------|
+| **Due date** | Cards due soonest first (default) |
+| **Random** | Fully shuffled |
+| **Due date (randomized)** | By due date, shuffled within same day |
+| **By retrievability** | Lowest recall probability first |
+| **Most lapses** | Most-failed cards first |
+| **Relative overdueness** | Most overdue relative to stability |
+| **Lowest stability** | Weakest memory first |
+| **Order added** | By creation order |
 
-**Recommended:** By due date or By retrievability.
+**Recommended:** Due date for normal review, Relative overdueness for catching up after a break.
 
 ### New/Review Mix
 
-Options: Mix with reviews (default), Show after reviews, Show before reviews.
+| Mode | Description |
+|------|-------------|
+| **Mix with reviews** | New cards interleaved with reviews (default) |
+| **Show after reviews** | All reviews first, then new cards |
+| **Show before reviews** | New cards first, then reviews |
+
+All three order settings can be configured globally in `Settings → General` or overridden per [Preset](/scheduling/presets/).
 
 ## Daily Limits
 
@@ -86,9 +123,14 @@ True Recall includes tools to shape your daily review load: [load balancing](/sc
 - **Postpone** — Push all due cards forward by N days. Useful when overwhelmed with backlog.
 - **Advance** — Pull future cards to today for extra practice.
 
+## Falling Behind
+
+If you have a growing backlog of overdue cards, don't panic — FSRS handles overdue reviews better than older algorithms. See [Troubleshooting — Falling Behind](/reference/troubleshooting/#falling-behind-on-reviews) for a step-by-step recovery guide, including how to use Postpone, Relative Overdueness sorting, and Load Balancing to get back on track.
+
 ## What to Read Next
 
 - [FSRS Algorithm](/scheduling/fsrs-algorithm/) — how the algorithm models memory and calculates intervals
 - [Presets & Optimization](/scheduling/presets/) — configure scheduling per project and optimize from your review history
 - [Workload Management](/scheduling/workload-management/) — load balancing, easy days, and scheduled breaks
 - [Answering Cards](/review/answering-cards/) — how each rating affects scheduling
+- [Troubleshooting](/reference/troubleshooting/) — common issues and solutions

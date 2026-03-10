@@ -123,7 +123,7 @@ A **lapse** is when you forget a review card (rating Again):
 2. Goes through relearning steps (default: 10 min)
 3. After relearning, returns to Review with reduced stability
 
-Mature cards with good history recover quickly from lapses — a single lapse won't erase months of successful reviews.
+Mature cards with good history recover quickly from lapses — a single lapse won't erase months of successful reviews. However, if a card accumulates too many lapses, it becomes a [leech](/review/leeches/) — a card that needs rewriting rather than more repetition.
 
 ## Rating Strategy by Card Age
 
@@ -143,4 +143,5 @@ Rate honestly. Don't be afraid of Again on a card you've known for months — FS
 
 - [Review Interface](/review/review-interface/) — the review view, actions, and session management
 - [Type-in Mode](/review/type-in-mode/) — type your answers for stricter self-testing
+- [Leeches](/review/leeches/) — dealing with cards you keep forgetting
 - [FSRS Algorithm](/scheduling/fsrs-algorithm/) — how the algorithm calculates intervals
