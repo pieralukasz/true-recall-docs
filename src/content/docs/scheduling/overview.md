@@ -1,7 +1,7 @@
 ---
 title: Scheduling
 sidebar:
-  order: -1
+  order: 1
 description: "How True Recall schedules reviews: day boundaries, learning steps, intervals, review order, and daily limits."
 ---
 
@@ -46,22 +46,9 @@ Configure in Settings -> FSRS -> Learning steps / Relearning steps. Format: comm
 
 ## Interval Calculation
 
-FSRS calculates intervals to maintain your **desired retention** (default: 90%).
+After you rate a card, FSRS calculates the next interval to maintain your [desired retention](/scheduling/fsrs-algorithm/#desired-retention) target. Constraints apply — minimum 1 day, maximum your configured cap (default: effectively unlimited).
 
-With constraints:
-- Minimum: 1 day
-- Maximum: Your configured maximum (default: 100 years)
-
-To prevent cards from bunching on the same day, a small fuzz factor is applied (plus/minus 2.5% of the interval).
-
-### Interval Modifiers by Rating
-
-| Rating | Effect on Interval |
-|--------|-------------------|
-| Again | Reset to learning/relearning |
-| Hard | Shorter interval than Good |
-| Good | Standard FSRS interval |
-| Easy | Longer interval than Good |
+To prevent cards from bunching on the same day, a small fuzz factor is applied (±2.5% of the interval). For how each rating (Again, Hard, Good, Easy) affects intervals and FSRS parameters, see [Answering Cards](/review/answering-cards/).
 
 ## Review Order
 
@@ -98,3 +85,10 @@ True Recall includes tools to shape your daily review load: [load balancing](/sc
 - **Reschedule** — Recalculate all intervals with current FSRS weights. Useful after optimizing parameters or changing desired retention.
 - **Postpone** — Push all due cards forward by N days. Useful when overwhelmed with backlog.
 - **Advance** — Pull future cards to today for extra practice.
+
+## What to Read Next
+
+- [FSRS Algorithm](/scheduling/fsrs-algorithm/) — how the algorithm models memory and calculates intervals
+- [Presets & Optimization](/scheduling/presets/) — configure scheduling per project and optimize from your review history
+- [Workload Management](/scheduling/workload-management/) — load balancing, easy days, and scheduled breaks
+- [Answering Cards](/review/answering-cards/) — how each rating affects scheduling

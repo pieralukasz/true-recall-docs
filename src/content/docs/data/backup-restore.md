@@ -2,175 +2,82 @@
 title: "Backup & Restore"
 sidebar:
   order: 1
-description: "Protect your flashcard data with automatic and manual backups, and restore from any backup point"
+description: "Protect your flashcard data with automatic and manual backups, and restore from any backup point."
 ---
 
 :::caution[My Notes]
 :::
 
-True Recall provides comprehensive backup options to protect your flashcard data and review history.
-
-## Where Data is Stored
-
-All True Recall data is stored in:
-
-```
-.true-recall/
-├── true-recall-{device-id}.db    # SQLite database
-└── backups/                       # Backup files
-    ├── backup-2024-01-15-120000.db
-    ├── backup-2024-01-14-120000.db
-    └── ...
-```
+Your review history is valuable — it takes months to build. **True Recall** stores everything in a SQLite database inside your vault at `.true-recall/true-recall-{device-id}.db`, with backups in `.true-recall/backups/`. Configure backups in `Settings → Data & Backup`.
 
 ## Manual Backup
 
-### Create Backup
+`Settings → Data & Backup → Manual backup → Create backup`
 
-Settings > Data & Backup > Manual backup > Create backup
-
-Creates a timestamped backup file in `.true-recall/backups/`.
-
-### When to Backup Manually
-
-- Before major changes
-- Before importing cards
-- Before optimizing FSRS
-- Before switching devices
+Creates a timestamped copy in `.true-recall/backups/`. Do this before importing cards, optimizing FSRS parameters, or making major configuration changes.
 
 ## Automatic Backups
 
 ### On Plugin Load
 
-Settings > Data & Backup > Automatic backup on load
+`Settings → Data & Backup → Automatic backup on load`
 
-Creates a backup each time Obsidian starts.
+Creates a backup each time Obsidian starts — a simple safety net you should keep enabled.
 
 ### Background Backups
 
-Settings > Data & Backup > Background Backup
+`Settings → Data & Backup → Background Backup`
 
 | Setting | Description |
 |---------|-------------|
-| Enable periodic backups | Auto-backup at intervals |
-| Backup interval | Every 15/30/60/120/240 minutes |
-| Activity-triggered | Backup after N reviews |
-| Reviews before backup | Trigger threshold |
+| **Enable periodic backups** | Auto-backup at intervals |
+| **Backup interval** | Every 15/30/60/120/240 minutes |
+| **Activity-triggered** | Backup after N reviews |
+| **Reviews before backup** | Trigger threshold |
 
-### Recommended Settings
-
-```
-Enable periodic backups: on
-Interval: Every 60 minutes
-Activity-triggered backup: on
-Reviews before backup: 50
-```
+**Recommended:** Enable periodic backups every 60 minutes with activity-triggered backup after 50 reviews. This covers both timed and usage-based protection.
 
 ## Smart Retention
 
-Instead of keeping all backups, use smart retention to keep useful backups while saving space.
+Keeps useful backups while saving disk space. Instead of accumulating every backup forever, smart retention thins older backups automatically.
 
-Settings > Data & Backup > Smart Retention
+`Settings → Data & Backup → Smart Retention`
 
-| Tier | Setting | Description |
-|------|---------|-------------|
-| Hourly | 24 | Keep hourly backups for last 24 hours |
-| Daily | 7 | Keep daily backups for last 7 days |
-| Weekly | 4 | Keep weekly backups for last 4 weeks |
+| Tier | Default | Keeps |
+|------|---------|-------|
+| **Hourly** | 24 | One backup per hour for last 24 hours |
+| **Daily** | 7 | One backup per day for last 7 days |
+| **Weekly** | 4 | One backup per week for last 4 weeks |
 
-### How It Works
-
-- **Hourly tier** -- One backup per hour, keep last 24
-- **Daily tier** -- One backup per day, keep last 7 days
-- **Weekly tier** -- One backup per week, keep last 4 weeks
-
-Older backups are automatically deleted.
+Backups older than the weekly tier are deleted automatically.
 
 ## Restoring from Backup
 
-### From Settings
+`Settings → Data & Backup → Manual backup → Restore...`
 
-Settings > Data & Backup > Manual backup > Restore...
+1. Select a backup file from the list
+2. Preview backup info (date, card count)
+3. Confirm restore
+4. **Obsidian reloads** to apply changes
 
-1. Click "Restore..."
-2. Select backup file from list
-3. Preview backup info (date, card count)
-4. Confirm restore
-5. **Obsidian reloads** to apply changes
+A restore replaces your entire database — all cards, review history, FSRS scheduling data, statistics, and note types. After restoring, check [Dashboard](/views/dashboard/) to verify expected card counts.
 
-### What Gets Restored
-
-- All flashcards
-- Review history
-- FSRS scheduling data
-- Statistics
-- Note types
-
-### After Restore
-
-1. Verify cards appear correctly
-2. Check [Dashboard](/views/dashboard/) for expected counts
-3. Resume reviewing
+:::caution[Create a Backup Before Restoring]
+If the restore doesn't contain what you need, you'll want the current database to fall back to.
+:::
 
 ## Backup Status
 
-Settings > Data & Backup > Backup Status
+`Settings → Data & Backup → Backup Status`
 
-Shows:
-- Last backup time
-- Next scheduled backup
-- Reviews since last backup
-- Total backup count
+Shows last backup time, next scheduled backup, reviews since last backup, and total backup count.
 
-## Best Practices
+:::tip[External Backup]
+For extra safety, periodically copy the `.true-recall/backups/` folder to external storage or a cloud drive. This protects against vault-level data loss.
+:::
 
-### 1. Enable Background Backups
+## What to Read Next
 
-Don't rely on manual backups. Set up automatic backups.
-
-### 2. Use Smart Retention
-
-Keeps useful history without filling disk space.
-
-### 3. Backup Before Major Changes
-
-Create manual backup before:
-- Importing large decks
-- Running FSRS optimization
-- Changing many settings
-
-### 4. Test Restores Occasionally
-
-Verify your backups work by doing a test restore.
-
-### 5. External Backup
-
-For extra safety, periodically copy `.true-recall/backups/` to external storage.
-
-## Troubleshooting
-
-### Backup Fails
-
-1. Check disk space
-2. Check file permissions
-3. Try manual backup
-
-### Restore Fails
-
-1. Verify backup file isn't corrupted
-2. Check Obsidian console for errors
-3. Try an older backup
-
-### Missing Backups
-
-1. Check backup folder exists
-2. Verify retention settings aren't too aggressive
-3. Look for backups in wrong location
-
-### After Restore, Cards Missing
-
-1. Backup may be from before cards were created
-2. Try a more recent backup
-3. Check if cards were orphaned
-
-See also [Device Databases](/data/device-databases/) for multi-device setup, [Data Integrity](/data/integrity-check/) to verify database health, and [Anki Import/Export](/data/anki-import-export/) for external backup options.
+- [Device Databases](/data/device-databases/) — multi-device setup and database management
+- [Database Integrity Check](/data/integrity-check/) — scan for orphaned cards and corrupted data
+- [Cloud Sync Setup](/sync/setup/) — automatic syncing between devices

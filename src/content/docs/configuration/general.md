@@ -8,7 +8,7 @@ description: Configure True Recall's review interface, editor integration, day b
 :::caution[My Notes]
 :::
 
-Configure in Settings -> True Recall -> General.
+**True Recall's** general settings control the review experience, editor features, and when your study day rolls over. Configure in `Settings → True Recall → General`.
 
 ## Review Interface
 
@@ -22,7 +22,7 @@ Configure in Settings -> True Recall -> General.
 | **Default type-in mode** | Off / Diff / AI | Type-in mode for new review sessions |
 
 :::note
-Daily limits are configured **per preset**. Each [FSRS preset](/scheduling/presets/) has its own new cards/day and reviews/day.
+Daily limits are configured **per preset**, not here. Each [FSRS preset](/scheduling/presets/) has its own new cards/day and reviews/day.
 :::
 
 ## Editor Integration
@@ -33,28 +33,25 @@ Daily limits are configured **per preset**. Each [FSRS preset](/scheduling/prese
 | **Show status bar widget** | On / Off | Global card counts in Obsidian's bottom bar |
 | **Show quick review in panel** | On / Off | Quick-review section at top of [Flashcard Panel](/views/flashcard-panel/) |
 
+For details on what these features look like and how to use them, see [Editor Integration](/configuration/editor-integration/).
+
 ## Day Boundary
 
-**Next day starts at** — Hour when a new "day" begins (0-23). Default is **4 AM** (same as Anki) so late-night reviews count for today, not tomorrow.
+**Next day starts at** — Hour when a new "day" begins (0–23). Default: **4 AM** (same as Anki).
+
+This means a 2 AM review counts as "today," not "tomorrow." Useful if you study late at night.
 
 ## Flashcard Collection
 
 | Setting | Options | Description |
 |---------|---------|-------------|
-| **Remove content after collecting** | On / Off | Remove flashcard syntax from note after collection |
+| **Remove content after collecting** | On / Off | Remove flashcard block format syntax from note after collection |
 
-## Settings Summary
+See [The Collection Step](/creation/creating-flashcards/#the-collection-step) for how collection works.
 
-| Setting | Default | Recommendation |
-|---------|---------|----------------|
-| Review mode | Fullscreen | Fullscreen |
-| Show review header | On | On |
-| Show header stats | On | On |
-| Show next review time | On | On |
-| Continuous custom reviews | On | On |
-| Default type-in mode | Off | Off or AI |
-| Link status indicators | On | On |
-| Status bar widget | On | On |
-| Quick review in panel | On | On |
-| Next day starts at | 4 | 4 |
-| Remove content after collecting | Off | Off |
+## What to Read Next
+
+- [Review Interface](/review/review-interface/) — the review experience these settings control
+- [Editor Integration](/configuration/editor-integration/) — link indicators, status bar, and codeblock widgets
+- [FSRS Settings](/configuration/fsrs-settings/) — scheduling configuration per preset
+- [Type-in Mode](/review/type-in-mode/) — how the type-in setting works during review

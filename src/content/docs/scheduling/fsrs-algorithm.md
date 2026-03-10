@@ -1,7 +1,7 @@
 ---
 title: FSRS Algorithm
 sidebar:
-  order: -2
+  order: 0
 description: "How FSRS v6 works and why it outperforms older spaced repetition algorithms."
 ---
 
@@ -135,9 +135,10 @@ Benchmarks on 9,999 Anki user collections show FSRS consistently outperforms all
 
 FSRS achieves 10–20% better retention with 15–20% fewer reviews compared to SM-2. You remember more while studying less.
 
-## Further Reading
+## What to Read Next
 
-- [Scheduling Overview](/scheduling/overview/) — how intervals, learning steps, and daily limits work
-- [Presets & Optimization](/scheduling/presets/) — different FSRS settings and personalizing weights from your review history
+- [Scheduling](/scheduling/overview/) — how intervals, learning steps, and daily limits work
+- [Presets & Optimization](/scheduling/presets/) — configure scheduling per project and personalize weights from your history
+- [Workload Management](/scheduling/workload-management/) — load balancing, easy days, and scheduled breaks
 - [FSRS Simulator](/views/fsrs-simulator/) — interactive visualization of how FSRS schedules cards
-- [FSRS GitHub](https://github.com/open-spaced-repetition/fsrs4anki) — source code and research
+- [FSRS GitHub](https://github.com/open-spaced-repetition/fsrs4anki) — source code and research papers

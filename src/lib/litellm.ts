@@ -4,6 +4,7 @@ interface GenerateKeyParams {
 	userId: string;
 	maxBudget: number;
 	budgetDuration?: string;
+	teamId?: string;
 	metadata?: Record<string, string>;
 	models?: string[];
 }
@@ -47,6 +48,9 @@ export async function generateKey(params: GenerateKeyParams): Promise<KeyInfo> {
 	}
 	if (params.models !== undefined) {
 		payload.models = params.models;
+	}
+	if (params.teamId !== undefined) {
+		payload.team_id = params.teamId;
 	}
 	return litellmFetch("/key/generate", {
 		method: "POST",

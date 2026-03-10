@@ -16,7 +16,7 @@ Every flashcard in **True Recall** starts the same way: you decide what's worth 
 
 **[Flashcard Editor](/views/flashcard-editor/)** — A form where you pick a [note type](/creation/note-types/), fill in fields, and save. Cards go straight into the database — no collection needed. Open it from the **Add (+)** button in the [Flashcard Panel](/views/flashcard-panel/) header, or press `A` during a review session.
 
-**[Import Studio](/views/import-studio/)** — Import flashcards from external sources like Anki decks, CSV files, or other apps. Maps fields to True Recall note types and brings cards straight into your database with full scheduling data.
+**[Import Studio](/views/import-studio/)** — A text editor for creating many cards at once — type or paste cards in block, tab-separated, or double-colon format, see a live preview, and save to the database in batch.
 
 **[Block format](#block-format)** — Write cards as structured text directly in your notes using `#type/<slug>` syntax. This is primarily how AI-generated cards are stored in your notes. You can also write blocks by hand, but the Selection Toolbar and Flashcard Editor are faster for most people.
 

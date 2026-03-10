@@ -2,7 +2,7 @@
 title: "AI Settings"
 sidebar:
   order: 3
-description: "Configure AI features including subscription, API keys, models, and custom prompts"
+description: "Configure AI features including subscription, API keys, models, and custom prompts."
 ---
 
 :::caution[My Notes]
@@ -11,157 +11,68 @@ description: "Configure AI features including subscription, API keys, models, an
 - napisac, ze planuje dodac jeszcze modele lokalne
   :::
 
-Configure AI features in Settings -> True Recall -> AI.
+AI-powered card generation is what makes **True Recall** fast — select text, click a button, get flashcards. Configure AI features in `Settings → True Recall → AI`.
+
+For how AI generation works in practice, see [Selection Toolbar](/views/selection-toolbar/).
 
 ## True Recall AI Subscription
 
-### Subscription Key
+Enter your subscription key (format: `tr-xxxxxxxxxxxx`). After entering:
 
-Enter your True Recall AI subscription key (format: `tr-xxxxxxxxxxxx`).
-
-After entering key:
-
-- Shows subscription status
-- Tier (Basic, Pro, etc.)
+- Shows subscription status and tier (Basic, Pro, etc.)
 - Approximate generations remaining
 - Renewal date
 
-### Benefits of Subscription
-
-- No API configuration
-- Pre-optimized prompts
-- Usage tracking
-- Priority support
+**Benefits:** No API configuration needed, pre-optimized prompts, usage tracking, priority support.
 
 ## OpenRouter API Key
 
-### API Key
-
-Your OpenRouter API key for direct API access.
+Direct API access as an alternative or fallback to the subscription.
 
 **When to use:**
 
-- As fallback when subscription exhausted
+- As fallback when subscription is exhausted
 - For access to specific models
 - For pay-per-use pricing
 
-### Getting an API Key
-
-1. Create account at [openrouter.ai](https://openrouter.ai)
-2. Go to Keys
-3. Create new key
-4. Copy and paste here
-
-## Model Selection
-
-### Generation Model
-
-AI model for flashcard generation:
-
-| Model          | Speed  | Quality   | Cost   |
-| -------------- | ------ | --------- | ------ |
-| Gemini 3 Flash | Fast   | Good      | Low    |
-| Gemini 2.5 Pro | Medium | Excellent | Medium |
-| GPT-4o         | Medium | Excellent | Medium |
-| Claude Sonnet  | Medium | Excellent | Medium |
-| GPT-4o mini    | Fast   | Good      | Low    |
-
-**Recommended:** Gemini 3 Flash for speed, GPT-4o for quality.
+**Setup:** Create an account at [openrouter.ai](https://openrouter.ai) → Keys → Create new key → paste here.
 
 ## Generation Language
 
-Target language for AI-generated cards:
+Target language for AI-generated cards. Default: **Auto** (detects from input content). You can force a specific language like English or Polish.
 
-| Option  | Description               |
-| ------- | ------------------------- |
-| Auto    | Detect from input content |
-| English | Force English output      |
-| Polish  | Force Polish output       |
-| etc.    | Other languages           |
+## Selection Toolbar Toggle
 
-**Recommended:** Auto for most cases.
+Show or hide the floating toolbar when text is selected in the editor. Default: **On**.
 
-## Selection Toolbar
-
-### Enable Selection Toolbar
-
-Show floating toolbar when text is selected in editor.
-
-| Setting | Effect                                |
-| ------- | ------------------------------------- |
-| On      | Toolbar appears above selection       |
-| Off     | No toolbar (use panel for generation) |
-
-**Recommended:** On for quick card creation.
+See [Selection Toolbar](/views/selection-toolbar/) for toolbar buttons and workflow.
 
 ## Custom Prompts
 
-Customize how AI generates cards.
+Customize the system prompts that control how AI generates cards. Each card type has its own prompt:
 
-### Basic Prompt
+| Prompt | Controls |
+|--------|----------|
+| **Basic Prompt** | Q&A card generation |
+| **Cloze Prompt** | Cloze deletion generation |
+| **Reversed Prompt** | Reversed card generation |
+| **Auto Prompt** | Auto-detection of best card type |
+| **Type-in Grading Prompt** | AI answer grading during [type-in mode](/review/type-in-mode/) |
+| **Image Occlusion Detection Prompt** | AI region detection in images |
 
-System prompt for generating basic Q&A cards.
+### Available Variables
 
-Variables:
+- `{{content}}` — Selected text (generation prompts)
+- `{{language}}` — Target language (generation prompts)
+- `{{correct}}` — Correct answer (grading prompt)
+- `{{student}}` — Student's answer (grading prompt)
 
-- `{{content}}` -- Selected text
-- `{{language}}` -- Target language
+### Prompt Tips
 
-### Cloze Prompt
+Be specific about what you want: number of cards, difficulty level, language style. Set limits to avoid over-generation. Define format preferences (e.g., "use basic format for definitions, cloze for processes").
 
-System prompt for generating cloze deletions.
+## What to Read Next
 
-### Reversed Prompt
-
-System prompt for generating reversed cards.
-
-### Auto Prompt
-
-System prompt for auto-detecting best card type.
-
-### Type-in Grading Prompt
-
-System prompt for AI answer grading during type-in mode.
-
-Variables:
-
-- `{{correct}}` -- Correct answer
-- `{{student}}` -- Student's answer
-
-### Image Occlusion Detection Prompt
-
-System prompt for AI region detection in images.
-
-## Prompt Tips
-
-### 1. Be Specific
-
-```
-Generate 3-5 flashcards focusing on key definitions.
-Use simple language appropriate for beginners.
-```
-
-### 2. Set Limits
-
-```
-Maximum 3 cards per selection.
-Avoid creating cards for dates and names.
-```
-
-### 3. Define Format
-
-```
-For lists, use cloze format.
-For definitions, use basic format.
-```
-
-## Settings Summary
-
-| Setting           | Default        | Recommendation                      |
-| ----------------- | -------------- | ----------------------------------- |
-| Subscription key  | --             | Add if subscribed                   |
-| API key           | --             | Add as fallback                     |
-| Model             | Gemini 3 Flash | Flash for speed, GPT-4o for quality |
-| Language          | Auto           | Auto                                |
-| Selection toolbar | On             | On                                  |
-| Custom prompts    | Default        | Customize if needed                 |
+- [Selection Toolbar](/views/selection-toolbar/) — how AI generation works in the editor
+- [Creating Flashcards](/creation/creating-flashcards/) — all ways to create cards
+- [Type-in Mode](/review/type-in-mode/) — AI-graded typed answers

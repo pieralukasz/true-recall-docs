@@ -49,7 +49,7 @@ Color-coded badges show card counts by FSRS state:
 On the right side of the header:
 
 - **Collect** — Appears when uncollected flashcards exist in the note. Shows a count badge with a pulsing animation. Click to collect all detected flashcard syntax into the database.
-- **Review** — Launch a [review session](/review/review-session/) for this note's cards.
+- **Review** — Launch a [review session](/review/review-interface/) for this note's cards.
 - **Add (+)** — Opens the [Flashcard Editor](/views/flashcard-editor/) to create a new card via a form.
 - **More (...)** — Opens the [actions menu](#header-more-menu).
 

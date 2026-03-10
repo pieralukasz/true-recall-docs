@@ -28,6 +28,13 @@ All paths are relative to `src/content/docs/`.
 - `creation/best-practices.md` — How to write effective flashcards
 - `creation/projects-and-notes.md` — Projects, folder includes, archiving, preset inheritance
 
+## Review (4 pages)
+
+- `review/review-interface.md` — The review view: card display, rating, actions, session management
+- `review/answering-cards.md` — Rating system, FSRS scheduling effects, learning and review phases
+- `review/type-in-mode.md` — Typed answers with AI semantic grading or diff comparison
+- `review/cramming.md` — Practice without affecting scheduled review dates
+
 ## Migration (4 pages)
 
 - `migration/from-anki.md` — Migrating from Anki
@@ -46,25 +53,24 @@ All paths are relative to `src/content/docs/`.
 - `features/anki-export.md` — Exporting cards to Anki (.apkg) and CSV/TSV
 - `features/cloud-sync.md` — Cloud sync (planned feature)
 
-## Views & Panels (9 pages)
+## Views & Panels (8 pages)
 
 - `views/selection-toolbar.md` — AI-powered floating toolbar: generate Basic, Cloze, or Auto cards from any text selection
 - `views/flashcard-panel.md` — Main sidebar panel for card management
 - `views/flashcard-editor.md` — Form-based modal for creating and editing flashcards
-- `views/review-view.md` — Review session interface
+- `views/import-studio.md` — Bulk text-based flashcard creation with live preview and format auto-detection
 - `views/statistics.md` — Comprehensive analytics dashboard with FSRS insights, study patterns, retention tracking, workload forecasting, and cross-project comparison
 - `views/session-builder.md` — Custom review session configuration
-- `views/projects-view.md` — Project management interface
 - `views/fsrs-simulator.md` — Interactive FSRS visualization tool
 - `views/custom-type-modal.md` — Modal for creating and managing custom note types: fields, templates, CSS
 
 ## Configuration (5 pages)
 
-- `configuration/general.md` — General settings and UI preferences
-- `configuration/scheduling.md` — Learning steps and card progression
-- `configuration/fsrs-presets.md` — Multiple scheduling profiles (like Anki deck options)
-- `configuration/fsrs-parameters.md` — FSRS algorithm parameters and optimization
-- `configuration/data-backup.md` — Database backup and device management
+- `configuration/general.md` — General settings: review interface, editor integration, day boundary, collection behavior
+- `configuration/fsrs-settings.md` — FSRS scheduling settings: presets, retention, weights, bulk operations
+- `configuration/ai-settings.md` — AI configuration: subscription, API keys, generation language, custom prompts
+- `configuration/editor-integration.md` — Editor features: link status indicators, status bar, reading mode, selection toolbar
+- `configuration/keyboard-shortcuts.md` — Keyboard shortcut reference and customization
 
 ## Scheduling (4 pages)
 
@@ -72,6 +78,12 @@ All paths are relative to `src/content/docs/`.
 - `scheduling/overview.md` — Scheduling overview: day boundaries, learning steps, intervals, review order, daily limits
 - `scheduling/presets.md` — Presets & optimization: scheduling profiles, parameter training from review history
 - `scheduling/workload-management.md` — Workload management: load balancing, easy days, scheduled breaks, sibling dispersal
+
+## Data (3 pages)
+
+- `data/backup-restore.md` — Backup & Restore: manual/automatic backups, smart retention, restoring from backup
+- `data/device-databases.md` — Device Databases: per-device SQLite databases, switching, importing
+- `data/integrity-check.md` — Database Integrity Check: orphaned cards, missing references, repair
 
 ## Reference (1 page)
 

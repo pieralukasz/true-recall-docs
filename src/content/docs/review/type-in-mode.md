@@ -2,69 +2,63 @@
 title: Type-in Mode
 sidebar:
   order: 3
-description: Type your answers during review and get them graded with AI semantic evaluation or character-by-character diff comparison.
+description: "Type your answers during review and get them graded with AI semantic evaluation or character-by-character diff comparison."
 ---
 
 :::caution[My Notes]
 :::
 
-**Type-in Mode** lets you type your answers during review instead of just thinking them. True Recall can compare your typed answer with the correct one using either diff comparison or AI semantic grading.
+**Type-in Mode** lets you type your answers during review instead of just thinking them. **True Recall** compares your typed answer with the correct one using either AI semantic grading or character-by-character diff comparison.
 
 ## Enabling Type-in Mode
 
 ### During Review
 
 Press `T` to cycle through modes:
-1. **Off** -- Standard review
-2. **AI Grading** -- AI evaluates your answer semantically
-3. **Diff** -- Character-by-character comparison
+1. **Off** — Standard review (think, reveal, rate)
+2. **AI Grading** — AI evaluates your answer semantically
+3. **Diff** — Character-by-character comparison
 
 ### Default Setting
 
-Settings → General → Default type-in mode
+Set your preferred default in `Settings → General → Default type-in mode` (Off, Diff, or AI).
 
-Options: Off, Diff, AI
+### Per-Card Type-in
 
-## Type-in Interface
+You can also mark individual cards as type-in when creating them — add `@typein` in the [block format](/creation/creating-flashcards/#type-in-mode). These cards always show the type-in input regardless of the global setting.
 
-```
-+-------------------------------------------------+
-|              Question text here                  |
-|                                                 |
-|  +---------------------------------------------+|
-|  | Type your answer...                         ||
-|  |                                             ||
-|  +---------------------------------------------+|
-|                                                 |
-|            [Show Answer] - Space                |
-+-------------------------------------------------+
-```
-
-### Workflow
+## How It Works
 
 1. Read the question
 2. Type your answer in the text area
-3. Press **Space** or **Cmd/Ctrl + Enter** to submit
+3. Press `Space` or `Cmd/Ctrl + Enter` to submit
 4. See the comparison/grading result
-5. Rate your answer
+5. Rate your answer (or accept the AI-suggested rating)
+
+TODO PHOTO
 
 ## AI Semantic Grading
 
-When using **AI Grading** mode, True Recall uses AI to evaluate your answer.
+AI compares your answer with the correct one on meaning, not exact wording. After submitting:
 
-### How It Works
+1. AI assigns a score (0–100) and provides brief feedback
+2. An auto-rating is suggested based on the score
+3. Click **Accept** to use it, or **Override** to rate manually
 
-1. You type your answer
-2. AI compares your answer with the correct one
-3. AI assigns a score (0-100) and provides feedback
-4. You see the score and can rate manually
+### Auto-Rating Thresholds
 
-### Advantages
+| AI Score | Rating Applied |
+|----------|----------------|
+| 90–100 | Good |
+| 70–89 | Hard |
+| 0–69 | Again |
 
-- Understands synonyms and paraphrases
-- Catches partial answers
-- Provides helpful feedback
-- More forgiving than exact matching
+### What AI Understands
+
+- **Synonyms** — "car" = "automobile"
+- **Paraphrases** — "turns sunlight into energy" = "converts light to chemical energy"
+- **Partial answers** — scored proportionally with feedback on what's missing
+- **Minor typos** — treated as correct at 90%+ similarity
 
 ### Example
 
@@ -77,64 +71,33 @@ When using **AI Grading** mode, True Recall uses AI to evaluate your answer.
 
 ### Custom Grading Prompt
 
-Settings → AI → Type-in grading prompt
+Customize how AI evaluates in `Settings → AI → Type-in grading prompt`. Template variables: `{{correct}}`, `{{student}}`, `{{question}}`.
 
-Customize how AI evaluates answers:
-
-```
-You are grading a flashcard answer.
-- Correct answer: {{correct}}
-- Student answer: {{student}}
-
-Score 0-100 and provide brief feedback.
-Be strict but fair. Minor spelling errors should score 90+.
-```
+AI grading requires an API key or a [True Recall subscription](https://truerecall.app).
 
 ## Diff Comparison Mode
 
-When using **Diff** mode, True Recall shows a character-by-character comparison.
+Diff mode shows a character-by-character comparison — no AI needed, works offline.
 
-### How It Works
+Differences are highlighted:
+- **Green** — Correct characters
+- **Red** — Incorrect characters
+- **Yellow** — Missing characters
 
-1. You type your answer
-2. System compares with correct answer
-3. Differences are highlighted:
-   - **Green** -- Correct characters
-   - **Red** -- Incorrect characters
-   - **Yellow** -- Missing characters
+### When to Use Diff
 
-### Example
-
-```
-Correct:  M i t o c h o n d r i a
-Yours:    M i t o c o n d r i a
-              ^^^^^
-```
-
-The "on" instead of "chon" is highlighted red.
-
-### Advantages
-
-- Exact spelling feedback
-- Good for vocabulary and terminology
-- No AI required (works offline)
-
-### Limitations
-
-- Doesn't understand synonyms
-- Sensitive to minor typos
-- Word order must match
+Diff mode is better when exact spelling matters — vocabulary, terminology, formulas, or when you're working offline.
 
 ## Choosing Between Modes
 
-| Use AI Grading When | Use Diff Mode When |
-|---------------------|-------------------|
-| Answers are sentences | Exact spelling matters |
-| Multiple correct answers exist | Learning vocabulary |
-| You want feedback | Working offline |
-| Testing understanding | Testing memorization |
+| Use AI Grading when | Use Diff when |
+|---------------------|---------------|
+| Answers are sentences or concepts | Exact spelling matters |
+| Multiple correct phrasings exist | Learning vocabulary |
+| You want feedback on understanding | Working offline |
+| Testing comprehension | Testing memorization |
 
-## Type-in Answer Actions
+## Keyboard Shortcuts
 
 ### During Typing
 
@@ -152,42 +115,15 @@ The "on" instead of "chon" is highlighted red.
 | **Override** | Ignore AI, rate manually |
 | **Edit** | Modify your answer |
 
-## Tips for Effective Type-in
+## Tips
 
-### 1. Don't Look at the Answer
+- **Use AI mode for concepts** — it excels at evaluating understanding, not just wording
+- **Use Diff mode for terms** — exact terminology and spelling benefit from character comparison
+- **Rate honestly even with high scores** — if you struggled despite AI giving 95%, rate Hard
+- **Customize the prompt** if AI is too lenient or strict for your subject
 
-Resist the urge to peek. Type first, then reveal.
+## What to Read Next
 
-### 2. Be Honest with Ratings
-
-Even if AI gives 95%, if you struggled, rate Hard instead of Good.
-
-### 3. Use AI Mode for Concepts
-
-AI grading excels at evaluating conceptual understanding.
-
-### 4. Use Diff Mode for Terms
-
-Diff mode is better for exact terminology and spelling.
-
-### 5. Customize the Prompt
-
-If AI is too lenient or strict, adjust the grading prompt.
-
-## Troubleshooting
-
-### AI Grading Not Working
-
-1. Ensure AI is configured (API key or subscription)
-2. Check network connection
-3. Fall back to Diff mode if offline
-
-### Input Not Focusing
-
-Press `Tab` to focus the input field.
-
-### Answer Shows Before Typing
-
-Make sure you're not pressing Space too early. Type first, then submit.
-
-For an overview of the review view, see [Review Interface](/review/review-interface/). For details on how ratings affect scheduling, see [Answering Cards](/review/answering-cards/).
+- [Review Interface](/review/review-interface/) — the full review view and actions
+- [Answering Cards](/review/answering-cards/) — how ratings affect FSRS scheduling
+- [Creating Flashcards](/creation/creating-flashcards/#type-in-mode) — marking cards as type-in during creation

@@ -23,6 +23,12 @@ export const MANAGED_MODELS = ["google/gemini-3-flash-preview"];
 
 export const BETA_BUDGET = 1.0;
 
+export const LITELLM_TEAM_IDS = {
+	admins: "30cd10a5-cd61-4fc4-b965-0b341868ef08",
+	betaTesters: "2410c0d1-96c0-4349-8ea0-5d4cb73dcd6a",
+	users: "816f5a9c-87d5-4753-8e6f-311a07e6e8b0",
+};
+
 export const POLAR_STARTER_CHECKOUT_URL =
 	"https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0";
 export const POLAR_TOPUP_S_CHECKOUT_URL =

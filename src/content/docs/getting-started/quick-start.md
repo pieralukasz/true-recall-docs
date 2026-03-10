@@ -32,36 +32,23 @@ TODO: PHOTOS
 #type/basic
 Front: What is spaced repetition?
 Back: A learning technique that reviews information at increasing intervals to optimize long-term retention.
-flashcard_uid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-
-## <!-- source: Spaced repetition reviews information at increasing intervals -->
+<!-- source: Spaced repetition reviews information at increasing intervals -->
 ```
 
 :::note[Don't delete `flashcard_uid`]
-Every flashcard has a unique `flashcard_uid` field added to the block in your note. **True Recall generates it automatically** — you never need to create or edit it. This ID links the block in your note to the card in the database, so deleting it will break that connection. Leave it as-is.
+Every note with flashcards gets a unique `flashcard_uid` field in its frontmatter. **True Recall generates it automatically** — you never need to create or edit it. This ID links the note to its cards in the database, so deleting it will break that connection. Leave it as-is.
 :::
 
 :::tip[The Flashcard Panel is your home base]
 The [Flashcard Panel](/views/flashcard-panel/) is one of the most important views in True Recall. Keep it open while working — it automatically syncs with whatever note you're editing and shows:
 
 - **Card status** — new, learning, and review counts at a glance
-- **Quick Review** — answer a due card without opening a full session
-- **Collect & Generate** — add cards to the database or generate new ones with AI
+- **Collect & Generate** — add cards to the note or generate new ones
   :::
 
 ### Manual Alternative
 
 Prefer a form over writing syntax? Click **Add** (+) in the [Flashcard Panel](/views/flashcard-panel/) to open the Add Flashcard Modal — fill in the fields and save. The card is added to the note immediately, no collection step needed.
-
-## Collect your cards
-
-New flashcards need to be "[collected](/creation/creating-flashcards/#the-collection-step)" into the database:
-
-1. Click the brain icon in the left ribbon to open the **[Flashcard Panel](/views/flashcard-panel/)**
-2. Your uncollected flashcards appear in the "Uncollected" section
-3. Click **Collect** to add them to your database
-
-Each card moves to the main list with a green "New" badge.
 
 ## Start reviewing
 

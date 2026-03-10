@@ -2,57 +2,33 @@
 title: "Database Integrity Check"
 sidebar:
   order: 3
-description: "Scan your database for orphaned cards, missing references, and corrupted data"
+description: "Scan your database for orphaned cards, missing references, and corrupted data."
 ---
 
 :::caution[My Notes]
 :::
 
-The **Integrity Check** scans your database for issues like orphaned cards, missing references, and corrupted data.
+The **Integrity Check** scans your database for problems that can accumulate over time — orphaned cards, missing references, duplicate UIDs, and corrupted records.
 
 ## Common Issues
 
 | Issue | Description |
 |-------|-------------|
-| Orphaned cards | Cards without source notes |
-| Orphaned notes | Notes without note types |
-| Missing review logs | Logs without matching cards |
-| Duplicate UIDs | Multiple notes with same UID |
-| Corrupted records | Malformed database entries |
+| **Orphaned cards** | Cards whose source notes were deleted or moved |
+| **Orphaned notes** | Notes without a valid note type |
+| **Missing review logs** | Review logs that reference deleted cards |
+| **Duplicate UIDs** | Multiple notes sharing the same `flashcard_uid` |
+| **Corrupted records** | Malformed database entries |
 
-## Running Integrity Check
+## Running the Check
 
-Settings > Data & Backup > Database Integrity > Check now
+`Settings → Data & Backup → Database Integrity → Check now`
 
-### Check Process
-
-1. Click "Check now"
-2. Scans database (usually takes seconds)
-3. Report shows found issues
-4. Option to repair
-
-## Check Report
-
-```
-Integrity Check Results
-
-  Cards: 1,234
-  Notes: 89
-  Review logs: 5,678
-
-  Issues found:
-  Orphaned cards: 3
-  Orphaned notes: 1
-  Duplicate UIDs: 0
-
-  [Repair All]  [Export Report]
-```
+The scan takes a few seconds and produces a report showing total cards, notes, and review logs alongside any issues found.
 
 ## Repairing Issues
 
-### Automatic Repair
-
-Click "Repair All" to fix found issues:
+Click **"Repair All"** to fix everything automatically:
 
 | Issue | Repair Action |
 |-------|---------------|
@@ -61,83 +37,21 @@ Click "Repair All" to fix found issues:
 | Missing review logs | Delete orphaned logs |
 | Duplicate UIDs | Generate new UIDs |
 
-### Manual Review
+For individual issues, you can choose to **Keep** (leave as-is), **Delete** (remove the record), or **Reassign** (link to an existing entity).
 
-For some issues, you can choose:
+:::caution[Backup First]
+Always [create a backup](/data/backup-restore/) before running repairs. If something goes wrong, you can restore.
+:::
 
-- **Keep** -- Leave as-is
-- **Delete** -- Remove the record
-- **Reassign** -- Link to existing entity
+## When to Run It
 
-## When to Run Integrity Check
-
-### Recommended Times
-
-- After importing from Anki
+- After importing cards from external sources
 - After plugin updates
-- If noticing unexpected behavior
-- Monthly as maintenance
+- If cards appear that shouldn't exist, or expected cards are missing
+- If [Statistics](/views/statistics/) seem wrong
+- Monthly as general maintenance
 
-### Signs You Need It
+## What to Read Next
 
-- Cards appearing that shouldn't exist
-- Missing cards
-- Statistics seem wrong
-- Errors in console
-
-## What Gets Checked
-
-### Cards
-
-| Check | Description |
-|-------|-------------|
-| Source note exists | Card's source note is valid |
-| Note type valid | Card's note type exists |
-| FSRS data valid | Scheduling data is coherent |
-| No duplicates | No identical cards |
-
-### Notes
-
-| Check | Description |
-|-------|-------------|
-| Note type assigned | Has a valid note type |
-| UID unique | No duplicate flashcard_uid |
-| Fields valid | Required fields present |
-
-### Review Logs
-
-| Check | Description |
-|-------|-------------|
-| Card exists | Referenced card exists |
-| Rating valid | Rating is 1-4 |
-| Timestamp valid | Review time is reasonable |
-
-## After Repair
-
-1. Review [Dashboard](/views/dashboard/) for changes
-2. Check affected notes
-3. Resume normal use
-
-## Troubleshooting
-
-### Check Fails to Complete
-
-1. Database may be locked
-2. Close review sessions
-3. Restart Obsidian
-4. Try again
-
-### Repair Doesn't Fix Issue
-
-1. Run check again
-2. Check for file permissions
-3. Try restoring from backup
-4. Check console for errors
-
-### Data Lost After Repair
-
-1. Restore from backup
-2. Run check again with more caution
-3. Export report before repairing
-
-See also [Backup & Restore](/data/backup-restore/) to restore if needed, [Anki Import](/data/anki-import-export/) as a common source of issues, and [Device Databases](/data/device-databases/) for multiple database management.
+- [Backup & Restore](/data/backup-restore/) — restore if repairs cause issues
+- [Device Databases](/data/device-databases/) — multiple database management

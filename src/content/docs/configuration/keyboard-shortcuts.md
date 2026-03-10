@@ -114,3 +114,10 @@ REVIEW SHORTCUTS
   Esc      End session
 -----------------------------------------
 ```
+
+## What to Read Next
+
+- [Review Interface](/review/review-interface/) — the review experience and actions
+- [Card Browser](/views/card-browser/) — browsing and managing your card collection
+- [Flashcard Panel](/views/flashcard-panel/) — sidebar panel for card management
+- [Type-in Mode](/review/type-in-mode/) — typed answers during review

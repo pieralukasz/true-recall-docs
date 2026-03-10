@@ -1,7 +1,7 @@
 ---
 title: "Presets & Optimization"
 sidebar:
-  order: 1
+  order: 2
 description: "Configure FSRS scheduling profiles and optimize parameters from your review history"
 ---
 
@@ -105,13 +105,14 @@ Advanced: Customize the 17-21 FSRS weight parameters. See [Optimizing Parameters
 
 ```yaml
 Name: exam-prep
-Desired retention: 92%
-New cards/day: 50
+Desired retention: 90%
+New cards/day: 40
 Reviews/day: 300
-Learning steps: 1, 5, 10
+Learning steps: 15
+Maximum interval: 180
 ```
 
-For intensive study periods before exams.
+For intensive study periods before exams. Maximum interval is capped at 180 days so cards stay relevant through exam day. High daily limits accommodate the compressed timeline.
 
 ### Maintenance (Casual)
 
@@ -120,34 +121,125 @@ Name: casual
 Desired retention: 85%
 New cards/day: 5
 Reviews/day: 50
-Learning steps: 1, 10
+Learning steps: 15
 ```
 
-For low-priority topics you want to maintain.
+For low-priority topics you want to maintain long-term without spending much time. Lower retention means longer intervals and fewer daily reviews.
 
 ### Language Learning
 
 ```yaml
 Name: language
-Desired retention: 90%
-New cards/day: 30
-Reviews/day: 150
-Learning steps: 1, 5, 10, 30
+Desired retention: 88%
+New cards/day: 20
+Reviews/day: 200
+Learning steps: 15
 ```
 
-For vocabulary with more learning steps.
+For vocabulary and grammar. Slightly lower retention keeps daily workload manageable when you have thousands of cards. 20 new cards/day is sustainable long-term — going higher leads to review backlogs within weeks.
 
-### Medical School
+### Medical / Professional
 
 ```yaml
 Name: medical
-Desired retention: 95%
-New cards/day: 40
-Reviews/day: 200
-Learning steps: 1, 10
+Desired retention: 90%
+New cards/day: 30
+Reviews/day: 250
+Learning steps: 15
 ```
 
-For high-stakes medical knowledge.
+For high-stakes professional knowledge. At 90% desired retention, your actual recall across the full collection is approximately 95% — most cards sit well above the threshold at any given time.
+
+### Programming / Technical
+
+```yaml
+Name: technical
+Desired retention: 87%
+New cards/day: 15
+Reviews/day: 150
+Learning steps: 20
+```
+
+For programming concepts, APIs, and technical references. Moderate pace — technical cards often need context to be useful, so quality matters more than volume.
+
+### History / Humanities
+
+```yaml
+Name: humanities
+Desired retention: 85%
+New cards/day: 15
+Reviews/day: 100
+Learning steps: 15
+```
+
+For factual knowledge like dates, events, geography, and cultural concepts. Lower retention is fine for material where approximate recall is acceptable.
+
+## How to Choose Your Settings
+
+### Desired Retention: The Most Important Setting
+
+Desired retention is the probability that you'll successfully recall a card when it comes due. It's the single most important setting in FSRS — everything else follows from it.
+
+**The 80–90% sweet spot.** FSRS developers and researchers consistently recommend staying in this range. Here's why:
+
+- **Below 80%** — You forget too much and spend time relearning, which is inefficient. The workload from lapses can actually exceed the workload you'd have at higher retention.
+- **80–90%** — The optimal zone. Workload increases gradually and each percentage point gives meaningful knowledge gains.
+- **Above 90%** — Workload increases exponentially. Going from 90% to 95% can double your daily reviews while only marginally improving recall.
+
+:::note[90% Desired ≠ 90% Actual]
+When you set desired retention to 90%, your actual recall across the entire collection is approximately 95%. That's because most of your cards aren't due yet — they're sitting comfortably above the 90% threshold. Only cards that are due hover around 90%.
+:::
+
+**Practical guidelines:**
+
+| Goal | Recommended Retention |
+|------|----------------------|
+| High-stakes (exams, professional certifications) | 90% |
+| Active daily study (language, technical skills) | 87–90% |
+| Long-term maintenance (low priority material) | 82–85% |
+| Bulk learning (large volume, lower stakes) | 80–85% |
+
+:::tip[Start at 90% and Adjust Down]
+Begin with the default 90%. After a few weeks, check your actual retention in [Statistics](/views/statistics/). If reviews feel overwhelming, try 87% or 85%. You'll barely notice the difference in recall but your daily workload will drop significantly.
+:::
+
+### New Cards Per Day: Finding Your Sustainable Pace
+
+Every new card you learn today creates reviews tomorrow, next week, and for months to come. A rough rule of thumb: **10 new cards/day eventually generates around 100 reviews/day** at steady state.
+
+| New Cards/Day | Eventual Daily Reviews | Time Commitment |
+|---------------|----------------------|-----------------|
+| 5 | ~50 | ~15 min/day |
+| 10 | ~100 | ~30 min/day |
+| 20 | ~200 | ~60 min/day |
+| 40 | ~400 | ~2 hours/day |
+
+**Start lower than you think.** It's much easier to increase new cards later than to dig out of a review backlog. If you skip a few days, the backlog compounds fast.
+
+:::caution[The Backlog Trap]
+Adding 50 new cards/day sounds productive, but within two weeks you may face 500+ daily reviews. If you miss even one day, the pile grows. It's better to do 15 cards/day consistently than 50 cards/day for a week and then quit.
+:::
+
+### Learning Steps: Keep It Simple
+
+With FSRS, **a single learning step of 15–20 minutes is ideal**. This may seem counterintuitive if you're used to multiple steps like `1, 10, 30, 60`, but here's why:
+
+- **FSRS doesn't use learning steps** in its scheduling algorithm. Steps only control the initial same-day experience before a card graduates to FSRS scheduling.
+- **Same-day repetitions have minimal impact on long-term memory.** Research shows that repeating a card 5 times in one session barely moves the needle compared to a single review followed by spaced reviews on subsequent days.
+- **Multiple steps delay FSRS scheduling.** The sooner a card graduates, the sooner FSRS can schedule it optimally based on your actual memory patterns.
+
+A single step of `15` means: see the card, wait 15 minutes, review once, then FSRS takes over. That's all you need.
+
+### When to Use Multiple Presets
+
+Use separate presets when your material has genuinely different requirements:
+
+- **Different retention targets** — Exam material at 90%, hobby material at 85%
+- **Different daily limits** — Intensive project with 40 new/day alongside casual maintenance at 5/day
+- **Different maximum intervals** — Exam prep capped at 180 days, general knowledge unlimited
+- **Different FSRS weights** — After optimization, each preset can have parameters tuned to that specific type of material
+
+You don't need a preset for every topic. If two subjects have similar settings, use the same preset. Presets are most useful when the *study pattern* differs, not just the subject.
 
 ## Assigning Presets
 
@@ -305,3 +397,10 @@ If you use multiple presets, optimize the Default preset first (it usually has t
 ### Reverting
 
 If optimization didn't help, go to `Settings → FSRS` and click **"Reset to Defaults"** to restore default weights. If you saved previous weights, paste them into the Custom Weights field and save. Check retention in [Statistics](/views/statistics/) to compare pre- and post-optimization performance.
+
+## What to Read Next
+
+- [FSRS Algorithm](/scheduling/fsrs-algorithm/) — how FSRS models memory and what the 21 weights control
+- [Scheduling](/scheduling/overview/) — day boundaries, learning steps, review order, and daily limits
+- [Workload Management](/scheduling/workload-management/) — load balancing, easy days, and scheduled breaks
+- [Projects & Notes](/creation/projects-and-notes/) — preset inheritance through project hierarchies

@@ -7,9 +7,7 @@ description: Core concepts of True Recall including flashcard types, FSRS algori
 ---
 
 :::caution[My Notes]
-
-- poprawic wszystkie notatkie #type/basic
-  :::
+:::
 
 Before diving deeper, understanding these core concepts will help you get the most out of True Recall.
 
@@ -19,11 +17,14 @@ A **flashcard** is a learning unit with a question (front) and answer (back). Tr
 
 ```markdown
 #type/basic
+#type/basic
 Front: What is photosynthesis?
 Back: The process by which plants convert sunlight into energy.
 
 ---
 ```
+
+The first `#type/basic` is a tag that links the block to your note type. The second `#type/basic` declares which note type template to use for this card. For the full block format reference, see [Creating Flashcards](/creation/creating-flashcards/).
 
 | Type            | Tag                     | Fields      | Description                     |
 | --------------- | ----------------------- | ----------- | ------------------------------- |
@@ -67,7 +68,7 @@ Each note type has:
 - **Templates** — How fields are displayed on cards
 - **CSS** — Styling for cards
 
-Built-in note types: Basic, Basic Reversed, Cloze, and Image Occlusion. You can create custom note types with any fields you need.
+Built-in note types: Basic, Basic Reversed, Cloze, and Image Occlusion. You can create custom note types with any fields you need. See [Note Types](/creation/note-types/) for a full guide.
 
 ## Projects
 
@@ -81,7 +82,7 @@ fsrs_preset: medical-school
 ---
 ```
 
-Child notes inherit FSRS presets from parent projects. A note can belong to multiple projects.
+Child notes inherit FSRS presets from parent projects. A note can belong to multiple projects. See [Projects](/creation/projects-and-notes/) for details.
 
 ## Day Boundaries
 
@@ -99,11 +100,11 @@ A **Preset** is a collection of FSRS settings including:
 - Learning steps
 - FSRS weights (21 parameters)
 
-You can have multiple presets (e.g., "Intensive" for exam prep, "Casual" for general learning).
+You can have multiple presets (e.g., "Intensive" for exam prep, "Casual" for general learning). See [Presets](/scheduling/presets/) for configuration details.
 
 ## The Review Loop
 
-1. **Due cards** appear in your review queue
+1. **Due cards** appear in your [review queue](/review/review-interface/)
 2. You **answer** each card
 3. FSRS **schedules** the next review
 4. **[Statistics](/views/statistics/)** track your progress

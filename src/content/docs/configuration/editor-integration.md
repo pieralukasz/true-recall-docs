@@ -2,13 +2,13 @@
 title: Editor Integration
 sidebar:
   order: 4
-description: "Link status indicators, status bar widget, selection toolbar, and code block widgets in the editor."
+description: "Link status indicators, status bar widget, selection toolbar, and reading mode highlights in the editor."
 ---
 
 :::caution[My Notes]
 :::
 
-True Recall integrates with Obsidian's editor to show flashcard status and provide quick actions.
+**True Recall** adds several visual features to Obsidian's editor so you can see flashcard status and take quick actions without leaving your notes.
 
 ## Link Status Indicators
 
@@ -26,7 +26,7 @@ Inline indicators next to `[[wiki links]]` showing the linked note's flashcard s
 | Donut chart | Small pie chart |
 | Both | Chart + numbers |
 
-Configure in Settings -> General -> Show link status indicators.
+Configure in `Settings → General → Show link status indicators`.
 
 ### Hover Tooltip
 
@@ -40,7 +40,7 @@ Click the status indicator to open the [Flashcard Panel](/views/flashcard-panel/
 
 Global card counts in Obsidian's bottom status bar showing due today, new cards, and learning cards.
 
-Enable in Settings -> General -> Show status bar widget. Click the widget to open [Dashboard](/views/dashboard/) or start today's review.
+Enable in `Settings → General → Show status bar widget`. Click the widget to open [Dashboard](/views/dashboard/) or start today's review.
 
 Numbers change color based on state: Blue when cards are due, Green when only new cards remain, Gray when all done.
 
@@ -50,26 +50,19 @@ In reading mode, source text for flashcards is highlighted. Hover over highlight
 
 ## Selection Toolbar
 
-When you select text in the editor, a toolbar appears with buttons:
+When you select text in the editor, a floating toolbar appears with AI generation buttons and quick actions. Enable in `Settings → AI → Selection toolbar`.
 
-| Button | Action |
-|--------|--------|
-| Basic | Generate Q&A card |
-| Cloze | Generate cloze |
-| Reversed | Generate reversed card |
-| Auto | AI chooses type |
-| IO | Image occlusion |
-| Edit | Open in editor |
-| Quick+ | Quick add |
-
-Enable in Settings -> AI -> Selection toolbar.
+See [Selection Toolbar](/views/selection-toolbar/) for the full toolbar reference.
 
 ## Quick Review in Panel
 
-Collapsible section at top of Flashcard Panel showing one due card with Show, Edit, and Rate actions.
+Collapsible section at top of the [Flashcard Panel](/views/flashcard-panel/) showing one due card with Show, Edit, and Rate actions. A quick way to review without opening a full session.
 
-Enable in Settings -> General -> Show quick review in panel.
+Enable in `Settings → General → Show quick review in panel`.
 
-## CodeBlock Widgets
+## What to Read Next
 
-Embed True Recall widgets in notes using code blocks. See [CodeBlock Widgets](/views/codeblock-widgets/) for the full list of 25+ available widgets.
+- [General Settings](/configuration/general/) — all general settings including editor toggles
+- [Selection Toolbar](/views/selection-toolbar/) — AI-powered card generation from text selection
+- [Flashcard Panel](/views/flashcard-panel/) — main sidebar panel for card management
+- [Dashboard](/views/dashboard/) — overview of your study progress
