@@ -1,7 +1,7 @@
 ---
 title: Custom Study & Cramming
 sidebar:
-  label: "Custom Study & Cramming (P)"
+  label: "Custom Study & Cramming"
   order: 4
 description: "Build custom review sessions with filters, sort orders, and cramming mode — ideal for targeted practice, exam preparation, and extra reinforcement."
 ---
@@ -25,7 +25,7 @@ description: "Build custom review sessions with filters, sort orders, and crammi
 
 ## Session Filters
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Card State
 

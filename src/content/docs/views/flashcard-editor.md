@@ -1,7 +1,7 @@
 ---
 title: Flashcard Editor
 sidebar:
-  label: "Flashcard Editor (P)"
+  label: "Flashcard Editor"
   order: 4
 description: A form-based modal for creating and editing flashcards without writing syntax.
 ---
@@ -30,7 +30,7 @@ From top to bottom, the editor contains:
 3. **Fields** — Dynamic form fields based on the selected note type
 4. **Footer** — Management buttons, card count preview, save
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Action Bar
 
@@ -76,7 +76,7 @@ When a Cloze note type is selected, the editor displays syntax help for cloze de
 4. Fill in the fields
 5. Click **Save** or press `Cmd/Ctrl + Enter`
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 After saving:
 - A notification confirms how many cards were created (e.g., "Created 2 cards" for a reversed card)

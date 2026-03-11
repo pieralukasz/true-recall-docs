@@ -1,7 +1,7 @@
 ---
 title: Leeches
 sidebar:
-  label: "Leeches (P)"
+  label: "Leeches"
   order: 5
 description: "How True Recall detects and handles leech cards — flashcards you keep forgetting — and strategies for dealing with them."
 ---

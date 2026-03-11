@@ -1,7 +1,7 @@
 ---
 title: Import Studio
 sidebar:
-  label: "Import Studio (P)"
+  label: "Import Studio"
   order: 6
 description: "Bulk flashcard creation from formatted text — type or paste cards in block, tab-separated, or double-colon format."
 ---
@@ -32,7 +32,7 @@ From top to bottom, the modal contains:
 4. **Card preview** — Live parsed card preview
 5. **Footer** — Format indicator, card count, AI help, save
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Action Bar
 
@@ -64,7 +64,7 @@ A live preview of all parsed cards appears below the editor.
 - **Collapsible list** — Displays the first 5 cards by default; expand to see all
 - **Duplicate detection** — Identical cards within the same session are detected and excluded from the count
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Footer
 

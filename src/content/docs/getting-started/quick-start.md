@@ -1,7 +1,7 @@
 ---
 title: Quick Start
 sidebar:
-  label: "Quick Start (P)"
+  label: "Quick Start"
   order: 3
 description: Create and review your first flashcards in 5 minutes
 ---

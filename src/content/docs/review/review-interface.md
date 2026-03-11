@@ -18,7 +18,7 @@ The **Review View** is where learning happens. You see one card at a time: read 
 | [Dashboard](/views/dashboard/) | Click **Study** on any project or note row |
 | [Flashcard Panel](/views/flashcard-panel/) | Click the **Review** button in the header |
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ## The Review Loop
 
@@ -59,7 +59,7 @@ If you peeked at the answer or took an unusually long time, rate **Hard** or **A
 
 The rated card is scheduled and the next due card appears. Repeat until the session is complete.
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ## Header Options
 
@@ -137,7 +137,7 @@ When all due cards have been answered, a summary screen appears showing:
 - Rating breakdown (Again / Hard / Good / Easy counts)
 - Time until the next session
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ## Undo
 

@@ -1,7 +1,7 @@
 ---
 title: Introduction
 sidebar:
-  label: "Introduction (P)"
+  label: "Introduction"
   order: 1
 description: Learn what True Recall is and how it can help you remember everything you learn
 ---
@@ -26,7 +26,7 @@ Open the note, open the [Flashcard Panel](/views/flashcard-panel/), and all its 
 
 ## How it works
 
-TODO PHOTO — diagram or animation of the four-step loop
+<!-- TODO PHOTO --> — diagram or animation of the four-step loop
 
 1. **Create** flashcards — select text and use the [Selection Toolbar](/views/selection-toolbar/), or click **Add** in the [Flashcard Panel](/views/flashcard-panel/) to open the Add Flashcard Modal
 2. **[Collect](/creation/creating-flashcards/#the-collection-step)** cards into the database via the Flashcard Panel
@@ -37,7 +37,7 @@ The algorithm tracks two things per card: **stability** (how long until you migh
 
 ## Key Features
 
-TODO PHOTO — screenshot grid or icons for each feature
+<!-- TODO PHOTO --> — screenshot grid or icons for each feature
 
 - **AI-Powered Generation** — Select text and instantly create Q&A cards, cloze deletions, or reversed cards using the [Selection Toolbar](/views/selection-toolbar/). See [Creating Flashcards](/creation/creating-flashcards/) for details.
 - **[FSRS v6 Algorithm](/scheduling/fsrs-algorithm/)** — State-of-the-art spaced repetition that adapts to your patterns

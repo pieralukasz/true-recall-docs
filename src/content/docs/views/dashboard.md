@@ -1,7 +1,7 @@
 ---
 title: Dashboard
 sidebar:
-  label: "Dashboard (P)"
+  label: "Dashboard"
   order: 1
 description: "The main hub for your projects, notes, and daily study workload — organize, study, and track everything from one place."
 ---
@@ -17,7 +17,7 @@ The **Dashboard** is your command center. It shows every note that has flashcard
 - **Ribbon icon:** Click the grid icon in the left ribbon
 - **Status bar:** Click the card counts in the bottom-right corner of Obsidian (e.g., `28 new · 3 lrn · 354 due`)
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ## Layout
 
@@ -38,7 +38,7 @@ TODO PHOTO
 +===========================================================+
 ```
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 Three tabs sit at the top: **Projects**, **Notes**, and **Orphaned** (only visible when orphaned notes exist). A search bar filters rows in real time. The **Archived** chip toggles visibility of archived items.
 
@@ -56,7 +56,7 @@ The Projects tab shows your notes organized into a hierarchy. Each project row d
 
 Each row shows a color-coded due count. Green means nothing is due. Orange means some cards are due for review today.
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Starting a review from the Dashboard
 
@@ -99,7 +99,7 @@ The Notes tab shows every note in your vault that has at least one flashcard in 
 
 This is useful when you want to study a specific note regardless of which project it belongs to, or when you want to audit which notes have cards.
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Note row context menu
 

@@ -1,7 +1,7 @@
 ---
 title: Why True Recall
 sidebar:
-  label: "Why True Recall (P)"
+  label: "Why True Recall"
   order: 0
 description: Why spaced repetition works, why True Recall was built, and how it compares to Anki, RemNote, Obsidian-to-Anki, and Logseq.
 ---

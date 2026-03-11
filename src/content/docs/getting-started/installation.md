@@ -1,7 +1,7 @@
 ---
 title: Installation
 sidebar:
-  label: "Installation (P)"
+  label: "Installation"
   order: 2
 description: How to install True Recall in your Obsidian vault
 ---

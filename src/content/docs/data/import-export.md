@@ -1,7 +1,7 @@
 ---
 title: Import & Export
 sidebar:
-  label: "Import & Export (P)"
+  label: "Import & Export"
   order: 4
 description: "Import flashcards from Anki (.apkg) and export your collection to Anki or CSV/TSV formats."
 ---
@@ -23,7 +23,7 @@ Import your Anki collection — cards, review history, media, and note types —
 4. Configure import options
 5. Click **Import**
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Import Options
 
@@ -127,7 +127,7 @@ Export your True Recall collection as a standard `.apkg` file that can be opened
 3. Configure options
 4. Click **Export**
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Export Options
 
@@ -173,7 +173,7 @@ Export your collection as a text file for use in spreadsheets, other flashcard a
 3. Select separator and options
 4. Click **Export**
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Export Options
 

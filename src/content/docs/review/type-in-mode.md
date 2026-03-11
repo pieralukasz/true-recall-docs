@@ -35,7 +35,7 @@ You can also mark individual cards as type-in when creating them — add `@typei
 4. See the comparison/grading result
 5. Rate your answer (or accept the AI-suggested rating)
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ## AI Semantic Grading
 

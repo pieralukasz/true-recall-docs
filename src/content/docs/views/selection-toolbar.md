@@ -1,7 +1,7 @@
 ---
 title: Selection Toolbar
 sidebar:
-  label: "Selection Toolbar (P)"
+  label: "Selection Toolbar"
   order: 2
 description: A floating toolbar that appears when you select text — generate Basic, Cloze, or Auto cards with AI, or open the Flashcard Editor.
 ---
@@ -19,7 +19,7 @@ The **Selection Toolbar** is a floating toolbar that appears above any text sele
 4. AI analyzes the text and creates flashcards in [block format](/creation/creating-flashcards/#block-format)
 5. Cards appear in your note, ready to collect
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ## Workflow Example
 
@@ -46,7 +46,7 @@ Total time: about 10 seconds.
 | **Edit** | Open the selection in the flashcard editor |
 | **Quick+** | Instantly add as a basic flashcard (no AI) |
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### AI Buttons (Basic, Cloze, Auto)
 

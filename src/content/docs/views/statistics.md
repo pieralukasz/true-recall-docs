@@ -1,7 +1,7 @@
 ---
 title: Statistics
 sidebar:
-  label: "Statistics (P)"
+  label: "Statistics"
   order: 7
 description: Track your learning progress with daily stats, retention charts, maturity breakdown, streaks, and collection health metrics.
 ---
@@ -13,7 +13,7 @@ The **Statistics** view gives you a comprehensive picture of your learning — h
 
 ## Today Summary
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 At the top you see today's snapshot:
 
@@ -40,7 +40,7 @@ All charts below can be filtered by time range:
 
 ## Card Maturity Breakdown
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 A pie or bar chart showing how your cards are distributed across maturity stages:
 
@@ -59,7 +59,7 @@ The percentage of Mature cards is a good measure of long-term progress. A health
 
 ## Future Due Forecast
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 A bar chart showing how many cards are due each day in the coming weeks. Use this to:
 
@@ -71,7 +71,7 @@ The chart shows both daily counts and a cumulative line, so you can see total ba
 
 ## Review History
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 A daily breakdown of your review activity over the selected time range. Each day shows:
 
@@ -80,7 +80,7 @@ A daily breakdown of your review activity over the selected time range. Each day
 
 ## Retention History
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 Daily retention rate as a line chart — the percentage of reviews where you rated Good or Easy. A healthy retention rate stays near your [Desired Retention](/scheduling/fsrs-algorithm/#desired-retention) target (default: 90%).
 
@@ -90,7 +90,7 @@ If your retention consistently falls below your target, consider [optimizing you
 
 ## Cards Created History
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 A chart showing how many new cards you created each day — useful for tracking content creation alongside review activity. Includes a cumulative line showing total collection growth.
 
@@ -113,7 +113,7 @@ Your **current streak** (consecutive days with at least one review) and **longes
 
 ## Collection Health
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 A snapshot of your entire collection's health based on current **retrievability** — the probability that you could recall each card right now:
 

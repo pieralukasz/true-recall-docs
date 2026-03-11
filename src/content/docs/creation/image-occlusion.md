@@ -41,7 +41,7 @@ This type exists because some things can't be tested with text alone. In anatomy
 
 ## The Image Occlusion Editor
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Drawing Tools
 

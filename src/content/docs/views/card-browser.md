@@ -45,7 +45,7 @@ The **Card Browser** gives you a searchable, filterable view of every card in yo
 +============================+===================================+
 ```
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 The left sidebar contains **facets** — clickable filters that show counts. The right panel is a sortable table of matching cards. Click any row to preview the full card.
 

@@ -1,7 +1,7 @@
 ---
 title: Flashcard Panel
 sidebar:
-  label: "Flashcard Panel (P)"
+  label: "Flashcard Panel"
   order: 3
 description: The main sidebar panel for managing flashcards per note with quick review, collection, and AI generation.
 ---
@@ -30,7 +30,7 @@ The panel has these sections from top to bottom:
 3. **Image Occlusion Groups** — IO cards grouped by source image
 4. **Empty State** — Generation options when no cards exist
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ## Header
 
@@ -111,7 +111,7 @@ Click a card to expand it and reveal:
 - **Lapses** — times the card was forgotten (if any)
 - **Note type** name
 
-TODO PHOTO
+<!-- TODO PHOTO -->
 
 ### Source Text Highlighting
 
