@@ -8,6 +8,7 @@ import {
 	LITELLM_MASTER_KEY,
 	MANAGED_MODELS,
 	BETA_BUDGET,
+	LITELLM_TEAM_IDS,
 } from "../../../lib/constants";
 
 export const POST: APIRoute = async ({ request }) => {
@@ -67,6 +68,7 @@ export const POST: APIRoute = async ({ request }) => {
 		const keyResult = await generateKey({
 			userId,
 			maxBudget: BETA_BUDGET,
+			teamId: LITELLM_TEAM_IDS.betaTesters,
 			metadata: { tier: "beta", email },
 			models: MANAGED_MODELS,
 		});

@@ -131,6 +131,22 @@ Not sure which type to use? See [Note Types — Choosing the Right Type](/creati
 Use the [Selection Toolbar](/views/selection-toolbar/) to generate cards from your notes. AI follows these principles automatically — then you can edit the result to match your voice.
 :::
 
+## AI Speeds Up Creation — It Doesn't Replace Encoding
+
+AI is good at one thing: generating basic, dry flashcards quickly. It is not a substitute for personal encoding — the more deliberate process of deciding what matters, how concepts relate, and how to phrase a question so it tests *your* understanding.
+
+That work is still yours. Nothing replaces it.
+
+This also means: don't confuse making learning easier with eliminating effort entirely. Importing someone else's deck is tempting, but problematic. You don't know where the information comes from, how accurate it is, or how the facts are ordered and connected in the original source. A deck built by someone else encodes *their* understanding — not yours.
+
+## Always Read the Source Text
+
+Individual flashcards don't hold together on their own. A card that tests an isolated fact, disconnected from context, is quickly forgotten — because memory is relational, not a list of independent entries.
+
+Your job when creating cards is not just to extract facts but to *connect them* — to build a network where each card reinforces the others. That only works if you've read the source material yourself.
+
+The text matters. It shows how facts relate, what follows from what, which ideas are central and which are supporting. Reading the text is not optional, even when AI generates the cards. The approach described here is about how to create flashcards — it doesn't replace reading.
+
 ## Learn More
 
 For deeper guides on learning strategies, study techniques, and how to get the most out of spaced repetition, visit [lucaspiera.com](https://lucaspiera.com) — where tutorials on effective learning are published regularly.

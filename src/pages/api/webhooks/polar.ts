@@ -15,6 +15,7 @@ import {
 	TIER_BUDGETS,
 	TOPUP_BUDGETS,
 	MANAGED_MODELS,
+	LITELLM_TEAM_IDS,
 } from "../../../lib/constants";
 
 async function verifyWebhookSignature(
@@ -142,6 +143,7 @@ export const POST: APIRoute = async ({ request }) => {
 					const keyResult = await generateKey({
 						userId,
 						maxBudget: budget,
+						teamId: LITELLM_TEAM_IDS.users,
 						metadata: { tier: "trial", email },
 						models: MANAGED_MODELS,
 					});
@@ -186,6 +188,7 @@ export const POST: APIRoute = async ({ request }) => {
 							userId,
 							maxBudget: budget,
 							budgetDuration: "30d",
+							teamId: LITELLM_TEAM_IDS.users,
 							metadata: { tier: "starter", email },
 							models: MANAGED_MODELS,
 						});
