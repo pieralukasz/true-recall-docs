@@ -45,6 +45,20 @@ include: folder
 
 This is same-folder only (no recursion into subfolders).
 
+### Create project note from folder
+
+Right-click a folder in the file explorer and select **Create project note**. This creates a note named after the folder (e.g., `Biology/Biology.md`) with `include: folder` already set:
+
+```
+Biology/
+├── Biology.md          ← created project note (include: folder)
+├── Cell Division.md    ← auto-assigned as child
+├── Mitosis.md          ← auto-assigned as child
+└── DNA Replication.md  ← auto-assigned as child
+```
+
+The menu item only appears if the project note doesn't already exist. After creation the note opens automatically — you can add a title, description, or extra frontmatter fields like `fsrs_preset`.
+
 ## [Dashboard](/views/dashboard/) Workflows
 
 ### Drag-and-drop

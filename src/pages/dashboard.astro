@@ -123,8 +123,6 @@ if (!subscription?.litellm_api_key && !subscription?.trial_used) {
 
 const tier = subscription?.tier ?? "none";
 const apiKey = subscription?.litellm_api_key ?? null;
-const budgetMax = TIER_BUDGETS[tier] ?? 0;
-const approxGenerationsMax = budgetMax > 0 ? Math.floor(budgetMax / 0.007) : 0;
 const periodEnd = subscription?.current_period_end
 	? new Date(subscription.current_period_end).toLocaleDateString("en-US", {
 			month: "long",
@@ -203,13 +201,6 @@ if (Astro.request.method === "POST") {
 			</div>
 
 			<div class="info-card">
-				<h3>Monthly Generations</h3>
-				<div class="info-value">
-					{approxGenerationsMax > 0 ? `~${approxGenerationsMax}` : "—"}
-				</div>
-			</div>
-
-			<div class="info-card">
 				<h3>Usage</h3>
 				<div class="info-value">
 					<div class="usage-bar-container" id="usage-container">
@@ -278,9 +269,7 @@ if (Astro.request.method === "POST") {
 					const pct = Math.min(100, (data.budget_spent / data.budget_max) * 100);
 					fill.style.width = `${pct}%`;
 					fill.classList.toggle("usage-high", pct > 80);
-					const remaining = Math.floor((data.budget_max - data.budget_spent) / 0.007);
-					const total = Math.floor(data.budget_max / 0.007);
-					text.textContent = `~${remaining} remaining of ~${total} generations`;
+					text.textContent = `${Math.round(pct)}% used`;
 				}
 			})
 			.catch(() => {

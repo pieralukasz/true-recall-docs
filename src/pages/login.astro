@@ -33,20 +33,20 @@ if (Astro.request.method === "POST") {
 				emailSent = true;
 			}
 		}
-	} else if (action === "oauth-google" || action === "oauth-apple") {
-		const provider = action === "oauth-google" ? "google" : "apple";
-		const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
-			provider,
-			options: {
-				redirectTo: `${Astro.url.origin}/auth/callback`,
-			},
-		});
-		if (oauthError || !data.url) {
-			error = oauthError?.message ?? "Could not initiate sign-in. Please try again.";
-		} else {
-			return Astro.redirect(data.url);
-		}
-	}
+	// } else if (action === "oauth-google" || action === "oauth-apple") {
+	// 	const provider = action === "oauth-google" ? "google" : "apple";
+	// 	const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
+	// 		provider,
+	// 		options: {
+	// 			redirectTo: `${Astro.url.origin}/auth/callback`,
+	// 		},
+	// 	});
+	// 	if (oauthError || !data.url) {
+	// 		error = oauthError?.message ?? "Could not initiate sign-in. Please try again.";
+	// 	} else {
+	// 		return Astro.redirect(data.url);
+	// 	}
+	// }
 }
 ---
 
@@ -82,9 +82,9 @@ if (Astro.request.method === "POST") {
 					<button type="submit" class="btn btn-full">Send Magic Link</button>
 				</form>
 
-				<div class="divider"><span>or continue with</span></div>
+				<!-- <div class="divider"><span>or continue with</span></div> -->
 
-				<div class="oauth-buttons">
+				<!-- <div class="oauth-buttons">
 					<form method="POST">
 						<input type="hidden" name="action" value="oauth-google" />
 						<button type="submit" class="btn btn-oauth">
@@ -107,7 +107,7 @@ if (Astro.request.method === "POST") {
 							Continue with Apple
 						</button>
 					</form>
-				</div>
+				</div> -->
 			</>
 		)}
 	</div>
