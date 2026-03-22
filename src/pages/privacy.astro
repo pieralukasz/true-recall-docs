@@ -1,0 +1,289 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title="Privacy Policy"
+	description="Privacy Policy for True Recall — how we collect, use, and protect your data."
+>
+	<div class="legal-page">
+		<h1>Privacy Policy</h1>
+		<p class="meta">Effective date: March 22, 2026 · Last updated: March 22, 2026</p>
+
+		<p>
+			This Privacy Policy explains how True Recall ("<strong>we</strong>", "<strong>us</strong>",
+			"<strong>our</strong>") collects, uses, and protects information about you when you use our
+			website at <a href="https://truerecall.app">truerecall.app</a> and the True Recall Obsidian
+			plugin (collectively, the "<strong>Service</strong>").
+		</p>
+
+		<h2>1. Data Controller</h2>
+		<p>
+			The data controller responsible for your personal data is:<br />
+			<strong>Łukasz Piera</strong>, operating under the name True Recall, based in Poland.<br />
+			For all data-related enquiries, including GDPR requests, contact us at:
+			<a href="mailto:privacy@truerecall.app">privacy@truerecall.app</a>.
+		</p>
+
+		<h2>2. Data We Collect</h2>
+		<p>We collect only what is necessary to provide the Service.</p>
+
+		<h3>Account data</h3>
+		<p>
+			When you register or log in, we collect your <strong>email address</strong>. We use Supabase
+			magic-link authentication — no password is stored.
+		</p>
+
+		<h3>Usage data</h3>
+		<p>
+			We store your AI generation count and subscription tier in our database. This is required to
+			enforce plan limits (Free Trial, Starter) and display your usage on the dashboard.
+		</p>
+
+		<h3>Payment data</h3>
+		<p>
+			Payments are processed by <strong>Polar.sh</strong> and <strong>Stripe</strong>. We do
+			<em>not</em> store card numbers or full billing details. We receive from Polar a customer
+			identifier, subscription status, and purchase history sufficient to manage your account.
+		</p>
+
+		<h3>Analytics data</h3>
+		<p>
+			We use <strong>Vercel Analytics</strong> to collect anonymous, aggregated page-view
+			statistics (pages visited, country, browser type). No cookies are set by True Recall for
+			analytics purposes; Vercel Analytics operates without cookies and without collecting personal
+			identifiers.
+		</p>
+
+		<h3>Data you create in the plugin</h3>
+		<p>
+			Flashcard content (questions, answers, notes) is stored entirely on your own device inside
+			your Obsidian vault. It is <em>not</em> transmitted to our servers unless you explicitly use
+			the cloud sync feature.
+		</p>
+
+		<h2>3. Legal Basis for Processing</h2>
+		<p>We rely on the following legal bases under GDPR Article 6:</p>
+		<ul>
+			<li>
+				<strong>Contract performance (Art. 6(1)(b))</strong> — processing your email address and
+				usage data is necessary to create and manage your account and deliver the Service.
+			</li>
+			<li>
+				<strong>Legitimate interests (Art. 6(1)(f))</strong> — anonymous analytics help us
+				understand how the Service is used and improve it. This interest does not override your
+				rights.
+			</li>
+			<li>
+				<strong>Legal obligation (Art. 6(1)(c))</strong> — we may process data where required by
+				applicable law (e.g. keeping records for tax purposes).
+			</li>
+		</ul>
+
+		<h2>4. Third-Party Data Processors</h2>
+		<p>
+			We share your data only with the processors listed below, each bound by appropriate data
+			processing agreements and GDPR-compliant safeguards.
+		</p>
+		<table>
+			<thead>
+				<tr>
+					<th>Processor</th>
+					<th>Purpose</th>
+					<th>Location</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase</a></td>
+					<td>Authentication, database storage</td>
+					<td>EU (AWS eu-central-1)</td>
+				</tr>
+				<tr>
+					<td><a href="https://polar.sh/legal/privacy" target="_blank" rel="noopener">Polar.sh</a></td>
+					<td>Subscription & payment processing</td>
+					<td>USA (Stripe — SCCs apply)</td>
+				</tr>
+				<tr>
+					<td><a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe</a></td>
+					<td>Card payment processing (via Polar)</td>
+					<td>USA (SCCs apply)</td>
+				</tr>
+				<tr>
+					<td><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Vercel</a></td>
+					<td>Hosting, anonymous analytics</td>
+					<td>USA (SCCs apply)</td>
+				</tr>
+				<tr>
+					<td><a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Resend</a></td>
+					<td>Transactional emails (magic link, waitlist)</td>
+					<td>USA (SCCs apply)</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>
+			Where processors are located outside the EU/EEA, transfers are governed by Standard
+			Contractual Clauses (SCCs) adopted by the European Commission.
+		</p>
+
+		<h2>5. Data Retention</h2>
+		<p>
+			We retain your account data for as long as your account is active. If you request account
+			deletion, we will delete your personal data within <strong>30 days</strong>, except where
+			retention is required by law (e.g. transaction records for 5 years under Polish accounting
+			law). Anonymised or aggregated data may be retained indefinitely.
+		</p>
+
+		<h2>6. Your Rights Under GDPR</h2>
+		<p>
+			If you are located in the EU/EEA, you have the following rights regarding your personal data:
+		</p>
+		<ul>
+			<li><strong>Right of access</strong> — obtain a copy of the data we hold about you.</li>
+			<li>
+				<strong>Right to rectification</strong> — correct inaccurate or incomplete data.
+			</li>
+			<li>
+				<strong>Right to erasure ("right to be forgotten")</strong> — request deletion of your
+				data, subject to legal retention requirements.
+			</li>
+			<li>
+				<strong>Right to restrict processing</strong> — limit how we use your data in certain
+				circumstances.
+			</li>
+			<li>
+				<strong>Right to data portability</strong> — receive your data in a structured,
+				machine-readable format.
+			</li>
+			<li>
+				<strong>Right to object</strong> — object to processing based on legitimate interests.
+			</li>
+			<li>
+				<strong>Rights related to automated decision-making</strong> — True Recall does not use
+				automated decision-making or profiling.
+			</li>
+			<li>
+				<strong>Right to lodge a complaint</strong> — you may file a complaint with the Polish
+				Data Protection Authority (<a
+					href="https://uodo.gov.pl"
+					target="_blank"
+					rel="noopener">UODO</a
+				>) or the supervisory authority in your country of residence.
+			</li>
+		</ul>
+		<p>
+			To exercise any of these rights, email us at <a href="mailto:privacy@truerecall.app"
+				>privacy@truerecall.app</a
+			>. We will respond within 30 days.
+		</p>
+
+		<h2>7. Cookies</h2>
+		<p>
+			True Recall does not set tracking or analytics cookies. Supabase sets a session cookie
+			strictly necessary for authentication. You cannot opt out of this cookie without losing the
+			ability to log in.
+		</p>
+
+		<h2>8. Children's Privacy</h2>
+		<p>
+			The Service is not directed at children under the age of 16. We do not knowingly collect
+			personal data from anyone under 16. If you believe a child has provided us with their data,
+			contact us and we will delete it promptly.
+		</p>
+
+		<h2>9. Changes to This Policy</h2>
+		<p>
+			We may update this Privacy Policy. For material changes, we will notify you by email (at the
+			address associated with your account) at least 14 days before the change takes effect. The
+			date at the top of this page always reflects the latest revision.
+		</p>
+
+		<h2>10. Contact</h2>
+		<p>
+			Questions about this policy or your data? Email us at <a href="mailto:privacy@truerecall.app"
+				>privacy@truerecall.app</a
+			>.
+		</p>
+	</div>
+</BaseLayout>
+
+<style>
+	.legal-page {
+		max-width: 760px;
+		margin: 0 auto;
+		padding-top: 2.5rem;
+		padding-bottom: 4rem;
+	}
+
+	.legal-page h1 {
+		font-size: 2rem;
+		margin-bottom: 0.375rem;
+	}
+
+	.meta {
+		color: var(--sl-color-gray-4);
+		font-size: 0.875rem;
+		margin-bottom: 2rem;
+	}
+
+	.legal-page h2 {
+		font-size: 1.25rem;
+		margin-top: 2.25rem;
+		margin-bottom: 0.625rem;
+		color: var(--sl-color-gray-1);
+	}
+
+	.legal-page h3 {
+		font-size: 1rem;
+		font-weight: 600;
+		margin-top: 1.25rem;
+		margin-bottom: 0.375rem;
+		color: var(--sl-color-gray-2);
+	}
+
+	.legal-page p,
+	.legal-page li {
+		color: var(--sl-color-gray-3);
+		line-height: 1.7;
+		font-size: 0.9375rem;
+	}
+
+	.legal-page p + p {
+		margin-top: 0.75rem;
+	}
+
+	.legal-page ul {
+		margin: 0.625rem 0 0.625rem 1.25rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.375rem;
+	}
+
+	.legal-page a {
+		color: var(--sl-color-accent-high);
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1rem 0;
+		font-size: 0.875rem;
+	}
+
+	th,
+	td {
+		text-align: left;
+		padding: 0.625rem 0.75rem;
+		border: 1px solid var(--sl-color-gray-5);
+	}
+
+	th {
+		background: var(--sl-color-gray-6);
+		color: var(--sl-color-gray-2);
+		font-weight: 600;
+	}
+
+	td {
+		color: var(--sl-color-gray-3);
+	}
+</style>

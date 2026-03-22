@@ -6,14 +6,12 @@ import { canonicalizeEmail } from "../../../lib/email";
 import {
 	generateKey,
 	resetKeyBudget,
-	incrementKeyBudget,
 	updateKeyConfig,
 	deleteKey,
 } from "../../../lib/litellm";
 import {
 	POLAR_WEBHOOK_SECRET,
 	TIER_BUDGETS,
-	TOPUP_BUDGETS,
 	MANAGED_MODELS,
 	LITELLM_TEAM_IDS,
 } from "../../../lib/constants";
@@ -47,10 +45,6 @@ function tierFromProductName(productName: string): string | null {
 	return null;
 }
 
-function topupSizeFromProductName(productName: string): "s" | "m" {
-	return productName.toLowerCase().includes("top-up m") ? "m" : "s";
-}
-
 export const POST: APIRoute = async ({ request }) => {
 	const body = await request.text();
 	const signature = request.headers.get("x-polar-signature");
@@ -76,32 +70,6 @@ export const POST: APIRoute = async ({ request }) => {
 				const email: string = data.customer_email;
 				const productName: string = data.product?.name ?? "";
 				const tier = tierFromProductName(productName);
-				const isTopup = productName.toLowerCase().includes("top-up");
-
-				// --- Top-up: increment existing key budget + track balance ---
-				if (isTopup) {
-					const { data: sub } = await supabase
-						.from("user_subscriptions")
-						.select("litellm_key_hash, topup_balance")
-						.eq("polar_customer_id", data.customer_id)
-						.single();
-
-					if (sub?.litellm_key_hash) {
-						const size = topupSizeFromProductName(productName);
-						const topupAmount = TOPUP_BUDGETS[size] ?? TOPUP_BUDGETS.s;
-						await incrementKeyBudget(sub.litellm_key_hash, topupAmount);
-
-						await supabase
-							.from("user_subscriptions")
-							.update({
-								topup_balance: (sub.topup_balance ?? 0) + topupAmount,
-								updated_at: new Date().toISOString(),
-							})
-							.eq("polar_customer_id", data.customer_id);
-					}
-					break;
-				}
-
 				if (!tier) break;
 
 				// --- Find or create Supabase user ---
@@ -156,7 +124,6 @@ export const POST: APIRoute = async ({ request }) => {
 						litellm_api_key: keyResult.key,
 						trial_used: true,
 						canonical_email: canonicalizeEmail(email),
-						topup_balance: 0,
 						updated_at: new Date().toISOString(),
 					});
 				} else if (tier === "starter") {
@@ -201,7 +168,6 @@ export const POST: APIRoute = async ({ request }) => {
 							litellm_key_hash: keyResult.token,
 							litellm_api_key: keyResult.key,
 							current_period_end: data.current_period_end,
-							topup_balance: 0,
 							updated_at: new Date().toISOString(),
 						});
 					}
@@ -213,14 +179,12 @@ export const POST: APIRoute = async ({ request }) => {
 			case "subscription.active": {
 				const { data: sub } = await supabase
 					.from("user_subscriptions")
-					.select("litellm_key_hash, tier, topup_balance")
+					.select("litellm_key_hash, tier")
 					.eq("polar_subscription_id", data.id)
 					.single();
 
 				if (sub?.litellm_key_hash) {
-					const tierBudget = TIER_BUDGETS[sub.tier] ?? 2.5;
-					const totalBudget = tierBudget + (sub.topup_balance ?? 0);
-					await resetKeyBudget(sub.litellm_key_hash, totalBudget);
+					await resetKeyBudget(sub.litellm_key_hash, TIER_BUDGETS[sub.tier] ?? 2.5);
 				}
 				break;
 			}
@@ -250,7 +214,6 @@ export const POST: APIRoute = async ({ request }) => {
 						tier: "free",
 						litellm_key_hash: null,
 						litellm_api_key: null,
-						topup_balance: 0,
 						updated_at: new Date().toISOString(),
 					})
 					.eq("polar_subscription_id", data.id);
@@ -261,17 +224,15 @@ export const POST: APIRoute = async ({ request }) => {
 				const billingReason: string = data.billing_reason ?? "";
 
 				if (billingReason === "subscription_cycle") {
-					// Monthly renewal — reset budget but preserve top-ups
+					// Monthly renewal — reset budget
 					const { data: sub } = await supabase
 						.from("user_subscriptions")
-						.select("litellm_key_hash, tier, topup_balance")
+						.select("litellm_key_hash, tier")
 						.eq("polar_subscription_id", data.subscription_id)
 						.single();
 
 					if (sub?.litellm_key_hash) {
-						const tierBudget = TIER_BUDGETS[sub.tier] ?? 2.5;
-						const totalBudget = tierBudget + (sub.topup_balance ?? 0);
-						await resetKeyBudget(sub.litellm_key_hash, totalBudget);
+						await resetKeyBudget(sub.litellm_key_hash, TIER_BUDGETS[sub.tier] ?? 2.5);
 					}
 
 					await supabase

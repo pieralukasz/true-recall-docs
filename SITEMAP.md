@@ -7,6 +7,8 @@ All paths are relative to `src/content/docs/`.
 ## Special Pages (src/pages/)
 
 - `subscription.astro` — Redirects to https://truerecall.app (linked from header subscription icon)
+- `privacy.astro` — Privacy Policy (GDPR-compliant; linked from footer)
+- `terms.astro` — Terms of Service (subscription terms, EU consumer rights; linked from footer)
 
 ## Landing Page
 

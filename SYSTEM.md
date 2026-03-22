@@ -47,7 +47,7 @@ True Recall is an Obsidian plugin for AI-powered flashcard generation. The monet
 | Service | Purpose | URL |
 |---------|---------|-----|
 | **Supabase** | Auth (magic link, OAuth) + database (`user_subscriptions`) | Project dashboard |
-| **Polar.sh** | Payments (Starter subscription, top-ups) | polar.sh/truerecall |
+| **Polar.sh** | Payments (Starter subscription) | polar.sh/truerecall |
 | **LiteLLM** | API key management, budget caps, model routing | ai.truerecall.app |
 | **OpenRouter** | Upstream LLM provider (Gemini, GPT, Claude, etc.) | openrouter.ai |
 | **Resend** | Transactional email (waitlist welcome) | resend.com |
@@ -63,9 +63,7 @@ True Recall is an Obsidian plugin for AI-powered flashcard generation. The monet
 | **Free (BYOK)** | $0 | N/A (user's own key) | — | Unlimited | google/gemini-3-flash-preview |
 | **Trial** | $0 | $0.35 | One-time | ~50 | google/gemini-3-flash-preview |
 | **Beta** | $0 (admin) | $1.00 | Manual | ~142 | google/gemini-3-flash-preview |
-| **Starter** | $7/mo | $2.50 | 30-day auto-reset | ~350 | google/gemini-3-flash-preview |
-| **Top-up S** | $5 | +$2.00 | Permanent | +~280 | — |
-| **Top-up M** | $10 | +$4.50 | Permanent | +~640 | — |
+| **Starter** | $9/mo | $2.50 | 30-day auto-reset | ~350 | google/gemini-3-flash-preview |
 
 All managed tiers use one model: `google/gemini-3-flash-preview`. BYOK users also use this model (hardcoded in plugin). Generation estimate: `budget / $0.007 per generation`.
 
@@ -93,9 +91,9 @@ All managed tiers use one model: `google/gemini-3-flash-preview`. BYOK users als
 ### Flow 2: Trial → Starter Upgrade
 
 ```
-1. User clicks "Upgrade to Starter ($7/mo)" on dashboard
+1. User clicks "Upgrade to Starter ($9/mo)" on dashboard
 2. Redirected to Polar checkout (POLAR_STARTER_CHECKOUT_URL)
-3. User pays $7
+3. User pays $9
 4. Polar sends webhook: checkout.updated (status=succeeded, product=Starter)
 5. Webhook handler:
    a. Finds user by email in Supabase
@@ -126,39 +124,25 @@ All managed tiers use one model: `google/gemini-3-flash-preview`. BYOK users als
 7. Old beta key stays alive in LiteLLM until its budget runs out
 ```
 
-### Flow 4: Top-Up Purchase
-
-```
-1. Starter user clicks "Top-up S ($5)" or "Top-up M ($10)" on dashboard
-2. Polar checkout → payment succeeds
-3. Webhook: checkout.updated (isTopup=true)
-   a. Looks up user by polar_customer_id
-   b. incrementKeyBudget(key, $2.00 or $4.50) — adds to max_budget, keeps spend
-   c. Updates topup_balance in DB: topup_balance += amount
-4. Key now has more budget immediately
-5. Top-up balance persists across monthly resets
-```
-
-### Flow 5: Monthly Renewal
+### Flow 4: Monthly Renewal
 
 ```
 1. Polar sends order.created (billing_reason=subscription_cycle)
 2. Webhook handler:
-   a. Reads user_subscriptions: litellm_key_hash, tier, topup_balance
-   b. Calculates total: TIER_BUDGETS[tier] + topup_balance
-   c. resetKeyBudget(key, total) — sets max_budget=total, spend=0
-   d. Updates current_period_end
-3. User's key is refreshed: full $2.50 + any accumulated top-ups
+   a. Reads user_subscriptions: litellm_key_hash, tier
+   b. resetKeyBudget(key, TIER_BUDGETS[tier]) — sets max_budget=$2.50, spend=0
+   c. Updates current_period_end
+3. User's key is refreshed with full $2.50 budget
 ```
 
-### Flow 6: Subscription Cancellation
+### Flow 5: Subscription Cancellation
 
 ```
 1. User cancels via Polar customer portal
 2. Polar sends subscription.revoked
 3. Webhook handler:
    a. Deletes LiteLLM key
-   b. Updates user_subscriptions: tier=free, key=null, topup_balance=0
+   b. Updates user_subscriptions: tier=free, key=null
 4. Dashboard shows "No Active Subscription"
 5. User can still use BYOK (own OpenRouter key) in plugin
 ```
@@ -178,7 +162,7 @@ All managed tiers use one model: `google/gemini-3-flash-preview`. BYOK users als
 | `/auth/callback` | SSR | Public | OAuth code → session cookies |
 | `/auth/confirm` | SSR | Public | Magic link OTP → session cookies |
 | `/dashboard` | SSR | Protected | Key display, usage, actions, trial auto-provisioning |
-| `/pricing` | Static | Public | Plans, top-ups, FAQ |
+| `/pricing` | Static | Public | Plans, FAQ |
 
 **API Endpoints:**
 
@@ -311,7 +295,7 @@ TRUERECALL_WEB_URL = "https://www.truerecall.app"
 | `trial_used` | boolean | Prevents double trial grant |
 | `canonical_email` | text | Normalized email for dedup (indexed) |
 | `trial_ip` | text | IP at trial creation (rate limiting) |
-| `topup_balance` | numeric | Accumulated top-up USD (survives monthly reset) |
+| `topup_balance` | numeric | Legacy — no longer used (kept for historical data) |
 | `current_period_end` | timestamp | Next renewal date |
 | `created_at` | timestamp | Row creation |
 | `updated_at` | timestamp | Last modification |
@@ -334,11 +318,10 @@ Managed by LiteLLM automatically:
 |-------|---------|--------|
 | `checkout.updated` (trial) | User completes trial checkout | Create LiteLLM key ($0.35), upsert user_subscriptions |
 | `checkout.updated` (starter) | User subscribes | Upgrade existing key in-place OR create new key |
-| `checkout.updated` (top-up) | User buys top-up | incrementKeyBudget + update topup_balance |
-| `subscription.active` | Subscription activated | Reset budget to tier + topup_balance |
+| `subscription.active` | Subscription activated | Reset budget to TIER_BUDGETS[tier] |
 | `subscription.canceled` | User cancels | Update timestamp (access continues until period end) |
 | `subscription.revoked` | Period ends after cancel | Delete LiteLLM key, clear subscription |
-| `order.created` (cycle) | Monthly billing | Reset budget to tier + topup_balance, update period_end |
+| `order.created` (cycle) | Monthly billing | Reset budget to TIER_BUDGETS[tier], update period_end |
 
 ---
 
@@ -358,9 +341,7 @@ Managed by LiteLLM automatically:
 
 | Product | Type | Price | Checkout URL |
 |---------|------|-------|-------------|
-| Starter | Recurring ($7/mo) | $7 | `https://buy.polar.sh/polar_cl_NRts1e4m...` |
-| Top-up S | One-time | $5 | `https://buy.polar.sh/polar_cl_FT4Du1lT...` |
-| Top-up M | One-time | $10 | `https://buy.polar.sh/polar_cl_FAbt5pog...` |
+| Starter | Recurring ($9/mo) | $9 | `https://buy.polar.sh/polar_cl_NRts1e4m...` |
 
 Customer portal: `https://polar.sh/truerecall/portal`
 

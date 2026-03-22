@@ -14,11 +14,6 @@ export const TIER_BUDGETS: Record<string, number> = {
 	starter: 2.5,
 };
 
-export const TOPUP_BUDGETS: Record<string, number> = {
-	s: 2.0,
-	m: 4.5,
-};
-
 export const MANAGED_MODELS = ["google/gemini-3-flash-preview"];
 
 export const BETA_BUDGET = 1.0;
@@ -31,7 +26,3 @@ export const LITELLM_TEAM_IDS = {
 
 export const POLAR_STARTER_CHECKOUT_URL =
 	"https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0";
-export const POLAR_TOPUP_S_CHECKOUT_URL =
-	"https://buy.polar.sh/polar_cl_FT4Du1lTHCPXPbwmiS1tbonaFLkg7EAsPDa5x12xkzp";
-export const POLAR_TOPUP_M_CHECKOUT_URL =
-	"https://buy.polar.sh/polar_cl_FAbt5poghsqR7kvZwcwrFL1apA1ONsSrx8cgb3MSwDT";

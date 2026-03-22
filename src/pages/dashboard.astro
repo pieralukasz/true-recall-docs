@@ -9,8 +9,6 @@ import {
 	POLAR_CUSTOMER_PORTAL_URL,
 	TIER_BUDGETS,
 	MANAGED_MODELS,
-	POLAR_TOPUP_S_CHECKOUT_URL,
-	POLAR_TOPUP_M_CHECKOUT_URL,
 } from "../lib/constants";
 
 const supabase = createSupabaseServerClient(
@@ -105,7 +103,6 @@ if (!subscription?.litellm_api_key && !subscription?.trial_used) {
 				trial_used: true,
 				canonical_email: canonical,
 				trial_ip: clientIp,
-				topup_balance: 0,
 				updated_at: new Date().toISOString(),
 			});
 			subscription = {
@@ -229,19 +226,13 @@ if (Astro.request.method === "POST") {
 		{(tier === "trial" || tier === "beta") ? (
 			<div class="actions">
 				<a href="/pricing" class="btn">
-					Upgrade to Starter ($7/mo)
+					Upgrade to Starter ($9/mo)
 				</a>
 			</div>
 		) : tier === "starter" && (
 			<div class="actions">
 				<a href={POLAR_CUSTOMER_PORTAL_URL} class="btn" target="_blank" rel="noopener">
 					Manage Subscription
-				</a>
-				<a href={POLAR_TOPUP_S_CHECKOUT_URL} class="btn btn-secondary" target="_blank" rel="noopener">
-					Top-up S ($5)
-				</a>
-				<a href={POLAR_TOPUP_M_CHECKOUT_URL} class="btn btn-secondary" target="_blank" rel="noopener">
-					Top-up M ($10)
 				</a>
 			</div>
 		)}

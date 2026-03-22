@@ -44,7 +44,13 @@ const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
 		</main>
 
 		<footer class="page-footer">
-			<p>&copy; {new Date().getFullYear()} True Recall. All rights reserved.</p>
+			<p>
+				&copy; {new Date().getFullYear()} True Recall. All rights reserved.
+				<span class="footer-sep">·</span>
+				<a href="/privacy">Privacy Policy</a>
+				<span class="footer-sep">·</span>
+				<a href="/terms">Terms of Service</a>
+			</p>
 		</footer>
 	</body>
 </html>
@@ -165,5 +171,18 @@ const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
 		color: var(--sl-color-gray-4);
 		font-size: 0.875rem;
 		border-top: 1px solid var(--sl-color-gray-5);
+	}
+
+	.page-footer a {
+		color: var(--sl-color-gray-4);
+	}
+
+	.page-footer a:hover {
+		color: var(--sl-color-gray-2);
+		text-decoration: underline;
+	}
+
+	.footer-sep {
+		margin: 0 0.375rem;
 	}
 </style>
