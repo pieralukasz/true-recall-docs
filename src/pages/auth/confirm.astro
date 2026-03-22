@@ -10,6 +10,7 @@ const supabase = createSupabaseServerClient(
 	Astro.request.headers.get("cookie"),
 );
 
+const code = Astro.url.searchParams.get("code");
 const tokenHash = Astro.url.searchParams.get("token_hash");
 const rawType = Astro.url.searchParams.get("type");
 const ALLOWED_OTP_TYPES = ["email", "recovery", "magiclink"] as const;
@@ -20,7 +21,19 @@ const type: OtpType | undefined = ALLOWED_OTP_TYPES.includes(rawType as OtpType)
 
 let error = "";
 
-if (tokenHash && type) {
+if (code) {
+	// PKCE flow
+	const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+
+	if (exchangeError) {
+		error = exchangeError.message;
+	} else if (data.session) {
+		setSessionCookies(Astro.cookies, data.session);
+		return Astro.redirect("/dashboard");
+	} else {
+		error = "Email confirmed but no session was created. Please sign in.";
+	}
+} else if (tokenHash && type) {
 	const { data, error: verifyError } = await supabase.auth.verifyOtp({
 		token_hash: tokenHash,
 		type,
