@@ -3,6 +3,7 @@ export const prerender = false;
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { createSupabaseServerClient } from "../../lib/supabase-server";
+import { setSessionCookies } from "../../lib/auth-helpers";
 
 const supabase = createSupabaseServerClient(
 	Astro.cookies,
@@ -18,20 +19,7 @@ if (code) {
 	if (exchangeError) {
 		error = exchangeError.message;
 	} else if (data.session) {
-		Astro.cookies.set("sb-access-token", data.session.access_token, {
-			path: "/",
-			httpOnly: true,
-			secure: true,
-			sameSite: "lax",
-			maxAge: 60 * 60 * 24 * 7,
-		});
-		Astro.cookies.set("sb-refresh-token", data.session.refresh_token, {
-			path: "/",
-			httpOnly: true,
-			secure: true,
-			sameSite: "lax",
-			maxAge: 60 * 60 * 24 * 30,
-		});
+		setSessionCookies(Astro.cookies, data.session);
 		return Astro.redirect("/dashboard");
 	} else {
 		error = "Authentication succeeded but no session was created. Please try again.";

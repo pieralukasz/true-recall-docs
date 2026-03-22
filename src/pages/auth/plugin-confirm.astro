@@ -3,6 +3,7 @@ export const prerender = false;
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { createSupabaseServerClient } from "../../lib/supabase-server";
+import { setSessionCookies } from "../../lib/auth-helpers";
 
 const supabase = createSupabaseServerClient(
 	Astro.cookies,
@@ -29,21 +30,7 @@ if (tokenHash && type) {
 	if (verifyError) {
 		error = verifyError.message;
 	} else if (data.session) {
-		Astro.cookies.set("sb-access-token", data.session.access_token, {
-			path: "/",
-			httpOnly: true,
-			secure: true,
-			sameSite: "lax",
-			maxAge: 60 * 60 * 24 * 7,
-		});
-		Astro.cookies.set("sb-refresh-token", data.session.refresh_token, {
-			path: "/",
-			httpOnly: true,
-			secure: true,
-			sameSite: "lax",
-			maxAge: 60 * 60 * 24 * 30,
-		});
-		// Redirect back to plugin auth page (now with session cookies)
+		setSessionCookies(Astro.cookies, data.session);
 		return Astro.redirect(`/auth/plugin?state=${encodeURIComponent(state)}`);
 	} else {
 		error = "Email confirmed but no session was created. Please sign in.";

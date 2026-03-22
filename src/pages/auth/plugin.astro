@@ -4,9 +4,9 @@ export const prerender = false;
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { createSupabaseServerClient } from "../../lib/supabase-server";
 import { getSupabaseAdmin } from "../../lib/supabase-admin";
-import { generateKey } from "../../lib/litellm";
-import { canonicalizeEmail } from "../../lib/email";
-import { TIER_BUDGETS, MANAGED_MODELS, SITE_URL } from "../../lib/constants";
+import { SITE_URL } from "../../lib/constants";
+import { resolveUser } from "../../lib/auth-helpers";
+import { provisionTrial } from "../../lib/trial-provisioning";
 
 const supabase = createSupabaseServerClient(
 	Astro.cookies,
@@ -24,97 +24,16 @@ let emailSent = false;
 let redirectUrl = "";
 let fallbackKey = "";
 
-// Check if user is already logged in
-const accessToken = Astro.cookies.get("sb-access-token")?.value;
-const refreshToken = Astro.cookies.get("sb-refresh-token")?.value;
-let user: { id: string; email?: string } | null = null;
+const user = await resolveUser(Astro.cookies, supabase);
 
-if (accessToken) {
-	const { data: { user: authUser }, error: authError } = await supabase.auth.getUser(accessToken);
-	if (!authError && authUser) {
-		user = authUser;
-	} else if (refreshToken) {
-		const { data: refreshData, error: refreshError } =
-			await supabase.auth.refreshSession({ refresh_token: refreshToken });
-		if (!refreshError && refreshData.session) {
-			Astro.cookies.set("sb-access-token", refreshData.session.access_token, {
-				path: "/",
-				httpOnly: true,
-				secure: true,
-				sameSite: "lax",
-				maxAge: 60 * 60 * 24 * 7,
-			});
-			Astro.cookies.set("sb-refresh-token", refreshData.session.refresh_token, {
-				path: "/",
-				httpOnly: true,
-				secure: true,
-				sameSite: "lax",
-				maxAge: 60 * 60 * 24 * 30,
-			});
-			user = refreshData.session.user;
-		}
-	}
-}
-
-// If user is logged in, generate code and prepare redirect
 if (user) {
 	try {
-		// Ensure user has a subscription (auto-provision trial if needed)
-		let { data: subscription } = await supabase
-			.from("user_subscriptions")
-			.select("*")
-			.eq("user_id", user.id)
-			.single();
+		const clientIp = Astro.request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+		const trial = await provisionTrial(supabase, user, clientIp);
 
-		if (!subscription?.litellm_api_key && !subscription?.trial_used) {
-			const canonical = canonicalizeEmail(user.email ?? "");
-			const clientIp = Astro.request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-
-			const { count: canonicalCount } = await supabase
-				.from("user_subscriptions")
-				.select("*", { count: "exact", head: true })
-				.eq("canonical_email", canonical)
-				.eq("trial_used", true);
-
-			const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-			const { count: ipCount } = await supabase
-				.from("user_subscriptions")
-				.select("*", { count: "exact", head: true })
-				.eq("trial_ip", clientIp)
-				.gte("created_at", since)
-				.eq("trial_used", true);
-
-			if ((canonicalCount ?? 0) > 0 || (ipCount ?? 0) >= 3) {
-				error = "Trial already used for this account. Please subscribe for continued access.";
-			} else {
-				const keyResult = await generateKey({
-					userId: user.id,
-					maxBudget: TIER_BUDGETS.trial ?? 0.35,
-					metadata: { tier: "trial", email: user.email ?? "" },
-					models: MANAGED_MODELS,
-				});
-				await supabase.from("user_subscriptions").upsert({
-					user_id: user.id,
-					tier: "trial",
-					litellm_key_hash: keyResult.token,
-					litellm_api_key: keyResult.key,
-					trial_used: true,
-					canonical_email: canonical,
-					trial_ip: clientIp,
-					updated_at: new Date().toISOString(),
-				});
-				subscription = {
-					...subscription,
-					tier: "trial",
-					litellm_api_key: keyResult.key,
-					litellm_key_hash: keyResult.token,
-					trial_used: true,
-				};
-			}
-		}
-
-		if (subscription?.litellm_api_key && !error) {
-			// Generate one-time auth code (use admin client — RLS blocks anon access)
+		if (trial.blocked) {
+			error = trial.error ?? "Trial already used for this account. Please subscribe for continued access.";
+		} else if (trial.success && trial.subscription?.litellm_api_key) {
 			const code = crypto.randomUUID();
 			const adminClient = getSupabaseAdmin();
 			await adminClient.from("auth_codes").insert({
@@ -124,8 +43,8 @@ if (user) {
 				expires_at: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
 			});
 			redirectUrl = `obsidian://true-recall-auth?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`;
-			fallbackKey = subscription.litellm_api_key;
-		} else if (!error) {
+			fallbackKey = trial.subscription.litellm_api_key;
+		} else {
 			error = "No subscription found. Please subscribe first.";
 		}
 	} catch (err) {
@@ -134,7 +53,6 @@ if (user) {
 	}
 }
 
-// Handle magic link submission for non-logged-in users
 if (!user && Astro.request.method === "POST") {
 	const formData = await Astro.request.formData();
 	const action = formData.get("action")?.toString();
@@ -218,10 +136,8 @@ if (!user && Astro.request.method === "POST") {
 
 <script define:vars={{ redirectUrl }}>
 	if (redirectUrl) {
-		// Auto-redirect to Obsidian
 		window.location.href = redirectUrl;
 
-		// Copy key to clipboard
 		const copyBtn = document.getElementById("copy-key");
 		const keyEl = document.getElementById("api-key");
 		if (copyBtn && keyEl) {

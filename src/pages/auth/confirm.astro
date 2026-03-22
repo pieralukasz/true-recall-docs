@@ -3,6 +3,7 @@ export const prerender = false;
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { createSupabaseServerClient } from "../../lib/supabase-server";
+import { setSessionCookies } from "../../lib/auth-helpers";
 
 const supabase = createSupabaseServerClient(
 	Astro.cookies,
@@ -10,7 +11,12 @@ const supabase = createSupabaseServerClient(
 );
 
 const tokenHash = Astro.url.searchParams.get("token_hash");
-const type = Astro.url.searchParams.get("type") as "email" | "recovery" | "magiclink" | undefined;
+const rawType = Astro.url.searchParams.get("type");
+const ALLOWED_OTP_TYPES = ["email", "recovery", "magiclink"] as const;
+type OtpType = (typeof ALLOWED_OTP_TYPES)[number];
+const type: OtpType | undefined = ALLOWED_OTP_TYPES.includes(rawType as OtpType)
+	? (rawType as OtpType)
+	: undefined;
 
 let error = "";
 
@@ -23,20 +29,7 @@ if (tokenHash && type) {
 	if (verifyError) {
 		error = verifyError.message;
 	} else if (data.session) {
-		Astro.cookies.set("sb-access-token", data.session.access_token, {
-			path: "/",
-			httpOnly: true,
-			secure: true,
-			sameSite: "lax",
-			maxAge: 60 * 60 * 24 * 7,
-		});
-		Astro.cookies.set("sb-refresh-token", data.session.refresh_token, {
-			path: "/",
-			httpOnly: true,
-			secure: true,
-			sameSite: "lax",
-			maxAge: 60 * 60 * 24 * 30,
-		});
+		setSessionCookies(Astro.cookies, data.session);
 		return Astro.redirect("/dashboard");
 	} else {
 		error = "Email confirmed but no session was created. Please sign in.";
