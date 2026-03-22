@@ -6,7 +6,7 @@ import { createSupabaseServerClient } from "../../lib/supabase-server";
 import { getSupabaseAdmin } from "../../lib/supabase-admin";
 import { generateKey } from "../../lib/litellm";
 import { canonicalizeEmail } from "../../lib/email";
-import { TIER_BUDGETS, MANAGED_MODELS } from "../../lib/constants";
+import { TIER_BUDGETS, MANAGED_MODELS, SITE_URL } from "../../lib/constants";
 
 const supabase = createSupabaseServerClient(
 	Astro.cookies,
@@ -147,7 +147,7 @@ if (!user && Astro.request.method === "POST") {
 			const { error: otpError } = await supabase.auth.signInWithOtp({
 				email,
 				options: {
-					emailRedirectTo: `${Astro.url.origin}/auth/plugin-confirm?state=${encodeURIComponent(state)}`,
+					emailRedirectTo: `${SITE_URL}/auth/plugin-confirm?state=${encodeURIComponent(state)}`,
 				},
 			});
 			if (otpError) {

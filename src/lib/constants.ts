@@ -1,3 +1,5 @@
+export const SITE_URL = "https://www.truerecall.app";
+
 export const LITELLM_PROXY_URL =
 	import.meta.env.LITELLM_PROXY_URL ?? "https://ai.truerecall.app";
 
