@@ -72,20 +72,6 @@ export async function resetKeyBudget(
 	});
 }
 
-export async function incrementKeyBudget(
-	keyId: string,
-	additionalBudget: number,
-): Promise<void> {
-	const info = await getKeyInfo(keyId);
-	await litellmFetch("/key/update", {
-		method: "POST",
-		body: JSON.stringify({
-			key: keyId,
-			max_budget: (info.max_budget ?? 0) + additionalBudget,
-		}),
-	});
-}
-
 export async function updateKeyConfig(
 	keyId: string,
 	updates: {

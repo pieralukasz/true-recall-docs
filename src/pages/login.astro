@@ -33,20 +33,7 @@ if (Astro.request.method === "POST") {
 				emailSent = true;
 			}
 		}
-	// } else if (action === "oauth-google" || action === "oauth-apple") {
-	// 	const provider = action === "oauth-google" ? "google" : "apple";
-	// 	const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
-	// 		provider,
-	// 		options: {
-	// 			redirectTo: `${Astro.url.origin}/auth/callback`,
-	// 		},
-	// 	});
-	// 	if (oauthError || !data.url) {
-	// 		error = oauthError?.message ?? "Could not initiate sign-in. Please try again.";
-	// 	} else {
-	// 		return Astro.redirect(data.url);
-	// 	}
-	// }
+	}
 }
 ---
 
