@@ -52,12 +52,20 @@ export async function provisionTrial(
 		};
 	}
 
-	const keyResult = await generateKey({
-		userId: user.id,
-		maxBudget: TIER_BUDGETS.trial ?? 0.35,
-		metadata: { tier: "trial", email: user.email ?? "" },
-		models: MANAGED_MODELS,
-	});
+	let keyResult;
+	try {
+		keyResult = await generateKey({
+			userId: user.id,
+			maxBudget: TIER_BUDGETS.trial ?? 0.35,
+			metadata: { tier: "trial", email: user.email ?? "" },
+			models: MANAGED_MODELS,
+		});
+	} catch {
+		return {
+			success: false,
+			error: "AI service temporarily unavailable. Please try again later.",
+		};
+	}
 
 	await supabase.from("user_subscriptions").upsert({
 		user_id: user.id,

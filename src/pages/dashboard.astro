@@ -5,7 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { createSupabaseServerClient } from "../lib/supabase-server";
 import { POLAR_CUSTOMER_PORTAL_URL } from "../lib/constants";
 import { resolveUser, clearSessionCookies } from "../lib/auth-helpers";
-import { provisionTrial } from "../lib/trial-provisioning";
+import { provisionTrial, type TrialResult } from "../lib/trial-provisioning";
 
 const supabase = createSupabaseServerClient(
 	Astro.cookies,
@@ -16,7 +16,12 @@ const user = await resolveUser(Astro.cookies, supabase);
 if (!user) return Astro.redirect("/login");
 
 const clientIp = Astro.request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-const trial = await provisionTrial(supabase, user, clientIp);
+let trial: TrialResult;
+try {
+	trial = await provisionTrial(supabase, user, clientIp);
+} catch {
+	trial = { success: false, error: "AI service temporarily unavailable." };
+}
 const subscription = trial.subscription;
 const trialBlocked = trial.blocked ?? false;
 

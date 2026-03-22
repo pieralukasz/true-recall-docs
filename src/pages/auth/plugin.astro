@@ -32,14 +32,18 @@ if (user && Astro.request.method === "POST") {
 
 	if (action === "authorize") {
 		try {
-			const clientIp = Astro.request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-			const trial = await provisionTrial(supabase, user, clientIp);
+			const adminClient = getSupabaseAdmin();
 
-			if (trial.blocked) {
-				error = trial.error ?? "Trial already used for this account. Please subscribe for continued access.";
-			} else if (trial.success && trial.subscription?.litellm_api_key) {
+			// Check existing subscription first (no LiteLLM call needed)
+			const { data: subscription } = await adminClient
+				.from("user_subscriptions")
+				.select("*")
+				.eq("user_id", user.id)
+				.single();
+
+			if (subscription?.litellm_api_key) {
+				// Has key → generate auth code directly
 				const code = crypto.randomUUID();
-				const adminClient = getSupabaseAdmin();
 				const { error: insertError } = await adminClient.from("auth_codes").insert({
 					code,
 					user_id: user.id,
@@ -53,7 +57,29 @@ if (user && Astro.request.method === "POST") {
 					redirectUrl = `obsidian://true-recall-auth?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`;
 				}
 			} else {
-				error = "No subscription found. Please subscribe first.";
+				// No subscription → try provisioning trial
+				const clientIp = Astro.request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+				const trial = await provisionTrial(supabase, user, clientIp);
+
+				if (trial.blocked) {
+					error = trial.error ?? "Trial already used for this account. Please subscribe for continued access.";
+				} else if (trial.success && trial.subscription?.litellm_api_key) {
+					const code = crypto.randomUUID();
+					const { error: insertError } = await adminClient.from("auth_codes").insert({
+						code,
+						user_id: user.id,
+						state,
+						expires_at: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
+					});
+					if (insertError) {
+						console.error("auth_codes insert failed:", insertError);
+						error = `Authorization failed: ${insertError.message}`;
+					} else {
+						redirectUrl = `obsidian://true-recall-auth?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`;
+					}
+				} else {
+					error = trial.error ?? "Could not set up your account. Please try again later.";
+				}
 			}
 		} catch (err) {
 			console.error("Plugin auth error:", err);
