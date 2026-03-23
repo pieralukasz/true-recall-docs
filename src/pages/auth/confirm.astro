@@ -1,73 +1,64 @@
 ---
-export const prerender = false;
-
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { createSupabaseServerClient } from "../../lib/supabase-server";
-import { setSessionCookies } from "../../lib/auth-helpers";
-
-const supabase = createSupabaseServerClient(
-	Astro.cookies,
-	Astro.request.headers.get("cookie"),
-);
-
-const code = Astro.url.searchParams.get("code");
-const tokenHash = Astro.url.searchParams.get("token_hash");
-const rawType = Astro.url.searchParams.get("type");
-const ALLOWED_OTP_TYPES = ["email", "recovery", "magiclink"] as const;
-type OtpType = (typeof ALLOWED_OTP_TYPES)[number];
-const type: OtpType | undefined = ALLOWED_OTP_TYPES.includes(rawType as OtpType)
-	? (rawType as OtpType)
-	: undefined;
-
-let error = "";
-
-if (code) {
-	// PKCE flow
-	const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
-
-	if (exchangeError) {
-		error = exchangeError.message;
-	} else if (data.session) {
-		setSessionCookies(Astro.cookies, data.session);
-		return Astro.redirect("/dashboard");
-	} else {
-		error = "Email confirmed but no session was created. Please sign in.";
-	}
-} else if (tokenHash && type) {
-	const { data, error: verifyError } = await supabase.auth.verifyOtp({
-		token_hash: tokenHash,
-		type,
-	});
-
-	if (verifyError) {
-		error = verifyError.message;
-	} else if (data.session) {
-		setSessionCookies(Astro.cookies, data.session);
-		return Astro.redirect("/dashboard");
-	} else {
-		error = "Email confirmed but no session was created. Please sign in.";
-	}
-} else {
-	error = "This link is invalid or has expired. Please request a new sign-in link.";
-}
 ---
 
 <BaseLayout title="Email Confirmation" description="Confirm your True Recall email address">
 	<div class="confirm-container">
-		{error ? (
-			<>
-				<h1>Confirmation Failed</h1>
-				<p class="error-message">{error}</p>
-				<a href="/login" class="btn">Go to Sign In</a>
-			</>
-		) : (
-			<>
-				<h1>Confirming...</h1>
-				<p>Please wait while we verify your email.</p>
-			</>
-		)}
+		<div id="loading">
+			<h1>Confirming…</h1>
+			<p>Please wait while we verify your email.</p>
+		</div>
+		<div id="error-state" style="display:none">
+			<h1>Confirmation Failed</h1>
+			<p id="error-message" class="error-message"></p>
+			<a href="/login" class="btn">Go to Sign In</a>
+		</div>
 	</div>
 </BaseLayout>
+
+<script>
+	import { supabase } from "../../lib/supabase";
+
+	const params = new URLSearchParams(window.location.search);
+	const code = params.get("code");
+	const tokenHash = params.get("token_hash");
+	const type = params.get("type");
+
+	const loadingEl = document.getElementById("loading")!;
+	const errorState = document.getElementById("error-state")!;
+	const errorMessage = document.getElementById("error-message")!;
+
+	function showError(msg: string) {
+		loadingEl.style.display = "none";
+		errorMessage.textContent = msg;
+		errorState.style.display = "block";
+	}
+
+	async function handleConfirm() {
+		if (code) {
+			const { error } = await supabase.auth.exchangeCodeForSession(code);
+			if (error) {
+				showError(error.message);
+				return;
+			}
+			window.location.href = "/dashboard";
+		} else if (tokenHash && type) {
+			const { error } = await supabase.auth.verifyOtp({
+				token_hash: tokenHash,
+				type: type as "email" | "recovery" | "magiclink",
+			});
+			if (error) {
+				showError(error.message);
+				return;
+			}
+			window.location.href = "/dashboard";
+		} else {
+			showError("This link is invalid or has expired. Please request a new sign-in link.");
+		}
+	}
+
+	handleConfirm();
+</script>
 
 <style>
 	.confirm-container {

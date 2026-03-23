@@ -147,7 +147,7 @@ const faqs = [
 
 	.plans {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		grid-template-columns: repeat(3, 1fr);
 		gap: 1.5rem;
 		margin-bottom: 2rem;
 		text-align: left;
@@ -184,6 +184,7 @@ const faqs = [
 	.plan h2 {
 		font-size: 1.5rem;
 		margin-bottom: 0.5rem;
+		min-height: 2.25rem;
 	}
 
 	.price {
@@ -191,6 +192,10 @@ const faqs = [
 		font-weight: 700;
 		color: var(--sl-color-accent);
 		margin-bottom: 0.5rem;
+		display: flex;
+		align-items: baseline;
+		gap: 0.25rem;
+		min-height: 3.5rem;
 	}
 
 	.price .period {
@@ -203,6 +208,7 @@ const faqs = [
 		color: var(--sl-color-gray-3);
 		margin-bottom: 1.5rem;
 		font-size: 0.875rem;
+		min-height: 2.75rem;
 	}
 
 	.features {
@@ -240,6 +246,7 @@ const faqs = [
 		cursor: pointer;
 		transition: filter 0.2s;
 		text-decoration: none;
+		margin-top: auto;
 	}
 
 	.btn:hover {
@@ -315,5 +322,17 @@ const faqs = [
 		font-size: 0.9375rem;
 		line-height: 1.6;
 		padding-left: 1.25rem;
+	}
+
+	@media (max-width: 768px) {
+		.plans {
+			grid-template-columns: 1fr;
+		}
+
+		.plan h2,
+		.price,
+		.plan > p {
+			min-height: unset;
+		}
 	}
 </style>
