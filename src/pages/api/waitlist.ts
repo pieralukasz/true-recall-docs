@@ -46,8 +46,12 @@ export const POST: APIRoute = async ({ request }) => {
 	if (resendKey) {
 		const resend = new Resend(resendKey);
 
+		const segmentId = import.meta.env.RESEND_SEGMENT_ID;
 		try {
-			await resend.contacts.create({ email });
+			await resend.contacts.create({
+				email,
+				segments: segmentId ? [{ id: segmentId }] : undefined,
+			});
 		} catch (contactError) {
 			console.error("Resend contacts error:", contactError);
 		}

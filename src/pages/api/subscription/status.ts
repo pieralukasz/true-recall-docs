@@ -1,8 +1,8 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
-import { getKeyInfo } from "../../../lib/litellm";
-import { TIER_BUDGETS, MANAGED_MODELS } from "../../../lib/constants";
+import { verifyKey } from "../../../lib/unkey";
+import { TIER_CREDITS, MANAGED_MODEL } from "../../../lib/constants";
 
 export const GET: APIRoute = async ({ request }) => {
 	const url = new URL(request.url);
@@ -16,25 +16,30 @@ export const GET: APIRoute = async ({ request }) => {
 	}
 
 	try {
-		const info = await getKeyInfo(key);
+		const info = await verifyKey(key);
 
-		const tier = info.metadata?.tier ?? "unknown";
-		const budgetMax = info.max_budget ?? TIER_BUDGETS[tier] ?? 0;
-		const budgetSpent = info.spend ?? 0;
-		const budgetRemaining = Math.max(0, budgetMax - budgetSpent);
+		if (!info.valid) {
+			return new Response(
+				JSON.stringify({ error: "Invalid subscription key" }),
+				{ status: 401, headers: { "Content-Type": "application/json" } },
+			);
+		}
 
-		const isManagedTier = tier === "trial" || tier === "starter";
+		const tier = (info.meta?.tier as string) ?? "unknown";
+		const budgetMax = TIER_CREDITS[tier] ?? 50;
+		const budgetRemaining = info.remaining ?? 0;
+		const budgetSpent = Math.max(0, budgetMax - budgetRemaining);
 
 		return new Response(
 			JSON.stringify({
 				tier,
-				plan_type: isManagedTier ? tier : "byok",
+				plan_type: tier,
 				budget_max: budgetMax,
 				budget_spent: budgetSpent,
 				budget_remaining: budgetRemaining,
-				expires: info.expires,
-				allowed_models: isManagedTier ? MANAGED_MODELS : null,
-				trial_used: tier === "trial" && budgetSpent > 0,
+				expires: null,
+				allowed_models: [MANAGED_MODEL],
+				trial_used: tier === "trial",
 			}),
 			{
 				status: 200,

@@ -46,9 +46,6 @@ export default defineConfig({
 				src: './src/assets/simple-logo.svg',
 				replacesTitle: false,
 			},
-			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/pieralukasz/true-recall' },
-			],
 			sidebar,
 			customCss: ['./src/styles/custom.css'],
 		}),

@@ -41,7 +41,7 @@ if (user && Astro.request.method === "POST") {
 				.eq("user_id", user.id)
 				.single();
 
-			if (subscription?.litellm_api_key) {
+			if (subscription?.api_key) {
 				// Has key → generate auth code directly
 				const code = crypto.randomUUID();
 				const { error: insertError } = await adminClient.from("auth_codes").insert({
@@ -63,7 +63,7 @@ if (user && Astro.request.method === "POST") {
 
 				if (trial.blocked) {
 					error = trial.error ?? "Trial already used for this account. Please subscribe for continued access.";
-				} else if (trial.success && trial.subscription?.litellm_api_key) {
+				} else if (trial.success && trial.subscription?.api_key) {
 					const code = crypto.randomUUID();
 					const { error: insertError } = await adminClient.from("auth_codes").insert({
 						code,

@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { generateKey } from "./litellm";
+import { createKey } from "./unkey";
 import { canonicalizeEmail } from "./email";
-import { TIER_BUDGETS, MANAGED_MODELS } from "./constants";
+import { TIER_CREDITS } from "./constants";
 
 export interface TrialResult {
 	success: boolean;
@@ -21,7 +21,7 @@ export async function provisionTrial(
 		.eq("user_id", user.id)
 		.single();
 
-	if (subscription?.litellm_api_key) {
+	if (subscription?.api_key) {
 		return { success: true, subscription };
 	}
 	if (subscription?.trial_used) {
@@ -54,11 +54,10 @@ export async function provisionTrial(
 
 	let keyResult;
 	try {
-		keyResult = await generateKey({
+		keyResult = await createKey({
 			userId: user.id,
-			maxBudget: TIER_BUDGETS.trial ?? 0.35,
-			metadata: { tier: "trial", email: user.email ?? "" },
-			models: MANAGED_MODELS,
+			tier: "trial",
+			email: user.email ?? "",
 		});
 	} catch {
 		return {
@@ -70,8 +69,8 @@ export async function provisionTrial(
 	await supabase.from("user_subscriptions").upsert({
 		user_id: user.id,
 		tier: "trial",
-		litellm_key_hash: keyResult.token,
-		litellm_api_key: keyResult.key,
+		unkey_key_id: keyResult.keyId,
+		api_key: keyResult.key,
 		trial_used: true,
 		canonical_email: canonical,
 		trial_ip: clientIp,
@@ -83,8 +82,8 @@ export async function provisionTrial(
 		subscription: {
 			...subscription,
 			tier: "trial",
-			litellm_api_key: keyResult.key,
-			litellm_key_hash: keyResult.token,
+			api_key: keyResult.key,
+			unkey_key_id: keyResult.keyId,
 			trial_used: true,
 		},
 	};

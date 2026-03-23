@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { POLAR_STARTER_CHECKOUT_URL } from "../lib/constants";
 
 const plans = [
 	{
@@ -12,27 +11,26 @@ const plans = [
 			"~50 one-time AI generations",
 			"No API key or setup needed",
 			"No credit card required",
-			"Upgrade anytime",
 		],
 		cta: "Start Free Trial",
 		ctaHref: "/login",
 		popular: false,
-		secondary: true,
+		secondary: false,
 	},
 	{
-		name: "Starter",
-		price: "$9",
-		period: "/month",
-		description: "~350 AI generations per month. No API key needed.",
+		name: "Bring Your Own Key",
+		price: "Free",
+		period: "forever",
+		description: "Use your own OpenRouter API key. Unlimited generations, you pay only for what you use.",
 		features: [
-			"~350 AI generations per month",
-			"No API key or setup needed",
-			"Usage dashboard",
+			"Unlimited AI generations",
+			"Use any supported model",
+			"Pay OpenRouter directly",
 		],
-		cta: "Subscribe",
-		ctaHref: POLAR_STARTER_CHECKOUT_URL,
-		popular: true,
-		secondary: false,
+		cta: "Get Started",
+		ctaHref: "/getting-started/quick-start/",
+		popular: false,
+		secondary: true,
 	},
 ];
 

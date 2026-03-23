@@ -2,20 +2,17 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { getSupabaseAdmin } from "../../../lib/supabase-admin";
-import { generateKey } from "../../../lib/litellm";
+import { createKey } from "../../../lib/unkey";
 import { canonicalizeEmail } from "../../../lib/email";
-import {
-	LITELLM_MASTER_KEY,
-	MANAGED_MODELS,
-	BETA_BUDGET,
-	LITELLM_TEAM_IDS,
-} from "../../../lib/constants";
+import { UNKEY_ROOT_KEY } from "../../../lib/constants";
+
+const BETA_CREDITS = 150;
 
 export const POST: APIRoute = async ({ request }) => {
 	const authHeader = request.headers.get("authorization");
 	const token = authHeader?.replace("Bearer ", "");
 
-	if (!token || token !== LITELLM_MASTER_KEY) {
+	if (!token || token !== UNKEY_ROOT_KEY) {
 		return new Response(JSON.stringify({ error: "Unauthorized" }), {
 			status: 401,
 			headers: { "Content-Type": "application/json" },
@@ -43,7 +40,6 @@ export const POST: APIRoute = async ({ request }) => {
 	const supabase = getSupabaseAdmin();
 
 	try {
-		// Find or create Supabase user
 		let userId: string;
 		const { data: existingUsers } = await supabase.auth.admin.listUsers();
 		const existing = existingUsers?.users?.find((u) => u.email === email);
@@ -64,21 +60,17 @@ export const POST: APIRoute = async ({ request }) => {
 			userId = newUser.user.id;
 		}
 
-		// Generate LiteLLM key
-		const keyResult = await generateKey({
+		const keyResult = await createKey({
 			userId,
-			maxBudget: BETA_BUDGET,
-			teamId: LITELLM_TEAM_IDS.betaTesters,
-			metadata: { tier: "beta", email },
-			models: MANAGED_MODELS,
+			tier: "beta",
+			email,
 		});
 
-		// Upsert subscription record
 		await supabase.from("user_subscriptions").upsert({
 			user_id: userId,
 			tier: "beta",
-			litellm_key_hash: keyResult.token,
-			litellm_api_key: keyResult.key,
+			unkey_key_id: keyResult.keyId,
+			api_key: keyResult.key,
 			canonical_email: canonicalizeEmail(email),
 			trial_used: true,
 			updated_at: new Date().toISOString(),
@@ -88,8 +80,7 @@ export const POST: APIRoute = async ({ request }) => {
 			JSON.stringify({
 				key: keyResult.key,
 				email,
-				budget: BETA_BUDGET,
-				approx_generations: Math.floor(BETA_BUDGET / 0.007),
+				credits: BETA_CREDITS,
 			}),
 			{
 				status: 200,

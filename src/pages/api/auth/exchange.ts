@@ -2,8 +2,8 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { getSupabaseAdmin } from "../../../lib/supabase-admin";
-import { getKeyInfo } from "../../../lib/litellm";
-import { TIER_BUDGETS } from "../../../lib/constants";
+import { verifyKey } from "../../../lib/unkey";
+import { TIER_CREDITS } from "../../../lib/constants";
 
 export const POST: APIRoute = async ({ request }) => {
 	let body: { code?: string };
@@ -44,7 +44,6 @@ export const POST: APIRoute = async ({ request }) => {
 		}
 
 		// Mark as used atomically (CAS — prevents replay)
-		// .select().single() ensures we verify a row was actually updated
 		const { data: claimed, error: updateError } = await supabase
 			.from("auth_codes")
 			.update({ used_at: new Date().toISOString() })
@@ -67,36 +66,34 @@ export const POST: APIRoute = async ({ request }) => {
 			.eq("user_id", authCode.user_id)
 			.single();
 
-		if (!subscription?.litellm_api_key) {
+		if (!subscription?.api_key) {
 			return new Response(
 				JSON.stringify({ error: "No subscription found. Please sign up first." }),
 				{ status: 404, headers: { "Content-Type": "application/json" } },
 			);
 		}
 
-		// Get live budget info from LiteLLM
-		let budgetMax = TIER_BUDGETS[subscription.tier] ?? 0;
-		let budgetSpent = 0;
-		let expires: string | null = null;
+		// Get live budget info from Unkey
+		const tier = subscription.tier ?? "trial";
+		let budgetMax = TIER_CREDITS[tier] ?? 50;
+		let budgetRemaining = budgetMax;
 
 		try {
-			const info = await getKeyInfo(subscription.litellm_api_key);
-			budgetMax = info.max_budget ?? budgetMax;
-			budgetSpent = info.spend ?? 0;
-			expires = info.expires ?? null;
+			const info = await verifyKey(subscription.api_key);
+			budgetRemaining = info.remaining ?? budgetMax;
 		} catch {
-			// Fall back to stored tier budget if LiteLLM is unreachable
+			// Fall back to tier default if Unkey is unreachable
 		}
 
 		return new Response(
 			JSON.stringify({
-				subscriptionKey: subscription.litellm_api_key,
-				tier: subscription.tier ?? "unknown",
-				plan_type: subscription.tier === "starter" ? "monthly" : subscription.tier ?? "unknown",
+				subscriptionKey: subscription.api_key,
+				tier,
+				plan_type: tier,
 				budget_max: budgetMax,
-				budget_spent: budgetSpent,
-				budget_remaining: Math.max(0, budgetMax - budgetSpent),
-				expires,
+				budget_spent: budgetMax - budgetRemaining,
+				budget_remaining: budgetRemaining,
+				expires: null,
 				trial_used: subscription.trial_used ?? false,
 			}),
 			{
