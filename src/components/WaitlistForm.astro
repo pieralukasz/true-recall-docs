@@ -42,6 +42,7 @@
         <span id="btn-text">Join Waitlist</span>
         <span id="btn-loading" style="display:none">Joining...</span>
       </button>
+      <p class="legal-notice">We'll use your email only to notify you about the launch. See our <a href="/privacy">Privacy Policy</a>.</p>
     </form>
 
     <div id="waitlist-success" class="waitlist-success" style="display:none">
@@ -280,5 +281,18 @@
     border-radius: 8px;
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
+  }
+
+  .legal-notice {
+    font-size: 0.8125rem;
+    color: var(--sl-color-gray-3);
+    margin-top: 0.75rem;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .legal-notice a {
+    color: var(--sl-color-accent-high);
+    text-decoration: underline;
   }
 </style>

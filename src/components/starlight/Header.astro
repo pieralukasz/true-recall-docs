@@ -39,7 +39,7 @@ const shouldRenderSearch =
 		{ auth: { flowType: "pkce" } },
 	);
 
-	function updateAuthButtonss(session: unknown) {
+	function updateAuthButtons(session: unknown) {
 		const buttons = document.querySelectorAll("[data-auth-btn]");
 		for (const btn of buttons) {
 			if (session) {

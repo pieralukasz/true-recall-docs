@@ -1,374 +1,30 @@
 ---
-export const prerender = false;
-
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { createSupabaseServerClient } from "../lib/supabase-server";
-import { resolveUser, clearSessionCookies } from "../lib/auth-helpers";
-import { provisionTrial, type TrialResult } from "../lib/trial-provisioning";
-
-const supabase = createSupabaseServerClient(
-	Astro.cookies,
-	Astro.request.headers.get("cookie"),
-);
-
-const user = await resolveUser(Astro.cookies, supabase);
-if (!user) return Astro.redirect("/login");
-
-const clientIp = Astro.request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-let trial: TrialResult;
-try {
-	trial = await provisionTrial(supabase, user, clientIp);
-} catch {
-	trial = { success: false, error: "AI service temporarily unavailable." };
-}
-const subscription = trial.subscription;
-const trialBlocked = trial.blocked ?? false;
-
-const tier = subscription?.tier ?? "none";
-const apiKey = subscription?.api_key ?? null;
-const periodEnd = subscription?.current_period_end
-	? new Date(subscription.current_period_end).toLocaleDateString("en-US", {
-			month: "long",
-			day: "numeric",
-			year: "numeric",
-		})
-	: null;
-
-// Handle logout
-if (Astro.request.method === "POST") {
-	const formData = await Astro.request.formData();
-	if (formData.get("action") === "logout") {
-		clearSessionCookies(Astro.cookies);
-		return Astro.redirect("/login");
-	}
-}
 ---
 
 <BaseLayout title="Dashboard" description="Manage your True Recall subscription">
-	<div class="dashboard">
-		<div class="dashboard-header">
-			<div>
-				<h1>Dashboard</h1>
-				<p>Welcome back, {user!.email}</p>
-			</div>
-			<form method="POST">
-				<input type="hidden" name="action" value="logout" />
-				<button type="submit" class="btn-logout">Sign Out</button>
-			</form>
-		</div>
-
-		{trialBlocked ? (
-			<div class="no-sub-card">
-				<h2>Trial Already Used</h2>
-				<p>A free trial was already activated for this email. Subscribe to continue using AI generations.</p>
-				<a href="/pricing" class="btn">View Plans</a>
-			</div>
-		) : apiKey ? (
-			<div class="credits-card">
-				<h2>{tier === "trial" ? "Your Free Trial Key" : tier === "beta" ? "Your Beta Tester Key" : "Your Subscription Key"}</h2>
-				<div class="key-display">
-					<code id="api-key">{apiKey}</code>
-					<button class="copy-btn" id="copy-btn" type="button">Copy</button>
-				</div>
-				<p class="key-hint">Paste this key in Obsidian → True Recall Settings → AI → Subscription Key</p>
-				{tier === "trial" && (
-					<p class="key-hint" style="margin-top: 0.5rem; opacity: 0.9;">
-						Trial includes ~50 one-time AI generations.
-						<a href="/pricing" style="color: inherit; text-decoration: underline;">Subscribe</a> for ~350 generations per month.
-					</p>
-				)}
-				{tier === "beta" && (
-					<p class="key-hint" style="margin-top: 0.5rem; opacity: 0.9;">
-						Beta tester key — managed by admin.
-						<a href="/pricing" style="color: inherit; text-decoration: underline;">Subscribe</a> for a permanent key.
-					</p>
-				)}
-			</div>
-		) : (
-			<div class="no-sub-card">
-				<h2>No Active Subscription</h2>
-				<p>Sign up for a plan to get a managed AI key with no setup required.</p>
-				<a href="/pricing" class="btn">View Plans</a>
-			</div>
-		)}
-
-		<div class="info-grid">
-			<div class="info-card">
-				<h3>Plan</h3>
-				<div class="info-value">
-					<span class:list={["tier-badge", `tier-${tier}`]}>
-						{tier.charAt(0).toUpperCase() + tier.slice(1)}
-					</span>
-				</div>
-			</div>
-
-			<div class="info-card">
-				<h3>Usage</h3>
-				<div class="info-value">
-					<div class="usage-bar-container" id="usage-container">
-						{apiKey ? (
-							<>
-								<div class="usage-bar">
-									<div class="usage-fill" id="usage-fill" style="width: 0%"></div>
-								</div>
-								<span class="usage-text" id="usage-text">Loading...</span>
-							</>
-						) : (
-							<span class="usage-text">N/A</span>
-						)}
-					</div>
-				</div>
-			</div>
-
-			<div class="info-card">
-				<h3>Renews</h3>
-				<div class="info-value">
-					{periodEnd ?? "—"}
-				</div>
-			</div>
-		</div>
-
-		{(tier === "trial" || tier === "beta") && (
-			<div class="actions">
-				<a href="/pricing" class="btn">
-					View Plans
-				</a>
-			</div>
-		)}
+	<div class="dashboard-placeholder">
+		<h1>Dashboard</h1>
+		<p>Account management is coming soon.</p>
+		<a href="/pricing" class="btn">View Pricing</a>
 	</div>
 </BaseLayout>
 
-<script define:vars={{ apiKey, tier }}>
-	// Copy key to clipboard
-	const copyBtn = document.getElementById("copy-btn");
-	copyBtn?.addEventListener("click", async () => {
-		if (!apiKey) return;
-		await navigator.clipboard.writeText(apiKey);
-		copyBtn.textContent = "Copied!";
-		setTimeout(() => { copyBtn.textContent = "Copy"; }, 2000);
-	});
-
-	// Fetch live usage from status API
-	if (apiKey) {
-		fetch(`/api/subscription/status?key=${encodeURIComponent(apiKey)}`)
-			.then((r) => r.json())
-			.then((data) => {
-				const fill = document.getElementById("usage-fill");
-				const text = document.getElementById("usage-text");
-				if (fill && text && data.budget_max > 0) {
-					const pct = Math.min(100, (data.budget_spent / data.budget_max) * 100);
-					fill.style.width = `${pct}%`;
-					fill.classList.toggle("usage-high", pct > 80);
-					text.textContent = `${Math.round(pct)}% used`;
-				}
-			})
-			.catch(() => {
-				const text = document.getElementById("usage-text");
-				if (text) text.textContent = "Could not load usage data";
-			});
-	}
-</script>
-
 <style>
-	.dashboard {
-		max-width: 800px;
-		margin: 0 auto;
-		padding-top: 1rem;
+	.dashboard-placeholder {
+		max-width: 400px;
+		margin: 4rem auto;
+		text-align: center;
 	}
 
-	.dashboard-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		margin-bottom: 2rem;
-	}
-
-	.dashboard-header h1 {
-		font-size: 2rem;
-		margin-bottom: 0.25rem;
-	}
-
-	.dashboard-header p {
-		color: var(--sl-color-gray-3);
-	}
-
-	.btn-logout {
-		background: transparent;
-		border: 1px solid var(--sl-color-gray-5);
-		color: var(--sl-color-gray-3);
-		padding: 0.5rem 1rem;
-		border-radius: var(--tr-radius-sm);
-		cursor: pointer;
-		font-size: 0.875rem;
-	}
-
-	.btn-logout:hover {
-		background: var(--sl-color-gray-6);
-		color: var(--sl-color-white);
-	}
-
-	/* Subscription Key Card */
-	.credits-card {
-		background: linear-gradient(135deg, var(--sl-color-accent) 0%, var(--tr-color-accent-deep) 100%);
-		border-radius: var(--tr-radius-md);
-		padding: 2rem;
-		margin-bottom: 2rem;
-	}
-
-	.credits-card h2 {
-		font-size: 1rem;
-		font-weight: 400;
-		opacity: 0.9;
+	.dashboard-placeholder h1 {
+		font-size: 1.75rem;
 		margin-bottom: 1rem;
 	}
 
-	.key-display {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		background: rgba(0, 0, 0, 0.2);
-		border-radius: var(--tr-radius-sm);
-		padding: 0.75rem 1rem;
-		margin-bottom: 0.75rem;
-	}
-
-	.key-display code {
-		flex: 1;
-		font-size: 0.9375rem;
-		font-family: "SF Mono", "Fira Code", monospace;
-		word-break: break-all;
-		color: var(--sl-color-white);
-	}
-
-	.copy-btn {
-		background: var(--tr-overlay-light);
-		border: 1px solid var(--tr-overlay-light-hover);
-		color: var(--sl-color-white);
-		padding: 0.375rem 0.75rem;
-		border-radius: var(--tr-radius-sm);
-		cursor: pointer;
-		font-size: 0.8125rem;
-		white-space: nowrap;
-	}
-
-	.copy-btn:hover {
-		background: var(--tr-overlay-light-hover);
-	}
-
-	.key-hint {
-		font-size: 0.8125rem;
-		opacity: 0.8;
-	}
-
-	/* No subscription card */
-	.no-sub-card {
-		background: var(--sl-color-gray-6);
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: var(--tr-radius-md);
-		padding: 2rem;
-		text-align: center;
+	.dashboard-placeholder p {
+		color: var(--sl-color-gray-3);
 		margin-bottom: 2rem;
-	}
-
-	.no-sub-card h2 {
-		margin-bottom: 0.5rem;
-	}
-
-	.no-sub-card p {
-		color: var(--sl-color-gray-3);
-		margin-bottom: 1.5rem;
-	}
-
-	/* Info Grid */
-	.info-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-		gap: 1rem;
-		margin-bottom: 2rem;
-	}
-
-	.info-card {
-		background: var(--sl-color-gray-6);
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: var(--tr-radius-md);
-		padding: 1.25rem;
-	}
-
-	.info-card h3 {
-		font-size: 0.75rem;
-		font-weight: 500;
-		color: var(--sl-color-gray-3);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin-bottom: 0.5rem;
-	}
-
-	.info-value {
-		font-size: 1.25rem;
-		font-weight: 600;
-	}
-
-	/* Tier badges */
-	.tier-badge {
-		display: inline-block;
-		padding: 0.25rem 0.75rem;
-		border-radius: var(--tr-radius-pill);
-		font-size: 0.875rem;
-		font-weight: 600;
-	}
-
-	.tier-free {
-		background: var(--sl-color-gray-5);
-		color: var(--sl-color-gray-2);
-	}
-
-	.tier-starter {
-		background: color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
-		color: var(--sl-color-accent-high);
-	}
-
-	.tier-trial,
-	.tier-beta {
-		background: var(--sl-color-gray-5);
-		color: var(--sl-color-gray-2);
-	}
-
-	/* Usage bar */
-	.usage-bar-container {
-		width: 100%;
-	}
-
-	.usage-bar {
-		width: 100%;
-		height: 8px;
-		background: var(--sl-color-gray-5);
-		border-radius: 4px;
-		overflow: hidden;
-		margin-bottom: 0.375rem;
-	}
-
-	.usage-fill {
-		height: 100%;
-		background: var(--sl-color-accent);
-		border-radius: 4px;
-		transition: width 0.5s ease;
-	}
-
-	.usage-fill.usage-high {
-		background: var(--tr-color-error);
-	}
-
-	.usage-text {
-		font-size: 0.8125rem;
-		font-weight: 400;
-		color: var(--sl-color-gray-3);
-	}
-
-	/* Actions */
-	.actions {
-		display: flex;
-		gap: 1rem;
-		flex-wrap: wrap;
 	}
 
 	.btn {
@@ -380,22 +36,12 @@ if (Astro.request.method === "POST") {
 		border-radius: var(--tr-radius-sm);
 		font-size: 1rem;
 		font-weight: 500;
-		cursor: pointer;
-		transition: filter 0.2s;
 		text-decoration: none;
+		transition: filter 0.2s;
 	}
 
 	.btn:hover {
 		filter: brightness(1.1);
 		text-decoration: none;
-	}
-
-	.btn-secondary {
-		background: transparent;
-		border: 1px solid var(--sl-color-gray-5);
-	}
-
-	.btn-secondary:hover {
-		background: var(--sl-color-gray-6);
 	}
 </style>
