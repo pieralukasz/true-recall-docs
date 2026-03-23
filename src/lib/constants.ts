@@ -11,4 +11,4 @@ export const TIER_CREDITS: Record<string, number> = {
 	beta: 150,
 };
 
-export const MANAGED_MODEL = "google/gemini-3-flash-preview";
+export const MANAGED_MODEL = "google/gemini-2.5-flash";
