@@ -1,0 +1,41 @@
+---
+import LanguageSelect from "virtual:starlight/components/LanguageSelect";
+import ThemeSelect from "virtual:starlight/components/ThemeSelect";
+---
+
+<div class="mobile-preferences sl-flex">
+	<a href="/login" class="auth-btn" data-auth-btn>Sign In</a>
+	<ThemeSelect />
+	<LanguageSelect />
+</div>
+
+<style>
+	@layer starlight.core {
+		.mobile-preferences {
+			justify-content: space-between;
+			flex-wrap: wrap;
+			border-top: 1px solid var(--sl-color-gray-6);
+			column-gap: 1rem;
+			padding: 0.5rem 0;
+			align-items: center;
+		}
+
+		.auth-btn {
+			display: inline-flex;
+			align-items: center;
+			padding: 0.375rem 0.875rem;
+			background: var(--sl-color-accent);
+			color: var(--sl-color-white);
+			border-radius: 9999px;
+			font-size: 0.8125rem;
+			font-weight: 500;
+			text-decoration: none;
+			white-space: nowrap;
+			transition: filter 0.2s;
+		}
+		.auth-btn:hover {
+			filter: brightness(1.15);
+			color: var(--sl-color-white);
+		}
+	}
+</style>

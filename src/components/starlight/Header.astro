@@ -23,7 +23,7 @@ const shouldRenderSearch =
 	</div>
 	<div class="sl-hidden md:sl-flex print:hidden right-group">
 		<div class="sl-flex right-items">
-			<a href="/login" class="auth-btn" id="auth-btn">Sign In</a>
+			<a href="/login" class="auth-btn" data-auth-btn>Sign In</a>
 			<ThemeSelect />
 		</div>
 		<LanguageSelect />
@@ -39,23 +39,24 @@ const shouldRenderSearch =
 		{ auth: { flowType: "pkce" } },
 	);
 
-	function updateAuthButton(session: unknown) {
-		const btn = document.getElementById("auth-btn");
-		if (!btn) return;
-		if (session) {
-			btn.textContent = "Dashboard";
-			btn.setAttribute("href", "/dashboard");
-		} else {
-			btn.textContent = "Sign In";
-			btn.setAttribute("href", "/login");
+	function updateAuthButtonss(session: unknown) {
+		const buttons = document.querySelectorAll("[data-auth-btn]");
+		for (const btn of buttons) {
+			if (session) {
+				btn.textContent = "Dashboard";
+				btn.setAttribute("href", "/dashboard");
+			} else {
+				btn.textContent = "Sign In";
+				btn.setAttribute("href", "/login");
+			}
 		}
 	}
 
 	const { data } = await supabase.auth.getSession();
-	updateAuthButton(data.session);
+	updateAuthButtons(data.session);
 
 	supabase.auth.onAuthStateChange((_event, session) => {
-		updateAuthButton(session);
+		updateAuthButtons(session);
 	});
 </script>
 

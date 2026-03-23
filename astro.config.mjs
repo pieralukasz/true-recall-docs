@@ -41,6 +41,7 @@ export default defineConfig({
 				Header: './src/components/starlight/Header.astro',
 				Head: './src/components/starlight/Head.astro',
 				Hero: './src/components/starlight/Hero.astro',
+				MobileMenuFooter: './src/components/starlight/MobileMenuFooter.astro',
 			},
 			logo: {
 				src: './src/assets/simple-logo.svg',
