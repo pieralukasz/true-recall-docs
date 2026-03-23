@@ -6,7 +6,8 @@ const plans = [
 		name: "Free Trial",
 		price: "$0",
 		period: "no card required",
-		description: "Sign up to get ~50 free AI generations. Try before you subscribe.",
+		description:
+			"Sign up to get ~50 free AI generations. Try before you subscribe.",
 		features: [
 			"~50 one-time AI generations",
 			"No API key or setup needed",
@@ -21,7 +22,8 @@ const plans = [
 		name: "Starter",
 		price: "$8",
 		period: "/month",
-		description: "Continue generating AI flashcards after your free trial ends. No setup, no hassle.",
+		description:
+			"Continue generating AI flashcards after your free trial ends. No setup, no hassle.",
 		features: [
 			"~350 AI generations per month",
 			"No API key or setup needed",
@@ -33,10 +35,11 @@ const plans = [
 		secondary: false,
 	},
 	{
-		name: "Bring Your Own Key",
+		name: "BYOK",
 		price: "Free",
 		period: "forever",
-		description: "Use your own OpenRouter API key. Unlimited generations, you pay only for what you use.",
+		description:
+			"Use your own OpenRouter API key. Unlimited generations, you pay only for what you use.",
 		features: [
 			"Unlimited AI generations",
 			"Use any supported model",
@@ -77,50 +80,66 @@ const faqs = [
 ];
 ---
 
-<BaseLayout title="Pricing" description="True Recall subscription plans for AI-powered flashcard generation">
+<BaseLayout
+	title="Pricing"
+	description="True Recall subscription plans for AI-powered flashcard generation"
+>
 	<div class="credits">
 		<h1>Simple, transparent pricing</h1>
-		<p>Generate AI flashcards without managing API keys. Or bring your own — it's free.</p>
+		<p>
+			Generate AI flashcards without managing API keys. Or bring your own
+			— it's free.
+		</p>
 
 		<div class="plans">
-			{plans.map((plan) => (
-				<div class:list={["plan", { popular: plan.popular }]}>
-					{plan.popular && <span class="badge">Most Popular</span>}
-					<h2>{plan.name}</h2>
-					<div class="price">
-						{plan.price}<span class="period">{plan.period}</span>
+			{
+				plans.map((plan) => (
+					<div class:list={["plan", { popular: plan.popular }]}>
+						{plan.popular && (
+							<span class="badge">Most Popular</span>
+						)}
+						<h2>{plan.name}</h2>
+						<div class="price">
+							{plan.price}
+							<span class="period">{plan.period}</span>
+						</div>
+						<p>{plan.description}</p>
+						<ul class="features">
+							{plan.features.map((f) => (
+								<li>{f}</li>
+							))}
+						</ul>
+						<a
+							href={plan.ctaHref}
+							class:list={[
+								"btn",
+								{ "btn-secondary": plan.secondary },
+							]}
+						>
+							{plan.cta}
+						</a>
 					</div>
-					<p>{plan.description}</p>
-					<ul class="features">
-						{plan.features.map((f) => (
-							<li>{f}</li>
-						))}
-					</ul>
-					<a
-						href={plan.ctaHref}
-						class:list={["btn", { "btn-secondary": plan.secondary }]}
-					>
-						{plan.cta}
-					</a>
-				</div>
-			))}
+				))
+			}
 		</div>
 
 		<p class="note">
-			Generation counts are approximate and may vary slightly based on text length.
+			Generation counts are approximate and may vary slightly based on
+			text length.
 		</p>
-
 	</div>
 
 	<div class="faq-section">
 		<h2>Frequently Asked Questions</h2>
 		<div class="faq-list">
-			{faqs.map((faq) => (
-				<details class="faq-item">
-					<summary>{faq.q}</summary>
-					<p>{faq.a}</p>
-				</details>
-			))}
+			{
+				faqs.map((faq) => (
+					<details class="faq-item">
+						<summary>{faq.q}</summary>
+						<p>{faq.a}</p>
+					</details>
+				))
+			}
 		</div>
 	</div>
 </BaseLayout>

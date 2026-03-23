@@ -19,10 +19,6 @@ const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
 		<meta name="description" content={description} />
 		<title>{title} | True Recall</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-		/>
 		<Analytics />
 		<SpeedInsights />
 	</head>
@@ -57,18 +53,22 @@ const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
 
 <style is:global>
 	:root {
+		/* Accent palette (matches custom.css / Starlight overrides) */
 		--sl-color-accent: #7c3aed;
 		--sl-color-accent-high: #a78bfa;
 		--sl-color-accent-low: #4c1d95;
-		--sl-color-white: #ffffff;
-		--sl-color-gray-1: #e0e0e0;
-		--sl-color-gray-2: #c0c0c0;
-		--sl-color-gray-3: #9ca3af;
-		--sl-color-gray-4: #6b7280;
-		--sl-color-gray-5: #374151;
-		--sl-color-gray-6: #1f2937;
-		--sl-color-gray-7: #111827;
-		--sl-color-bg: #0f172a;
+		/* Gray scale (from Starlight props.css) */
+		--sl-color-white: hsl(0, 0%, 100%);
+		--sl-color-gray-1: hsl(224, 20%, 94%);
+		--sl-color-gray-2: hsl(224, 6%, 77%);
+		--sl-color-gray-3: hsl(224, 6%, 56%);
+		--sl-color-gray-4: hsl(224, 7%, 36%);
+		--sl-color-gray-5: hsl(224, 10%, 23%);
+		--sl-color-gray-6: hsl(224, 14%, 16%);
+		--sl-color-black: hsl(224, 10%, 10%);
+		/* Background (from starlight-theme-obsidian dark) */
+		--sl-color-bg: #111213;
+		/* Custom tokens */
 		--tr-color-error: #ef4444;
 		--tr-color-success: #10b981;
 		--tr-color-accent-deep: #5b21b6;
@@ -88,7 +88,7 @@ const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
 	}
 
 	body {
-		font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
 		background: var(--sl-color-bg);
 		color: var(--sl-color-white);
 		line-height: 1.6;
