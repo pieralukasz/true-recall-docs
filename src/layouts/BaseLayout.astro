@@ -31,7 +31,7 @@ const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
 			<div class="nav-links">
 				<a href="/getting-started/introduction">Docs</a>
 				<a href="/pricing">Pricing</a>
-				<a href="/login" class="btn btn-small">Sign In</a>
+				<a href="/login" class="btn btn-small" data-auth-btn>Sign In</a>
 			</div>
 		</nav>
 
@@ -186,3 +186,27 @@ const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
 		margin: 0 0.375rem;
 	}
 </style>
+
+<script>
+	import { supabase } from "../lib/supabase";
+
+	function updateAuthButtons(session: unknown) {
+		const buttons = document.querySelectorAll("[data-auth-btn]");
+		for (const btn of buttons) {
+			if (session) {
+				btn.textContent = "Dashboard";
+				btn.setAttribute("href", "/dashboard");
+			} else {
+				btn.textContent = "Sign In";
+				btn.setAttribute("href", "/login");
+			}
+		}
+	}
+
+	const { data } = await supabase.auth.getSession();
+	updateAuthButtons(data.session);
+
+	supabase.auth.onAuthStateChange((_event, session) => {
+		updateAuthButtons(session);
+	});
+</script>

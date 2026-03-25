@@ -2,6 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const LITELLM_URL = "https://ai.truerecall.app";
+const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 ---
 
 <BaseLayout title="Dashboard" description="Manage your True Recall subscription and API key">
@@ -91,26 +93,46 @@ const LITELLM_URL = "https://ai.truerecall.app";
 				</p>
 			</div>
 
-			<!-- No key state -->
+			<!-- Trial ended (budget exceeded) -->
+			<div class="card trial-ended-card" id="trial-ended-card" style="display:none">
+				<div class="trial-ended-content">
+					<h2>Free trial ended</h2>
+					<p>You've used all your free AI generations. Subscribe to continue, or use your own OpenRouter API key.</p>
+					<a href="/pricing" class="btn">Subscribe — $8/mo</a>
+				</div>
+			</div>
+
+			<!-- Provisioning trial -->
+			<div class="card" id="provisioning-card" style="display:none">
+				<div class="provisioning-content">
+					<div class="spinner spinner-sm"></div>
+					<span>Setting up your free trial…</span>
+				</div>
+			</div>
+
+			<!-- Provision failed -->
 			<div class="card no-key-card" id="no-key-card" style="display:none">
-				<div class="state-icon">✨</div>
-				<h2>No active subscription</h2>
-				<p>Subscribe to get your Pro key with AI-powered flashcard generation, or use your own OpenRouter API key for free.</p>
-				<a href="/pricing" class="btn">View Plans</a>
+				<div class="state-icon">⚠️</div>
+				<h2>Something went wrong</h2>
+				<p>We couldn't set up your trial key. Please try refreshing the page.</p>
+				<button class="btn" onclick="location.reload()">Refresh</button>
 			</div>
 		</div>
 	</div>
 </BaseLayout>
 
-<script define:vars={{ LITELLM_URL }}>
-	// Make LITELLM_URL available to the module script below
+<script define:vars={{ LITELLM_URL, SUPABASE_URL, SUPABASE_ANON_KEY }}>
 	window.__LITELLM_URL = LITELLM_URL;
+	window.__SUPABASE_URL = SUPABASE_URL;
+	window.__SUPABASE_ANON_KEY = SUPABASE_ANON_KEY;
 </script>
 
 <script>
 	import { supabase } from "../lib/supabase";
 
 	const LITELLM_URL = (window as any).__LITELLM_URL as string;
+	const SUPABASE_URL = (window as any).__SUPABASE_URL as string;
+	const SUPABASE_ANON_KEY = (window as any).__SUPABASE_ANON_KEY as string;
 
 	// Elements
 	const $ = (id: string) => document.getElementById(id)!;
@@ -134,6 +156,8 @@ const LITELLM_URL = "https://ai.truerecall.app";
 	const expiredNotice = $("expired-notice");
 	const keyCard = $("key-card");
 	const noKeyCard = $("no-key-card");
+	const trialEndedCard = $("trial-ended-card");
+	const provisioningCard = $("provisioning-card");
 	const keyValue = $("key-value");
 	const copyBtn = $("copy-btn");
 	const signOutBtn = $("sign-out-btn");
@@ -176,74 +200,140 @@ const LITELLM_URL = "https://ai.truerecall.app";
 		return new Date(expires) < new Date();
 	}
 
+	type PlanType = "pro" | "trial" | "expired" | "trial-ended" | "blocked";
+
+	function detectPlan(info: KeyInfo): PlanType {
+		const expired = isExpired(info.expires);
+		if (expired) return "expired";
+
+		const budget = info.max_budget ?? 0;
+		if (budget === 0) return "blocked";
+
+		const spend = info.spend ?? 0;
+		const budgetExceeded = budget > 0 && spend >= budget;
+		const hasBudgetDuration = !!info.budget_duration;
+
+		// Pro: has budget_duration (monthly reset)
+		if (hasBudgetDuration) return budgetExceeded ? "pro" : "pro"; // Pro shows "exceeded, resets X"
+
+		// Trial: no budget_duration (one-time budget)
+		return budgetExceeded ? "trial-ended" : "trial";
+	}
+
 	function renderPlan(info: KeyInfo | null, hasKey: boolean) {
 		if (!hasKey) {
 			noKeyCard.style.display = "block";
 			return;
 		}
 
-		planCard.style.display = "block";
 		keyCard.style.display = "block";
 
 		if (!info) {
 			// LiteLLM unavailable — show key but no usage
-			planLabel.textContent = "Pro";
+			planCard.style.display = "block";
+			planLabel.textContent = "Active";
 			planDot.classList.add("dot-green");
 			return;
 		}
 
-		const expired = isExpired(info.expires);
-		const hasBudget = info.max_budget != null && info.max_budget > 0;
-		const hasExpiry = info.expires != null;
+		const plan = detectPlan(info);
 
-		// Determine plan state
-		if (expired) {
-			planLabel.textContent = "Expired";
-			planDot.classList.add("dot-red");
-			planBadge.classList.add("badge-expired");
-			expiredNotice.style.display = "block";
-			keyCard.style.display = "none";
-		} else if (hasExpiry) {
-			planLabel.textContent = "Trial";
-			planDot.classList.add("dot-yellow");
-		} else {
-			planLabel.textContent = "Pro";
-			planDot.classList.add("dot-green");
+		// Trial ended — show upgrade CTA instead of plan card
+		if (plan === "trial-ended") {
+			trialEndedCard.style.display = "block";
+			return;
+		}
+
+		planCard.style.display = "block";
+
+		// Badge
+		switch (plan) {
+			case "pro":
+				planLabel.textContent = "Pro";
+				planDot.classList.add("dot-green");
+				manageLink.textContent = "Manage Subscription";
+				break;
+			case "trial":
+				planLabel.textContent = "Free Trial";
+				planDot.classList.add("dot-yellow");
+				manageLink.textContent = "Upgrade to Pro";
+				break;
+			case "expired":
+				planLabel.textContent = "Expired";
+				planDot.classList.add("dot-red");
+				planBadge.classList.add("badge-expired");
+				expiredNotice.style.display = "block";
+				keyCard.style.display = "none";
+				return;
+			case "blocked":
+				planLabel.textContent = "Suspended";
+				planDot.classList.add("dot-red");
+				planBadge.classList.add("badge-expired");
+				expiredNotice.style.display = "block";
+				$("expired-notice").querySelector("p")!.textContent =
+					"Your subscription has been suspended. Please contact support.";
+				keyCard.style.display = "none";
+				return;
 		}
 
 		// Usage bar
-		if (hasBudget && !expired) {
+		const budget = info.max_budget ?? 0;
+		if (budget > 0) {
 			usageSection.style.display = "block";
 			const spend = info.spend ?? 0;
-			const budget = info.max_budget!;
 			const percent = Math.min(100, (spend / budget) * 100);
-			usageAmount.textContent = `${formatCurrency(spend)} / ${formatCurrency(budget)}`;
-			usageFill.style.width = `${percent}%`;
 
-			if (percent > 90) {
-				usageFill.classList.add("fill-warning");
-			} else if (percent > 70) {
-				usageFill.classList.add("fill-caution");
+			if (plan === "trial") {
+				// Show as "~X / ~50 generations" for trial
+				const totalGens = Math.round(budget / 0.01); // ~$0.01 per gen
+				const usedGens = Math.round(spend / 0.01);
+				$("usage-section").querySelector("span")!.textContent = "Free generations used";
+				usageAmount.textContent = `~${usedGens} / ~${totalGens}`;
+			} else {
+				usageAmount.textContent = `${formatCurrency(spend)} / ${formatCurrency(budget)}`;
 			}
+
+			usageFill.style.width = `${percent}%`;
+			if (percent > 90) usageFill.classList.add("fill-warning");
+			else if (percent > 70) usageFill.classList.add("fill-caution");
 		}
 
-		// Stats
-		if (!expired) {
-			let hasStats = false;
+		// Stats row
+		let hasStats = false;
 
-			if (info.budget_reset_at) {
-				statResets.style.display = "block";
-				statResetsValue.textContent = formatDate(info.budget_reset_at);
-				hasStats = true;
-			}
+		if (info.budget_reset_at && plan === "pro") {
+			statResets.style.display = "block";
+			statResetsValue.textContent = formatDate(info.budget_reset_at);
+			hasStats = true;
+		}
 
-			if (hasExpiry && !expired) {
-				statExpires.style.display = "block";
-				statExpiresValue.textContent = formatDate(info.expires!);
-				hasStats = true;
-			}
+		if (info.expires && !isExpired(info.expires)) {
+			statExpires.style.display = "block";
+			statExpiresValue.textContent = formatDate(info.expires);
+			hasStats = true;
+		}
 
-			if (hasStats) statsRow.style.display = "flex";
+		if (hasStats) statsRow.style.display = "flex";
+	}
+
+	async function provisionTrialKey(accessToken: string): Promise<string | null> {
+		try {
+			const res = await fetch(
+				`${SUPABASE_URL}/functions/v1/provision-trial-key`,
+				{
+					method: "POST",
+					headers: {
+						Authorization: `Bearer ${accessToken}`,
+						"Content-Type": "application/json",
+						apikey: SUPABASE_ANON_KEY,
+					},
+				},
+			);
+			if (!res.ok) return null;
+			const data = await res.json();
+			return data.litellm_key ?? null;
+		} catch {
+			return null;
 		}
 	}
 
@@ -258,24 +348,39 @@ const LITELLM_URL = "https://ai.truerecall.app";
 
 		userEmail.textContent = session.user.email ?? "";
 
+		// 1. Check if user already has a key
 		const { data } = await supabase
 			.from("user_subscriptions")
 			.select("litellm_key")
 			.eq("user_id", session.user.id)
 			.maybeSingle();
 
-		const litellmKey = data?.litellm_key as string | null;
+		let litellmKey = data?.litellm_key as string | null;
 
-		let keyInfo: KeyInfo | null = null;
-		if (litellmKey) {
-			keyValue.textContent = litellmKey;
-			keyInfo = await fetchKeyInfo(litellmKey);
+		// 2. No key → auto-provision trial
+		if (!litellmKey) {
+			loadingState.style.display = "none";
+			dashboardContent.style.display = "block";
+			provisioningCard.style.display = "block";
+
+			litellmKey = await provisionTrialKey(session.access_token);
+
+			provisioningCard.style.display = "none";
+
+			if (!litellmKey) {
+				noKeyCard.style.display = "block";
+				return;
+			}
+		} else {
+			loadingState.style.display = "none";
+			dashboardContent.style.display = "block";
 		}
 
-		loadingState.style.display = "none";
-		dashboardContent.style.display = "block";
+		// 3. Fetch usage from LiteLLM
+		keyValue.textContent = litellmKey;
+		const keyInfo = await fetchKeyInfo(litellmKey);
 
-		renderPlan(keyInfo, !!litellmKey);
+		renderPlan(keyInfo, true);
 	}
 
 	// Copy button
@@ -571,7 +676,45 @@ const LITELLM_URL = "https://ai.truerecall.app";
 		color: var(--sl-color-gray-2);
 	}
 
-	/* ── No key card ── */
+	/* ── Trial ended card ── */
+	.trial-ended-card {
+		border-color: var(--sl-color-accent);
+	}
+
+	.trial-ended-content {
+		text-align: center;
+		padding: 1rem 0;
+	}
+
+	.trial-ended-content h2 {
+		font-size: 1.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.trial-ended-content p {
+		color: var(--sl-color-gray-3);
+		margin-bottom: 1.25rem;
+		font-size: 0.9375rem;
+	}
+
+	/* ── Provisioning ── */
+	.provisioning-content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+		padding: 0.5rem 0;
+		color: var(--sl-color-gray-3);
+		font-size: 0.9375rem;
+	}
+
+	.spinner-sm {
+		width: 1.25rem;
+		height: 1.25rem;
+		border-width: 2px;
+	}
+
+	/* ── No key / error card ── */
 	.no-key-card {
 		text-align: center;
 		padding: 2.5rem 1.5rem;
