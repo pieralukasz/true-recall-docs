@@ -6,7 +6,10 @@ const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 ---
 
-<BaseLayout title="Dashboard" description="Manage your True Recall subscription and API key">
+<BaseLayout
+	title="Dashboard"
+	description="Manage your True Recall subscription and API key"
+>
 	<div class="dashboard">
 		<!-- Loading -->
 		<div id="loading-state" class="center-state">
@@ -39,11 +42,17 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						<span class="plan-dot" id="plan-dot"></span>
 						<span id="plan-label">Pro</span>
 					</div>
-					<a href="/pricing" class="manage-link" id="manage-link">Manage Subscription</a>
+					<a href="/pricing" class="manage-link" id="manage-link"
+						>Manage Subscription</a
+					>
 				</div>
 
 				<!-- Usage bar -->
-				<div class="usage-section" id="usage-section" style="display:none">
+				<div
+					class="usage-section"
+					id="usage-section"
+					style="display:none"
+				>
 					<div class="usage-label">
 						<span>Usage this period</span>
 						<span class="usage-amount" id="usage-amount"></span>
@@ -66,8 +75,15 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 				</div>
 
 				<!-- Expired state -->
-				<div class="expired-notice" id="expired-notice" style="display:none">
-					<p>Your key has expired. Subscribe to continue using AI features.</p>
+				<div
+					class="expired-notice"
+					id="expired-notice"
+					style="display:none"
+				>
+					<p>
+						Your key has expired. Subscribe to continue using AI
+						features.
+					</p>
 					<a href="/pricing" class="btn btn-sm">View Plans</a>
 				</div>
 			</div>
@@ -78,26 +94,64 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 				<div class="key-row">
 					<code id="key-value" class="key-value"></code>
 					<button id="copy-btn" class="btn-copy">
-						<svg id="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-							<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+						<svg
+							id="copy-icon"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<rect
+								x="9"
+								y="9"
+								width="13"
+								height="13"
+								rx="2"
+								ry="2"></rect>
+							<path
+								d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+							></path>
 						</svg>
-						<svg id="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-							<polyline points="20 6 9 17 4 12"/>
+						<svg
+							id="check-icon"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							style="display:none"
+						>
+							<polyline points="20 6 9 17 4 12"></polyline>
 						</svg>
 						<span id="copy-text">Copy</span>
 					</button>
 				</div>
 				<p class="key-hint">
-					Paste this key in Obsidian: <strong>Settings → True Recall → AI → Pro Key</strong>
+					Paste this key in Obsidian: <strong
+						>Settings → True Recall → AI → Pro Key</strong
+					>
 				</p>
 			</div>
 
 			<!-- Trial ended (budget exceeded) -->
-			<div class="card trial-ended-card" id="trial-ended-card" style="display:none">
+			<div
+				class="card trial-ended-card"
+				id="trial-ended-card"
+				style="display:none"
+			>
 				<div class="trial-ended-content">
 					<h2>Free trial ended</h2>
-					<p>You've used all your free AI generations. Subscribe to continue, or use your own OpenRouter API key.</p>
+					<p>
+						You've used all your free AI generations. Subscribe to
+						continue.
+					</p>
 					<a href="/pricing" class="btn">Subscribe — $8/mo</a>
 				</div>
 			</div>
@@ -114,7 +168,10 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 			<div class="card no-key-card" id="no-key-card" style="display:none">
 				<div class="state-icon">⚠️</div>
 				<h2>Something went wrong</h2>
-				<p>We couldn't set up your trial key. Please try refreshing the page.</p>
+				<p>
+					We couldn't set up your trial key. Please try refreshing the
+					page.
+				</p>
 				<button class="btn" onclick="location.reload()">Refresh</button>
 			</div>
 		</div>
@@ -287,10 +344,13 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 				// Show as "~X / ~50 generations" for trial
 				const totalGens = Math.round(budget / 0.01); // ~$0.01 per gen
 				const usedGens = Math.round(spend / 0.01);
-				$("usage-section").querySelector("span")!.textContent = "Free generations used";
+				$("usage-section").querySelector("span")!.textContent =
+					"Free generations used";
 				usageAmount.textContent = `~${usedGens} / ~${totalGens}`;
 			} else {
-				usageAmount.textContent = `${formatCurrency(spend)} / ${formatCurrency(budget)}`;
+				usageAmount.textContent = `${formatCurrency(
+					spend
+				)} / ${formatCurrency(budget)}`;
 			}
 
 			usageFill.style.width = `${percent}%`;
@@ -316,7 +376,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		if (hasStats) statsRow.style.display = "flex";
 	}
 
-	async function provisionTrialKey(accessToken: string): Promise<string | null> {
+	async function provisionTrialKey(
+		accessToken: string
+	): Promise<string | null> {
 		try {
 			const res = await fetch(
 				`${SUPABASE_URL}/functions/v1/provision-trial-key`,
@@ -327,7 +389,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						"Content-Type": "application/json",
 						apikey: SUPABASE_ANON_KEY,
 					},
-				},
+				}
 			);
 			if (!res.ok) return null;
 			const data = await res.json();
@@ -338,7 +400,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	}
 
 	async function init() {
-		const { data: { session } } = await supabase.auth.getSession();
+		const {
+			data: { session },
+		} = await supabase.auth.getSession();
 
 		if (!session) {
 			loadingState.style.display = "none";
@@ -348,14 +412,8 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 		userEmail.textContent = session.user.email ?? "";
 
-		// 1. Check if user already has a key
-		const { data } = await supabase
-			.from("user_subscriptions")
-			.select("litellm_key")
-			.eq("user_id", session.user.id)
-			.maybeSingle();
-
-		let litellmKey = data?.litellm_key as string | null;
+		// 1. Check app_metadata for existing key (zero DB query — already in JWT)
+		let litellmKey = (session.user.app_metadata?.litellm_key as string) ?? null;
 
 		// 2. No key → auto-provision trial
 		if (!litellmKey) {
@@ -452,7 +510,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	}
 
 	@keyframes spin {
-		to { transform: rotate(360deg); }
+		to {
+			transform: rotate(360deg);
+		}
 	}
 
 	/* ── Dashboard header ── */
@@ -485,7 +545,15 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	/* ── Plan card ── */
 	.plan-card {
 		border-color: var(--sl-color-accent);
-		background: linear-gradient(135deg, color-mix(in srgb, var(--sl-color-accent) 8%, var(--sl-color-gray-6)), var(--sl-color-gray-6));
+		background: linear-gradient(
+			135deg,
+			color-mix(
+				in srgb,
+				var(--sl-color-accent) 8%,
+				var(--sl-color-gray-6)
+			),
+			var(--sl-color-gray-6)
+		);
 	}
 
 	.plan-header {
@@ -512,7 +580,8 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 	.dot-green {
 		background: var(--tr-color-success);
-		box-shadow: 0 0 6px color-mix(in srgb, var(--tr-color-success) 50%, transparent);
+		box-shadow: 0 0 6px
+			color-mix(in srgb, var(--tr-color-success) 50%, transparent);
 	}
 
 	.dot-yellow {
@@ -522,7 +591,8 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 	.dot-red {
 		background: var(--tr-color-error);
-		box-shadow: 0 0 6px color-mix(in srgb, var(--tr-color-error) 50%, transparent);
+		box-shadow: 0 0 6px
+			color-mix(in srgb, var(--tr-color-error) 50%, transparent);
 	}
 
 	.badge-expired {
