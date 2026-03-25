@@ -6,9 +6,8 @@ All paths are relative to `src/content/docs/`.
 
 ## Special Pages (src/pages/)
 
-- `subscription.astro` — Redirects to https://truerecall.app (linked from header subscription icon)
 - `privacy.astro` — Privacy Policy (GDPR-compliant; linked from footer)
-- `terms.astro` — Terms of Service (subscription terms, EU consumer rights; linked from footer)
+- `terms.astro` — Terms of Service (linked from footer)
 
 ## Landing Page
 
@@ -54,7 +53,7 @@ All paths are relative to `src/content/docs/`.
 
 - `configuration/general.md` — General settings: review interface, editor integration, day boundary, collection behavior
 - `configuration/fsrs-settings.md` — FSRS scheduling settings: presets, retention, weights, bulk operations
-- `configuration/ai-settings.md` — AI configuration: subscription, API keys, generation language, custom prompts
+- `configuration/ai-settings.md` — AI configuration: API keys, generation language, custom prompts
 - `configuration/editor-integration.md` — Editor features: link status indicators, status bar, reading mode, selection toolbar
 - `configuration/keyboard-shortcuts.md` — Keyboard shortcut reference and customization
 

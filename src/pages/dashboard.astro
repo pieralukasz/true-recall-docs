@@ -1,32 +1,597 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const LITELLM_URL = "https://ai.truerecall.app";
 ---
 
-<BaseLayout title="Dashboard" description="Manage your True Recall subscription">
-	<div class="dashboard-placeholder">
-		<h1>Dashboard</h1>
-		<p>Account management is coming soon.</p>
-		<a href="/pricing" class="btn">View Pricing</a>
+<BaseLayout title="Dashboard" description="Manage your True Recall subscription and API key">
+	<div class="dashboard">
+		<!-- Loading -->
+		<div id="loading-state" class="center-state">
+			<div class="spinner"></div>
+			<p>Loading your dashboard…</p>
+		</div>
+
+		<!-- Not logged in -->
+		<div id="not-logged-in" class="center-state" style="display:none">
+			<div class="state-icon">🔒</div>
+			<h1>Sign in to continue</h1>
+			<p>You need to sign in to view your dashboard.</p>
+			<a href="/login" class="btn">Sign In</a>
+		</div>
+
+		<!-- Dashboard content -->
+		<div id="dashboard-content" style="display:none">
+			<div class="dashboard-header">
+				<div>
+					<h1>Dashboard</h1>
+					<p class="user-email" id="user-email"></p>
+				</div>
+				<button id="sign-out-btn" class="btn-text">Sign Out</button>
+			</div>
+
+			<!-- Plan card -->
+			<div class="card plan-card" id="plan-card" style="display:none">
+				<div class="plan-header">
+					<div class="plan-badge" id="plan-badge">
+						<span class="plan-dot" id="plan-dot"></span>
+						<span id="plan-label">Pro</span>
+					</div>
+					<a href="/pricing" class="manage-link" id="manage-link">Manage Subscription</a>
+				</div>
+
+				<!-- Usage bar -->
+				<div class="usage-section" id="usage-section" style="display:none">
+					<div class="usage-label">
+						<span>Usage this period</span>
+						<span class="usage-amount" id="usage-amount"></span>
+					</div>
+					<div class="usage-bar">
+						<div class="usage-fill" id="usage-fill"></div>
+					</div>
+				</div>
+
+				<!-- Stats row -->
+				<div class="stats-row" id="stats-row" style="display:none">
+					<div class="stat" id="stat-resets" style="display:none">
+						<span class="stat-label">Resets</span>
+						<span class="stat-value" id="stat-resets-value"></span>
+					</div>
+					<div class="stat" id="stat-expires" style="display:none">
+						<span class="stat-label">Expires</span>
+						<span class="stat-value" id="stat-expires-value"></span>
+					</div>
+				</div>
+
+				<!-- Expired state -->
+				<div class="expired-notice" id="expired-notice" style="display:none">
+					<p>Your key has expired. Subscribe to continue using AI features.</p>
+					<a href="/pricing" class="btn btn-sm">View Plans</a>
+				</div>
+			</div>
+
+			<!-- Key card -->
+			<div class="card key-card" id="key-card" style="display:none">
+				<h2>Your Pro Key</h2>
+				<div class="key-row">
+					<code id="key-value" class="key-value"></code>
+					<button id="copy-btn" class="btn-copy">
+						<svg id="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+							<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+						</svg>
+						<svg id="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+							<polyline points="20 6 9 17 4 12"/>
+						</svg>
+						<span id="copy-text">Copy</span>
+					</button>
+				</div>
+				<p class="key-hint">
+					Paste this key in Obsidian: <strong>Settings → True Recall → AI → Pro Key</strong>
+				</p>
+			</div>
+
+			<!-- No key state -->
+			<div class="card no-key-card" id="no-key-card" style="display:none">
+				<div class="state-icon">✨</div>
+				<h2>No active subscription</h2>
+				<p>Subscribe to get your Pro key with AI-powered flashcard generation, or use your own OpenRouter API key for free.</p>
+				<a href="/pricing" class="btn">View Plans</a>
+			</div>
+		</div>
 	</div>
 </BaseLayout>
 
+<script define:vars={{ LITELLM_URL }}>
+	// Make LITELLM_URL available to the module script below
+	window.__LITELLM_URL = LITELLM_URL;
+</script>
+
+<script>
+	import { supabase } from "../lib/supabase";
+
+	const LITELLM_URL = (window as any).__LITELLM_URL as string;
+
+	// Elements
+	const $ = (id: string) => document.getElementById(id)!;
+	const loadingState = $("loading-state");
+	const notLoggedIn = $("not-logged-in");
+	const dashboardContent = $("dashboard-content");
+	const userEmail = $("user-email");
+	const planCard = $("plan-card");
+	const planBadge = $("plan-badge");
+	const planDot = $("plan-dot");
+	const planLabel = $("plan-label");
+	const manageLink = $("manage-link") as HTMLAnchorElement;
+	const usageSection = $("usage-section");
+	const usageAmount = $("usage-amount");
+	const usageFill = $("usage-fill");
+	const statsRow = $("stats-row");
+	const statResets = $("stat-resets");
+	const statResetsValue = $("stat-resets-value");
+	const statExpires = $("stat-expires");
+	const statExpiresValue = $("stat-expires-value");
+	const expiredNotice = $("expired-notice");
+	const keyCard = $("key-card");
+	const noKeyCard = $("no-key-card");
+	const keyValue = $("key-value");
+	const copyBtn = $("copy-btn");
+	const signOutBtn = $("sign-out-btn");
+
+	function formatDate(iso: string): string {
+		return new Date(iso).toLocaleDateString("en-US", {
+			month: "long",
+			day: "numeric",
+			year: "numeric",
+		});
+	}
+
+	function formatCurrency(amount: number): string {
+		return `$${amount.toFixed(2)}`;
+	}
+
+	interface KeyInfo {
+		expires: string | null;
+		spend: number;
+		max_budget: number | null;
+		budget_reset_at: string | null;
+		budget_duration: string | null;
+	}
+
+	async function fetchKeyInfo(key: string): Promise<KeyInfo | null> {
+		try {
+			const res = await fetch(`${LITELLM_URL}/key/info`, {
+				headers: { Authorization: `Bearer ${key}` },
+			});
+			if (!res.ok) return null;
+			const data = await res.json();
+			return data.info ?? data;
+		} catch {
+			return null;
+		}
+	}
+
+	function isExpired(expires: string | null): boolean {
+		if (!expires) return false;
+		return new Date(expires) < new Date();
+	}
+
+	function renderPlan(info: KeyInfo | null, hasKey: boolean) {
+		if (!hasKey) {
+			noKeyCard.style.display = "block";
+			return;
+		}
+
+		planCard.style.display = "block";
+		keyCard.style.display = "block";
+
+		if (!info) {
+			// LiteLLM unavailable — show key but no usage
+			planLabel.textContent = "Pro";
+			planDot.classList.add("dot-green");
+			return;
+		}
+
+		const expired = isExpired(info.expires);
+		const hasBudget = info.max_budget != null && info.max_budget > 0;
+		const hasExpiry = info.expires != null;
+
+		// Determine plan state
+		if (expired) {
+			planLabel.textContent = "Expired";
+			planDot.classList.add("dot-red");
+			planBadge.classList.add("badge-expired");
+			expiredNotice.style.display = "block";
+			keyCard.style.display = "none";
+		} else if (hasExpiry) {
+			planLabel.textContent = "Trial";
+			planDot.classList.add("dot-yellow");
+		} else {
+			planLabel.textContent = "Pro";
+			planDot.classList.add("dot-green");
+		}
+
+		// Usage bar
+		if (hasBudget && !expired) {
+			usageSection.style.display = "block";
+			const spend = info.spend ?? 0;
+			const budget = info.max_budget!;
+			const percent = Math.min(100, (spend / budget) * 100);
+			usageAmount.textContent = `${formatCurrency(spend)} / ${formatCurrency(budget)}`;
+			usageFill.style.width = `${percent}%`;
+
+			if (percent > 90) {
+				usageFill.classList.add("fill-warning");
+			} else if (percent > 70) {
+				usageFill.classList.add("fill-caution");
+			}
+		}
+
+		// Stats
+		if (!expired) {
+			let hasStats = false;
+
+			if (info.budget_reset_at) {
+				statResets.style.display = "block";
+				statResetsValue.textContent = formatDate(info.budget_reset_at);
+				hasStats = true;
+			}
+
+			if (hasExpiry && !expired) {
+				statExpires.style.display = "block";
+				statExpiresValue.textContent = formatDate(info.expires!);
+				hasStats = true;
+			}
+
+			if (hasStats) statsRow.style.display = "flex";
+		}
+	}
+
+	async function init() {
+		const { data: { session } } = await supabase.auth.getSession();
+
+		if (!session) {
+			loadingState.style.display = "none";
+			notLoggedIn.style.display = "flex";
+			return;
+		}
+
+		userEmail.textContent = session.user.email ?? "";
+
+		const { data } = await supabase
+			.from("user_subscriptions")
+			.select("litellm_key")
+			.eq("user_id", session.user.id)
+			.maybeSingle();
+
+		const litellmKey = data?.litellm_key as string | null;
+
+		let keyInfo: KeyInfo | null = null;
+		if (litellmKey) {
+			keyValue.textContent = litellmKey;
+			keyInfo = await fetchKeyInfo(litellmKey);
+		}
+
+		loadingState.style.display = "none";
+		dashboardContent.style.display = "block";
+
+		renderPlan(keyInfo, !!litellmKey);
+	}
+
+	// Copy button
+	copyBtn.addEventListener("click", async () => {
+		const key = keyValue.textContent ?? "";
+		await navigator.clipboard.writeText(key);
+		const copyIcon = $("copy-icon");
+		const checkIcon = $("check-icon");
+		const copyText = $("copy-text");
+		copyIcon.style.display = "none";
+		checkIcon.style.display = "block";
+		copyText.textContent = "Copied!";
+		setTimeout(() => {
+			copyIcon.style.display = "block";
+			checkIcon.style.display = "none";
+			copyText.textContent = "Copy";
+		}, 2000);
+	});
+
+	// Sign out
+	signOutBtn.addEventListener("click", async () => {
+		await supabase.auth.signOut();
+		window.location.href = "/login";
+	});
+
+	init();
+</script>
+
 <style>
-	.dashboard-placeholder {
-		max-width: 400px;
-		margin: 4rem auto;
+	.dashboard {
+		max-width: 600px;
+		margin: 0 auto;
+		padding-top: 1rem;
+	}
+
+	/* ── Center states (loading, not logged in) ── */
+	.center-state {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 4rem 2rem;
 		text-align: center;
 	}
 
-	.dashboard-placeholder h1 {
-		font-size: 1.75rem;
+	.center-state h1 {
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.center-state p {
+		color: var(--sl-color-gray-3);
+		margin-bottom: 1.5rem;
+	}
+
+	.state-icon {
+		font-size: 2.5rem;
 		margin-bottom: 1rem;
 	}
 
-	.dashboard-placeholder p {
-		color: var(--sl-color-gray-3);
-		margin-bottom: 2rem;
+	.spinner {
+		width: 2rem;
+		height: 2rem;
+		border: 2px solid var(--sl-color-gray-5);
+		border-top-color: var(--sl-color-accent);
+		border-radius: 50%;
+		animation: spin 0.8s linear infinite;
+		margin-bottom: 1rem;
 	}
 
+	@keyframes spin {
+		to { transform: rotate(360deg); }
+	}
+
+	/* ── Dashboard header ── */
+	.dashboard-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 1.5rem;
+	}
+
+	.dashboard-header h1 {
+		font-size: 1.75rem;
+		margin-bottom: 0.125rem;
+	}
+
+	.user-email {
+		color: var(--sl-color-gray-3);
+		font-size: 0.875rem;
+	}
+
+	/* ── Cards ── */
+	.card {
+		background: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: var(--tr-radius-md);
+		padding: 1.5rem;
+		margin-bottom: 1rem;
+	}
+
+	/* ── Plan card ── */
+	.plan-card {
+		border-color: var(--sl-color-accent);
+		background: linear-gradient(135deg, color-mix(in srgb, var(--sl-color-accent) 8%, var(--sl-color-gray-6)), var(--sl-color-gray-6));
+	}
+
+	.plan-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.25rem;
+	}
+
+	.plan-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 1.125rem;
+		font-weight: 600;
+	}
+
+	.plan-dot {
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		display: inline-block;
+	}
+
+	.dot-green {
+		background: var(--tr-color-success);
+		box-shadow: 0 0 6px color-mix(in srgb, var(--tr-color-success) 50%, transparent);
+	}
+
+	.dot-yellow {
+		background: #eab308;
+		box-shadow: 0 0 6px color-mix(in srgb, #eab308 50%, transparent);
+	}
+
+	.dot-red {
+		background: var(--tr-color-error);
+		box-shadow: 0 0 6px color-mix(in srgb, var(--tr-color-error) 50%, transparent);
+	}
+
+	.badge-expired {
+		color: var(--tr-color-error);
+	}
+
+	.manage-link {
+		font-size: 0.8125rem;
+		color: var(--sl-color-accent-high);
+	}
+
+	/* ── Usage bar ── */
+	.usage-section {
+		margin-bottom: 1.25rem;
+	}
+
+	.usage-label {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 0.5rem;
+		font-size: 0.8125rem;
+		color: var(--sl-color-gray-3);
+	}
+
+	.usage-amount {
+		font-weight: 600;
+		color: var(--sl-color-gray-2);
+		font-size: 0.875rem;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.usage-bar {
+		height: 0.5rem;
+		background: var(--sl-color-gray-5);
+		border-radius: var(--tr-radius-pill);
+		overflow: hidden;
+	}
+
+	.usage-fill {
+		height: 100%;
+		background: var(--sl-color-accent);
+		border-radius: var(--tr-radius-pill);
+		transition: width 0.6s ease-out;
+		width: 0%;
+	}
+
+	.fill-caution {
+		background: #eab308;
+	}
+
+	.fill-warning {
+		background: var(--tr-color-error);
+	}
+
+	/* ── Stats row ── */
+	.stats-row {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.stat {
+		display: flex;
+		flex-direction: column;
+		gap: 0.125rem;
+	}
+
+	.stat-label {
+		font-size: 0.75rem;
+		color: var(--sl-color-gray-4);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-weight: 500;
+	}
+
+	.stat-value {
+		font-size: 0.875rem;
+		color: var(--sl-color-gray-2);
+		font-weight: 500;
+	}
+
+	/* ── Expired notice ── */
+	.expired-notice {
+		text-align: center;
+		padding: 1rem 0 0.5rem;
+	}
+
+	.expired-notice p {
+		color: var(--sl-color-gray-3);
+		margin-bottom: 1rem;
+		font-size: 0.9375rem;
+	}
+
+	/* ── Key card ── */
+	.key-card h2 {
+		font-size: 0.875rem;
+		color: var(--sl-color-gray-3);
+		margin-bottom: 0.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.key-row {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.key-value {
+		flex: 1;
+		background: var(--sl-color-black);
+		padding: 0.75rem 1rem;
+		border-radius: var(--tr-radius-sm);
+		font-size: 0.8125rem;
+		color: var(--sl-color-accent-high);
+		word-break: break-all;
+		border: 1px solid var(--sl-color-gray-5);
+		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+		line-height: 1.5;
+	}
+
+	.btn-copy {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
+		padding: 0.75rem 1rem;
+		background: var(--sl-color-gray-5);
+		color: var(--sl-color-gray-2);
+		border: none;
+		border-radius: var(--tr-radius-sm);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		cursor: pointer;
+		white-space: nowrap;
+		transition: background 0.15s, color 0.15s;
+	}
+
+	.btn-copy:hover {
+		background: var(--sl-color-accent);
+		color: var(--sl-color-white);
+	}
+
+	.key-hint {
+		color: var(--sl-color-gray-4);
+		font-size: 0.8125rem;
+	}
+
+	.key-hint strong {
+		color: var(--sl-color-gray-2);
+	}
+
+	/* ── No key card ── */
+	.no-key-card {
+		text-align: center;
+		padding: 2.5rem 1.5rem;
+	}
+
+	.no-key-card h2 {
+		font-size: 1.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.no-key-card p {
+		color: var(--sl-color-gray-3);
+		margin-bottom: 1.5rem;
+		font-size: 0.9375rem;
+		max-width: 360px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/* ── Buttons ── */
 	.btn {
 		display: inline-block;
 		padding: 0.75rem 1.5rem;
@@ -36,6 +601,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		border-radius: var(--tr-radius-sm);
 		font-size: 1rem;
 		font-weight: 500;
+		cursor: pointer;
 		text-decoration: none;
 		transition: filter 0.2s;
 	}
@@ -43,5 +609,53 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	.btn:hover {
 		filter: brightness(1.1);
 		text-decoration: none;
+	}
+
+	.btn-sm {
+		padding: 0.5rem 1.25rem;
+		font-size: 0.875rem;
+	}
+
+	.btn-text {
+		background: none;
+		border: 1px solid var(--sl-color-gray-5);
+		color: var(--sl-color-gray-3);
+		font-size: 0.8125rem;
+		cursor: pointer;
+		padding: 0.375rem 0.75rem;
+		border-radius: var(--tr-radius-sm);
+		transition: color 0.15s, border-color 0.15s;
+	}
+
+	.btn-text:hover {
+		color: var(--sl-color-white);
+		border-color: var(--sl-color-gray-4);
+	}
+
+	/* ── Responsive ── */
+	@media (max-width: 480px) {
+		.dashboard {
+			padding-left: 0.5rem;
+			padding-right: 0.5rem;
+		}
+
+		.plan-header {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
+
+		.stats-row {
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
+		.key-row {
+			flex-direction: column;
+		}
+
+		.btn-copy {
+			align-self: flex-end;
+		}
 	}
 </style>
