@@ -223,10 +223,6 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		});
 	}
 
-	function formatCurrency(amount: number): string {
-		return `$${amount.toFixed(2)}`;
-	}
-
 	interface KeyInfo {
 		expires: string | null;
 		spend: number;
@@ -338,29 +334,17 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 				return;
 		}
 
-		// Usage bar
+		// Usage bar — show as percentage only, never dollars
 		const budget = info.max_budget ?? 0;
 		if (budget > 0) {
 			usageSection.style.display = "block";
 			const spend = info.spend ?? 0;
-			const percent = Math.min(100, (spend / budget) * 100);
+			const percent = Math.min(100, Math.round((spend / budget) * 100));
 
-			if (plan === "trial") {
-				// Show as "~X / ~50 generations" for trial
-				const totalGens = Math.round(budget / 0.01); // ~$0.01 per gen
-				const usedGens = Math.round(spend / 0.01);
-				$("usage-section").querySelector("span")!.textContent =
-					"Free generations used";
-				usageAmount.textContent = `~${usedGens} / ~${totalGens}`;
-			} else {
-				usageAmount.textContent = `${formatCurrency(
-					spend
-				)} / ${formatCurrency(budget)}`;
-			}
-
+			usageAmount.textContent = `${percent}%`;
 			usageFill.style.width = `${percent}%`;
-			if (percent > 90) usageFill.classList.add("fill-warning");
-			else if (percent > 70) usageFill.classList.add("fill-caution");
+			if (percent >= 100) usageFill.classList.add("fill-warning");
+			else if (percent > 80) usageFill.classList.add("fill-caution");
 		}
 
 		// Stats row
@@ -371,11 +355,10 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 			(plan === "pro" || plan === "pro-exceeded")
 		) {
 			statResets.style.display = "block";
-			statResetsValue.textContent = formatDate(info.budget_reset_at);
-			if (plan === "pro-exceeded") {
-				statResetsValue.textContent =
-					formatDate(info.budget_reset_at) + " (budget exceeded)";
-			}
+			statResetsValue.textContent =
+				plan === "pro-exceeded"
+					? formatDate(info.budget_reset_at) + " (limit reached)"
+					: formatDate(info.budget_reset_at);
 			hasStats = true;
 		}
 
