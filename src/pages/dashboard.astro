@@ -24,7 +24,6 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 					<h1>Dashboard</h1>
 					<p class="user-email" id="user-email"></p>
 				</div>
-				<button id="sign-out-btn" class="btn-text">Sign Out</button>
 			</div>
 
 			<!-- Plan card -->
@@ -34,8 +33,10 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						<span class="plan-dot" id="plan-dot"></span>
 						<span id="plan-label">Pro</span>
 					</div>
-					<a href="/pricing" class="manage-link" id="manage-link"
-						>Manage Subscription</a
+					<a
+						href="https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0"
+						class="manage-link"
+						id="manage-link">Manage Subscription</a
 					>
 				</div>
 
@@ -76,7 +77,10 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						Your key has expired. Subscribe to continue using AI
 						features.
 					</p>
-					<a href="/pricing" class="btn btn-sm">View Plans</a>
+					<a
+						href="https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0"
+						class="btn btn-sm">Upgrade to Pro</a
+					>
 				</div>
 			</div>
 
@@ -144,7 +148,10 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						You've used all your free AI generations. Subscribe to
 						continue.
 					</p>
-					<a href="/pricing" class="btn">Subscribe — $8/mo</a>
+					<a
+						href="https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0"
+						class="btn">Subscribe — $7.99/mo</
+					>
 				</div>
 			</div>
 
@@ -208,8 +215,6 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	const provisioningCard = $("provisioning-card");
 	const keyValue = $("key-value");
 	const copyBtn = $("copy-btn");
-	const signOutBtn = $("sign-out-btn");
-
 	function formatDate(iso: string): string {
 		return new Date(iso).toLocaleDateString("en-US", {
 			month: "long",
@@ -248,7 +253,13 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		return new Date(expires) < new Date();
 	}
 
-	type PlanType = "pro" | "trial" | "expired" | "trial-ended" | "blocked";
+	type PlanType =
+		| "pro"
+		| "pro-exceeded"
+		| "trial"
+		| "expired"
+		| "trial-ended"
+		| "blocked";
 
 	function detectPlan(info: KeyInfo): PlanType {
 		const expired = isExpired(info.expires);
@@ -262,7 +273,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		const hasBudgetDuration = !!info.budget_duration;
 
 		// Pro: has budget_duration (monthly reset)
-		if (hasBudgetDuration) return budgetExceeded ? "pro" : "pro"; // Pro shows "exceeded, resets X"
+		if (hasBudgetDuration) return budgetExceeded ? "pro-exceeded" : "pro";
 
 		// Trial: no budget_duration (one-time budget)
 		return budgetExceeded ? "trial-ended" : "trial";
@@ -297,8 +308,11 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		// Badge
 		switch (plan) {
 			case "pro":
+			case "pro-exceeded":
 				planLabel.textContent = "Pro";
-				planDot.classList.add("dot-green");
+				planDot.classList.add(
+					plan === "pro-exceeded" ? "dot-yellow" : "dot-green"
+				);
 				manageLink.textContent = "Manage Subscription";
 				break;
 			case "trial":
@@ -352,9 +366,16 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		// Stats row
 		let hasStats = false;
 
-		if (info.budget_reset_at && plan === "pro") {
+		if (
+			info.budget_reset_at &&
+			(plan === "pro" || plan === "pro-exceeded")
+		) {
 			statResets.style.display = "block";
 			statResetsValue.textContent = formatDate(info.budget_reset_at);
+			if (plan === "pro-exceeded") {
+				statResetsValue.textContent =
+					formatDate(info.budget_reset_at) + " (budget exceeded)";
+			}
 			hasStats = true;
 		}
 
@@ -391,9 +412,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	}
 
 	async function init() {
-		const {
-			data: { session },
-		} = await supabase.auth.getSession();
+		// Refresh session first to ensure app_metadata (e.g. litellm_key) is up to date
+		const { data: refreshData } = await supabase.auth.refreshSession();
+		const session = refreshData?.session;
 
 		if (!session) {
 			window.location.href = "/login";
@@ -402,8 +423,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 		userEmail.textContent = session.user.email ?? "";
 
-		// 1. Check app_metadata for existing key (zero DB query — already in JWT)
-		let litellmKey = (session.user.app_metadata?.litellm_key as string) ?? null;
+		// 1. Check app_metadata for existing key (now guaranteed fresh from refreshSession)
+		let litellmKey =
+			(session.user.app_metadata?.litellm_key as string) ?? null;
 
 		// 2. No key → auto-provision trial
 		if (!litellmKey) {
@@ -419,6 +441,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 				noKeyCard.style.display = "block";
 				return;
 			}
+
+			// Refresh again so app_metadata has the new key on next page load
+			await supabase.auth.refreshSession();
 		} else {
 			loadingState.style.display = "none";
 			dashboardContent.style.display = "block";
@@ -446,12 +471,6 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 			checkIcon.style.display = "none";
 			copyText.textContent = "Copy";
 		}, 2000);
-	});
-
-	// Sign out
-	signOutBtn.addEventListener("click", async () => {
-		await supabase.auth.signOut();
-		window.location.href = "/login";
 	});
 
 	init();
@@ -817,22 +836,6 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	.btn-sm {
 		padding: 0.5rem 1.25rem;
 		font-size: 0.875rem;
-	}
-
-	.btn-text {
-		background: none;
-		border: 1px solid var(--sl-color-gray-5);
-		color: var(--sl-color-gray-3);
-		font-size: 0.8125rem;
-		cursor: pointer;
-		padding: 0.375rem 0.75rem;
-		border-radius: var(--tr-radius-sm);
-		transition: color 0.15s, border-color 0.15s;
-	}
-
-	.btn-text:hover {
-		color: var(--sl-color-white);
-		border-color: var(--sl-color-gray-4);
 	}
 
 	/* ── Responsive ── */
