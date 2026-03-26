@@ -7,9 +7,9 @@ const plans = [
 		price: "$0",
 		period: "no card required",
 		description:
-			"Sign up to get 50–100 free AI generations depending on usage. Try before you subscribe.",
+			"Sign up to try AI flashcard generation for free. No setup, no credit card.",
 		features: [
-			"50–100 one-time AI generations",
+			"~350–700 flashcards one-time",
 			"No API key or setup needed",
 			"No credit card required",
 		],
@@ -25,7 +25,7 @@ const plans = [
 		description:
 			"Expertly crafted prompts optimized for effective learning. Beautiful, polished experience — no setup, no hassle.",
 		features: [
-			"750–1,000 AI generations per month",
+			"~5,000–7,000 flashcards per month",
 			"Perfectly tuned prompts for learning",
 			"Language learning method coming soon",
 			"No API key or setup needed",
@@ -43,7 +43,7 @@ const plans = [
 		description:
 			"Use your own OpenRouter API key and prompts. Full control — you manage everything yourself.",
 		features: [
-			"Unlimited AI generations",
+			"Unlimited flashcard generation",
 			"Use any supported model",
 			"Bring your own prompts",
 			"Pay OpenRouter directly",
@@ -57,20 +57,20 @@ const plans = [
 
 const faqs = [
 	{
-		q: "How many generations do I get?",
-		a: "The Pro plan includes 750–1,000 AI generations per month depending on how intensively you use it. Each generation creates a set of flashcards from your selected text. In practice, most users never hit the limit.",
+		q: "How many flashcards can I create?",
+		a: "Pro includes ~5,000–7,000 flashcards per month. Each generation creates ~7-15 flashcards on average depending on how much text you select — a paragraph gives fewer cards, a full page gives more. Benchmarked across models like Gemini 3 Flash, GPT-5.1, and Qwen 3.5. In practice, most users never come close to the limit.",
 	},
 	{
 		q: "What's the difference between Pro and BYOK?",
-		a: "Pro gives you perfectly composed prompts optimized for effective learning, a polished no-setup experience, and upcoming features like a dedicated language learning method. BYOK gives you full control — bring your own OpenRouter API key and prompts, but you manage everything yourself.",
+		a: "Pro gives you perfectly composed prompts benchmarked across 10+ models and optimized for effective learning, a polished no-setup experience, and upcoming features like a dedicated language learning method. BYOK gives you full control — bring your own OpenRouter API key and prompts, but you manage everything yourself.",
 	},
 	{
 		q: "Can I still use my own API key?",
 		a: "Absolutely! The BYOK tier lets you use your own OpenRouter API key with no restrictions. Pro is for users who want expertly crafted prompts and a managed, no-setup experience.",
 	},
 	{
-		q: "What happens when I run out of generations?",
-		a: "You'll see a notification in the plugin. You can upgrade to the Pro plan ($8/month), wait for the monthly reset, or switch to your own OpenRouter API key.",
+		q: "What happens when I run out?",
+		a: "You'll see a notification in the plugin. You can upgrade to Pro ($8/month), wait for the monthly reset, or switch to your own OpenRouter API key.",
 	},
 	{
 		q: "Can I cancel anytime?",
@@ -82,7 +82,7 @@ const faqs = [
 	},
 	{
 		q: "What's the free trial?",
-		a: "Sign up and your trial key is generated instantly — no payment required. You get 50–100 AI generations to try True Recall. After that, continue with Pro at $8/month or bring your own API key for free.",
+		a: "Sign up and your trial key is generated instantly — no payment required. You get ~350–700 flashcards to try True Recall. After that, continue with Pro at $8/month or bring your own API key for free.",
 	},
 ];
 ---
@@ -131,8 +131,9 @@ const faqs = [
 		</div>
 
 		<p class="note">
-			Generation counts are approximate and vary based on content length
-			and generation intensity.
+			Flashcard counts are approximate. The number of flashcards per
+			generation depends on how much text you select and how dense the
+			content is — select a whole note and expect significantly more cards.
 		</p>
 	</div>
 

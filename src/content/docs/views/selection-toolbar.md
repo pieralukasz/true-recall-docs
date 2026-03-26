@@ -94,7 +94,6 @@ Whole-note generation is the least optimal way to create personalized flashcards
 For the most accurate results, **generate from selections** instead. Highlighting specific passages lets you control exactly what becomes a card, and the output is noticeably more precise.
 :::
 
-You can control how many cards the AI produces per note in **Settings → AI → Note generation density** — choose between Sparse, Balanced, or Dense (see [Generation Settings](#generation-settings) below).
 
 ## What AI Generates
 
@@ -127,7 +126,6 @@ Configure AI behavior in Settings → AI:
 | Setting | Description |
 |---------|-------------|
 | **Language** | Output language (auto-detect or specific) |
-| **Density** | How many cards to generate — Sparse, Balanced, or Dense |
 
 ### Custom Prompt
 
@@ -156,4 +154,4 @@ Select multiple paragraphs at once. AI generates multiple cards covering differe
 | Toolbar not appearing | Check Settings → AI → Selection toolbar is enabled |
 | AI buttons grayed out | Configure an API key or subscription in Settings → AI |
 | Generation fails | Check API key validity and network connection |
-| Poor card quality | Try a different model, or adjust density settings |
+| Poor card quality | Try a different model or adjust temperature in Settings → AI |

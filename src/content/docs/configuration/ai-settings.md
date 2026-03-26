@@ -39,7 +39,6 @@ Settings that control how AI generates flashcards:
 | Setting | Description |
 |---------|-------------|
 | **Generation language** | Target language for generated cards. Default: **Auto** (detects from input content). You can force a specific language. |
-| **Note generation density** | How many cards to generate from a whole note — Sparse, Balanced, or Dense |
 | **Selection toolbar** | Show or hide the floating [Selection Toolbar](/views/selection-toolbar/) when text is selected. Default: **On** |
 
 ### Generation Prompt

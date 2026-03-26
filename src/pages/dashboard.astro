@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const LITELLM_URL = "https://ai.truerecall.app";
+const POLAR_CHECKOUT_URL = "https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0";
 const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 ---
@@ -34,9 +35,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						<span id="plan-label">Pro</span>
 					</div>
 					<a
-						href="https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0"
+						href="#"
 						class="manage-link"
-						id="manage-link">Manage Subscription</a
+						id="manage-link">Manage Subscription</
 					>
 				</div>
 
@@ -78,8 +79,8 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						features.
 					</p>
 					<a
-						href="https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0"
-						class="btn btn-sm">Upgrade to Pro</a
+						href="#"
+						class="btn btn-sm polar-checkout-link">Upgrade to Pro</
 					>
 				</div>
 			</div>
@@ -149,8 +150,8 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						continue.
 					</p>
 					<a
-						href="https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0"
-						class="btn">Subscribe — $7.99/mo</a
+						href="#"
+						class="btn polar-checkout-link">Subscribe — $7.99/mo</
 					>
 				</div>
 			</div>
@@ -177,8 +178,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	</div>
 </BaseLayout>
 
-<script define:vars={{ LITELLM_URL, SUPABASE_URL, SUPABASE_ANON_KEY }}>
+<script define:vars={{ LITELLM_URL, POLAR_CHECKOUT_URL, SUPABASE_URL, SUPABASE_ANON_KEY }}>
 	window.__LITELLM_URL = LITELLM_URL;
+	window.__POLAR_CHECKOUT_URL = POLAR_CHECKOUT_URL;
 	window.__SUPABASE_URL = SUPABASE_URL;
 	window.__SUPABASE_ANON_KEY = SUPABASE_ANON_KEY;
 </script>
@@ -187,8 +189,51 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	import { supabase } from "../lib/supabase";
 
 	const LITELLM_URL = (window as any).__LITELLM_URL as string;
+	const POLAR_CHECKOUT_URL = (window as any).__POLAR_CHECKOUT_URL as string;
 	const SUPABASE_URL = (window as any).__SUPABASE_URL as string;
 	const SUPABASE_ANON_KEY = (window as any).__SUPABASE_ANON_KEY as string;
+
+	function buildCheckoutUrl(userId: string, email?: string): string {
+		const url = new URL(POLAR_CHECKOUT_URL);
+		url.searchParams.set("metadata[supabase_user_id]", userId);
+		if (email) url.searchParams.set("customer_email", email);
+		return url.toString();
+	}
+
+	function setCheckoutLinks(userId: string, email?: string) {
+		const url = buildCheckoutUrl(userId, email);
+		document.querySelectorAll<HTMLAnchorElement>(".polar-checkout-link").forEach((a) => {
+			a.href = url;
+		});
+	}
+
+	async function openPortalSession(accessToken: string): Promise<void> {
+		manageLink.textContent = "Opening…";
+		manageLink.style.pointerEvents = "none";
+		try {
+			const res = await fetch(
+				`${SUPABASE_URL}/functions/v1/create-portal-session`,
+				{
+					method: "POST",
+					headers: {
+						Authorization: `Bearer ${accessToken}`,
+						"Content-Type": "application/json",
+						apikey: SUPABASE_ANON_KEY,
+					},
+				}
+			);
+			if (res.ok) {
+				const data = await res.json();
+				if (data.customer_portal_url) {
+					window.location.href = data.customer_portal_url;
+					return;
+				}
+			}
+			window.location.href = "https://polar.sh/true-recall/portal";
+		} catch {
+			window.location.href = "https://polar.sh/true-recall/portal";
+		}
+	}
 
 	// Elements
 	const $ = (id: string) => document.getElementById(id)!;
@@ -301,7 +346,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 		planCard.style.display = "block";
 
-		// Badge
+		// Badge + manage link behavior
 		switch (plan) {
 			case "pro":
 			case "pro-exceeded":
@@ -310,11 +355,17 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 					plan === "pro-exceeded" ? "dot-yellow" : "dot-green"
 				);
 				manageLink.textContent = "Manage Subscription";
+				manageLink.addEventListener("click", async (e) => {
+					e.preventDefault();
+					const { data: sd } = await supabase.auth.getSession();
+					if (sd?.session) await openPortalSession(sd.session.access_token);
+				});
 				break;
 			case "trial":
 				planLabel.textContent = "Free Trial";
 				planDot.classList.add("dot-yellow");
 				manageLink.textContent = "Upgrade to Pro";
+				manageLink.classList.add("polar-checkout-link");
 				break;
 			case "expired":
 				planLabel.textContent = "Expired";
@@ -405,6 +456,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		}
 
 		userEmail.textContent = session.user.email ?? "";
+		setCheckoutLinks(session.user.id, session.user.email);
 
 		// 1. Check app_metadata for existing key (now guaranteed fresh from refreshSession)
 		let litellmKey =
