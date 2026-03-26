@@ -355,3 +355,12 @@ const faqs = [
 		}
 	}
 </style>
+
+<script>
+	// Redirect pricing CTAs to dashboard for logged-in users
+	if (document.documentElement.classList.contains("is-logged-in")) {
+		document.querySelectorAll<HTMLAnchorElement>('a.btn[href="/login"]').forEach((a) => {
+			a.href = "/dashboard";
+		});
+	}
+</script>

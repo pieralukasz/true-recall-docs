@@ -17,14 +17,6 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 			<p>Loading your dashboard…</p>
 		</div>
 
-		<!-- Not logged in -->
-		<div id="not-logged-in" class="center-state" style="display:none">
-			<div class="state-icon">🔒</div>
-			<h1>Sign in to continue</h1>
-			<p>You need to sign in to view your dashboard.</p>
-			<a href="/login" class="btn">Sign In</a>
-		</div>
-
 		<!-- Dashboard content -->
 		<div id="dashboard-content" style="display:none">
 			<div class="dashboard-header">
@@ -194,7 +186,6 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	// Elements
 	const $ = (id: string) => document.getElementById(id)!;
 	const loadingState = $("loading-state");
-	const notLoggedIn = $("not-logged-in");
 	const dashboardContent = $("dashboard-content");
 	const userEmail = $("user-email");
 	const planCard = $("plan-card");
@@ -405,8 +396,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		} = await supabase.auth.getSession();
 
 		if (!session) {
-			loadingState.style.display = "none";
-			notLoggedIn.style.display = "flex";
+			window.location.href = "/login";
 			return;
 		}
 

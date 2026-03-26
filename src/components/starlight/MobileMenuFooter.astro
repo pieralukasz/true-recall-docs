@@ -4,10 +4,26 @@ import ThemeSelect from "virtual:starlight/components/ThemeSelect";
 ---
 
 <div class="mobile-preferences sl-flex">
-	<a href="/login" class="auth-btn" data-auth-btn>Sign In</a>
+	<a href="/login" class="auth-btn" data-auth-btn>Sign Up</a>
+	<div class="auth-avatar-wrap" data-auth-avatar>
+		<div class="auth-avatar">
+			<span data-auth-initial>U</span>
+		</div>
+		<div class="auth-dropdown" style="display:none">
+			<a href="/dashboard" class="auth-dropdown-item">Dashboard</a>
+			<button class="auth-dropdown-item" data-auth-signout>Log out</button>
+		</div>
+	</div>
 	<ThemeSelect />
 	<LanguageSelect />
 </div>
+
+<script is:inline>
+	(function(){try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.startsWith("sb-")&&k.endsWith("-auth-token")){var r=localStorage.getItem(k);if(r){var p=JSON.parse(r);if(p&&(p.access_token||p.user)){document.documentElement.classList.add("is-logged-in");break}}}}}catch(e){}})();
+</script>
+<script>
+	import "../../lib/auth-ui";
+</script>
 
 <style>
 	@layer starlight.core {
@@ -38,6 +54,58 @@ import ThemeSelect from "virtual:starlight/components/ThemeSelect";
 		}
 		.auth-btn:hover {
 			filter: brightness(1.15);
+			color: var(--sl-color-white);
+		}
+
+		:global(html.is-logged-in) .auth-btn { display: none; }
+
+		.auth-avatar-wrap { display: none; position: relative; margin-inline-end: auto; }
+		:global(html.is-logged-in) .auth-avatar-wrap { display: flex; }
+
+		.auth-avatar {
+			width: 28px;
+			height: 28px;
+			border-radius: 50%;
+			background: var(--sl-color-accent);
+			color: var(--sl-color-white);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 600;
+			font-size: 0.75rem;
+			cursor: pointer;
+			user-select: none;
+		}
+
+		.auth-dropdown {
+			position: absolute;
+			bottom: calc(100% + 8px);
+			left: 0;
+			background: var(--sl-color-gray-6);
+			border: 1px solid var(--sl-color-gray-5);
+			border-radius: 8px;
+			min-width: 160px;
+			padding: 0.25rem 0;
+			z-index: 999;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		}
+
+		.auth-dropdown-item {
+			display: block;
+			width: 100%;
+			padding: 0.5rem 1rem;
+			text-align: left;
+			color: var(--sl-color-gray-1);
+			background: none;
+			border: none;
+			font-size: 0.85rem;
+			font-family: inherit;
+			cursor: pointer;
+			text-decoration: none;
+		}
+		.auth-dropdown-item:hover {
+			background: var(--sl-color-gray-5);
+			text-decoration: none;
 			color: var(--sl-color-white);
 		}
 	}
