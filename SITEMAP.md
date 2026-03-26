@@ -42,7 +42,7 @@ All paths are relative to `src/content/docs/`.
 ## Views & Panels (8 pages)
 
 - `views/dashboard.md` — Daily command center for projects and workload
-- `views/selection-toolbar.md` — AI-powered floating toolbar: generate Basic, Cloze, or Auto cards from any text selection
+- `views/selection-toolbar.md` — AI-powered floating toolbar: generate flashcards, highlight, copy, or edit from any text selection
 - `views/flashcard-panel.md` — Main sidebar panel for card management
 - `views/flashcard-editor.md` — Form-based modal for creating and editing flashcards
 - `views/card-browser.md` — Search, filter, and bulk-manage cards with query language and facets

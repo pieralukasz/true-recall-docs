@@ -24,22 +24,11 @@ Most workflows combine AI generation for bulk creation with the Flashcard Editor
 
 ## AI Generation
 
-The [Selection Toolbar](/views/selection-toolbar/) appears when you select text in any note. It can generate:
-
-| Button    | What it creates                                                                 |
-| --------- | ------------------------------------------------------------------------------- |
-| **Basic** | Question-and-answer cards                                                       |
-| **Cloze** | Fill-in-the-blank cards                                                         |
-| **Auto**  | AI picks the best format for each fact                                          |
-| **IO**    | [Image occlusion](/creation/image-occlusion/) cards (when an image is selected) |
+The [Selection Toolbar](/views/selection-toolbar/) appears when you select text in any note. Click **Flashcards** to generate cards with AI — the AI analyzes the content and picks the best format for each fact (Basic, Cloze, or Reversed). The **IO** button appears when an image is in the selection for [image occlusion](/creation/image-occlusion/) cards.
 
 You can also generate cards from an entire note at once — open the Command Palette (`Cmd/Ctrl + P`) and run "Generate flashcards from note."
 
-:::tip[Start with Basic]
-**Basic** is the best default for meaningful learning. It forces you to formulate a clear question and a precise answer — which is exactly the kind of active recall that builds lasting knowledge. Auto and Cloze are available if you want them, but I recommend starting with Basic and only branching out once you've developed a feel for what makes a good card. See the [author's note on Cloze](/creation/note-types/#cloze) for more on this.
-:::
-
-AI generation requires either an API key or a [True Recall subscription](https://truerecall.app). Configure your AI settings in `Settings → AI`. See [Selection Toolbar](/views/selection-toolbar/) for model options, custom prompts, and generation density settings.
+AI generation requires an API key. Configure your AI settings in `Settings → AI`. See [Selection Toolbar](/views/selection-toolbar/) for custom prompts and generation density settings.
 
 ## The Flashcard Editor
 

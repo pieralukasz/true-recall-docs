@@ -126,7 +126,7 @@ def {{c1::greet}}(name):
 
 ## Converting Text to Cloze
 
-Select text in your note and use the [Selection Toolbar](/views/selection-toolbar/) → **Cloze** to have AI generate cloze markers automatically. Or wrap terms manually: `{{c1::term}}`.
+Select text in your note and use the [Selection Toolbar](/views/selection-toolbar/) → **Flashcards** to have AI generate cloze cards automatically when the content fits the cloze format. Or wrap terms manually: `{{c1::term}}`.
 
 ## Tips for Good Cloze Cards
 

@@ -22,7 +22,7 @@ The fastest way is with the **Selection Toolbar**:
 1. Open any note in your vault
 2. Select a paragraph of text
 3. A toolbar appears above your selection
-4. Click **Basic** — AI generates a flashcard
+4. Click **Flashcards** — AI generates a flashcard
 
 The generated card is added directly to your note in block format and immediately appears in the **[Flashcard Panel](/views/flashcard-panel/)** where you can manage and review it:
 

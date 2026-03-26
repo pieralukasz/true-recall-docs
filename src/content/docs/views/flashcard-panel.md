@@ -7,9 +7,6 @@ description: The main sidebar panel for managing flashcards per note with quick 
 ---
 
 :::caution[My Notes]
-
-- I've changed header, now it has an action button to start review. During review it shows jump to source icon.
-
 :::
 
 The **Flashcard Panel** is one of the most important views in True Recall. This sidebar automatically follows the note you're editing, showing all its flashcards, their review status, and quick actions. It's your hub for collecting new cards, managing existing ones, launching reviews, and generating cards with AI.
@@ -128,7 +125,6 @@ Right-click any card (or tap the three-dot icon) to open the context menu:
 | Move                            | Transfer card to a different source note                               |
 | Change type                     | Convert card to a different note type (e.g., Basic → Cloze)            |
 | Make reversed / Remove reversed | Toggle a reversed pair for Basic cards. Not available for Cloze or IO. |
-| AI Rewrite                      | Use AI to rewrite or split the card into better cards                  |
 | Forget                          | Reset FSRS scheduling to New state and clear review history            |
 | Suspend / Unsuspend             | Toggle whether the card appears in review sessions                     |
 | Delete                          | Permanently remove the card                                            |
@@ -154,7 +150,6 @@ A **selection toolbar** replaces the header, showing the selected count and bulk
 | Select All       | Select every card in the current note             |
 | Move             | Move all selected cards to another note           |
 | Change note type | Convert selected cards to a different type        |
-| AI Rewrite       | AI rewrite all selected cards                     |
 | Suspend          | Suspend all selected cards                        |
 | Unsuspend        | Unsuspend all selected cards                      |
 | Forget           | Reset scheduling for all selected cards           |
@@ -188,10 +183,6 @@ Use **More menu → Generate** or the empty state button to generate flashcards 
 ### Generate from Highlights
 
 Use **More menu → Generate from highlights** to create cards only from `==highlighted==` text in the note. Highlights already covered by existing cards are automatically skipped — this means you won't generate duplicate flashcards from the same highlights. This is one of the most efficient ways to create flashcards in True Recall.
-
-### AI Rewrite
-
-Right-click any card → **AI Rewrite** to have the AI improve, rewrite, or split a card into multiple better cards. Also available as a bulk action in selection mode.
 
 ## Panel Sync
 

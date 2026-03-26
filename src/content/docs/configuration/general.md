@@ -10,6 +10,14 @@ description: Configure True Recall's review interface, editor integration, day b
 
 **True Recall's** general settings control the review experience, editor features, and when your study day rolls over. Configure in `Settings → True Recall → General`.
 
+## True Recall Pro
+
+Enter your Pro key to unlock premium features. Get your key from [truerecall.app/dashboard](https://truerecall.app/dashboard).
+
+| Setting | Description |
+|---------|-------------|
+| **Pro Key** | Your True Recall Pro license key. Shows activation status after entering. |
+
 ## Review Interface
 
 | Setting | Options | Description |
@@ -19,6 +27,7 @@ description: Configure True Recall's review interface, editor integration, day b
 | **Show header stats** | On / Off | Badge counts (New, Learn, Due) in review header |
 | **Show next review time** | On / Off | Predicted intervals ("8d", "21d") on rating buttons |
 | **Continuous custom reviews** | On / Off | Show "Next Session" button after finishing a custom session |
+| **Ignore daily limits for note study** | On / Off | When studying a specific note, bypass the preset's daily new/review limits |
 | **Default type-in mode** | Off / Diff / AI | Type-in mode for new review sessions |
 
 :::note

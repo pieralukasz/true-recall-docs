@@ -21,26 +21,29 @@ The **Dashboard** is your command center. It shows every note that has flashcard
 
 ## Layout
 
-```
-+===========================================================+
-|  [Projects] [Notes] [Orphaned]         [🔍 Search...] [Archived]  |
-+===========================================================+
-|                                                           |
-|  ▶ Biology Exam                         12 due  [Study]  |
-|      Chapter 3: Cell Biology             8 due           |
-|      Chapter 4: Genetics                 4 due           |
-|                                                           |
-|  ▶ Language Learning                     0 due  [Study]  |
-|      Spanish: Vocabulary                 0 due           |
-|                                                           |
-+-----------------------------------------------------------+
-|  [Get Shared]   [Import File]                            |
-+===========================================================+
-```
+The Dashboard is organized from top to bottom:
+
+1. **Today Action Bar** — due/new/learning counts, estimated study time, progress bar, and a **Review** button to start today's session
+2. **Recently Studied** — quick-access row of recently studied notes (only shown when applicable)
+3. **Tabs** — **Projects**, **Notes**, and **Orphaned** (only visible when orphaned notes exist)
+4. **Search & Archived toggle** — filter rows in real time; toggle archived items visibility
+5. **Heatmap** — a contribution-style activity graph showing your review history
+6. **Bottom Action Bar** — Get Shared and Import File buttons
 
 <!-- TODO PHOTO -->
 
-Three tabs sit at the top: **Projects**, **Notes**, and **Orphaned** (only visible when orphaned notes exist). A search bar filters rows in real time. The **Archived** chip toggles visibility of archived items.
+## Today Action Bar
+
+The bar at the top gives you an at-a-glance summary:
+
+- **Color-coded badges** showing due, new, and learning card counts
+- **Review button** — labeled "Review: X (~Ymin)" with estimated study time, or "All caught up!" when nothing is due
+- **Progress bar** — stacked horizontal bar showing the distribution of new/review/learning cards
+- **Study summary** — shows "X studied · Y min" when you've already studied today
+
+## Recently Studied
+
+When you've studied notes recently, a row of quick-access buttons appears below the Today bar. Each button shows a mini donut chart with the note's due/new/learning breakdown. Click any note to jump straight into reviewing it.
 
 ---
 
@@ -50,8 +53,8 @@ The Projects tab shows your notes organized into a hierarchy. Each project row d
 
 ### What you see
 
-- **Project row** — name, total cards due across all member notes, a **Study** button
-- **Note rows** (nested under their project) — note name, cards due in that note
+- **Project row** — name, total cards due across all member notes, estimated minutes to complete, a **Study** button
+- **Note rows** (nested under their project) — note name, cards due, estimated study time
 - **Unassigned notes** — notes with cards that don't belong to any project appear at the bottom
 
 Each row shows a color-coded due count. Green means nothing is due. Orange means some cards are due for review today.
@@ -171,6 +174,10 @@ Only archive something when you're truly certain you'll never need it again. An 
 :::
 
 ---
+
+## Heatmap
+
+At the bottom of the tab content, a contribution-style heatmap displays your review activity over time. Color intensity indicates how many cards you reviewed each day — a quick visual indicator of your study consistency.
 
 ## Bottom Action Bar
 

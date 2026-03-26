@@ -3,7 +3,7 @@ title: Selection Toolbar
 sidebar:
   label: "Selection Toolbar"
   order: 2
-description: A floating toolbar that appears when you select text — generate Basic, Cloze, or Auto cards with AI, or open the Flashcard Editor.
+description: A floating toolbar that appears when you select text — generate flashcards with AI, highlight, copy, or open the Flashcard Editor.
 ---
 
 :::caution[My Notes]
@@ -28,7 +28,7 @@ Here's the full flow for a biology lecture note:
 1. You're reading your note on cellular respiration
 2. Select a paragraph: *"The mitochondria produces ATP through a process called oxidative phosphorylation..."*
 3. The toolbar floats above the selection
-4. Click **Auto** — AI reads the passage and generates two cards: one Q&A about ATP production, one cloze about oxidative phosphorylation
+4. Click **Flashcards** — AI reads the passage and generates cards: Q&A about ATP production, cloze about oxidative phosphorylation
 5. The cards are inserted into your note as block format text
 6. The **Flashcard Panel** shows a pulsing **Collect** button — click it to add the cards to the database
 7. The cards are now scheduled for review
@@ -39,20 +39,18 @@ Total time: about 10 seconds.
 
 | Button | What It Does |
 |--------|-------------|
-| **Basic** | Generate Q&A flashcards from the selection |
-| **Cloze** | Generate fill-in-the-blank cards |
-| **Auto** | AI chooses the best format for each fact |
+| **Flashcards** | Generate flashcard(s) with AI — the AI decides the best format for each fact |
 | **IO** | Create [image occlusion](/creation/image-occlusion/) card (appears when an image is in the selection) |
-| **Edit** | Open the selection in the flashcard editor |
+| **Edit** | Open the selection in the [Flashcard Editor](/views/flashcard-editor/) |
 | **Quick+** | Instantly add as a basic flashcard (no AI) |
+| **Highlight** | Wrap selection with `==highlight==` syntax |
+| **Copy** | Copy selection to clipboard |
 
 <!-- TODO PHOTO -->
 
-### AI Buttons (Basic, Cloze, Auto)
+### Flashcards (AI Generation)
 
-These buttons send your selected text to AI, which generates one or more flashcards in `#type/<slug>` block format. The generated cards are inserted into your note.
-
-**Auto mode** is the best default — AI analyzes the content and picks the right format for each fact:
+The **Flashcards** button sends your selected text to AI, which generates one or more flashcards in `#type/<slug>` block format. The generated cards are inserted into your note. AI analyzes the content and picks the right format for each fact:
 - Definitions and explanations → Basic cards
 - Lists, sequences, and key terms → Cloze deletions
 - Term-definition pairs → Reversed cards
@@ -64,6 +62,14 @@ For when your text is already in Q&A format. Select the text, click **Quick+**, 
 ### Image Occlusion
 
 The **IO** button appears when your selection contains an image reference (`![[image.png]]` or `![alt](path)`). Click it to open the image occlusion editor.
+
+### Highlight
+
+Wraps the selected text with `==highlight==` Markdown syntax. Useful for marking passages you want to generate cards from later — you can generate cards from all highlights in a note via the [Flashcard Panel](/views/flashcard-panel/) menu → "Generate from highlights".
+
+### Copy
+
+Copies the selected text to the clipboard. The button briefly changes to "Copied!" to confirm.
 
 ## Enabling the Toolbar
 
@@ -88,7 +94,7 @@ Whole-note generation is the least optimal way to create personalized flashcards
 For the most accurate results, **generate from selections** instead. Highlighting specific passages lets you control exactly what becomes a card, and the output is noticeably more precise.
 :::
 
-You can control how many cards the AI produces per note in **Settings → AI → Note generation density** — choose between Essential, Balanced, or Comprehensive (see [Generation Settings](#generation-settings) below).
+You can control how many cards the AI produces per note in **Settings → AI → Note generation density** — choose between Sparse, Balanced, or Dense (see [Generation Settings](#generation-settings) below).
 
 ## What AI Generates
 
@@ -120,57 +126,20 @@ Configure AI behavior in Settings → AI:
 
 | Setting | Description |
 |---------|-------------|
-| **Model** | Which AI model to use (via OpenRouter or subscription) |
 | **Language** | Output language (auto-detect or specific) |
-| **Density** | How many cards to generate — Essential (~5-10/1000 words), Balanced (~15-25), or Comprehensive (~40-60) |
+| **Density** | How many cards to generate — Sparse, Balanced, or Dense |
 
-### Available Models
+### Custom Prompt
 
-| Model | Speed | Best For |
-|-------|-------|----------|
-| Gemini Flash | Fastest | Quick generation, high volume |
-| Gemini Pro | Medium | Complex or technical content |
-| GPT-4o | Medium | General use |
-| Claude Sonnet | Medium | Nuanced, conceptual content |
-| GPT-4o mini | Fast | Simple, factual cards |
+Override how AI generates cards in **Settings → AI → Generation Prompt**. There is a single generation prompt that controls all card generation. You can edit it or reset to default.
 
-### Custom Prompts
-
-Override how AI generates each card type in **Settings → AI → Custom Prompts**:
-
-| Prompt | Affects |
-|--------|---------|
-| Basic | Q&A generation |
-| Cloze | Cloze deletion generation |
-| Auto | Format selection logic |
-
-**Template variables:**
-
-| Variable | Value |
-|----------|-------|
-| `{{content}}` | The selected text |
-| `{{language}}` | Target output language |
-| `{{cardCount}}` | Suggested number of cards |
-
-Example:
-
-```
-Generate flashcards from the following content.
-Create 3-5 cards maximum. Focus on key definitions and cause-effect relationships.
-Avoid dates, proper names, and trivial facts.
-
-{{content}}
-```
+See [AI Settings](/configuration/ai-settings/) for full details on prompt customization and available variables.
 
 ## Tips
 
 ### Select Meaningful Chunks
 
 A good selection is 1-3 paragraphs covering a coherent topic. Too short (a single word) gives AI nothing to work with. Too long (an entire chapter) produces unfocused cards.
-
-### Use Auto for Mixed Content
-
-When text contains both definitions and factual statements, Auto mode picks the right format for each piece of information.
 
 ### Edit After Generation
 
