@@ -33,9 +33,9 @@ Common issues and how to fix them. If your problem isn't listed here, check the 
 
 **Symptoms:** Selection Toolbar buttons are disabled or generation fails.
 
-1. **No API key** — You need either a True Recall subscription or your own OpenRouter API key. Check `Settings → AI`.
+1. **No API key** — You need either a subscription key (from [truerecall.app/dashboard](https://truerecall.app/dashboard)) or your own OpenRouter API key. Check `Settings → AI`.
 
-2. **Budget exceeded** — If you're on a subscription, your monthly budget may be exhausted. The system tries to fall back to your OpenRouter key (if configured). Check the error message.
+2. **Budget exceeded** — Free trial has a one-time budget (~350-700 cards). Pro resets monthly. Check usage on your [dashboard](https://truerecall.app/dashboard). You can upgrade to Pro or add an OpenRouter key as fallback.
 
 3. **Model unavailable** — Some models may be temporarily unavailable. Try a different model in `Settings → AI → Model`.
 

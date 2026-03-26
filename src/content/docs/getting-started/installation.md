@@ -41,11 +41,11 @@ After enabling True Recall:
 1. **AI Configuration** (Optional) — AI features require either a True Recall account or your own API key. You have two options:
 
    **Option A — True Recall account (recommended for new users)**
-   1. Visit [truerecall.app](https://truerecall.app) and create a free account
-   2. You'll receive free credits to try AI features — no payment needed upfront
-   3. Copy your subscription key from the dashboard (format: `tr-xxxxxxxxxxxx`)
-   4. In Obsidian: Settings → True Recall → AI → paste your key into **Subscription key**
-   5. After testing, decide whether to continue with a paid plan
+   1. Visit [truerecall.app/login](https://truerecall.app/login) and sign in with your email
+   2. A free trial key is generated automatically on the [dashboard](https://truerecall.app/dashboard)
+   3. Copy your key from the dashboard
+   4. In Obsidian: `Settings → True Recall → AI → Pro Key` — paste your key
+   5. After testing, upgrade to Pro ($8/mo) from the dashboard or bring your own OpenRouter key
 
    **Option B — OpenRouter API key**
    1. Get an API key from [openrouter.ai](https://openrouter.ai)

@@ -6,6 +6,9 @@ All paths are relative to `src/content/docs/`.
 
 ## Special Pages (src/pages/)
 
+- `login.astro` — Magic link sign-in for True Recall accounts
+- `dashboard.astro` — Subscription dashboard: plan status, usage, Pro key, Polar checkout/portal
+- `pricing.astro` — Pricing page: Free Trial, Pro, and BYOK tiers
 - `privacy.astro` — Privacy Policy (GDPR-compliant; linked from footer)
 - `terms.astro` — Terms of Service (linked from footer)
 

@@ -12,9 +12,30 @@ AI-powered card generation is what makes **True Recall** fast — select text, c
 
 For how AI generation works in practice, see [Selection Toolbar](/views/selection-toolbar/).
 
-## OpenRouter API Key
+## Subscription Key (Pro)
 
-Direct API access for AI features (card generation, type-in grading, image occlusion detection).
+The recommended way to use AI features. A subscription key gives you access to expertly tuned prompts and managed model routing with no setup.
+
+**Setup:**
+1. Visit [truerecall.app/login](https://truerecall.app/login) and sign in with your email
+2. A free trial key is generated automatically on first visit to the [dashboard](https://truerecall.app/dashboard)
+3. Copy the key and paste it into `Settings → True Recall → AI → Subscription Key`
+4. Upgrade to Pro ($8/mo) from the dashboard when ready — your key stays the same
+
+When a subscription key is configured, it takes priority over an OpenRouter API key.
+
+**Plans:**
+
+| Plan | Budget | Reset |
+|------|--------|-------|
+| Free Trial | ~350-700 cards (one-time) | No reset |
+| Pro | ~5,000-7,000 cards/month | Monthly |
+
+Manage or cancel your subscription anytime from the [dashboard](https://truerecall.app/dashboard).
+
+## OpenRouter API Key (BYOK)
+
+Direct API access for users who want full control. Bring your own key and prompts — no subscription needed.
 
 **Setup:** Create an account at [openrouter.ai](https://openrouter.ai) → Keys → Create new key → paste here.
 
