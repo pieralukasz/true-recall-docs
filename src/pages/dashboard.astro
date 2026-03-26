@@ -2,7 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const LITELLM_URL = "https://ai.truerecall.app";
-const POLAR_CHECKOUT_URL = "https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0";
+const POLAR_CHECKOUT_URL =
+	"https://buy.polar.sh/polar_cl_NRts1e4mbVLXzPq3AdNqsCFwWHkn2BlHW1t3S2dcjq0";
 const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 ---
@@ -34,10 +35,8 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						<span class="plan-dot" id="plan-dot"></span>
 						<span id="plan-label">Pro</span>
 					</div>
-					<a
-						href="#"
-						class="manage-link"
-						id="manage-link">Manage Subscription</
+					<a href="#" class="manage-link" id="manage-link"
+						>Manage Subscription</a
 					>
 				</div>
 
@@ -78,9 +77,8 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						Your key has expired. Subscribe to continue using AI
 						features.
 					</p>
-					<a
-						href="#"
-						class="btn btn-sm polar-checkout-link">Upgrade to Pro</
+					<a href="#" class="btn btn-sm polar-checkout-link"
+						>Upgrade to Pro</a
 					>
 				</div>
 			</div>
@@ -149,9 +147,8 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						You've used all your free AI generations. Subscribe to
 						continue.
 					</p>
-					<a
-						href="#"
-						class="btn polar-checkout-link">Subscribe — $7.99/mo</
+					<a href="#" class="btn polar-checkout-link"
+						>Subscribe — $7.99/mo</a
 					>
 				</div>
 			</div>
@@ -178,7 +175,14 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 	</div>
 </BaseLayout>
 
-<script define:vars={{ LITELLM_URL, POLAR_CHECKOUT_URL, SUPABASE_URL, SUPABASE_ANON_KEY }}>
+<script
+	define:vars={{
+		LITELLM_URL,
+		POLAR_CHECKOUT_URL,
+		SUPABASE_URL,
+		SUPABASE_ANON_KEY,
+	}}
+>
 	window.__LITELLM_URL = LITELLM_URL;
 	window.__POLAR_CHECKOUT_URL = POLAR_CHECKOUT_URL;
 	window.__SUPABASE_URL = SUPABASE_URL;
@@ -202,9 +206,11 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 	function setCheckoutLinks(userId: string, email?: string) {
 		const url = buildCheckoutUrl(userId, email);
-		document.querySelectorAll<HTMLAnchorElement>(".polar-checkout-link").forEach((a) => {
-			a.href = url;
-		});
+		document
+			.querySelectorAll<HTMLAnchorElement>(".polar-checkout-link")
+			.forEach((a) => {
+				a.href = url;
+			});
 	}
 
 	async function openPortalSession(accessToken: string): Promise<void> {
@@ -358,7 +364,8 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 				manageLink.addEventListener("click", async (e) => {
 					e.preventDefault();
 					const { data: sd } = await supabase.auth.getSession();
-					if (sd?.session) await openPortalSession(sd.session.access_token);
+					if (sd?.session)
+						await openPortalSession(sd.session.access_token);
 				});
 				break;
 			case "trial":

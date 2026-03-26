@@ -139,6 +139,47 @@ Use sparingly — max 2-3 per page. Too many asides create visual fatigue.
 - Settings references (`Settings → ...`) must match the actual UI paths in the plugin source at `/Users/lukaszpiera/Projects/true-recall`.
 - Cross-reference the plugin code when documenting features to ensure accuracy.
 
+## File Operations
+
+Before editing or deleting documentation files, confirm with the user which files should be preserved. Never bulk-delete docs without explicit approval for each file/folder.
+
+## Infrastructure
+
+- **true-recall-proxy** runs on ZimaBlade (`ssh zimablade`). It is the proxy server used by the plugin.
+
+### Creating Beta Testers
+
+Two-step process — Edge Function hardcodes $3 budget, so you MUST update it after.
+
+**Step 1: Create user** (Supabase Edge Function)
+```bash
+curl -sS -X POST https://REDACTED_PROJECT_REF.supabase.co/functions/v1/admin-create-user \
+  -H "Authorization: Bearer $ADMIN_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com", "expires_in_days": 30}'
+```
+Response contains `litellmKey` (truncated) — not usable for `/key/update`. Use the token hash instead.
+
+**Step 2: Set budget to $1.50** (LiteLLM API, by token hash)
+```bash
+curl -sS -X POST https://ai.truerecall.app/key/update \
+  -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"key": "<TOKEN_HASH>", "max_budget": 1.5}'
+```
+Get the token hash from `/key/list` — match by `key_alias` (email).
+
+**DO NOT:**
+- Skip step 2 — budget defaults to $3, beta testers get $1.50
+- Use the truncated `litellmKey` from the Edge Function response for `/key/update` — it won't match. Use the full token hash from `/key/list`
+- Forget `expires_in_days` — without it the key never expires
+
+**Secrets:** `ADMIN_SECRET` and `LITELLM_MASTER_KEY` are in the true-recall repo at `docs/beta-testing-users.md`.
+
+## Deployment
+
+This project uses Vercel for deployment. Changes must be committed AND pushed to trigger deploys. When users report stale content on production, first check git status and recent pushes before suggesting manual Vercel checks.
+
 ### Sidebar Label Suffixes (Dev Only)
 
 | Suffix | Meaning |
