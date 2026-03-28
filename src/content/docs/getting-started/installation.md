@@ -14,25 +14,16 @@ description: How to install True Recall in your Obsidian vault
 - Obsidian v1.5.0 or later
 - An Obsidian vault
 
-## Install from Community Plugins
-
-:::note
-True Recall is not yet available in the Obsidian Community Plugins directory. Use [BRAT](#install-via-brat) instead.
-:::
-
 ## Install via BRAT
 
-:::note[Invite only]
-True Recall is currently in private beta — available by invitation only. If you have an invite, follow the steps below.
-:::
+True Recall is not yet listed in the Obsidian Community Plugins directory. Install it using [BRAT](https://github.com/TfTHacker/obsidian42-brat) (Beta Reviewers Auto-update Tool), which handles installation and automatic updates.
 
-[BRAT](https://github.com/TfTHacker/obsidian42-brat) (Beta Reviewers Auto-update Tool) handles installation and auto-updates for beta releases.
-
-```
-Settings → BRAT → Add Beta Plugin → Enter: pieralukasz/true-recall → Add Plugin
-```
-
-Then enable the plugin in **Settings → Community plugins → True Recall → Toggle on**.
+1. Open **Settings → Community plugins → Browse**
+2. Search for **BRAT** and install it
+3. Enable BRAT in **Settings → Community plugins**
+4. Open **Settings → BRAT → Add Beta Plugin**
+5. Enter `pieralukasz/true-recall` and click **Add Plugin**
+6. Enable True Recall in **Settings → Community plugins**
 
 ## First-Time Setup
 
