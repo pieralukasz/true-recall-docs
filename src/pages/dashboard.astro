@@ -496,6 +496,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		const keyInfo = await fetchKeyInfo(litellmKey);
 
 		renderPlan(keyInfo, true);
+		// Re-set checkout links — renderPlan may have added .polar-checkout-link
+		// to elements that didn't have it when setCheckoutLinks() first ran
+		setCheckoutLinks(session.user.id, session.user.email);
 	}
 
 	// Copy button
