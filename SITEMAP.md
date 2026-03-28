@@ -74,7 +74,8 @@ All paths are relative to `src/content/docs/`.
 - `data/integrity-check.md` — Database Integrity Check: orphaned cards, missing references, repair
 - `data/import-export.md` — Import & Export: Anki .apkg import/export, CSV/TSV export, migration tips
 
-## Reference (2 pages)
+## Reference (3 pages)
 
 - `reference/frontmatter-fields.md` — All supported frontmatter fields and their usage
+- `reference/mcp-server.md` — MCP server setup, tool reference (34 tools), and example workflows for AI assistant integration
 - `reference/troubleshooting.md` — Common issues and solutions: cards, AI, sync, performance, backlog recovery

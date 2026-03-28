@@ -123,9 +123,22 @@ This isn't a bug — it's a workload problem. Here's how to recover:
 Unlike older algorithms, FSRS recalculates intervals based on actual time elapsed. If you remember an overdue card, FSRS recognizes this as evidence of strong memory and gives a longer interval. You won't be punished for a break.
 :::
 
+## MCP / Local API Issues
+
+**Symptoms:** Claude Code can't connect to True Recall, MCP tools return errors.
+
+1. **API not enabled** — Go to `Settings → General → Local API` and enable it. See [MCP Server](/reference/mcp-server/) for full setup.
+
+2. **Obsidian not running** — The Local API only works while Obsidian is open with True Recall loaded.
+
+3. **Port conflict** — If another service uses port `27182`, change the port in plugin settings and update `TRUE_RECALL_PORT` in your MCP config. Restart Obsidian.
+
+4. **Dependencies not installed** — Run `cd mcp-server && bun install` in the plugin directory.
+
 ## What to Read Next
 
 - [Database Integrity Check](/data/integrity-check/) — detect and fix database issues
 - [Backup & Restore](/data/backup-restore/) — protect your data
 - [Workload Management](/scheduling/workload-management/) — prevent overload
 - [Card Browser](/views/card-browser/) — find and manage problem cards
+- [MCP Server](/reference/mcp-server/) — AI assistant integration via MCP

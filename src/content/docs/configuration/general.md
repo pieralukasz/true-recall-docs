@@ -58,9 +58,23 @@ This means a 2 AM review counts as "today," not "tomorrow." Useful if you study 
 
 See [The Collection Step](/creation/creating-flashcards/#the-collection-step) for how collection works.
 
+## Local API
+
+The Local API starts an HTTP server on `127.0.0.1` so external tools can interact with True Recall. It powers the [MCP Server](/reference/mcp-server/) for AI assistant integration.
+
+| Setting | Description |
+|---------|-------------|
+| **Enable local API** | Start the HTTP server when the plugin loads |
+| **Port** | Default `27182`. Change if the port conflicts. Restart Obsidian after changing. |
+
+:::note
+The API only listens on localhost — it is not accessible from other machines.
+:::
+
 ## What to Read Next
 
 - [Review Interface](/review/review-interface/) — the review experience these settings control
 - [Editor Integration](/configuration/editor-integration/) — link indicators, status bar, and codeblock widgets
 - [FSRS Settings](/configuration/fsrs-settings/) — scheduling configuration per preset
 - [Type-in Mode](/review/type-in-mode/) — how the type-in setting works during review
+- [MCP Server](/reference/mcp-server/) — connect AI assistants via the Local API
