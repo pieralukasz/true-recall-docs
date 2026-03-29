@@ -8,7 +8,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 >
 	<div class="legal-page">
 		<h1>Privacy Policy</h1>
-		<p class="meta">Effective date: March 22, 2026 · Last updated: March 22, 2026</p>
+		<p class="meta">Effective date: March 22, 2026 · Last updated: March 29, 2026</p>
 
 		<p>
 			This Privacy Policy explains how True Recall ("<strong>we</strong>", "<strong>us</strong>",
@@ -53,6 +53,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			statistics (pages visited, country, browser type). No cookies are set by True Recall for
 			analytics purposes; Vercel Analytics operates without cookies and without collecting personal
 			identifiers.
+		</p>
+
+		<h3>AI generation data</h3>
+		<p>
+			When you use the AI flashcard generation feature, text snippets from your notes are sent
+			to <a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a>, which
+			routes requests to third-party large language model providers (such as Anthropic, OpenAI,
+			and others). True Recall has <strong>prompt logging disabled</strong> — OpenRouter does not
+			store your prompts or generated completions. However, the underlying LLM providers may have
+			their own data retention policies; see
+			<a href="https://openrouter.ai/docs/guides/privacy/logging" target="_blank" rel="noopener"
+				>OpenRouter's provider logging documentation</a
+			> for details.
+		</p>
+		<p>
+			Text is sent only when you explicitly trigger AI generation — it is never transmitted
+			automatically or in the background.
 		</p>
 
 		<h3>Data you create in the plugin</h3>
@@ -100,8 +117,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					<td>EU (AWS eu-central-1)</td>
 				</tr>
 				<tr>
-					<td><a href="https://unkey.com/privacy" target="_blank" rel="noopener">Unkey</a></td>
-					<td>API key management & usage tracking</td>
+					<td><a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">OpenRouter</a></td>
+					<td>AI model routing & generation processing</td>
 					<td>USA (SCCs apply)</td>
 				</tr>
 				<tr>
