@@ -1,14 +1,14 @@
 ---
 title: True Recall
-description: Spaced repetition for Obsidian with FSRS v6
+description: Remember everything you learn in Obsidian — AI flashcards with spaced repetition powered by FSRS v6
 template: splash
 hero:
-  tagline: "The next-gen spaced repetition system for Obsidian."
+  tagline: "Remember everything you learn in Obsidian."
   image:
     file: ../../assets/simple-logo.svg
   actions:
-    - text: Documentation
-      link: /getting-started/introduction/
+    - text: Install Now
+      link: "#install"
       variant: primary
     - text: View on GitHub
       link: https://github.com/pieralukasz/true-recall
@@ -16,38 +16,61 @@ hero:
       variant: secondary
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
 import WaitlistForm from '../../components/WaitlistForm.astro';
 
-## Features
+<div id="install">
+## Install in 2 Minutes
+</div>
 
-Transform your Obsidian vault into an intelligent learning system. Create flashcards in a dedicated panel or directly in your notes, review them with state-of-the-art spaced repetition, and track your progress with comprehensive analytics.
+<Steps>
+1. **Install BRAT** — Open `Settings → Community plugins → Browse`, search for **BRAT**, and install it
+
+2. **Add True Recall** — Go to `Settings → BRAT → Add Beta Plugin`, enter `pieralukasz/true-recall`
+
+3. **Enable the plugin** — Toggle on True Recall in `Settings → Community plugins`
+
+4. **Start creating cards** — Select text in any note, click the ✨ button, and AI generates flashcards instantly
+</Steps>
+
+[Full setup guide →](/getting-started/installation/) · [Quick start →](/getting-started/quick-start/)
+
+## Why True Recall?
+
+Select any text in Obsidian. Get perfectly structured flashcards in seconds. Review them with the most advanced spaced repetition algorithm available — all without leaving your vault.
 
 <CardGrid stagger>
-	<Card title="FSRS v6 Algorithm" icon="setting">
-		State-of-the-art spaced repetition with 21 trainable parameters.
-		Unlike Anki, your flashcards live inside your notes — source and knowledge unified.
+	<Card title="AI Flashcard Generation" icon="star">
+		Select text → get flashcards. Expertly tuned prompts create high-quality cards from any content. Supports cloze deletions, reversed cards, and image occlusion.
 	</Card>
-	<Card title="Local-First Storage" icon="document">
-		All data stored in portable SQLite database within your vault.
-		Your data stays with you, always.
+	<Card title="FSRS v6 Algorithm" icon="setting">
+		State-of-the-art spaced repetition with 21 trainable parameters that adapt to how you learn. Proven more efficient than SM-2 (used by Anki).
+	</Card>
+	<Card title="Lives in Your Notes" icon="document">
+		Flashcards are stored as blocks inside your Markdown files — not in a separate app. Your knowledge stays connected to its source.
 	</Card>
 	<Card title="Comprehensive Analytics" icon="seti:graphql">
-		Track retention, forecast workload, and visualize progress with
-		interactive charts. Query your learning data with natural language.
+		Track retention rates, forecast workload, and visualize your progress with interactive charts.
 	</Card>
-	<Card title="Projects System" icon="list-format">
-		Organize flashcards into projects spanning multiple notes.
-		Review cards by topic or subject area.
+	<Card title="Projects & Organization" icon="list-format">
+		Organize flashcards into projects spanning multiple notes. Review by topic, subject, or custom scope.
 	</Card>
-	<Card title="Cloze Deletions & Reversed Cards" icon="pencil">
-		Create cloze deletions and reversed cards directly in your notes
-		using simple tags.
-	</Card>
-	<Card title="Cloud Sync" icon="rocket">
-		Cross-device synchronization via True Recall Cloud.
-		Study on any device with automatic conflict resolution.
+	<Card title="Cross-Device Sync" icon="rocket">
+		Sync your learning progress across devices via True Recall Cloud. Automatic conflict resolution.
 	</Card>
 </CardGrid>
 
+<div id="pricing">
+## Try It Free
+</div>
+
+<div class="homepage-cta">
+	<p class="homepage-cta-text">Start generating AI flashcards right now — no credit card, no API key, no setup.</p>
+	<a href="/login" class="btn homepage-cta-btn">Start Free Trial</a>
+	<p class="homepage-cta-sub">~350–700 flashcards included &middot; Already have an API key? <a href="/getting-started/quick-start/">Use your own OpenRouter key</a></p>
+</div>
+
+[See all plans & pricing →](/pricing/)
+
 <WaitlistForm />
+

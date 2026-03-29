@@ -23,6 +23,8 @@ const shouldRenderSearch =
 	</div>
 	<div class="sl-hidden md:sl-flex print:hidden right-group">
 		<div class="sl-flex right-items">
+			<a href="/getting-started/introduction/" class="nav-link">Docs</a>
+			<a href="/pricing" class="nav-link">Pricing</a>
 			<a href="/login" class="auth-btn" data-auth-btn>Sign Up</a>
 			<div class="auth-avatar-wrap" data-auth-avatar>
 				<div class="auth-avatar">
@@ -72,7 +74,19 @@ const shouldRenderSearch =
 			align-items: center;
 		}
 
-		.auth-btn {
+		.nav-link {
+				color: var(--sl-color-gray-2);
+				text-decoration: none;
+				font-size: 0.875rem;
+				font-weight: 500;
+				white-space: nowrap;
+				transition: color 0.2s;
+			}
+			.nav-link:hover {
+				color: var(--sl-color-white);
+			}
+
+			.auth-btn {
 			display: inline-flex;
 			align-items: center;
 			line-height: 1;

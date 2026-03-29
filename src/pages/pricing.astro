@@ -55,36 +55,6 @@ const plans = [
 	},
 ];
 
-const faqs = [
-	{
-		q: "How many flashcards can I create?",
-		a: "Pro includes ~5,000–7,000 flashcards per month. Each generation creates ~7-15 flashcards on average depending on how much text you select — a paragraph gives fewer cards, a full page gives more. Benchmarked across models like Gemini 3 Flash, GPT-5.1, and Qwen 3.5. In practice, most users never come close to the limit.",
-	},
-	{
-		q: "What's the difference between Pro and BYOK?",
-		a: "Pro gives you perfectly composed prompts benchmarked across 10+ models and optimized for effective learning, a polished no-setup experience, and upcoming features like a dedicated language learning method. BYOK gives you full control — bring your own OpenRouter API key and prompts, but you manage everything yourself.",
-	},
-	{
-		q: "Can I still use my own API key?",
-		a: "Absolutely! The BYOK tier lets you use your own OpenRouter API key with no restrictions. Pro is for users who want expertly crafted prompts and a managed, no-setup experience.",
-	},
-	{
-		q: "What happens when I run out?",
-		a: "You'll see a notification in the plugin. You can upgrade to Pro ($8/month), wait for the monthly reset, or switch to your own OpenRouter API key.",
-	},
-	{
-		q: "Can I cancel anytime?",
-		a: "Yes. Cancel anytime from your dashboard. You'll keep access until the end of your billing period.",
-	},
-	{
-		q: "How do I activate my subscription in Obsidian?",
-		a: "After subscribing, you'll get a subscription key on your dashboard. Paste it into True Recall settings → AI → Subscription Key. That's it!",
-	},
-	{
-		q: "What's the free trial?",
-		a: "Sign up and your trial key is generated instantly — no payment required. You get ~350–700 flashcards to try True Recall. After that, continue with Pro at $8/month or bring your own API key for free.",
-	},
-];
 ---
 
 <BaseLayout
@@ -137,19 +107,6 @@ const faqs = [
 		</p>
 	</div>
 
-	<div class="faq-section">
-		<h2>Frequently Asked Questions</h2>
-		<div class="faq-list">
-			{
-				faqs.map((faq) => (
-					<details class="faq-item">
-						<summary>{faq.q}</summary>
-						<p>{faq.a}</p>
-					</details>
-				))
-			}
-		</div>
-	</div>
 </BaseLayout>
 
 <style>
@@ -293,62 +250,6 @@ const faqs = [
 	.note {
 		color: var(--sl-color-gray-4);
 		font-size: 0.875rem;
-	}
-
-	/* FAQ Section */
-	.faq-section {
-		max-width: 700px;
-		margin: 4rem auto 0;
-	}
-
-	.faq-section h2 {
-		font-size: 1.75rem;
-		margin-bottom: 1.5rem;
-		text-align: center;
-	}
-
-	.faq-list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.faq-item {
-		background: var(--sl-color-gray-6);
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: var(--tr-radius-sm);
-		padding: 1rem 1.25rem;
-	}
-
-	.faq-item summary {
-		cursor: pointer;
-		font-weight: 500;
-		font-size: 1rem;
-		list-style: none;
-	}
-
-	.faq-item summary::-webkit-details-marker {
-		display: none;
-	}
-
-	.faq-item summary::before {
-		content: "+";
-		display: inline-block;
-		width: 1.25rem;
-		font-weight: 600;
-		color: var(--sl-color-accent);
-	}
-
-	.faq-item[open] summary::before {
-		content: "−";
-	}
-
-	.faq-item p {
-		margin-top: 0.75rem;
-		color: var(--sl-color-gray-3);
-		font-size: 0.9375rem;
-		line-height: 1.6;
-		padding-left: 1.25rem;
 	}
 
 	@media (max-width: 768px) {

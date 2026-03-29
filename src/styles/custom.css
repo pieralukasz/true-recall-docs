@@ -305,3 +305,223 @@
 	min-height: 200px;
 	color: var(--sl-color-gray-3);
 }
+
+/* Anchor scroll offset for sticky nav on splash page */
+#install,
+#pricing {
+	scroll-margin-top: calc(var(--sl-nav-height) + 1.5rem);
+}
+
+/* ============================================
+   Homepage — Pricing Cards
+   ============================================ */
+
+.homepage-plans {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem;
+	margin: 1.5rem 0;
+	text-align: left;
+}
+
+.homepage-plans.single {
+	grid-template-columns: 1fr;
+	max-width: 360px;
+	margin-inline: auto;
+}
+
+.homepage-plan {
+	background: var(--sl-color-gray-6);
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: var(--tr-radius-md);
+	padding: 2rem;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.homepage-plan.popular {
+	border-color: var(--sl-color-accent);
+}
+
+.homepage-plan .badge {
+	position: absolute;
+	top: -10px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: var(--sl-color-accent);
+	color: var(--sl-color-white);
+	padding: 0.25rem 0.75rem;
+	border-radius: var(--tr-radius-pill);
+	font-size: 0.75rem;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.homepage-plan h3 {
+	font-size: 1.5rem;
+	margin-bottom: 0.5rem;
+	min-height: 2.25rem;
+}
+
+.homepage-price {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: var(--sl-color-accent);
+	margin-bottom: 0.5rem;
+	display: flex;
+	align-items: baseline;
+	gap: 0.25rem;
+	min-height: 3.5rem;
+}
+
+.homepage-price span {
+	font-size: 1rem;
+	font-weight: 400;
+	color: var(--sl-color-gray-3);
+}
+
+.homepage-plan > p {
+	color: var(--sl-color-gray-3);
+	margin-bottom: 1.5rem;
+	font-size: 0.875rem;
+	min-height: 5.5rem;
+}
+
+.homepage-plan .features {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 2rem;
+	flex: 1;
+}
+
+.homepage-plan .features li {
+	padding: 0.375rem 0;
+	padding-left: 1.5rem;
+	position: relative;
+	font-size: 0.9375rem;
+	color: var(--sl-color-gray-2);
+}
+
+.homepage-plan .features li::before {
+	content: "✓";
+	position: absolute;
+	left: 0;
+	color: var(--tr-color-success);
+	font-weight: 600;
+}
+
+.homepage-plan .btn {
+	display: block;
+	text-align: center;
+	width: 100%;
+	margin-top: auto;
+}
+
+@media (max-width: 768px) {
+	.homepage-plans {
+		grid-template-columns: 1fr;
+	}
+
+	.homepage-plan h3,
+	.homepage-price,
+	.homepage-plan > p {
+		min-height: unset;
+	}
+}
+
+/* ============================================
+   Homepage — CTA
+   ============================================ */
+
+.homepage-cta {
+	text-align: center;
+	padding: 2.5rem 2rem;
+	margin: 1.5rem 0;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: var(--tr-radius-md);
+	background: linear-gradient(135deg, color-mix(in srgb, var(--sl-color-accent) 8%, transparent), transparent);
+}
+
+.homepage-cta-text {
+	font-size: 1.125rem;
+	color: var(--sl-color-gray-2);
+	margin-bottom: 1.5rem;
+	max-width: 500px;
+	margin-inline: auto;
+}
+
+.homepage-cta-btn {
+	font-size: 1.125rem;
+	padding: 0.875rem 2.5rem;
+}
+
+.homepage-cta-sub {
+	margin-top: 1rem;
+	font-size: 0.8125rem;
+	color: var(--sl-color-gray-3);
+}
+
+.homepage-cta-sub a {
+	color: var(--sl-color-accent-high);
+}
+
+/* ============================================
+   Homepage — FAQ
+   ============================================ */
+
+.homepage-faq {
+	max-width: 700px;
+	margin: 1rem auto;
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	text-align: left;
+}
+
+.homepage-faq details {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid var(--sl-color-gray-5);
+	border-radius: 0;
+	padding: 1rem 0;
+}
+
+.homepage-faq details:last-child {
+	border-bottom: none;
+}
+
+.homepage-faq summary {
+	cursor: pointer;
+	font-weight: 500;
+	font-size: 1rem;
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.homepage-faq summary::-webkit-details-marker {
+	display: none;
+}
+
+.homepage-faq summary::after {
+	content: "+";
+	font-size: 1.25rem;
+	font-weight: 400;
+	color: var(--sl-color-gray-3);
+	flex-shrink: 0;
+	transition: transform 0.2s;
+}
+
+.homepage-faq details[open] summary::after {
+	content: "−";
+}
+
+.homepage-faq details p {
+	margin-top: 0.75rem;
+	color: var(--sl-color-gray-3);
+	font-size: 0.9375rem;
+	line-height: 1.6;
+}
