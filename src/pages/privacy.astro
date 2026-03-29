@@ -57,12 +57,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 		<h3>AI processing data</h3>
 		<p>
-			True Recall acts solely as an intermediary for AI features. When you use AI functionality,
-			your content is passed through to third-party AI providers via
-			<a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a>. We do not
-			store, retain, or have ongoing access to the content you submit. The text and images you
-			provide remain yours at all times — we merely transmit them on your behalf. True Recall has
-			<strong>prompt logging disabled</strong> at OpenRouter.
+			For AI features, True Recall acts as a <strong>data processor with limited scope</strong>.
+			When you use AI functionality, your content is passed through to third-party AI providers
+			via <a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a>. The
+			text and images you provide remain yours at all times — we transmit them on your behalf
+			and do not retain them. True Recall has <strong>prompt logging disabled</strong> at
+			OpenRouter.
+		</p>
+		<p>
+			<strong>What we store:</strong> your email address, AI generation count, subscription
+			tier, and payment identifiers — the minimum required for account management and billing.
+			<strong>What we do not store:</strong> the content of your prompts, your images, AI model
+			responses, or any material you submit to AI features. This content passes through our
+			proxy in transit and is not written to disk or retained in memory beyond the duration of
+			the request.
 		</p>
 		<p>The following AI features involve data transmission:</p>
 		<ul>
@@ -72,9 +80,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			</li>
 			<li>
 				<strong>Image Occlusion (AI Detect)</strong> — images you select from your vault are
-				sent to OpenRouter for region detection and analysis. Images may contain sensitive
-				information such as photographs of individuals, identity documents, or medical diagrams.
-				You are solely responsible for the content of images you submit.
+				sent to OpenRouter for region detection and analysis. Before the first image
+				transmission, the plugin displays a confirmation dialog informing you that the image
+				will be sent to third-party AI providers; you must affirmatively confirm before
+				processing begins. Images may contain sensitive information such as photographs of
+				individuals, identity documents, or medical diagrams. You are solely responsible for
+				the content of images you submit.
 			</li>
 			<li>
 				<strong>Type-in Grading</strong> — when enabled, your typed answer and the expected
@@ -217,13 +228,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			Data sent to OpenRouter, Vercel, Resend, and Polar is transferred to the United States
 			under Standard Contractual Clauses (SCCs) approved by the European Commission
 			(Decision 2021/914), together with supplementary measures where appropriate per EDPB
-			recommendations.
+			recommendations. Supplementary measures include encryption of data in transit (TLS 1.2+)
+			and contractual restrictions on access. Copies of executed SCCs are available upon request
+			at <a href="mailto:pieralukasz@gmail.com">pieralukasz@gmail.com</a>.
 		</p>
 		<p>
-			For AI features specifically, OpenRouter routes requests to third-party LLM providers
-			(such as Anthropic, OpenAI, and others) that may be located in various jurisdictions.
-			True Recall has prompt logging disabled on OpenRouter, but cannot control the data
-			practices of individual LLM providers.
+			<strong>Onward transfers via OpenRouter:</strong> OpenRouter routes AI requests to
+			third-party LLM providers (such as Anthropic, OpenAI, and others) that may be located
+			in various jurisdictions. These onward transfers are governed by OpenRouter's own data
+			processing agreements with each provider. True Recall has prompt logging disabled on
+			OpenRouter, but cannot control the data practices of individual LLM providers. See
+			<a href="https://openrouter.ai/docs/guides/privacy/logging" target="_blank" rel="noopener"
+				>OpenRouter's provider logging documentation</a
+			> for details on how specific providers handle data.
 		</p>
 
 		<h2>7. Data Security</h2>
@@ -276,7 +293,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<li>
 				<strong>Purpose:</strong> AI is used for (a) flashcard generation from text,
 				(b) image analysis for Image Occlusion region detection, and (c) semantic answer
-				evaluation for Type-in Grading. These are classified as limited-risk AI applications.
+				evaluation for Type-in Grading. We classify these as limited-risk AI applications
+				based on the following assessment: True Recall does not train or host any AI models;
+				all AI outputs are non-binding suggestions that you review, edit, or discard; no
+				automated decisions with legal or similarly significant effects are made; and you
+				can disable any AI feature at any time. Image Occlusion detects regions of interest
+				(not biometric identification) and processes only images you explicitly choose to
+				submit.
 			</li>
 			<li>
 				<strong>Intermediary role:</strong> True Recall does not train, fine-tune, or host any

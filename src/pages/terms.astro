@@ -31,8 +31,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<p>
 			AI generation is powered by third-party large language models accessed via
 			<a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a>. True Recall
-			does not train, host, or control these models. True Recall acts solely as an intermediary —
-			your content is passed through to AI providers and the results are returned to you. Generated
+			does not train, host, or control these models. True Recall acts as a
+			<strong>data processor with limited scope</strong> — your content is passed through to AI
+			providers and the results are returned to you. We store only your email, usage count, and
+			subscription status for billing; we do not store prompts, images, or AI responses. Generated
 			flashcards are AI-produced and <strong>may contain inaccuracies, errors, or incomplete
 			information</strong>. You are responsible for reviewing all AI-generated content before
 			relying on it.
@@ -220,10 +222,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<h3>Reporting illegal content</h3>
 		<p>
 			If you become aware of illegal content being processed through the Service, report it to
-			<a href="mailto:pieralukasz@gmail.com">pieralukasz@gmail.com</a>. We will acknowledge
-			receipt within 24 hours and take appropriate action in accordance with applicable law,
-			including the EU Digital Services Act where applicable.
+			<a href="mailto:pieralukasz@gmail.com">pieralukasz@gmail.com</a>. Upon receiving a
+			report, we will:
 		</p>
+		<ul>
+			<li>Acknowledge receipt within <strong>24 hours</strong>.</li>
+			<li>Preserve all available technical evidence (server logs, request metadata, file
+				hashes) for law enforcement.</li>
+			<li>Immediately suspend the account of the reported user pending investigation.</li>
+			<li>Report to law enforcement and, where applicable, to organisations such as NCMEC
+				(National Center for Missing &amp; Exploited Children) or the IWF (Internet Watch
+				Foundation), as required or appropriate under applicable law.</li>
+			<li>Provide information about actions taken to law enforcement upon lawful request.</li>
+		</ul>
 
 		<h2>7. AI-Specific Terms</h2>
 		<p>
