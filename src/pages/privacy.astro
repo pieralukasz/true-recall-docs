@@ -42,8 +42,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 		<h3>Payment data</h3>
 		<p>
-			When paid plans are available, payments will be processed by a third-party payment provider. We do
-			<em>not</em> store card numbers or full billing details. We receive only a customer
+			Payments are processed by <a href="https://polar.sh" target="_blank" rel="noopener">Polar</a>.
+			We do <em>not</em> store card numbers or full billing details. We receive only a customer
 			identifier, subscription status, and purchase history sufficient to manage your account.
 		</p>
 
@@ -55,28 +55,67 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			identifiers.
 		</p>
 
-		<h3>AI generation data</h3>
+		<h3>AI processing data</h3>
 		<p>
-			When you use the AI flashcard generation feature, text snippets from your notes are sent
-			to <a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a>, which
-			routes requests to third-party large language model providers (such as Anthropic, OpenAI,
-			and others). True Recall has <strong>prompt logging disabled</strong> — OpenRouter does not
-			store your prompts or generated completions. However, the underlying LLM providers may have
-			their own data retention policies; see
+			True Recall acts solely as an intermediary for AI features. When you use AI functionality,
+			your content is passed through to third-party AI providers via
+			<a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a>. We do not
+			store, retain, or have ongoing access to the content you submit. The text and images you
+			provide remain yours at all times — we merely transmit them on your behalf. True Recall has
+			<strong>prompt logging disabled</strong> at OpenRouter.
+		</p>
+		<p>The following AI features involve data transmission:</p>
+		<ul>
+			<li>
+				<strong>AI Flashcard Generation</strong> — text snippets you select in your notes are
+				sent to OpenRouter for flashcard creation.
+			</li>
+			<li>
+				<strong>Image Occlusion (AI Detect)</strong> — images you select from your vault are
+				sent to OpenRouter for region detection and analysis. Images may contain sensitive
+				information such as photographs of individuals, identity documents, or medical diagrams.
+				You are solely responsible for the content of images you submit.
+			</li>
+			<li>
+				<strong>Type-in Grading</strong> — when enabled, your typed answer and the expected
+				answer are sent to an AI model for semantic similarity evaluation.
+			</li>
+		</ul>
+		<p>
+			All AI features are user-initiated — data is never sent to AI providers automatically or in
+			the background. True Recall does not use your content to train AI models. However, the
+			underlying LLM providers may have their own data retention policies; see
 			<a href="https://openrouter.ai/docs/guides/privacy/logging" target="_blank" rel="noopener"
 				>OpenRouter's provider logging documentation</a
 			> for details.
-		</p>
-		<p>
-			Text is sent only when you explicitly trigger AI generation — it is never transmitted
-			automatically or in the background.
 		</p>
 
 		<h3>Data you create in the plugin</h3>
 		<p>
 			Flashcard content (questions, answers, notes) is stored entirely on your own device inside
-			your Obsidian vault. It is <em>not</em> transmitted to our servers unless you explicitly use
-			the cloud sync feature.
+			your Obsidian vault. It is <em>not</em> transmitted to our servers unless you explicitly
+			enable Cloud Sync.
+		</p>
+		<p>
+			<strong>Cloud Sync (when enabled):</strong> If you enable Cloud Sync, flashcard content,
+			review history, and scheduling data are transmitted to and stored on Supabase servers in the
+			EU (AWS eu-central-1). Sync is entirely opt-in and can be disabled at any time. Your data
+			remains yours — we store it solely to provide the synchronisation service.
+		</p>
+		<p>
+			<strong>MCP Server:</strong> The True Recall MCP Server exposes plugin tools on
+			<code>localhost</code> only (127.0.0.1). No data is sent to external servers by the MCP
+			Server itself. Third-party MCP clients you connect may transmit data according to their own
+			policies; you are responsible for which clients you connect.
+		</p>
+
+		<h3>Bring Your Own Key (BYOK)</h3>
+		<p>
+			When you configure your own OpenRouter API key, AI requests are sent directly under your
+			OpenRouter account. <a href="https://openrouter.ai/privacy" target="_blank" rel="noopener"
+				>OpenRouter's privacy policy</a
+			> governs that data relationship. True Recall has no visibility into or control over
+			prompts processed through your own key and does not track your BYOK usage.
 		</p>
 
 		<h2>3. Legal Basis for Processing</h2>
@@ -85,6 +124,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<li>
 				<strong>Contract performance (Art. 6(1)(b))</strong> — processing your email address and
 				usage data is necessary to create and manage your account and deliver the Service.
+			</li>
+			<li>
+				<strong>Consent (Art. 6(1)(a))</strong> — where you explicitly choose to send content
+				(including images that may contain personal data) to AI providers via the Service's AI
+				features.
 			</li>
 			<li>
 				<strong>Legitimate interests (Art. 6(1)(f))</strong> — anonymous analytics help us
@@ -97,7 +141,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			</li>
 		</ul>
 
-		<h2>4. Third-Party Data Processors</h2>
+		<h2>4. Special Categories of Data (Art. 9 GDPR)</h2>
+		<p>
+			True Recall does not intentionally collect special category data as defined by GDPR
+			Article 9 (data revealing racial or ethnic origin, political opinions, religious beliefs,
+			health data, biometric data, etc.).
+		</p>
+		<p>
+			However, content you create or submit — such as medical flashcards, photographs of
+			individuals, or images of identity documents — may contain special category or sensitive
+			personal data. When you send such content to AI providers via the Service's AI features,
+			you act as the data controller for that data and are responsible for ensuring you have a
+			lawful basis for processing it.
+		</p>
+		<p>
+			<strong>Do not submit personal data of third parties</strong> (such as photographs,
+			identity documents, health records, or biometric data) to AI features unless you have a
+			lawful basis and, where required, their explicit consent. True Recall acts solely as an
+			intermediary and does not review, store, or moderate the content you pass through to AI
+			providers.
+		</p>
+
+		<h2>5. Third-Party Data Processors</h2>
 		<p>
 			We share your data only with the processors listed below, each bound by appropriate data
 			processing agreements and GDPR-compliant safeguards.
@@ -113,12 +178,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<tbody>
 				<tr>
 					<td><a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase</a></td>
-					<td>Authentication, database storage</td>
+					<td>Authentication, database storage, Cloud Sync</td>
 					<td>EU (AWS eu-central-1)</td>
 				</tr>
 				<tr>
 					<td><a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">OpenRouter</a></td>
-					<td>AI model routing & generation processing</td>
+					<td>AI model routing (text and image processing)</td>
 					<td>USA (SCCs apply)</td>
 				</tr>
 				<tr>
@@ -131,22 +196,118 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					<td>Transactional emails (magic link, waitlist)</td>
 					<td>USA (SCCs apply)</td>
 				</tr>
+				<tr>
+					<td><a href="https://polar.sh/legal/privacy" target="_blank" rel="noopener">Polar</a></td>
+					<td>Payment processing, subscription management</td>
+					<td>USA (SCCs apply)</td>
+				</tr>
 			</tbody>
 		</table>
 		<p>
-			Where processors are located outside the EU/EEA, transfers are governed by Standard
-			Contractual Clauses (SCCs) adopted by the European Commission.
+			We will notify you by email at least <strong>30 days</strong> before engaging a new
+			sub-processor or making a material change to an existing one. If you object, you may
+			terminate your account before the change takes effect.
 		</p>
 
-		<h2>5. Data Retention</h2>
+		<h2>6. International Data Transfers</h2>
+		<p>
+			All account and Cloud Sync data stored by Supabase resides in the EU (AWS eu-central-1).
+		</p>
+		<p>
+			Data sent to OpenRouter, Vercel, Resend, and Polar is transferred to the United States
+			under Standard Contractual Clauses (SCCs) approved by the European Commission
+			(Decision 2021/914), together with supplementary measures where appropriate per EDPB
+			recommendations.
+		</p>
+		<p>
+			For AI features specifically, OpenRouter routes requests to third-party LLM providers
+			(such as Anthropic, OpenAI, and others) that may be located in various jurisdictions.
+			True Recall has prompt logging disabled on OpenRouter, but cannot control the data
+			practices of individual LLM providers.
+		</p>
+
+		<h2>7. Data Security</h2>
+		<ul>
+			<li>All communications between the plugin, our website, and third-party processors use
+				<strong>TLS encryption</strong> in transit.</li>
+			<li>Supabase provides <strong>encryption at rest</strong> for all stored data.</li>
+			<li>Your local SQLite database (<code>.true-recall/</code>) is stored unencrypted on your
+				device. You are responsible for device-level encryption (e.g. FileVault, BitLocker).</li>
+			<li>Access to production systems is restricted to the data controller (sole operator).
+				There are no employees with access to user data.</li>
+			<li>We regularly review the security practices and certifications of our third-party
+				processors.</li>
+		</ul>
+
+		<h2>8. Data Breach Notification</h2>
+		<p>
+			In the event of a personal data breach, we will notify the relevant supervisory authority
+			(UODO) within <strong>72 hours</strong> of becoming aware, as required by GDPR Article 33.
+		</p>
+		<p>
+			If the breach is likely to result in a high risk to your rights and freedoms, we will
+			notify you without undue delay by email at the address associated with your account
+			(GDPR Article 34).
+		</p>
+
+		<h2>9. Data Retention</h2>
 		<p>
 			We retain your account data for as long as your account is active. If you request account
 			deletion, we will delete your personal data within <strong>30 days</strong>, except where
 			retention is required by law (e.g. transaction records for 5 years under Polish accounting
 			law). Anonymised or aggregated data may be retained indefinitely.
 		</p>
+		<p>
+			<strong>AI processing data:</strong> True Recall does not retain any content you submit to
+			AI features. We act as a pass-through intermediary only. Retention by OpenRouter and
+			underlying LLM providers is governed by their respective privacy policies.
+		</p>
+		<p>
+			<strong>Cloud Sync data:</strong> Retained as long as your account is active and sync is
+			enabled. Deleted within 30 days of account deletion or sync disablement.
+		</p>
 
-		<h2>6. Your Rights Under GDPR</h2>
+		<h2>10. AI Transparency (EU AI Act)</h2>
+		<p>
+			In accordance with the EU AI Act (Regulation 2024/1689), we provide the following
+			transparency information about AI systems used within the Service:
+		</p>
+		<ul>
+			<li>
+				<strong>Purpose:</strong> AI is used for (a) flashcard generation from text,
+				(b) image analysis for Image Occlusion region detection, and (c) semantic answer
+				evaluation for Type-in Grading. These are classified as limited-risk AI applications.
+			</li>
+			<li>
+				<strong>Intermediary role:</strong> True Recall does not train, fine-tune, or host any
+				AI models. We act solely as an intermediary, passing your content to third-party models
+				via OpenRouter and returning the results to you.
+			</li>
+			<li>
+				<strong>Labelling:</strong> All AI-generated content is clearly identified as
+				machine-generated within the plugin interface.
+			</li>
+			<li>
+				<strong>Non-exclusivity:</strong> AI-generated outputs (such as flashcards) are produced
+				by third-party models and may be similar or identical to outputs generated for other
+				users. No exclusive rights to any particular AI output are granted.
+			</li>
+			<li>
+				<strong>Human review:</strong> You may disable AI grading at any time and use manual
+				grading instead. No consequential decisions are made solely by AI — all AI outputs are
+				assistive and can be reviewed, edited, or discarded.
+			</li>
+			<li>
+				<strong>Data minimization:</strong> Only the minimum necessary text or image is sent to
+				AI providers. Your full vault contents are never transmitted.
+			</li>
+			<li>
+				<strong>No training:</strong> True Recall does not use your content to train, or allow
+				any third party to train, any AI models.
+			</li>
+		</ul>
+
+		<h2>11. Your Rights Under GDPR</h2>
 		<p>
 			If you are located in the EU/EEA, you have the following rights regarding your personal data:
 		</p>
@@ -171,8 +332,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				<strong>Right to object</strong> — object to processing based on legitimate interests.
 			</li>
 			<li>
-				<strong>Rights related to automated decision-making</strong> — True Recall does not use
-				automated decision-making or profiling.
+				<strong>Rights related to automated decision-making</strong> — True Recall uses AI for
+				flashcard generation and answer grading, but these do not constitute automated
+				decision-making with legal or similarly significant effects. You can disable AI grading
+				at any time and review all generated content manually.
 			</li>
 			<li>
 				<strong>Right to lodge a complaint</strong> — you may file a complaint with the Polish
@@ -189,28 +352,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			>. We will respond within 30 days.
 		</p>
 
-		<h2>7. Cookies</h2>
+		<h2>12. Cookies</h2>
 		<p>
 			True Recall does not set tracking or analytics cookies. Supabase sets a session cookie
 			strictly necessary for authentication. You cannot opt out of this cookie without losing the
 			ability to log in.
 		</p>
 
-		<h2>8. Children's Privacy</h2>
+		<h2>13. Children's Privacy</h2>
 		<p>
 			The Service is not directed at children under the age of 16. We do not knowingly collect
 			personal data from anyone under 16. If you believe a child has provided us with their data,
 			contact us and we will delete it promptly.
 		</p>
 
-		<h2>9. Changes to This Policy</h2>
+		<h2>14. Changes to This Policy</h2>
 		<p>
 			We may update this Privacy Policy. For material changes, we will notify you by email (at the
 			address associated with your account) at least 14 days before the change takes effect. The
 			date at the top of this page always reflects the latest revision.
 		</p>
 
-		<h2>10. Contact</h2>
+		<h2>15. Contact</h2>
 		<p>
 			Questions about this policy or your data? Email us at <a href="mailto:pieralukasz@gmail.com"
 				>pieralukasz@gmail.com</a

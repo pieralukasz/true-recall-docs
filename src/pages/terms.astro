@@ -31,10 +31,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<p>
 			AI generation is powered by third-party large language models accessed via
 			<a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a>. True Recall
-			does not train, host, or control these models. Generated flashcards are AI-produced and
-			<strong>may contain inaccuracies, errors, or incomplete information</strong>. You are
-			responsible for reviewing all AI-generated content before relying on it.
+			does not train, host, or control these models. True Recall acts solely as an intermediary —
+			your content is passed through to AI providers and the results are returned to you. Generated
+			flashcards are AI-produced and <strong>may contain inaccuracies, errors, or incomplete
+			information</strong>. You are responsible for reviewing all AI-generated content before
+			relying on it.
 		</p>
+		<p>The Service also includes the following features that involve data processing:</p>
+		<ul>
+			<li>
+				<strong>Image Occlusion (AI Detect)</strong> — images from your vault are sent to
+				third-party AI providers via OpenRouter for region detection and analysis.
+			</li>
+			<li>
+				<strong>Type-in Grading</strong> — when enabled, your typed answers and expected answers
+				are sent to AI providers for semantic similarity evaluation.
+			</li>
+			<li>
+				<strong>MCP Server</strong> — exposes plugin tools on localhost (127.0.0.1) for
+				programmatic access by AI assistants and other MCP clients.
+			</li>
+			<li>
+				<strong>Cloud Sync</strong> — an optional feature that, when available and enabled,
+				synchronises flashcard data to servers in the EU.
+			</li>
+		</ul>
 
 		<h2>2. Account & Eligibility</h2>
 		<p>
@@ -72,7 +93,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 		<h3>Payment processing</h3>
 		<p>
-			When paid plans are available, payments will be processed by a third-party payment provider.
+			Payments are processed by <a href="https://polar.sh" target="_blank" rel="noopener">Polar</a>.
 			True Recall does not store card numbers or full billing details.
 		</p>
 
@@ -114,17 +135,105 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<li>Attempt to reverse-engineer the AI proxy infrastructure.</li>
 			<li>Submit content that is illegal, harmful, or infringes third-party rights.</li>
 			<li>Use AI generation to intentionally produce misleading, defamatory, or harmful content.</li>
+			<li>
+				Use AI features to generate, process, or distribute child sexual abuse material (CSAM)
+				or any content that sexually exploits minors.
+			</li>
+			<li>
+				Submit images containing personal data of third parties — such as identity documents,
+				photographs of individuals, or medical records — to AI features without their explicit
+				consent and a lawful basis for processing.
+			</li>
+			<li>
+				Process biometric data of third parties through AI features (e.g. Image Occlusion)
+				without a lawful basis.
+			</li>
+			<li>Use AI features to generate content that impersonates real individuals.</li>
+			<li>Expose the MCP Server to the public internet or use it to automate actions that
+				violate these Terms.</li>
+		</ul>
+		<p>
+			You are responsible for implementing reasonable practices to review AI-generated content
+			before relying on it.
+		</p>
+
+		<h2>6. User Content</h2>
+
+		<h3>Ownership</h3>
+		<p>
+			You retain all rights to content you create, upload, or submit through the Service. The
+			text and images you provide to AI features are and remain yours — True Recall acts solely
+			as an intermediary, passing your content to third-party AI providers and returning the
+			results. We do not claim ownership of your content or of AI-generated suggestions.
+		</p>
+		<p>
+			By using AI features, you grant True Recall a limited, non-exclusive licence to transmit
+			your content to AI providers solely to deliver the requested functionality. This licence
+			terminates when you delete the content or your account.
+		</p>
+		<p>
+			AI-generated outputs (such as flashcards) are produced by third-party models and may be
+			similar or identical to outputs generated for other users. AI-generated content may not
+			qualify for copyright protection in all jurisdictions.
+		</p>
+
+		<h3>Your responsibilities</h3>
+		<p>
+			You are solely responsible for all content you submit to the Service, including text,
+			images, and any data sent to AI providers. You represent and warrant that:
+		</p>
+		<ul>
+			<li>You have all necessary rights to submit the content.</li>
+			<li>Your content does not violate any applicable law.</li>
+			<li>
+				Your content does not contain personal data of third parties unless you have a lawful
+				basis and, where required, their explicit consent.
+			</li>
+			<li>
+				Your content does not contain child sexual abuse material (CSAM) or any material that
+				exploits minors.
+			</li>
 		</ul>
 
-		<h2>6. AI-Generated Content</h2>
+		<h3>Prohibited content</h3>
+		<p>The following content must not be submitted to the Service under any circumstances:</p>
+		<ul>
+			<li>CSAM or any material depicting minors in a sexual context.</li>
+			<li>
+				Personal data of third parties without a lawful basis — including identity documents,
+				photographs, health records, or biometric data.
+			</li>
+			<li>Content that violates applicable law in your jurisdiction or the EU.</li>
+			<li>Content that infringes intellectual property rights of third parties.</li>
+			<li>Malicious code or content designed to exploit vulnerabilities.</li>
+		</ul>
+
+		<h3>Content moderation</h3>
 		<p>
-			The Service uses artificial intelligence to generate flashcard content based on text you
-			provide. In accordance with EU AI Act transparency requirements:
+			True Recall is a local-first tool. We do not proactively monitor content stored in your
+			local vault. However, for content processed through our AI proxy or stored via Cloud Sync,
+			we reserve the right (but have no obligation) to review, remove, or restrict access to
+			content that violates these Terms. We may implement automated scanning for illegal content
+			as required by applicable law.
+		</p>
+
+		<h3>Reporting illegal content</h3>
+		<p>
+			If you become aware of illegal content being processed through the Service, report it to
+			<a href="mailto:pieralukasz@gmail.com">pieralukasz@gmail.com</a>. We will acknowledge
+			receipt within 24 hours and take appropriate action in accordance with applicable law,
+			including the EU Digital Services Act where applicable.
+		</p>
+
+		<h2>7. AI-Specific Terms</h2>
+		<p>
+			The Service uses artificial intelligence to generate flashcard content based on text and
+			images you provide. In accordance with EU AI Act transparency requirements:
 		</p>
 		<ul>
 			<li>
-				All content produced by the AI generation feature is <strong>machine-generated</strong>
-				and is not reviewed by a human before delivery to you.
+				All content produced by AI features is <strong>machine-generated</strong> and is not
+				reviewed by a human before delivery to you.
 			</li>
 			<li>
 				AI-generated flashcards may contain factual errors, omissions, or misinterpretations of
@@ -140,7 +249,98 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			</li>
 		</ul>
 
-		<h2>7. Service Availability</h2>
+		<h3>Image Occlusion</h3>
+		<p>
+			When you use Image Occlusion, images from your vault are sent to third-party AI providers
+			via OpenRouter for analysis. True Recall acts as a pass-through — we do not store, review,
+			or retain the images you submit. You are responsible for ensuring that images you submit do
+			not contain sensitive personal data of third parties (such as photographs of individuals,
+			identity documents, or medical images) unless you have a lawful basis for processing.
+		</p>
+
+		<h3>Type-in Grading</h3>
+		<p>
+			When Type-in Grading is enabled, your typed answers and expected answers are sent to AI
+			providers for semantic evaluation. True Recall passes this data through without storing it.
+			You may disable this feature at any time and use manual grading instead.
+		</p>
+
+		<h3>AI acceptable use</h3>
+		<p>You must not use AI features to:</p>
+		<ul>
+			<li>Generate CSAM or content exploiting minors.</li>
+			<li>Process biometric data of third parties without their consent.</li>
+			<li>Generate content for illegal purposes.</li>
+			<li>Attempt to extract training data or reverse-engineer AI models.</li>
+		</ul>
+
+		<h3>No consequential decisions</h3>
+		<p>
+			AI features in True Recall are assistive tools for learning. They do not make legally or
+			similarly significant decisions about you. You may override any AI output at any time.
+		</p>
+
+		<h3>No training on your data</h3>
+		<p>
+			True Recall will not use your content to train, or allow any third party to train, any AI
+			models. Your content is used solely to deliver the AI functionality you request.
+		</p>
+
+		<h2>8. Bring Your Own Key (BYOK)</h2>
+		<p>
+			When using your own OpenRouter API key, AI requests are sent directly to OpenRouter under
+			your account. True Recall acts solely as the interface — we do not intercept, store, or
+			have access to content processed through your own key.
+		</p>
+		<p>You are responsible for:</p>
+		<ul>
+			<li>All costs incurred on your OpenRouter account.</li>
+			<li>
+				Compliance with <a href="https://openrouter.ai/terms" target="_blank" rel="noopener"
+					>OpenRouter's terms of service</a
+				> and acceptable use policy.
+			</li>
+			<li>Any data processed through your key, including compliance with applicable data
+				protection law.</li>
+		</ul>
+		<p>
+			True Recall is not liable for charges, data processing, or service issues related to your
+			own API key.
+		</p>
+
+		<h2>9. Cloud Sync</h2>
+		<p>
+			Cloud Sync is an optional feature that, when available and enabled, synchronises flashcard
+			data to Supabase servers in the EU (AWS eu-central-1).
+		</p>
+		<ul>
+			<li>You may enable or disable Cloud Sync at any time.</li>
+			<li>The content moderation terms in Section 6 apply to cloud-synced data.</li>
+			<li>
+				If we detect a violation of the User Content policy in cloud-synced data, we may
+				suspend sync access and notify you.
+			</li>
+			<li>
+				You may export your data at any time via the plugin's export feature before disabling
+				sync or deleting your account.
+			</li>
+		</ul>
+
+		<h2>10. MCP Server</h2>
+		<p>
+			The True Recall MCP Server exposes plugin tools on localhost (127.0.0.1) for programmatic
+			access to plugin features by AI assistants and other MCP clients.
+		</p>
+		<ul>
+			<li>The MCP Server is provided for personal, local use only. You must not expose it to
+				the public internet.</li>
+			<li>You are responsible for any third-party MCP clients you connect and for the data
+				they transmit.</li>
+			<li>True Recall is not liable for actions taken by third-party MCP clients or for data
+				they process.</li>
+		</ul>
+
+		<h2>11. Service Availability</h2>
 		<p>
 			The Service is provided "<strong>as is</strong>" without any uptime guarantee at the current
 			price tier. We aim for high availability but do not warrant uninterrupted access. Planned
@@ -148,11 +348,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			temporary unavailability.
 		</p>
 
-		<h2>8. Intellectual Property</h2>
+		<h2>12. Intellectual Property</h2>
 		<p>
-			<strong>Your content:</strong> You own all flashcards, notes, and other content you create
-			with the plugin. You grant True Recall a limited licence to process that content solely to
-			deliver the AI generation features you request.
+			<strong>Your content:</strong> Subject to the User Content terms in Section 6, you own all
+			flashcards, notes, and other content you create with the plugin. You grant True Recall a
+			limited licence to transmit that content solely to deliver the AI features you request.
+			True Recall does not store, review, or claim any rights over the content you pass through
+			to AI providers.
 		</p>
 		<p>
 			<strong>Our property:</strong> True Recall owns the plugin code, prompt engineering, API
@@ -160,7 +362,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			open-source licence (see the repository). The managed subscription service is proprietary.
 		</p>
 
-		<h2>9. Limitation of Liability</h2>
+		<h2>13. Limitation of Liability</h2>
 		<p>
 			To the maximum extent permitted by law, True Recall's total liability to you for any claims
 			arising from these Terms or the Service shall not exceed the amounts you paid us in the
@@ -168,24 +370,56 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		</p>
 		<p>
 			We are not liable for indirect, incidental, or consequential damages, including loss of data
-			or lost profits, even if advised of the possibility of such damages. Some jurisdictions do
-			not allow the exclusion of implied warranties or limitation of liability — in those
-			jurisdictions our liability is limited to the fullest extent permitted by law.
+			or lost profits, even if advised of the possibility of such damages. In particular, True
+			Recall is not liable for: (a) any content you choose to submit to AI providers through the
+			Service; (b) the outputs generated by third-party AI models; (c) any data processing
+			performed by AI providers on content you submitted.
+		</p>
+		<p>
+			Some jurisdictions do not allow the exclusion of implied warranties or limitation of
+			liability — in those jurisdictions our liability is limited to the fullest extent permitted
+			by law.
 		</p>
 
-		<h2>10. Termination</h2>
+		<h2>14. Indemnification</h2>
+		<p>
+			You agree to indemnify, defend, and hold harmless True Recall and its operator from any
+			claims, damages, losses, liabilities, and expenses (including reasonable legal fees)
+			arising from:
+		</p>
+		<ul>
+			<li>Your violation of these Terms.</li>
+			<li>
+				Your User Content, including any claim that content you submitted to AI features
+				infringes third-party intellectual property rights, violates applicable data protection
+				law, or contains illegal material.
+			</li>
+			<li>
+				Your use of AI features in violation of the Acceptable Use (Section 5) or AI-Specific
+				Terms (Section 7).
+			</li>
+			<li>Your use of a personal API key (BYOK) under Section 8.</li>
+		</ul>
+		<p>This indemnification obligation survives termination of your account.</p>
+
+		<h2>15. Termination</h2>
 		<p>
 			You may delete your account at any time by contacting
 			<a href="mailto:pieralukasz@gmail.com">pieralukasz@gmail.com</a>.
 		</p>
 		<p>
 			We reserve the right to suspend or terminate accounts that violate these Terms, with or
-			without prior notice. In the event we discontinue the Service entirely, we will provide at
-			least <strong>30 days' notice</strong> by email and issue prorated refunds for prepaid
+			without prior notice. Grounds for immediate termination without notice include: submission
+			of CSAM, use of the Service for clearly illegal purposes, or repeated violations of the
+			User Content policy.
+		</p>
+		<p>
+			In the event we discontinue the Service entirely, we will provide at least
+			<strong>30 days' notice</strong> by email and issue prorated refunds for prepaid
 			subscription periods.
 		</p>
 
-		<h2>11. Changes to These Terms</h2>
+		<h2>16. Changes to These Terms</h2>
 		<p>
 			We may update these Terms from time to time. For material changes, we will notify you by
 			email at least <strong>14 days</strong> before the new Terms take effect. Continued use of
@@ -193,7 +427,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			you may cancel your subscription and delete your account before the effective date.
 		</p>
 
-		<h2>12. Governing Law & Disputes</h2>
+		<h2>17. Governing Law & Disputes</h2>
 		<p>
 			These Terms are governed by the laws of <strong>Poland</strong> and, where applicable,
 			European Union law. Consumer rights granted by EU law are not affected by the choice of
@@ -211,7 +445,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			>.
 		</p>
 
-		<h2>13. Contact</h2>
+		<h2>18. Force Majeure</h2>
+		<p>
+			Neither party shall be liable for failure or delay in performance due to causes beyond its
+			reasonable control, including but not limited to: natural disasters, war, terrorism,
+			pandemics, government actions, internet or infrastructure failures, or third-party service
+			provider outages (including AI model providers). This does not affect your right to cancel
+			your subscription.
+		</p>
+
+		<h2>19. Severability</h2>
+		<p>
+			If any provision of these Terms is found to be invalid, illegal, or unenforceable by a
+			court of competent jurisdiction, the remaining provisions shall continue in full force and
+			effect. The invalid provision shall be modified to the minimum extent necessary to make it
+			valid and enforceable while preserving its original intent.
+		</p>
+
+		<h2>20. Entire Agreement</h2>
+		<p>
+			These Terms, together with the <a href="/privacy">Privacy Policy</a>, constitute the entire
+			agreement between you and True Recall regarding the Service. They supersede all prior or
+			contemporaneous agreements, representations, and understandings, whether written or oral.
+		</p>
+
+		<h2>21. Contact</h2>
 		<p>
 			Questions about these Terms? Email us at
 			<a href="mailto:pieralukasz@gmail.com">pieralukasz@gmail.com</a>.
