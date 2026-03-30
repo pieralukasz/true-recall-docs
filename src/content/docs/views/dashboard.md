@@ -15,7 +15,7 @@ The **Dashboard** is your command center. It shows every note that has flashcard
 
 - **Command palette:** `Cmd/Ctrl + P` → "Open dashboard"
 - **Ribbon icon:** Click the grid icon in the left ribbon
-- **Status bar:** Click the card counts in the bottom-right corner of Obsidian (e.g., `28 new · 3 lrn · 354 due`)
+- **Status bar:** Click the card counts in the bottom-right status bar (e.g., `28 new · 3 lrn · 354 due`)
 
 <!-- TODO PHOTO -->
 

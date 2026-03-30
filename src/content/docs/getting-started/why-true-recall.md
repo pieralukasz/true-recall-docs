@@ -9,7 +9,7 @@ description: Why spaced repetition works, why True Recall was built, and how it 
 :::caution[My Notes]
 :::
 
-You already take notes. **True Recall** turns those notes into long-term memory — without leaving Obsidian.
+You already take notes. **True Recall** turns those notes into long-term memory — without leaving your notes.
 
 ## Why Spaced Repetition Works
 
@@ -28,7 +28,7 @@ Most spaced repetition tools require you to leave your notes. You write in one a
 
 True Recall was built on a simple idea: **flashcards should live alongside the notes they came from**.
 
-- Select text in your Obsidian note → flashcards are generated instantly with AI
+- Select text in any note → flashcards are generated instantly with AI
 - Open the [Flashcard Panel](/views/flashcard-panel/) → all cards for that note are right there
 - Click a card → jump back to the source text it was created from
 
@@ -59,7 +59,7 @@ Drop an image into your note, select it, and AI automatically detects regions to
 
 ### 23 Inline Widgets
 
-Embed live analytics directly in your Obsidian notes using codeblock widgets:
+Embed live analytics directly in your notes using codeblock widgets:
 
 - **Dashboard** — Today's stats and 7-day forecast
 - **Heatmap** — GitHub-style study activity
@@ -87,29 +87,29 @@ Anki is the gold standard for spaced repetition. True Recall builds on Anki's co
 
 |                        | True Recall                     | Anki                                     |
 | ---------------------- | ------------------------------- | ---------------------------------------- |
-| **Where cards live**   | Inside your Obsidian notes      | Separate application                     |
+| **Where cards live**   | Inside your notes               | Separate application                     |
 | **Card creation**      | AI generates from selected text | Manual typing                            |
 | **Algorithm**          | FSRS v6 (21 parameters)         | SM-2 default, FSRS optional since v24.11 |
 | **Image Occlusion**    | AI auto-detection + manual      | Manual only                              |
 | **Answer checking**    | AI semantic grading             | Exact text match                         |
 | **Workload tools**     | Load balance, easy days, breaks | Basic (since v24)                        |
 | **Widgets**            | 23 inline widgets in notes      | Add-ons required                         |
-| **Platform**           | Obsidian (desktop + mobile)     | Standalone + AnkiDroid/AnkiMobile        |
+| **Platform**           | Desktop + mobile (Obsidian engine) | Standalone + AnkiDroid/AnkiMobile        |
 | **Anki compatibility** | Full .apkg import and export    | N/A                                      |
 
 **Choose Anki if:** You need a standalone app or use AnkiDroid/AnkiMobile extensively.
 
-**Choose True Recall if:** You already use Obsidian, want AI-powered card creation, or prefer cards linked to your notes.
+**Choose True Recall if:** You want AI-powered card creation, prefer cards linked to your notes, or already use Obsidian.
 
 :::note[Add-on Compatibility]
-True Recall plans to integrate the most popular Anki add-on features directly into the plugin — no third-party extensions needed.
+True Recall plans to integrate the most popular Anki add-on features natively — no third-party extensions needed.
 :::
 
 ### True Recall vs Obsidian-to-Anki
 
 The Obsidian-to-Anki plugin syncs flashcards from Obsidian to Anki. This means you still need Anki running, cards are reviewed in a separate app, and there's a manual sync step every time you edit.
 
-True Recall replaces this workflow entirely — cards are created, stored, and reviewed inside Obsidian. No external dependency, no sync lag.
+True Recall replaces this workflow entirely — cards are created, stored, and reviewed in one place. No external dependency, no sync lag.
 
 ### True Recall vs RemNote
 
@@ -117,7 +117,7 @@ RemNote combines notes and flashcards in a web-based tool. It's a good approach,
 
 - RemNote uses SM-2, not FSRS v6
 - RemNote's AI features are more limited
-- RemNote is a separate app — True Recall works inside your existing Obsidian vault
+- RemNote is a separate app with its own file format — True Recall uses standard Markdown and works with your existing notes
 - RemNote has its own file format — True Recall uses standard Markdown
 
 ### True Recall vs Logseq
@@ -130,7 +130,7 @@ Logseq has a built-in flashcard plugin, but it's basic:
 - No workload management tools
 - Limited card types
 
-True Recall's Obsidian integration is deeper — inline widgets, Selection Toolbar, source text tracking, and full Anki-compatible note types.
+True Recall goes deeper — inline widgets, Selection Toolbar, source text tracking, and full Anki-compatible note types.
 
 ## Getting Started
 

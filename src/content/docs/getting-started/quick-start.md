@@ -19,7 +19,7 @@ Head to the [Installation guide](/getting-started/installation/) first.
 
 The fastest way is with the **Selection Toolbar**:
 
-1. Open any note in your vault
+1. Open any note
 2. Select a paragraph of text
 3. A toolbar appears above your selection
 4. Click **Flashcards** — AI generates a flashcard

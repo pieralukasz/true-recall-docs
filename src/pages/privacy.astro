@@ -13,8 +13,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<p>
 			This Privacy Policy explains how True Recall ("<strong>we</strong>", "<strong>us</strong>",
 			"<strong>our</strong>") collects, uses, and protects information about you when you use our
-			website at <a href="https://truerecall.app">truerecall.app</a> and the True Recall Obsidian
-			plugin (collectively, the "<strong>Service</strong>").
+			website at <a href="https://truerecall.app">truerecall.app</a> and the True Recall application
+			(collectively, the "<strong>Service</strong>").
 		</p>
 
 		<h2>1. Data Controller</h2>
@@ -81,7 +81,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<li>
 				<strong>Image Occlusion (AI Detect)</strong> — images you select from your vault are
 				sent to OpenRouter for region detection and analysis. Before the first image
-				transmission, the plugin displays a confirmation dialog informing you that the image
+				transmission, True Recall displays a confirmation dialog informing you that the image
 				will be sent to third-party AI providers; you must affirmatively confirm before
 				processing begins. Images may contain sensitive information such as photographs of
 				individuals, identity documents, or medical diagrams. You are solely responsible for
@@ -101,7 +101,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			> for details.
 		</p>
 
-		<h3>Data you create in the plugin</h3>
+		<h3>Data you create in the app</h3>
 		<p>
 			Flashcard content (questions, answers, notes) is stored entirely on your own device inside
 			your Obsidian vault. It is <em>not</em> transmitted to our servers unless you explicitly
@@ -114,7 +114,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			remains yours — we store it solely to provide the synchronisation service.
 		</p>
 		<p>
-			<strong>MCP Server:</strong> The True Recall MCP Server exposes plugin tools on
+			<strong>MCP Server:</strong> The True Recall MCP Server exposes True Recall tools on
 			<code>localhost</code> only (127.0.0.1). No data is sent to external servers by the MCP
 			Server itself. Third-party MCP clients you connect may transmit data according to their own
 			policies; you are responsible for which clients you connect.
@@ -245,7 +245,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 		<h2>7. Data Security</h2>
 		<ul>
-			<li>All communications between the plugin, our website, and third-party processors use
+			<li>All communications between the application, our website, and third-party processors use
 				<strong>TLS encryption</strong> in transit.</li>
 			<li>Supabase provides <strong>encryption at rest</strong> for all stored data.</li>
 			<li>Your local SQLite database (<code>.true-recall/</code>) is stored unencrypted on your
@@ -308,7 +308,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			</li>
 			<li>
 				<strong>Labelling:</strong> All AI-generated content is clearly identified as
-				machine-generated within the plugin interface.
+				machine-generated within the True Recall interface.
 			</li>
 			<li>
 				<strong>Non-exclusivity:</strong> AI-generated outputs (such as flashcards) are produced

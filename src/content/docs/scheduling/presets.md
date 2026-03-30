@@ -318,7 +318,7 @@ In preset settings, you can see:
 When you work with presets, three different things are stored in different places:
 
 1. **Preset definitions** (retention, steps, weights, limits)  
-   Saved in plugin settings (`data.json`), typically:
+   Saved in True Recall settings (`data.json`), typically:
    `<vault>/.obsidian/plugins/<plugin-id>/data.json`
 2. **Preset assignment to note/project** (`fsrs_preset`)  
    Saved in Markdown frontmatter of that note/project file

@@ -3,7 +3,7 @@ title: Installation
 sidebar:
   label: "Installation"
   order: 2
-description: How to install True Recall in your Obsidian vault
+description: How to install True Recall
 ---
 
 :::caution[My Notes]
@@ -59,7 +59,7 @@ Once installed, you should see:
 Make sure all three files (`main.js`, `styles.css`, `manifest.json`) are inside a folder named exactly `true-recall` in your vault's `.obsidian/plugins/` directory. Restart Obsidian if needed.
 
 :::caution
-Large vaults (10,000+ notes) may take longer on first load — the plugin indexes flashcard links on startup. This only happens once.
+Large collections (10,000+ notes) may take longer on first load — True Recall indexes flashcard links on startup. This only happens once.
 :::
 
 ## Next Steps

@@ -14,14 +14,14 @@ description: Connect AI assistants like Claude Code to True Recall via Model Con
 
 The MCP integration has two parts:
 
-1. **Local API** — an HTTP server that runs inside the Obsidian plugin, exposing your flashcard data on `127.0.0.1`
+1. **Local API** — an HTTP server that runs inside True Recall, exposing your flashcard data on `127.0.0.1`
 2. **MCP Server** — a stdio-based process (runs via Bun) that translates MCP tool calls into Local API requests
 
 ```
-Claude Code  ←→  MCP Server (stdio)  ←→  Local API (HTTP)  ←→  True Recall Plugin
+Claude Code  ←→  MCP Server (stdio)  ←→  Local API (HTTP)  ←→  True Recall
 ```
 
-The MCP server ships in the `mcp-server/` directory of the plugin repository.
+The MCP server ships in the `mcp-server/` directory of the True Recall repository.
 
 ## Setup
 
@@ -31,7 +31,7 @@ In Obsidian, go to `Settings → True Recall → General → Local API`:
 
 | Setting | Description |
 |---------|-------------|
-| **Enable local API** | Start the HTTP server when the plugin loads |
+| **Enable local API** | Start the HTTP server when True Recall loads |
 | **Port** | Default `27182`. Change if the port conflicts with another service. Restart Obsidian after changing. |
 
 When enabled, the API listens on `http://127.0.0.1:27182`.
@@ -73,7 +73,7 @@ The MCP server exposes 34 tools organized into functional groups.
 
 | Tool | Description |
 |------|-------------|
-| `get_status` | Check if the plugin is running and the database is ready |
+| `get_status` | Check if True Recall is running and the database is ready |
 | `get_active_note` | Get the currently open note with its content and linked flashcards |
 
 ### Cards
@@ -207,7 +207,7 @@ Claude: [calls get_problem_cards → get_study_recommendations]
 
 ### Custom Port
 
-Set the `TRUE_RECALL_PORT` environment variable in your MCP config if you changed the default port in the plugin settings:
+Set the `TRUE_RECALL_PORT` environment variable in your MCP config if you changed the default port in True Recall settings:
 
 ```json
 {
@@ -217,7 +217,7 @@ Set the `TRUE_RECALL_PORT` environment variable in your MCP config if you change
 }
 ```
 
-Both the plugin setting and the MCP server env must match.
+Both the True Recall setting and the MCP server env must match.
 
 ### Security
 
@@ -227,8 +227,8 @@ The Local API binds to `127.0.0.1` only — it is not accessible from other mach
 
 | Problem | Solution |
 |---------|----------|
-| "Cannot connect to True Recall plugin" | Ensure Obsidian is running and `Settings → General → Local API` is enabled |
-| "Port in use" | Change the port in plugin settings and restart Obsidian. Update `TRUE_RECALL_PORT` in MCP config to match |
+| "Cannot connect to True Recall" | Ensure Obsidian is running and `Settings → General → Local API` is enabled |
+| "Port in use" | Change the port in True Recall settings and restart Obsidian. Update `TRUE_RECALL_PORT` in MCP config to match |
 | Tools return errors | Check the Obsidian developer console (`Cmd/Ctrl + Shift + I`) for API error logs |
 | MCP server won't start | Run `cd mcp-server && bun install` to install dependencies |
 

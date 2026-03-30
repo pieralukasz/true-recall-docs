@@ -9,7 +9,7 @@ description: Learn what True Recall is and how it can help you remember everythi
 :::caution[My Notes]
 :::
 
-True Recall is an Obsidian plugin for spaced repetition. Your flashcards live alongside your notes, scheduled by FSRS v6 — the most advanced open-source algorithm for long-term memory.
+**True Recall** is a spaced repetition app that lives alongside your notes. Flashcards are scheduled by FSRS v6 — the most advanced open-source algorithm for long-term memory.
 
 ## Cards are linked to notes
 
@@ -69,14 +69,14 @@ Project: "Science Fundamentals"
 
 |                      | True Recall                       | Anki                          |
 | -------------------- | --------------------------------- | ----------------------------- |
-| **Where cards live** | Inside your notes                 | Separate from source material |
+| **Where cards live** | Inside your notes                  | Separate from source material |
 | **Algorithm**        | FSRS v6                           | FSRS v6 (optional) or SM-2    |
 | **Organization**     | Notes belong to multiple projects | 1 card = 1 deck               |
 | **AI Generation**    | Built-in                          | No                            |
 | **Image Occlusion**  | Built-in with AI detection        | Plugin required               |
 | **Type-in Grading**  | AI semantic grading               | Exact match only              |
 | **Cloud Sync**       | Built-in                          | Paid add-on                   |
-| **Runs in**          | Obsidian                          | Standalone app                |
+| **Platform**         | Obsidian engine                   | Standalone app                |
 
 :::tip[Coming from Anki?]
 See the [migration guide](/migration/from-anki/) for a complete walkthrough — note types, media, scheduling, everything transfers.
@@ -84,7 +84,7 @@ See the [migration guide](/migration/from-anki/) for a complete walkthrough — 
 
 ## Local-first data
 
-Your flashcard data lives in `.true-recall/true-recall.db` inside your vault — a portable SQLite database. Nothing leaves your machine unless you opt into cloud sync.
+Your flashcard data lives in `.true-recall/true-recall.db` inside your notes folder — a portable SQLite database. Nothing leaves your machine unless you opt into cloud sync.
 
 ## Next steps
 

@@ -8,7 +8,7 @@ description: "How to create flashcards in True Recall — AI generation, the Fla
 :::caution[My Notes]
 :::
 
-Every flashcard in **True Recall** starts the same way: you decide what's worth remembering, and the plugin turns it into a scheduled review card. How you get there depends on your workflow.
+Every flashcard in **True Recall** starts the same way: you decide what's worth remembering, and True Recall turns it into a scheduled review card. How you get there depends on your workflow.
 
 ## Many Ways to Create Cards
 

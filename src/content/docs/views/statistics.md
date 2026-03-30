@@ -154,7 +154,7 @@ When filtered, statistics are recalculated from the review log rather than cache
 
 ## Widgets
 
-You can embed statistics directly in your Obsidian notes using codeblock widgets. See the full list in [Editor Integration](/configuration/editor-integration/).
+You can embed statistics directly in your notes using codeblock widgets. See the full list in [Editor Integration](/configuration/editor-integration/).
 
 Key statistics widgets:
 

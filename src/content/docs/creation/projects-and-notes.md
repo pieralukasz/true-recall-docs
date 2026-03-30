@@ -75,7 +75,7 @@ In **Projects** or **Notes** views:
 
 - drag one note onto another
 - provide a project name
-- plugin creates project note and assigns both notes as children
+- True Recall creates project note and assigns both notes as children
 
 ### Detach from project
 

@@ -131,9 +131,9 @@ Unlike older algorithms, FSRS recalculates intervals based on actual time elapse
 
 2. **Obsidian not running** — The Local API only works while Obsidian is open with True Recall loaded.
 
-3. **Port conflict** — If another service uses port `27182`, change the port in plugin settings and update `TRUE_RECALL_PORT` in your MCP config. Restart Obsidian.
+3. **Port conflict** — If another service uses port `27182`, change the port in True Recall settings and update `TRUE_RECALL_PORT` in your MCP config. Restart Obsidian.
 
-4. **Dependencies not installed** — Run `cd mcp-server && bun install` in the plugin directory.
+4. **Dependencies not installed** — Run `cd mcp-server && bun install` in the True Recall directory.
 
 ## What to Read Next
 

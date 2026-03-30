@@ -70,7 +70,7 @@ Quick reference for all True Recall keyboard shortcuts.
 
 ## Global Commands
 
-These work from anywhere in Obsidian (via Command Palette):
+These work globally (via Command Palette):
 
 | Command | Default Shortcut |
 |---------|-----------------|

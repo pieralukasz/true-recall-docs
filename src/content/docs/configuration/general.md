@@ -39,7 +39,7 @@ Daily limits are configured **per preset**, not here. Each [FSRS preset](/schedu
 | Setting | Options | Description |
 |---------|---------|-------------|
 | **Show link status indicators** | On / Off | Inline flashcard counts next to `[[wiki links]]` |
-| **Show status bar widget** | On / Off | Global card counts in Obsidian's bottom bar |
+| **Show status bar widget** | On / Off | Global card counts in the bottom status bar |
 | **Show quick review in panel** | On / Off | Quick-review section at top of [Flashcard Panel](/views/flashcard-panel/) |
 
 For details on what these features look like and how to use them, see [Editor Integration](/configuration/editor-integration/).
@@ -64,7 +64,7 @@ The Local API starts an HTTP server on `127.0.0.1` so external tools can interac
 
 | Setting | Description |
 |---------|-------------|
-| **Enable local API** | Start the HTTP server when the plugin loads |
+| **Enable local API** | Start the HTTP server when True Recall loads |
 | **Port** | Default `27182`. Change if the port conflicts. Restart Obsidian after changing. |
 
 :::note

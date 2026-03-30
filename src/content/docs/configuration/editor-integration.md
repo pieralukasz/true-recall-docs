@@ -8,7 +8,7 @@ description: "Link status indicators, status bar widget, selection toolbar, and 
 :::caution[My Notes]
 :::
 
-**True Recall** adds several visual features to Obsidian's editor so you can see flashcard status and take quick actions without leaving your notes.
+**True Recall** adds several visual features to the editor so you can see flashcard status and take quick actions without leaving your notes.
 
 ## Link Status Indicators
 
@@ -38,7 +38,7 @@ Click the status indicator to open the [Flashcard Panel](/views/flashcard-panel/
 
 ## Status Bar Widget
 
-Global card counts in Obsidian's bottom status bar showing due today, new cards, and learning cards.
+Global card counts in the bottom status bar showing due today, new cards, and learning cards.
 
 Enable in `Settings → General → Show status bar widget`. Click the widget to open [Dashboard](/views/dashboard/) or start today's review.
 

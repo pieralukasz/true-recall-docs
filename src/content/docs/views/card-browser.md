@@ -2,7 +2,7 @@
 title: Card Browser
 sidebar:
   order: 6
-description: Search, filter, and bulk-manage every flashcard in your vault using a powerful query language and visual facets.
+description: Search, filter, and bulk-manage every flashcard using a powerful query language and visual facets.
 ---
 
 :::caution[My Notes]

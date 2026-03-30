@@ -159,7 +159,7 @@ The **Copy Prompt** button in the footer generates a ready-made prompt with bloc
 
 The generated prompt includes block format examples, rules for atomic facts, and guidelines for bold key terms and Obsidian `[[wikilinks]]`.
 
-For AI generation directly inside Obsidian, use the [Selection Toolbar](/views/selection-toolbar/) instead — it handles everything in-app. See [AI Settings](/configuration/ai-settings/) for model and prompt configuration.
+For AI generation directly in your notes, use the [Selection Toolbar](/views/selection-toolbar/) instead — it handles everything in-app. See [AI Settings](/configuration/ai-settings/) for model and prompt configuration.
 
 ## Tips
 

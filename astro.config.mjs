@@ -29,7 +29,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'True Recall',
-			description: 'Spaced repetition for Obsidian with FSRS v6',
+			description: 'AI-powered spaced repetition with FSRS v6',
 			plugins: [starlightThemeObsidian({
 				graph: true,
 				graphConfig: {
