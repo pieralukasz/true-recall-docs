@@ -28,3 +28,10 @@ pnpm-debug.log*
 
 # Internal plans
 STANDALONE_PLAN.md
+STANDALONE_CORE.md
+STANDALONE_MAC_DESIGN.md
+STANDALONE_MONOREPO.md
+STANDALONE_SHARED_UI.md
+STANDALONE_UX.md
+vault-CLAUDE.md
+vault-true-recall-SKILL.md
