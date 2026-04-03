@@ -27,6 +27,7 @@ Enter your Pro key to unlock premium features. Get your key from [truerecall.app
 | **Show header stats** | On / Off | Badge counts (New, Learn, Due) in review header |
 | **Show next review time** | On / Off | Predicted intervals ("8d", "21d") on rating buttons |
 | **Continuous custom reviews** | On / Off | Show "Next Session" button after finishing a custom session |
+| **Show frontmatter in note review** | On / Off | Display YAML frontmatter when reviewing whole notes (see [Note Review](/review/review-interface/#note-review)) |
 | **Ignore daily limits for note study** | On / Off | When studying a specific note, bypass the preset's daily new/review limits |
 | **Default type-in mode** | Off / Diff / AI | Type-in mode for new review sessions |
 

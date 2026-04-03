@@ -202,6 +202,8 @@ true-recall get_status --port 27183   # override port
 | `set_note_preset --preset_name "Technical"` | Assign FSRS preset to a note. Pass `--preset_name null` to remove |
 | `set_note_parent --parent_name "ML" --action add` | Add/remove parent project |
 | `set_note_archive --archived true` | Archive/unarchive a note |
+| `toggle_note_review` | Enable/disable note review for the active note. Optional: `--path` |
+| `note_review_status` | Check if note review is enabled for the active note. Optional: `--path` |
 
 ### Statistics & Analysis
 

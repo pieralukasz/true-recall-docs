@@ -28,6 +28,7 @@ Release notes for every **True Recall** version. For the latest release, check [
 - **Custom review keybindings** — remap Space, Again, Hard, and Easy keys in `Settings → General → Review keybindings`
 - **Claude Code Skill** — download link in settings to install the CLI skill for Claude Code integration
 - **Knowledge Base enabled for all** — the RAG-powered [Knowledge Base](/configuration/knowledge-base/) is now available to all Pro users without feature flags. Index your vault, then ask questions in the Knowledge Chat — True Recall searches your notes semantically and uses agentic tool calls to pull relevant context before answering.
+- **Note Review** — review entire notes as flashcards. Toggle note review on any note from the [Flashcard Panel](/views/flashcard-panel/) header or the command palette ("Toggle note review"). The full note content renders in the review view using Obsidian's live preview, so formatting, links, and embeds all work. A setting controls whether YAML frontmatter is shown or stripped. Note review cards are scheduled by FSRS just like regular cards.
 
 ### Improvements
 

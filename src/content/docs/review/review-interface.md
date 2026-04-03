@@ -105,6 +105,28 @@ Press `E` during any card to edit it without leaving the session. A toolbar appe
 
 Changes save immediately and the card updates. Press `Escape` to close the editor and continue the session.
 
+## Note Review
+
+Note review lets you review an entire note as a single flashcard — useful for dense reference material, summaries, or notes you want to re-read on a schedule.
+
+### Enabling Note Review
+
+- **Flashcard Panel** — click the toggle icon in the panel header (when viewing a note with a `flashcard_uid`)
+- **Command palette** — `Cmd/Ctrl + P` → "Toggle note review"
+- **CLI / API** — `true-recall toggle_note_review`
+
+When enabled, a `note-review` card is created for that note. It appears in your review queue alongside regular cards.
+
+### During Review
+
+The full note content is rendered using Obsidian's live preview — formatting, links, images, and embeds all display normally. A small "Note Review" label and the source note link appear above and below the content.
+
+By default, YAML frontmatter is hidden. To show it, enable **Show frontmatter in note review** in `Settings → General → Review Interface`.
+
+### Disabling
+
+Toggle note review off using the same toggle button or command. The `note-review` card is removed from the database.
+
 ## Image Occlusion in Review
 
 For [image occlusion](/creation/image-occlusion/) cards, the review experience works differently:
