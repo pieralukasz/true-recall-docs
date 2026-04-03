@@ -55,6 +55,20 @@ include: folder
 ---
 ```
 
+### `project`
+
+Mark a note as an explicit project, even if it has no children.
+
+- Type: boolean
+- When set, the note appears in the Projects tab on the Dashboard
+- Removed automatically when dissolving a project
+
+```yaml
+---
+project: true
+---
+```
+
 ### `archive`
 
 Exclude note from active study.
@@ -101,6 +115,7 @@ flashcard_uid: a1b2c3d4
 parents:
   - "[[Medicine]]"
 include: folder
+project: true
 archive: true
 fsrs_preset: intensive
 ---

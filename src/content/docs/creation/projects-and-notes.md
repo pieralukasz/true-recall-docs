@@ -8,13 +8,17 @@ description: "Organize notes into projects using parent relationships, folder in
 :::caution[My Notes]
 :::
 
-Projects in **True Recall** are built from note relationships, not from a separate deck entity. Any note can become a project — it just needs other notes pointing to it as their parent.
+Projects in **True Recall** are built from note relationships, not from a separate deck entity. Any note can become a project — either by having other notes point to it as a parent, or by marking it explicitly with `project: true` in frontmatter.
 
 Unlike Anki, where each card belongs to exactly one deck, a note in True Recall can belong to **multiple projects at once**. A note on "Cell Biology" can live in both your "Medicine" and "Exam Prep" projects without duplicating any cards. This makes organization flexible — you model how knowledge actually connects, instead of forcing it into a single hierarchy.
 
 ## Core Model
 
-A note becomes a child when it declares a parent in `parents`:
+There are two ways a note becomes a project:
+
+### 1. Implicit — via children
+
+A note becomes a project automatically when other notes declare it as a parent:
 
 ```yaml
 ---
@@ -22,6 +26,20 @@ parents:
   - "[[Medicine]]"
 ---
 ```
+
+### 2. Explicit — via `project: true`
+
+A note can declare itself as a project, even without children:
+
+```yaml
+---
+project: true
+---
+```
+
+This is useful for empty projects you plan to fill later, or for notes you want to appear in the Projects tab on the [Dashboard](/views/dashboard/).
+
+### Multiple parents
 
 A note can belong to multiple projects:
 
@@ -84,6 +102,10 @@ In project-tree note context menu:
 - **Detach from project**
 
 Equivalent manual edit: remove that parent entry from `parents`.
+
+### Convert note to project
+
+Right-click any unassigned note → **Create project**. This adds `project: true` to the note's frontmatter, turning it into a project in-place without creating a new file.
 
 ### Create project from selected notes
 

@@ -32,6 +32,7 @@ Release notes for every **True Recall** version. For the latest release, check [
 
 ### Improvements
 
+- **Explicit project marker** — notes can declare themselves as projects with `project: true` in frontmatter, without needing children. Convert any note to a project in-place from the Dashboard context menu.
 - Local API section renamed from "Local API (MCP)" to "Local API" for clarity
 - Anki import creates full deck hierarchy with standardized leaf node naming
 - Anki HTML content is converted to clean Markdown during import
