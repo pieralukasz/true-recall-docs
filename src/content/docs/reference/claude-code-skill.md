@@ -20,7 +20,7 @@ A Claude Code skill is a markdown file that teaches Claude how to use a specific
 Before installing the skill, make sure you have:
 
 1. **True Recall** installed and running in Obsidian
-2. **Local API enabled** — go to `Settings → True Recall → General → Local API (CLI)` and toggle it on
+2. **Local API enabled** — go to `Settings → True Recall → General → Local API` and toggle it on
 3. **CLI built** — see the [setup instructions](#building-the-cli) below
 
 ## Installation
@@ -85,7 +85,7 @@ True Recall exposes a local HTTP API (port 27182) from the running Obsidian plug
 
 1. Open Obsidian
 2. Go to **Settings > True Recall > General**
-3. Scroll to **Local API (CLI)** section
+3. Scroll to **Local API** section
 4. Toggle **Enable local API** on
 5. Port defaults to `27182`
 6. Verify: `true-recall get_status`

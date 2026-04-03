@@ -81,7 +81,7 @@ Customize the keyboard shortcuts for rating cards during review.
 
 Click a key button, press the new key to reassign. Duplicates are prevented. See [Keyboard Shortcuts](/configuration/keyboard-shortcuts/#custom-review-keybindings) for details.
 
-## Local API (CLI)
+## Local API
 
 The Local API starts an HTTP server on `127.0.0.1` so the True Recall CLI and other tools can interact with the plugin. It powers the [MCP Server](/reference/mcp-server/) and the [Claude Code Skill](/reference/claude-code-skill/).
 

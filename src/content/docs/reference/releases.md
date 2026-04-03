@@ -30,7 +30,7 @@ Release notes for every **True Recall** version. For the latest release, check [
 
 ### Improvements
 
-- Local API section renamed from "Local API (MCP)" to "Local API (CLI)" for clarity
+- Local API section renamed from "Local API (MCP)" to "Local API" for clarity
 - Anki import creates full deck hierarchy with standardized leaf node naming
 - Anki HTML content is converted to clean Markdown during import
 
