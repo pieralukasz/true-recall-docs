@@ -27,6 +27,7 @@ Release notes for every **True Recall** version. For the latest release, check [
 - **Note creation modal** — create notes from selections with folder picker and optional project assignment
 - **Custom review keybindings** — remap Space, Again, Hard, and Easy keys in `Settings → General → Review keybindings`
 - **Claude Code Skill** — download link in settings to install the CLI skill for Claude Code integration
+- **Knowledge Base enabled for all** — the RAG-powered [Knowledge Base](/configuration/knowledge-base/) is now available to all Pro users without feature flags. Index your vault, then ask questions in the Knowledge Chat — True Recall searches your notes semantically and uses agentic tool calls to pull relevant context before answering.
 
 ### Improvements
 
@@ -53,7 +54,7 @@ Internal restructuring release — no user-facing changes.
 
 ### Features
 
-- **Knowledge Base (RAG)** — Pro-only semantic search across your vault with agentic chat (gated behind `ENABLE_RAG` flag)
+- **Knowledge Base (RAG)** — semantic search across your vault with agentic chat (initially gated, fully enabled in 1.6.0)
 - **Daily stats API** — new `get_daily_stats` tool with date range parameters for MCP and CLI
 - **Chat tool history** — tool call history is now persisted in agentic chat sessions
 
