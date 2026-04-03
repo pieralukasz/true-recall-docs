@@ -11,6 +11,10 @@ description: A floating toolbar that appears when you select text — generate f
 
 The **Selection Toolbar** is a floating toolbar that appears above any text selection in your notes. Select text, click a button, and AI generates properly formatted cards from your content.
 
+There are two toolbar variants:
+- **Editor Toolbar** — appears when selecting text in the editor (all buttons available)
+- **Global Toolbar** — appears in sidebars, reading view, and other non-editor contexts (editor-only buttons like IO and Highlight are excluded)
+
 ## How It Works
 
 1. Select text in any note (minimum 3 characters)
@@ -37,14 +41,16 @@ Total time: about 10 seconds.
 
 ## Toolbar Buttons
 
-| Button | What It Does |
-|--------|-------------|
-| **Flashcards** | Generate flashcard(s) with AI — the AI decides the best format for each fact |
-| **IO** | Create [image occlusion](/creation/image-occlusion/) card (appears when an image is in the selection) |
-| **Edit** | Open the selection in the [Flashcard Editor](/views/flashcard-editor/) |
-| **Quick+** | Instantly add as a basic flashcard (no AI) |
-| **Highlight** | Wrap selection with `==highlight==` syntax |
-| **Copy** | Copy selection to clipboard |
+| Button | What It Does | Editor | Global |
+|--------|-------------|:------:|:------:|
+| **Flashcards** | Generate flashcard(s) with AI | Yes | Yes |
+| **IO** | Create [image occlusion](/creation/image-occlusion/) card | Yes | -- |
+| **Edit** | Open the selection in the [Flashcard Editor](/views/flashcard-editor/) | Yes | Yes |
+| **Quick+** | Instantly add as a basic flashcard (no AI) | Yes | Yes |
+| **Highlight** | Wrap selection with `==highlight==` syntax | Yes | -- |
+| **Copy** | Copy selection to clipboard | Yes | Yes |
+| **Note+** | Create a new note from the selection | Yes | Yes |
+| **Append** | Append the selection to the current note | -- | Yes |
 
 <!-- TODO PHOTO -->
 
@@ -71,11 +77,33 @@ Wraps the selected text with `==highlight==` Markdown syntax. Useful for marking
 
 Copies the selected text to the clipboard. The button briefly changes to "Copied!" to confirm.
 
+### Note+
+
+Creates a new note from the selected text. A modal lets you set the note name, choose a vault folder, and optionally assign the note to a parent project.
+
+### Append
+
+Appends the selected text to the currently active note. Available in the global toolbar only (useful for collecting text from sidebars or reading view into your working note).
+
 ## Enabling the Toolbar
 
-Settings → AI → **Selection toolbar** (enabled by default)
+`Settings → True Recall → General → Selection Toolbar` (enabled by default)
 
 AI generation buttons require an AI configuration — either an API key or a [True Recall subscription](/subscription/).
+
+## Customizing Buttons
+
+You can configure which buttons appear and in what order — separately for the editor toolbar and the global toolbar.
+
+`Settings → True Recall → General → Editor toolbar buttons / Global toolbar buttons`
+
+For each toolbar:
+- **Toggle** buttons on or off with checkboxes
+- **Drag** buttons to reorder them
+- **Add custom commands** — click "+ Add command" to add any Obsidian command as a toolbar button
+- **Remove** custom commands with the trash icon (built-in buttons can only be toggled, not removed)
+
+<!-- TODO PHOTO -->
 
 ## Other Creation Methods
 
@@ -151,7 +179,8 @@ Select multiple paragraphs at once. AI generates multiple cards covering differe
 
 | Problem | Solution |
 |---------|----------|
-| Toolbar not appearing | Check Settings → AI → Selection toolbar is enabled |
+| Toolbar not appearing | Check `Settings → True Recall → General → Selection Toolbar` is enabled |
 | AI buttons grayed out | Configure an API key or subscription in Settings → AI |
+| Missing buttons | Check toolbar button configuration in General settings — some may be toggled off |
 | Generation fails | Check API key validity and network connection |
 | Poor card quality | Try a different model or adjust temperature in Settings → AI |

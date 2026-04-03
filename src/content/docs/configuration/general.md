@@ -58,14 +58,38 @@ This means a 2 AM review counts as "today," not "tomorrow." Useful if you study 
 
 See [The Collection Step](/creation/creating-flashcards/#the-collection-step) for how collection works.
 
-## Local API
+## Selection Toolbar
 
-The Local API starts an HTTP server on `127.0.0.1` so external tools can interact with True Recall. It powers the [MCP Server](/reference/mcp-server/) for AI assistant integration.
+| Setting | Description |
+|---------|-------------|
+| **Enable selection toolbar** | Show a floating toolbar when text is selected (default: on) |
+| **Editor toolbar buttons** | Choose which buttons appear in the editor toolbar, drag to reorder, add custom commands |
+| **Global toolbar buttons** | Choose which buttons appear in the global toolbar (non-editor contexts) |
+
+See [Selection Toolbar](/views/selection-toolbar/) for full details on buttons and customization.
+
+## Review Keybindings
+
+Customize the keyboard shortcuts for rating cards during review.
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| **Reveal + Good** | `Space` | Shows answer when hidden, rates Good when visible |
+| **Again** | `1` | Rate Again |
+| **Hard** | `2` | Rate Hard |
+| **Easy** | `4` | Rate Easy |
+
+Click a key button, press the new key to reassign. Duplicates are prevented. See [Keyboard Shortcuts](/configuration/keyboard-shortcuts/#custom-review-keybindings) for details.
+
+## Local API (CLI)
+
+The Local API starts an HTTP server on `127.0.0.1` so the True Recall CLI and other tools can interact with the plugin. It powers the [MCP Server](/reference/mcp-server/) and the [Claude Code Skill](/reference/claude-code-skill/).
 
 | Setting | Description |
 |---------|-------------|
 | **Enable local API** | Start the HTTP server when True Recall loads |
 | **Port** | Default `27182`. Change if the port conflicts. Restart Obsidian after changing. |
+| **Claude Code Skill** | Link to download the CLI skill for Claude Code |
 
 :::note
 The API only listens on localhost — it is not accessible from other machines.
@@ -74,7 +98,10 @@ The API only listens on localhost — it is not accessible from other machines.
 ## What to Read Next
 
 - [Review Interface](/review/review-interface/) — the review experience these settings control
+- [Keyboard Shortcuts](/configuration/keyboard-shortcuts/) — all shortcuts including custom review keybindings
+- [Selection Toolbar](/views/selection-toolbar/) — configurable floating toolbar
 - [Editor Integration](/configuration/editor-integration/) — link indicators, status bar, and codeblock widgets
 - [FSRS Settings](/configuration/fsrs-settings/) — scheduling configuration per preset
 - [Type-in Mode](/review/type-in-mode/) — how the type-in setting works during review
+- [Claude Code Skill](/reference/claude-code-skill/) — control True Recall from Claude Code
 - [MCP Server](/reference/mcp-server/) — connect AI assistants via the Local API

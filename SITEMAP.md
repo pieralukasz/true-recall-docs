@@ -74,8 +74,10 @@ All paths are relative to `src/content/docs/`.
 - `data/integrity-check.md` — Database Integrity Check: orphaned cards, missing references, repair
 - `data/import-export.md` — Import & Export: Anki .apkg import/export, CSV/TSV export, migration tips
 
-## Reference (3 pages)
+## Reference (5 pages)
 
+- `reference/releases.md` — Release history with features, fixes, and improvements per version
+- `reference/claude-code-skill.md` — Claude Code skill installation, 46 CLI commands, and workflow examples
 - `reference/frontmatter-fields.md` — All supported frontmatter fields and their usage
 - `reference/mcp-server.md` — MCP server setup, tool reference (34 tools), and example workflows for AI assistant integration
 - `reference/troubleshooting.md` — Common issues and solutions: cards, AI, sync, performance, backlog recovery

@@ -21,6 +21,12 @@ Quick reference for all True Recall keyboard shortcuts.
 | `3` or `Space` | Rate: Good |
 | `4` | Rate: Easy |
 
+These are the default bindings. You can customize them — see [Custom Review Keybindings](#custom-review-keybindings) below.
+
+:::note
+Number keys `1`–`4` always work as rating shortcuts regardless of custom bindings.
+:::
+
 ### Showing Answer
 
 | Key | Action |
@@ -94,6 +100,19 @@ These work globally (via Command Palette):
 |---------|-------------------|
 | Review current note | `Cmd/Ctrl + R` |
 | Open dashboard | `Cmd/Ctrl + D` |
+
+## Custom Review Keybindings
+
+You can reassign the review rating keys and the reveal/good shortcut in `Settings → True Recall → General → Review keybindings`.
+
+| Binding | Default | Description |
+|---------|---------|-------------|
+| **Reveal + Good** | `Space` | Shows the answer when hidden, rates Good when answer is visible |
+| **Again** | `1` | Rate the card as Again |
+| **Hard** | `2` | Rate the card as Hard |
+| **Easy** | `4` | Rate the card as Easy |
+
+To change a binding, click the key button next to the action, then press the new key. Duplicate keys are not allowed — True Recall shows an error if you try to assign a key that's already in use. Click "Reset to defaults" to restore the original bindings.
 
 ## Quick Reference Card
 

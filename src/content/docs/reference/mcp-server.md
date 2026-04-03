@@ -27,7 +27,7 @@ The MCP server ships in the `mcp-server/` directory of the True Recall repositor
 
 ### 1. Enable the Local API
 
-In Obsidian, go to `Settings → True Recall → General → Local API`:
+In Obsidian, go to `Settings → True Recall → General → Local API (CLI)`:
 
 | Setting | Description |
 |---------|-------------|
@@ -227,13 +227,14 @@ The Local API binds to `127.0.0.1` only — it is not accessible from other mach
 
 | Problem | Solution |
 |---------|----------|
-| "Cannot connect to True Recall" | Ensure Obsidian is running and `Settings → General → Local API` is enabled |
+| "Cannot connect to True Recall" | Ensure Obsidian is running and `Settings → General → Local API (CLI)` is enabled |
 | "Port in use" | Change the port in True Recall settings and restart Obsidian. Update `TRUE_RECALL_PORT` in MCP config to match |
 | Tools return errors | Check the Obsidian developer console (`Cmd/Ctrl + Shift + I`) for API error logs |
 | MCP server won't start | Run `cd mcp-server && bun install` to install dependencies |
 
 ## What to Read Next
 
+- [Claude Code Skill](/reference/claude-code-skill/) — install the CLI skill for Claude Code with 46 commands
 - [General Settings](/configuration/general/) — enable the Local API and configure the port
 - [FSRS Settings](/configuration/fsrs-settings/) — understand presets referenced by MCP tools
 - [AI Settings](/configuration/ai-settings/) — configure AI generation used by `generate_flashcards`

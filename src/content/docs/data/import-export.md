@@ -19,9 +19,11 @@ Import your Anki collection — cards, review history, media, and note types —
 
 1. Open the command palette: `Cmd/Ctrl + P` → "Import from Anki"
 2. Drop your `.apkg` file or click to browse
-3. Review the preview (card counts by type, deck list, media count)
-4. Configure import options
-5. Click **Import**
+3. Review the preview — card counts by type, deck list, media count
+4. Configure import options (scheduling, media, AI organization)
+5. Map note types and fields (see [Mapping Phase](#mapping-phase) below)
+6. Wait for import (and optional AI passes) to complete
+7. Review the results summary
 
 <!-- TODO PHOTO -->
 
@@ -32,6 +34,39 @@ Import your Anki collection — cards, review history, media, and note types —
 | **Import scheduling data** | On | Replay your review history to preserve FSRS progress |
 | **Import media files** | On | Save images and audio to `Attachments/anki-import` |
 | **Create project** | On | Organize imported decks as a project hierarchy |
+| **Organize with AI** | Off | AI classifies cards into better deck structure and cleans up formatting (requires API key) |
+
+### Mapping Phase
+
+After the preview, you enter the **Mapping Phase** — a dedicated screen where you control how each Anki note type maps to a True Recall note type.
+
+For each Anki model (e.g., "Basic", "Cloze", your custom types), you choose:
+
+- **Auto-create new type** — True Recall creates a matching note type with the same fields
+- **Use existing note type** — map to a note type you already have
+
+#### Field-Level Mapping
+
+When you map to an existing note type, a field mapping table appears. For each Anki field, pick the target True Recall field or **(skip)** to exclude it.
+
+True Recall auto-matches fields: exact match first, then case-insensitive match, then skip. You can override any mapping manually.
+
+| Anki Field | Target Field | Notes |
+|------------|-------------|-------|
+| Front | Front | Auto-matched |
+| Back | Back | Auto-matched |
+| Extra | *(skip)* | No match — choose a target or skip |
+
+<!-- TODO PHOTO -->
+
+### AI-Assisted Import
+
+When **Organize with AI** is enabled and your collection has 3+ decks with most cards concentrated in one deck, two additional passes run after the main import:
+
+1. **AI Classification** — analyzes card content and redistributes cards into a better deck structure (batches of 100 cards)
+2. **AI Cleanup** — fixes formatting issues in card content: strips leftover HTML, normalizes whitespace, cleans up Anki artifacts (batches of 50 cards)
+
+Both passes show progress bars. AI processing is optional and only appears when an API key is configured in [AI Settings](/configuration/ai-settings/).
 
 ### What Gets Imported
 
@@ -47,16 +82,16 @@ Import your Anki collection — cards, review history, media, and note types —
 
 ### Note Type Mapping
 
-Anki note types are automatically mapped to True Recall equivalents:
+During the [Mapping Phase](#mapping-phase), Anki note types are suggested to True Recall equivalents:
 
-| Anki Model | True Recall Type |
+| Anki Model | Suggested Mapping |
 |------------|-----------------|
 | Basic (Front, Back) | Basic |
 | Basic (and reversed card) | Basic Reversed |
 | Cloze (Text, Extra) | Cloze |
-| Other models | Custom Note Type (auto-created) |
+| Other models | Auto-create or map to existing |
 
-Custom note types are created automatically with the original Anki field names, templates, and CSS. If a name conflict exists, a suffix is added (e.g., "My Type (2)").
+You can override any suggestion in the mapping screen. When auto-creating, note types keep the original Anki field names, templates, and CSS. If a name conflict exists, a suffix is added (e.g., "My Type (2)").
 
 ### Deck Hierarchy
 

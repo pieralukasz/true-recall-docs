@@ -76,8 +76,12 @@ Right-click any project to access:
 | Go to project note | Open the project's linked note in the editor |
 | Rename | Change the project name (renames the underlying note file) |
 | Pick preset | Assign an FSRS preset to the project (writes `fsrs_preset` to the note's frontmatter) |
-| Archive project | Hide the project and its notes from the default view (sets `archived: true` in the note's frontmatter) |
-| Unarchive project | Restore an archived project |
+| Archive / Unarchive | Toggle project visibility (sets `archived` in frontmatter) |
+| **Export** | Export the project to Anki (.apkg) or CSV |
+| **Create sub-project** | Add a child project under this project |
+| **Move children to...** | Reassign all child notes to a different project |
+| **Dissolve project** | Remove the project but keep its child notes (they become unassigned) |
+| **Delete project** | Remove the project and unlink children |
 
 ### Drag-and-drop organization
 
@@ -114,11 +118,11 @@ Right-click any note to access:
 | Custom session | Build a filtered session for this note |
 | Go to note | Open the note in the editor |
 | Rename | Rename the note (renames the file) |
-| Archive | Hide this note from the default view (sets `archived: true` in the note's frontmatter) |
-| Unarchive | Restore an archived note |
+| Archive / Unarchive | Toggle note visibility (sets `archived` in frontmatter) |
+| **Create project** | Turn this unassigned note into a new project (appears for unassigned notes) |
+| **Assign to project** | Add this unassigned note to an existing project (appears for unassigned notes) |
+| Detach from project | Remove this note from its parent project (appears inside Projects tab) |
 | Select | Enter selection mode with this note selected |
-
-`Detach from project` appears on note rows inside the Projects tab, not here.
 
 ### Orphaned Notes
 
@@ -139,6 +143,7 @@ You can select multiple notes at once to perform bulk actions.
 |-------------|-------------|
 | All | Select every visible note |
 | Create project | Create a new project containing all selected notes |
+| Assign to project | Add all selected notes to an existing project |
 | Archive | Archive all selected notes |
 | Study | Start a review session for all selected notes combined |
 | Cancel | Exit selection mode |
