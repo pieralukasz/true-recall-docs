@@ -13,29 +13,39 @@ Release notes for every **True Recall** version. For the latest release, check [
 
 ---
 
-## 1.6.0 (upcoming)
+## Next (upcoming)
+
+---
+
+## 1.6.0 (2026-04-04)
 
 ### Features
 
-- **Configurable Selection Toolbar** — choose which buttons appear in the editor and global toolbars, drag to reorder, and add custom Obsidian commands
-- **Global Selection Toolbar** — the floating toolbar now works outside the editor too (sidebars, reading view, terminal)
-- **New toolbar buttons** — Note+ (create note from selection) and Append (add selection to current note)
-- **Anki Import: Mapping Phase** — manually map Anki note types and individual fields to True Recall equivalents before importing
-- **AI-Assisted Anki Import** — optional AI passes to reclassify cards into better deck structures and clean up formatting artifacts
-- **Dashboard: Project management** — right-click context menu on projects with export, sub-project creation, move children, dissolve, and delete actions
-- **Dashboard: Assign to project** — create projects from unassigned notes or assign them to existing projects, including bulk selection
-- **Note creation modal** — create notes from selections with folder picker and optional project assignment
-- **Custom review keybindings** — remap Space, Again, Hard, and Easy keys in `Settings → General → Review keybindings`
-- **Claude Code Skill** — download link in settings to install the CLI skill for Claude Code integration
-- **Knowledge Base enabled for all** — the RAG-powered [Knowledge Base](/configuration/knowledge-base/) is now available to all Pro users without feature flags. Index your vault, then ask questions in the Knowledge Chat — True Recall searches your notes semantically and uses agentic tool calls to pull relevant context before answering.
-- **Note Review** — review entire notes as flashcards. Toggle note review on any note from the [Flashcard Panel](/views/flashcard-panel/) header or the command palette ("Toggle note review"). The full note content renders in the review view using Obsidian's live preview, so formatting, links, and embeds all work. A setting controls whether YAML frontmatter is shown or stripped. Note review cards are scheduled by FSRS just like regular cards.
+- Added Note Review -- schedule entire notes for spaced repetition with a toggle, with configurable frontmatter display and editable content during review
+- Added Selection Toolbar -- select multiple flashcards across any view for bulk AI actions, with configurable editor and global toolbars, drag-to-reorder, and custom command support
+- Added Anki Import mapping phase -- manually map fields between Anki and True Recall with AI-assisted classification, dropped fields tracking, and HTML-to-Markdown conversion
+- Added project management actions to the Dashboard -- export, create sub-projects, dissolve, and delete projects via context menu; assign notes to projects; bulk selection
+- Added explicit project marker -- convert any note into a project in-place using `project: true` frontmatter
+- Added custom review keybindings -- remap Space, Again, Hard, and Easy to your preferred keys
+- Added note creation modal with project assignment and folder picker
+- Enabled Knowledge Base for all Pro users
+- Added Claude Code Skill download link in settings
+
+### Bug Fixes
+
+- Fixed daily reviewed stats incorrectly counting cards when reverting a new card review
+- Fixed dissolve not removing the `project: true` marker from explicit projects
+- Fixed silent failures when deleting a project -- errors are now surfaced
+- Fixed note archived status not always populating, causing incorrect context menus
+- Fixed frontmatter index not syncing before dashboard invalidation, causing stale project data
+- Fixed dashboard not reacting to manual `project` frontmatter changes
 
 ### Improvements
 
-- **Explicit project marker** — notes can declare themselves as projects with `project: true` in frontmatter, without needing children. Convert any note to a project in-place from the Dashboard context menu.
-- Local API section renamed from "Local API (MCP)" to "Local API" for clarity
-- Anki import creates full deck hierarchy with standardized leaf node naming
-- Anki HTML content is converted to clean Markdown during import
+- Renamed Local API setting from "Local API (MCP)" to "Local API"
+- Improved review UI performance with incremental state patching instead of full reloads
+- Anki imports now create the full deck hierarchy with standardized leaf node naming
+- Fixed data layer invalidation race conditions for more reliable cache updates
 
 ---
 
