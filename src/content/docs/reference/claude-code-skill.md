@@ -9,7 +9,7 @@ description: Install the True Recall skill for Claude Code to control flashcards
 :::caution[My Notes]
 :::
 
-The **True Recall** skill gives Claude Code direct access to your flashcard collection through 46 CLI commands. Generate flashcards from notes, run review sessions, analyze study patterns, and manage your entire spaced repetition system — all from the terminal.
+The **True Recall** skill gives Claude Code direct access to your flashcard collection through 60 CLI commands. Generate flashcards from notes, discuss cards during review, analyze study patterns, and manage your entire spaced repetition system — all from the terminal.
 
 ## What Is a Skill?
 
@@ -37,7 +37,7 @@ Create `~/.claude/skills/true-recall/SKILL.md` with the content from the [Skill 
 
 ### Step 3: Verify
 
-Open a new Claude Code session and type `/true-recall` — Claude should recognize the skill and have access to all 60 commands.
+Open a new Claude Code session and type `/true-recall` — Claude should recognize the skill and have access to all commands.
 
 ## Building the CLI
 
@@ -75,281 +75,64 @@ description: Use when working with True Recall flashcards, spaced repetition, st
 user-invocable: true
 ---
 
-# True Recall CLI Integration
-
-True Recall exposes a local HTTP API (port 27182) from the running Obsidian plugin. The `true-recall` CLI binary calls this API directly.
+# True Recall CLI
 
-## Setup
+True Recall exposes a local HTTP API (port 27182) from the running Obsidian plugin. The `true-recall` CLI binary calls this API. All output is JSON.
 
-### Step 1: Enable the plugin's Local API
+Always start with `get_full_context` to understand what the user is doing right now.
 
-1. Open Obsidian
-2. Go to **Settings > True Recall > General**
-3. Scroll to **Local API** section
-4. Toggle **Enable local API** on
-5. Port defaults to `27182`
-6. Verify: `true-recall get_status`
+## How to Act
 
-### Step 2: Build the CLI (if not already built)
+### When the user is reviewing a flashcard
 
-```bash
-cd /path/to/true-recall
-bun run cli:build
-ln -sf $(pwd)/cli/true-recall ~/.local/bin/true-recall
-```
+- Call `get_full_context` to see the current card and session state
+- If `isAnswerRevealed` is false: discuss ONLY the question. Never reveal or hint at the answer.
+- Use Socratic prompting — ask what they think, guide their reasoning
+- When they're ready, call `reveal_answer`, then discuss
+- Do NOT grade cards unless the user explicitly asks you to
 
-### Usage
+### When the user wants flashcards generated
 
-```bash
-true-recall <command> [--flag value ...]
-true-recall --help                    # list all commands
-true-recall <command> --help          # show command params
-true-recall get_status --port 27183   # override port
-```
+- Call `get_active_note` to read the note content and its `source_uid`
+- Pass the relevant text to `generate_flashcards --text "..." --source_uid UID`
+- If the note has no `source_uid`, call `add_flashcard_uid` first
 
-### Important notes
-
-- **Obsidian must be running** with True Recall loaded — the CLI talks to the live plugin via HTTP
-- If the port is in use, the plugin auto-increments (27183, 27184...) — use `--port` to match
-- The API binds to `127.0.0.1` only — never exposed to the network
-- All output is JSON
+### When the user asks about their progress
 
-## Quick Reference — All 60 Commands
+- `get_study_summary` for today's snapshot
+- `get_session_analysis` for detailed card-by-card breakdown
+- `get_study_patterns` for trends over time
+- `get_problem_cards` for leeches and weak spots
+- `get_fsrs_analytics` for retention vs target
 
-### Context (what's happening now)
-
-| Command | What it does |
-|---------|-------------|
-| `get_full_context` | **START HERE** — complete snapshot: active view, review session with current card, active note, today's stats, due count |
-| `get_status` | Check if plugin is running and DB is ready |
-| `get_active_note` | Get the currently open note: path, content, source_uid, and all linked flashcards |
-
-### Cards — Read
-
-| Command | What it does |
-|---------|-------------|
-| `list_cards` | Search/filter cards. Flags: `--query`, `--state`, `--source_uid`, `--limit`, `--suspended`, `--archived` |
-| `get_card --card_id ID` | Single card with full details + last 20 review history entries |
-| `get_card_context --card_id ID` | Deep context: card + full source note content + review history + sibling cards |
-| `get_card_relations --card_id ID` | Related cards: siblings from same note, reverse pairs, cloze siblings |
-| `get_due_cards` | All cards due for review today. WARNING: can return 100k+ chars |
-| `get_problem_cards` | Leech cards: high lapses (>3), low stability (<2d), or relearning state. Flag: `--limit` |
-
-### Cards — Write
-
-| Command | What it does |
-|---------|-------------|
-| `create_flashcard --question Q --answer A` | Create one card. Optional: `--source_uid`, `--card_type basic\|cloze` |
-| `create_flashcards_batch --cards '[...]'` | Bulk create. Optional: `--source_uid` |
-| `update_card --card_id ID` | Edit card's `--question` and/or `--answer` |
-| `suspend_card --card_id ID --suspended true` | Suspend/unsuspend a card |
-| `delete_card --card_id ID` | Soft-delete a card |
-| `bulk_delete_cards --card_ids '[...]'` | Delete multiple cards |
-| `remove_cards_from_note` | Delete ALL cards linked to a note. Optional: `--source_uid`, `--path` |
-| `bulk_suspend_cards --card_ids '[...]' --suspended true` | Suspend/unsuspend multiple cards |
-| `bury_cards --card_ids '[...]'` | Temporarily hide cards. Optional: `--days`, `--until` |
-
-### Review — In-Session
-
-| Command | What it does |
-|---------|-------------|
-| `get_review_context` | Current card, answer revealed status, progress. Flag: `--include_note_content` |
-| `reveal_answer` | Flip the current card — reveals answer in Obsidian UI |
-| `grade_review_card --rating N` | Grade current card (1-4) and advance to next. 1=Again, 2=Hard, 3=Good, 4=Easy |
-| `start_review_session` | Open ReviewView. Flag: `--mode all_due\|current_note\|weak_cards\|created_today\|overdue\|custom` |
-
-### Review — Standalone
-
-| Command | What it does |
-|---------|-------------|
-| `grade_card --card_id ID --rating N` | Grade any card by ID (outside of active session) |
+### When the user asks about a specific card
 
-### AI Generation
-
-| Command | What it does |
-|---------|-------------|
-| `generate_flashcards --text "..."` | Send text to AI, generate and save flashcards. Optional: `--note_type_slug`, `--source_uid` |
-| `get_note_types` | List available note types (Basic, Cloze, custom) with field definitions |
-
-### Navigation
-
-| Command | What it does |
-|---------|-------------|
-| `open_view --view dashboard` | Open a view: `dashboard`, `stats`, `card-browser`, `card-browser-orphaned`, `flashcard-panel`, `simulator` |
-| `open_note --path "Projects/ML.md"` | Open a specific note in Obsidian |
-
-### Dashboard & Projects
+- `get_card_context --card_id ID` gives everything: card, source note, history, siblings
+- For related cards from same note: `get_card_relations --card_id ID`
 
-| Command | What it does |
-|---------|-------------|
-| `get_dashboard` | Full overview: totals, due/new/learning/overdue, today progress, streak, per-note breakdown |
-| `get_projects` | Project/deck hierarchy tree with aggregate stats |
-| `get_project --path "Projects/Spanish.md"` | Detailed stats for a single project |
-
-### FSRS Scheduling
+### When the user wants to organize notes
 
-| Command | What it does |
-|---------|-------------|
-| `get_fsrs_presets` | List all presets with retention target, daily limits, learning steps |
-| `create_fsrs_preset --name "Exam Prep"` | Create preset. Optional: `--request_retention`, `--new_cards_per_day`, `--reviews_per_day`, `--learning_steps '[1,10]'` |
-| `get_fsrs_analytics` | True retention, workload forecast, distributions. Flag: `--days` |
-
-### FSRS Advanced
-
-| Command | What it does |
-|---------|-------------|
-| `optimize_parameters` | Optimize FSRS weights from review history. Needs 400+ reviews. Optional: `--preset_name` |
-| `simulate_reviews --sequences '["3333","1333"]'` | Simulate FSRS scheduling for "what if" scenarios. Rating strings: 1=Again, 3=Good |
-| `get_workload_forecast` | Detailed daily workload forecast with day-of-week breakdown. Flag: `--days` |
-| `get_retrievability --card_id ID` | Get current recall probability (0-1) for a card |
-| `get_scheduling_preview --card_id ID` | Preview next interval for each rating (Again/Hard/Good/Easy) |
-
-### Export
-
-| Command | What it does |
-|---------|-------------|
-| `export_csv` | Export flashcards to CSV/TSV. Optional: `--separator`, `--include_scheduling` |
-
-### Notes & Deck Management
-
-| Command | What it does |
-|---------|-------------|
-| `add_flashcard_uid` | Add `flashcard_uid` to active note's frontmatter |
-| `set_note_preset --preset_name "Technical"` | Assign FSRS preset to a note. Pass `--preset_name null` to remove |
-| `set_note_parent --parent_name "ML" --action add` | Add/remove parent project |
-| `set_note_archive --archived true` | Archive/unarchive a note |
-| `dissolve_project --path "Projects/Old.md"` | Dissolve a project — detach all children, they become unassigned |
-| `move_project_children --from "Old" --to "New"` | Move all children from one project to another |
-| `toggle_note_review` | Enable/disable note review for the active note. Optional: `--path` |
-| `note_review_status` | Check if note review is enabled for the active note. Optional: `--path` |
+- Projects: `set_note_parent`, `get_projects`, `dissolve_project`
+- Presets: `set_note_preset`, `get_fsrs_presets`
+- Note review: `toggle_note_review` to schedule whole-note review
 
-### Statistics & Analysis
-
-| Command | What it does |
-|---------|-------------|
-| `get_study_summary` | Today's stats + maturity breakdown + streaks |
-| `get_daily_stats --start_date 2026-03-01 --end_date 2026-03-31` | Daily stats for a date range |
-| `get_study_patterns` | Best days/hours heatmap from last 30 days |
-| `get_session_analysis` | Deep dive into today's session: every reviewed card with ratings |
-| `get_study_recommendations` | Gathers summary + patterns + problem cards for analysis. Flag: `--focus` |
-
-### Backup & Integrity
-
-| Command | What it does |
-|---------|-------------|
-| `create_backup` | Create compressed database backup |
-| `list_backups` | List all backups with dates and sizes |
-| `check_integrity` | Find orphaned cards, notes, review logs |
-
-### Power User
-
-| Command | What it does |
-|---------|-------------|
-| `query_sql --sql "SELECT ..."` | Execute read-only SQL SELECT |
-| `get_schema` | Database schema with FSRS annotations |
-
-### Knowledge Base (Pro)
-
-| Command | What it does |
-|---------|-------------|
-| `search_knowledge --query "topic"` | Semantic search. Optional: `--topK`, `--sourceType`, `--sourceIds '[...]'` |
-| `index_knowledge` | Trigger full reindex |
-| `get_knowledge_status` | Index status: total chunks, embedded chunks, source counts |
-
----
-
-## Common Workflows
-
-### "I don't understand this flashcard" / "Help me with this card"
-
-```bash
-true-recall get_full_context          # see current card, view, session state
-# If isAnswerRevealed=false: discuss only the QUESTION, never reveal answer
-# Ask user what they think, use Socratic prompts
-true-recall reveal_answer             # when user is ready to see it
-# Discuss the answer, explain context
-true-recall grade_review_card --rating 3  # grade and advance
-```
-
-### "How did I do today?" / Analyze my session
-
-```bash
-true-recall get_session_analysis      # every reviewed card with ratings
-```
-
-### "Generate flashcards from my active note"
-
-```bash
-true-recall get_active_note           # read note content + existing cards
-true-recall generate_flashcards --text "..." --source_uid UID
-```
-
-### "Let's review together in the terminal"
-
-```bash
-true-recall get_full_context          # check if session is active + current card
-# Discuss the question with the user (answer hidden!)
-true-recall reveal_answer             # flip the card
-true-recall grade_review_card --rating 3  # advance to next
-# Repeat
-```
-
-### "Start a review session in Obsidian"
-
-```bash
-true-recall start_review_session --mode all_due       # standard daily review
-true-recall start_review_session --mode current_note  # review active note's cards
-true-recall start_review_session --mode weak_cards    # focus on low-stability cards
-```
-
-### "Why do I keep forgetting things?"
-
-```bash
-true-recall get_problem_cards         # find leech cards
-true-recall get_study_patterns        # analyze when/how user studies
-true-recall get_fsrs_analytics        # check true retention vs target
-```
-
-### "Organize my notes into a project"
-
-```bash
-true-recall set_note_parent --parent_name "Machine Learning" --action add
-true-recall set_note_preset --preset_name "Technical"
-true-recall get_projects              # verify hierarchy
-```
-
----
-
-## FSRS Cheat Sheet
-
-| State | Value | Meaning |
-|-------|-------|---------|
-| New | 0 | Never reviewed, not "due" |
-| Learning | 1 | In initial learning steps |
-| Review | 2 | Graduated, scheduled for review |
-| Relearning | 3 | Failed review, back in learning |
-
-| Rating | Value | Meaning |
-|--------|-------|---------|
-| Again | 1 | Forgot — card re-enters learning |
-| Hard | 2 | Difficult recall |
-| Good | 3 | Normal recall |
-| Easy | 4 | Perfect recall |
-
-**Problem cards**: lapses > 3 OR stability < 2.0 days OR state = Relearning
-**Mature cards**: state = Review AND scheduled_days >= 21
-**Young cards**: state = Review AND scheduled_days < 21
-
----
-
-## Troubleshooting
-
-| Problem | Solution |
-|---------|----------|
-| "Cannot connect to True Recall plugin" | Open Obsidian and enable Local API in Settings > General |
-| "Database not ready" | Wait for plugin to fully load, or restart Obsidian |
-| "No AI key configured" | Add Pro key or OpenRouter API key in plugin settings |
-| "Port in use" | Use `--port 27183` or change port in Settings > General > Local API port |
+## Key Commands
+
+Start here: `get_full_context` — snapshot of active view, session, note, stats, due count
+
+| Use case | Commands |
+|----------|---------|
+| Read cards | `list_cards`, `get_card`, `get_card_context`, `get_due_cards`, `get_problem_cards` |
+| Write cards | `create_flashcard`, `create_flashcards_batch`, `update_card`, `suspend_card`, `delete_card` |
+| Review session | `get_review_context`, `reveal_answer`, `grade_review_card`, `start_review_session` |
+| AI generation | `generate_flashcards`, `get_note_types` |
+| Stats | `get_study_summary`, `get_daily_stats`, `get_study_patterns`, `get_session_analysis` |
+| Notes & projects | `set_note_parent`, `set_note_preset`, `toggle_note_review`, `get_projects` |
+| FSRS | `get_fsrs_presets`, `get_fsrs_analytics`, `optimize_parameters` |
+| Navigation | `open_view`, `open_note` |
+
+For all 60 commands with flags and parameters: `true-recall --help`
+For a specific command: `true-recall <command> --help`
 ````
 
 ## What to Read Next
