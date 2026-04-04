@@ -75,7 +75,7 @@ Right-click any project to access:
 | Custom session | Build a filtered session (states, limits, card types) |
 | Go to project note | Open the project's linked note in the editor |
 | Rename | Change the project name (renames the underlying note file) |
-| Pick preset | Assign an FSRS preset to the project (writes `fsrs_preset` to the note's frontmatter) |
+| Set preset | Assign an FSRS preset to the project (writes `fsrs_preset` to the note's frontmatter) |
 | Archive / Unarchive | Toggle project visibility (sets `archived` in frontmatter) |
 | **Export** | Export the project to Anki (.apkg) or CSV |
 | **Create sub-project** | Add a child project under this project |
@@ -92,6 +92,8 @@ Drag rows to reorganize your hierarchy without menus:
 | Project → another project | Target project | Nest as a subproject |
 | Note → a project | Target project | Add note to that project |
 | Note → another note | Empty area between notes | Create a new project containing both notes |
+| Unassigned note → top drop zone | Top of unassigned area | Convert to project (`project: true`) |
+| Unassigned note → bottom drop zone | Bottom of unassigned area | Archive the note |
 | Note or project → root drop zone | Bottom of the list | Remove from parent (unnest) |
 
 :::tip[Building your structure]
@@ -119,7 +121,8 @@ Right-click any note to access:
 | Go to note | Open the note in the editor |
 | Rename | Rename the note (renames the file) |
 | Archive / Unarchive | Toggle note visibility (sets `archived` in frontmatter) |
-| **Create project** | Turn this unassigned note into a new project (appears for unassigned notes) |
+| **Convert to project** | Mark this note as a project with `project: true` (appears for unassigned notes) |
+| **Remove project status** | Remove the `project: true` marker (appears for explicit projects) |
 | **Assign to project** | Add this unassigned note to an existing project (appears for unassigned notes) |
 | Detach from project | Remove this note from its parent project (appears inside Projects tab) |
 | Select | Enter selection mode with this note selected |

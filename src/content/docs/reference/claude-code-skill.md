@@ -37,7 +37,7 @@ Create `~/.claude/skills/true-recall/SKILL.md` with the content from the [Skill 
 
 ### Step 3: Verify
 
-Open a new Claude Code session and type `/true-recall` — Claude should recognize the skill and have access to all 46 commands.
+Open a new Claude Code session and type `/true-recall` — Claude should recognize the skill and have access to all 60 commands.
 
 ## Building the CLI
 
@@ -71,7 +71,7 @@ Copy the entire content below into `~/.claude/skills/true-recall/SKILL.md`:
 ````markdown
 ---
 name: true-recall
-description: Use when working with True Recall flashcards, spaced repetition, study sessions, FSRS scheduling, or generating flashcards from notes. Provides CLI access to 46 commands for reading cards, creating flashcards, reviewing, analyzing study patterns, managing decks/projects, and AI generation.
+description: Use when working with True Recall flashcards, spaced repetition, study sessions, FSRS scheduling, or generating flashcards from notes. Provides CLI access to 60 commands for reading cards, creating flashcards, reviewing, analyzing study patterns, managing decks/projects, and AI generation.
 user-invocable: true
 ---
 
@@ -114,7 +114,7 @@ true-recall get_status --port 27183   # override port
 - The API binds to `127.0.0.1` only — never exposed to the network
 - All output is JSON
 
-## Quick Reference — All 46 Commands
+## Quick Reference — All 60 Commands
 
 ### Context (what's happening now)
 
@@ -194,6 +194,22 @@ true-recall get_status --port 27183   # override port
 | `create_fsrs_preset --name "Exam Prep"` | Create preset. Optional: `--request_retention`, `--new_cards_per_day`, `--reviews_per_day`, `--learning_steps '[1,10]'` |
 | `get_fsrs_analytics` | True retention, workload forecast, distributions. Flag: `--days` |
 
+### FSRS Advanced
+
+| Command | What it does |
+|---------|-------------|
+| `optimize_parameters` | Optimize FSRS weights from review history. Needs 400+ reviews. Optional: `--preset_name` |
+| `simulate_reviews --sequences '["3333","1333"]'` | Simulate FSRS scheduling for "what if" scenarios. Rating strings: 1=Again, 3=Good |
+| `get_workload_forecast` | Detailed daily workload forecast with day-of-week breakdown. Flag: `--days` |
+| `get_retrievability --card_id ID` | Get current recall probability (0-1) for a card |
+| `get_scheduling_preview --card_id ID` | Preview next interval for each rating (Again/Hard/Good/Easy) |
+
+### Export
+
+| Command | What it does |
+|---------|-------------|
+| `export_csv` | Export flashcards to CSV/TSV. Optional: `--separator`, `--include_scheduling` |
+
 ### Notes & Deck Management
 
 | Command | What it does |
@@ -202,6 +218,8 @@ true-recall get_status --port 27183   # override port
 | `set_note_preset --preset_name "Technical"` | Assign FSRS preset to a note. Pass `--preset_name null` to remove |
 | `set_note_parent --parent_name "ML" --action add` | Add/remove parent project |
 | `set_note_archive --archived true` | Archive/unarchive a note |
+| `dissolve_project --path "Projects/Old.md"` | Dissolve a project — detach all children, they become unassigned |
+| `move_project_children --from "Old" --to "New"` | Move all children from one project to another |
 | `toggle_note_review` | Enable/disable note review for the active note. Optional: `--path` |
 | `note_review_status` | Check if note review is enabled for the active note. Optional: `--path` |
 
