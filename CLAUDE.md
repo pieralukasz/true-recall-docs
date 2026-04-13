@@ -2,6 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+
 ## Project Overview
 
 Documentation site for **True Recall**, an Obsidian plugin for spaced repetition using FSRS v6. Built with [Astro](https://astro.build) + [Starlight](https://starlight.astro.build/) and deployed to Vercel as a static site.
@@ -147,34 +148,6 @@ Before editing or deleting documentation files, confirm with the user which file
 
 - **true-recall-proxy** runs on ZimaBlade (`ssh zimablade`). It is the proxy server used by the plugin.
 
-### Creating Beta Testers
-
-Two-step process — Edge Function hardcodes $3 budget, so you MUST update it after.
-
-**Step 1: Create user** (Supabase Edge Function)
-```bash
-curl -sS -X POST https://REDACTED_PROJECT_REF.supabase.co/functions/v1/admin-create-user \
-  -H "Authorization: Bearer $ADMIN_SECRET" \
-  -H "Content-Type: application/json" \
-  -d '{"email": "user@example.com", "expires_in_days": 30}'
-```
-Response contains `litellmKey` (truncated) — not usable for `/key/update`. Use the token hash instead.
-
-**Step 2: Set budget to $1.50** (LiteLLM API, by token hash)
-```bash
-curl -sS -X POST https://ai.truerecall.app/key/update \
-  -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"key": "<TOKEN_HASH>", "max_budget": 1.5}'
-```
-Get the token hash from `/key/list` — match by `key_alias` (email).
-
-**DO NOT:**
-- Skip step 2 — budget defaults to $3, beta testers get $1.50
-- Use the truncated `litellmKey` from the Edge Function response for `/key/update` — it won't match. Use the full token hash from `/key/list`
-- Forget `expires_in_days` — without it the key never expires
-
-**Secrets:** `ADMIN_SECRET` and `LITELLM_MASTER_KEY` are in the true-recall repo at `docs/beta-testing-users.md`.
 
 ## Deployment
 

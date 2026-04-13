@@ -20,7 +20,7 @@ The recommended way to use AI features. A subscription key gives you access to e
 1. Visit [truerecall.app/login](https://truerecall.app/login) and sign in with your email
 2. A free trial key is generated automatically on first visit to the [dashboard](https://truerecall.app/dashboard)
 3. Copy the key and paste it into `Settings → True Recall → AI → Subscription Key`
-4. Upgrade to Pro ($8/mo) from the dashboard when ready — your key stays the same
+4. Upgrade to Pro ($2/mo) from the dashboard when ready — your key stays the same
 
 When a subscription key is configured, it takes priority over an OpenRouter API key.
 
@@ -28,8 +28,8 @@ When a subscription key is configured, it takes priority over an OpenRouter API 
 
 | Plan | Budget | Reset |
 |------|--------|-------|
-| Free Trial | ~350-700 cards (one-time) | No reset |
-| Pro | ~5,000-7,000 cards/month | Monthly |
+| Free Trial | ~100 cards (one-time) | No reset |
+| Pro | ~2,000-3,000 cards/month | Monthly |
 
 Manage or cancel your subscription anytime from the [dashboard](https://truerecall.app/dashboard).
 

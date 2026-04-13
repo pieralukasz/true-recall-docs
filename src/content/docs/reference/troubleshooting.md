@@ -35,7 +35,7 @@ Common issues and how to fix them. If your problem isn't listed here, check the 
 
 1. **No API key** — You need either a subscription key (from [truerecall.app/dashboard](https://truerecall.app/dashboard)) or your own OpenRouter API key. Check `Settings → AI`.
 
-2. **Budget exceeded** — Free trial has a one-time budget (~350-700 cards). Pro resets monthly. Check usage on your [dashboard](https://truerecall.app/dashboard). You can upgrade to Pro or add an OpenRouter key as fallback.
+2. **Budget exceeded** — Free trial has a one-time budget (~100 cards). Pro resets monthly. Check usage on your [dashboard](https://truerecall.app/dashboard). You can upgrade to Pro or add an OpenRouter key as fallback.
 
 3. **Model unavailable** — Some models may be temporarily unavailable. Try a different model in `Settings → AI → Model`.
 

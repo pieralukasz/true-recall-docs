@@ -36,7 +36,7 @@ After enabling True Recall:
    2. A free trial key is generated automatically on the [dashboard](https://truerecall.app/dashboard)
    3. Copy your key from the dashboard
    4. In Obsidian: `Settings → True Recall → AI → Pro Key` — paste your key
-   5. After testing, upgrade to Pro ($8/mo) from the dashboard or bring your own OpenRouter key
+   5. After testing, upgrade to Pro ($2/mo) from the dashboard or bring your own OpenRouter key
 
    **Option B — OpenRouter API key**
    1. Get an API key from [openrouter.ai](https://openrouter.ai)
