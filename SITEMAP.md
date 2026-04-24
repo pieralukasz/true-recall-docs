@@ -52,6 +52,13 @@ All paths are relative to `src/content/docs/`.
 - `views/import-studio.md` — Bulk text-based flashcard creation with live preview and format auto-detection
 - `views/statistics.md` — Analytics dashboard: daily stats, retention, maturity, streaks, collection health, widgets
 
+## Plugins (4 pages)
+
+- `plugins/overview.md` — Plugin architecture, tier system (free / BYOK / Pro), and the Plugins settings tab
+- `plugins/card-polish.md` — AI rewriting of cards during review and in the Add Flashcard modal, with per-preset auto-apply / preview and hotkeys
+- `plugins/ai-flashcard-generation.md` — Preset-driven AI card generation from notes, selections, and highlights
+- `plugins/generation-presets.md` — Reference for generation presets: shape, CRUD, built-ins, validation, TTS / image post-processing
+
 ## Configuration (5 pages)
 
 - `configuration/general.md` — General settings: review interface, editor integration, day boundary, collection behavior

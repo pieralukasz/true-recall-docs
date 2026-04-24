@@ -17,6 +17,53 @@ Release notes for every **True Recall** version. For the latest release, check [
 
 ---
 
+## 1.7.0 (2026-04-24)
+
+### Features
+
+- **Plugin architecture** -- 12 built-in plugins with tier-based gating (free / BYOK / Pro), each independently toggleable from a new Plugins tab in settings: Image Occlusion, AI Flashcard Generation, Knowledge Base, Type-in Mode, Healing Flashcards, Link Status Indicators, Dashboard Codeblocks, Gamification Widgets, Status Bar Widget, AI Anki Import, Selection Toolbar, and Card Polish. See [Plugin Overview](/plugins/overview/)
+- **Card Polish plugin** -- AI rewriting of cards mid-review or in the Add Flashcard modal, with per-preset auto-apply or preview, per-preset review hotkeys, and optional source-note / related-card context. See [Card Polish](/plugins/card-polish/)
+- **AI Flashcard Generation plugin** -- preset-driven generation from notes, selections, and highlights, with per-preset TTS and image post-processing, a Pro-hosted built-in preset, and automatic injection of existing cards to avoid duplicates. See [AI Flashcard Generation](/plugins/ai-flashcard-generation/)
+- **Generation presets system** -- full CRUD for AI generation templates via settings UI, CLI, and MCP. Presets bind a single free-form prompt to a note type and optionally configure TTS voice / autoplay and image generation targets. See [Generation Presets](/plugins/generation-presets/)
+- **Card Preview modal** -- click Preview on any Flashcard Panel card to see front and back with an interactive grading flow, smooth view-transition animations, and keyboard shortcuts
+- **Basic Pro prompt overhaul** -- rewritten Pro generation prompt with 7 core rules and 6 few-shot examples
+- **CLI preset commands** -- `list_generation_presets`, `get_generation_preset`, `create_generation_preset`, `update_generation_preset`, `delete_generation_preset`, and `generate_flashcards_with_preset`
+- **MCP preset tools** -- matching MCP tools for AI assistants
+
+### Improvements
+
+- **Selection Toolbar is now a plugin** -- toggle and configure it from the Plugins tab
+- **Cmd/Ctrl-click a panel card** to enter selection mode without the context menu
+- **Wand button in Add Flashcard modal** dispatches Card Polish presets
+- **Day rollover fixes UI immediately** -- focus / visibility triggers DataLayer invalidation so due / new counts update without manual refresh
+- **Reactive settings UI** -- `useSettings` / `usePreset` subscribe to `settings:changed`
+- **Preview modal polish** -- compact button bar in preview mode, cleaner dividers, PRO badge on the Basic Pro preset
+- **AI parse tolerance** -- Card Polish and generation flows tolerate JSON in prose or code fences and surface notices on parse failures
+- **Post-processing errors surface to the user** with DataLayer invalidation
+
+### Bug Fixes
+
+- Fixed **CommandSuggestModal** and **PresetSuggestModal** resolving `null` on selection
+- Fixed stale `defaultGenerationPresetId` after migration (self-heals)
+- Fixed pin / wand icons not rendering in the Add Flashcard modal
+- Fixed Pro prompt not falling back when user custom prompt was empty
+- Fixed "AI changes applied" notice firing on silent `ReviewCardTarget` advances
+- Fixed unhandled rejection from `resolveSourceUid` in the QuickNoteEditor wand
+
+### Pro-gating Changes
+
+- **Per-plugin tiers** -- plugins declare `free`, `byok`, or `pro`; the Plugins tab shows a Pro badge accordingly
+
+### Breaking Changes & Migration
+
+- **Generation preset shape flattened** -- dropped `fields`, `customPrompt` (renamed to `prompt`), and `isPinned`; added `builtin` and `image`; `isPro` renamed to `requiresPro`. Settings migration lossy-merges legacy preset fields into the new flat `prompt`
+- **`flashcardGeneration` settings bucket removed**
+- **Built-in presets are now locked** in the UI -- copy one to customize
+- **`cardPolish.presets` renamed to `userPresets`** -- legacy built-in polish presets are replaced by the shared plugin defaults; migration is automatic
+- **`selectionToolbarEnabled` setting removed** -- toggle the plugin instead
+
+---
+
 ## 1.6.2 (2026-04-09)
 
 ### Features

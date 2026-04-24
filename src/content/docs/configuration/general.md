@@ -39,11 +39,15 @@ Daily limits are configured **per preset**, not here. Each [FSRS preset](/schedu
 
 | Setting | Options | Description |
 |---------|---------|-------------|
-| **Show link status indicators** | On / Off | Inline flashcard counts next to `[[wiki links]]` |
-| **Show status bar widget** | On / Off | Global card counts in the bottom status bar |
 | **Show quick review in panel** | On / Off | Quick-review section at top of [Flashcard Panel](/views/flashcard-panel/) |
 
-For details on what these features look like and how to use them, see [Editor Integration](/configuration/editor-integration/).
+Most editor integrations are now plugins (see [Plugin Overview](/plugins/overview/)) — toggle them in `Settings → True Recall → Plugins`:
+
+- **Link Status Indicators** — inline flashcard counts next to `[[wiki links]]`
+- **Status Bar Widget** — global card counts in the bottom status bar
+- **Dashboard Codeblocks** / **Gamification Widgets** — embed dashboards in your notes
+
+For details on what each plugin does and how to configure it, see [Editor Integration](/configuration/editor-integration/).
 
 ## Day Boundary
 
@@ -61,9 +65,11 @@ See [The Collection Step](/creation/creating-flashcards/#the-collection-step) fo
 
 ## Selection Toolbar
 
+The Selection Toolbar is now a [plugin](/plugins/overview/). Enable it and configure buttons in `Settings → True Recall → Plugins → Selection Toolbar`:
+
 | Setting | Description |
 |---------|-------------|
-| **Enable selection toolbar** | Show a floating toolbar when text is selected (default: on) |
+| **Enable plugin** | Show a floating toolbar when text is selected |
 | **Editor toolbar buttons** | Choose which buttons appear in the editor toolbar, drag to reorder, add custom commands |
 | **Global toolbar buttons** | Choose which buttons appear in the global toolbar (non-editor contexts) |
 

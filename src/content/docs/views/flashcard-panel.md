@@ -47,7 +47,7 @@ On the right side of the header:
 
 - **Collect** — Appears when uncollected flashcards exist in the note. Shows a count badge with a pulsing animation. Click to collect all detected flashcard syntax into the database.
 - **Review** — Launch a [review session](/review/review-interface/) for this note's cards.
-- **Add (+)** — Opens the [Flashcard Editor](/views/flashcard-editor/) to create a new card via a form.
+- **Add (+)** — Opens the [Flashcard Editor](/views/flashcard-editor/) to create a new card via a form. Includes a wand icon to run [Card Polish](/plugins/card-polish/) presets on the draft.
 - **More (...)** — Opens the [actions menu](#header-more-menu).
 
 ### Search Bar
@@ -120,6 +120,7 @@ Right-click any card (or tap the three-dot icon) to open the context menu:
 
 | Action                          | Description                                                            |
 | ------------------------------- | ---------------------------------------------------------------------- |
+| Preview                         | Open the [Card Preview modal](#card-preview-modal) with interactive rating |
 | Edit                            | Open card in the [Flashcard Editor](/views/flashcard-editor/)          |
 | Copy                            | Copy card to clipboard as `Q: ... A: ...`                              |
 | Move                            | Transfer card to a different source note                               |
@@ -129,6 +130,22 @@ Right-click any card (or tap the three-dot icon) to open the context menu:
 | Suspend / Unsuspend             | Toggle whether the card appears in review sessions                     |
 | Delete                          | Permanently remove the card                                            |
 | Select                          | Enter selection mode with this card selected                           |
+
+:::tip[Quick selection]
+**Cmd/Ctrl + click** a card to enter selection mode directly, skipping the context menu.
+:::
+
+## Card Preview Modal
+
+The **Preview** action opens the card in a modal with both sides rendered and an interactive rating flow:
+
+- The front is shown first. Press Space or click **Show answer** to flip
+- The four rating buttons (Again / Hard / Good / Easy) trigger the same FSRS grading as a review
+- Keyboard shortcuts match the review interface (1–4 or your custom keybindings)
+- The modal uses view transitions so flipping between sides feels instant
+- Esc or clicking outside closes without grading
+
+Preview is useful for checking a card out of session — rate a single card you just edited without starting a full review.
 
 :::note
 **Forget** is only available for cards that have been reviewed at least once (non-New state).
@@ -140,6 +157,7 @@ Right-click any card (or tap the three-dot icon) to open the context menu:
 ### Entering Selection Mode
 
 - Right-click a card → **Select**
+- **Cmd/Ctrl + click** any card
 
 A **selection toolbar** replaces the header, showing the selected count and bulk action buttons.
 
@@ -176,9 +194,11 @@ IO cards are grouped by their source image rather than listed individually. Each
 
 ## AI Generation
 
+Both panel-driven generation flows run through the [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) plugin and its [generation presets](/plugins/generation-presets/).
+
 ### Generate from Note
 
-Use **More menu → Generate** or the empty state button to generate flashcards from the entire note content. The AI processes the note in chunks, streaming cards in real time with a progress counter (e.g., "Section 3/7").
+Use **More menu → Generate** or the empty state button to generate flashcards from the entire note content. The AI processes the note in chunks, streaming cards in real time with a progress counter (e.g., "Section 3/7"). Existing cards on the note are injected into the prompt so new generations don't duplicate what's already there.
 
 ### Generate from Highlights
 

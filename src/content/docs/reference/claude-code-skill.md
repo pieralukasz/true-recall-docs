@@ -9,7 +9,7 @@ description: Install the True Recall skill for Claude Code to control flashcards
 :::caution[My Notes]
 :::
 
-The **True Recall** skill gives Claude Code direct access to your flashcard collection through 60 CLI commands. Generate flashcards from notes, discuss cards during review, analyze study patterns, and manage your entire spaced repetition system — all from the terminal.
+The **True Recall** skill gives Claude Code direct access to your flashcard collection through 65 CLI commands. Generate flashcards from notes, discuss cards during review, analyze study patterns, and manage your entire spaced repetition system — all from the terminal.
 
 ## What Is a Skill?
 
@@ -71,7 +71,7 @@ Copy the entire content below into `~/.claude/skills/true-recall/SKILL.md`:
 ````markdown
 ---
 name: true-recall
-description: Use when working with True Recall flashcards, spaced repetition, study sessions, FSRS scheduling, or generating flashcards from notes. Provides CLI access to 60 commands for reading cards, creating flashcards, reviewing, analyzing study patterns, managing decks/projects, and AI generation.
+description: Use when working with True Recall flashcards, spaced repetition, study sessions, FSRS scheduling, or generating flashcards from notes. Provides CLI access to 65 commands for reading cards, creating flashcards, reviewing, analyzing study patterns, managing decks/projects, and AI generation.
 user-invocable: true
 ---
 
@@ -125,13 +125,14 @@ Start here: `get_full_context` — snapshot of active view, session, note, stats
 | Read cards | `list_cards`, `get_card`, `get_card_context`, `get_due_cards`, `get_problem_cards` |
 | Write cards | `create_flashcard`, `create_flashcards_batch`, `update_card`, `suspend_card`, `delete_card` |
 | Review session | `get_review_context`, `reveal_answer`, `grade_review_card`, `start_review_session` |
-| AI generation | `generate_flashcards`, `get_note_types` |
+| AI generation | `generate_flashcards`, `generate_flashcards_with_preset`, `get_note_types` |
+| Generation presets | `list_generation_presets`, `get_generation_preset`, `create_generation_preset`, `update_generation_preset`, `delete_generation_preset` |
 | Stats | `get_study_summary`, `get_daily_stats`, `get_study_patterns`, `get_session_analysis` |
-| Notes & projects | `set_note_parent`, `set_note_preset`, `toggle_note_review`, `get_projects` |
+| Notes & projects | `set_note_parent`, `set_note_preset`, `toggle_note_review`, `get_projects`, `note_stats`, `note_cards` |
 | FSRS | `get_fsrs_presets`, `get_fsrs_analytics`, `optimize_parameters` |
 | Navigation | `open_view`, `open_note` |
 
-For all 60 commands with flags and parameters: `true-recall --help`
+For all 65 commands with flags and parameters: `true-recall --help`
 For a specific command: `true-recall <command> --help`
 ````
 

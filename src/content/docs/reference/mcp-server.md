@@ -67,7 +67,7 @@ cd mcp-server && bun install
 
 ## Tools Reference
 
-The MCP server exposes 34 tools organized into functional groups.
+The MCP server exposes 55 tools organized into functional groups.
 
 ### Context
 
@@ -115,7 +115,18 @@ The MCP server exposes 34 tools organized into functional groups.
 | Tool | Parameters | Description |
 |------|-----------|-------------|
 | `generate_flashcards` | `text`, `note_type_slug?`, `source_uid?` | Generate flashcards from text using AI (Pro key or OpenRouter BYOK) |
+| `generate_flashcards_with_preset` | `text`, `preset_id`, `source_uid?` | Generate cards using a specific [generation preset](/plugins/generation-presets/) |
 | `get_note_types` | — | List available note types (Basic, Cloze, etc.) |
+
+### Generation Presets
+
+| Tool | Parameters | Description |
+|------|-----------|-------------|
+| `list_generation_presets` | — | List every preset with id, name, noteTypeId, default flag, tier |
+| `get_generation_preset` | `preset_id` | Fetch one preset |
+| `create_generation_preset` | `preset` (JSON) | Create a preset. Validation is strict — see [Generation Presets](/plugins/generation-presets/) |
+| `update_generation_preset` | `preset_id`, `patch` (JSON) | PATCH an existing preset |
+| `delete_generation_preset` | `preset_id` | Delete a non-built-in preset. Deleting the default auto-promotes the next |
 
 ### Notes
 
@@ -234,7 +245,7 @@ The Local API binds to `127.0.0.1` only — it is not accessible from other mach
 
 ## What to Read Next
 
-- [Claude Code Skill](/reference/claude-code-skill/) — install the CLI skill for Claude Code with 46 commands
+- [Claude Code Skill](/reference/claude-code-skill/) — install the CLI skill for Claude Code with 65 commands
 - [General Settings](/configuration/general/) — enable the Local API and configure the port
 - [FSRS Settings](/configuration/fsrs-settings/) — understand presets referenced by MCP tools
 - [AI Settings](/configuration/ai-settings/) — configure AI generation used by `generate_flashcards`

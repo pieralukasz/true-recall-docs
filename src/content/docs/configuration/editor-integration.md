@@ -8,7 +8,7 @@ description: "Link status indicators, status bar widget, selection toolbar, and 
 :::caution[My Notes]
 :::
 
-**True Recall** adds several visual features to the editor so you can see flashcard status and take quick actions without leaving your notes.
+**True Recall** adds several visual features to the editor so you can see flashcard status and take quick actions without leaving your notes. Most of these are delivered as [plugins](/plugins/overview/) and toggle from `Settings → True Recall → Plugins`.
 
 ## Link Status Indicators
 
@@ -26,7 +26,7 @@ Inline indicators next to `[[wiki links]]` showing the linked note's flashcard s
 | Donut chart | Small pie chart |
 | Both | Chart + numbers |
 
-Configure in `Settings → General → Show link status indicators`.
+Enable the **Link Status Indicators** plugin in `Settings → True Recall → Plugins → Link Status Indicators` and configure the mode in its panel.
 
 ### Hover Tooltip
 
@@ -40,7 +40,7 @@ Click the status indicator to open the [Flashcard Panel](/views/flashcard-panel/
 
 Global card counts in the bottom status bar showing due today, new cards, and learning cards.
 
-Enable in `Settings → General → Show status bar widget`. Click the widget to open [Dashboard](/views/dashboard/) or start today's review.
+Enable the **Status Bar Widget** plugin in `Settings → True Recall → Plugins → Status Bar Widget`. Click the widget to open [Dashboard](/views/dashboard/) or start today's review.
 
 Numbers change color based on state: Blue when cards are due, Green when only new cards remain, Gray when all done.
 
@@ -50,7 +50,7 @@ In reading mode, source text for flashcards is highlighted. Hover over highlight
 
 ## Selection Toolbar
 
-When you select text in the editor, a floating toolbar appears with AI generation buttons and quick actions. Enable in `Settings → AI → Selection toolbar`.
+When you select text in the editor, a floating toolbar appears with AI generation buttons and quick actions. Enable the **Selection Toolbar** plugin in `Settings → True Recall → Plugins → Selection Toolbar`.
 
 See [Selection Toolbar](/views/selection-toolbar/) for the full toolbar reference.
 

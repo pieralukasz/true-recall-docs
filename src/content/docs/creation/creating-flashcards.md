@@ -28,7 +28,7 @@ The [Selection Toolbar](/views/selection-toolbar/) appears when you select text 
 
 You can also generate cards from an entire note at once — open the Command Palette (`Cmd/Ctrl + P`) and run "Generate flashcards from note."
 
-AI generation requires an API key. Configure your AI settings in `Settings → AI`. See [Selection Toolbar](/views/selection-toolbar/) for custom prompts and model settings.
+AI generation requires an API key. Configure your AI settings in `Settings → True Recall → AI` (subscription / BYOK) and manage per-preset prompts in `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/) for how presets work.
 
 ## The Flashcard Editor
 

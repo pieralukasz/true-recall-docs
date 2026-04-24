@@ -80,6 +80,7 @@ Showing interval previews is especially useful while you're learning FSRS — yo
 | Action | Key | Description |
 |--------|-----|-------------|
 | Edit | `E` | Edit the card inline without leaving the session |
+| Polish | wand button | Run a [Card Polish](/plugins/card-polish/) preset to rewrite the card with AI — auto-apply or preview, each preset can bind its own hotkey |
 | Suspend | `!` | Remove card from future reviews (unsuspend from [Card Browser](/views/card-browser/)) |
 | Bury card | `-` | Hide until tomorrow |
 | Bury note | `=` | Hide all cards from the same note until tomorrow |

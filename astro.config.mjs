@@ -7,6 +7,7 @@ import { remarkStripDevNotes } from './plugins/remark-strip-dev-notes.mjs';
 const sidebar = [
 	{ label: 'Getting Started', autogenerate: { directory: 'getting-started' } },
 	{ label: 'Views', autogenerate: { directory: 'views' } },
+	{ label: 'Plugins', autogenerate: { directory: 'plugins' } },
 	{ label: 'Creation', autogenerate: { directory: 'creation' } },
 	{ label: 'Review', autogenerate: { directory: 'review' } },
 	{ label: 'Scheduling', autogenerate: { directory: 'scheduling' } },

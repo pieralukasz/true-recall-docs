@@ -87,15 +87,15 @@ Appends the selected text to the currently active note. Available in the global 
 
 ## Enabling the Toolbar
 
-`Settings → True Recall → General → Selection Toolbar` (enabled by default)
+The Selection Toolbar is a **[plugin](/plugins/overview/)** (tier: Free). Enable or disable it in `Settings → True Recall → Plugins → Selection Toolbar`.
 
-AI generation buttons require an AI configuration — either an API key or a [True Recall subscription](/subscription/).
+AI generation buttons additionally require an AI configuration — either an API key or a [True Recall subscription](/subscription/) — and the owning plugin (e.g. [AI Flashcard Generation](/plugins/ai-flashcard-generation/)) must be enabled. Buttons from disabled plugins don't appear in the toolbar.
 
 ## Customizing Buttons
 
 You can configure which buttons appear and in what order — separately for the editor toolbar and the global toolbar.
 
-`Settings → True Recall → General → Editor toolbar buttons / Global toolbar buttons`
+`Settings → True Recall → Plugins → Selection Toolbar → Editor toolbar buttons / Global toolbar buttons`
 
 For each toolbar:
 - **Toggle** buttons on or off with checkboxes
@@ -149,17 +149,15 @@ Each generated card includes:
 
 ## Generation Settings
 
-Configure AI behavior in Settings → AI:
+Generation is driven by [**generation presets**](/plugins/generation-presets/). Each preset bundles a prompt, a note type, and optional TTS / image post-processing. When you click **Flashcards**, the preset marked as default for the Basic note type runs; other presets can expose their own toolbar buttons (e.g. a "Vocab" preset for language learning).
+
+Shared settings:
 
 | Setting | Description |
 |---------|-------------|
-| **Language** | Output language (auto-detect or specific) |
+| **Language** | Output language (auto-detect or specific) — in `Settings → True Recall → AI` |
 
-### Custom Prompt
-
-Override how AI generates cards in **Settings → AI → Generation Prompt**. There is a single generation prompt that controls all card generation. You can edit it or reset to default.
-
-See [AI Settings](/configuration/ai-settings/) for full details on prompt customization and available variables.
+To edit, create, or delete presets: `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/).
 
 ## Tips
 
@@ -179,8 +177,9 @@ Select multiple paragraphs at once. AI generates multiple cards covering differe
 
 | Problem | Solution |
 |---------|----------|
-| Toolbar not appearing | Check `Settings → True Recall → General → Selection Toolbar` is enabled |
-| AI buttons grayed out | Configure an API key or subscription in Settings → AI |
-| Missing buttons | Check toolbar button configuration in General settings — some may be toggled off |
+| Toolbar not appearing | Check `Settings → True Recall → Plugins → Selection Toolbar` is enabled |
+| AI buttons grayed out | Configure an API key or subscription in `Settings → True Recall → AI` |
+| AI buttons missing entirely | The owning plugin (e.g. [AI Flashcard Generation](/plugins/ai-flashcard-generation/)) is disabled or your tier doesn't meet its requirement |
+| Button config moved | Button order and visibility are now in the **Selection Toolbar** plugin panel, not in General settings |
 | Generation fails | Check API key validity and network connection |
-| Poor card quality | Try a different model or adjust temperature in Settings → AI |
+| Poor card quality | Try a different model in BYOK, or use a Pro preset (see [Generation Presets](/plugins/generation-presets/)) |
