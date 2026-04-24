@@ -22,6 +22,8 @@ Open `Settings → True Recall → Plugins` to see every bundled plugin as an ac
 
 Toggles take effect immediately — the plugin runs its `activate` hook when enabled and `deactivate` hook when disabled. You don't need to reload Obsidian.
 
+You can expand any plugin's accordion to read its description and settings panel even when the plugin is disabled, so you can preview what you'd get before turning it on.
+
 ## Tier System
 
 Every plugin declares a tier that determines when it can activate:

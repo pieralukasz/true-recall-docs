@@ -40,6 +40,7 @@ Release notes for every **True Recall** version. For the latest release, check [
 - **Preview modal polish** -- compact button bar in preview mode, cleaner dividers, PRO badge on the Basic Pro preset
 - **AI parse tolerance** -- Card Polish and generation flows tolerate JSON in prose or code fences and surface notices on parse failures
 - **Post-processing errors surface to the user** with DataLayer invalidation
+- **Preview disabled plugins** -- expand any plugin's accordion in the Plugins tab to read its description and settings before enabling it
 
 ### Bug Fixes
 
