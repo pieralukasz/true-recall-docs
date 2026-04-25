@@ -30,9 +30,9 @@ Every plugin declares a tier that determines when it can activate:
 
 | Tier | Unlocks when… | Example plugins |
 |------|----------------|-----------------|
-| **Free** | Always | Selection Toolbar, Status Bar Widget, Dashboard Codeblocks, Gamification Widgets, Type-in Mode, Link Status Indicators |
-| **BYOK** | Any AI key present (OpenRouter BYOK or Pro key) | AI Flashcard Generation, Card Polish |
-| **Pro** | Pro key present | Image Occlusion, Knowledge Base, AI Anki Import, Healing Flashcards |
+| **Free** | Always | Selection Toolbar, Status Bar Widget, Dashboard Codeblocks, Link Status Indicators |
+| **BYOK** | Any AI key present (OpenRouter BYOK or Pro key) | AI Flashcard Generation |
+| **Pro** | Pro key present | Card Polish, Type-in Mode, Gamification Widgets, Image Occlusion, Knowledge Base, AI Anki Import, Healing Flashcards |
 
 Tiers form an inclusive ladder — a Pro user gets every BYOK and Free plugin; a BYOK user gets every Free plugin. See [AI Settings](/configuration/ai-settings/) for how to configure your key.
 
@@ -43,11 +43,11 @@ Tiers form an inclusive ladder — a Pro user gets every BYOK and Free plugin; a
 | [**Selection Toolbar**](/views/selection-toolbar/) | Free | Floating toolbar above text selections — generate cards, highlight, copy, quick-add, and more |
 | **Status Bar Widget** | Free | Compact review-progress widget in the Obsidian status bar |
 | **Dashboard Codeblocks** | Free | Embed True Recall dashboards in your notes as codeblocks |
-| **Gamification Widgets** | Free | Daily progress rings, achievement badges, streaks, and exam countdowns as codeblocks |
-| [**Type-in Mode**](/review/type-in-mode/) | Free | Typed-answer reviews with AI or diff-based grading |
 | **Link Status Indicators** | Free | Donut charts and hover tooltips on `[[wikilinks]]` showing each note's card status |
 | [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) | BYOK | Preset-driven card generation from notes, selections, and highlights |
-| [**Card Polish**](/plugins/card-polish/) | BYOK | Transform cards mid-review or in the Add Flashcard modal using your own AI presets |
+| [**Card Polish**](/plugins/card-polish/) | Pro | Transform cards mid-review or in the Add Flashcard modal using your own AI presets |
+| [**Type-in Mode**](/review/type-in-mode/) | Pro | Typed-answer reviews with AI or diff-based grading |
+| **Gamification Widgets** | Pro | Daily progress rings, achievement badges, streaks, and exam countdowns as codeblocks |
 | [**Image Occlusion**](/creation/image-occlusion/) | Pro | Hide regions of images to test visual recall |
 | [**Knowledge Base**](/configuration/knowledge-base/) | Pro | RAG-powered semantic search and chat across your vault |
 | **AI Anki Import** | Pro | AI-assisted `.apkg` import with deck classification and field mapping |

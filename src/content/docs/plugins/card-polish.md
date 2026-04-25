@@ -11,7 +11,7 @@ description: AI-powered card improvement during review and inside the Add Flashc
 
 **Card Polish** is a plugin that rewrites flashcards on demand using AI. You can run it mid-review (from the review interface) or while drafting cards in the Add Flashcard modal. Each preset captures a specific instruction — "simplify", "tighten wording", "fix formatting", or anything custom — and can auto-apply the result or show a preview first.
 
-**Tier:** BYOK — works with a Pro key (LiteLLM-backed) or any OpenRouter BYOK key.
+**Tier:** Pro — requires a Pro key. The plugin routes through LiteLLM by default.
 
 Enable it in `Settings → True Recall → Plugins → Card Polish`.
 
@@ -33,16 +33,15 @@ Enable it in `Settings → True Recall → Plugins → Card Polish`.
 
 ## Presets
 
-Card Polish ships with defaults and you can add your own. Each preset captures:
+Card Polish ships with no built-in presets — you craft your own. Each preset captures:
 
 | Field | What it controls |
 |-------|------------------|
 | **Name** | Display name in the popover menu |
 | **Prompt** | The instruction sent to AI (e.g. "Simplify the question and keep the answer short") |
-| **Apply mode** | `auto` (rewrite in place) or `preview` (show modal first) |
+| **Auto-apply** | When on, rewrite in place; when off, show a preview modal first |
 | **Hotkey** | Optional keyboard shortcut — scoped to the Review view only |
 | **Context** | Opt-in flags to include the source note and related cards in the prompt |
-| **Requires Pro** | Restrict this preset to Pro users only (routes through LiteLLM) |
 
 Manage presets in the Card Polish plugin settings panel (`Settings → True Recall → Plugins → Card Polish`).
 
@@ -76,13 +75,12 @@ If AI fails to produce usable output, Card Polish surfaces a user-visible notice
 
 - **Parse failure** — "Card Polish: couldn't parse AI response." The plugin is tolerant of JSON embedded in prose or in ``` ```json ... ``` ``` code fences, so parse failures are rare
 - **Abort** — canceling mid-stream (e.g. via modal dismiss) cleanly aborts the request
-- **Pro required** — if the preset is Pro-only but no Pro key is configured, the runner returns a notice and stops
 
 Audio-related errors (from TTS post-processing) are logged separately without interrupting the polish flow.
 
 ## Pro Routing
 
-Card Polish routes through `resolveAIClientConfig`, which prefers the Pro (LiteLLM) endpoint when a Pro key is present and falls back to OpenRouter BYOK otherwise. You'll see a **PRO** badge on built-in Pro-only presets.
+Card Polish routes through `resolveAIClientConfig`, which uses the Pro (LiteLLM) endpoint. The plugin is gated to Pro users, so every request goes through the Pro pipeline.
 
 ## What to Read Next
 
