@@ -63,7 +63,7 @@ All paths are relative to `src/content/docs/`.
 
 - `configuration/general.md` — General settings: review interface, editor integration, day boundary, collection behavior
 - `configuration/fsrs-settings.md` — FSRS scheduling settings: presets, retention, weights, bulk operations
-- `configuration/ai-settings.md` — AI configuration: API keys, generation language, custom prompts
+- `configuration/ai-settings.md` — AI provider selection (Pro, OpenRouter, LM Studio, Custom), API keys, generation language, custom prompts
 - `configuration/editor-integration.md` — Editor features: link status indicators, status bar, reading mode, selection toolbar
 - `configuration/keyboard-shortcuts.md` — Keyboard shortcut reference and customization
 

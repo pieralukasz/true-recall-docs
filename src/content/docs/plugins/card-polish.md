@@ -87,4 +87,4 @@ Card Polish routes through `resolveAIClientConfig`, which uses the Pro (LiteLLM)
 - [Plugin Overview](/plugins/overview/) — the broader plugin system
 - [AI Flashcard Generation](/plugins/ai-flashcard-generation/) — generate new cards (distinct from polishing existing ones)
 - [Review Interface](/review/review-interface/) — where the wand button lives mid-review
-- [AI Settings](/configuration/ai-settings/) — configure Pro or OpenRouter keys
+- [AI Settings](/configuration/ai-settings/) — configure AI provider

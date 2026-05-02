@@ -2,7 +2,7 @@
 title: "AI Settings"
 sidebar:
   order: 3
-description: "Configure AI features including subscription, API keys, and shared generation / grading settings."
+description: "Configure AI provider, subscription, API keys, and generation / grading settings."
 ---
 
 :::caution[My Notes]
@@ -12,7 +12,20 @@ AI-powered card generation is what makes **True Recall** fast — select text, c
 
 For how AI generation works in practice, see [Selection Toolbar](/views/selection-toolbar/).
 
-## Subscription Key (Pro)
+## AI Provider
+
+Choose where AI requests are routed via the **AI Provider** dropdown. Available options:
+
+| Provider | Description |
+|----------|-------------|
+| **True Recall Pro** (Recommended) | Managed service with optimized prompts and model routing |
+| **OpenRouter (BYOK)** | Direct API access — bring your own key and pick any model |
+| **LM Studio (Local)** | Run models locally with auto-discovered model listing |
+| **Custom Provider (Self-hosted)** | Connect to Ollama, vLLM, or any OpenAI-compatible endpoint |
+
+Only one provider can be active at a time. Each provider has its own configuration fields that appear when selected.
+
+## True Recall Pro
 
 The recommended way to use AI features. A subscription key gives you access to expertly tuned prompts and managed model routing with no setup.
 
@@ -21,8 +34,6 @@ The recommended way to use AI features. A subscription key gives you access to e
 2. A free trial key is generated automatically on first visit to the [dashboard](https://truerecall.app/dashboard)
 3. Copy the key and paste it into `Settings → True Recall → AI → Subscription Key`
 4. Upgrade to Pro ($4/mo) from the dashboard when ready — your key stays the same
-
-When a subscription key is configured, it takes priority over an OpenRouter API key.
 
 **Plans:**
 
@@ -33,11 +44,53 @@ When a subscription key is configured, it takes priority over an OpenRouter API 
 
 Manage or cancel your subscription anytime from the [dashboard](https://truerecall.app/dashboard).
 
-## OpenRouter API Key (BYOK)
+## OpenRouter (BYOK)
 
 Direct API access for users who want full control. Bring your own key and prompts — no subscription needed.
 
 **Setup:** Create an account at [openrouter.ai](https://openrouter.ai) → Keys → Create new key → paste here.
+
+When OpenRouter is selected, you can choose from a curated list of popular models or enter a custom model ID.
+
+## LM Studio (Local)
+
+Run AI models locally using [LM Studio](https://lmstudio.ai). Models are auto-discovered from your running LM Studio server.
+
+**Setup:**
+1. Download and install [LM Studio](https://lmstudio.ai)
+2. Start the LM Studio local server (default: `http://localhost:1234/v1`)
+3. In True Recall, select **LM Studio (Local)** from the AI Provider dropdown
+4. The base URL should match your LM Studio server endpoint
+5. Load a model in LM Studio — True Recall will auto-discover it in the **Model** dropdown
+
+**Settings:**
+
+| Setting | Description |
+|---------|-------------|
+| **Base URL** | LM Studio server endpoint. Default: `http://localhost:1234/v1` |
+| **Model** | Select from models loaded in LM Studio (auto-discovered) or type manually |
+| **API Key** | Optional — only needed if you enabled authentication in LM Studio |
+| **Temperature** | Controls randomness (0–2). Default: 0.7 |
+
+If LM Studio is not running, a fallback text input lets you type a model name manually. Use the **Refresh models** link to re-fetch the model list.
+
+## Custom Provider (Self-hosted)
+
+Connect to Ollama, LM Studio, vLLM, or any OpenAI-compatible endpoint. This gives you maximum flexibility over which model and server to use.
+
+**Setup:**
+1. Start your self-hosted model server (e.g. Ollama at `http://localhost:11434/v1`)
+2. In True Recall, select **Custom Provider (Self-hosted)** from the AI Provider dropdown
+3. Enter the base URL, model name, and optional API key
+
+**Settings:**
+
+| Setting | Description |
+|---------|-------------|
+| **Base URL** | OpenAI-compatible API endpoint. Default: `http://localhost:11434/v1` (Ollama) |
+| **Model Name** | The model identifier (e.g. `llama3`, `mistral`, `codellama`) |
+| **API Key** | Optional — many local setups don't need authentication |
+| **Temperature** | Controls randomness (0–2). Default: 0.7 |
 
 ## Grading and Detection Prompts
 

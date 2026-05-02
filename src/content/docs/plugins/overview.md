@@ -72,4 +72,4 @@ When a plugin owns a toolbar button (like the Selection Toolbar's "Flashcards" o
 - [Card Polish](/plugins/card-polish/) — AI-powered card improvements in review and the editor
 - [AI Flashcard Generation](/plugins/ai-flashcard-generation/) — generate cards from notes and selections using presets
 - [Generation Presets](/plugins/generation-presets/) — how presets work and how to build your own
-- [AI Settings](/configuration/ai-settings/) — configure Pro / OpenRouter keys
+- [AI Settings](/configuration/ai-settings/) — configure AI provider (Pro, OpenRouter, LM Studio, Custom)
