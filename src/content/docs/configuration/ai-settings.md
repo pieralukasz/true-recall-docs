@@ -108,7 +108,7 @@ A couple of AI-powered features use standalone prompts that sit outside the pres
 
 ## Flashcard Generation
 
-Flashcard generation is handled by the [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) plugin. Each generation flow (selection toolbar, panel, CLI, MCP) runs through a **[generation preset](/plugins/generation-presets/)** — a template that binds a prompt to a note type, plus optional TTS and image post-processing.
+Flashcard generation is handled by the [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) plugin. Each generation flow (selection toolbar, panel, CLI, MCP) runs through a **[generation preset](/plugins/generation-presets/)** — a template that binds a prompt to a note type, with opt-in source-note and related-card context.
 
 Shared generation settings:
 
@@ -116,11 +116,26 @@ Shared generation settings:
 |---------|-------------|
 | **Generation language** | Target language for generated cards. Default: **Auto** (detects from input content). You can force a specific language. |
 
-For **per-preset** configuration (prompt, note type binding, TTS voice, image generation, Pro gating), use the plugin's own settings panel at `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/) for the full preset reference.
+For **per-preset** configuration (prompt, note type binding, context flags, Pro gating), use the plugin's own settings panel at `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/) for the full preset reference.
 
 :::note[Where did the old generation prompt go?]
 Pre-1.7 versions had a single "Generation Prompt" in AI settings. In 1.7.0 that was replaced by the preset system — every generation flow now binds to a preset instead of a global prompt. Your old prompt is migrated into a preset automatically.
 :::
+
+:::note[TTS and image post-processing were removed in 1.8]
+Earlier versions let presets configure text-to-speech and image generation. Both pipelines were removed in 1.8 — generation focuses on text only. Existing `tts` / `image` config on stored presets is dropped during settings migration; if you relied on either, generate audio / images outside True Recall and store the result in the field by hand.
+:::
+
+## Per-Plugin LM Studio Models
+
+When the active provider is **LM Studio**, AI Flashcard Generation and Card Polish can each use a different model than the global LM Studio selection — useful when one task wants speed (a small model for polish) and the other wants quality (a larger model for generation).
+
+| Plugin | Where to configure |
+|--------|-------------------|
+| AI Flashcard Generation | `Settings → True Recall → Plugins → AI Flashcard Generation → LM Studio model` |
+| Card Polish | `Settings → True Recall → Plugins → Card Polish → LM Studio model` |
+
+Each plugin falls back to the global LM Studio model when no per-plugin override is set.
 
 ## What to Read Next
 

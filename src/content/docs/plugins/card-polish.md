@@ -9,9 +9,9 @@ description: AI-powered card improvement during review and inside the Add Flashc
 :::caution[My Notes]
 :::
 
-**Card Polish** is a plugin that rewrites flashcards on demand using AI. You can run it mid-review (from the review interface) or while drafting cards in the Add Flashcard modal. Each preset captures a specific instruction — "simplify", "tighten wording", "fix formatting", or anything custom — and can auto-apply the result or show a preview first.
+**Card Polish** is a plugin that rewrites flashcards on demand using AI. You can run it mid-review (from the review interface) or while drafting cards in the Add Flashcard modal. Each preset captures a specific instruction — "simplify", "tighten wording", "fix formatting", "split into atomic cards", or anything custom — and can auto-apply the result or show a preview first.
 
-**Tier:** Pro — requires a Pro key. The plugin routes through LiteLLM by default.
+**Tier:** BYOK — works with any AI key (OpenRouter BYOK, LM Studio, Custom, or Pro). Card Polish routes through whichever AI provider is currently selected in `Settings → True Recall → AI`.
 
 Enable it in `Settings → True Recall → Plugins → Card Polish`.
 
@@ -47,14 +47,24 @@ Manage presets in the Card Polish plugin settings panel (`Settings → True Reca
 
 ## Preview Modal
 
-Preview mode opens a modal with the **original card** on the left and the **polished card** on the right, side by side. You can:
+Preview mode opens a modal with the **original card** on the left and the **proposed card** on the right, side by side. Each field is rendered in an embedded CodeMirror editor — you can tweak the AI's output inline before accepting. You can:
 
-- **Apply** — replace the card with the polished version
-- **Retry** — re-run the same preset (useful if AI output needs another pass)
+- **Apply** — replace the card with the (possibly edited) proposal
+- **Retry** — re-run the same preset, optionally with an extra free-form instruction (useful if AI output needs another pass)
 - **Cancel** — close without changes
 - **Dismiss** with Esc or by clicking outside
 
-The modal uses view transitions so switching between original and polished feels instant.
+When the preset operates in **SPLIT mode** (the AI returns multiple new cards instead of editing the source), the original card is shown alongside an opt-in **Delete after applying** toggle. Tick it and the source card is removed when you accept, so the split decomposition replaces the original in one step. Leave it off to keep the source alongside the new cards.
+
+### Card AI Modes
+
+The Card Polish prompt teaches the LLM three explicit modes — pick whichever your preset's instruction implies:
+
+| Mode | When it triggers | What you get |
+|------|-----------------|--------------|
+| `EDIT` | Default — "simplify", "rephrase", "fix formatting", "tighten" | One revised version of the source card |
+| `SPAWN` | "add follow-ups", "generate sibling cards", "expand" | Source card stays, plus N new cards on related angles |
+| `SPLIT` | "split", "decompose", "break apart into atomics" | N new atomic cards; source can be deleted on accept |
 
 ## Context Flags
 
@@ -62,8 +72,9 @@ If a preset opts in to context, the AI receives extra information with every cal
 
 - **Source note** — the body of the card's source note, useful when the preset needs to rephrase in context
 - **Related cards** — other cards from the same note, so the preset avoids contradicting or duplicating sibling cards
+- **Note type metadata** — every Card AI request automatically ships the active note type's name and field schema, so the LLM picks correct field names for custom note types without you having to spell them out in the prompt
 
-Enable these per-preset in the preset editor. More context uses more tokens, so only enable what the preset actually needs.
+Enable the source-note and related-cards flags per-preset in the preset editor. More context uses more tokens, so only enable what the preset actually needs.
 
 ## Hotkeys (Review Only)
 
@@ -73,14 +84,12 @@ Each preset can declare a hotkey that's active ONLY while the Review view is foc
 
 If AI fails to produce usable output, Card Polish surfaces a user-visible notice:
 
-- **Parse failure** — "Card Polish: couldn't parse AI response." The plugin is tolerant of JSON embedded in prose or in ``` ```json ... ``` ``` code fences, so parse failures are rare
+- **Parse failure** — "Card Polish: couldn't parse AI response." The plugin is tolerant of JSON embedded in prose or in ``` ```json ... ``` ``` code fences, so parse failures are rare. When a parse failure happens with no usable proposal, the preview modal shows the raw response so you can copy or rerun manually
 - **Abort** — canceling mid-stream (e.g. via modal dismiss) cleanly aborts the request
 
-Audio-related errors (from TTS post-processing) are logged separately without interrupting the polish flow.
+## AI Routing
 
-## Pro Routing
-
-Card Polish routes through `resolveAIClientConfig`, which uses the Pro (LiteLLM) endpoint. The plugin is gated to Pro users, so every request goes through the Pro pipeline.
+Card Polish routes through `resolveAIClientConfig`, which dispatches to whichever provider is currently selected (`Pro` / `OpenRouter` / `LM Studio` / `Custom`). When the active provider is **LM Studio**, you can pick a Card Polish-specific model in `Settings → True Recall → Plugins → Card Polish → LM Studio model` — the plugin falls back to the global LM Studio model when no override is set.
 
 ## What to Read Next
 

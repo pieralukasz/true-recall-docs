@@ -75,7 +75,7 @@ Right-click any project to access:
 | Custom session | Build a filtered session (states, limits, card types) |
 | Go to project note | Open the project's linked note in the editor |
 | Rename | Change the project name (renames the underlying note file) |
-| Set preset | Assign an FSRS preset to the project (writes `fsrs_preset` to the note's frontmatter) |
+| Set FSRS preset | Assign an FSRS preset to the project (writes `fsrs_preset` to the note's frontmatter; member notes inherit unless they set their own) |
 | Archive / Unarchive | Toggle project visibility (sets `archived` in frontmatter) |
 | **Export** | Export the project to Anki (.apkg) or CSV |
 | **Create sub-project** | Add a child project under this project |
@@ -120,6 +120,7 @@ Right-click any note to access:
 | Custom session | Build a filtered session for this note |
 | Go to note | Open the note in the editor |
 | Rename | Rename the note (renames the file) |
+| Set FSRS preset | Assign an FSRS preset to the note (writes `fsrs_preset` to the note's frontmatter; overrides any inherited project preset) |
 | Archive / Unarchive | Toggle note visibility (sets `archived` in frontmatter) |
 | **Convert to project** | Mark this note as a project with `project: true` (appears for unassigned notes) |
 | **Remove project status** | Remove the `project: true` marker (appears for explicit projects) |

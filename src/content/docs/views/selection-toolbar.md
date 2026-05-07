@@ -93,9 +93,9 @@ AI generation buttons additionally require an AI configuration — either an API
 
 ## Customizing Buttons
 
-You can configure which buttons appear and in what order — separately for the editor toolbar and the global toolbar.
+You can configure which buttons appear and in what order — separately for the editor toolbar, the global toolbar, and the image-click toolbar (the small toolbar that appears when you click an image embed in a note, with quick-add and image-occlusion actions).
 
-`Settings → True Recall → Plugins → Selection Toolbar → Editor toolbar buttons / Global toolbar buttons`
+`Settings → True Recall → Plugins → Selection Toolbar → Editor toolbar buttons / Global toolbar buttons / Image toolbar buttons`
 
 For each toolbar:
 - **Toggle** buttons on or off with checkboxes
@@ -149,7 +149,7 @@ Each generated card includes:
 
 ## Generation Settings
 
-Generation is driven by [**generation presets**](/plugins/generation-presets/). Each preset bundles a prompt, a note type, and optional TTS / image post-processing. When you click **Flashcards**, the preset marked as default for the Basic note type runs; other presets can expose their own toolbar buttons (e.g. a "Vocab" preset for language learning).
+Generation is driven by [**generation presets**](/plugins/generation-presets/). Each preset bundles a prompt, a note type, and optional source-note / related-card context. When you click **Flashcards**, the preset marked as default for the Basic note type runs; other presets can expose their own toolbar buttons (e.g. a "Vocab" preset for language learning).
 
 Shared settings:
 

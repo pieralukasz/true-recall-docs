@@ -3,7 +3,7 @@ title: AI Flashcard Generation
 sidebar:
   label: "AI Flashcard Generation"
   order: 3
-description: Preset-driven AI card generation from notes, selections, and highlights. Configure presets per note type with optional TTS and image post-processing.
+description: Preset-driven AI card generation from notes, selections, and highlights. Configure presets per note type with opt-in source-note and related-card context.
 ---
 
 :::caution[My Notes]
@@ -11,7 +11,7 @@ description: Preset-driven AI card generation from notes, selections, and highli
 
 The **AI Flashcard Generation** plugin is the engine behind every AI-generated card in True Recall. It runs when you click **Flashcards** in the [Selection Toolbar](/views/selection-toolbar/), **Generate from highlights** in the [Flashcard Panel](/views/flashcard-panel/), or **generate_flashcards_with_preset** from the CLI / MCP.
 
-**Tier:** BYOK — works with any AI key (OpenRouter BYOK or Pro). A Pro-hosted built-in preset is available to Pro users only.
+**Tier:** BYOK — works with any AI key (OpenRouter BYOK, LM Studio, Custom, or Pro). A Pro-hosted built-in preset is available to Pro users only.
 
 Enable it in `Settings → True Recall → Plugins → AI Flashcard Generation`.
 
@@ -19,10 +19,9 @@ Enable it in `Settings → True Recall → Plugins → AI Flashcard Generation`.
 
 1. You trigger generation from a UI action (selection toolbar, panel, command) or a headless endpoint (CLI, MCP, HTTP)
 2. The plugin looks up the **preset** you pick (or the default preset) and binds it to its **note type**
-3. It builds a prompt from the preset's `prompt` field + the note type's field spec
-4. It sends the prompt to the AI provider (Pro / LiteLLM for Pro presets, OpenRouter for BYOK)
+3. It builds a prompt from the preset's `prompt` field + the note type's field spec, optionally enriched with the source note body and / or sibling cards (see [Context Options](#context-options))
+4. It sends the prompt to the active AI provider — Pro / LiteLLM for Pro presets, otherwise the configured BYOK route (OpenRouter, LM Studio, or Custom)
 5. It streams cards back, validates them against the note type's schema, and writes them to your note in [block format](/creation/creating-flashcards/#block-format)
-6. If the preset configures **TTS** or **image** post-processing, those run on the generated cards
 
 For a deep dive on the preset shape and how presets bind to note types, see [Generation Presets](/plugins/generation-presets/).
 
@@ -46,8 +45,8 @@ To create your own preset:
    - **Name** — how it appears in the toolbar / picker
    - **Note type** — which note type the preset produces (Basic, Cloze, custom, etc.)
    - **Prompt** — free-form instruction for the AI. The note type's field spec is appended automatically
-   - **TTS** (optional) — which field to narrate, voice, autoplay (Pro only)
-   - **Image** (optional) — which field to send as prompt and which field to receive the generated image (Pro only)
+   - **Include source note** (optional) — append the host note's full body to the prompt as context
+   - **Include related cards** (optional) — append sibling cards from the same source note as context
    - **Requires Pro** — restrict to Pro users
 
 4. Save. The preset is immediately available in every surface that uses presets.
@@ -69,14 +68,18 @@ Both the CLI and MCP can run presets directly:
 
 See [Claude Code Skill](/reference/claude-code-skill/) and [MCP Server](/reference/mcp-server/).
 
-## TTS and Image Post-Processing
+## Context Options
 
-If your preset configures TTS or image generation, those post-processors run after the card is parsed and before it's saved:
+Two opt-in flags per preset enrich the prompt with extra information before it reaches the AI:
 
-- **TTS** — generates an audio clip for the configured field and attaches it to the card. Uses the voice selected in the preset. **Pro only** — there is no OpenRouter fallback
-- **Image** — sends the source field to an image model and writes the resulting image URL or attachment into the target field. External URLs are allowlisted to HTTPS hosts only. **Pro only**
+- **Include source note** — the full body of the note that owns the trigger selection / highlight is appended to the prompt. Use it when the AI needs surrounding context (definitions earlier in the note, the topic of the chapter, etc.) to disambiguate
+- **Include related cards** — the cards already collected from the same source note are appended, so the AI knows what's been covered and avoids duplicating questions
 
-If a post-processor fails, you get a user-visible notice explaining what went wrong. The card itself is still saved — only the side-effect (audio / image) is missing.
+Both are off by default — they trade tokens for accuracy. Enable them only on presets that actually need the extra context.
+
+## LM Studio Per-Plugin Model
+
+When the active AI provider is **LM Studio**, AI Flashcard Generation can use a different model than the global LM Studio selection. Pick one in `Settings → True Recall → Plugins → AI Flashcard Generation → LM Studio model` — the plugin falls back to the global LM Studio model when no override is set. See [AI Settings](/configuration/ai-settings/) for the global LM Studio configuration.
 
 ## What to Read Next
 

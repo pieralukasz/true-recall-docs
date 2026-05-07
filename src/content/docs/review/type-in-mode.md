@@ -59,6 +59,7 @@ AI compares your answer with the correct one on meaning, not exact wording. Afte
 - **Paraphrases** — "turns sunlight into energy" = "converts light to chemical energy"
 - **Partial answers** — scored proportionally with feedback on what's missing
 - **Minor typos** — treated as correct at 90%+ similarity
+- **Context-dependent answers** — the grader receives the source note path and the related cards from the same note, so answers that lean on context (definitions earlier in the note, sibling cards) are scored against that context instead of being penalized as ambiguous
 
 ### Example
 
