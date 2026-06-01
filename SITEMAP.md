@@ -20,7 +20,7 @@ All paths are relative to `src/content/docs/`.
 
 - `getting-started/why-true-recall.md` — Why spaced repetition works, why True Recall was built, comparison with Anki/RemNote/Logseq
 - `getting-started/introduction.md` — What True Recall is, core concepts, philosophy
-- `getting-started/installation.md` — Installation via BRAT, manual, or from source
+- `getting-started/installation.md` — Installation from Obsidian Community Plugins, with BRAT for beta builds
 - `getting-started/quick-start.md` — 5-minute quickstart guide
 - `getting-started/basic-concepts.md` — Core concepts: flashcard types, FSRS, projects, presets, leeches
 
