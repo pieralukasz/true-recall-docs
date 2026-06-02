@@ -11,7 +11,7 @@ description: How to install True Recall
 
 ## Requirements
 
-- Obsidian v1.5.0 or later
+- Obsidian v1.8.0 or later
 - An Obsidian vault
 
 ## Install from Community Plugins
@@ -46,18 +46,18 @@ Beta builds may be unstable. For most users, the Community Plugins install above
 
 After enabling True Recall:
 
-1. **AI Configuration** (Optional) — AI features require either a True Recall account or your own API key. You have two options:
+1. **AI Configuration** (Optional) — Free features work without AI. AI features use either a True Recall Pro key, your own OpenRouter key, LM Studio, or a custom OpenAI-compatible provider.
 
    **Option A — True Recall account (recommended for new users)**
    1. Visit [truerecall.app/login](https://truerecall.app/login) and sign in with your email
    2. A free trial key is generated automatically on the [dashboard](https://truerecall.app/dashboard)
    3. Copy your key from the dashboard
-   4. In Obsidian: `Settings → True Recall → AI → Pro Key` — paste your key
+   4. In Obsidian, open `Settings → True Recall → Plugins`, select **True Recall Pro** as the AI provider, and paste your key
    5. After testing, upgrade to Pro ($4/mo) from the dashboard or bring your own OpenRouter key
 
    **Option B — OpenRouter API key**
    1. Get an API key from [openrouter.ai](https://openrouter.ai)
-   2. In Obsidian: Settings → True Recall → AI → paste your key into **API key**
+   2. In Obsidian, open `Settings → True Recall → Plugins`, select **OpenRouter (BYOK)**, and paste your key
 2. **FSRS Settings** — Review the default FSRS parameters in Settings → True Recall → FSRS (defaults work well for most users)
 3. **Day Start Hour** — Set when your "day" begins (default: 4 AM, matching Anki behavior)
 
@@ -66,7 +66,7 @@ After enabling True Recall:
 Once installed, you should see:
 
 - **Ribbon icons** — a brain icon (purple) and a chart icon (orange) in the left sidebar
-- **Commands** — open the Command Palette (`Cmd/Ctrl+P`) and search "True Recall"
+- **Commands** — open the Command Palette and search "True Recall"
 - **Settings tab** — Settings → True Recall with configuration options
 
 ## Troubleshooting

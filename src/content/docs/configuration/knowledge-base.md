@@ -10,8 +10,8 @@ description: "Configure the Knowledge Base for semantic search over your notes a
 
 The **Knowledge Base** lets AI assistants search your notes by meaning, not just keywords. It indexes your notes and flashcards into a semantic search engine so tools like Claude Code can find relevant context instantly — without reading every file.
 
-:::note[Pro Only]
-Knowledge Base requires a Pro subscription. Configure your key in [AI Settings](/configuration/ai-settings/).
+:::note[Availability]
+Knowledge Base is a **Pro** plugin. It also needs an active AI configuration because indexing and semantic search depend on AI embeddings.
 :::
 
 ## How It Works
@@ -22,7 +22,7 @@ For flashcards, search results include FSRS mastery data (stability, difficulty,
 
 ## Settings
 
-Configure the Knowledge Base in `Settings → True Recall → Knowledge Base`.
+Configure the Knowledge Base in `Settings → True Recall → Plugins → Knowledge Base`.
 
 | Setting | Description | Default |
 |---------|-------------|---------|
@@ -40,7 +40,7 @@ When **Auto-index** is enabled, the Knowledge Base watches for file changes in y
 
 ### Manual Indexing
 
-You can trigger a full reindex via the MCP `index_knowledge` tool. This re-scans all notes and flashcards, computes embeddings for any new or changed content, and skips anything already up to date. Useful after bulk imports or if auto-indexing was previously disabled.
+Click **Reindex now** in the Knowledge Base plugin settings. This re-scans all notes and flashcards, computes embeddings for any new or changed content, and skips anything already up to date. Useful after bulk imports or if auto-indexing was previously disabled.
 
 ### What Gets Indexed
 
@@ -49,20 +49,12 @@ You can trigger a full reindex via the MCP `index_knowledge` tool. This re-scans
 
 Folders listed in **Exclude folders** are always skipped. If **Include folders** is set, only notes in those folders are indexed. The `.true-recall` data folder is excluded by default.
 
-## MCP Tools
+## Assistant Access
 
-AI assistants interact with the Knowledge Base through three [MCP tools](/reference/mcp-server/):
-
-| Tool | Description |
-|------|-------------|
-| `search_knowledge` | Semantic search over notes and flashcards. Returns ranked results with content, source info, and FSRS mastery data. |
-| `index_knowledge` | Trigger a full reindex of the Knowledge Base. |
-| `get_knowledge_status` | Check index status: total chunks, embedded chunks, source counts, last indexed time. |
-
-For full parameter details and example workflows, see [MCP Server — Knowledge Base](/reference/mcp-server/#knowledge-base).
+If you enable the Local API, compatible AI assistants can search the Knowledge Base while Obsidian is running. This is optional and only needed if you want an assistant to use your indexed notes as context.
 
 ## What to Read Next
 
 - [AI Settings](/configuration/ai-settings/) — configure your subscription key and AI features
-- [MCP Server](/reference/mcp-server/) — full tool reference for AI assistant integration
-- [General Settings](/configuration/general/) — enable the Local API required for MCP
+- [MCP Server](/reference/mcp-server/) — optional AI assistant integration
+- [General Settings](/configuration/general/) — where to find the Integrations tab

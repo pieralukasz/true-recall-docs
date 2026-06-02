@@ -54,12 +54,6 @@ When you select text in the editor, a floating toolbar appears with AI generatio
 
 See [Selection Toolbar](/views/selection-toolbar/) for the full toolbar reference.
 
-## Quick Review in Panel
-
-Collapsible section at top of the [Flashcard Panel](/views/flashcard-panel/) showing one due card with Show, Edit, and Rate actions. A quick way to review without opening a full session.
-
-Enable in `Settings → General → Show quick review in panel`.
-
 ## What to Read Next
 
 - [General Settings](/configuration/general/) — all general settings including editor toggles

@@ -8,7 +8,7 @@ description: "Work with multiple device databases for different machines or sepa
 :::caution[My Notes]
 :::
 
-Each device that runs **True Recall** gets its own SQLite database. This means your laptop and phone each have independent review histories, card states, and scheduling data.
+Each desktop device that runs **True Recall** gets its own SQLite database. This means your work laptop and home computer can each keep independent review histories, card states, and scheduling data.
 
 ```
 .true-recall/
@@ -21,7 +21,7 @@ Each device that runs **True Recall** gets its own SQLite database. This means y
 
 `Settings → Data & Backup → Device Database`
 
-Shows your **Device ID** (unique identifier), **Device name** (optional friendly name like "macbook-work" or "iphone"), and **Database path**.
+Shows your **Device ID** (unique identifier), **Device name** (optional friendly name like "macbook-work"), and **Database path**.
 
 Give each device a descriptive name — it makes switching and backups much easier to manage.
 
@@ -50,10 +50,10 @@ Copy the `.db` file from the other vault's `.true-recall/` folder, then use "Imp
 
 ## Database Conflicts
 
-If multiple devices modify the same database file without sync, you'll see inconsistencies — reviews you didn't do, missing data, or wrong statistics.
+If multiple devices modify the same database file without a clean handoff, you'll see inconsistencies — reviews you didn't do, missing data, or wrong statistics.
 
 **Solutions:**
-- Use [Cloud Sync](/sync/setup/) for automatic syncing between devices (recommended)
+- Enable **Device Sync** in `Settings → True Recall → Integrations` if your vault is synced across machines
 - Or use one device at a time and manually transfer the database
 - Or keep completely separate databases per device
 
@@ -69,4 +69,4 @@ Don't edit `.db` files directly. Use True Recall's interface to avoid corruption
 
 - [Backup & Restore](/data/backup-restore/) — protect your data with automatic and manual backups
 - [Database Integrity Check](/data/integrity-check/) — scan for orphaned cards and corrupted data
-- [Cloud Sync Setup](/sync/setup/) — automatic syncing between devices
+- [General Settings](/configuration/general/) — where to find the Integrations tab and Device Sync

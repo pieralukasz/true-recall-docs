@@ -158,7 +158,7 @@ You can select multiple notes at once to perform bulk actions.
 
 ### Start today's review
 
-Open the Dashboard, look at the Projects tab for any row with an orange due count, and click **Study**. To review everything due across all projects at once, use the Command Palette → "Start review session".
+Open the Dashboard, look at the Projects tab for any row with an orange due count, and click **Study**. To review today's queue from the command palette, run **Review today's new cards**.
 
 ### Create a project from related notes
 

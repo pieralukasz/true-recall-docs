@@ -11,13 +11,17 @@ description: "Import flashcards from Anki (.apkg) and export your collection to 
 
 **True Recall** supports full Anki import/export and CSV/TSV export, so you can migrate from Anki or back up your collection in portable formats.
 
+:::note[Availability]
+CSV/TSV export is a Free data tool. Anki import/export is available from the Data & Backup tab; AI-assisted organization during import uses your active AI provider and requires BYOK or Pro.
+:::
+
 ## Anki Import (.apkg)
 
 Import your Anki collection — cards, review history, media, and note types — from a standard `.apkg` file.
 
 ### How to Import
 
-1. Open the command palette: `Cmd/Ctrl + P` → "Import from Anki"
+1. Open `Settings → True Recall → Data & Backup → Anki import / export` and click **Import .apkg**, or use the command palette action **Import Anki deck (.apkg)**
 2. Drop your `.apkg` file or click to browse
 3. Review the preview — card counts by type, deck list, media count
 4. Configure import options (scheduling, media, AI organization)
@@ -32,9 +36,9 @@ Import your Anki collection — cards, review history, media, and note types —
 | Option | Default | Description |
 |--------|---------|-------------|
 | **Import scheduling data** | On | Replay your review history to preserve FSRS progress |
-| **Import media files** | On | Save images and audio to `Attachments/anki-import` |
+| **Import media files** | On | Save images and audio under `Attachments/Anki Import/...` by default |
 | **Create project** | On | Organize imported decks as a project hierarchy |
-| **Organize with AI** | Off | AI classifies cards into better deck structure and cleans up formatting (requires API key) |
+| **Organize with AI** | Off | AI classifies cards into better deck structure and cleans up formatting (requires BYOK or Pro AI provider) |
 
 ### Mapping Phase
 
@@ -75,7 +79,7 @@ Both passes show progress bars. AI processing is optional and only appears when 
 | Notes & fields | Cards with question/answer |
 | Card types | Mapped to built-in or custom note types |
 | Review log | Replayed through FSRS for accurate scheduling |
-| Media (images, audio) | Copied to `Attachments/anki-import` |
+| Media (images, audio) | Copied under the selected import folder in `Attachments` |
 | Decks | Obsidian notes with project hierarchy |
 | Suspended cards | Preserved as suspended |
 | Buried cards | Preserved as buried until next day |
@@ -130,10 +134,9 @@ Cards with identical questions (and cloze index for cloze cards) are detected an
 
 ### Media Support
 
-Imported media files go to `Attachments/anki-import` in your vault. Existing files with the same name are not overwritten. References in cards are converted:
+Imported media files go under the selected import folder in `Attachments` (by default, `Attachments/Anki Import/...`). Existing files with the same name are not overwritten. References in cards are converted to Obsidian embeds.
 
-- Anki `<img src="image.png">` → Obsidian `![[Attachments/anki-import/image.png]]`
-- Anki `[sound:audio.mp3]` → Obsidian `![[Attachments/anki-import/audio.mp3]]`
+For example, imported images and audio become embedded files in your vault instead of remaining hidden inside the `.apkg`.
 
 Supported formats: PNG, JPG, JPEG, GIF, BMP, SVG, WebP, ICO, TIF, TIFF (images) and MP3, OGG, WAV, M4A, FLAC, AAC, WMA, OPUS (audio).
 
@@ -157,7 +160,7 @@ Export your True Recall collection as a standard `.apkg` file that can be opened
 
 ### How to Export
 
-1. Open the command palette: `Cmd/Ctrl + P` → "Export to Anki"
+1. Open `Settings → True Recall → Data & Backup → Anki import / export` and click **Export .apkg**, or use the command palette action **Export to Anki (.apkg)**
 2. Choose scope: All cards or Selected notes only
 3. Configure options
 4. Click **Export**
@@ -186,10 +189,7 @@ Export your True Recall collection as a standard `.apkg` file that can be opened
 
 ### Content Conversion
 
-Obsidian syntax is converted to Anki format:
-
-- `![[image.png]]` → `<img src="image.png">`
-- `![[audio.mp3]]` → `[sound:audio.mp3]`
+Obsidian image and audio embeds are converted to Anki-compatible media references during export.
 
 ### Deck Organization
 
@@ -203,7 +203,7 @@ Export your collection as a text file for use in spreadsheets, other flashcard a
 
 ### How to Export
 
-1. Open the command palette: `Cmd/Ctrl + P` → "Export to CSV"
+1. Open `Settings → True Recall → Data & Backup → Anki import / export` and click **Export CSV**, or use the command palette action **Export as CSV/TSV**
 2. Choose scope: All cards or Selected notes only
 3. Select separator and options
 4. Click **Export**

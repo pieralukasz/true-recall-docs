@@ -52,7 +52,7 @@ Prefer a form over writing syntax? Click **Add** (+) in the [Flashcard Panel](/v
 
 ## Start reviewing
 
-Open the Command Palette and run **Start review session**, or click the review button in the Flashcard Panel.
+Open the Command Palette and run **Review today's new cards**, or click the review button in the Flashcard Panel.
 
 You'll see a question. Think of the answer, then press `Space` to reveal it. Rate how well you recalled it:
 

@@ -22,7 +22,7 @@ Creates a timestamped copy in `.true-recall/backups/`. Do this before importing 
 
 `Settings → Data & Backup → Automatic backup on load`
 
-Creates a backup each time Obsidian starts — a simple safety net you should keep enabled.
+Creates a backup each time Obsidian starts. This is optional and is off by default; enable it if you want an extra safety net before each session.
 
 ### Background Backups
 

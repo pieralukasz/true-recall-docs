@@ -10,6 +10,10 @@ description: "Create flashcards from images by hiding specific regions, with man
 
 **Image Occlusion** lets you create flashcards from images by hiding specific regions. Each region becomes a separate card — you see the image with one area covered and must recall what's underneath.
 
+:::note[Availability]
+Image Occlusion is a **Pro** plugin. Manual region drawing and AI-assisted region detection are both part of this Pro feature.
+:::
+
 This type exists because some things can't be tested with text alone. In anatomy, chemistry, or geography, the spatial relationship between a label and its location is part of what you're learning. A basic card that asks "What is the hippocampus?" doesn't test whether you can find it on a brain diagram. Image occlusion does.
 
 ## How It Works

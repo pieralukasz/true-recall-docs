@@ -9,7 +9,11 @@ description: A floating toolbar that appears when you select text — generate f
 :::caution[My Notes]
 :::
 
-The **Selection Toolbar** is a floating toolbar that appears above any text selection in your notes. Select text, click a button, and AI generates properly formatted cards from your content.
+The **Selection Toolbar** is a floating toolbar that appears above any text selection in your notes. Select text, click a button, and create cards, highlights, copied snippets, or notes without leaving the editor.
+
+:::note[Availability]
+The toolbar itself is **Free**. AI generation buttons require **BYOK** or **Pro**, and Image Occlusion requires **Pro**.
+:::
 
 There are two toolbar variants:
 - **Editor Toolbar** — appears when selecting text in the editor (all buttons available)
@@ -114,7 +118,7 @@ Besides the Selection Toolbar, you can create flashcards by:
 
 ### From a Whole Note
 
-Use the command palette (Cmd/Ctrl + P → "Generate flashcards from note") to generate cards from an entire note at once.
+Use the [Flashcard Panel](/views/flashcard-panel/) to generate cards from an entire note at once.
 
 :::note[Least personalized method]
 Whole-note generation is the least optimal way to create personalized flashcards — the AI decides what matters, not you. Use it when a note is short and you believe **everything** in it is worth remembering.
@@ -155,7 +159,7 @@ Shared settings:
 
 | Setting | Description |
 |---------|-------------|
-| **Language** | Output language (auto-detect or specific) — in `Settings → True Recall → AI` |
+| **Language** | Output language (auto-detect or specific) — in `Settings → True Recall → Plugins → AI Flashcard Generation` |
 
 To edit, create, or delete presets: `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/).
 
@@ -178,7 +182,7 @@ Select multiple paragraphs at once. AI generates multiple cards covering differe
 | Problem | Solution |
 |---------|----------|
 | Toolbar not appearing | Check `Settings → True Recall → Plugins → Selection Toolbar` is enabled |
-| AI buttons grayed out | Configure an API key or subscription in `Settings → True Recall → AI` |
+| AI buttons grayed out | Configure an API key or subscription in `Settings → True Recall → Plugins` |
 | AI buttons missing entirely | The owning plugin (e.g. [AI Flashcard Generation](/plugins/ai-flashcard-generation/)) is disabled or your tier doesn't meet its requirement |
 | Button config moved | Button order and visibility are now in the **Selection Toolbar** plugin panel, not in General settings |
 | Generation fails | Check API key validity and network connection |

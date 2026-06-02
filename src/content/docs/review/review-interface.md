@@ -14,7 +14,7 @@ The **Review View** is where learning happens. You see one card at a time: read 
 
 | Method | Action |
 |--------|--------|
-| Command palette | `Cmd/Ctrl + P` → "Review flashcards from current note" or "Start review session" |
+| Command palette | `Cmd/Ctrl + P` → "Review flashcards from current note" or "Review today's new cards" |
 | [Dashboard](/views/dashboard/) | Click **Study** on any project or note row |
 | [Flashcard Panel](/views/flashcard-panel/) | Click the **Review** button in the header |
 
@@ -114,7 +114,6 @@ Note review lets you review an entire note as a single flashcard — useful for 
 
 - **Flashcard Panel** — click the toggle icon in the panel header (when viewing a note with a `flashcard_uid`)
 - **Command palette** — `Cmd/Ctrl + P` → "Toggle note review"
-- **CLI / API** — `true-recall toggle_note_review`
 
 When enabled, a `note-review` card is created for that note. It appears in your review queue alongside regular cards.
 

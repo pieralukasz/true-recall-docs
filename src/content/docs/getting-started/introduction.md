@@ -45,8 +45,8 @@ The algorithm tracks two things per card: **stability** (how long until you migh
 - **[Type-in Mode](/review/type-in-mode/)** — Type answers and get AI-powered semantic grading or diff
 - **[Note Types](/creation/note-types/)** — Anki-style templates with customizable fields
 - **[Projects](/creation/projects-and-notes/)** — Organize notes into hierarchies with per-project FSRS presets
-- **Cloud Sync** — Sync progress across devices (Coming soon)
-- **[25+ Widgets](/configuration/editor-integration/)** — Embed analytics and gamification in your notes
+- **Device Sync** — Optional vault-based device database merge on startup
+- **Dashboard Codeblocks** — Embed study analytics and project dashboards in your notes
 
 ## Projects group notes together
 
@@ -75,8 +75,8 @@ Project: "Science Fundamentals"
 | **AI Generation**    | Built-in                          | No                            |
 | **Image Occlusion**  | Built-in with AI detection        | Plugin required               |
 | **Type-in Grading**  | AI semantic grading               | Exact match only              |
-| **Cloud Sync**       | Built-in                          | Paid add-on                   |
-| **Platform**         | Obsidian engine                   | Standalone app                |
+| **Device databases** | Vault-based device databases      | AnkiWeb sync                  |
+| **Platform**         | Obsidian desktop                  | Desktop and mobile apps      |
 
 :::tip[Coming from Anki?]
 See the [migration guide](/migration/from-anki/) for a complete walkthrough — note types, media, scheduling, everything transfers.
@@ -84,7 +84,7 @@ See the [migration guide](/migration/from-anki/) for a complete walkthrough — 
 
 ## Local-first data
 
-Your flashcard data lives in `.true-recall/true-recall.db` inside your notes folder — a portable SQLite database. Nothing leaves your machine unless you opt into cloud sync.
+Your flashcard data lives in your vault as a local SQLite database. Nothing leaves your machine unless you use your own vault sync setup or configure AI features that send selected content to your chosen provider.
 
 ## Next steps
 

@@ -33,11 +33,11 @@ Common issues and how to fix them. If your problem isn't listed here, check the 
 
 **Symptoms:** Selection Toolbar buttons are disabled or generation fails.
 
-1. **No API key** — You need either a subscription key (from [truerecall.app/dashboard](https://truerecall.app/dashboard)) or your own OpenRouter API key. Check `Settings → AI`.
+1. **No AI provider configured** — You need either a Pro key, your own OpenRouter key, LM Studio, or a custom provider. Check `Settings → True Recall → Plugins`.
 
 2. **Budget exceeded** — Free trial has a one-time budget (~100 cards). Pro resets monthly. Check usage on your [dashboard](https://truerecall.app/dashboard). You can upgrade to Pro or add an OpenRouter key as fallback.
 
-3. **Model unavailable** — Some models may be temporarily unavailable. Try a different model in `Settings → AI → Model`.
+3. **Model unavailable** — Some models may be temporarily unavailable. Try a different model in `Settings → True Recall → Plugins`.
 
 4. **Text too short** — The Selection Toolbar requires at least 3 characters selected.
 
@@ -47,25 +47,23 @@ Common issues and how to fix them. If your problem isn't listed here, check the 
 
 **Symptoms:** Type-in mode doesn't grade semantically, or gives unexpected scores.
 
-1. **Mode set to "diff"** — Check `Settings → General → Type-in Mode`. Set to "ai" for semantic grading, "diff" for text comparison.
+1. **Mode set to "diff"** — Check `Settings → True Recall → Plugins → Type-in Mode`. Set the default to "AI" for semantic grading or "Diff" for text comparison.
 
 2. **Timeout** — AI grading has an 8-second timeout. On slow connections, it may fall back to local text comparison. The fallback score appears instantly.
 
-3. **Custom prompt override** — If you set a custom grading prompt in AI settings, it may be causing unexpected behavior. Try clearing it.
+3. **Custom prompt override** — If you set a custom grading prompt in Type-in Mode settings, it may be causing unexpected behavior. Try clearing it.
 
-## Sync Problems
+## Device Sync Problems
 
-**Symptoms:** Cards not syncing across devices, sync errors.
+**Symptoms:** Cards not merging across desktop devices, sync errors, or stale review history.
 
-1. **Not logged in** — Check `Settings → Sync` and ensure you're signed in.
+1. **Device Sync disabled** — Check `Settings → True Recall → Integrations → Device Sync`.
 
-2. **Network issues** — Sync requires an internet connection to reach Supabase servers.
+2. **Vault sync not finished** — Device Sync depends on your vault sync setup. Wait until your synced vault files are fully up to date before opening Obsidian on another machine.
 
-3. **First sync conflict** — If both local and remote have existing data, True Recall detects a conflict. Choose:
-   - **Force upload** — Replace remote with your local data
-   - **Force pull** — Replace local with remote data
+3. **Plugin open on another device** — Close Obsidian on the other device first if True Recall warns about an active device lock.
 
-4. **Stale data** — Sync uses last-write-wins. If you edit the same card on two devices without syncing between edits, the later timestamp wins.
+4. **Stale data** — Device Sync uses last-write-wins. If you edit the same card on two devices without syncing between edits, the later timestamp wins.
 
 ## Performance Issues
 
@@ -89,7 +87,7 @@ Common issues and how to fix them. If your problem isn't listed here, check the 
 
 3. **Duplicate detection** — Cards with identical questions are skipped as duplicates. This is expected behavior — check the "Duplicates" count in the import result.
 
-4. **Media not showing** — Imported media goes to `Attachments/anki-import`. If images don't render, check that the files exist at that path and that Obsidian's attachment folder settings don't conflict.
+4. **Media not showing** — Imported media goes under the selected import folder in `Attachments` by default. If images don't render, check that the files exist there and that Obsidian's attachment folder settings don't conflict.
 
 ## Database Issues
 
@@ -127,13 +125,13 @@ Unlike older algorithms, FSRS recalculates intervals based on actual time elapse
 
 **Symptoms:** Claude Code can't connect to True Recall, MCP tools return errors.
 
-1. **API not enabled** — Go to `Settings → General → Local API` and enable it. See [MCP Server](/reference/mcp-server/) for full setup.
+1. **API not enabled** — Go to `Settings → True Recall → Integrations → Local API` and enable it. See [MCP Server](/reference/mcp-server/) for full setup.
 
 2. **Obsidian not running** — The Local API only works while Obsidian is open with True Recall loaded.
 
-3. **Port conflict** — If another service uses port `27182`, change the port in True Recall settings and update `TRUE_RECALL_PORT` in your MCP config. Restart Obsidian.
+3. **Port conflict** — If another service uses the same port, change the Local API port in True Recall settings, update your assistant configuration, then restart Obsidian.
 
-4. **Dependencies not installed** — Run `cd mcp-server && bun install` in the True Recall directory.
+4. **Assistant setup incomplete** — Recheck your assistant's True Recall integration setup after changing the Local API port.
 
 ## What to Read Next
 

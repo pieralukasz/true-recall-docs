@@ -11,7 +11,7 @@ description: AI-powered card improvement during review and inside the Add Flashc
 
 **Card Polish** is a plugin that rewrites flashcards on demand using AI. You can run it mid-review (from the review interface) or while drafting cards in the Add Flashcard modal. Each preset captures a specific instruction — "simplify", "tighten wording", "fix formatting", "split into atomic cards", or anything custom — and can auto-apply the result or show a preview first.
 
-**Tier:** BYOK — works with any AI key (OpenRouter BYOK, LM Studio, Custom, or Pro). Card Polish routes through whichever AI provider is currently selected in `Settings → True Recall → AI`.
+**Tier:** BYOK — works with any AI key (OpenRouter BYOK, LM Studio, Custom, or Pro). Card Polish routes through whichever AI provider is currently selected in `Settings → True Recall → Plugins`.
 
 Enable it in `Settings → True Recall → Plugins → Card Polish`.
 
@@ -82,14 +82,11 @@ Each preset can declare a hotkey that's active ONLY while the Review view is foc
 
 ## Error Handling
 
-If AI fails to produce usable output, Card Polish surfaces a user-visible notice:
-
-- **Parse failure** — "Card Polish: couldn't parse AI response." The plugin is tolerant of JSON embedded in prose or in ``` ```json ... ``` ``` code fences, so parse failures are rare. When a parse failure happens with no usable proposal, the preview modal shows the raw response so you can copy or rerun manually
-- **Abort** — canceling mid-stream (e.g. via modal dismiss) cleanly aborts the request
+If AI fails to produce usable output, Card Polish shows a notice and leaves the original card unchanged. If you cancel while the request is running, the request is stopped cleanly.
 
 ## AI Routing
 
-Card Polish routes through `resolveAIClientConfig`, which dispatches to whichever provider is currently selected (`Pro` / `OpenRouter` / `LM Studio` / `Custom`). When the active provider is **LM Studio**, you can pick a Card Polish-specific model in `Settings → True Recall → Plugins → Card Polish → LM Studio model` — the plugin falls back to the global LM Studio model when no override is set.
+Card Polish uses whichever provider is currently selected: Pro, OpenRouter, LM Studio, or Custom. When the active provider is **LM Studio**, you can pick a Card Polish-specific model in `Settings → True Recall → Plugins → Card Polish → LM Studio model` — the plugin falls back to the global LM Studio model when no override is set.
 
 ## What to Read Next
 

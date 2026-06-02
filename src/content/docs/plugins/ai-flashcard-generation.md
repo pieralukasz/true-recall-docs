@@ -9,7 +9,7 @@ description: Preset-driven AI card generation from notes, selections, and highli
 :::caution[My Notes]
 :::
 
-The **AI Flashcard Generation** plugin is the engine behind every AI-generated card in True Recall. It runs when you click **Flashcards** in the [Selection Toolbar](/views/selection-toolbar/), **Generate from highlights** in the [Flashcard Panel](/views/flashcard-panel/), or **generate_flashcards_with_preset** from the CLI / MCP.
+The **AI Flashcard Generation** plugin is the engine behind every AI-generated card in True Recall. It runs when you click **Flashcards** in the [Selection Toolbar](/views/selection-toolbar/) or generate cards from highlights or the whole note in the [Flashcard Panel](/views/flashcard-panel/).
 
 **Tier:** BYOK — works with any AI key (OpenRouter BYOK, LM Studio, Custom, or Pro). A Pro-hosted built-in preset is available to Pro users only.
 
@@ -17,10 +17,10 @@ Enable it in `Settings → True Recall → Plugins → AI Flashcard Generation`.
 
 ## How Generation Works
 
-1. You trigger generation from a UI action (selection toolbar, panel, command) or a headless endpoint (CLI, MCP, HTTP)
+1. You trigger generation from the Selection Toolbar or Flashcard Panel
 2. The plugin looks up the **preset** you pick (or the default preset) and binds it to its **note type**
-3. It builds a prompt from the preset's `prompt` field + the note type's field spec, optionally enriched with the source note body and / or sibling cards (see [Context Options](#context-options))
-4. It sends the prompt to the active AI provider — Pro / LiteLLM for Pro presets, otherwise the configured BYOK route (OpenRouter, LM Studio, or Custom)
+3. It builds the AI instruction from the preset and selected note type, optionally enriched with the source note body and / or sibling cards (see [Context Options](#context-options))
+4. It sends the prompt to the active AI provider — Pro for Pro presets, otherwise your configured BYOK route (OpenRouter, LM Studio, or Custom)
 5. It streams cards back, validates them against the note type's schema, and writes them to your note in [block format](/creation/creating-flashcards/#block-format)
 
 For a deep dive on the preset shape and how presets bind to note types, see [Generation Presets](/plugins/generation-presets/).
@@ -30,7 +30,6 @@ For a deep dive on the preset shape and how presets bind to note types, see [Gen
 The plugin ships with:
 
 - **Basic flashcards** — Q/A pairs in the Basic note type
-- **Cloze** — fill-in-the-blank cards in the Cloze note type
 - **Basic Pro** — Pro-only preset with a heavily tuned prompt (7 core rules, 6 few-shot examples, automatic existing-cards awareness) that produces cleaner output than BYOK. Shows a **PRO** badge in the UI.
 
 Built-in presets are **locked** — you can't edit or delete them from the UI. To customize, create a new preset (optionally starting by copy-pasting the built-in prompt).
@@ -59,15 +58,6 @@ When generating on a note that already has flashcards, the plugin injects those 
 
 Each preset that is eligible for a toolbar button (based on its note type and tier) appears in the [Selection Toolbar](/views/selection-toolbar/) so you can trigger it with a single click on a selection.
 
-## Headless Generation
-
-Both the CLI and MCP can run presets directly:
-
-- CLI: `true-recall generate_flashcards_with_preset --text "..." --preset_id <id>`
-- MCP: `generate_flashcards_with_preset({ text, preset_id })`
-
-See [Claude Code Skill](/reference/claude-code-skill/) and [MCP Server](/reference/mcp-server/).
-
 ## Context Options
 
 Two opt-in flags per preset enrich the prompt with extra information before it reaches the AI:
@@ -86,4 +76,3 @@ When the active AI provider is **LM Studio**, AI Flashcard Generation can use a 
 - [Generation Presets](/plugins/generation-presets/) — full preset reference
 - [Card Polish](/plugins/card-polish/) — improve existing cards (complementary plugin)
 - [Selection Toolbar](/views/selection-toolbar/) — the most common trigger for AI generation
-- [Claude Code Skill](/reference/claude-code-skill/) — headless generation via CLI

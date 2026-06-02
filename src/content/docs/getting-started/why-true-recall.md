@@ -65,7 +65,7 @@ Embed live analytics directly in your notes using codeblock widgets:
 - **Heatmap** — GitHub-style study activity
 - **Forecast** — 30-day workload prediction
 - **Health** — Collection health by retrievability
-- **Streak, Progress, Achievements** — Gamification
+- **Streak, progress, and workload views** — long-term study patterns at a glance
 - **Problem Cards** — Leeches and unstable cards
 
 All widgets update live as you review.
@@ -94,7 +94,7 @@ Anki is the gold standard for spaced repetition. True Recall builds on Anki's co
 | **Answer checking**    | AI semantic grading             | Exact text match                         |
 | **Workload tools**     | Load balance, easy days, breaks | Basic (since v24)                        |
 | **Widgets**            | 23 inline widgets in notes      | Add-ons required                         |
-| **Platform**           | Desktop + mobile (Obsidian engine) | Standalone + AnkiDroid/AnkiMobile        |
+| **Platform**           | Obsidian desktop                  | Standalone + AnkiDroid/AnkiMobile        |
 | **Anki compatibility** | Full .apkg import and export    | N/A                                      |
 
 **Choose Anki if:** You need a standalone app or use AnkiDroid/AnkiMobile extensively.

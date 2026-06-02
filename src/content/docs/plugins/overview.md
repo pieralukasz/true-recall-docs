@@ -32,7 +32,7 @@ Every plugin declares a tier that determines when it can activate:
 |------|----------------|-----------------|
 | **Free** | Always | Selection Toolbar, Status Bar Widget, Dashboard Codeblocks, Link Status Indicators |
 | **BYOK** | Any AI key present (OpenRouter BYOK, LM Studio, Custom, or Pro key) | AI Flashcard Generation, Card Polish |
-| **Pro** | Pro key present | Type-in Mode, Gamification Widgets, Image Occlusion, Knowledge Base, AI Anki Import |
+| **Pro** | True Recall Pro key present | Type-in Mode, Image Occlusion, Knowledge Base, AI Anki Import |
 
 Tiers form an inclusive ladder — a Pro user gets every BYOK and Free plugin; a BYOK user gets every Free plugin. See [AI Settings](/configuration/ai-settings/) for how to configure your key.
 
@@ -47,10 +47,13 @@ Tiers form an inclusive ladder — a Pro user gets every BYOK and Free plugin; a
 | [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) | BYOK | Preset-driven card generation from notes, selections, and highlights |
 | [**Card Polish**](/plugins/card-polish/) | BYOK | Transform cards mid-review or in the Add Flashcard modal using your own AI presets |
 | [**Type-in Mode**](/review/type-in-mode/) | Pro | Typed-answer reviews with AI or diff-based grading |
-| **Gamification Widgets** | Pro | Daily progress rings, achievement badges, streaks, and exam countdowns as codeblocks |
 | [**Image Occlusion**](/creation/image-occlusion/) | Pro | Hide regions of images to test visual recall |
 | [**Knowledge Base**](/configuration/knowledge-base/) | Pro | RAG-powered semantic search and chat across your vault |
 | **AI Anki Import** | Pro | AI-assisted `.apkg` import with deck classification and field mapping |
+
+:::note[Tier summary]
+Free features work without any AI key. BYOK features work when you bring your own OpenRouter key, use LM Studio, use a custom provider, or have a Pro key. Pro features require a True Recall Pro key.
+:::
 
 ## Plugin Settings Panels
 

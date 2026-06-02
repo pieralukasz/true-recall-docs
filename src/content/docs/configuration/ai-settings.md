@@ -8,7 +8,7 @@ description: "Configure AI provider, subscription, API keys, and generation / gr
 :::caution[My Notes]
 :::
 
-AI-powered card generation is what makes **True Recall** fast — select text, click a button, get flashcards. Configure AI features in `Settings → True Recall → AI`.
+AI-powered card generation is what makes **True Recall** fast — select text, click a button, get flashcards. Configure AI features in `Settings → True Recall → Plugins`, at the top of the Plugins tab.
 
 For how AI generation works in practice, see [Selection Toolbar](/views/selection-toolbar/).
 
@@ -18,10 +18,10 @@ Choose where AI requests are routed via the **AI Provider** dropdown. Available 
 
 | Provider | Description |
 |----------|-------------|
-| **True Recall Pro** (Recommended) | Managed service with optimized prompts and model routing |
-| **OpenRouter (BYOK)** | Direct API access — bring your own key and pick any model |
-| **LM Studio (Local)** | Run models locally with auto-discovered model listing |
-| **Custom Provider (Self-hosted)** | Connect to Ollama, vLLM, or any OpenAI-compatible endpoint |
+| **True Recall Pro** (Pro) | Managed service with optimized prompts and model routing |
+| **OpenRouter (BYOK)** | Bring your own OpenRouter key and pick a model |
+| **LM Studio (BYOK / Local)** | Run models locally with auto-discovered model listing |
+| **Custom Provider (BYOK / Self-hosted)** | Connect to Ollama, vLLM, or another OpenAI-compatible endpoint |
 
 Only one provider can be active at a time. Each provider has its own configuration fields that appear when selected.
 
@@ -32,7 +32,7 @@ The recommended way to use AI features. A subscription key gives you access to e
 **Setup:**
 1. Visit [truerecall.app/login](https://truerecall.app/login) and sign in with your email
 2. A free trial key is generated automatically on first visit to the [dashboard](https://truerecall.app/dashboard)
-3. Copy the key and paste it into `Settings → True Recall → AI → Subscription Key`
+3. Copy the key and paste it into `Settings → True Recall → Plugins → Pro Key`
 4. Upgrade to Pro ($4/mo) from the dashboard when ready — your key stays the same
 
 **Plans:**
@@ -48,7 +48,7 @@ Manage or cancel your subscription anytime from the [dashboard](https://truereca
 
 Direct API access for users who want full control. Bring your own key and prompts — no subscription needed.
 
-**Setup:** Create an account at [openrouter.ai](https://openrouter.ai) → Keys → Create new key → paste here.
+**Setup:** Create an account at [openrouter.ai](https://openrouter.ai), create an API key, then paste it into the OpenRouter section in `Settings → True Recall → Plugins`.
 
 When OpenRouter is selected, you can choose from a curated list of popular models or enter a custom model ID.
 
@@ -94,36 +94,31 @@ Connect to Ollama, LM Studio, vLLM, or any OpenAI-compatible endpoint. This give
 
 ## Grading and Detection Prompts
 
-A couple of AI-powered features use standalone prompts that sit outside the preset system:
+A couple of AI-powered features have their own prompts in their plugin settings:
 
 | Prompt | Controls |
 |--------|----------|
-| **Type-in Grading Prompt** | AI answer grading during [type-in mode](/review/type-in-mode/) |
-| **Image Occlusion Detection Prompt** | AI region detection in images |
-
-### Available Variables (Grading Prompt)
-
-- `{{correct}}` — Correct answer
-- `{{student}}` — Student's answer
+| **Type-in grading prompt** | AI answer grading during [Type-in Mode](/review/type-in-mode/) |
+| **AI detection prompt** | AI region detection in [Image Occlusion](/creation/image-occlusion/) |
 
 ## Flashcard Generation
 
-Flashcard generation is handled by the [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) plugin. Each generation flow (selection toolbar, panel, CLI, MCP) runs through a **[generation preset](/plugins/generation-presets/)** — a template that binds a prompt to a note type, with opt-in source-note and related-card context.
+Flashcard generation is handled by the [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) plugin. Each generation flow runs through a **[generation preset](/plugins/generation-presets/)** — a template that binds a prompt to a note type, with opt-in source-note and related-card context.
 
-Shared generation settings:
+Generation language is configured per preset:
 
 | Setting | Description |
 |---------|-------------|
-| **Generation language** | Target language for generated cards. Default: **Auto** (detects from input content). You can force a specific language. |
+| **Output language** | Target language for generated cards. Default: **Auto** (detects from input content). You can force a specific language per preset. |
 
-For **per-preset** configuration (prompt, note type binding, context flags, Pro gating), use the plugin's own settings panel at `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/) for the full preset reference.
+For preset configuration (prompt, note type binding, language, and context flags), use `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/) for the full preset reference.
 
 :::note[Where did the old generation prompt go?]
 Pre-1.7 versions had a single "Generation Prompt" in AI settings. In 1.7.0 that was replaced by the preset system — every generation flow now binds to a preset instead of a global prompt. Your old prompt is migrated into a preset automatically.
 :::
 
 :::note[TTS and image post-processing were removed in 1.8]
-Earlier versions let presets configure text-to-speech and image generation. Both pipelines were removed in 1.8 — generation focuses on text only. Existing `tts` / `image` config on stored presets is dropped during settings migration; if you relied on either, generate audio / images outside True Recall and store the result in the field by hand.
+Earlier versions let presets configure text-to-speech and image generation. Both pipelines were removed in 1.8 — generation focuses on text only. Old audio and image settings are removed automatically during migration.
 :::
 
 ## Per-Plugin LM Studio Models

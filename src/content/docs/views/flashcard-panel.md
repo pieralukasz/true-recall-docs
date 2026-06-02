@@ -3,7 +3,7 @@ title: Flashcard Panel
 sidebar:
   label: "Flashcard Panel"
   order: 3
-description: The main sidebar panel for managing flashcards per note with quick review, collection, and AI generation.
+description: The main sidebar panel for managing flashcards per note with collection, review actions, and AI generation.
 ---
 
 :::caution[My Notes]

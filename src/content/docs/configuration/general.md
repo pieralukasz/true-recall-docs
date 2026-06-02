@@ -8,15 +8,7 @@ description: Configure True Recall's review interface, editor integration, day b
 :::caution[My Notes]
 :::
 
-**True Recall's** general settings control the review experience, editor features, and when your study day rolls over. Configure in `Settings → True Recall → General`.
-
-## True Recall Pro
-
-Enter your Pro key to unlock premium features. Get your key from [truerecall.app/dashboard](https://truerecall.app/dashboard).
-
-| Setting | Description |
-|---------|-------------|
-| **Pro Key** | Your True Recall Pro license key. Shows activation status after entering. |
+**True Recall's** general settings control the review experience, editor indicators, and when your study day rolls over. Configure in `Settings → True Recall → General`.
 
 ## Review Interface
 
@@ -27,9 +19,9 @@ Enter your Pro key to unlock premium features. Get your key from [truerecall.app
 | **Show header stats** | On / Off | Badge counts (New, Learn, Due) in review header |
 | **Show next review time** | On / Off | Predicted intervals ("8d", "21d") on rating buttons |
 | **Continuous custom reviews** | On / Off | Show "Next Session" button after finishing a custom session |
+| **Card content width** | Narrow / Default / Wide / Full | Maximum width of card text in review |
 | **Show frontmatter in note review** | On / Off | Display YAML frontmatter when reviewing whole notes (see [Note Review](/review/review-interface/#note-review)) |
 | **Ignore daily limits for note study** | On / Off | When studying a specific note, bypass the preset's daily new/review limits |
-| **Default type-in mode** | Off / Diff / AI | Type-in mode for new review sessions |
 
 :::note
 Daily limits are configured **per preset**, not here. Each [FSRS preset](/scheduling/presets/) has its own new cards/day and reviews/day.
@@ -39,13 +31,16 @@ Daily limits are configured **per preset**, not here. Each [FSRS preset](/schedu
 
 | Setting | Options | Description |
 |---------|---------|-------------|
-| **Show quick review in panel** | On / Off | Quick-review section at top of [Flashcard Panel](/views/flashcard-panel/) |
+| **Show link status indicators** | On / Off | Inline flashcard counts next to `[[wiki links]]` |
+| **Show donuts in flashcard panel** | On / Off | Donut indicators next to links inside Flashcard Panel cards |
+| **Show donuts in review** | On / Off | Donut indicators next to links during review sessions |
+| **Show status bar widget** | On / Off | Global card counts in the bottom status bar |
 
 Most editor integrations are now plugins (see [Plugin Overview](/plugins/overview/)) — toggle them in `Settings → True Recall → Plugins`:
 
 - **Link Status Indicators** — inline flashcard counts next to `[[wiki links]]`
 - **Status Bar Widget** — global card counts in the bottom status bar
-- **Dashboard Codeblocks** / **Gamification Widgets** — embed dashboards in your notes
+- **Dashboard Codeblocks** — embed dashboards in your notes
 
 For details on what each plugin does and how to configure it, see [Editor Integration](/configuration/editor-integration/).
 
@@ -54,14 +49,6 @@ For details on what each plugin does and how to configure it, see [Editor Integr
 **Next day starts at** — Hour when a new "day" begins (0–23). Default: **4 AM** (same as Anki).
 
 This means a 2 AM review counts as "today," not "tomorrow." Useful if you study late at night.
-
-## Flashcard Collection
-
-| Setting | Options | Description |
-|---------|---------|-------------|
-| **Remove content after collecting** | On / Off | Remove flashcard block format syntax from note after collection |
-
-See [The Collection Step](/creation/creating-flashcards/#the-collection-step) for how collection works.
 
 ## Selection Toolbar
 
@@ -88,19 +75,11 @@ Customize the keyboard shortcuts for rating cards during review.
 
 Click a key button, press the new key to reassign. Duplicates are prevented. See [Keyboard Shortcuts](/configuration/keyboard-shortcuts/#custom-review-keybindings) for details.
 
-## Local API
+## Other Settings Tabs
 
-The Local API starts an HTTP server on `127.0.0.1` so the True Recall CLI and other tools can interact with the plugin. It powers the [MCP Server](/reference/mcp-server/) and the [Claude Code Skill](/reference/claude-code-skill/).
-
-| Setting | Description |
-|---------|-------------|
-| **Enable local API** | Start the HTTP server when True Recall loads |
-| **Port** | Default `27182`. Change if the port conflicts. Restart Obsidian after changing. |
-| **Claude Code Skill** | Link to download the CLI skill for Claude Code |
-
-:::note
-The API only listens on localhost — it is not accessible from other machines.
-:::
+- **Plugins** — AI provider, plugin toggles, Selection Toolbar buttons, AI Flashcard Generation presets, Card Polish presets, Type-in Mode settings, Knowledge Base settings
+- **Integrations** — Local API, Claude Code Skill link, and Device Sync
+- **Data & Backup** — device database, backups, restore, integrity check, Anki import/export, CSV/TSV export
 
 ## What to Read Next
 
@@ -110,5 +89,3 @@ The API only listens on localhost — it is not accessible from other machines.
 - [Editor Integration](/configuration/editor-integration/) — link indicators, status bar, and codeblock widgets
 - [FSRS Settings](/configuration/fsrs-settings/) — scheduling configuration per preset
 - [Type-in Mode](/review/type-in-mode/) — how the type-in setting works during review
-- [Claude Code Skill](/reference/claude-code-skill/) — control True Recall from Claude Code
-- [MCP Server](/reference/mcp-server/) — connect AI assistants via the Local API

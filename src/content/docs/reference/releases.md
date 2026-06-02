@@ -25,7 +25,7 @@ Release notes for every **True Recall** version. For the latest release, check [
 - **Per-plugin LM Studio model overrides** -- AI Flashcard Generation and Card Polish each expose their own LM Studio model selector, so you can route a fast model for polish and a stronger model for generation. The system falls back to the global LM Studio model when no override is set
 - **Generation preset context options** -- two new opt-in toggles per preset, **Include source note** and **Include related cards**, enrich the prompt with the host note's body and sibling cards from the same note. See [Generation Presets](/plugins/generation-presets/)
 - **Card Polish moved to BYOK** -- Card Polish now activates with any AI key (OpenRouter BYOK or Pro), not just Pro. See [Card Polish](/plugins/card-polish/)
-- **Card AI: SPLIT mode** -- the system prompt now recognizes three explicit modes (`EDIT`, `SPAWN`, `SPLIT`); presets with "split / decompose / break apart" wording correctly decompose one card into N atomic cards instead of rewriting the source
+- **Card AI split behavior** -- presets with "split / decompose / break apart" wording can decompose one card into several atomic cards instead of rewriting the source
 - **Card AI: inline-edit preview** -- the preview modal now uses an embedded CodeMirror editor for every field. Tweak proposed edits and new cards before clicking Accept
 - **Card AI: "Delete after applying" toggle** -- when an AI run produces multiple new cards (typically SPLIT), the source card is shown alongside an opt-in delete toggle, so you can replace the source with its decomposition in one click
 - **Card AI: note-type aware prompts** -- requests now ship the note type's name and field schema to the LLM, reducing field-name mistakes for custom note types
@@ -36,8 +36,8 @@ Release notes for every **True Recall** version. For the latest release, check [
 ### Improvements
 
 - **Targeted review session updates** -- mid-session card mutations (rename, edit, suspend) no longer trigger a full session rebuild; the engine applies a targeted mutation that preserves card position and response timing
-- **Review session refactor** -- review logic split into a platform-agnostic `ReviewSessionEngine` and an Obsidian-side `ReviewSessionController`. Internal change with two visible side-effects: leech notifications respect Anki-style thresholds (8 / 12 / 16 lapses) instead of firing on every grade above threshold, and cramming sessions no longer show phantom "leech suspended" toasts
-- **Card AI runtime moved to plugins/shared** -- card-ai service, runner, prompts, and context collection moved out of `@true-recall/core` and into the shared plugin runtime, so non-plugin code (CLI, MCP) no longer pulls in plugin-only logic
+- **Review session refactor** -- internal review handling is cleaner. Visible side-effects: leech notifications respect Anki-style thresholds (8 / 12 / 16 lapses) instead of firing on every grade above threshold, and cramming sessions no longer show phantom "leech suspended" toasts
+- **Card AI runtime cleanup** -- Card Polish and AI generation now share more of the same plugin runtime, which improves consistency between AI features
 
 ### Bug Fixes
 
@@ -49,10 +49,10 @@ Release notes for every **True Recall** version. For the latest release, check [
 
 ### Breaking Changes & Migration
 
-- **TTS post-processing removed** -- the entire text-to-speech pipeline (OpenAI voices, autoplay, per-note synthesis) is gone. Generation presets no longer carry `tts` config, and AI settings no longer expose voice / autoplay knobs. Existing `tts` fields on stored presets are dropped during settings migration
+- **TTS post-processing removed** -- the text-to-speech pipeline is gone. AI settings no longer expose voice / autoplay knobs, and old voice settings are removed during migration
 - **Card Healing plugin removed** -- the "Healing Flashcards" plugin (auto-generate corrective cards from lapse patterns) is gone. Card AI's SPLIT mode covers most decomposition use-cases; for repair, use Card Polish presets
-- **Image post-processing removed from generation presets** -- the per-preset image generation step is gone. Generation presets no longer carry an `image` config; existing entries are dropped during settings migration
-- **`providerType` is now the source of truth** -- the AI provider is selected explicitly via a `providerType` field (`pro` / `openrouter` / `lmstudio` / `custom`). For users upgrading from 1.7, `providerType` is derived from your existing `proKey` / `openRouterApiKey`, and `aiTier` is kept in sync automatically — no action needed
+- **Image post-processing removed from generation presets** -- the per-preset image generation step is gone, and old image settings are removed during migration
+- **AI provider selection cleaned up** -- the AI provider is selected explicitly from the provider dropdown. Existing Pro and OpenRouter users are migrated automatically
 
 ---
 
@@ -60,14 +60,12 @@ Release notes for every **True Recall** version. For the latest release, check [
 
 ### Features
 
-- **Plugin architecture** -- 12 built-in plugins with tier-based gating (free / BYOK / Pro), each independently toggleable from a new Plugins tab in settings: Image Occlusion, AI Flashcard Generation, Knowledge Base, Type-in Mode, Healing Flashcards, Link Status Indicators, Dashboard Codeblocks, Gamification Widgets, Status Bar Widget, AI Anki Import, Selection Toolbar, and Card Polish. See [Plugin Overview](/plugins/overview/)
+- **Plugin architecture** -- built-in plugins with tier-based gating (Free / BYOK / Pro), each independently toggleable from a new Plugins tab in settings. See [Plugin Overview](/plugins/overview/)
 - **Card Polish plugin** -- AI rewriting of cards mid-review or in the Add Flashcard modal, with per-preset auto-apply or preview, per-preset review hotkeys, and optional source-note / related-card context. See [Card Polish](/plugins/card-polish/)
-- **AI Flashcard Generation plugin** -- preset-driven generation from notes, selections, and highlights, with per-preset TTS and image post-processing, a Pro-hosted built-in preset, and automatic injection of existing cards to avoid duplicates. See [AI Flashcard Generation](/plugins/ai-flashcard-generation/)
-- **Generation presets system** -- full CRUD for AI generation templates via settings UI, CLI, and MCP. Presets bind a single free-form prompt to a note type and optionally configure TTS voice / autoplay and image generation targets. See [Generation Presets](/plugins/generation-presets/)
+- **AI Flashcard Generation plugin** -- preset-driven generation from notes, selections, and highlights, with a Pro-hosted built-in preset and automatic existing-card awareness. See [AI Flashcard Generation](/plugins/ai-flashcard-generation/)
+- **Generation presets system** -- manage AI generation presets from settings. Presets bind a single instruction to a note type. See [Generation Presets](/plugins/generation-presets/)
 - **Card Preview modal** -- click Preview on any Flashcard Panel card to see front and back with an interactive grading flow, smooth view-transition animations, and keyboard shortcuts
 - **Basic Pro prompt overhaul** -- rewritten Pro generation prompt with 7 core rules and 6 few-shot examples
-- **CLI preset commands** -- `list_generation_presets`, `get_generation_preset`, `create_generation_preset`, `update_generation_preset`, `delete_generation_preset`, and `generate_flashcards_with_preset`
-- **MCP preset tools** -- matching MCP tools for AI assistants
 
 ### Improvements
 
@@ -77,7 +75,7 @@ Release notes for every **True Recall** version. For the latest release, check [
 - **Day rollover fixes UI immediately** -- focus / visibility triggers DataLayer invalidation so due / new counts update without manual refresh
 - **Reactive settings UI** -- `useSettings` / `usePreset` subscribe to `settings:changed`
 - **Preview modal polish** -- compact button bar in preview mode, cleaner dividers, PRO badge on the Basic Pro preset
-- **AI parse tolerance** -- Card Polish and generation flows tolerate JSON in prose or code fences and surface notices on parse failures
+- **AI response tolerance** -- Card Polish and generation flows handle imperfect AI responses more gracefully
 - **Post-processing errors surface to the user** with DataLayer invalidation
 - **Preview disabled plugins** -- expand any plugin's accordion in the Plugins tab to read its description and settings before enabling it
 
@@ -96,11 +94,11 @@ Release notes for every **True Recall** version. For the latest release, check [
 
 ### Breaking Changes & Migration
 
-- **Generation preset shape flattened** -- dropped `fields`, `customPrompt` (renamed to `prompt`), and `isPinned`; added `builtin` and `image`; `isPro` renamed to `requiresPro`. Settings migration lossy-merges legacy preset fields into the new flat `prompt`
-- **`flashcardGeneration` settings bucket removed**
+- **Generation preset settings simplified** -- older preset settings are migrated into the newer one-prompt preset model
+- **Legacy generation settings removed**
 - **Built-in presets are now locked** in the UI -- copy one to customize
-- **`cardPolish.presets` renamed to `userPresets`** -- legacy built-in polish presets are replaced by the shared plugin defaults; migration is automatic
-- **`selectionToolbarEnabled` setting removed** -- toggle the plugin instead
+- **Card Polish presets migrated** -- legacy built-in polish presets are replaced by the shared plugin defaults automatically
+- **Selection Toolbar setting moved** -- toggle the plugin instead
 
 ---
 
@@ -111,13 +109,13 @@ Release notes for every **True Recall** version. For the latest release, check [
 - Cross-device sync on startup -- new toggle in settings to automatically sync your flashcard database when the plugin loads
 - Archived cards filter in Statistics -- toggle to include or exclude archived projects from FSRS stats, workload forecasts, and dashboard counts
 - Smarter knowledge search -- RAG search now supports temporal filtering, source grouping, and improved chunking for better results
-- Per-note CLI commands -- `note_stats` and `note_cards` let you inspect card counts, states, and scheduling details for individual notes
+- Per-note assistant context improvements for card counts, states, and scheduling details
 
 ### Bug Fixes
 
 - Sync reliability -- restored last-write-wins guards for sync upsert methods, preventing potential data overwrites during cross-device sync
 - Review images -- images in the review view are now properly centered
-- JSON parsing -- added error handling for malformed JSON in card data, with clearer error messages for missing cards
+- Import data parsing -- added clearer error handling for malformed card data and missing cards
 
 ### Improvements
 
@@ -176,7 +174,7 @@ Internal restructuring release — no user-facing changes.
 ### Features
 
 - **Knowledge Base (RAG)** — semantic search across your vault with agentic chat (initially gated, fully enabled in 1.6.0)
-- **Daily stats API** — new `get_daily_stats` tool with date range parameters for MCP and CLI
+- **Daily stats improvements** — better date-range support for assistant integrations and statistics workflows
 - **Chat tool history** — tool call history is now persisted in agentic chat sessions
 
 ### Improvements
@@ -220,7 +218,7 @@ Internal restructuring release — no user-facing changes.
 
 ### Features
 
-- **Review session context API** — new API endpoint and MCP tool to retrieve current review session state
+- **Review session context** — assistant integrations can now understand the current review session state
 
 ### Improvements
 
@@ -238,12 +236,12 @@ Internal restructuring release — no user-facing changes.
 
 - **AI flashcard generation** — generate flashcards from selected text with source text extraction
 - **Markdown-aware source text fixing** — AI preserves markdown formatting in generated cards
-- **Bulk card actions** — suspend, bury, delete, and manage multiple cards at once via API
+- **Bulk card actions** — suspend, bury, delete, and manage multiple cards at once
 - **AI temperature setting** — configurable temperature per model in BYOK settings
 
 ### Improvements
 
-- MCP tool registration uses structured options objects
+- Local API integration became more consistent
 - Port assignment logic refined for Local API
 - Source field instructions clarified in AI prompts
 
@@ -270,10 +268,10 @@ Initial public release of **True Recall**.
 - **Dashboard** with project hierarchy, drag-and-drop, and multi-select
 - **Review mode** with keyboard shortcuts, type-in answers, and inline editing
 - **Statistics** with daily stats, retention tracking, and streak analytics
-- **MCP Server** and **CLI** for AI assistant integration
+- **AI assistant integration** through the Local API
 
 ## What to Read Next
 
 - [Troubleshooting](/reference/troubleshooting/) — solutions to common issues
 - [Claude Code Skill](/reference/claude-code-skill/) — control True Recall from Claude Code
-- [MCP Server](/reference/mcp-server/) — connect AI assistants via MCP
+- [MCP Server](/reference/mcp-server/) — connect compatible AI assistants

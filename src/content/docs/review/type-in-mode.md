@@ -10,6 +10,10 @@ description: "Type your answers during review and get them graded with AI semant
 
 **Type-in Mode** lets you type your answers during review instead of just thinking them. **True Recall** compares your typed answer with the correct one using either AI semantic grading or character-by-character diff comparison.
 
+:::note[Availability]
+Type-in Mode is a **Pro** plugin. Diff comparison works without sending an AI request, but the Type-in Mode plugin itself requires Pro.
+:::
+
 ## Enabling Type-in Mode
 
 ### During Review
@@ -21,7 +25,7 @@ Press `T` to cycle through modes:
 
 ### Default Setting
 
-Set your preferred default in `Settings → General → Default type-in mode` (Off, Diff, or AI).
+Set your preferred default in `Settings → True Recall → Plugins → Type-in Mode` (Off, Diff, or AI).
 
 ### Per-Card Type-in
 
@@ -70,11 +74,7 @@ AI compares your answer with the correct one on meaning, not exact wording. Afte
 | "Mitochondria" | "Mitocondria" | 95% | Minor spelling error, essentially correct |
 | "Mitochondria" | "Nucleus" | 0% | Incorrect |
 
-### Custom Grading Prompt
-
-Customize how AI evaluates in `Settings → AI → Type-in grading prompt`. Template variables: `{{correct}}`, `{{student}}`, `{{question}}`.
-
-AI grading requires an API key or a [True Recall subscription](https://truerecall.app).
+AI grading requires a Pro key and an active AI provider. Configure Type-in Mode in `Settings → True Recall → Plugins → Type-in Mode`.
 
 ## Diff Comparison Mode
 
@@ -121,7 +121,7 @@ Diff mode is better when exact spelling matters — vocabulary, terminology, for
 - **Use AI mode for concepts** — it excels at evaluating understanding, not just wording
 - **Use Diff mode for terms** — exact terminology and spelling benefit from character comparison
 - **Rate honestly even with high scores** — if you struggled despite AI giving 95%, rate Hard
-- **Customize the prompt** if AI is too lenient or strict for your subject
+- **Use the plugin settings** if AI is too lenient or strict for your subject
 
 ## What to Read Next
 

@@ -26,9 +26,9 @@ Most workflows combine AI generation for bulk creation with the Flashcard Editor
 
 The [Selection Toolbar](/views/selection-toolbar/) appears when you select text in any note. Click **Flashcards** to generate cards with AI — the AI analyzes the content and picks the best format for each fact (Basic, Cloze, or Reversed). The **IO** button appears when an image is in the selection for [image occlusion](/creation/image-occlusion/) cards.
 
-You can also generate cards from an entire note at once — open the Command Palette (`Cmd/Ctrl + P`) and run "Generate flashcards from note."
+You can also generate cards from an entire note at once from the [Flashcard Panel](/views/flashcard-panel/).
 
-AI generation requires an API key. Configure your AI settings in `Settings → True Recall → AI` (subscription / BYOK) and manage per-preset prompts in `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/) for how presets work.
+AI generation requires **BYOK** or **Pro**. Configure your provider in `Settings → True Recall → Plugins`, then manage per-preset prompts in `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/) for how presets work.
 
 ## The Flashcard Editor
 
