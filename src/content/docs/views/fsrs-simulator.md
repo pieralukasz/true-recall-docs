@@ -14,7 +14,7 @@ The **FSRS Simulator** lets you see how the scheduler behaves under different pa
 
 Open it with the **Open FSRS simulator** command from the Command Palette.
 
-<!-- TODO PHOTO -->
+![FSRS Simulator with the parameter panel, rating sequences, and the interval projection chart](../../../assets/screenshots/simulator/fsrs-simulator.png)
 
 ## What You Can Adjust
 

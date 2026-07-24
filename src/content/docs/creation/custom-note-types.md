@@ -155,7 +155,7 @@ You can change the note type of existing cards:
 
 Create, edit, and delete note types in the **Note Type Manager**. Open it from the Command Palette → **Manage note types**, or from the type picker in the [Flashcard Editor](/views/flashcard-editor/).
 
-<!-- TODO PHOTO -->
+![Note Type Manager listing built-in and custom note types](../../../assets/screenshots/note-types/note-type-manager.png)
 
 The manager lists every note type — built-in and custom — and lets you add a new type, rename it, edit its fields, or delete a custom type. Built-in types (Basic, Cloze, Image Occlusion) cannot be deleted.
 

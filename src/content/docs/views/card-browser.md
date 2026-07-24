@@ -45,7 +45,7 @@ The **Card Browser** gives you a searchable, filterable view of every card in yo
 +============================+===================================+
 ```
 
-<!-- TODO PHOTO -->
+![Card Browser with the faceted sidebar and a sortable table of flashcards](../../../assets/screenshots/browser/card-browser.png)
 
 The left sidebar contains **facets** — clickable filters that show counts. The right panel is a sortable table of matching cards. Click any row to preview the full card.
 

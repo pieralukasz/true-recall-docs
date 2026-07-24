@@ -30,7 +30,7 @@ The Dashboard is organized from top to bottom:
 5. **Heatmap** — a contribution-style activity graph showing your review history
 6. **Bottom Action Bar** — Get Shared and Import File buttons
 
-<!-- TODO PHOTO -->
+![True Recall Dashboard showing due counts, the review call-to-action, and the projects tree](../../../assets/screenshots/dashboard/dashboard.png)
 
 ## Today Action Bar
 

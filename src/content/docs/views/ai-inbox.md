@@ -14,7 +14,7 @@ The **AI Inbox** is where deferred [AI Assistant](/plugins/ai-assistant/) work w
 
 Open it with the **Open AI assistant inbox** command from the Command Palette. The [Flashcard Panel](/views/flashcard-panel/) also deep-links here when the active note has pending AI drafts.
 
-<!-- TODO PHOTO -->
+![AI Inbox listing assistant threads and pending proposals awaiting review](../../../assets/screenshots/assistant/ai-inbox.png)
 
 ## Layout
 
