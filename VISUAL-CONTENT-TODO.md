@@ -4,6 +4,22 @@ Lista wszystkich miejsc w dokumentacji wymagających materiałów wizualnych.
 
 ---
 
+## Capture method (status: BLOCKED — manual capture required)
+
+Automated capture via the Obsidian CLI was probed and is **not viable** in the current environment:
+
+1. **CLI absent.** The `obsidian` CLI (which offers `dev:screenshot` / `eval`) is not installed on this machine — `obs` on `PATH` is OBS Studio, not Obsidian. No `obsidian`/`obsidian-cli` binary was found under Homebrew, npm-global, or `~/.bun/bin`.
+2. **Privacy.** Even with the CLI installed, the running Obsidian instance holds a **personal vault**. Screenshotting it would leak private notes into this **public** docs repo. Product screenshots must come from a dedicated, clean **True Recall demo vault** with sample content.
+
+**Fallback (in effect): manual capture.** Follow the process documented in `CLAUDE.md → ## Screenshots`:
+- Dark theme, large readable font, 1920×1080.
+- Save to `src/assets/screenshots/<area>/<name>.png`.
+- Embed with `![alt](../../../assets/screenshots/…png)` and delete the matching `<!-- TODO PHOTO -->`.
+
+**Status:** No screenshots captured yet. All `<!-- TODO PHOTO -->` markers below remain open. Newly added pages that also need shots: `plugins/ai-assistant.md`, `views/ai-inbox.md`, `views/knowledge-chat.md`, `views/fsrs-simulator.md`, `configuration/ink-integration.md`, and the new sections in `creation/custom-note-types.md`.
+
+---
+
 ## 🎬 Tutorial wideo (2 min) — Getting Started
 
 **Rekomendacja: TAK, zdecydowanie nagraj.**
