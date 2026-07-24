@@ -172,4 +172,4 @@ Don't export everything when analyzing specific subsets.
 2. Enable "Include scheduling" for FSRS data
 3. Some columns require specific data
 
-See also [Anki Import/Export](/data/anki-import-export/) for Anki format exchange.
+See also [Import & Export](/data/import-export/) for Anki format exchange.
