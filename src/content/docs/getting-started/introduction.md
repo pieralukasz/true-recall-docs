@@ -79,7 +79,7 @@ Project: "Science Fundamentals"
 | **Platform**         | Obsidian desktop                  | Desktop and mobile apps      |
 
 :::tip[Coming from Anki?]
-See the [migration guide](/migration/from-anki/) for a complete walkthrough — note types, media, scheduling, everything transfers.
+See [Import & Export](/data/import-export/) for a complete walkthrough — note types, media, scheduling, everything transfers.
 :::
 
 ## Local-first data

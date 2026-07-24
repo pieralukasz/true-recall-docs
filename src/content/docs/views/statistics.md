@@ -13,7 +13,7 @@ The **Statistics** view gives you a comprehensive picture of your learning — h
 
 ## Today Summary
 
-<!-- TODO PHOTO -->
+![Statistics view with today's summary tiles, FSRS status, and the review activity heatmap](../../../assets/screenshots/stats/statistics.png)
 
 At the top you see today's snapshot:
 

@@ -24,11 +24,11 @@ Most workflows combine AI generation for bulk creation with the Flashcard Editor
 
 ## AI Generation
 
-The [Selection Toolbar](/views/selection-toolbar/) appears when you select text in any note. Click **Flashcards** to generate cards with AI — the AI analyzes the content and picks the best format for each fact (Basic, Cloze, or Reversed). The **IO** button appears when an image is in the selection for [image occlusion](/creation/image-occlusion/) cards.
+AI card generation runs through the [**AI Assistant**](/plugins/ai-assistant/). The [Selection Toolbar](/views/selection-toolbar/) appears when you select text in any note — click **Ask AI**, pick a generation preset chip (or type a request), and review the drafted cards before applying. The **IO** button appears when an image is in the selection for [image occlusion](/creation/image-occlusion/) cards.
 
-You can also generate cards from an entire note at once from the [Flashcard Panel](/views/flashcard-panel/).
+You can also generate cards from an entire note at once from the [Flashcard Panel](/views/flashcard-panel/), and batch-review pending drafts in the [AI Inbox](/views/ai-inbox/).
 
-AI generation requires **BYOK** or **Pro**. Configure your provider in `Settings → True Recall → Plugins`, then manage per-preset prompts in `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/) for how presets work.
+AI generation requires **BYOK** or **Pro**. Configure your provider in `Settings → True Recall → Plugins`, and manage generation presets from [Generation Presets](/plugins/generation-presets/).
 
 ## The Flashcard Editor
 

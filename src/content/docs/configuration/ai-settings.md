@@ -101,9 +101,23 @@ A couple of AI-powered features have their own prompts in their plugin settings:
 | **Type-in grading prompt** | AI answer grading during [Type-in Mode](/review/type-in-mode/) |
 | **AI detection prompt** | AI region detection in [Image Occlusion](/creation/image-occlusion/) |
 
+## AI Assistant Settings
+
+The [**AI Assistant**](/plugins/ai-assistant/) has its own settings panel at `Settings → True Recall → Plugins → AI Assistant`:
+
+| Setting | Controls |
+|---------|----------|
+| **Assistant model** | Model used for research tasks. Leave empty to use your default AI model. |
+| **Web search** | Let the model search the web via OpenRouter (extra cost per search). |
+| **Max sources** | Maximum web sources/citations the assistant may collect per task. Set to `0` to disable source fetching. |
+| **Global instructions** | Text appended to every task's prompt — your style, language, and tone. |
+| **Max agent iterations** | Upper bound on tool-calling rounds per task. |
+
+The assistant adds an **Ask AI** button to the [Selection Toolbar](/views/selection-toolbar/) and an **Open AI assistant inbox** command to the Command Palette. See [AI Assistant](/plugins/ai-assistant/) for the full workflow.
+
 ## Flashcard Generation
 
-Flashcard generation is handled by the [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) plugin. Each generation flow runs through a **[generation preset](/plugins/generation-presets/)** — a template that binds a prompt to a note type, with opt-in source-note and related-card context.
+Flashcard generation runs through the [**AI Assistant**](/plugins/ai-assistant/) (the *generate-cards* workflow). Each generation flow still uses a **[generation preset](/plugins/generation-presets/)** — a template that binds a prompt to a note type, with opt-in source-note and related-card context — now surfaced as a chip in the Ask AI composer.
 
 Generation language is configured per preset:
 
@@ -111,7 +125,7 @@ Generation language is configured per preset:
 |---------|-------------|
 | **Output language** | Target language for generated cards. Default: **Auto** (detects from input content). You can force a specific language per preset. |
 
-For preset configuration (prompt, note type binding, language, and context flags), use `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/) for the full preset reference.
+For preset configuration (prompt, note type binding, language, and context flags), see [Generation Presets](/plugins/generation-presets/) for the full preset reference.
 
 :::note[Where did the old generation prompt go?]
 Pre-1.7 versions had a single "Generation Prompt" in AI settings. In 1.7.0 that was replaced by the preset system — every generation flow now binds to a preset instead of a global prompt. Your old prompt is migrated into a preset automatically.
@@ -134,9 +148,8 @@ Each plugin falls back to the global LM Studio model when no per-plugin override
 
 ## What to Read Next
 
-- [AI Flashcard Generation](/plugins/ai-flashcard-generation/) — preset-driven card generation
+- [AI Assistant](/plugins/ai-assistant/) — the unified draft-and-approve AI workflow
 - [Generation Presets](/plugins/generation-presets/) — full preset reference
-- [Card Polish](/plugins/card-polish/) — AI card rewriting during review
 - [Selection Toolbar](/views/selection-toolbar/) — how AI generation is triggered in the editor
 - [Creating Flashcards](/creation/creating-flashcards/) — all ways to create cards
 - [Type-in Mode](/review/type-in-mode/) — AI-graded typed answers

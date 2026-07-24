@@ -1,0 +1,33 @@
+---
+import Default from "@astrojs/starlight/components/Footer.astro";
+---
+
+<Default><slot /></Default>
+
+<div class="tr-footer-credit">
+	Made by <a href="https://lucaspiera.com" target="_blank" rel="noopener">Lucas Piera</a>
+	<span aria-hidden="true">·</span>
+	<a href="https://lucaspiera.com" target="_blank" rel="noopener">lucaspiera.com</a>
+</div>
+
+<style>
+	.tr-footer-credit {
+		margin-top: 1.5rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--sl-color-gray-6);
+		font-size: var(--sl-text-xs);
+		color: var(--sl-color-gray-3);
+		text-align: center;
+	}
+	.tr-footer-credit a {
+		color: var(--sl-color-gray-2);
+		text-decoration: none;
+	}
+	.tr-footer-credit a:hover {
+		color: var(--sl-color-white);
+		text-decoration: underline;
+	}
+	.tr-footer-credit span {
+		margin: 0 0.375rem;
+	}
+</style>

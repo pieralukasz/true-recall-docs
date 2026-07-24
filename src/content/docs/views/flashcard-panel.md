@@ -27,7 +27,7 @@ The panel has these sections from top to bottom:
 3. **Image Occlusion Groups** — IO cards grouped by source image
 4. **Empty State** — Generation options when no cards exist
 
-<!-- TODO PHOTO -->
+![Flashcard Panel listing the AI-generated cards for the active note](../../../assets/screenshots/panel/flashcard-panel.png)
 
 ## Header
 

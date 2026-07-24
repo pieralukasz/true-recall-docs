@@ -151,14 +151,22 @@ You can change the note type of existing cards:
 5. Map old fields to new fields
 6. Confirm
 
-## Managing Custom Types
+## Managing Note Types
 
-Create, edit, and delete custom note types using the [Custom Type Modal](/views/custom-type-modal/) — open it from the Command Palette → "Manage note types", or from the type picker in the Flashcard Editor.
+Create, edit, and delete note types in the **Note Type Manager**. Open it from the Command Palette → **Manage note types**, or from the type picker in the [Flashcard Editor](/views/flashcard-editor/).
 
-Built-in types (Basic, Cloze, Image Occlusion) cannot be deleted.
+![Note Type Manager listing built-in and custom note types](../../../assets/screenshots/note-types/note-type-manager.png)
+
+The manager lists every note type — built-in and custom — and lets you add a new type, rename it, edit its fields, or delete a custom type. Built-in types (Basic, Cloze, Image Occlusion) cannot be deleted.
+
+## Editing Card Templates
+
+To change *how* a note type turns fields into cards, open its **Card Types Editor** from the Note Type Manager. This is where you edit the [card templates](#card-templates) and [CSS](#css) described above — add or remove templates (each template produces one card), and adjust the question and answer layout for the type.
+
+Editing a template updates every existing card of that type the next time it's rendered, so you can refine a layout without recreating cards.
 
 ## What to Read Next
 
 - [Note Types](/creation/note-types/) — the four built-in types and when to use each
 - [Creating Flashcards](/creation/creating-flashcards/) — block format syntax for writing cards in your notes
-- [Custom Type Modal](/views/custom-type-modal/) — the interface for creating and managing custom types
+- [Flashcard Editor](/views/flashcard-editor/) — where you pick a note type and fill in card fields

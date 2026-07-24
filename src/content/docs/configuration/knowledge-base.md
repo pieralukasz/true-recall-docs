@@ -51,10 +51,17 @@ Folders listed in **Exclude folders** are always skipped. If **Include folders**
 
 ## Assistant Access
 
-If you enable the Local API, compatible AI assistants can search the Knowledge Base while Obsidian is running. This is optional and only needed if you want an assistant to use your indexed notes as context.
+The index feeds two True Recall surfaces directly:
+
+- **[Knowledge Chat](/views/knowledge-chat/)** — ask questions and get answers cited from your indexed notes and cards.
+- **[AI Assistant](/plugins/ai-assistant/)** — when drafting cards or notes, the assistant queries the same index through its knowledge retriever (the `search_knowledge` tool) and shows what it found in a **Vault evidence** panel.
+
+If you also enable the Local API, external AI assistants (such as Claude Code) can search the Knowledge Base while Obsidian is running. This is optional and only needed if you want an outside assistant to use your indexed notes as context.
 
 ## What to Read Next
 
+- [Knowledge Chat](/views/knowledge-chat/) — chat over your indexed vault
+- [AI Assistant](/plugins/ai-assistant/) — draft cards from retrieved Vault evidence
 - [AI Settings](/configuration/ai-settings/) — configure your subscription key and AI features
-- [MCP Server](/reference/mcp-server/) — optional AI assistant integration
+- [MCP Server](/reference/mcp-server/) — optional external AI assistant integration
 - [General Settings](/configuration/general/) — where to find the Integrations tab
