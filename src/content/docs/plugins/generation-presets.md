@@ -11,7 +11,7 @@ description: Reference for AI generation presets — settings, built-ins, defaul
 
 A **generation preset** is a reusable template for AI card generation. Every time True Recall generates cards from a selection, highlight, or note, it runs through a preset. Presets bind an instruction to a specific note type and optionally pull in extra context before sending the prompt to the AI.
 
-This page is the reference for how presets work. For day-to-day usage, see [AI Flashcard Generation](/plugins/ai-flashcard-generation/).
+This page is the reference for how presets work. For day-to-day usage, see the [AI Assistant](/plugins/ai-assistant/) — each generation preset now surfaces as a chip in the Ask AI composer, so picking a preset is one click when you draft cards.
 
 ## What a Preset Controls
 
@@ -81,6 +81,5 @@ Both are off by default — they trade tokens for accuracy. Enable them per-pres
 
 ## What to Read Next
 
-- [AI Flashcard Generation](/plugins/ai-flashcard-generation/) — how presets are triggered in practice
-- [Card Polish](/plugins/card-polish/) — a different plugin with its own preset system (for rewriting, not generation)
+- [AI Assistant](/plugins/ai-assistant/) — how presets are triggered in practice (as composer chips)
 - [Selection Toolbar](/views/selection-toolbar/) — add preset buttons to selected-text workflows

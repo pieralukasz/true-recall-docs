@@ -44,8 +44,9 @@ Tiers form an inclusive ladder — a Pro user gets every BYOK and Free plugin; a
 | **Status Bar Widget** | Free | Compact review-progress widget in the Obsidian status bar |
 | **Dashboard Codeblocks** | Free | Embed True Recall dashboards in your notes as codeblocks |
 | **Link Status Indicators** | Free | Donut charts and hover tooltips on `[[wikilinks]]` showing each note's card status |
-| [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) | BYOK | Preset-driven card generation from notes, selections, and highlights |
-| [**Card Polish**](/plugins/card-polish/) | BYOK | Transform cards mid-review or in the Add Flashcard modal using your own AI presets |
+| [**AI Assistant**](/plugins/ai-assistant/) | BYOK | Unified draft-and-approve AI — generate, edit, and polish cards and notes from one composer |
+| [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) | BYOK | *Deprecated — unified into [AI Assistant](/plugins/ai-assistant/)* |
+| [**Card Polish**](/plugins/card-polish/) | BYOK | *Deprecated — unified into [AI Assistant](/plugins/ai-assistant/)* |
 | [**Type-in Mode**](/review/type-in-mode/) | Pro | Typed-answer reviews with AI or diff-based grading |
 | [**Image Occlusion**](/creation/image-occlusion/) | Pro | Hide regions of images to test visual recall |
 | [**Knowledge Base**](/configuration/knowledge-base/) | Pro | RAG-powered semantic search and chat across your vault |
@@ -61,17 +62,16 @@ Each plugin that has configurable options renders its own settings panel inside 
 
 For example:
 
-- **AI Flashcard Generation** renders the preset editor (see [Generation Presets](/plugins/generation-presets/))
-- **Card Polish** renders its own preset editor with auto-apply / preview toggles and hotkey configuration
+- **AI Assistant** renders its provider/behavior options; your generation and polish presets surface as chips in the Ask AI composer (see [Generation Presets](/plugins/generation-presets/))
 - **Selection Toolbar** renders button configuration for the editor and global toolbars
+- **Knowledge Base** renders indexing options (folders, daily notes, manual reindex)
 
 ## Toolbar Button Gating
 
-When a plugin owns a toolbar button (like the Selection Toolbar's "Flashcards" or "Vocab" buttons), the button only appears if the owning plugin is enabled AND the user meets its tier. If you disable the **AI Flashcard Generation** plugin, its buttons disappear from every toolbar.
+When a plugin owns a toolbar button (like the Selection Toolbar's **Ask AI** button), the button only appears if the owning plugin is enabled AND the user meets its tier. If you disable the **AI Assistant** plugin, its buttons disappear from every toolbar.
 
 ## What to Read Next
 
-- [Card Polish](/plugins/card-polish/) — AI-powered card improvements in review and the editor
-- [AI Flashcard Generation](/plugins/ai-flashcard-generation/) — generate cards from notes and selections using presets
+- [AI Assistant](/plugins/ai-assistant/) — the unified draft-and-approve AI workflow
 - [Generation Presets](/plugins/generation-presets/) — how presets work and how to build your own
 - [AI Settings](/configuration/ai-settings/) — configure AI provider (Pro, OpenRouter, LM Studio, Custom)
