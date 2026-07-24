@@ -63,7 +63,7 @@ Every `.md` page follows this skeleton:
 ---
 title: Page Title
 sidebar:
-  label: "Page Title (P)"   # (P) = needs photos, remove before release
+  label: "Page Title"
   order: 1
 description: One-line summary for SEO and search results.
 ---
@@ -86,7 +86,7 @@ Opening paragraph — what is this thing, in one sentence.
 Key rules:
 - `description` is **required** — it appears in search results and meta tags.
 - `:::caution[My Notes]` goes right after frontmatter. It's dev-only (stripped in prod).
-- `TODO PHOTO` marks where screenshots will be added later.
+- `<!-- TODO PHOTO -->` (an HTML comment) marks where a screenshot will be added later. This is the single source of truth for "needs a photo" — grep for it to find pending visuals.
 - End pages with a "What to Read Next" section linking 3-5 related pages.
 
 ### Internal Linking & Backlinking
@@ -153,11 +153,17 @@ Before editing or deleting documentation files, confirm with the user which file
 
 This project uses Vercel for deployment. Changes must be committed AND pushed to trigger deploys. When users report stale content on production, first check git status and recent pushes before suggesting manual Vercel checks.
 
-### Sidebar Label Suffixes (Dev Only)
+## Screenshots
 
-| Suffix | Meaning |
-|--------|---------|
-| `(P)` | Page reviewed, needs photos/screenshots |
-| No suffix | Not yet reviewed |
+Product screenshots are the main pending visual work. Track and add them like this:
 
-Remove all suffixes before production release.
+- **Marker:** a page that needs a screenshot carries an HTML comment `<!-- TODO PHOTO -->` at the spot. Find all pending visuals with `grep -rn "TODO PHOTO" src/content/docs/`. (There is no sidebar-label suffix convention — an earlier `(P)` scheme was never actually used.)
+- **Capture:** shoot in Obsidian's **dark theme** with a large, readable font, at 1920×1080 (see `VISUAL-CONTENT-TODO.md` for the per-view shot list and production notes).
+- **Storage:** save under `src/assets/screenshots/<area>/<name>.png` (e.g. `src/assets/screenshots/review/session-complete.png`).
+- **Embed:** plain Markdown from the page, with descriptive alt text and a relative path. From a page at `src/content/docs/<section>/<page>.md` the assets root is three levels up:
+
+  ```markdown
+  ![Review session complete screen with retention and time](../../../assets/screenshots/review/session-complete.png)
+  ```
+
+- **After adding one:** delete the matching `<!-- TODO PHOTO -->` marker and tick the item in `VISUAL-CONTENT-TODO.md`.

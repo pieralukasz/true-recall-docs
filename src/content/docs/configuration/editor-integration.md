@@ -12,29 +12,26 @@ description: "Link status indicators, status bar widget, selection toolbar, and 
 
 ## Link Status Indicators
 
-Inline indicators next to `[[wiki links]]` showing the linked note's flashcard status:
+Indicators next to `[[wikilinks]]` showing the linked note's flashcard status. The form depends on context rather than a mode you pick:
 
-```
-[[Biology Notes]]  3 new | 1 learning | 10 review
-```
+- **In the editor** — a small **donut chart** summarizing new / learning / review cards.
+- **In reading view** — inline **text counts** rendered by the post-processor.
 
-### Display Modes
+### Enabling and toggling
 
-| Mode | Description |
-|------|-------------|
-| Text | Numbers only |
-| Donut chart | Small pie chart |
-| Both | Chart + numbers |
+The **Link Status Indicators** plugin has no settings panel of its own — you simply enable or disable it in `Settings → True Recall → Plugins → Link Status Indicators`. Where the indicators appear is controlled by the toggles in `Settings → True Recall → General → Editor integration`:
 
-Enable the **Link Status Indicators** plugin in `Settings → True Recall → Plugins → Link Status Indicators` and configure the mode in its panel.
+- **Show link status indicators** — the master switch for the wikilink indicators
+- **Show donuts in flashcard panel** — donuts on cards in the [Flashcard Panel](/views/flashcard-panel/)
+- **Show donuts in review** — donuts during review
 
-### Hover Tooltip
+### Note Stats Tooltip
 
-Hover over a link to see detailed stats: total cards, new/learning/review counts, due today, and last review time.
+Hover over a link to open the **Note Stats Tooltip** with detailed stats: total cards, new / learning / review counts, due today, and last review time.
 
 ### Click Actions
 
-Click the status indicator to open the [Flashcard Panel](/views/flashcard-panel/) for that note or start review.
+Click a link status indicator to open the [Flashcard Panel](/views/flashcard-panel/) for that note or start review.
 
 ## Status Bar Widget
 

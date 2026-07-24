@@ -42,7 +42,7 @@ All paths are relative to `src/content/docs/`.
 - `review/cramming.md` — Custom study sessions with filters, sort orders, and cramming mode
 - `review/leeches.md` — Leech detection, configuration, and strategies for problem cards
 
-## Views & Panels (8 pages)
+## Views & Panels (10 pages)
 
 - `views/dashboard.md` — Daily command center for projects and workload
 - `views/selection-toolbar.md` — AI-powered floating toolbar: generate flashcards, highlight, copy, or edit from any text selection
@@ -51,20 +51,25 @@ All paths are relative to `src/content/docs/`.
 - `views/card-browser.md` — Search, filter, and bulk-manage cards with query language and facets
 - `views/import-studio.md` — Bulk text-based flashcard creation with live preview and format auto-detection
 - `views/statistics.md` — Analytics dashboard: daily stats, retention, maturity, streaks, collection health, widgets
+- `views/ai-inbox.md` — Batch-review, approve, and defer AI Assistant drafts
+- `views/knowledge-chat.md` — RAG-powered chat over your indexed vault notes and cards
+- `views/fsrs-simulator.md` — Interactive FSRS parameter and scheduling simulator
 
-## Plugins (4 pages)
+## Plugins (5 pages)
 
 - `plugins/overview.md` — Plugin architecture, tier system (free / BYOK / Pro), and the Plugins settings tab
-- `plugins/card-polish.md` — AI rewriting of cards during review and in the Add Flashcard modal, with per-preset auto-apply / preview and hotkeys
-- `plugins/ai-flashcard-generation.md` — Preset-driven AI card generation from notes, selections, and highlights
+- `plugins/ai-assistant.md` — Unified draft-and-approve AI: generate, edit, and polish cards and notes from one composer (threads + AI Inbox)
 - `plugins/generation-presets.md` — Reference for generation presets: shape, CRUD, built-ins, validation, context options
+- `plugins/ai-flashcard-generation.md` — Deprecated stub → unified into AI Assistant
+- `plugins/card-polish.md` — Deprecated stub → unified into AI Assistant
 
-## Configuration (5 pages)
+## Configuration (6 pages)
 
 - `configuration/general.md` — General settings: review interface, editor integration, day boundary, collection behavior
 - `configuration/fsrs-settings.md` — FSRS scheduling settings: presets, retention, weights, bulk operations
-- `configuration/ai-settings.md` — AI provider selection (Pro, OpenRouter, LM Studio, Custom), API keys, generation language, custom prompts
+- `configuration/ai-settings.md` — AI provider selection (Pro, OpenRouter, LM Studio, Custom), API keys, AI Assistant options
 - `configuration/editor-integration.md` — Editor features: link status indicators, status bar, reading mode, selection toolbar
+- `configuration/ink-integration.md` — Render handwritten/hand-drawn Ink embeds inside review and editors
 - `configuration/keyboard-shortcuts.md` — Keyboard shortcut reference and customization
 
 ## Scheduling (4 pages)
