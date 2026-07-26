@@ -40,18 +40,20 @@ export const ownedSites = [
 ];
 
 /**
- * Profile POTWIERDZONE w kodzie tego repozytorium.
+ * Profile POTWIERDZONE przez właściciela (2026-07-26).
  *
- * TODO(lucas): poniższe konta wyszły w wynikach wyszukiwania na to nazwisko,
- * ale NIE są nigdzie zadeklarowane w repo, więc ich tu nie wpisuję — potwierdź,
- * że są Twoje, i przenieś je z komentarza do tablicy:
- *   "https://www.linkedin.com/in/lukasz-piera/"
- *   "https://www.facebook.com/lucas.piera/"
- *   "https://www.tiktok.com/@lukisarg"
- * `sameAs` to najtańszy sygnał spójności encji, jaki masz — im więcej
- * niezależnych, potwierdzonych profili, tym pewniejsza identyfikacja.
+ * Wpisuj tu wyłącznie konta, do których Łukasz ma dostęp i które potwierdził.
+ * `sameAs` jest sygnałem tożsamości — wskazanie cudzego profilu albo konta,
+ * którego nie kontrolujesz, psuje encję zamiast ją wzmacniać.
+ *
+ * Odrzucone świadomie: `tiktok.com/@lukisarg` — konto o zbieżnej nazwie,
+ * ale NIE należy do Łukasza (potwierdzone 2026-07-26). Nie dodawać.
  */
-export const verifiedProfiles = ["https://github.com/pieralukasz"];
+export const verifiedProfiles = [
+  "https://github.com/pieralukasz",
+  "https://www.linkedin.com/in/lukasz-piera/",
+  "https://www.facebook.com/pieralukasz",
+];
 
 /**
  * Encje tematyczne, które Google zna już z Wikidata. Podpięcie się pod nie
