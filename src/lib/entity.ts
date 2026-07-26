@@ -191,7 +191,22 @@ const engineeringDegree = {
 };
 
 /**
- * Jednoosobowa działalność (elektryka, Poznań).
+ * Jednoosobowa działalność gospodarcza (NIP 7272848245).
+ *
+ * ⚠️ To JEDEN podmiot prawny obsługujący DWIE linie usług: elektrykę **oraz IT**
+ * (potwierdzone 2026-07-26). Węzeł ma `@type: Electrician`, bo taka jest jego
+ * lokalna twarz na elektryk.piera.pl i to ten podtyp `LocalBusiness` pomaga w
+ * zapytaniach o elektryka w Poznaniu.
+ *
+ * **Nie twórz drugiej `Organization` na usługi IT.** Dwa węzły z tym samym
+ * NIP-em to dla maszyny albo jeden byt opisany sprzecznie, albo dwie firmy,
+ * z których jedna nie istnieje w rejestrze. Jeśli kiedyś powstanie strona z
+ * ofertą IT, rozszerz TEN węzeł (kolejny `hasOfferCatalog` albo `department`) —
+ * nie dubluj podmiotu.
+ *
+ * Dopóki nie ma strony z ofertą IT, katalog usług zostaje wyłącznie elektryczny.
+ * Sama rejestracja działalności to fakt weryfikowalny w CEIDG, ale „świadczę
+ * usługi IT" bez strony z ofertą to znowu deklaracja bez pokrycia.
  *
  * Ten sam `@id`, co węzeł `Electrician` na elektryk.piera.pl — dzięki temu
  * `worksFor` nie jest wiszącą referencją na pozostałych domenach (jest tu
@@ -224,6 +239,23 @@ const canonicalPerson = {
   image: "https://lucaspiera.com/profile.jpg",
   email: "mailto:pieralukasz@gmail.com",
   honorificPrefix: "inż.",
+  // Każdy z tych trzech ma pokrycie: Software Engineer → True Recall + projekty
+  // produkcyjne, Electrician → elektryk.piera.pl (26 stron, NIP, katalog usług),
+  // Mechanical Engineer → dyplom w `hasCredential` (weryfikowalny przez encję
+  // uczelni, nie deklaracja).
+  //
+  // ⛔ ODRZUCONE ŚWIADOMIE 2026-07-26: „Tutor" / korepetytor.
+  // Łukasz realnie udziela korepetycji z fizyki, ale zdecydował, że ta linia
+  // zostaje POZA marką — i tak jest lepiej, bo:
+  //   · zero treści na ten temat na wszystkich 6 domenach (sprawdzone: 0 trafień
+  //     na „korepetycj"), więc byłaby to deklaracja bez dowodu;
+  //   · byłaby SPRZECZNA z piera.pl/o-mnie, gdzie fizyka jest wymieniona jako
+  //     dziedzina chłonięta, wraz ze zdaniem „Nie jestem specjalistą od
+  //     wszystkiego". Sprzeczność w obrębie jednej encji to sygnał ujemny,
+  //     nie tylko słaby — obniża `entity confidence`.
+  // To także powód, dla którego `physics` (Q413) nie wraca do `knowsAbout`.
+  // Kolejność jest odwrotna, niż się wydaje: najpierw strona z ofertą, POTEM
+  // etykieta. Nie dopisuj tego bez treści, która to pokrywa.
   jobTitle: ["Software Engineer", "Electrician", "Mechanical Engineer"],
   alumniOf,
   worksFor: electricalBusiness,
