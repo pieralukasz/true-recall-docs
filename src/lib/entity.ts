@@ -204,9 +204,19 @@ const engineeringDegree = {
  * ofertą IT, rozszerz TEN węzeł (kolejny `hasOfferCatalog` albo `department`) —
  * nie dubluj podmiotu.
  *
- * Dopóki nie ma strony z ofertą IT, katalog usług zostaje wyłącznie elektryczny.
- * Sama rejestracja działalności to fakt weryfikowalny w CEIDG, ale „świadczę
- * usługi IT" bez strony z ofertą to znowu deklaracja bez pokrycia.
+ * Linia IT tej JDG MA pokrycie (ustalone 2026-07-26 — wcześniej twierdziłem
+ * inaczej i to było błędne):
+ *   · produkt — True Recall, sprzedawany przez tę działalność (płatny plan Pro).
+ *     Dlatego `publisher` węzła `SoftwareApplication` na truerecall.app wskazuje
+ *     na TĘ organizację, nie na osobę. Osoba zostaje jako `author`/`creator`/
+ *     `maintainer`, bo napisała kod — ale sprzedaje firma.
+ *   · usługi B2B — praca nad produktem TapIn (dawniej Gigaverse) fakturowana
+ *     z tej działalności. TapIn jest KLIENTEM, nie pracodawcą, więc świadomie
+ *     NIE ma go w `worksFor`. Wpisanie klienta jako pracodawcy byłoby
+ *     nieprawdą o zatrudnieniu, a encja ma być weryfikowalna.
+ *
+ * Katalog usług (`hasOfferCatalog`) zostaje elektryczny, bo tylko usługi
+ * elektryczne mają własne strony ofertowe. Produkt IT ma własną domenę.
  *
  * Ten sam `@id`, co węzeł `Electrician` na elektryk.piera.pl — dzięki temu
  * `worksFor` nie jest wiszącą referencją na pozostałych domenach (jest tu
@@ -214,9 +224,11 @@ const engineeringDegree = {
  * (telefon, NIP, adres, katalog usług). Relacja istniała dotąd tylko w jedną
  * stronę, jako `founder` na firmie; dwukierunkowa jest mocniejszym sygnałem.
  */
-const electricalBusiness = {
+export const BUSINESS_ID = "https://elektryk.piera.pl/#business";
+
+const soleProprietorship = {
   "@type": "Organization",
-  "@id": "https://elektryk.piera.pl/#business",
+  "@id": BUSINESS_ID,
   name: "Łukasz Piera, elektryk Poznań",
   url: "https://elektryk.piera.pl/",
 };
@@ -258,7 +270,7 @@ const canonicalPerson = {
   // etykieta. Nie dopisuj tego bez treści, która to pokrywa.
   jobTitle: ["Software Engineer", "Electrician", "Mechanical Engineer"],
   alumniOf,
-  worksFor: electricalBusiness,
+  worksFor: soleProprietorship,
   hasCredential: [engineeringDegree],
   // schema.org NIE ma sposobu na wyrażenie poziomu biegłości w `knowsLanguage`
   // — jest tylko „zna / nie zna". Włoski jest tu więc uproszczeniem

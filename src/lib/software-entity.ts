@@ -1,4 +1,4 @@
-import { PERSON_ID, personFor, topics } from "./entity";
+import { BUSINESS_ID, PERSON_ID, personFor, topics } from "./entity";
 
 // ─── ENCJA OPROGRAMOWANIA: TRUE RECALL ───────────────────────────────────────
 //
@@ -85,11 +85,26 @@ const software = {
   },
   installUrl: OBSIDIAN_DIRECTORY,
   license: "https://polyformproject.org/licenses/strict/1.0.0/",
-  // Autor jako osoba, nie organizacja — sygnał, że to marka osobista.
+  // Autorstwo po stronie OSOBY — sygnał, że to marka osobista, a nie „produkt
+  // firmy X". Kod napisał człowiek i on go utrzymuje.
   author: { "@id": PERSON_ID },
   creator: { "@id": PERSON_ID },
-  publisher: { "@id": PERSON_ID },
   maintainer: { "@id": PERSON_ID },
+  // …ale WYDAWCĄ jest działalność gospodarcza, bo to ona sprzedaje płatny plan
+  // Pro (ustalone 2026-07-26). Rozdzielenie jest celowe: `author` odpowiada na
+  // „kto to zrobił", `publisher` na „kto za to odpowiada i komu płacisz".
+  // Zlepienie obu w osobę było uproszczeniem — przy produkcie z cenami to
+  // organizacja stoi za transakcją.
+  //
+  // Węzeł organizacji nie jest wiszącą referencją: `personFor()` emituje go w
+  // całości w `Person.worksFor`, w tym samym grafie.
+  //
+  // UWAGA: `publisher` węzła `WebSite` (niżej) zostaje OSOBĄ i to nie jest
+  // niespójność. Podpowiada tak wprost rozdział 2 książki Podrez-Siamy:
+  // „Jako wydawcę każdej ze stron ustawiłam osobę, nie organizację — sygnał,
+  // że to marka osobista, nie »treść firmy X«". Strona to marka osobista,
+  // produkt to towar firmy. Dwie różne rzeczy, dwa różne wydawcy.
+  publisher: { "@id": BUSINESS_ID },
   about: [topics.spacedRepetition, topics.obsidian],
   featureList: [
     "AI Assistant that drafts flashcards from selected text",
