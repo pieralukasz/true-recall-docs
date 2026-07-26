@@ -127,6 +127,37 @@ const sourceCode = {
 };
 
 /**
+ * Obszary wiedzy OSOBY w kontekście tej domeny.
+ *
+ * Dodane 2026-07-26. Do tej pory `truerecall.app` było jedyną domeną, na której
+ * węzeł `Person` nie deklarował ani jednego tematu — a jest to domena z
+ * NAJGŁĘBSZYM pokryciem treściowym w całym ekosystemie (55 stron dokumentacji).
+ * Tematy niósł tam wyłącznie węzeł `SoftwareApplication` przez `about`, a osoba
+ * była z nim spięta przez `author`/`creator`, więc sygnał szedł obejściem:
+ * „ta osoba zrobiła narzędzie o powtórkach" zamiast „ta osoba zna się na
+ * powtórkach". Dla oceny ekspertyzy osoby to nie to samo zdanie.
+ *
+ * Polityka „dowody, nie deklaracje" — każda pozycja ma pokrycie w treści TEJ
+ * domeny; liczby stron policzone na `src/content/docs/` (bez `_later/`).
+ * Wszystko jest gałęzią jednego drzewa: nauka → pamięć → powtórki → fiszki.
+ */
+const personTopics = [
+  topics.learning, //            korzeń drzewa
+  topics.spacedRepetition, //    12 stron
+  topics.memory, //              15 stron
+  topics.forgettingCurve, //     scheduling/fsrs-algorithm, getting-started/why-true-recall
+  "FSRS spaced repetition algorithm", // 31 stron — najgłębszy temat, brak encji Wikidata
+  topics.flashcards, //          rdzeń produktu
+  topics.clozeDeletion, //       18 stron (creation/cloze-deletions + typy notatek)
+  "Image occlusion", //          19 stron (creation/image-occlusion) — brak encji Wikidata
+  topics.activeRecall, //        getting-started/why-true-recall
+  topics.anki, //                19 stron (import/eksport, porównania)
+  topics.learningAnalytics, //   views/statistics, views/dashboard, scheduling/workload-management
+  topics.vocabularyLearning, //  review/type-in-mode, creation/note-types, scheduling/presets
+  topics.obsidian, //            20 stron
+];
+
+/**
  * Graf emitowany na każdej stronie truerecall.app.
  * `pageUrl` / `title` pochodzą z aktualnie renderowanej strony Starlight.
  */
@@ -162,7 +193,7 @@ export function truerecallGraph({
       },
       software,
       sourceCode,
-      personFor({ site: "https://truerecall.app/" }),
+      personFor({ site: "https://truerecall.app/", knowsAbout: personTopics }),
     ],
   };
 }

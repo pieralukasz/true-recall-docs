@@ -87,7 +87,65 @@ export const topics = {
     name: "Obsidian (note-taking software)",
     sameAs: "https://www.wikidata.org/wiki/Q103994532",
   },
+  // Dodane 2026-07-26. „Anki" i „Flashcards" były wcześniej gołymi stringami —
+  // a to dokładnie ten przypadek, przed którym ostrzega komentarz wyżej:
+  // Wikidata zna trzy różne „Anki" (oprogramowanie Q557318, imię żeńskie
+  // Q19796915, grę wideo z 2015 Q124063060). Bez zakotwiczenia maszyna zgaduje.
+  flashcards: {
+    "@type": "Thing",
+    name: "Flashcards",
+    sameAs: "https://www.wikidata.org/wiki/Q1820374",
+  },
+  anki: {
+    "@type": "Thing",
+    name: "Anki",
+    sameAs: "https://www.wikidata.org/wiki/Q557318",
+  },
+  activeRecall: {
+    "@type": "Thing",
+    name: "Active recall",
+    sameAs: "https://www.wikidata.org/wiki/Q4677578",
+  },
+  forgettingCurve: {
+    "@type": "Thing",
+    name: "Forgetting curve",
+    sameAs: "https://www.wikidata.org/wiki/Q949167",
+  },
+  // Zakotwiczenie celowo wskazuje encję „cloze test" (Q951968) — Wikidata nie ma
+  // osobnego bytu na „cloze deletion" z fiszek, a termin z Anki pochodzi wprost
+  // od tej techniki. Nazwę zostawiamy taką, jakiej realnie używa dokumentacja.
+  clozeDeletion: {
+    "@type": "Thing",
+    name: "Cloze deletion",
+    sameAs: "https://www.wikidata.org/wiki/Q951968",
+  },
+  learningAnalytics: {
+    "@type": "Thing",
+    name: "Learning analytics",
+    sameAs: "https://www.wikidata.org/wiki/Q2845208",
+  },
 } as const;
+
+/**
+ * Ta sama encja Wikidata pod inną etykietą językową.
+ *
+ * Wartości `knowsAbout` sumują się pod jednym `@id`, a dwa `Thing` z tym samym
+ * `sameAs` to dla maszyny jeden byt o dwóch nazwach — więc polska etykieta na
+ * piera.pl wzbogaca encję (daje polski token do zaczepienia), a nie duplikuje
+ * jej. Q-ID zostaje w JEDNYM miejscu, w `topics`.
+ */
+export function localized(
+  topic: { readonly "@type": string; readonly name: string; readonly sameAs: string },
+  name: string,
+) {
+  return { ...topic, name };
+}
+
+// Sprawdzone 2026-07-26: FSRS (Free Spaced Repetition Scheduler) NIE ma encji w
+// Wikidata — wyszukiwanie zwraca towarzystwo naukowe rybaków i fińskie służby
+// ratownictwa morskiego. Dlatego zostaje gołym stringiem. Nie podpinaj go pod
+// pierwsze Q-ID z listy.
+// „Image occlusion" — również bez encji (jedyne trafienie to patent US11514640).
 
 // USUNIĘTE 2026-07-26 (polityka „dowody, nie deklaracje"):
 //   physics (Q413)        — zero treści, about.md mówi „I'm not an expert in any of it"
