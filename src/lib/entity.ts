@@ -62,22 +62,39 @@ export const verifiedProfiles = [
  * ("Obsidian" to też szkło wulkaniczne i trzy gry wideo).
  */
 export const topics = {
+  learning: {
+    "@type": "Thing",
+    name: "Learning",
+    sameAs: "https://www.wikidata.org/wiki/Q133500",
+  },
   spacedRepetition: {
     "@type": "Thing",
     name: "Spaced repetition",
     sameAs: "https://www.wikidata.org/wiki/Q1095869",
+  },
+  memory: {
+    "@type": "Thing",
+    name: "Memory",
+    sameAs: "https://www.wikidata.org/wiki/Q492",
+  },
+  vocabularyLearning: {
+    "@type": "Thing",
+    name: "Vocabulary learning",
+    sameAs: "https://www.wikidata.org/wiki/Q48842322",
   },
   obsidian: {
     "@type": "Thing",
     name: "Obsidian (note-taking software)",
     sameAs: "https://www.wikidata.org/wiki/Q103994532",
   },
-  physics: {
-    "@type": "Thing",
-    name: "Physics",
-    sameAs: "https://www.wikidata.org/wiki/Q413",
-  },
 } as const;
+
+// USUNIĘTE 2026-07-26 (polityka „dowody, nie deklaracje"):
+//   physics (Q413)        — zero treści, about.md mówi „I'm not an expert in any of it"
+//   Software engineering  — inne drzewo tematyczne niż oś nauki/pamięci
+//   TypeScript            — jak wyżej
+//   AI-assisted learning  — brak wpisu na blogu; wróci, gdy powstanie treść
+// Nie dopisuj ich z powrotem bez treści, która je pokrywa.
 
 /** Politechnika Łódzka — encja, którą Google już zna (autorytet instytucjonalny). */
 const alumniOf = {
@@ -116,6 +133,22 @@ const engineeringDegree = {
 };
 
 /**
+ * Jednoosobowa działalność (elektryka, Poznań).
+ *
+ * Ten sam `@id`, co węzeł `Electrician` na elektryk.piera.pl — dzięki temu
+ * `worksFor` nie jest wiszącą referencją na pozostałych domenach (jest tu
+ * pełnym obiektem), a na elektryk.piera.pl scala się z bogatszym węzłem
+ * (telefon, NIP, adres, katalog usług). Relacja istniała dotąd tylko w jedną
+ * stronę, jako `founder` na firmie; dwukierunkowa jest mocniejszym sygnałem.
+ */
+const electricalBusiness = {
+  "@type": "Organization",
+  "@id": "https://elektryk.piera.pl/#business",
+  name: "Łukasz Piera, elektryk Poznań",
+  url: "https://elektryk.piera.pl/",
+};
+
+/**
  * Rdzeń encji osoby — IDENTYCZNY na każdej domenie.
  *
  * Świadomie nie ma tu `description` ani zlokalizowanych wariantów `jobTitle`:
@@ -135,6 +168,7 @@ const canonicalPerson = {
   honorificPrefix: "inż.",
   jobTitle: ["Software Engineer", "Electrician", "Mechanical Engineer"],
   alumniOf,
+  worksFor: electricalBusiness,
   hasCredential: [engineeringDegree],
   // schema.org NIE ma sposobu na wyrażenie poziomu biegłości w `knowsLanguage`
   // — jest tylko „zna / nie zna". Włoski jest tu więc uproszczeniem
