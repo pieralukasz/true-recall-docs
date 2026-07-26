@@ -2,8 +2,20 @@
 import StarlightHead from '@astrojs/starlight/components/Head.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
+import { truerecallGraph } from '../../lib/software-entity';
+
+// Starlight nie emituje żadnego JSON-LD, więc graf encji wstrzykujemy tutaj —
+// to jedyny punkt, przez który przechodzi każda strona dokumentacji.
+const route = Astro.locals.starlightRoute;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const graph = truerecallGraph({
+	pageUrl,
+	title: route?.entry?.data?.title ?? 'True Recall',
+	description: route?.entry?.data?.description,
+});
 ---
 
 <StarlightHead><slot /></StarlightHead>
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />
 <Analytics />
 <SpeedInsights />

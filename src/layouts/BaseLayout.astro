@@ -1,6 +1,7 @@
 ---
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { truerecallGraph } from "../lib/software-entity";
 
 interface Props {
 	title: string;
@@ -9,6 +10,16 @@ interface Props {
 
 const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
 	Astro.props;
+
+// Strony poza Starlightem (m.in. /pricing) mają własny layout, więc graf
+// encji trzeba wstrzyknąć również tutaj — inaczej strona z cenami, czyli
+// jedyne miejsce z realnymi ofertami, byłaby dla maszyn pusta.
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const graph = truerecallGraph({
+	pageUrl: canonicalURL.href,
+	title,
+	description,
+});
 ---
 
 <!doctype html>
@@ -18,7 +29,9 @@ const { title, description = "Spaced repetition for Obsidian with FSRS v6" } =
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
 		<title>{title} | True Recall</title>
+		<link rel="canonical" href={canonicalURL} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<script type="application/ld+json" set:html={JSON.stringify(graph)} />
 		<Analytics />
 		<SpeedInsights />
 	</head>

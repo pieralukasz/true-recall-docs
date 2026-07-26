@@ -17,6 +17,34 @@ npm run preview   # Preview production build locally
 
 There are no tests or linting configured.
 
+## Structured data / entity graph (added 2026-07-26)
+
+This site previously emitted **no** JSON-LD at all, even though True Recall is the most
+externally-validated entity in Lucas's ecosystem (official Obsidian Community Plugins
+directory, public repo, r/ObsidianMD thread).
+
+- `src/lib/entity.ts` — the canonical `Person` node, shared across **six** sites. It is
+  intentionally duplicated (byte-identical) with `apps/*/src/lib/entity.ts` in the
+  `pieralukasz/lucaspiera` repo. **Any change must be propagated to all copies in the same
+  task**, otherwise the person entity splits again. Canonical `@id`:
+  `https://lucaspiera.com/#person`; Entity Home: `https://lucaspiera.com/about/`.
+- `src/lib/software-entity.ts` — `SoftwareApplication` + `SoftwareSourceCode` + `WebSite`
+  + `WebPage` graph. Canonical software `@id`: `https://truerecall.app/#software`, reused
+  verbatim as `entityId` in `apps/lucaspiera-com/src/content/projects/true-recall.mdx`
+  so both sites describe **one** entity.
+- Injected in **two** places, because the site has two layouts:
+  `src/components/starlight/Head.astro` (all docs pages) and `src/layouts/BaseLayout.astro`
+  (standalone pages, including `/pricing` — the only page with real offers).
+- `offers` must stay in sync with `src/pages/pricing.astro`. Price and availability are the
+  one category of structured data machines genuinely cannot infer from page text.
+- `codeRepository` belongs **only** to `SoftwareSourceCode` in schema.org — never put it on
+  `SoftwareApplication`. The two are linked via `targetProduct`.
+- Do not add `aggregateRating`: there is no rating source to cite.
+- Known issue: `astro.config.mjs` declares `site: 'https://truerecall.app'` but the domain
+  307-redirects to `www.truerecall.app`. Fix the primary domain in Vercel (preferred) or
+  change `site` **and** every `@id` — see `docs/2026-07-26-encja-marki.md` in the
+  `lucaspiera` repo.
+
 ## Architecture
 
 - **Framework**: Astro 5 with Starlight documentation theme + `starlight-theme-obsidian` plugin
