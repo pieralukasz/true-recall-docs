@@ -230,6 +230,18 @@ const soleProprietorship = {
   "@type": "Organization",
   "@id": BUSINESS_ID,
   name: "Łukasz Piera, elektryk Poznań",
+  // `name` jest handlową nazwą linii elektrycznej i zostaje taka, bo pracuje w
+  // lokalnych zapytaniach („elektryk Poznań"). Ale ten sam węzeł jest teraz
+  // wydawcą produktu software'owego, a „elektryk Poznań" jako jedyna nazwa
+  // wydawcy wtyczki do Obsidiana opisuje podmiot za wąsko.
+  //
+  // `legalName` bierzemy z własnego dokumentu prawnego, nie z domysłu:
+  // apps/elektryk/src/pages/regulamin.astro § 1 mówi „Serwis elektryk.piera.pl
+  // prowadzę ja, Łukasz Piera, elektryk z Poznania, NIP: 7272848245".
+  // Zgodność `legalName` z `Person.alternateName` jest tu poprawna i pożądana —
+  // w JDG podmiot gospodarczy i osoba to ten sam człowiek, a to wzmacnia
+  // powiązanie osoba ↔ firma zamiast je rozmywać.
+  legalName: "Łukasz Piera",
   url: "https://elektryk.piera.pl/",
 };
 
