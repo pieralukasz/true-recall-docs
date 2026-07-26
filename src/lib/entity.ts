@@ -72,6 +72,11 @@ export const topics = {
     name: "Obsidian (note-taking software)",
     sameAs: "https://www.wikidata.org/wiki/Q103994532",
   },
+  physics: {
+    "@type": "Thing",
+    name: "Physics",
+    sameAs: "https://www.wikidata.org/wiki/Q413",
+  },
 } as const;
 
 /** Politechnika Łódzka — encja, którą Google już zna (autorytet instytucjonalny). */
@@ -81,6 +86,33 @@ const alumniOf = {
   alternateName: "Politechnika Łódzka",
   url: "https://www.p.lodz.pl/",
   sameAs: "https://www.wikidata.org/wiki/Q2140369",
+};
+
+/**
+ * Dyplom inżyniera — Politechnika Łódzka, Wydział Mechaniczny,
+ * kierunek Mechanika i Budowa Maszyn.
+ *
+ * Tytuł „inżynier" jest modelowany na trzy sposoby, bo każdy odpowiada na inne
+ * pytanie maszyny:
+ *  - `honorificPrefix: "inż."` — jak brzmi tytuł przed nazwiskiem,
+ *  - `jobTitle: "Mechanical Engineer"` — jaką rolę pełni,
+ *  - `hasCredential` (poniżej) — CZYM to jest potwierdzone i przez kogo.
+ * Trzecie jest najmocniejsze: to weryfikowalne powiązanie z encją uczelni,
+ * którą Google już zna, a nie deklaracja na własnej stronie.
+ */
+const engineeringDegree = {
+  "@type": "EducationalOccupationalCredential",
+  name: "Inżynier (engineer's degree)",
+  alternateName: "inż.",
+  credentialCategory: "degree",
+  educationalLevel: "Engineer's degree (inż.)",
+  competencyRequired: "Mechanika i Budowa Maszyn",
+  about: {
+    "@type": "Thing",
+    name: "Mechanical engineering",
+    sameAs: "https://www.wikidata.org/wiki/Q101333",
+  },
+  recognizedBy: alumniOf,
 };
 
 /**
@@ -100,11 +132,17 @@ const canonicalPerson = {
   mainEntityOfPage: { "@id": "https://lucaspiera.com/about/#webpage" },
   image: "https://lucaspiera.com/profile.jpg",
   email: "mailto:pieralukasz@gmail.com",
-  jobTitle: ["Software Engineer", "Electrician"],
+  honorificPrefix: "inż.",
+  jobTitle: ["Software Engineer", "Electrician", "Mechanical Engineer"],
   alumniOf,
+  hasCredential: [engineeringDegree],
+  // schema.org NIE ma sposobu na wyrażenie poziomu biegłości w `knowsLanguage`
+  // — jest tylko „zna / nie zna". Włoski jest tu więc uproszczeniem
+  // (realnie: podstawy). Jeśli ma być precyzyjnie, usuń ten wpis.
   knowsLanguage: [
     { "@type": "Language", name: "Polish", alternateName: "pl" },
     { "@type": "Language", name: "English", alternateName: "en" },
+    { "@type": "Language", name: "Italian", alternateName: "it" },
   ],
 };
 
@@ -123,6 +161,17 @@ interface PersonOptions {
  */
 export function personFor({ site, knowsAbout, extra }: PersonOptions) {
   const normalized = site.endsWith("/") ? site : `${site}/`;
+
+  // `hasCredential` musi być SCALANE, nie nadpisywane. Zwykły spread `...extra`
+  // wywalałby dyplom inżyniera wszędzie, gdzie domena dokłada własne
+  // poświadczenia (elektryk + SEP) — czyli cichy zanik atrybutu encji.
+  const { hasCredential: extraCredential, ...restExtra } = extra ?? {};
+  const extraCredentials = Array.isArray(extraCredential)
+    ? extraCredential
+    : extraCredential
+      ? [extraCredential]
+      : [];
+
   return {
     ...canonicalPerson,
     ...(knowsAbout && knowsAbout.length > 0 ? { knowsAbout } : {}),
@@ -130,6 +179,7 @@ export function personFor({ site, knowsAbout, extra }: PersonOptions) {
       ...ownedSites.filter((url) => url !== normalized),
       ...verifiedProfiles,
     ],
-    ...extra,
+    ...restExtra,
+    hasCredential: [...canonicalPerson.hasCredential, ...extraCredentials],
   };
 }
