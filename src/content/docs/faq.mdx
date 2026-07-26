@@ -1,0 +1,33 @@
+---
+title: Frequently asked questions
+description: What you need to run True Recall, how it differs from Anki, which scheduling algorithm it uses, what it costs, and how it handles multiple devices.
+sidebar:
+  order: 99
+---
+
+import { faqItems } from '../../lib/faq';
+
+{/*
+  Ta strona renderuje dokładnie tę samą tablicę, z której powstaje węzeł
+  `FAQPage` w danych strukturalnych (src/lib/faq.ts). Google wymaga, żeby treść
+  opisana schematem FAQ była widoczna dla użytkownika — trzymanie jednego
+  źródła sprawia, że tekst i schemat nie mogą się rozjechać.
+*/}
+
+Answers sourced from the pages linked throughout this documentation. If something
+here contradicts a specific page, the specific page wins — and that is a bug worth
+reporting.
+
+{faqItems.map((item) => (
+  <section>
+    <h2 id={item.question.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}>
+      {item.question}
+    </h2>
+    <p>{item.answer}</p>
+  </section>
+))}
+
+## Still stuck?
+
+Open an issue in the [GitHub repository](https://github.com/pieralukasz/true-recall)
+or ask in the [Obsidian community thread](https://forum.obsidian.md/t/i-built-a-native-fsrs-algorithm-for-obsidian-with-ai-flashcard-generation/109962).

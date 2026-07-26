@@ -8,10 +8,14 @@ import { truerecallGraph } from '../../lib/software-entity';
 // to jedyny punkt, przez który przechodzi każda strona dokumentacji.
 const route = Astro.locals.starlightRoute;
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+// `kind: "doc"` dokłada węzeł `TechArticle` — każda strona przechodząca przez
+// Starlight JEST artykułem technicznym, nie tylko „jakąś stroną". Strona FAQ
+// obsługuje się sama (patrz truerecallGraph).
 const graph = truerecallGraph({
 	pageUrl,
 	title: route?.entry?.data?.title ?? 'True Recall',
 	description: route?.entry?.data?.description,
+	kind: 'doc',
 });
 ---
 

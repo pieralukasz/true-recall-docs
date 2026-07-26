@@ -1,4 +1,5 @@
 import { BUSINESS_ID, PERSON_ID, personFor, topics } from "./entity";
+import { FAQ_PATH, faqItems } from "./faq";
 
 // ─── ENCJA OPROGRAMOWANIA: TRUE RECALL ───────────────────────────────────────
 //
@@ -175,16 +176,64 @@ const personTopics = [
 /**
  * Graf emitowany na każdej stronie truerecall.app.
  * `pageUrl` / `title` pochodzą z aktualnie renderowanej strony Starlight.
+ *
+ * `kind` decyduje o dwóch dodatkowych węzłach (2026-07-26):
+ *  - `"doc"` → dokłada `TechArticle`. Wcześniej każda z 55 stron dokumentacji
+ *    była opisana wyłącznie jako `WebPage`, czyli „jakaś strona" — a to są
+ *    artykuły techniczne z autorem i datą. `TechArticle` mówi to wprost.
+ *  - strona FAQ → dokłada `FAQPage` zbudowany z `src/lib/faq.ts`, czyli z tej
+ *    samej tablicy, którą renderuje `faq.mdx`. Google wymaga, żeby treść pod
+ *    schematem FAQ była widoczna; wspólne źródło to gwarantuje.
  */
 export function truerecallGraph({
   pageUrl,
   title,
   description,
+  kind = "page",
 }: {
   pageUrl: string;
   title: string;
   description?: string;
+  kind?: "doc" | "page";
 }) {
+  const isFaq = new URL(pageUrl).pathname.replace(/\/*$/, "/") === FAQ_PATH;
+
+  const techArticle =
+    kind === "doc" && !isFaq
+      ? [
+          {
+            "@type": "TechArticle",
+            "@id": `${pageUrl}#article`,
+            headline: title,
+            ...(description ? { description } : {}),
+            inLanguage: "en",
+            mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+            isPartOf: { "@id": WEBSITE_ID },
+            about: { "@id": SOFTWARE_ID },
+            author: { "@id": PERSON_ID },
+            publisher: { "@id": BUSINESS_ID },
+          },
+        ]
+      : [];
+
+  const faqPage = isFaq
+    ? [
+        {
+          "@type": "FAQPage",
+          "@id": `${pageUrl}#faq`,
+          url: pageUrl,
+          name: title,
+          inLanguage: "en",
+          isPartOf: { "@id": WEBSITE_ID },
+          about: { "@id": SOFTWARE_ID },
+          mainEntity: faqItems.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        },
+      ]
+    : [];
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -206,6 +255,8 @@ export function truerecallGraph({
         inLanguage: "en",
         isPartOf: { "@id": WEBSITE_ID },
       },
+      ...techArticle,
+      ...faqPage,
       software,
       sourceCode,
       personFor({ site: "https://truerecall.app/", knowsAbout: personTopics }),
