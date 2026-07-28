@@ -162,11 +162,21 @@ export function localized(
 // „Image occlusion" — również bez encji (jedyne trafienie to patent US11514640).
 
 // USUNIĘTE 2026-07-26 (polityka „dowody, nie deklaracje"):
-//   physics (Q413)        — zero treści, about.md mówi „I'm not an expert in any of it"
+//   physics (Q413)        — zero treści na blogach
 //   Software engineering  — inne drzewo tematyczne niż oś nauki/pamięci
 //   TypeScript            — jak wyżej
 //   AI-assisted learning  — brak wpisu na blogu; wróci, gdy powstanie treść
 // Nie dopisuj ich z powrotem bez treści, która je pokrywa.
+//
+// AKTUALIZACJA 2026-07-28: pierwotne uzasadnienie dla `physics` miało dwie nogi —
+// brak treści ORAZ zdanie „I'm not an expert in any of it" na about.md. Druga noga
+// już nie istnieje: to zdanie zostało usunięte z `about.md` i z `piera.pl/o-mnie`,
+// bo było maszynowo czytaną autodeklaracją braku kompetencji na Entity Home,
+// czyli sygnałem działającym przeciw encji. Fizyka jest teraz opisana po stronie
+// kompetencji (dyplom inżyniera + korepetycje).
+// Warunek powrotu `physics` do `knowsAbout` jest więc już TYLKO jeden:
+// opublikowane wpisy w kategorii `warsztat-i-pomiary`. Bez sprzeczności do
+// rozstrzygania, ale i bez skrótu — nadal potrzebne pokrycie.
 
 /** Politechnika Łódzka — encja, którą Google już zna (autorytet instytucjonalny). */
 const alumniOf = {
@@ -282,18 +292,19 @@ const canonicalPerson = {
   // Mechanical Engineer → dyplom w `hasCredential` (weryfikowalny przez encję
   // uczelni, nie deklaracja).
   //
-  // ⛔ ODRZUCONE ŚWIADOMIE 2026-07-26: „Tutor" / korepetytor.
-  // Łukasz realnie udziela korepetycji z fizyki, ale zdecydował, że ta linia
-  // zostaje POZA marką — i tak jest lepiej, bo:
-  //   · zero treści na ten temat na wszystkich 6 domenach (sprawdzone: 0 trafień
-  //     na „korepetycj"), więc byłaby to deklaracja bez dowodu;
-  //   · byłaby SPRZECZNA z piera.pl/o-mnie, gdzie fizyka jest wymieniona jako
-  //     dziedzina chłonięta, wraz ze zdaniem „Nie jestem specjalistą od
-  //     wszystkiego". Sprzeczność w obrębie jednej encji to sygnał ujemny,
-  //     nie tylko słaby — obniża `entity confidence`.
-  // To także powód, dla którego `physics` (Q413) nie wraca do `knowsAbout`.
-  // Kolejność jest odwrotna, niż się wydaje: najpierw strona z ofertą, POTEM
-  // etykieta. Nie dopisuj tego bez treści, która to pokrywa.
+  // ⛔ WSTRZYMANE: „Tutor" / korepetytor. Odrzucone 2026-07-26, status
+  // zaktualizowany 2026-07-28 — powód się zmienił, decyzja nie.
+  //
+  // Stan na dziś: korepetycje z fizyki SĄ już ofertą na `piera.pl` (kafel
+  // „Fizyka i korepetycje" + zdanie w `/o-mnie`), więc dawny argument „zero
+  // trafień na »korepetycj«" upadł. Zniknęła też sprzeczność z `/o-mnie`:
+  // fizyka przeszła z listy dziedzin *chłonionych* do zdania o kompetencjach.
+  //
+  // Dlaczego mimo to NIE dopisujemy `Tutor`: warunek z `docs/encja-osoby.md` §5
+  // mówi o osobnym, autonomicznym klastrze — stronie `/korepetycje` z zakresem,
+  // poziomami i formą zajęć, na którą można wskazać `url`. Kafel i jeden akapit
+  // to jeszcze nie klaster. Kolejność zostaje: dowód, POTEM nazwa.
+  // Ten sam warunek dotyczy `physics` (Q413) w `knowsAbout`.
   jobTitle: ["Software Engineer", "Electrician", "Mechanical Engineer"],
   alumniOf,
   worksFor: soleProprietorship,
