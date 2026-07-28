@@ -175,7 +175,7 @@ export function localized(
 // czyli sygnałem działającym przeciw encji. Fizyka jest teraz opisana po stronie
 // kompetencji (dyplom inżyniera + korepetycje).
 // Warunek powrotu `physics` do `knowsAbout` jest więc już TYLKO jeden:
-// opublikowane wpisy w kategorii `warsztat-i-pomiary`. Bez sprzeczności do
+// opublikowane wpisy w kategorii `warsztat`. Bez sprzeczności do
 // rozstrzygania, ale i bez skrótu — nadal potrzebne pokrycie.
 
 /** Politechnika Łódzka — encja, którą Google już zna (autorytet instytucjonalny). */
