@@ -1,8 +1,7 @@
 // ─── KANONICZNA ENCJA OSOBY ──────────────────────────────────────────────────
 //
 // Jedna encja `Person` dla całego ekosystemu domen:
-//   lucaspiera.com · piera.pl · elektryk.piera.pl · elektronika.piera.pl
-//   trening.piera.pl · truerecall.app
+//   lucaspiera.com · piera.pl · elektryk.piera.pl · truerecall.app
 //
 // Entity Home (kanoniczne źródło faktów o osobie): https://lucaspiera.com/about/
 //
@@ -16,8 +15,9 @@
 // współdzielonych pakietów ani workspace (patrz CLAUDE.md w korzeniu).
 // Każda zmiana MUSI zostać ręcznie przeniesiona do wszystkich pozostałych
 // kopii w tym samym zadaniu, inaczej encja znowu się rozjedzie.
-// Kopie: apps/{lucaspiera-com,piera-pl,elektryk,elektronika,trening}/src/lib/entity.ts
+// Kopie: apps/{lucaspiera-com,piera-pl,elektryk}/src/lib/entity.ts
 // oraz (w osobnym repo) true-recall-docs/src/lib/entity.ts
+// Sprawdzenie: `md5 apps/*/src/lib/entity.ts` — wszystkie sumy identyczne.
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Kanoniczny identyfikator encji osoby. Ten sam na wszystkich domenach. */
@@ -29,13 +29,27 @@ export const ENTITY_HOME = "https://lucaspiera.com/about/";
 /** Kanoniczny identyfikator encji oprogramowania True Recall (inna domena). */
 export const TRUE_RECALL_ID = "https://truerecall.app/#software";
 
-/** Wszystkie domeny, którymi zarządza ta sama osoba. */
+/**
+ * Wszystkie domeny, którymi zarządza ta sama osoba. Ta tablica karmi `sameAs`
+ * na KAŻDEJ domenie (patrz `personFor`), więc adres, który przestaje odpowiadać,
+ * nie jest tu neutralny — to wiszący sygnał tożsamości, gorszy niż jego brak.
+ *
+ * USUNIĘTE 2026-07-28 — konsolidacja ekosystemu z 6 domen do 4:
+ *   elektronika.piera.pl — placeholder „wkrótce" na `noindex`, nigdy nie
+ *     zaindeksowany, 2 pozycje `knowsAbout` bez pokrycia w treści. Elektronika
+ *     i warsztat wchodzą jako kategoria na piera.pl / lucaspiera.com, bo klaster
+ *     o nauce był najcieńszy w całym ekosystemie, a subdomena nie dziedziczy
+ *     autorytetu domeny nadrzędnej.
+ *   trening.piera.pl — placeholder na `noindex`, świadomie 0 `knowsAbout`
+ *     (YMYL bez kwalifikacji). Linia porzucona, nie odłożona.
+ *
+ * Dwie puste odnogi pod jednym nazwiskiem to nie zero, a sygnał wzorca
+ * (Podrez-Siama, rozdz. 4.3). Nie dopisuj tu domeny, dopóki nie ma na niej treści.
+ */
 export const ownedSites = [
   "https://lucaspiera.com/",
   "https://piera.pl/",
   "https://elektryk.piera.pl/",
-  "https://elektronika.piera.pl/",
-  "https://trening.piera.pl/",
   "https://truerecall.app/",
 ];
 
