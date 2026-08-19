@@ -220,7 +220,7 @@ const engineeringDegree = {
  * ⚠️ To JEDEN podmiot prawny obsługujący DWIE linie usług: elektrykę **oraz IT**
  * (potwierdzone 2026-07-26). Węzeł ma `@type: Electrician`, bo taka jest jego
  * lokalna twarz na elektryk.piera.pl i to ten podtyp `LocalBusiness` pomaga w
- * zapytaniach o elektryka w Poznaniu.
+ * zapytaniach o elektryka w Łodzi i okolicach.
  *
  * **Nie twórz drugiej `Organization` na usługi IT.** Dwa węzły z tym samym
  * NIP-em to dla maszyny albo jeden byt opisany sprzecznie, albo dwie firmy,
@@ -253,15 +253,15 @@ export const BUSINESS_ID = "https://elektryk.piera.pl/#business";
 const soleProprietorship = {
   "@type": "Organization",
   "@id": BUSINESS_ID,
-  name: "Łukasz Piera, elektryk Poznań",
+  name: "Łukasz Piera, elektryk Łódź i okolice",
   // `name` jest handlową nazwą linii elektrycznej i zostaje taka, bo pracuje w
-  // lokalnych zapytaniach („elektryk Poznań"). Ale ten sam węzeł jest teraz
-  // wydawcą produktu software'owego, a „elektryk Poznań" jako jedyna nazwa
+  // lokalnych zapytaniach („elektryk Łódź i okolice"). Ale ten sam węzeł jest teraz
+  // wydawcą produktu software'owego, a „elektryk Łódź i okolice" jako jedyna nazwa
   // wydawcy wtyczki do Obsidiana opisuje podmiot za wąsko.
   //
   // `legalName` bierzemy z własnego dokumentu prawnego, nie z domysłu:
   // apps/elektryk/src/pages/regulamin.astro § 1 mówi „Serwis elektryk.piera.pl
-  // prowadzę ja, Łukasz Piera, elektryk z Poznania, NIP: 7272848245".
+  // prowadzę ja, Łukasz Piera, elektryk z Łodzi, NIP: 7272848245".
   // Zgodność `legalName` z `Person.alternateName` jest tu poprawna i pożądana —
   // w JDG podmiot gospodarczy i osoba to ten sam człowiek, a to wzmacnia
   // powiązanie osoba ↔ firma zamiast je rozmywać.
