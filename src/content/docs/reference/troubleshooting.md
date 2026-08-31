@@ -53,17 +53,28 @@ Common issues and how to fix them. If your problem isn't listed here, check the 
 
 3. **Custom prompt override** — If you set a custom grading prompt in Type-in Mode settings, it may be causing unexpected behavior. Try clearing it.
 
-## Device Sync Problems
+## Sync Problems
 
-**Symptoms:** Cards not merging across desktop devices, sync errors, or stale review history.
+**Symptoms:** Cards not merging across devices, sync errors, or stale review history.
 
-1. **Device Sync disabled** — Check `Settings → True Recall → Integrations → Device Sync`.
+1. **Sync disabled** — Check `Settings → True Recall → Integrations` and select Cloud Sync or Shared vault. The modes cannot run together.
 
-2. **Vault sync not finished** — Device Sync depends on your vault sync setup. Wait until your synced vault files are fully up to date before opening Obsidian on another machine.
+2. **Cloud account disconnected** — Cloud Sync requires a True Recall account. Sign in again if the dashboard shows a sync error. Local studying remains available while disconnected.
 
-3. **Plugin open on another device** — Close Obsidian on the other device first if True Recall warns about an active device lock.
+3. **Vault sync not finished** — Shared vault mode depends on your vault sync setup. Wait until the `.true-recall` files are fully downloaded before opening Obsidian on another machine.
 
-4. **Stale data** — Device Sync uses last-write-wins. If you edit the same card on two devices without syncing between edits, the later timestamp wins.
+4. **Plugin open on another device** — In Shared vault mode, close Obsidian on the other device if True Recall warns about an active device lock.
+
+5. **Still stale** — Run **True Recall: Sync Cloud now** (Cloud Sync) or **True Recall: Sync devices now** (Shared vault), then inspect the dashboard sync status. See [Cloud Sync](/data/cloud-sync/) for conflict behavior and synchronized data.
+
+### Browser does not return to Obsidian
+
+1. On the authorization page, select **Open Obsidian** manually.
+2. On iPhone, iPad, or Android, approve the system prompt asking to open Obsidian.
+3. Confirm that Obsidian is installed and True Recall is enabled in the vault where sign-in started.
+4. Return to `Settings → True Recall → Integrations` and select **Try again** if the request expired.
+
+The callback is tied to the original vault and authorization request. Starting sign-in in one vault and completing it in another will not silently connect the wrong collection.
 
 ## Performance Issues
 

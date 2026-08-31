@@ -1,14 +1,14 @@
 ---
 title: "Device Databases"
 sidebar:
-  order: 2
+  order: 3
 description: "Work with multiple device databases for different machines or separate study profiles."
 ---
 
 :::caution[My Notes]
 :::
 
-Each desktop device that runs **True Recall** gets its own SQLite database. This means your work laptop and home computer can each keep independent review histories, card states, and scheduling data.
+Each device that runs **True Recall**, including phones and tablets, gets its own SQLite database. This means your phone, work laptop, and home computer can save reviews independently while offline.
 
 ```
 .true-recall/
@@ -53,13 +53,21 @@ Copy the `.db` file from the other vault's `.true-recall/` folder, then use "Imp
 If multiple devices modify the same database file without a clean handoff, you'll see inconsistencies — reviews you didn't do, missing data, or wrong statistics.
 
 **Solutions:**
-- Enable **Device Sync** in `Settings → True Recall → Integrations` if your vault is synced across machines
+
+- Enable [**Cloud Sync**](/data/cloud-sync/) for account-based synchronization that does not depend on a shared vault
+- Enable **Shared vault** in `Settings → True Recall → Integrations` if your vault is already synchronized across machines
 - Or use one device at a time and manually transfer the database
 - Or keep completely separate databases per device
 
+## Recommended Mobile Setup
+
+Use **Cloud Sync** for the True Recall database and use Obsidian Sync, iCloud, or another vault service for Markdown notes and media. This avoids waiting for a complete SQLite file to download before True Recall can start.
+
+On mobile, the operating system can suspend Obsidian in the background. Changes saved locally are synchronized after the app becomes active again.
+
 ## Backups and Devices
 
-Backups are stored per-device inside `.true-recall/backups/`. Each device's backups are independent — restoring a backup only affects the active device database. Always [create a backup](/data/backup-restore/) before switching devices.
+Backups are stored per-device inside `.true-recall/backups.nosync/{device-id}/`. Each device's backups are independent — restoring a backup only affects the active device database. The `.nosync` suffix prevents iCloud from transporting them, so copy important snapshots to separate storage. Always [create a backup](/data/backup-restore/) before switching devices.
 
 :::note
 Don't edit `.db` files directly. Use True Recall's interface to avoid corruption.
@@ -68,5 +76,6 @@ Don't edit `.db` files directly. Use True Recall's interface to avoid corruption
 ## What to Read Next
 
 - [Backup & Restore](/data/backup-restore/) — protect your data with automatic and manual backups
+- [Cloud Sync](/data/cloud-sync/) — synchronize cards and review progress across devices
 - [Database Integrity Check](/data/integrity-check/) — scan for orphaned cards and corrupted data
-- [General Settings](/configuration/general/) — where to find the Integrations tab and Device Sync
+- [General Settings](/configuration/general/) — where to find the Integrations tab and sync modes

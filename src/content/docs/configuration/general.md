@@ -78,7 +78,7 @@ Click a key button, press the new key to reassign. Duplicates are prevented. See
 ## Other Settings Tabs
 
 - **Plugins** — AI provider, plugin toggles, Selection Toolbar buttons, AI Flashcard Generation presets, Card Polish presets, Type-in Mode settings, Knowledge Base settings
-- **Integrations** — Local API, Claude Code Skill link, and Device Sync
+- **Integrations** — Local API, Claude Code Skill link, Cloud Sync, and Shared vault sync
 - **Data & Backup** — device database, backups, restore, integrity check, Anki import/export, CSV/TSV export
 
 ## What to Read Next

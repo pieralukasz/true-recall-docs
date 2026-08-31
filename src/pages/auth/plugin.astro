@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Connect Cloud Sync" description="Connect this device to True Recall Cloud Sync">
+	<div class="auth-container">
+		<h1>Connect Cloud Sync</h1>
+		<p id="status" aria-live="polite">Checking your account…</p>
+		<div id="error" class="error-message" style="display:none"></div>
+		<form id="login-form" class="auth-form" style="display:none">
+			<label for="email">Email</label>
+			<input id="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+			<button id="submit" class="btn" type="submit">Send magic link</button>
+		</form>
+		<section id="handoff" class="handoff" style="display:none" aria-live="polite">
+			<h2>Device authorized</h2>
+			<p id="handoff-message"></p>
+			<a id="open-obsidian" class="btn" href="#">Open Obsidian</a>
+			<p class="handoff-help">
+				If nothing happens, tap the button above and approve the system prompt. Make sure Obsidian is installed and the True Recall plugin is enabled in the vault you started from.
+			</p>
+		</section>
+	</div>
+</BaseLayout>
+
+<script>
+	import { supabase } from "../../lib/supabase";
+	const params = new URLSearchParams(location.search);
+	const requestData = {
+		state: params.get("state"),
+		challenge: params.get("challenge"),
+		deviceId: params.get("device_id"),
+		deviceName: params.get("device_name"),
+		vault: params.get("vault"),
+	};
+	const status = document.getElementById("status")!;
+	const error = document.getElementById("error")!;
+	const form = document.getElementById("login-form") as HTMLFormElement;
+	const handoff = document.getElementById("handoff") as HTMLElement;
+	const handoffMessage = document.getElementById("handoff-message")!;
+	const open = document.getElementById("open-obsidian") as HTMLAnchorElement;
+	const valid = [requestData.state, requestData.challenge, requestData.deviceId, requestData.deviceName]
+		.every((value) => typeof value === "string" && value.length > 0);
+	const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+		|| (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+	function fail(message: string) {
+		status.style.display = "none";
+		error.textContent = message;
+		error.style.display = "block";
+	}
+
+	async function authorize(accessToken: string) {
+		status.textContent = "Authorizing this device…";
+		const response = await fetch("/api/auth/device-code", {
+			method: "POST",
+			headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` },
+			body: JSON.stringify(requestData),
+		});
+		const data = await response.json();
+		if (!response.ok) throw new Error(data.error ?? "Authorization failed");
+		const callback = new URLSearchParams({ code: data.code, state: data.state });
+		if (requestData.vault) callback.set("vault", requestData.vault);
+		const url = `obsidian://true-recall-auth?${callback}`;
+		open.href = url;
+		form.style.display = "none";
+		status.style.display = "none";
+		handoffMessage.textContent = isMobile
+			? "Opening Obsidian on this device. Confirm the system prompt if your browser asks for permission."
+			: "Opening the Obsidian vault where you started sign-in.";
+		handoff.style.display = "block";
+		window.setTimeout(() => location.assign(url), 250);
+	}
+
+	async function init() {
+		if (!valid) {
+			fail("This authorization link is incomplete. Start again from the plugin.");
+			return;
+		}
+		const { data } = await supabase.auth.getSession();
+		if (data.session) {
+			await authorize(data.session.access_token);
+			return;
+		}
+		status.textContent = "Sign in with your free True Recall account."; form.style.display = "flex";
+	}
+
+	form.addEventListener("submit", async (event) => {
+		event.preventDefault();
+		const email = (document.getElementById("email") as HTMLInputElement).value.trim();
+		const next = `${location.pathname}${location.search}`;
+		const { error: authError } = await supabase.auth.signInWithOtp({
+			email,
+			// The apex domain is the configured Supabase redirect origin. It may
+			// redirect to www afterwards, while preserving this path and query.
+			options: { emailRedirectTo: `https://truerecall.app/auth/confirm?next=${encodeURIComponent(next)}` },
+		});
+		if (authError) fail(authError.message);
+		else {
+			form.style.display = "none";
+			status.textContent = "Check your email, then return here to finish connecting.";
+		}
+	});
+
+	init().catch((reason) => fail(reason instanceof Error ? reason.message : "Authorization failed"));
+</script>
+
+<style>
+	.auth-container { max-width: 420px; margin: 5rem auto; }
+	.auth-form { flex-direction: column; gap: .75rem; margin-top: 1.5rem; }
+	.auth-form input { padding: .75rem 1rem; border: 1px solid var(--sl-color-gray-5); border-radius: .5rem; }
+	.btn { display: inline-block; padding: .75rem 1rem; border: 0; border-radius: .5rem; background: var(--sl-color-accent); color: white; text-align: center; cursor: pointer; }
+	.handoff h2 { margin: 0 0 .75rem; font-size: 1.25rem; }
+	.handoff .btn { margin-top: .75rem; }
+	.handoff-help { margin-top: 1rem; color: var(--sl-color-gray-3); font-size: .875rem; line-height: 1.5; }
+	.error-message { color: var(--tr-color-error); margin-top: 1rem; }
+</style>

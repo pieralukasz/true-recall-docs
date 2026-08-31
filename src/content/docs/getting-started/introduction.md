@@ -45,7 +45,8 @@ The algorithm tracks two things per card: **stability** (how long until you migh
 - **[Type-in Mode](/review/type-in-mode/)** — Type answers and get AI-powered semantic grading or diff
 - **[Note Types](/creation/note-types/)** — Anki-style templates with customizable fields
 - **[Projects](/creation/projects-and-notes/)** — Organize notes into hierarchies with per-project FSRS presets
-- **Device Sync** — Optional vault-based device database merge on startup
+- **[Cloud Sync](/data/cloud-sync/)** — Free account-based sync across desktop and mobile, with offline local databases
+- **Shared vault sync** — Optional merge of device databases transported by your vault sync service
 - **Dashboard Codeblocks** — Embed study analytics and project dashboards in your notes
 
 ## Projects group notes together
@@ -75,7 +76,7 @@ Project: "Science Fundamentals"
 | **AI Generation**    | Built-in                          | No                            |
 | **Image Occlusion**  | Built-in with AI detection        | Plugin required               |
 | **Type-in Grading**  | AI semantic grading               | Exact match only              |
-| **Device databases** | Vault-based device databases      | AnkiWeb sync                  |
+| **Device sync**      | Free Cloud Sync or shared vault   | AnkiWeb sync                  |
 | **Platform**         | Obsidian desktop                  | Desktop and mobile apps      |
 
 :::tip[Coming from Anki?]
@@ -84,7 +85,7 @@ See [Import & Export](/data/import-export/) for a complete walkthrough — note 
 
 ## Local-first data
 
-Your flashcard data lives in your vault as a local SQLite database. Nothing leaves your machine unless you use your own vault sync setup or configure AI features that send selected content to your chosen provider.
+Your flashcard data lives in your vault as a local SQLite database. Nothing leaves your machine unless you enable [Cloud Sync](/data/cloud-sync/), use your own vault sync setup, or configure AI features that send selected content to your chosen provider.
 
 ## Next steps
 

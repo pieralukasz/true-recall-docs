@@ -110,8 +110,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<p>
 			<strong>Cloud Sync (when enabled):</strong> If you enable Cloud Sync, flashcard content,
 			review history, and scheduling data are transmitted to and stored on Supabase servers in the
-			EU (AWS eu-central-1). Sync is entirely opt-in and can be disabled at any time. Your data
-			remains yours — we store it solely to provide the synchronisation service.
+			EU (West EU, Ireland). Sync is entirely opt-in and can be disabled at any time. Your data
+			remains yours — we store it solely to provide the synchronisation service. Cloud Sync is not
+			end-to-end encrypted: authorised True Recall server processes can read this data when needed to
+			operate, secure, or support the service.
 		</p>
 		<p>
 			<strong>MCP Server:</strong> The True Recall MCP Server exposes True Recall tools on
@@ -248,6 +250,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<li>All communications between the application, our website, and third-party processors use
 				<strong>TLS encryption</strong> in transit.</li>
 			<li>Supabase provides <strong>encryption at rest</strong> for all stored data.</li>
+			<li>Cloud Sync uses account isolation and revocable per-device tokens. Device tokens are stored
+				as one-way hashes on the server.</li>
 			<li>Your local SQLite database (<code>.true-recall/</code>) is stored unencrypted on your
 				device. You are responsible for device-level encryption (e.g. FileVault, BitLocker).</li>
 			<li>Access to production systems is restricted to the data controller (sole operator).
@@ -280,8 +284,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			underlying LLM providers is governed by their respective privacy policies.
 		</p>
 		<p>
-			<strong>Cloud Sync data:</strong> Retained as long as your account is active and sync is
-			enabled. Deleted within 30 days of account deletion or sync disablement.
+			<strong>Cloud Sync data:</strong> Retained while your account is active. Disabling sync on a
+			device stops new transfers but does not itself delete the server collection. Cloud Sync data is
+			deleted within 30 days of account deletion or a verified erasure request.
 		</p>
 
 		<h2>10. AI Transparency (EU AI Act)</h2>

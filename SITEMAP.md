@@ -79,9 +79,10 @@ All paths are relative to `src/content/docs/`.
 - `scheduling/presets.md` — Presets & optimization: scheduling profiles, parameter training from review history
 - `scheduling/workload-management.md` — Workload management: load balancing, easy days, scheduled breaks, sibling dispersal
 
-## Data (4 pages)
+## Data (5 pages)
 
 - `data/backup-restore.md` — Backup & Restore: manual/automatic backups, smart retention, restoring from backup
+- `data/cloud-sync.md` — Cloud Sync: account connection, local-first behavior, synchronized records, conflicts, privacy
 - `data/device-databases.md` — Device Databases: per-device SQLite databases, switching, importing
 - `data/integrity-check.md` — Database Integrity Check: orphaned cards, missing references, repair
 - `data/import-export.md` — Import & Export: Anki .apkg import/export, CSV/TSV export, migration tips
