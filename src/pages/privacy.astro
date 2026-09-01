@@ -8,7 +8,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 >
 	<div class="legal-page">
 		<h1>Privacy Policy</h1>
-		<p class="meta">Effective date: March 22, 2026 · Last updated: March 29, 2026</p>
+		<p class="meta">Effective date: March 22, 2026 · Last updated: September 1, 2026</p>
 
 		<p>
 			This Privacy Policy explains how True Recall ("<strong>we</strong>", "<strong>us</strong>",
@@ -110,7 +110,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<p>
 			<strong>Cloud Sync (when enabled):</strong> If you enable Cloud Sync, flashcard content,
 			review history, and scheduling data are transmitted to and stored on Supabase servers in the
-			EU (West EU, Ireland). Sync is entirely opt-in and can be disabled at any time. Your data
+			EU (AWS eu-west-1, Ireland). Sync is entirely opt-in and can be disabled at any time. Your data
 			remains yours — we store it solely to provide the synchronisation service. Cloud Sync is not
 			end-to-end encrypted: authorised True Recall server processes can read this data when needed to
 			operate, secure, or support the service.
@@ -192,7 +192,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				<tr>
 					<td><a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase</a></td>
 					<td>Authentication, database storage, Cloud Sync</td>
-					<td>EU (AWS eu-central-1)</td>
+					<td>EU (AWS eu-west-1, Ireland)</td>
 				</tr>
 				<tr>
 					<td><a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">OpenRouter</a></td>
@@ -224,7 +224,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 		<h2>6. International Data Transfers</h2>
 		<p>
-			All account and Cloud Sync data stored by Supabase resides in the EU (AWS eu-central-1).
+			All account and Cloud Sync data stored by Supabase resides in the EU (AWS eu-west-1,
+			Ireland).
 		</p>
 		<p>
 			Data sent to OpenRouter, Vercel, Resend, and Polar is transferred to the United States
