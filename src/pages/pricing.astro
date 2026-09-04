@@ -23,12 +23,12 @@ const plans = [
 		price: "$4",
 		period: "/month",
 		description:
-			"AI study assistant — optimized generation, smart coaching, leech fixing, and more. No setup, no hassle.",
+			"Managed AI with tuned prompts, plus Image Occlusion and Typed Answers with AI grading. No API key, no setup.",
 		features: [
 			"~2,000–3,000 flashcards per month",
-			"Perfectly tuned prompts for learning",
-			"AI Study Coach & Leech Doctor",
-			"Knowledge Base chat",
+			"Server-tuned prompts for generation and grading",
+			"Image Occlusion cards with AI region detection",
+			"Typed Answers with teacher-style AI grading",
 			"No API key or setup needed",
 			"Cancel anytime",
 		],
@@ -42,10 +42,10 @@ const plans = [
 		price: "Free",
 		period: "forever",
 		description:
-			"Use your own OpenRouter API key and prompts. Full control — you manage everything yourself.",
+			"Use your own OpenRouter, LM Studio or custom endpoint. Full control, you manage everything yourself.",
 		features: [
 			"Unlimited flashcard generation",
-			"Use any supported model",
+			"Use any supported model, including local ones",
 			"Bring your own prompts",
 			"Pay OpenRouter directly",
 		],
@@ -66,7 +66,7 @@ const plans = [
 		<h1>Simple, transparent pricing</h1>
 		<p>
 			Expert AI flashcard generation with perfectly tuned prompts. Or bring
-			your own key — it's free.
+			your own key, it's free.
 		</p>
 
 		<div class="plans">
@@ -102,16 +102,20 @@ const plans = [
 		</div>
 
 		<p class="note">
+			Not sure what changes with Pro? <a href="/getting-started/what-pro-includes/">See exactly what Pro includes</a>, feature by feature, and what stays free.
+		</p>
+
+		<p class="note">
 			Flashcard counts are approximate. The number of flashcards per
 			generation depends on how much text you select and how dense the
-			content is — select a whole note and expect significantly more cards.
+			content is: select a whole note and expect significantly more cards.
 		</p>
 	</div>
 
 </BaseLayout>
 
 <style>
-	/* Reuse .credits, .plans, .plan from custom.css — extend here */
+	/* Reuse .credits, .plans, .plan from custom.css; extend here */
 	.credits {
 		text-align: center;
 		max-width: 900px;

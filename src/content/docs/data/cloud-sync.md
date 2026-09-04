@@ -25,8 +25,8 @@ Cloud Sync and a vault service can run at the same time because they synchronize
 
 ## Connect a device
 
-1. Open `Settings → True Recall → Integrations`.
-2. Under **Cloud Sync**, select **Sign in**.
+1. Open `Settings → True Recall → Integrations → "Sync"`.
+2. Under **Cloud Sync**, select **Sign in**. While the browser is open the button reads **Open browser again**; after a failed attempt it reads **Try again**.
 3. True Recall opens `truerecall.app` in your browser.
 4. Sign in or create a free account. If you already have a browser session, you can authorize the device immediately.
 5. The site opens the Obsidian vault where you started the request.
@@ -71,14 +71,14 @@ Synchronization runs:
 - when Obsidian returns to the foreground;
 - periodically while the plugin is active;
 - after connecting an account;
-- manually through **True Recall: Sync Cloud now**.
+- manually through the command **Sync cloud now** (available only while Cloud Sync is enabled).
 
 The dashboard can show:
 
-- **Saved locally** — the local database is durable;
-- **Syncing…** — an exchange is running;
-- **Synced just now** — the latest exchange succeeded;
-- **Sync error** — local work is safe, but Cloud has not accepted it yet.
+- **Saved locally**: the local database is durable;
+- **Syncing…**: an exchange is running;
+- **Synced just now**: the latest exchange succeeded;
+- **Sync error**: local work is safe, but Cloud has not accepted it yet.
 
 When offline, True Recall remains fully usable. A failed exchange does not advance the local cursor, so pending changes are retried when connectivity returns.
 
@@ -140,7 +140,11 @@ True Recall offers two database synchronization modes:
 
 Use only one of these True Recall modes at a time. You can still use iCloud or Obsidian Sync for notes and attachments while **Cloud Sync** is active.
 
-Changing **Shared vault** mode requires reloading Obsidian. Disabling **Cloud Sync** stops network synchronization but leaves the local database intact.
+Switching modes is safe mid-session: enabling **Cloud Sync** turns **Shared vault** off and stops its file transport immediately, so the two never run at the same time. Changing **Shared vault** mode still requires reloading Obsidian. Disabling **Cloud Sync** stops network synchronization but leaves the local database intact.
+
+### Where the database lives
+
+In Cloud Sync mode the device database is stored in `.true-recall/local.nosync/`, a folder iCloud does not sync. Nothing else reads the file in this mode, and keeping it out of iCloud avoids a full upload on every save, conflict copies, and iOS evicting the file the plugin must read at startup. Shared vault mode keeps the database in `.true-recall/`, because other devices read it from there. When you switch modes, the file is moved on the next start; if the move fails, the old location keeps working and a notice tells you. See [Device Databases](/data/device-databases/) for details.
 
 ## Privacy and security
 
@@ -170,7 +174,13 @@ Read [Backup & Restore](/data/backup-restore/) for backup frequency, retention, 
 
 ## Signing out or losing a device
 
-Signing out revokes the current device token, disables Cloud Sync on that device, and keeps its local database. It does not delete the account's Cloud collection.
+Signing out revokes the current device token, disables Cloud Sync on that device, and keeps its local database. It does not delete the account's Cloud collection. Sign-out is verified: if the server cannot revoke the device token (for example, you are offline), your session is kept and an error is shown instead of leaving a live credential behind. Check your connection and try again.
+
+If the server rejects the device token because the session expired, Cloud Sync is turned off on that device, the settings show the **Sign in** button again, and a notice asks you to sign in again in `Settings → True Recall → Integrations`. Nothing is lost locally; sign in and the next sync picks up where it left off.
+
+:::note[Update every device]
+Version 2.4.1 fixed the reliability gaps found in a review of the 2.4.0 sync path (skipped changes between devices, pulled data echoed back, interrupted syncs, oversized pushes). If you sync more than one device, update all of them.
+:::
 
 If a device is lost, install Obsidian and True Recall on another device, restore or synchronize the vault files, and connect the same True Recall account. Cloud Sync can restore the latest card and review state, while your vault provider restores Markdown and media files.
 
@@ -178,7 +188,7 @@ Self-service management for viewing all connected devices, revoking another devi
 
 ## What to read next
 
-- [Device Databases](/data/device-databases/) — how local databases work
-- [Backup & Restore](/data/backup-restore/) — protect the local copy of your collection
-- [Troubleshooting](/reference/troubleshooting/) — diagnose connection and sync errors
-- [Obsidian URI documentation](https://help.obsidian.md/Extending%2BObsidian/Obsidian%2BURI) — how Obsidian app links work
+- [Device Databases](/data/device-databases/): how local databases work
+- [Backup & Restore](/data/backup-restore/): protect the local copy of your collection
+- [Troubleshooting](/reference/troubleshooting/): diagnose connection and sync errors
+- [Obsidian URI documentation](https://help.obsidian.md/Extending%2BObsidian/Obsidian%2BURI): how Obsidian app links work

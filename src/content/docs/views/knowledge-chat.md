@@ -2,35 +2,28 @@
 title: Knowledge Chat
 sidebar:
   order: 9
-description: Chat with your vault notes and flashcards using True Recall's RAG-powered Knowledge Chat, with automatic context and cited sources.
+  badge:
+    text: Removed
+    variant: caution
+description: Knowledge Chat, the RAG-powered chat over your vault, was removed in True Recall 2.0.0 and will be rebuilt later. Use the Ask AI panel instead.
 ---
 
 :::caution[My Notes]
 :::
 
-**Knowledge Chat** is a conversational view over your indexed vault. Ask a question and it retrieves the most relevant notes and cards, answers with them, and cites its sources — so you can study a topic without leaving Obsidian.
+**Knowledge Chat** was a conversational view over an indexed copy of your vault: you asked a question, it retrieved the most relevant notes and cards and answered with cited sources.
 
-This is the *chat surface*. For how indexing works and how to configure what gets indexed, see [Knowledge Base](/configuration/knowledge-base/).
+:::caution[Removed in 2.0.0]
+The Knowledge Chat view, the Knowledge Base indexing feature, the `/rag/*` local API routes, the assistant's `search_knowledge` tool and every `rag*` setting were removed in **True Recall 2.0.0** (July 2026). The retrieval subsystem will be rebuilt from scratch later. Nothing was deleted from your database: existing index tables are left in place, and evidence already attached to saved assistant threads still renders.
+:::
 
-## Opening Knowledge Chat
+## What to use instead
 
-Open it with the **Chat with knowledge base** command from the Command Palette.
-
-<!-- TODO PHOTO -->
-
-## Layout
-
-- **Chat input** — type your question. Use `@` to attach specific notes as context.
-- **Context chips** — the notes currently in scope for the conversation; auto-suggested from what you're working on, and adjustable by hand.
-- **Messages with sources** — each answer lists the notes and cards it drew from.
-- **Index status** — shows whether your vault is indexed and up to date.
-- **Config panel** — tune retrieval behavior for the conversation.
-
-## Relationship to the AI Assistant
-
-Knowledge Chat and the [AI Assistant](/plugins/ai-assistant/) share the same retrieval layer. When the assistant needs supporting material it calls the same knowledge retriever and shows the results as **Vault evidence**. Chat is for asking; the assistant is for drafting cards and notes from what it finds.
+- The docked **Ask AI** panel (command "Open ask AI panel") is the conversational surface now. Its subject follows what you are studying (the card under review, otherwise the open note), and you can attach a text selection with the **Ask AI** button of the [Quick Actions Toolbar](/views/selection-toolbar/).
+- Every question becomes a thread of the [AI Workspace](/plugins/ai-assistant/), so drafts it produces (new cards, rewrites) can be applied later from the [AI Inbox](/views/ai-inbox/).
 
 ## What to Read Next
 
-- [Knowledge Base](/configuration/knowledge-base/) — indexing, included folders, and settings
-- [AI Assistant](/plugins/ai-assistant/) — draft cards from the same retrieved evidence
+- [AI Workspace](/plugins/ai-assistant/): the Ask AI panel, threads and proposals
+- [AI Inbox](/views/ai-inbox/): review deferred AI drafts
+- [Quick Actions Toolbar](/views/selection-toolbar/): ask AI about a selection

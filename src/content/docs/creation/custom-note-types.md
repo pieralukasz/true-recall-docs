@@ -8,13 +8,13 @@ description: "Create note types with custom fields, card templates, and CSS for 
 :::caution[My Notes]
 :::
 
-The four [built-in note types](/creation/note-types/) cover most use cases. Custom note types are for when you need something they can't do — extra fields, a different card structure, or a layout specific to your subject.
+The four [built-in note types](/creation/note-types/) cover most use cases. Custom note types are for when you need something they can't do: extra fields, a different card structure, or a layout specific to your subject.
 
 Common reasons to create a custom type:
-- **Language learning** — fields for the word, reading (furigana), meaning, example sentence
-- **Medical/scientific** — question, answer, and a clinical note field
-- **Vocabulary with memory aids** — Front, Back, Mnemonic
-- **Two-sided with extra context** — Front, Back, Source, Context
+- **Language learning**: fields for the word, reading (furigana), meaning, example sentence
+- **Medical/scientific**: question, answer, and a clinical note field
+- **Vocabulary with memory aids**: Front, Back, Mnemonic
+- **Two-sided with extra context**: Front, Back, Source, Context
 
 If you're starting out, don't create custom types yet. Learn the built-in types first, then create custom ones when you find yourself adding the same kind of extra information to every card.
 
@@ -58,7 +58,7 @@ Field order in the block must match the order you defined in the type. Field nam
 
 Each template generates one card. A note type with two templates generates two cards per block. A note type with one template generates one card.
 
-A template has two sides — question and answer:
+A template has two sides, question and answer:
 
 **Question template:**
 ```
@@ -153,20 +153,20 @@ You can change the note type of existing cards:
 
 ## Managing Note Types
 
-Create, edit, and delete note types in the **Note Type Manager**. Open it from the Command Palette → **Manage note types**, or from the type picker in the [Flashcard Editor](/views/flashcard-editor/).
+Create, edit, and delete note types in the **Note Type Manager**. Open it from the type picker in the [Flashcard Editor](/views/flashcard-editor/) (the fields action next to the note type). Both the Note Type Manager and the Card Types Editor open in their own popout windows, so you can keep the editor you came from visible while you work.
 
 ![Note Type Manager listing built-in and custom note types](../../../assets/screenshots/note-types/note-type-manager.png)
 
-The manager lists every note type — built-in and custom — and lets you add a new type, rename it, edit its fields, or delete a custom type. Built-in types (Basic, Cloze, Image Occlusion) cannot be deleted.
+The manager lists every note type, built-in and custom, and lets you add a new type, rename it, edit its fields, or delete a custom type. Built-in types (Basic, Cloze, Image Occlusion) cannot be deleted.
 
 ## Editing Card Templates
 
-To change *how* a note type turns fields into cards, open its **Card Types Editor** from the Note Type Manager. This is where you edit the [card templates](#card-templates) and [CSS](#css) described above — add or remove templates (each template produces one card), and adjust the question and answer layout for the type.
+To change *how* a note type turns fields into cards, open its **Card Types Editor**. The Command Palette command **Manage note types** asks which note type to edit (or lets you create a new one with **+ create new note type**) and opens the Card Types Editor for it in a popout window. This is where you edit the [card templates](#card-templates) and [CSS](#css) described above: add or remove templates (each template produces one card), and adjust the question and answer layout for the type.
 
 Editing a template updates every existing card of that type the next time it's rendered, so you can refine a layout without recreating cards.
 
 ## What to Read Next
 
-- [Note Types](/creation/note-types/) — the four built-in types and when to use each
-- [Creating Flashcards](/creation/creating-flashcards/) — block format syntax for writing cards in your notes
-- [Flashcard Editor](/views/flashcard-editor/) — where you pick a note type and fill in card fields
+- [Note Types](/creation/note-types/): the four built-in types and when to use each
+- [Creating Flashcards](/creation/creating-flashcards/): block format syntax for writing cards in your notes
+- [Flashcard Editor](/views/flashcard-editor/): where you pick a note type and fill in card fields

@@ -22,7 +22,7 @@ A single block in your notes can generate more than one card. The note type dete
 ```
 
 :::tip[Note Type vs Card Type]
-A **note type** is the template (fields + card templates). A **card** is an individual review item generated from it. For example, a Cloze note type with 3 cloze deletions generates 3 separate cards — each scheduled independently.
+A **note type** is the template (fields + card templates). A **card** is an individual review item generated from it. For example, a Cloze note type with 3 cloze deletions generates 3 separate cards, each scheduled independently.
 :::
 
 ## Basic
@@ -40,13 +40,13 @@ Back: Central Processing Unit
 
 **During review:** You see the Front, recall the answer, then reveal the Back. One card per block.
 
-**Best for:** Definitions, facts, concepts with a single correct answer — anything where you always want to test Front → Back.
+**Best for:** Definitions, facts, concepts with a single correct answer, anything where you always want to test Front → Back.
 
 ---
 
 ## Basic (Reversed)
 
-Same as Basic, but generates two cards — one in each direction.
+Same as Basic, but generates two cards, one in each direction.
 
 **Fields:** Front, Back
 
@@ -63,10 +63,10 @@ Back: The process by which plants convert sunlight into chemical energy
 
 Both cards are scheduled independently. Getting one right doesn't affect the other.
 
-**Best for:** Vocabulary (word ↔ translation), capitals (country ↔ capital), abbreviations (acronym ↔ meaning) — anything where both directions are worth testing.
+**Best for:** Vocabulary (word ↔ translation), capitals (country ↔ capital), abbreviations (acronym ↔ meaning), anything where both directions are worth testing.
 
 :::tip[Make reversed from any Basic card]
-You can create a reversed pair from an existing Basic card — right-click the card in the [Flashcard Panel](/views/flashcard-panel/) and select **Make reversed**. To remove the reversed pair later, use **Remove reversed** from the same menu.
+You can create a reversed pair from an existing Basic card: right-click the card in the [Flashcard Panel](/views/flashcard-panel/) and select **Make Reversed**. To remove the reversed pair later, use **Remove Reversed** from the same menu.
 :::
 
 ---
@@ -90,10 +90,10 @@ Extra: Cardiovascular system
 
 The Extra field appears on the answer side as additional context.
 
-**Best for:** Lists, sequences, fill-in-the-blank, facts that make more sense in sentence context than as isolated Q&A. See [Cloze Deletions](/creation/cloze-deletions/) for the full syntax guide — hints, grouping, complex examples.
+**Best for:** Lists, sequences, fill-in-the-blank, facts that make more sense in sentence context than as isolated Q&A. See [Cloze Deletions](/creation/cloze-deletions/) for the full syntax guide: hints, grouping, complex examples.
 
 :::caution[Author's note]
-I personally don't use Cloze cards at all. In my experience, they don't add real value for meaningful learning. I'll explain my reasoning in more detail at [lucaspiera.com](https://lucaspiera.com). That said — the community asked for this note type, so here it is.
+I personally don't use Cloze cards at all. In my experience, they don't add real value for meaningful learning. I'll explain my reasoning in more detail at [lucaspiera.com](https://lucaspiera.com). That said, the community asked for this note type, so here it is.
 :::
 
 ---
@@ -104,13 +104,13 @@ Cards created from images by hiding specific regions. Each region becomes one ca
 
 **Fields:** Image, drawn regions
 
-Created through the Image Occlusion editor — not written as plain text. You draw rectangles or ellipses over parts of an image (or let AI detect them), and each region becomes a separate review card.
+Created through the Image Occlusion editor, not written as plain text. You draw rectangles or ellipses over parts of an image (or let AI detect them), and each region becomes a separate review card. Image Occlusion is a Pro feature, switched on under `Settings → True Recall → General → "Image occlusion" → "Creation tools"`.
 
 **During review:** You see the image with one region hidden. Recall what's under it, then reveal.
 
-**Best for:** Anatomy diagrams, maps, labeled charts — any visual material where spatial position is part of what you're learning.
+**Best for:** Anatomy diagrams, maps, labeled charts, any visual material where spatial position is part of what you're learning.
 
-See [Image Occlusion](/creation/image-occlusion/) for the full guide — creation methods, the editor interface, AI detection, and region groups.
+See [Image Occlusion](/creation/image-occlusion/) for the full guide: creation methods, the editor interface, AI detection, and mask modes.
 
 ---
 
@@ -137,11 +137,11 @@ Each built-in type has a **slug** used in [block format](/creation/creating-flas
 | Cloze | `cloze` |
 | Image Occlusion | `image-occlusion` |
 
-Custom types use the slug you define when creating them. For custom note types — additional fields, custom templates, and CSS — see [Custom Note Types](/creation/custom-note-types/).
+Custom types use the slug you define when creating them. For custom note types (additional fields, custom templates, and CSS) see [Custom Note Types](/creation/custom-note-types/).
 
 ## What to Read Next
 
-- [Creating Flashcards](/creation/creating-flashcards/) — the three creation methods and block format syntax
-- [Cloze Deletions](/creation/cloze-deletions/) — full syntax guide for fill-in-the-blank cards
-- [Image Occlusion](/creation/image-occlusion/) — creating cards from images
-- [Custom Note Types](/creation/custom-note-types/) — build your own types with extra fields and templates
+- [Creating Flashcards](/creation/creating-flashcards/): the creation methods and block format syntax
+- [Cloze Deletions](/creation/cloze-deletions/): full syntax guide for fill-in-the-blank cards
+- [Image Occlusion](/creation/image-occlusion/): creating cards from images
+- [Custom Note Types](/creation/custom-note-types/): build your own types with extra fields and templates

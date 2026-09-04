@@ -8,15 +8,15 @@ description: "Organize notes into projects using parent relationships, folder in
 :::caution[My Notes]
 :::
 
-Projects in **True Recall** are built from note relationships, not from a separate deck entity. Any note can become a project — either by having other notes point to it as a parent, or by marking it explicitly with `project: true` in frontmatter.
+Projects in **True Recall** are built from note relationships, not from a separate deck entity. Any note can become a project, either by having other notes point to it as a parent, or by marking it explicitly with `project: true` in frontmatter.
 
-Unlike Anki, where each card belongs to exactly one deck, a note in True Recall can belong to **multiple projects at once**. A note on "Cell Biology" can live in both your "Medicine" and "Exam Prep" projects without duplicating any cards. This makes organization flexible — you model how knowledge actually connects, instead of forcing it into a single hierarchy.
+Unlike Anki, where each card belongs to exactly one deck, a note in True Recall can belong to **multiple projects at once**. A note on "Cell Biology" can live in both your "Medicine" and "Exam Prep" projects without duplicating any cards. This makes organization flexible: you model how knowledge actually connects, instead of forcing it into a single hierarchy.
 
 ## Core Model
 
 There are two ways a note becomes a project:
 
-### 1. Implicit — via children
+### 1. Implicit, via children
 
 A note becomes a project automatically when other notes declare it as a parent:
 
@@ -27,7 +27,7 @@ parents:
 ---
 ```
 
-### 2. Explicit — via `project: true`
+### 2. Explicit, via `project: true`
 
 A note can declare itself as a project, even without children:
 
@@ -75,7 +75,7 @@ Biology/
 └── DNA Replication.md  ← auto-assigned as child
 ```
 
-The menu item only appears if the project note doesn't already exist. After creation the note opens automatically — you can add a title, description, or extra frontmatter fields like `fsrs_preset`.
+The menu item only appears if the project note doesn't already exist. After creation the note opens automatically; you can add a title, description, or extra frontmatter fields like `fsrs_preset`.
 
 ## [Dashboard](/views/dashboard/) Workflows
 
@@ -113,6 +113,12 @@ In **Dashboard → Notes** selection mode:
 
 - **Create project**
 
+### Where new project notes are created
+
+Every flow that creates a project note pre-fills its folder from `Settings → True Recall → Data & Backup → "Storage locations" → "Default project folder"` (empty means the vault root). The folder is still editable per project, and it is created if it does not exist yet.
+
+A sub-project created from a project's context menu in the Projects tree is placed in the same folder as its parent project note, with the parent already set in its `parents` frontmatter.
+
 ## Archiving
 
 Archiving excludes notes from active study without deleting cards. Use `archive: true`:
@@ -127,9 +133,9 @@ To unarchive, remove the field (or set `false`).
 
 ### Archive/unarchive paths
 
-- **Dashboard** — note row: Archive / Unarchive; project row: Archive project / Unarchive project; notes selection mode: bulk Archive
-- **Commands** — Archive current note / Unarchive current note
-- **Frontmatter** — set/remove `archive: true`
+- **Dashboard**: note row: Archive / Unarchive; project row: Archive / Unarchive; notes selection mode: bulk Archive
+- **Commands**: **Archive current note** / **Unarchive current note**
+- **Frontmatter**: set/remove `archive: true`
 
 ### Project cascading
 
@@ -168,6 +174,6 @@ Notes with cards and no project assignment appear in **Unassigned** in the [Dash
 
 ## What to Read Next
 
-- [Dashboard](/views/dashboard/) — manage projects and notes visually
-- [FSRS Presets](/scheduling/presets/) — configure scheduling per project
-- [Frontmatter Fields](/reference/frontmatter-fields/) — full field reference
+- [Dashboard](/views/dashboard/): manage projects and notes visually
+- [FSRS Presets](/scheduling/presets/): configure scheduling per project
+- [Frontmatter Fields](/reference/frontmatter-fields/): full field reference

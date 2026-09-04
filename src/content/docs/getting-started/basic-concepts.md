@@ -2,7 +2,7 @@
 title: Basic Concepts
 sidebar:
   label: "Basic Concepts"
-  order: 4
+  order: 5
 description: Core concepts of True Recall including flashcard types, FSRS algorithm, projects, presets, and day boundaries.
 ---
 
@@ -17,14 +17,13 @@ A **flashcard** is a learning unit with a question (front) and answer (back). Tr
 
 ```markdown
 #type/basic
-#type/basic
 Front: What is photosynthesis?
 Back: The process by which plants convert sunlight into energy.
 
 ---
 ```
 
-The first `#type/basic` is a tag that links the block to your note type. The second `#type/basic` declares which note type template to use for this card. For the full block format reference, see [Creating Flashcards](/creation/creating-flashcards/).
+The `#type/basic` tag declares which note type template the block uses, the field lines fill in that template, and `---` closes the block. For the full block format reference, see [Creating Flashcards](/creation/creating-flashcards/).
 
 | Type            | Tag                     | Fields      | Description                     |
 | --------------- | ----------------------- | ----------- | ------------------------------- |
@@ -41,12 +40,12 @@ Cards are stored in your notes and linked to the database for scheduling. Manage
 
 ### Key FSRS Concepts
 
-- **Stability** — How long you'll remember something before forgetting
-- **Difficulty** — How hard a card is to learn
-- **Retrievability** — Current probability of successful recall
-- **Desired Retention** — Target recall probability (default: 90%)
+- **Stability**: how long you'll remember something before forgetting
+- **Difficulty**: how hard a card is to learn
+- **Retrievability**: current probability of successful recall
+- **Desired Retention**: target recall probability (default: 90%)
 
-When you answer a card, FSRS updates its predictions and schedules the next review.
+When you answer a card, FSRS updates its predictions and schedules the next review. The optional R-Mode (experimental, `Settings → True Recall → FSRS → "R-Mode (experimental)"`) replaces due dates with a continuous ranking by retrievability, so a card is simply worth reviewing now or not, and nothing is ever "late".
 
 ### Card States
 
@@ -64,9 +63,9 @@ When you answer a card, FSRS updates its predictions and schedules the next revi
 
 Each note type has:
 
-- **Fields** — Data slots (e.g., Front, Back for basic; Text, Extra for cloze)
-- **Templates** — How fields are displayed on cards
-- **CSS** — Styling for cards
+- **Fields**: data slots (e.g., Front, Back for basic; Text, Extra for cloze)
+- **Templates**: how fields are displayed on cards
+- **CSS**: styling for cards
 
 Built-in note types: Basic, Basic Reversed, Cloze, and Image Occlusion. You can create custom note types with any fields you need. See [Note Types](/creation/note-types/) for a full guide.
 
@@ -82,13 +81,13 @@ fsrs_preset: medical-school
 ---
 ```
 
-Child notes inherit FSRS presets from parent projects. A note can belong to multiple projects. See [Projects](/creation/projects-and-notes/) for details.
+Child notes inherit FSRS presets from parent projects. A note can belong to multiple projects. See [Projects](/creation/projects-and-notes/) for details and [Frontmatter Fields Reference](/reference/frontmatter-fields/) for every field True Recall reads.
 
 ## Day Boundaries
 
-True Recall uses configurable **day boundaries** (default: 4 AM) to determine when cards become "due today." This matches Anki's behavior — if you review at 2 AM, it counts as the previous day.
+True Recall uses configurable **day boundaries** (default: 4 AM) to determine when cards become "due today." This matches Anki's behavior: if you review at 2 AM, it counts as the previous day.
 
-Configure in Settings → General → "Next day starts at".
+Configure in `Settings → True Recall → General → "Day boundary" → "Next day starts at"`.
 
 ## Presets
 
@@ -104,7 +103,11 @@ You can have multiple presets (e.g., "Intensive" for exam prep, "Casual" for gen
 
 ## Leeches
 
-A **leech** is a card you keep forgetting — after multiple lapses (default: 8), True Recall flags it so you can fix or replace it. Leeches indicate that the card needs rewriting, not just more repetition. See [Leeches](/review/leeches/) for detection settings and strategies.
+A **leech** is a card you keep forgetting. After multiple lapses (default: 8), True Recall flags it so you can fix or replace it. Leeches indicate that the card needs rewriting, not just more repetition. See [Leeches](/review/leeches/) for detection settings and strategies.
+
+## Devices and Sync
+
+Every device you install True Recall on, including phones and tablets, keeps its own local SQLite database and works offline. To study on more than one device, turn on [Cloud Sync](/data/cloud-sync/) (free, with a True Recall account) or shared vault mode. Review history is merged by replaying it through FSRS, so grading the same card on two devices converges on one correct state. See [Device Databases](/data/device-databases/).
 
 ## The Review Loop
 
@@ -113,7 +116,7 @@ A **leech** is a card you keep forgetting — after multiple lapses (default: 8)
 3. FSRS **schedules** the next review
 4. **[Statistics](/views/statistics/)** track your progress
 
-Daily limits prevent overload while ensuring consistent progress.
+Daily limits prevent overload while ensuring consistent progress. When you need something outside the normal queue, [Custom Study](/review/cramming/) builds a temporary filtered session.
 
 ## Next Steps
 

@@ -1,130 +1,95 @@
 ---
-title: Type-in Mode
+title: Typed Answers
 sidebar:
+  label: "Typed Answers"
   order: 3
-description: "Type your answers during review and get them graded with AI semantic evaluation or character-by-character diff comparison."
+description: "Type your answers during review and get a teacher-style verdict from AI: what you covered, what is missing, and a suggested rating."
 ---
 
 :::caution[My Notes]
 :::
 
-**Type-in Mode** lets you type your answers during review instead of just thinking them. **True Recall** compares your typed answer with the correct one using either AI semantic grading or character-by-character diff comparison.
+**Typed Answers** (called Type-in Mode before 2.2.0) lets you type your answer during review instead of just thinking it. **True Recall** grades the typed answer against the card and the surrounding note and returns a teacher-style verdict: correct, partially correct or not quite, with a suggested rating and a short breakdown of what you got right and what you missed.
 
 :::note[Availability]
-Type-in Mode is a **Pro** plugin. Diff comparison works without sending an AI request, but the Type-in Mode plugin itself requires Pro.
+Typed Answers is a **True Recall Pro** feature. Without a Pro key the **Typed answers** setting is disabled and cards show the normal reveal flow. See [What Pro Includes](/getting-started/what-pro-includes/) for the full list of what a Pro key unlocks.
 :::
 
-## Enabling Type-in Mode
+## Enabling Typed Answers
 
 ### During Review
 
-Press `T` to cycle through modes:
-1. **Off** — Standard review (think, reveal, rate)
-2. **AI Grading** — AI evaluates your answer semantically
-3. **Diff** — Character-by-character comparison
+Press `T` (or click the **Type in** button next to the rating buttons; on phones it is in the view's overflow menu) to switch typed answers on or off for the current session.
 
 ### Default Setting
 
-Set your preferred default in `Settings → True Recall → Plugins → Type-in Mode` (Off, Diff, or AI).
+Set the default for new sessions in `Settings → True Recall → General → "Review interface" → "Typed answers"`: **Off** or **AI grading**.
 
-### Per-Card Type-in
+### Per-Card Typed Answers
 
-You can also mark individual cards as type-in when creating them — add `@typein` in the [block format](/creation/creating-flashcards/#type-in-mode). These cards always show the type-in input regardless of the global setting.
+You can also mark individual cards as type-in when creating them: add `@typein` in the [block format](/creation/creating-flashcards/#typed-answers). These cards always show the answer field regardless of the session setting. Image occlusion cards, note-review cards and cards without an answer never ask for a typed answer.
 
 ## How It Works
 
 1. Read the question
-2. Type your answer in the text area
-3. Press `Space` or `Cmd/Ctrl + Enter` to submit
-4. See the comparison/grading result
-5. Rate your answer (or accept the AI-suggested rating)
+2. Type your answer in the field under the question
+3. Press `Cmd/Ctrl + Enter` to check your answer (`Space` only moves the focus into the field)
+4. The grader checks your answer first; the model answer stays hidden until the verdict lands
+5. Press `Enter` to accept the suggested rating, or press `1` to `4` to rate yourself
+
+If you submit with an empty field, the card is simply revealed and nothing is graded.
 
 <!-- TODO PHOTO -->
 
-## AI Semantic Grading
+## The Assessment Panel
 
-AI compares your answer with the correct one on meaning, not exact wording. After submitting:
+Since 2.3.0 the grader returns a verdict rather than a bare similarity score. The panel under the answer shows:
 
-1. AI assigns a score (0–100) and provides brief feedback
-2. An auto-rating is suggested based on the score
-3. Click **Accept** to use it, or **Override** to rate manually
+| Element | Meaning |
+|---------|---------|
+| **Correct** / **Partially correct** / **Not quite** | The verdict, in green, orange or red |
+| **Suggested: Good · Enter** | The rating the grader proposes; `Enter` applies it |
+| Teacher comment | One or two sentences of feedback in plain language |
+| **You covered** | The points of the model answer your text contained |
+| **Missing** | Points you left out |
+| **Incorrect** | Statements that contradict the answer |
 
-### Auto-Rating Thresholds
+Rating buttons stay locked while a check is in flight, so you cannot rate a card before the verdict arrives.
 
-| AI Score | Rating Applied |
-|----------|----------------|
-| 90–100 | Good |
-| 70–89 | Hard |
-| 0–69 | Again |
+### What the Grader Understands
 
-### What AI Understands
+- **Synonyms and paraphrases**: meaning counts, not exact wording
+- **Partial answers**: graded as partially correct, with the missing points listed
+- **Minor typos**: treated as correct
+- **Context-dependent answers**: the grader receives excerpts of the source note that relate to the card (chosen by keyword, up to about 10,000 characters) plus up to ten related cards from the same note, so an answer that leans on a definition given earlier in the note is graded against that context instead of being penalized as ambiguous
 
-- **Synonyms** — "car" = "automobile"
-- **Paraphrases** — "turns sunlight into energy" = "converts light to chemical energy"
-- **Partial answers** — scored proportionally with feedback on what's missing
-- **Minor typos** — treated as correct at 90%+ similarity
-- **Context-dependent answers** — the grader receives the source note path and the related cards from the same note, so answers that lean on context (definitions earlier in the note, sibling cards) are scored against that context instead of being penalized as ambiguous
+### Grading Model
 
-### Example
+Grading uses its own model, separate from the one used for card generation. With OpenRouter (BYOK) or LM Studio as the provider you pick it in `Settings → True Recall → Features → "AI provider" → "Grading model"`, so you can use a stronger model for grading without changing the generation model. With the True Recall Pro provider the grading model is managed server-side and there is nothing to configure. See [AI Settings](/configuration/ai-settings/) for the provider cards.
 
-| Correct Answer | Your Answer | AI Score | Feedback |
-|----------------|-------------|----------|----------|
-| "Mitochondria" | "Mitochondria" | 100% | Correct! |
-| "Mitochondria" | "The powerhouse of the cell" | 85% | Correct description, but looking for the organelle name |
-| "Mitochondria" | "Mitocondria" | 95% | Minor spelling error, essentially correct |
-| "Mitochondria" | "Nucleus" | 0% | Incorrect |
+## When AI Grading Fails
 
-AI grading requires a Pro key and an active AI provider. Configure Type-in Mode in `Settings → True Recall → Plugins → Type-in Mode`.
-
-## Diff Comparison Mode
-
-Diff mode shows a character-by-character comparison — no AI needed, works offline.
-
-Differences are highlighted:
-- **Green** — Correct characters
-- **Red** — Incorrect characters
-- **Yellow** — Missing characters
-
-### When to Use Diff
-
-Diff mode is better when exact spelling matters — vocabulary, terminology, formulas, or when you're working offline.
-
-## Choosing Between Modes
-
-| Use AI Grading when | Use Diff when |
-|---------------------|---------------|
-| Answers are sentences or concepts | Exact spelling matters |
-| Multiple correct phrasings exist | Learning vocabulary |
-| You want feedback on understanding | Working offline |
-| Testing comprehension | Testing memorization |
+There is no separate diff mode any more. If the grading request fails (offline, provider error, quota), the panel falls back to **Text comparison (fallback)**: a word-level comparison of your text with the expected answer, with a percentage match and the differing words highlighted. Rate manually in that case.
 
 ## Keyboard Shortcuts
 
-### During Typing
-
 | Key | Action |
 |-----|--------|
-| `Tab` | Focus/blur input |
-| `Cmd/Ctrl+Enter` | Submit answer |
-| `Escape` | Cancel typing |
-
-### After Submission
-
-| Button | Action |
-|--------|--------|
-| **Accept & Rate** | Use AI score as rating |
-| **Override** | Ignore AI, rate manually |
-| **Edit** | Modify your answer |
+| `T` | Toggle typed answers for the session |
+| `Space` | Focus the answer field |
+| `Cmd/Ctrl + Enter` | Check the typed answer |
+| `Enter` (after the verdict) | Accept the suggested rating |
+| `1` to `4` | Rate manually, overriding the suggestion |
 
 ## Tips
 
-- **Use AI mode for concepts** — it excels at evaluating understanding, not just wording
-- **Use Diff mode for terms** — exact terminology and spelling benefit from character comparison
-- **Rate honestly even with high scores** — if you struggled despite AI giving 95%, rate Hard
-- **Use the plugin settings** if AI is too lenient or strict for your subject
+- **Rate honestly even with a good verdict**: if you struggled despite a "Correct", rate Hard
+- **Keep answers atomic**: the grader can only list what is missing if the model answer is a clear set of points
+- **Use context deliberately**: cards written in the flow of a note grade better than cards copied out of context, because the grader reads the note around them
 
 ## What to Read Next
 
-- [Review Interface](/review/review-interface/) — the full review view and actions
-- [Answering Cards](/review/answering-cards/) — how ratings affect FSRS scheduling
-- [Creating Flashcards](/creation/creating-flashcards/#type-in-mode) — marking cards as type-in during creation
+- [Review Interface](/review/review-interface/): the full review view and actions
+- [Answering Cards](/review/answering-cards/): how ratings affect FSRS scheduling
+- [Creating Flashcards](/creation/creating-flashcards/#typed-answers): marking cards as type-in during creation
+- [Features Overview](/plugins/overview/): access levels and the AI provider settings

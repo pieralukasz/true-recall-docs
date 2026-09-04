@@ -2,23 +2,23 @@
 title: Answering Cards
 sidebar:
   order: 2
-description: "How the four-button rating system works with FSRS — what each rating does to scheduling, learning phases, lapses, and intervals."
+description: "How the four-button rating system works with FSRS: what each rating does to scheduling, learning phases, lapses, and intervals."
 ---
 
 :::caution[My Notes]
 :::
 
-When you review a flashcard, you rate how well you remembered it. That rating feeds into FSRS, which calculates when you'll see the card next. This page explains the mechanics behind each rating — what happens to your card's scheduling data and why honest ratings matter.
+When you review a flashcard, you rate how well you remembered it. That rating feeds into FSRS, which calculates when you'll see the card next. This page explains the mechanics behind each rating: what happens to your card's scheduling data and why honest ratings matter.
 
-For the review interface itself — opening sessions, actions, keyboard shortcuts — see [Review Interface](/review/review-interface/).
+For the review interface itself (opening sessions, actions, keyboard shortcuts) see [Review Interface](/review/review-interface/).
 
 ## How Ratings Affect Scheduling
 
 After each rating, FSRS updates three parameters on the card:
 
-1. **Stability** — How long you'll remember it (higher = longer intervals)
-2. **Difficulty** — How hard the card is for you (higher = more frequent reviews)
-3. **Retrievability** — Current probability you can recall it right now
+1. **Stability**: how long you'll remember it (higher = longer intervals)
+2. **Difficulty**: how hard the card is for you (higher = more frequent reviews)
+3. **Retrievability**: current probability you can recall it right now
 
 The next interval depends on your rating, current stability, your desired retention setting, and your FSRS weights.
 
@@ -59,7 +59,7 @@ Use when you remembered instantly with no effort.
 
 ## Interval Preview
 
-Each rating button shows the predicted next interval. The notation:
+Each rating button shows the predicted next interval (toggle with **Show next review time** in `Settings → True Recall → General → "Review interface"`). The notation:
 
 | Notation | Meaning |
 |----------|---------|
@@ -70,9 +70,11 @@ Each rating button shows the predicted next interval. The notation:
 | `1.2mo` | 1.2 months |
 | `1y` | 1 year |
 
+When [load balancing](/scheduling/workload-management/#load-balancing) is enabled, the previews already include the balanced day, and since 2.3.1 they are monotonic: Hard never lands after Good, and Good never lands after Easy, even when balancing nudges the days around. The day you see on the button is the day the card is stored with.
+
 ### Fuzz
 
-Intervals have small random variation (±2.5%) to prevent cards from bunching on the same day.
+Review intervals get a small random variation so cards that were learned together don't all come back on the same day. The amount follows Anki's rules: intervals under 2.5 days are not fuzzed at all, and longer ones can move by about 1 day plus 15% of the days between 2.5 and 7, 10% of the days between 7 and 20, and 5% of anything beyond. The toggle **Fuzz review intervals** lives in each preset under `Settings → True Recall → FSRS → "FSRS algorithm"` and is on by default.
 
 ## Being Honest with Ratings
 
@@ -87,10 +89,10 @@ Accurate ratings improve FSRS predictions. Common mistakes:
 
 Rate based on your actual recall, not what you "should" know:
 
-- **Again** — You didn't remember
-- **Hard** — Significant effort, maybe some doubt
-- **Good** — Correct, normal effort
-- **Easy** — Instant, automatic recall
+- **Again**: you didn't remember
+- **Hard**: significant effort, maybe some doubt
+- **Good**: correct, normal effort
+- **Easy**: instant, automatic recall
 
 ## Learning Phase
 
@@ -123,7 +125,7 @@ A **lapse** is when you forget a review card (rating Again):
 2. Goes through relearning steps (default: 10 min)
 3. After relearning, returns to Review with reduced stability
 
-Mature cards with good history recover quickly from lapses — a single lapse won't erase months of successful reviews. However, if a card accumulates too many lapses, it becomes a [leech](/review/leeches/) — a card that needs rewriting rather than more repetition.
+Mature cards with good history recover quickly from lapses: a single lapse won't erase months of successful reviews. However, if a card accumulates too many lapses, it becomes a [leech](/review/leeches/), a card that needs rewriting rather than more repetition. The lapse count is shown under the card once you reveal the answer.
 
 ## Rating Strategy by Card Age
 
@@ -137,11 +139,11 @@ Use Good to graduate normally. Use Easy only if recall was truly instant.
 
 ### Mature Cards (Review)
 
-Rate honestly. Don't be afraid of Again on a card you've known for months — FSRS accounts for this and won't over-penalize.
+Rate honestly. Don't be afraid of Again on a card you've known for months: FSRS accounts for this and won't over-penalize.
 
 ## What to Read Next
 
-- [Review Interface](/review/review-interface/) — the review view, actions, and session management
-- [Type-in Mode](/review/type-in-mode/) — type your answers for stricter self-testing
-- [Leeches](/review/leeches/) — dealing with cards you keep forgetting
-- [FSRS Algorithm](/scheduling/fsrs-algorithm/) — how the algorithm calculates intervals
+- [Review Interface](/review/review-interface/): the review view, actions, and session management
+- [Typed Answers](/review/type-in-mode/): type your answers for stricter self-testing
+- [Leeches](/review/leeches/): dealing with cards you keep forgetting
+- [FSRS Algorithm](/scheduling/fsrs-algorithm/): how the algorithm calculates intervals

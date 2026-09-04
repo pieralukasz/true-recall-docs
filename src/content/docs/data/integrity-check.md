@@ -8,39 +8,30 @@ description: "Scan your database for orphaned cards, missing references, and cor
 :::caution[My Notes]
 :::
 
-The **Integrity Check** scans your database for problems that can accumulate over time — orphaned cards, missing references, duplicate UIDs, and corrupted records.
+The **Integrity Check** scans your database for orphaned records that can accumulate over time: cards, notes, and review logs whose parent record no longer exists.
 
-## Common Issues
+## What It Finds
 
 | Issue | Description |
 |-------|-------------|
-| **Orphaned cards** | Cards whose source notes were deleted or moved |
-| **Orphaned notes** | Notes without a valid note type |
-| **Missing review logs** | Review logs that reference deleted cards |
-| **Duplicate UIDs** | Multiple notes sharing the same `flashcard_uid` |
-| **Corrupted records** | Malformed database entries |
+| **Orphaned cards** | Cards whose database note record is missing |
+| **Orphaned notes** | Notes whose note type no longer exists |
+| **Orphaned review logs** | Review logs that reference deleted cards |
+
+Records already soft-deleted are ignored.
 
 ## Running the Check
 
-`Settings → Data & Backup → Database Integrity → Check now`
+`Settings → True Recall → Data & Backup → "Database integrity" → "Check integrity" → Check now`
 
-The scan takes a few seconds and produces a report showing total cards, notes, and review logs alongside any issues found.
+The scan takes a few seconds. If nothing is wrong you see "Database integrity OK". Otherwise a dialog lists how many orphaned cards, notes, and review logs were found and asks whether to soft-delete them.
 
 ## Repairing Issues
 
-Click **"Repair All"** to fix everything automatically:
-
-| Issue | Repair Action |
-|-------|---------------|
-| Orphaned cards | Delete or reassign |
-| Orphaned notes | Reassign to default type |
-| Missing review logs | Delete orphaned logs |
-| Duplicate UIDs | Generate new UIDs |
-
-For individual issues, you can choose to **Keep** (leave as-is), **Delete** (remove the record), or **Reassign** (link to an existing entity).
+Confirm the dialog to repair. True Recall first creates a safety backup, then marks every orphaned record as deleted in one transaction and reports how many records were fixed. Nothing is physically removed from the file, so a backup restore brings the records back if you need them.
 
 :::caution[Backup First]
-Always [create a backup](/data/backup-restore/) before running repairs. If something goes wrong, you can restore.
+The repair creates a backup automatically, but it is still worth [creating a backup](/data/backup-restore/) yourself before running repairs on a large collection. If something goes wrong, you can restore.
 :::
 
 ## When to Run It
@@ -53,5 +44,5 @@ Always [create a backup](/data/backup-restore/) before running repairs. If somet
 
 ## What to Read Next
 
-- [Backup & Restore](/data/backup-restore/) — restore if repairs cause issues
-- [Device Databases](/data/device-databases/) — multiple database management
+- [Backup & Restore](/data/backup-restore/): restore if repairs cause issues
+- [Device Databases](/data/device-databases/): multiple database management

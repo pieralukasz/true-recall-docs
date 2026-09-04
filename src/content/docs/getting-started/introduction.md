@@ -9,7 +9,7 @@ description: Learn what True Recall is and how it can help you remember everythi
 :::caution[My Notes]
 :::
 
-**True Recall** is a spaced repetition app that lives alongside your notes. Flashcards are scheduled by FSRS v6 — the most advanced open-source algorithm for long-term memory.
+**True Recall** is a spaced repetition app that lives alongside your notes. Flashcards are scheduled by FSRS v6, the most advanced open-source algorithm for long-term memory. It runs inside Obsidian on desktop, phones and tablets.
 
 ## Cards are linked to notes
 
@@ -26,28 +26,30 @@ Open the note, open the [Flashcard Panel](/views/flashcard-panel/), and all its 
 
 ## How it works
 
-<!-- TODO PHOTO --> — diagram or animation of the four-step loop
+<!-- TODO PHOTO --> diagram or animation of the four-step loop
 
-1. **Create** flashcards — select text and use the [Selection Toolbar](/views/selection-toolbar/), or click **Add** in the [Flashcard Panel](/views/flashcard-panel/) to open the Add Flashcard Modal
-2. **[Collect](/creation/creating-flashcards/#the-collection-step)** cards into the database via the Flashcard Panel
-3. **[Review](/review/review-interface/)** when cards come due — rate each card Again, Hard, Good, or Easy
+1. **Create** flashcards: select text and click **Ask AI** in the [Quick Actions Toolbar](/views/selection-toolbar/) to have the AI Workspace draft cards, or click **Add** in the [Flashcard Panel](/views/flashcard-panel/) to open the [Flashcard Editor](/views/flashcard-editor/)
+2. **[Collect](/creation/creating-flashcards/#the-collection-step)** cards written in block format into the database via the Flashcard Panel
+3. **[Review](/review/review-interface/)** when cards come due: rate each card Again, Hard, Good, or Easy
 4. **[FSRS v6](/scheduling/fsrs-algorithm/)** calculates the optimal time to show each card again
 
 The algorithm tracks two things per card: **stability** (how long until you might forget) and **difficulty** (how hard this card is for you). Every review refines these values, so your schedule gets more accurate over time.
 
 ## Key Features
 
-<!-- TODO PHOTO --> — screenshot grid or icons for each feature
+<!-- TODO PHOTO --> screenshot grid or icons for each feature
 
-- **AI-Powered Generation** — Select text and instantly create Q&A cards, cloze deletions, or reversed cards using the [Selection Toolbar](/views/selection-toolbar/). See [Creating Flashcards](/creation/creating-flashcards/) for details.
-- **[FSRS v6 Algorithm](/scheduling/fsrs-algorithm/)** — State-of-the-art spaced repetition that adapts to your patterns
-- **[Image Occlusion](/creation/image-occlusion/)** — Create flashcards from images by hiding regions, with AI auto-detection
-- **[Type-in Mode](/review/type-in-mode/)** — Type answers and get AI-powered semantic grading or diff
-- **[Note Types](/creation/note-types/)** — Anki-style templates with customizable fields
-- **[Projects](/creation/projects-and-notes/)** — Organize notes into hierarchies with per-project FSRS presets
-- **[Cloud Sync](/data/cloud-sync/)** — Free account-based sync across desktop and mobile, with offline local databases
-- **Shared vault sync** — Optional merge of device databases transported by your vault sync service
-- **Dashboard Codeblocks** — Embed study analytics and project dashboards in your notes
+- **[AI Workspace](/plugins/ai-assistant/)**: select text and let the AI draft Q&A cards, cloze deletions, or reversed cards. Drafts land in threads and the [AI Inbox](/views/ai-inbox/), and nothing touches your notes until you approve. Card Polish rewrites existing cards from the same workspace.
+- **[FSRS v6 Algorithm](/scheduling/fsrs-algorithm/)**: state-of-the-art spaced repetition that adapts to your patterns
+- **[Image Occlusion](/creation/image-occlusion/)**: create flashcards from images by hiding regions, with AI auto-detection
+- **[Typed Answers](/review/type-in-mode/)**: type answers and get an AI teacher verdict instead of a bare self-rating
+- **[Note Types](/creation/note-types/)**: Anki-style templates with customizable fields
+- **[Projects](/creation/projects-and-notes/)**: organize notes into hierarchies with per-project FSRS presets
+- **[Custom Study](/review/cramming/)**: Anki-style filtered sessions (review ahead, forgotten cards, preview new cards, by state or tag)
+- **[Workload management](/scheduling/workload-management/)**: load balancing, easy days, scheduled breaks, and a daily target anchored to the pace you actually sustain
+- **[Cloud Sync](/data/cloud-sync/)**: free account-based sync across desktop and mobile, with offline local databases
+- **Shared vault sync**: optional merge of device databases transported by your vault sync service
+- **Embedded Dashboards**: embed study analytics and project dashboards in your notes
 
 ## Projects group notes together
 
@@ -64,7 +66,7 @@ Project: "Science Fundamentals"
   └── Physics: Thermodynamics       (10 cards)
 ```
 
-"Chapter 3: Cell Biology" appears in both projects. The cards are the same — no duplication.
+"Chapter 3: Cell Biology" appears in both projects. The cards are the same, no duplication.
 
 ## True Recall vs Anki
 
@@ -75,12 +77,12 @@ Project: "Science Fundamentals"
 | **Organization**     | Notes belong to multiple projects | 1 card = 1 deck               |
 | **AI Generation**    | Built-in                          | No                            |
 | **Image Occlusion**  | Built-in with AI detection        | Plugin required               |
-| **Type-in Grading**  | AI semantic grading               | Exact match only              |
+| **Typed answers**    | AI teacher verdict                | Exact match only              |
 | **Device sync**      | Free Cloud Sync or shared vault   | AnkiWeb sync                  |
-| **Platform**         | Obsidian desktop                  | Desktop and mobile apps      |
+| **Platform**         | Obsidian desktop and mobile       | Desktop and mobile apps       |
 
 :::tip[Coming from Anki?]
-See [Import & Export](/data/import-export/) for a complete walkthrough — note types, media, scheduling, everything transfers.
+See [Import & Export](/data/import-export/) for a complete walkthrough: note types, media, scheduling, everything transfers.
 :::
 
 ## Local-first data
@@ -89,6 +91,7 @@ Your flashcard data lives in your vault as a local SQLite database. Nothing leav
 
 ## Next steps
 
-- [Why True Recall](/getting-started/why-true-recall/) — why spaced repetition works and how True Recall compares to alternatives
-- [Installation](/getting-started/installation/) — set up True Recall
-- [Quick Start](/getting-started/quick-start/) — create your first cards in 5 minutes
+- [Why True Recall](/getting-started/why-true-recall/): why spaced repetition works and how True Recall compares to alternatives
+- [Installation](/getting-started/installation/): set up True Recall
+- [Quick Start](/getting-started/quick-start/): create your first cards in 5 minutes
+- [What Pro Includes](/getting-started/what-pro-includes/): what is free, what needs your own AI key, and what a Pro key adds

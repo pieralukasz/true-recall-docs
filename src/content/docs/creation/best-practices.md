@@ -2,7 +2,7 @@
 title: Best Practices
 sidebar:
   order: 6
-description: "How to write effective flashcards that stick — principles, examples, and common mistakes."
+description: "How to write effective flashcards that stick: principles, examples, and common mistakes."
 ---
 
 :::caution[My Notes]
@@ -25,7 +25,7 @@ and the Calvin cycle occurs in the stroma. The overall equation is 6CO₂ + 6H�
 ---
 ```
 
-**Good** — split into focused cards:
+**Good**, split into focused cards:
 
 ```markdown
 #type/basic
@@ -57,7 +57,7 @@ Back: They indicate the result of an HTTP request.
 ```markdown
 #type/basic
 Front: What does HTTP status code **404** mean?
-Back: Not Found — the server cannot find the requested resource.
+Back: Not Found. The server cannot find the requested resource.
 ---
 ```
 
@@ -76,7 +76,7 @@ a class should have only one reason to change. Open/Closed means...
 ---
 ```
 
-**Good** — split into independent, contextual cards:
+**Good**, split into independent, contextual cards:
 
 ```markdown
 #type/basic
@@ -90,7 +90,7 @@ Back: Open/Closed Principle
 ---
 ```
 
-Each card stands on its own — one question, one answer, enough context in the question to know what's being asked.
+Each card stands on its own: one question, one answer, enough context in the question to know what's being asked.
 
 ## Add Context to Questions
 
@@ -110,13 +110,13 @@ Back: Global Interpreter Lock
 ```markdown
 #type/basic
 Front: In Python, what does **GIL** stand for?
-Back: Global Interpreter Lock — it prevents multiple threads from executing Python bytecode simultaneously.
+Back: Global Interpreter Lock. It prevents multiple threads from executing Python bytecode simultaneously.
 ---
 ```
 
 ## Use the Right Card Type
 
-Not sure which type to use? See [Note Types — Choosing the Right Type](/creation/note-types/#choosing-the-right-type) for a comparison table.
+Not sure which type to use? See [Note Types: Choosing the Right Type](/creation/note-types/#choosing-the-right-type) for a comparison table.
 
 ## Common Mistakes
 
@@ -128,31 +128,43 @@ Not sure which type to use? See [Note Types — Choosing the Right Type](/creati
 | Never editing cards | Bad cards stay bad | Edit or delete cards that feel wrong during review |
 
 :::tip[Let AI help]
-Use the [Selection Toolbar](/views/selection-toolbar/) to generate cards from your notes. AI follows these principles automatically — then you can edit the result to match your voice.
+Use the [Quick Actions Toolbar](/views/selection-toolbar/) to generate cards from your notes with the [Flashcard Generator](/plugins/ai-flashcard-generation/). AI follows these principles automatically, then you can edit the result to match your voice.
 :::
 
-## AI Speeds Up Creation — It Doesn't Replace Encoding
+### Baseline rules in every generation prompt
 
-AI is good at one thing: generating basic, dry flashcards quickly. It is not a substitute for personal encoding — the more deliberate process of deciding what matters, how concepts relate, and how to phrase a question so it tests *your* understanding.
+Every generation prompt that is not the Pro built-in (the basic built-in preset, your own presets, and BYOK providers) carries a fixed set of card-quality rules that mirror this page:
+
+- **Atomic**: one card tests one fact; an answer with two independent facts becomes two cards
+- **Self-contained**: no questions about an item's position in a list or "according to the text"
+- **Single answer**: exactly one correct answer per question, never "which of the N..."
+- **Concise answers**: a short phrase where possible, never a list or a wall of text
+- **Source fidelity**: no invented terms, labels, or facts
+
+A preset's own instructions can explicitly override any of these. The Pro built-in prompt carries a richer ruleset of its own.
+
+## AI Speeds Up Creation, It Doesn't Replace Encoding
+
+AI is good at one thing: generating basic, dry flashcards quickly. It is not a substitute for personal encoding, the more deliberate process of deciding what matters, how concepts relate, and how to phrase a question so it tests *your* understanding.
 
 That work is still yours. Nothing replaces it.
 
-This also means: don't confuse making learning easier with eliminating effort entirely. Importing someone else's deck is tempting, but problematic. You don't know where the information comes from, how accurate it is, or how the facts are ordered and connected in the original source. A deck built by someone else encodes *their* understanding — not yours.
+This also means: don't confuse making learning easier with eliminating effort entirely. Importing someone else's deck is tempting, but problematic. You don't know where the information comes from, how accurate it is, or how the facts are ordered and connected in the original source. A deck built by someone else encodes *their* understanding, not yours.
 
 ## Always Read the Source Text
 
-Individual flashcards don't hold together on their own. A card that tests an isolated fact, disconnected from context, is quickly forgotten — because memory is relational, not a list of independent entries.
+Individual flashcards don't hold together on their own. A card that tests an isolated fact, disconnected from context, is quickly forgotten, because memory is relational, not a list of independent entries.
 
-Your job when creating cards is not just to extract facts but to *connect them* — to build a network where each card reinforces the others. That only works if you've read the source material yourself.
+Your job when creating cards is not just to extract facts but to *connect them*: to build a network where each card reinforces the others. That only works if you've read the source material yourself.
 
-The text matters. It shows how facts relate, what follows from what, which ideas are central and which are supporting. Reading the text is not optional, even when AI generates the cards. The approach described here is about how to create flashcards — it doesn't replace reading.
+The text matters. It shows how facts relate, what follows from what, which ideas are central and which are supporting. Reading the text is not optional, even when AI generates the cards. The approach described here is about how to create flashcards; it doesn't replace reading.
 
 ## Learn More
 
-For deeper guides on learning strategies, study techniques, and how to get the most out of spaced repetition, visit [lucaspiera.com](https://lucaspiera.com) — where tutorials on effective learning are published regularly.
+For deeper guides on learning strategies, study techniques, and how to get the most out of spaced repetition, visit [lucaspiera.com](https://lucaspiera.com), where tutorials on effective learning are published regularly.
 
 ## What to Read Next
 
-- [Creating Flashcards](/creation/creating-flashcards/) — the three creation methods
-- [Note Types](/creation/note-types/) — built-in types and when to use each
-- [Selection Toolbar](/views/selection-toolbar/) — AI-powered card generation that follows these principles
+- [Creating Flashcards](/creation/creating-flashcards/): the creation methods
+- [Note Types](/creation/note-types/): built-in types and when to use each
+- [Generation Presets](/plugins/generation-presets/): shape how the Flashcard Generator writes cards

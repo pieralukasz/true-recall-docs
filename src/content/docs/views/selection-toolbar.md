@@ -1,23 +1,24 @@
 ---
-title: Selection Toolbar
+title: Quick Actions Toolbar
 sidebar:
-  label: "Selection Toolbar"
+  label: "Quick Actions Toolbar"
   order: 2
-description: A floating toolbar that appears when you select text — generate flashcards with AI, highlight, copy, or open the Flashcard Editor.
+description: A floating toolbar that appears when you select text. Generate flashcards with AI, highlight, tag a passage with #card, ask AI, copy, or open the Flashcard Editor.
 ---
 
 :::caution[My Notes]
 :::
 
-The **Selection Toolbar** is a floating toolbar that appears above any text selection in your notes. Select text, click a button, and create cards, highlights, copied snippets, or notes without leaving the editor.
+The **Quick Actions Toolbar** (called the Selection Toolbar before 2.0.0) is a floating toolbar that appears above any text selection in your notes. Select text, click a button, and create cards, highlights, copied snippets, or notes without leaving the editor.
 
 :::note[Availability]
-The toolbar itself is **Free**. AI generation buttons require **BYOK** or **Pro**, and Image Occlusion requires **Pro**.
+The toolbar itself is **Free**. AI buttons (generation presets and **Ask AI**) require **BYOK** or **Pro**, and Image Occlusion requires **Pro**.
 :::
 
-There are two toolbar variants:
-- **Editor Toolbar** — appears when selecting text in the editor (all buttons available)
-- **Global Toolbar** — appears in sidebars, reading view, and other non-editor contexts (editor-only buttons like IO and Highlight are excluded)
+There are three toolbar variants, each with its own button configuration:
+- **Editor toolbar**: appears when selecting text in the editor (all buttons available)
+- **Global toolbar**: appears in sidebars, reading view, and other non-editor contexts (editor-only buttons like IO, Highlight and #card are excluded)
+- **Image toolbar**: appears when you click an image embed, with quick-add and image-occlusion actions
 
 ## How It Works
 
@@ -36,9 +37,9 @@ Here's the full flow for a biology lecture note:
 1. You're reading your note on cellular respiration
 2. Select a paragraph: *"The mitochondria produces ATP through a process called oxidative phosphorylation..."*
 3. The toolbar floats above the selection
-4. Click **Flashcards** — AI reads the passage and generates cards: Q&A about ATP production, cloze about oxidative phosphorylation
+4. Click **Flashcards**: AI reads the passage and generates cards, a Q&A about ATP production and a cloze about oxidative phosphorylation
 5. The cards are inserted into your note as block format text
-6. The **Flashcard Panel** shows a pulsing **Collect** button — click it to add the cards to the database
+6. The **Flashcard Panel** shows a pulsing **Collect** button; click it to add the cards to the database
 7. The cards are now scheduled for review
 
 Total time: about 10 seconds.
@@ -47,35 +48,43 @@ Total time: about 10 seconds.
 
 | Button | What It Does | Editor | Global |
 |--------|-------------|:------:|:------:|
-| **Flashcards** | Generate flashcard(s) with AI | Yes | Yes |
+| **Flashcards** (preset) | Generate flashcard(s) with AI using a generation preset | Yes | Yes |
 | **IO** | Create [image occlusion](/creation/image-occlusion/) card | Yes | -- |
 | **Edit** | Open the selection in the [Flashcard Editor](/views/flashcard-editor/) | Yes | Yes |
 | **Quick+** | Instantly add as a basic flashcard (no AI) | Yes | Yes |
 | **Highlight** | Wrap selection with `==highlight==` syntax | Yes | -- |
+| **#card** | Wrap selection with `==highlight==` and tag it `#card` | Yes | -- |
 | **Copy** | Copy selection to clipboard | Yes | Yes |
 | **Note+** | Create a new note from the selection | Yes | Yes |
-| **Append** | Append the selection to the current note | -- | Yes |
+| **Append** | Append the selection to the current note | Yes | Yes |
+| **Ask AI** | Ask AI about the selection in the Ask AI panel | Yes | Yes |
+
+Every button can be toggled per toolbar, so the defaults differ: **Append** is enabled by default only in the global toolbar, for example.
 
 <!-- TODO PHOTO -->
 
 ### Flashcards (AI Generation)
 
-The **Flashcards** button sends your selected text to AI, which generates one or more flashcards in `#type/<slug>` block format. The generated cards are inserted into your note. AI analyzes the content and picks the right format for each fact:
+A generation button runs one [generation preset](/plugins/generation-presets/) on your selected text and inserts the resulting `#type/<slug>` blocks into your note. Since 2.0.0 the built-in Basic and Pro generation buttons are collapsed into a single button; when a preset needs Pro and you are on BYOK, the button carries a small **PRO** badge. Other presets can expose their own buttons (e.g. a "Vocab" preset for language learning).
+
+AI analyzes the content and picks the right format for each fact:
 - Definitions and explanations → Basic cards
 - Lists, sequences, and key terms → Cloze deletions
 - Term-definition pairs → Reversed cards
 
 ### Quick+ (No AI)
 
-For when your text is already in Q&A format. Select the text, click **Quick+**, and it's immediately created as a basic card — no AI processing needed.
+For when your text is already in Q&A format. Select the text, click **Quick+**, and it's immediately created as a basic card, no AI processing needed.
 
 ### Image Occlusion
 
 The **IO** button appears when your selection contains an image reference (`![[image.png]]` or `![alt](path)`). Click it to open the image occlusion editor.
 
-### Highlight
+### Highlight and #card
 
-Wraps the selected text with `==highlight==` Markdown syntax. Useful for marking passages you want to generate cards from later — you can generate cards from all highlights in a note via the [Flashcard Panel](/views/flashcard-panel/) menu → "Generate from highlights".
+**Highlight** wraps the selected text with `==highlight==` Markdown syntax. Useful for marking passages you want to generate cards from later: you can generate cards from all highlights in a note via the [Flashcard Panel](/views/flashcard-panel/) menu → "Generate from highlights".
+
+**#card** (added in 2.3.0) does the same and appends a `#card` tag, so highlights waiting to become cards stay findable with Obsidian's tag search.
 
 ### Copy
 
@@ -87,41 +96,47 @@ Creates a new note from the selected text. A modal lets you set the note name, c
 
 ### Append
 
-Appends the selected text to the currently active note. Available in the global toolbar only (useful for collecting text from sidebars or reading view into your working note).
+Appends the selected text to the currently active note. Enabled by default in the global toolbar, where it is useful for collecting text from sidebars or reading view into your working note.
+
+### Ask AI
+
+Opens the docked **Ask AI** panel with the selection as the subject, so you can ask a question, request a rewrite, or draft cards through the [AI Workspace](/plugins/ai-assistant/). Requires an AI provider.
 
 ## Enabling the Toolbar
 
-The Selection Toolbar is a **[plugin](/plugins/overview/)** (tier: Free). Enable or disable it in `Settings → True Recall → Plugins → Selection Toolbar`.
+The Quick Actions Toolbar is a **[feature](/plugins/overview/)** (tier: Free). Enable or disable it in `Settings → True Recall → Features → "Quick Actions Toolbar"`.
 
-AI generation buttons additionally require an AI configuration — either an API key or a [True Recall subscription](/subscription/) — and the owning plugin (e.g. [AI Flashcard Generation](/plugins/ai-flashcard-generation/)) must be enabled. Buttons from disabled plugins don't appear in the toolbar.
+AI buttons additionally require an AI configuration, either an API key or a [True Recall subscription](/subscription/), and the owning feature must be enabled: generation buttons belong to the [Flashcard Generator](/plugins/ai-flashcard-generation/) and **Ask AI** to the [AI Workspace](/plugins/ai-assistant/). Buttons from disabled features don't appear in the toolbar. When a provider is configured but incomplete, the AI buttons are greyed out with a hint ("Add API key in settings", or "Select a model in settings" for LM Studio and custom providers).
 
 ## Customizing Buttons
 
-You can configure which buttons appear and in what order — separately for the editor toolbar, the global toolbar, and the image-click toolbar (the small toolbar that appears when you click an image embed in a note, with quick-add and image-occlusion actions).
+You can configure which buttons appear and in what order, separately for the editor, global, and image toolbars:
 
-`Settings → True Recall → Plugins → Selection Toolbar → Editor toolbar buttons / Global toolbar buttons / Image toolbar buttons`
+`Settings → True Recall → Features → "Quick Actions Toolbar" → "Editor toolbar" / "Global toolbar" / "Image toolbar"`
 
 For each toolbar:
 - **Toggle** buttons on or off with checkboxes
 - **Drag** buttons to reorder them
-- **Add custom commands** — click "+ Add command" to add any Obsidian command as a toolbar button
-- **Remove** custom commands with the trash icon (built-in buttons can only be toggled, not removed)
+- **Add preset buttons**: add any of your generation presets as its own toolbar button
+- **Add custom commands**: add any Obsidian command as a toolbar button
+- **Remove** custom entries with the trash icon (built-in buttons can only be toggled, not removed)
 
 <!-- TODO PHOTO -->
 
 ## Other Creation Methods
 
-Besides the Selection Toolbar, you can create flashcards by:
+Besides the Quick Actions Toolbar, you can create flashcards by:
 
-- **[Flashcard Editor](/views/flashcard-editor/)** — fill in fields manually, cards go straight to the database
-- **[Block format](/creation/creating-flashcards/#block-format)** — write `#type/basic` blocks directly in your notes, then collect
+- **[Flashcard Editor](/views/flashcard-editor/)**: fill in fields manually, cards go straight to the database
+- **[Block format](/creation/creating-flashcards/#block-format)**: write `#type/basic` blocks directly in your notes, then collect
+- **[Import Studio](/views/import-studio/)**: paste many cards at once
 
 ### From a Whole Note
 
 Use the [Flashcard Panel](/views/flashcard-panel/) to generate cards from an entire note at once.
 
 :::note[Least personalized method]
-Whole-note generation is the least optimal way to create personalized flashcards — the AI decides what matters, not you. Use it when a note is short and you believe **everything** in it is worth remembering.
+Whole-note generation is the least optimal way to create personalized flashcards: the AI decides what matters, not you. Use it when a note is short and you believe **everything** in it is worth remembering.
 
 For the most accurate results, **generate from selections** instead. Highlighting specific passages lets you control exactly what becomes a card, and the output is noticeably more precise.
 :::
@@ -153,15 +168,7 @@ Each generated card includes:
 
 ## Generation Settings
 
-Generation is driven by [**generation presets**](/plugins/generation-presets/). Each preset bundles a prompt, a note type, and optional source-note / related-card context. When you click **Flashcards**, the preset marked as default for the Basic note type runs; other presets can expose their own toolbar buttons (e.g. a "Vocab" preset for language learning).
-
-Shared settings:
-
-| Setting | Description |
-|---------|-------------|
-| **Language** | Output language (auto-detect or specific) — in `Settings → True Recall → Plugins → AI Flashcard Generation` |
-
-To edit, create, or delete presets: `Settings → True Recall → Plugins → AI Flashcard Generation`. See [Generation Presets](/plugins/generation-presets/).
+Generation is driven by [**generation presets**](/plugins/generation-presets/). Each preset bundles a prompt, a note type, an **Output language**, and optional source-note / related-card context. Presets are managed in the [AI Workspace](/plugins/ai-assistant/) settings under `Settings → True Recall → Features`. See [AI Settings](/configuration/ai-settings/) for the provider and model configuration.
 
 ## Tips
 
@@ -171,7 +178,7 @@ A good selection is 1-3 paragraphs covering a coherent topic. Too short (a singl
 
 ### Edit After Generation
 
-Generated cards are a starting point. Click any generated card in the Panel to edit before collecting — tweak questions, simplify answers, remove redundancy.
+Generated cards are a starting point. Click any generated card in the Panel to edit before collecting: tweak questions, simplify answers, remove redundancy.
 
 ### Batch Generation
 
@@ -181,9 +188,16 @@ Select multiple paragraphs at once. AI generates multiple cards covering differe
 
 | Problem | Solution |
 |---------|----------|
-| Toolbar not appearing | Check `Settings → True Recall → Plugins → Selection Toolbar` is enabled |
-| AI buttons grayed out | Configure an API key or subscription in `Settings → True Recall → Plugins` |
-| AI buttons missing entirely | The owning plugin (e.g. [AI Flashcard Generation](/plugins/ai-flashcard-generation/)) is disabled or your tier doesn't meet its requirement |
-| Button config moved | Button order and visibility are now in the **Selection Toolbar** plugin panel, not in General settings |
+| Toolbar not appearing | Check `Settings → True Recall → Features → "Quick Actions Toolbar"` is enabled |
+| AI buttons grayed out | Configure an API key, a local model, or a subscription in `Settings → True Recall → Features → "AI provider"` |
+| AI buttons missing entirely | The owning feature ([Flashcard Generator](/plugins/ai-flashcard-generation/) or [AI Workspace](/plugins/ai-assistant/)) is disabled or your tier doesn't meet its requirement |
+| A preset button shows "Preset deleted" | The preset behind the button was removed; delete the button or recreate the preset |
 | Generation fails | Check API key validity and network connection |
 | Poor card quality | Try a different model in BYOK, or use a Pro preset (see [Generation Presets](/plugins/generation-presets/)) |
+
+## What to Read Next
+
+- [Flashcard Panel](/views/flashcard-panel/): collect generated cards and generate from highlights
+- [Flashcard Editor](/views/flashcard-editor/): where the **Edit** button sends your selection
+- [Generation Presets](/plugins/generation-presets/): the presets behind the generation buttons
+- [AI Workspace](/plugins/ai-assistant/): the Ask AI panel and threads

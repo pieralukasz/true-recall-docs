@@ -2,66 +2,35 @@
 title: "Knowledge Base"
 sidebar:
   order: 4
-description: "Configure the Knowledge Base for semantic search over your notes and flashcards."
+  badge:
+    text: "Removed"
+    variant: caution
+description: "The Knowledge Base (RAG semantic search) was removed in True Recall 2.0.0. This page explains what happened and where AI features live now."
 ---
 
 :::caution[My Notes]
 :::
 
-The **Knowledge Base** lets AI assistants search your notes by meaning, not just keywords. It indexes your notes and flashcards into a semantic search engine so tools like Claude Code can find relevant context instantly — without reading every file.
-
-:::note[Availability]
-Knowledge Base is a **Pro** plugin. It also needs an active AI configuration because indexing and semantic search depend on AI embeddings.
+:::caution[Removed in 2.0.0]
+The **Knowledge Base** no longer exists. True Recall 2.0.0 (2026-07-26) removed the whole RAG subsystem: the Knowledge Base feature and its settings, the Knowledge Chat view, the `/rag/*` local API routes, the assistant's `search_knowledge` tool, and every `rag*` setting. It will be rebuilt from scratch later.
 :::
 
-## How It Works
+## What Was Removed
 
-When enabled, **True Recall** splits your notes (and optionally flashcards) into chunks, then computes vector embeddings for each chunk using a managed embedding model. Searches match by meaning — a query for "mitochondria" will find notes about cellular respiration even if they never use that exact word.
+Until 1.9.x, the Knowledge Base indexed your notes and flashcards into vector embeddings so the AI could search them by meaning and show **Vault evidence** while drafting cards. None of that runs any more:
 
-For flashcards, search results include FSRS mastery data (stability, difficulty, state) so AI assistants can understand what you know well versus what needs more review.
+- There is no Knowledge Base row in `Settings → True Recall → Features` and no indexing settings anywhere.
+- The **Knowledge Chat** view is gone.
+- External tools (the CLI, the [MCP Server](/reference/mcp-server/), the [Claude Code Skill](/reference/claude-code-skill/)) can no longer call semantic search through the local API.
 
-## Settings
+Existing RAG tables in your database were left in place, nothing was dropped, and evidence already attached to saved AI threads still renders in the [AI Inbox](/views/ai-inbox/).
 
-Configure the Knowledge Base in `Settings → True Recall → Plugins → Knowledge Base`.
+## What Replaced It
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Enable Knowledge Base** | Index your content for semantic search | Off |
-| **Auto-index** | Re-index automatically when files change | On |
-| **Index flashcards** | Also index flashcard content alongside notes | On |
-| **Include folders** | Only index notes in these folders (comma-separated, empty = all) | Empty (all folders) |
-| **Exclude folders** | Skip notes in these folders (comma-separated) | Empty |
-
-## Indexing
-
-### Automatic Indexing
-
-When **Auto-index** is enabled, the Knowledge Base watches for file changes in your notes folder. When you create, edit, rename, or delete a note, the affected content is re-indexed automatically after a short debounce (5 seconds). Only changed content is re-embedded — unchanged files are skipped using content hashes.
-
-### Manual Indexing
-
-Click **Reindex now** in the Knowledge Base plugin settings. This re-scans all notes and flashcards, computes embeddings for any new or changed content, and skips anything already up to date. Useful after bulk imports or if auto-indexing was previously disabled.
-
-### What Gets Indexed
-
-- **Notes** — markdown files in your notes folder, split into chunks by heading structure
-- **Flashcards** (optional) — question/answer content and source text, with FSRS scheduling metadata attached to search results
-
-Folders listed in **Exclude folders** are always skipped. If **Include folders** is set, only notes in those folders are indexed. The `.true-recall` data folder is excluded by default.
-
-## Assistant Access
-
-The index feeds two True Recall surfaces directly:
-
-- **[Knowledge Chat](/views/knowledge-chat/)** — ask questions and get answers cited from your indexed notes and cards.
-- **[AI Assistant](/plugins/ai-assistant/)** — when drafting cards or notes, the assistant queries the same index through its knowledge retriever (the `search_knowledge` tool) and shows what it found in a **Vault evidence** panel.
-
-If you also enable the Local API, external AI assistants (such as Claude Code) can search the Knowledge Base while Obsidian is running. This is optional and only needed if you want an outside assistant to use your indexed notes as context.
+AI work now happens in the **[AI Workspace](/plugins/ai-assistant/)**: one docked **Ask AI** panel with an Assistant mode for questions and research (with optional web search), a Generator mode for new flashcards, and Card Polish for improving existing ones. Every request becomes a thread you can review, apply or reject from the AI Inbox. The workspace works from the note or card you have open rather than from a vault-wide index.
 
 ## What to Read Next
 
-- [Knowledge Chat](/views/knowledge-chat/) — chat over your indexed vault
-- [AI Assistant](/plugins/ai-assistant/) — draft cards from retrieved Vault evidence
-- [AI Settings](/configuration/ai-settings/) — configure your subscription key and AI features
-- [MCP Server](/reference/mcp-server/) — optional external AI assistant integration
-- [General Settings](/configuration/general/) — where to find the Integrations tab
+- [AI Workspace](/plugins/ai-assistant/): the unified AI workflow that replaced the Knowledge Base
+- [AI Settings](/configuration/ai-settings/): configure your AI provider and keys
+- [MCP Server](/reference/mcp-server/): external AI assistant integration without semantic search

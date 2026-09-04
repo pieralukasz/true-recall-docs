@@ -8,20 +8,24 @@ description: Search, filter, and bulk-manage every flashcard using a powerful qu
 :::caution[My Notes]
 :::
 
-The **Card Browser** gives you a searchable, filterable view of every card in your database — across all notes and projects. Use it to find cards that need attention (high lapse counts, low stability), audit specific note collections, or perform bulk operations like suspending or deleting groups of cards.
+The **Card Browser** gives you a searchable, filterable view of every card in your database, across all notes and projects. Use it to find cards that need attention (high lapse counts, low stability, heavy AI editing), audit specific note collections, or perform bulk operations like suspending or deleting groups of cards.
 
 ## Opening the Browser
 
 - **Command palette:** `Cmd/Ctrl + P` → "Open card browser"
-- **Flashcard Panel:** More menu (…) → "Browse in card browser"
+- **Flashcard Panel:** More Actions → "Open card browser"
 - **Dashboard:** The Card Browser link in the footer area
+
+:::note[Desktop only]
+The dense table with keyboard navigation is a desktop view. On phones use the [Flashcard Panel](/views/flashcard-panel/) to manage a note's cards.
+:::
 
 ## Layout
 
 ```
 +================================================================+
-|  🔍 Search or filter...        [New] [Learning] [Review] [All] |
-|  [Show archived]                              [Columns ▾]       |
+|  🔍 Search or filter...   [New] [Learning] [Review] [Relearning]|
+|  [Show archived]          [Suspended] [Buried]   [Columns ▾]    |
 +============================+===================================+
 |  SIDEBAR FACETS            |  CARD TABLE                       |
 |                            |                                   |
@@ -47,13 +51,13 @@ The **Card Browser** gives you a searchable, filterable view of every card in yo
 
 ![Card Browser with the faceted sidebar and a sortable table of flashcards](../../../assets/screenshots/browser/card-browser.png)
 
-The left sidebar contains **facets** — clickable filters that show counts. The right panel is a sortable table of matching cards. Click any row to preview the full card.
+The left sidebar contains **facets**: clickable filters that show counts. The right panel is a sortable table of matching cards. Click any row to preview the full card, including its edit counters.
 
 ---
 
 ## Query Syntax
 
-The search bar accepts a powerful query language. Type a query and press Enter (or just type — results update as you go).
+The search bar accepts a powerful query language. Type a query and press Enter (or just type; results update as you go).
 
 ### State tokens
 
@@ -80,7 +84,7 @@ Negate any token with `-`:
 
 ### Property filters
 
-Filter by numeric FSRS properties using `prop:<property><operator><value>`:
+Filter by numeric properties using `prop:<property><operator><value>`:
 
 | Property shorthand | Full name | What it measures |
 |--------------------|-----------|-----------------|
@@ -90,6 +94,8 @@ Filter by numeric FSRS properties using `prop:<property><operator><value>`:
 | `ivl` | `interval` | Current interval in days |
 | `reps` | | Total number of reviews |
 | `lapses` | | Times the card was forgotten (rated Again) |
+| `edits` (or `edit`) | | Times the card's content was rewritten by hand (since 2.3.0) |
+| `aiedits` | | Times the card's content was rewritten by AI (since 2.3.0) |
 
 Operators: `>`, `<`, `>=`, `<=`
 
@@ -101,7 +107,11 @@ prop:d>=0.8           → high-difficulty cards
 prop:stability<7      → cards with less than a week of stability
 prop:reps>=20         → well-reviewed cards
 prop:interval>100     → mature cards (100+ day intervals)
+prop:aiedits>0        → cards that Card Polish or the assistant has rewritten
+prop:edits>3          → cards you keep rewriting by hand
 ```
+
+The edit counters only move when the content actually changes, so saving an untouched field does not count as an edit. They merge across devices by taking the maximum, not last-writer-wins.
 
 ### Other tokens
 
@@ -116,7 +126,7 @@ mitochondria          → plain text search across question and answer content
 
 ### Combining tokens
 
-All tokens are ANDed together — every condition must match:
+All tokens are ANDed together: every condition must match:
 
 ```
 is:review prop:lapses>2 note:"Biology"
@@ -142,6 +152,7 @@ is:new type:cloze added:14
 | Find cards with very short intervals | `prop:interval<3 is:review` |
 | Find recently added cards | `added:7` |
 | Find all suspended cards | `is:suspended` |
+| Find cards the AI has rewritten | `prop:aiedits>0` |
 
 ---
 
@@ -149,12 +160,7 @@ is:new type:cloze added:14
 
 ### Toolbar chips
 
-Quick-access state filters. Click a chip to toggle it:
-
-- **New** — show only new cards
-- **Learning** — show only learning/relearning cards
-- **Review** — show only review-state cards
-- **All** — clear state filter
+Quick-access state filters. Click a chip to toggle it: **New**, **Learning**, **Review**, **Relearning**, **Suspended**, **Buried**. Click an active chip again to clear it.
 
 ### Show Archived
 
@@ -162,7 +168,7 @@ Toggle to include cards from archived notes in the results.
 
 ### Column Picker
 
-Click **Columns ▾** to show/hide table columns (Question, Answer, Note, State, Type, Stability, Difficulty, Lapses, Reps, Added, Last Review, Next Review).
+Click **Columns ▾** to show/hide table columns. Visible by default: Question, State, Due, Stability, Note, Reps. Hidden by default: Answer, Difficulty, Lapses, Interval, Created, Last Review, Type, Created Via, **Edits**, **AI Edits**, Last Edited, Preset. Every column is sortable.
 
 ### Sidebar Facets
 
@@ -192,9 +198,13 @@ When cards are selected:
 |--------|-------------|
 | **Suspend** | Exclude selected cards from review sessions |
 | **Unsuspend** | Re-include suspended cards in reviews |
+| **Unbury** | Bring buried cards back today |
 | **Forget** | Reset FSRS scheduling to New state (clears review history) |
 | **Change type** | Convert to a different note type with field mapping |
+| **Move** | Move selected cards to another source note |
 | **Delete** | Permanently remove selected cards (confirmation required) |
+
+Bulk operations are undoable with **Undo last flashcard action** (`Cmd/Ctrl + Z`).
 
 ### Example: Suspend high-lapse cards
 
@@ -202,22 +212,23 @@ When cards are selected:
 2. The table shows only cards you've failed 5+ times
 3. Right-click the first result to select it
 4. Shift-click the last result to extend the selection
-5. Click **Suspend** in the bulk bar — these cards leave your review queue until you unsuspend them
+5. Click **Suspend** in the bulk bar; these cards leave your review queue until you unsuspend them
 
 ---
 
 ## Known Limitations
 
-1. `project:` and `preset:` tokens are parsed and suggested in autocomplete, but are not currently applied in SQL filtering — they have no effect.
-2. `note:` resolution is basename-based — if two notes share the same filename (in different folders), results may be ambiguous.
-3. `is:due` and `is:overdue` are not strict due-date filters — they behave as `is:review` aliases.
+1. `project:` and `preset:` tokens are parsed and suggested in autocomplete, but are not currently applied in SQL filtering; they have no effect.
+2. `note:` resolution is basename-based: if two notes share the same filename (in different folders), results may be ambiguous.
+3. `is:due` and `is:overdue` are not strict due-date filters; they behave as `is:review` aliases.
 
 **Practical recommendation:** Use query tokens for state, property, type, and source filters. Use the chips and sidebar facets for fast narrowing when you don't need to type a query.
 
 ---
 
-## Related
+## What to Read Next
 
-- [Flashcard Panel](/views/flashcard-panel/) — per-note card management
-- [Dashboard](/views/dashboard/) — project and note overview
-- [Statistics](/views/statistics/) — aggregate analytics across your collection
+- [Flashcard Panel](/views/flashcard-panel/): per-note card management
+- [Dashboard](/views/dashboard/): project and note overview
+- [Statistics](/views/statistics/): aggregate analytics across your collection
+- [Card Polish](/plugins/card-polish/): the source of most `aiedits`

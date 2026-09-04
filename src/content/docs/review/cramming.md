@@ -1,134 +1,98 @@
 ---
-title: Custom Study & Cramming
+title: Custom Study
 sidebar:
-  label: "Custom Study & Cramming"
+  label: "Custom Study"
   order: 4
-description: "Build custom review sessions with filters, sort orders, and cramming mode — ideal for targeted practice, exam preparation, and extra reinforcement."
+description: "Anki-style Custom Study sessions: raise today's limits, review forgotten cards, review ahead, preview new cards, or study by card state and tag in a temporary deck."
 ---
 
 :::caution[My Notes]
 :::
 
-**Custom Study** lets you build review sessions with specific filters and sort orders — review only difficult cards, focus on a particular note, or sort by lowest stability. **Cramming** is a custom study option that disables scheduling, so ratings don't affect your FSRS progress.
+**Custom Study** builds an extra session on top of your normal daily queue. Since 2.0.0 it works like Anki's Custom Study: pick one of seven modes, and **True Recall** materializes a temporary filtered deck that you can study, rebuild, empty or delete from the [Dashboard](/views/dashboard/). Two of the modes are *preview* sessions that never touch scheduling, which is what the old "cramming mode" used to do.
 
 ## Starting a Custom Study Session
 
-### From the Dashboard
+All entry points are on the Dashboard:
 
-1. Open the [Dashboard](/views/dashboard/)
-2. Right-click a project or note
-3. Select **Custom session**
+| Where | Scope |
+|-------|-------|
+| **Custom study** button in the today bar | Your whole collection |
+| **+ Session** chip on the **Custom** tab | Your whole collection |
+| **Custom study** action on a project row | That project and its sub-projects (the virtual **Unassigned** group uses its member notes) |
+| **Custom study** action on a note row | That single note |
 
-### From Command Palette
-
-`Cmd/Ctrl + P` → "Custom study session"
-
-## Session Filters
+Custom Study sessions always ignore daily limits; the limits of the mode itself are the only cap.
 
 <!-- TODO PHOTO -->
 
-### Card State
+## The Seven Modes
 
-| Option | Description |
-|--------|-------------|
-| **All states** | Include all cards regardless of state |
-| **New only** | Only cards never reviewed |
-| **Learning only** | Only cards in learning/relearning |
-| **Due only** | Only cards in review state that are due |
+| Mode | What you set | What it does |
+|------|--------------|--------------|
+| **Increase today's new card limit** | by N cards | Adds N new cards on top of today's new-card limit for the scope |
+| **Increase today's review card limit** | by N cards | Adds N due review cards on top of today's review limit |
+| **Review forgotten cards** | forgotten in the last N days (max 30) | Cards you rated Again in that window, in random order. Preview session |
+| **Review actual learning** | nothing | Every card currently in Learning or Relearning, ordered by due time |
+| **Review ahead** | by N days | Cards that become due within the next N days, so you can clear a queue before a trip |
+| **Preview new cards** | added in the last N days | New cards you have not studied yet, oldest first. Preview session |
+| **Study by card state or tag** | number of cards, card state, include/exclude tags | A filtered batch from the current scope (see below) |
 
-### Difficulty Range
+### Study by Card State or Tag
 
-Filter by FSRS difficulty (1–10). Default: 1 to 10 (all difficulties). Narrow this to focus on hard cards (e.g., 7–10) or easy cards (1–3).
+| Field | Options |
+|-------|---------|
+| **Select** | How many cards to pull from the current scope (default 100) |
+| **Card state** | **New cards only**, **Due cards only**, **All review cards in random order**, **All cards in random order (no rescheduling)** |
+| **Include tags** | Comma-separated; a card matches if it has any of them |
+| **Exclude tags** | Comma-separated |
 
-### Minimum Lapses
+The **All cards in random order (no rescheduling)** state is a preview session as well.
 
-Only include cards that have been forgotten at least N times. Set to 3+ to focus on [leeches](/review/leeches/) — cards that need rewriting or extra attention.
+## Preview Sessions
 
-## Session Options
+Preview sessions (**Review forgotten cards**, **Preview new cards**, and the no-rescheduling state above) show a **Preview** badge in the review header and behave like Anki's preview: **Again** brings the card back after 1 minute, **Hard** after 10 minutes, and **Good** or **Easy** finish the card without changing its schedule. Nothing you rate in a preview session moves a due date or changes stability.
 
-### Sort Order
+Use them to warm up before an exam or to re-read fresh material without committing to intervals.
 
-Control which cards you see first:
+## The Custom Tab
 
-| Order | Description | Best for |
-|-------|-------------|----------|
-| **Due date** | Cards due soonest first | Standard review |
-| **Random** | Fully shuffled | Variety, avoiding patterns |
-| **Due date (randomized)** | By due date, shuffled within same day | Natural variety with priority |
-| **Retrievability** | Lowest recall probability first | Rescuing weak cards |
-| **Most lapses** | Most-failed cards first | Targeting [leeches](/review/leeches/) |
-| **Relative overdueness** | Most overdue relative to stability | Catching up after a break |
-| **Lowest stability** | Weakest memory first | Strengthening weak spots |
-| **Order added** | Oldest cards first | Systematic review |
+Every session you create appears as a row on the Dashboard's **Custom** tab, named after its mode ("Extra new cards", "Forgotten cards", "Review ahead", "Cards by state or tag", and so on) with a short description of the parameters and the card count. Each row has four actions:
 
-### Study Ahead
+| Action | Effect |
+|--------|--------|
+| **Study** | Start the session with the cards currently inside the deck |
+| **Rebuild** | Re-run the query so the deck reflects today's collection |
+| **Empty** | Clear the deck but keep its definition |
+| **Delete** | Remove the deck |
 
-Review cards that aren't due yet by setting **Study ahead** to N days. Set to 0 (default) to only review due cards. Useful before a vacation or break.
+The deck is a snapshot, like an Anki filtered deck: the query is kept for Rebuild, and the list of card ids is what you study.
 
-### Card Limit
+## Continuing After a Session
 
-Maximum cards in the session. Set to 0 for no limit. Custom study sessions always bypass daily limits — the card limit here is per-session only.
+When a Custom Study session ends, the summary screen offers **Next session** (start another one with the same definition), **Dashboard** and **Finish**. The **Next session** button is controlled by **Continuous custom reviews** in `Settings → True Recall → General → "Review interface"`.
 
-### Cramming Mode
+During any session you can also top up your queue: see [R-Mode](/scheduling/workload-management/#r-mode) for the **Top Up** panel that adds review or new cards mid-session.
 
-Enable **Cramming mode** to review without affecting scheduling. Ratings are recorded but don't change FSRS parameters, stability, or difficulty. The header shows a **Cram** badge so you always know you're in a cram session.
+## When to Use Which Mode
 
-## Saving Session Presets
+| Situation | Mode |
+|-----------|------|
+| You have spare time today | Increase today's new card limit or review card limit |
+| Exam tomorrow, you want to see what slipped | Review forgotten cards |
+| Learning steps piled up | Review actual learning |
+| Leaving for a week | Review ahead by 7 days |
+| You just wrote thirty cards and want a first read | Preview new cards |
+| One topic only, by tag | Study by card state or tag |
 
-Give your session a name to save it as a preset. Saved presets appear in the custom study dialog for quick access — useful if you regularly run the same type of session (e.g., "Exam prep — hard cards only").
-
-## When to Use Cramming
-
-| Use Cramming when | Use Normal Review when |
-|-------------------|------------------------|
-| Preparing for an exam | Daily spaced repetition |
-| Extra practice on weak areas | Building long-term memory |
-| Testing yourself before a test | Following the FSRS schedule |
-| Practicing without consequences | Normal learning |
-
-## How Cramming Works
-
-1. **Configure** your filters and card limits, enable Cramming mode
-2. **Review** cards and rate them as usual
-3. **Ratings are recorded** but don't change scheduling
-4. **Finish** when done or the card limit is reached
-
-The header shows a **Cram** badge so you always know you're in a cram session, not a normal review.
-
-## Cramming vs Normal Review
-
-| Aspect | Cramming | Normal Review |
-|--------|----------|---------------|
-| Affects schedule | No | Yes |
-| Updates FSRS parameters | No | Yes |
-| Counts toward daily stats | No | Yes |
-| Good for | Short-term preparation | Long-term retention |
-| Follow-up | None needed | Next scheduled review |
-
-## Best Practices
-
-### Before an Exam
-
-1. **One week before** — Normal reviews + light cramming on exam material
-2. **Day before** — Cram session focused on weak areas
-3. **Day of** — Quick cram review (optional)
-
-### For Difficult Material
-
-If you're struggling with certain cards: keep doing normal reviews as scheduled, add cram sessions on those cards for extra reinforcement, and stop cramming once you're comfortable.
-
-### Don't Overdo It
-
-Cramming is a supplement, not a replacement for spaced repetition. Don't cram the same cards daily for weeks — let FSRS do its job for long-term retention.
-
-## Cram Session Statistics
-
-After a cram session, you see cards reviewed, how many you forgot, and your accuracy percentage. These are informational only — they don't affect the database or daily statistics.
+:::tip[Preview is not practice]
+Preview sessions are for reading, not for long-term memory. Repeating the same cards daily in preview does nothing for scheduling. Let the normal queue do the spacing and use previews sparingly.
+:::
 
 ## What to Read Next
 
-- [Review Interface](/review/review-interface/) — the normal review flow
-- [Answering Cards](/review/answering-cards/) — how ratings work with FSRS
-- [Leeches](/review/leeches/) — dealing with cards you keep forgetting
-- [Workload Management](/scheduling/workload-management/) — control your daily review load
-- [Dashboard](/views/dashboard/) — where to start custom study sessions
+- [Review Interface](/review/review-interface/): the normal review flow and the session summary
+- [Answering Cards](/review/answering-cards/): how ratings work with FSRS
+- [Leeches](/review/leeches/): dealing with cards you keep forgetting
+- [Workload Management](/scheduling/workload-management/): daily targets, load balancing and R-Mode
+- [Dashboard](/views/dashboard/): where custom study sessions live

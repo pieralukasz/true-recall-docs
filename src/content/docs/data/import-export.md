@@ -17,13 +17,13 @@ CSV/TSV export is a Free data tool. Anki import/export is available from the Dat
 
 ## Anki Import (.apkg)
 
-Import your Anki collection — cards, review history, media, and note types — from a standard `.apkg` file.
+Import your Anki collection (cards, review history, media, and note types) from a standard `.apkg` file.
 
 ### How to Import
 
-1. Open `Settings → True Recall → Data & Backup → Anki import / export` and click **Import .apkg**, or use the command palette action **Import Anki deck (.apkg)**
+1. Open `Settings → True Recall → Data & Backup → "Anki import & export" → "Import Anki deck"` and click **Import .apkg**, or use the command palette action **Import Anki deck (.apkg)**
 2. Drop your `.apkg` file or click to browse
-3. Review the preview — card counts by type, deck list, media count
+3. Review the preview: card counts by type, deck list, media count
 4. Configure import options (scheduling, media, AI organization)
 5. Map note types and fields (see [Mapping Phase](#mapping-phase) below)
 6. Wait for import (and optional AI passes) to complete
@@ -36,18 +36,20 @@ Import your Anki collection — cards, review history, media, and note types —
 | Option | Default | Description |
 |--------|---------|-------------|
 | **Import scheduling data** | On | Replay your review history to preserve FSRS progress |
-| **Import media files** | On | Save images and audio under `Attachments/Anki Import/...` by default |
+| **Import media files** | On | Save images and audio under `Attachments/<import folder>/<top deck>/` by default, or in your **Attachment folder** if one is set |
 | **Create project** | On | Organize imported decks as a project hierarchy |
 | **Organize with AI** | Off | AI classifies cards into better deck structure and cleans up formatting (requires BYOK or Pro AI provider) |
 
+The notes destination folder defaults to `Anki Import`. Change the default in `Settings → True Recall → Data & Backup → "Storage locations" → "Default Anki import folder"`; it stays editable per import. The same section's **Attachment folder** overrides where imported media lands.
+
 ### Mapping Phase
 
-After the preview, you enter the **Mapping Phase** — a dedicated screen where you control how each Anki note type maps to a True Recall note type.
+After the preview, you enter the **Mapping Phase**, a dedicated screen where you control how each Anki note type maps to a True Recall note type.
 
 For each Anki model (e.g., "Basic", "Cloze", your custom types), you choose:
 
-- **Auto-create new type** — True Recall creates a matching note type with the same fields
-- **Use existing note type** — map to a note type you already have
+- **Auto-create new type**: True Recall creates a matching note type with the same fields
+- **Use existing note type**: map to a note type you already have
 
 #### Field-Level Mapping
 
@@ -59,7 +61,7 @@ True Recall auto-matches fields: exact match first, then case-insensitive match,
 |------------|-------------|-------|
 | Front | Front | Auto-matched |
 | Back | Back | Auto-matched |
-| Extra | *(skip)* | No match — choose a target or skip |
+| Extra | *(skip)* | No match: choose a target or skip |
 
 <!-- TODO PHOTO -->
 
@@ -67,8 +69,8 @@ True Recall auto-matches fields: exact match first, then case-insensitive match,
 
 When **Organize with AI** is enabled and your collection has 3+ decks with most cards concentrated in one deck, two additional passes run after the main import:
 
-1. **AI Classification** — analyzes card content and redistributes cards into a better deck structure (batches of 100 cards)
-2. **AI Cleanup** — fixes formatting issues in card content: strips leftover HTML, normalizes whitespace, cleans up Anki artifacts (batches of 50 cards)
+1. **AI Classification**: analyzes card content and redistributes cards into a better deck structure (batches of 100 cards)
+2. **AI Cleanup**: fixes formatting issues in card content: strips leftover HTML, normalizes whitespace, cleans up Anki artifacts (batches of 50 cards)
 
 Both passes show progress bars. AI processing is optional and only appears when an API key is configured in [AI Settings](/configuration/ai-settings/).
 
@@ -117,7 +119,7 @@ When **Import scheduling data** is enabled:
 
 1. Each card's review log is replayed chronologically through FSRS
 2. Stability, difficulty, and state are calculated from actual review history
-3. The result is accurate FSRS scheduling — not just a rough conversion
+3. The result is accurate FSRS scheduling, not just a rough conversion
 
 When disabled, cards are imported with estimated scheduling:
 
@@ -160,7 +162,7 @@ Export your True Recall collection as a standard `.apkg` file that can be opened
 
 ### How to Export
 
-1. Open `Settings → True Recall → Data & Backup → Anki import / export` and click **Export .apkg**, or use the command palette action **Export to Anki (.apkg)**
+1. Open `Settings → True Recall → Data & Backup → "Anki import & export" → "Export to Anki"` and click **Export .apkg**, or use the command palette action **Export to Anki (.apkg)**
 2. Choose scope: All cards or Selected notes only
 3. Configure options
 4. Click **Export**
@@ -176,20 +178,21 @@ Export your True Recall collection as a standard `.apkg` file that can be opened
 
 ### Scope
 
-- **All cards** — Export your entire collection
-- **Selected notes only** — Choose specific source notes to export
+- **All cards**: Export your entire collection
+- **Selected notes only**: Choose specific source notes to export
 
 ### What Gets Exported
 
-- Cards are exported as Anki "Basic (and reversed card)" or "Cloze" models
-- Reversed cards share a note with their basic counterpart (matching Anki's model)
+- One-way Basic cards are exported under a single-template "Basic" model, so Anki does not generate a phantom reverse card
+- Reversed pairs are exported as one "Basic (and reversed card)" note, so both directions share a note (matching Anki's model)
+- Cloze cards are exported under a "Cloze" model
 - Scheduling data: state, interval, difficulty (converted to ease factor), reps, lapses
 - Review log: full history with ratings and timestamps
 - Media: images and audio referenced in cards
 
 ### Content Conversion
 
-Obsidian image and audio embeds are converted to Anki-compatible media references during export.
+Obsidian image and audio embeds are converted to Anki-compatible media references during export, and media filenames are rewritten to names Anki accepts.
 
 ### Deck Organization
 
@@ -203,7 +206,7 @@ Export your collection as a text file for use in spreadsheets, other flashcard a
 
 ### How to Export
 
-1. Open `Settings → True Recall → Data & Backup → Anki import / export` and click **Export CSV**, or use the command palette action **Export as CSV/TSV**
+1. Open `Settings → True Recall → Data & Backup → "Anki import & export" → "Export as CSV/TSV"` and click **Export CSV**, or use the command palette action **Export as CSV/TSV**
 2. Choose scope: All cards or Selected notes only
 3. Select separator and options
 4. Click **Export**
@@ -254,7 +257,7 @@ Unless you specifically want a fresh start, keep scheduling import enabled. It t
 
 ## What to Read Next
 
-- [Card Browser](/views/card-browser/) — verify imported cards and manage your collection
-- [Presets & Optimization](/scheduling/presets/) — optimize FSRS parameters after migration
-- [Projects & Notes](/creation/projects-and-notes/) — organize your imported deck hierarchy
-- [Backup & Restore](/data/backup-restore/) — back up your collection after a successful import
+- [Card Browser](/views/card-browser/): verify imported cards and manage your collection
+- [Presets & Optimization](/scheduling/presets/): optimize FSRS parameters after migration
+- [Projects & Notes](/creation/projects-and-notes/): organize your imported deck hierarchy
+- [Backup & Restore](/data/backup-restore/): back up your collection after a successful import

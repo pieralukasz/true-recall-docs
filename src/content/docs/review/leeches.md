@@ -3,13 +3,13 @@ title: Leeches
 sidebar:
   label: "Leeches"
   order: 5
-description: "How True Recall detects and handles leech cards — flashcards you keep forgetting — and strategies for dealing with them."
+description: "How True Recall detects and handles leech cards (flashcards you keep forgetting) and strategies for dealing with them."
 ---
 
 :::caution[My Notes]
 :::
 
-A **leech** is a card you keep forgetting. After multiple lapses (rating Again), True Recall flags the card so you can decide what to do with it — fix it, simplify it, or suspend it until you're ready.
+A **leech** is a card you keep forgetting. After multiple lapses (rating Again), True Recall flags the card so you can decide what to do with it: fix it, simplify it, or suspend it until you're ready.
 
 ## How Leech Detection Works
 
@@ -21,7 +21,7 @@ True Recall uses Anki-style leech detection. A card becomes a leech when its lap
 | **8** (default) | 8, 12, 16, 20, 24, ... |
 | **12** | 12, 18, 24, 30, ... |
 
-The check happens immediately when you rate a card **Again** during review. If the card hits a trigger point, you'll see a notification.
+The check happens immediately when you rate a card **Again** during review. If the card hits a trigger point, you'll see a notification. The lapse counter shown under the answer (`Review #12 · 8 lapses`) turns orange once a card is at or above its threshold, so you can spot leeches while reviewing without waiting for the notification.
 
 ## Leech Actions
 
@@ -37,7 +37,7 @@ Leech detected (8 lapses): What is the mitochondria?
 
 This is the default because removing cards automatically can be disruptive. You decide what to do.
 
-### Suspend
+### Suspend Card
 
 The card is automatically removed from review. You see a warning notification:
 
@@ -45,23 +45,25 @@ The card is automatically removed from review. You see a warning notification:
 Leech suspended (8 lapses): What is the mitochondria?
 ```
 
-The card remains in your database — it's just excluded from review sessions until you unsuspend it in the [Card Browser](/views/card-browser/).
+The card remains in your database; it's just excluded from review sessions until you unsuspend it in the [Card Browser](/views/card-browser/).
 
 ## Configuring Leech Settings
 
-Leech settings are configured **per preset**, so different projects can have different thresholds.
+Leech settings belong to the FSRS **preset**, so different projects can have different thresholds. They are not part of the FSRS settings tab; they live in the preset options dialog that opens when you click the preset indicator on a project or note row in the [Dashboard](/views/dashboard/):
 
-Go to `Settings → FSRS → [Your Preset] → Leech Settings`:
+`Dashboard → preset indicator → "Lapses"`
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| **Leech Threshold** | 8 | Number of lapses before a card is flagged |
-| **Leech Action** | Tag only | What happens when a leech is detected |
+| **Leech threshold** | 8 | Number of lapses before a card is flagged (0 = disabled) |
+| **Leech action** | Tag only | **Tag only** or **Suspend card** |
+
+The same dialog also lets you set the relearning steps for lapsed cards. See [Presets & Optimization](/scheduling/presets/) for everything else a preset contains.
 
 :::tip[Choosing a Threshold]
-- **4–6** — Strict. Catches problem cards early. Good for exams where you can't afford weak spots.
-- **8** — Balanced. The default works for most people.
-- **12+** — Lenient. Gives cards more chances. Good for difficult material where some struggle is expected.
+- **4 to 6**: strict. Catches problem cards early. Good for exams where you can't afford weak spots.
+- **8**: balanced. The default works for most people.
+- **12+**: lenient. Gives cards more chances. Good for difficult material where some struggle is expected.
 
 Set to **0** to disable leech detection entirely.
 :::
@@ -70,13 +72,15 @@ Set to **0** to disable leech detection entirely.
 
 ### Problem Cards Widget
 
-Embed the Problem Cards widget in any note to see your worst-performing cards at a glance:
+Embed the Problem Cards widget (part of the **Embedded Dashboards** feature, see [Features Overview](/plugins/overview/)) in any note to see your worst-performing cards at a glance:
 
 ````markdown
 ```true-recall-problem-cards
 limit: 10
 ```
 ````
+
+The widget shows five cards unless you raise `limit`. The underlying problem-card query (also used by the local API) returns up to 50 cards by default since 2.2.0.
 
 The widget shows three types of problem cards:
 
@@ -102,7 +106,7 @@ is:suspended prop:lapses>8
 
 ## Strategies for Dealing with Leeches
 
-A leech means the card isn't working — not that you're failing. The card needs to change, not just more repetition.
+A leech means the card isn't working, not that you're failing. The card needs to change, not just more repetition.
 
 ### Rewrite the Card
 
@@ -110,11 +114,13 @@ The most effective fix. Common problems and solutions:
 
 | Problem | Fix |
 |---------|-----|
-| Question is too vague | Make it specific — "What does X do?" → "What does X do in context Y?" |
+| Question is too vague | Make it specific: "What does X do?" → "What does X do in context Y?" |
 | Answer is too long | Break into multiple cards with one fact each |
 | No personal connection | Add a mnemonic, example, or analogy to the answer |
 | Missing context | Add a hint field or include more context in the question |
 | Cloze hides too much | Reduce to one key term per cloze |
+
+The ✨ button during review opens the [AI Workspace](/plugins/ai-assistant/) in card-polish mode, so you can run a [Card Polish](/plugins/card-polish/) preset (split, simplify, add context) on the leech without leaving the session.
 
 ### Add a Mnemonic
 
@@ -130,20 +136,20 @@ Sometimes you're not ready for certain material. Suspend the leech, continue wit
 
 ### Delete the Card
 
-If the information isn't worth memorizing (it's trivial, outdated, or better understood through practice), delete it. Not every fact deserves a flashcard.
+If the information isn't worth memorizing (it's trivial, outdated, or better understood through practice), delete it. Not every fact deserves a flashcard. During review, `Shift + 1` deletes the current card.
 
 ## Leech Prevention
 
 The best way to handle leeches is to prevent them:
 
 - **Follow the [Best Practices](/creation/best-practices/)** for writing flashcards
-- **Use AI generation** — the [Selection Toolbar](/views/selection-toolbar/) creates well-structured cards with source tracking
-- **Review source text** — click "Jump to source" on a struggling card to re-read the original context
-- **Rate honestly** — accurate ratings help FSRS schedule optimally. See [Answering Cards](/review/answering-cards/).
+- **Use AI generation**: the [Quick Actions Toolbar](/views/selection-toolbar/) creates well-structured cards with source tracking
+- **Review source text**: open the source note from a struggling card to re-read the original context
+- **Rate honestly**: accurate ratings help FSRS schedule optimally. See [Answering Cards](/review/answering-cards/).
 
 ## What to Read Next
 
-- [Answering Cards](/review/answering-cards/) — how ratings affect scheduling and lapses
-- [Card Browser](/views/card-browser/) — find and manage problem cards
-- [Best Practices](/creation/best-practices/) — write effective flashcards that don't become leeches
-- [Presets & Optimization](/scheduling/presets/) — configure leech thresholds per project
+- [Answering Cards](/review/answering-cards/): how ratings affect scheduling and lapses
+- [Card Browser](/views/card-browser/): find and manage problem cards
+- [Best Practices](/creation/best-practices/): write effective flashcards that don't become leeches
+- [Presets & Optimization](/scheduling/presets/): configure leech thresholds per project

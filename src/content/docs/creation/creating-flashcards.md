@@ -2,7 +2,7 @@
 title: Creating Flashcards
 sidebar:
   order: 1
-description: "How to create flashcards in True Recall — AI generation, the Flashcard Editor, and block format."
+description: "How to create flashcards in True Recall: AI generation with the Flashcard Generator, the Flashcard Editor, and block format."
 ---
 
 :::caution[My Notes]
@@ -12,33 +12,35 @@ Every flashcard in **True Recall** starts the same way: you decide what's worth 
 
 ## Many Ways to Create Cards
 
-**[Selection Toolbar](/views/selection-toolbar/)** — Select text in any note, click a button, and AI generates formatted cards from your content. The fastest way to create cards from existing material. Cards appear in your note as block format text, ready to [collect](#the-collection-step).
+**[Quick Actions Toolbar](/views/selection-toolbar/)**: Select text in any note, click a button, and AI generates formatted cards from your content. The fastest way to create cards from existing material. Cards appear in your note as block format text, ready to [collect](#the-collection-step).
 
-**[Flashcard Editor](/views/flashcard-editor/)** — A form where you pick a [note type](/creation/note-types/), fill in fields, and save. Cards go straight into the database — no collection needed. Open it from the **Add (+)** button in the [Flashcard Panel](/views/flashcard-panel/) header, or press `A` during a review session.
+**[Flashcard Editor](/views/flashcard-editor/)**: A form where you pick a [note type](/creation/note-types/), fill in fields, and save. Cards go straight into the database, no collection needed. Open it from the **Add (+)** button in the [Flashcard Panel](/views/flashcard-panel/) header, or press `A` during a review session.
 
-**[Import Studio](/views/import-studio/)** — A text editor for creating many cards at once — type or paste cards in block, tab-separated, or double-colon format, see a live preview, and save to the database in batch.
+**[Import Studio](/views/import-studio/)**: A text editor for creating many cards at once. Type or paste cards in block, tab-separated, or double-colon format, see a live preview, and save to the database in batch.
 
-**[Block format](#block-format)** — Write cards as structured text directly in your notes using `#type/<slug>` syntax. This is primarily how AI-generated cards are stored in your notes. You can also write blocks by hand, but the Selection Toolbar and Flashcard Editor are faster for most people.
+**[Block format](#block-format)**: Write cards as structured text directly in your notes using `#type/<slug>` syntax. This is primarily how AI-generated cards are stored in your notes. You can also write blocks by hand, but the Quick Actions Toolbar and Flashcard Editor are faster for most people.
 
 Most workflows combine AI generation for bulk creation with the Flashcard Editor for crafting individual cards by hand.
 
 ## AI Generation
 
-AI card generation runs through the [**AI Assistant**](/plugins/ai-assistant/). The [Selection Toolbar](/views/selection-toolbar/) appears when you select text in any note — click **Ask AI**, pick a generation preset chip (or type a request), and review the drafted cards before applying. The **IO** button appears when an image is in the selection for [image occlusion](/creation/image-occlusion/) cards.
+AI card generation is the [**Flashcard Generator**](/plugins/ai-flashcard-generation/), which runs inside the [**AI Workspace**](/plugins/ai-assistant/). The [Quick Actions Toolbar](/views/selection-toolbar/) appears when you select text in any note: click **Ask AI**, pick a generation preset chip (or type a request), and review the drafted cards before applying. The same flow is available as the command **Generate flashcards from selection**. The **Image Occlusion** button opens the editor for [image occlusion](/creation/image-occlusion/) cards.
 
 You can also generate cards from an entire note at once from the [Flashcard Panel](/views/flashcard-panel/), and batch-review pending drafts in the [AI Inbox](/views/ai-inbox/).
 
-AI generation requires **BYOK** or **Pro**. Configure your provider in `Settings → True Recall → Plugins`, and manage generation presets from [Generation Presets](/plugins/generation-presets/).
+Not ready to turn a passage into a card yet? The toolbar's **#card** button wraps the selection in `==highlight==` and appends a `#card` tag, so highlights waiting to become cards stay findable in search.
+
+AI generation requires **BYOK** or **Pro**. Configure your provider in `Settings → True Recall → Features → "AI provider"`, and manage generation presets from [Generation Presets](/plugins/generation-presets/).
 
 ## The Flashcard Editor
 
-The [Flashcard Editor](/views/flashcard-editor/) is a form-based modal — pick a note type, fill in fields, save. No syntax to remember.
+The [Flashcard Editor](/views/flashcard-editor/) is a form-based editor: pick a note type, fill in fields, save. No syntax to remember.
 
 Open it from:
 
 - **Flashcard Panel** → click the **Add (+)** button in the header
 - **During review** → press `A` or use the menu → "Add flashcard"
-- **Command Palette** → "Add flashcard"
+- **Command Palette** → "Add flashcard to current note"
 
 Cards created through the editor go straight into the database. They skip the collection step entirely.
 
@@ -71,7 +73,7 @@ Chapter 5: Special Relativity
   ---
 ```
 
-Each note type has a **slug** — the identifier after `#type/`. See [Note Types](/creation/note-types/) for all built-in slugs (`basic`, `basic-reversed`, `cloze`, `image-occlusion`).
+Each note type has a **slug**, the identifier after `#type/`. See [Note Types](/creation/note-types/) for all built-in slugs (`basic`, `basic-reversed`, `cloze`, `image-occlusion`).
 
 ### Multi-Line Fields
 
@@ -80,8 +82,8 @@ Field values continue on the next lines until the next field name or `---`:
 ```markdown
 #type/basic
 Front: Explain the difference between RAM and ROM.
-Back: RAM (Random Access Memory) is volatile — it loses data when power is off.
-ROM (Read-Only Memory) is non-volatile — data persists without power.
+Back: RAM (Random Access Memory) is volatile: it loses data when power is off.
+ROM (Read-Only Memory) is non-volatile: data persists without power.
 
 ---
 ```
@@ -98,9 +100,9 @@ Back: Programmed cell death that occurs in multicellular organisms.
 ## <!-- source: Apoptosis is a form of programmed cell death -->
 ```
 
-The [Selection Toolbar](/views/selection-toolbar/) adds this automatically when generating cards. You can also add it manually — it enables hover-highlighting in the [Flashcard Panel](/views/flashcard-panel/).
+The Quick Actions Toolbar adds this automatically when generating cards. You can also add it manually; it enables hover-highlighting in the Flashcard Panel.
 
-### Type-in Mode
+### Typed Answers
 
 Mark a card as requiring a typed answer with `@typein`:
 
@@ -113,11 +115,13 @@ Back: Free Spaced Repetition Scheduler
 ---
 ```
 
-During review, you'll type your answer instead of just flipping the card. See [Type-in Mode](/review/type-in-mode/) for how it works during review.
+During review, you'll type your answer instead of just flipping the card. See [Typed Answers](/review/type-in-mode/) for how it works during review.
 
 ### Markdown Support
 
-Cards support full Markdown — **bold**, _italic_, `inline code`, code blocks, links, `![[images]]`, math (`$$E = mc^2$$`), lists, tables, and blockquotes.
+Cards support full Markdown: **bold**, _italic_, `inline code`, code blocks, links, `![[images]]`, math (`$$E = mc^2$$`), lists, tables, and blockquotes.
+
+Images you paste into a card, Image Occlusion crops, and Anki import media are saved to the folder set in `Settings → True Recall → Data & Backup → "Storage locations" → "Attachment folder"`. Leave it empty to keep each feature's default location. The same section holds the **Default project folder**, which every flow that creates a project note honors.
 
 :::note[Collection required]
 Cards written in block format need to be collected before they appear in reviews. See [The Collection Step](#the-collection-step) below.
@@ -125,7 +129,7 @@ Cards written in block format need to be collected before they appear in reviews
 
 ## The Collection Step
 
-Writing a block in your note doesn't add a card to the review queue immediately. It becomes **uncollected** — visible in the [Flashcard Panel](/views/flashcard-panel/) but not yet scheduled.
+Writing a block in your note doesn't add a card to the review queue immediately. It becomes **uncollected**: visible in the [Flashcard Panel](/views/flashcard-panel/) but not yet scheduled.
 
 ```
 write block in note  →  uncollected  →  click Collect  →  review queue
@@ -133,9 +137,9 @@ write block in note  →  uncollected  →  click Collect  →  review queue
 
 Collection is intentional by design:
 
-- **Preview first** — review AI-generated cards before committing them to your schedule
-- **Batch at your pace** — write cards throughout the day, collect when ready
-- **No accidents** — draft or incomplete blocks won't appear in reviews
+- **Preview first**: review AI-generated cards before committing them to your schedule
+- **Batch at your pace**: write cards throughout the day, collect when ready
+- **No accidents**: draft or incomplete blocks won't appear in reviews
 
 To collect: open the [Flashcard Panel](/views/flashcard-panel/) (brain icon in the ribbon). Uncollected cards show a pulsing badge. Click **Collect** to add them all at once.
 
@@ -151,7 +155,7 @@ flashcard_uid: abc123-def456
 ---
 ```
 
-This UID links cards to their source note. Don't delete it — it's how True Recall tracks which cards belong to which note.
+This UID links cards to their source note. Don't delete it: it's how True Recall tracks which cards belong to which note.
 
 :::tip[Clean notes after collecting]
 If you prefer notes without card syntax cluttering the page, enable `Settings → General → "Remove flashcard content after collecting"`. The blocks disappear from the note; the cards remain in the database.
@@ -159,7 +163,7 @@ If you prefer notes without card syntax cluttering the page, enable `Settings �
 
 ## What to Read Next
 
-- [Note Types](/creation/note-types/) — understand Basic, Cloze, Image Occlusion, and when to use each
-- [Cloze Deletions](/creation/cloze-deletions/) — fill-in-the-blank syntax with `{{c1::text}}`
-- [Image Occlusion](/creation/image-occlusion/) — create cards from images by hiding regions
-- [Best Practices](/creation/best-practices/) — principles for writing cards that stick
+- [Note Types](/creation/note-types/): understand Basic, Cloze, Image Occlusion, and when to use each
+- [Cloze Deletions](/creation/cloze-deletions/): fill-in-the-blank syntax with `{{c1::text}}`
+- [Image Occlusion](/creation/image-occlusion/): create cards from images by hiding regions
+- [Best Practices](/creation/best-practices/): principles for writing cards that stick

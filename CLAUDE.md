@@ -23,26 +23,26 @@ This site previously emitted **no** JSON-LD at all, even though True Recall is t
 externally-validated entity in Lucas's ecosystem (official Obsidian Community Plugins
 directory, public repo, r/ObsidianMD thread).
 
-- `src/lib/entity.ts` — the canonical `Person` node, shared across **six** sites. It is
+- `src/lib/entity.ts`: the canonical `Person` node, shared across **six** sites. It is
   intentionally duplicated (byte-identical) with `apps/*/src/lib/entity.ts` in the
   `pieralukasz/lucaspiera` repo. **Any change must be propagated to all copies in the same
   task**, otherwise the person entity splits again. Canonical `@id`:
   `https://lucaspiera.com/#person`; Entity Home: `https://lucaspiera.com/about/`.
-- `src/lib/software-entity.ts` — `SoftwareApplication` + `SoftwareSourceCode` + `WebSite`
+- `src/lib/software-entity.ts`: `SoftwareApplication` + `SoftwareSourceCode` + `WebSite`
   + `WebPage` graph. Canonical software `@id`: `https://truerecall.app/#software`, reused
   verbatim as `entityId` in `apps/lucaspiera-com/src/content/projects/true-recall.mdx`
   so both sites describe **one** entity.
 - Injected in **two** places, because the site has two layouts:
   `src/components/starlight/Head.astro` (all docs pages) and `src/layouts/BaseLayout.astro`
-  (standalone pages, including `/pricing` — the only page with real offers).
+  (standalone pages, including `/pricing`, the only page with real offers).
 - `offers` must stay in sync with `src/pages/pricing.astro`. Price and availability are the
   one category of structured data machines genuinely cannot infer from page text.
-- `codeRepository` belongs **only** to `SoftwareSourceCode` in schema.org — never put it on
+- `codeRepository` belongs **only** to `SoftwareSourceCode` in schema.org, never put it on
   `SoftwareApplication`. The two are linked via `targetProduct`.
 - Do not add `aggregateRating`: there is no rating source to cite.
 - Known issue: `astro.config.mjs` declares `site: 'https://truerecall.app'` but the domain
   307-redirects to `www.truerecall.app`. Fix the primary domain in Vercel (preferred) or
-  change `site` **and** every `@id` — see `docs/2026-07-26-encja-marki.md` in the
+  change `site` **and** every `@id`, see `docs/2026-07-26-encja-marki.md` in the
   `lucaspiera` repo.
 
 ## Architecture
@@ -57,14 +57,14 @@ All documentation lives in `src/content/docs/` as `.md` or `.mdx` files. Each fi
 
 ### Sidebar
 
-The sidebar uses `autogenerate` per directory in `astro.config.mjs` and only renders in dev mode (`import.meta.env.DEV`). Production sidebar is empty. Sections: Getting Started, Views, Creation, Review, Organization, Configuration, Data, Sync, AI, Scheduling, Reference, Migration.
+The sidebar uses `autogenerate` per directory in `astro.config.mjs` and only renders in dev mode (`import.meta.env.DEV`). Production sidebar is empty. Sections: Getting Started, Views, Features (directory `plugins/`), Creation, Review, Scheduling, Configuration, Data, Reference.
 
 ### Component Overrides
 
 Three Starlight components are overridden in `src/components/starlight/`:
-- **Header.astro** — custom header layout (removed nav links)
-- **Head.astro** — injects Vercel Analytics and Speed Insights
-- **Hero.astro** — custom landing page hero
+- **Header.astro**: custom header layout (removed nav links)
+- **Head.astro**: injects Vercel Analytics and Speed Insights
+- **Hero.astro**: custom landing page hero
 
 ### Styling
 
@@ -77,7 +77,7 @@ See [SITEMAP.md](./SITEMAP.md) for the full site structure with all pages and de
 
 ### Remark Plugins
 
-- `plugins/remark-strip-dev-notes.mjs` — strips `:::caution[My Notes]` blocks from production builds. Dev notes are visible only during `npm run dev`.
+- `plugins/remark-strip-dev-notes.mjs`: strips `:::caution[My Notes]` blocks from production builds. Dev notes are visible only during `npm run dev`.
 
 ## Documentation Writing Guidelines
 
@@ -100,21 +100,22 @@ description: One-line summary for SEO and search results.
 Dev-only working notes (stripped in production by remark plugin).
 :::
 
-Opening paragraph — what is this thing, in one sentence.
+Opening paragraph: what is this thing, in one sentence.
 
 ## First Section
 ...
 
 ## What to Read Next
 
-- [Related Page](/path/) — why it's relevant
-- [Another Page](/path/) — what it covers
+- [Related Page](/path/): why it's relevant
+- [Another Page](/path/): what it covers
 ```
 
 Key rules:
-- `description` is **required** — it appears in search results and meta tags.
+- **Never use the em dash (—)** anywhere in docs content, frontmatter or code comments. Use a colon, comma, period or parentheses instead. When editing an existing page, strip the em dashes you find.
+- `description` is **required**: it appears in search results and meta tags.
 - `:::caution[My Notes]` goes right after frontmatter. It's dev-only (stripped in prod).
-- `<!-- TODO PHOTO -->` (an HTML comment) marks where a screenshot will be added later. This is the single source of truth for "needs a photo" — grep for it to find pending visuals.
+- `<!-- TODO PHOTO -->` (an HTML comment) marks where a screenshot will be added later. This is the single source of truth for "needs a photo"; grep for it to find pending visuals.
 - End pages with a "What to Read Next" section linking 3-5 related pages.
 
 ### Internal Linking & Backlinking
@@ -143,29 +144,29 @@ Use these terms consistently across all pages:
 
 ### Formatting
 
-- **Bold** — UI element names, button labels, field names, product name on first mention
-- `Backticks` — code, syntax, tags, file paths, keyboard keys
-- *Italics* — emphasis on concepts (use sparingly)
-- Code blocks — block format examples, command syntax
-- Tables — temporary text mockups for UI layouts (will be replaced with screenshots)
-- Short paragraphs — 3-4 sentences max before a section break
+- **Bold**: UI element names, button labels, field names, product name on first mention
+- `Backticks`: code, syntax, tags, file paths, keyboard keys
+- *Italics*: emphasis on concepts (use sparingly)
+- Code blocks: block format examples, command syntax
+- Tables: temporary text mockups for UI layouts (will be replaced with screenshots)
+- Short paragraphs: 3-4 sentences max before a section break
 
 ### Asides
 
 ```markdown
-:::note[Title]     — important clarifications, caveats
-:::tip[Title]      — productivity advice, workflow tips, personal recommendations
-:::caution[Title]  — warnings, things that could go wrong
+:::note[Title]     : important clarifications, caveats
+:::tip[Title]      : productivity advice, workflow tips, personal recommendations
+:::caution[Title]  : warnings, things that could go wrong
 ```
 
-Use sparingly — max 2-3 per page. Too many asides create visual fatigue.
+Use sparingly, max 2-3 per page. Too many asides create visual fatigue.
 
 ### Keeping Docs in Sync
 
-- When a plugin feature changes, update **all** pages that reference it — not just the primary page.
+- When a plugin feature changes, update **all** pages that reference it, not just the primary page.
 - Update `SITEMAP.md` whenever pages are added, removed, or moved.
 - After renaming or deleting a page, search for broken internal links (`grep` for the old path).
-- Settings references (`Settings → ...`) must match the actual UI paths in the plugin source at `/Users/lukaszpiera/Projects/true-recall`.
+- Settings references (`Settings → ...`) must match the actual UI paths in the plugin source at `/Users/lukaszpiera/Projects/true-recall/true-recall` (tabs: General, FSRS, Data & Backup, Integrations, Features; feature names come from `packages/plugins/src/*/index.ts` `info.name`).
 - Cross-reference the plugin code when documenting features to ensure accuracy.
 
 ## File Operations
@@ -185,7 +186,7 @@ This project uses Vercel for deployment. Changes must be committed AND pushed to
 
 Product screenshots are the main pending visual work. Track and add them like this:
 
-- **Marker:** a page that needs a screenshot carries an HTML comment `<!-- TODO PHOTO -->` at the spot. Find all pending visuals with `grep -rn "TODO PHOTO" src/content/docs/`. (There is no sidebar-label suffix convention — an earlier `(P)` scheme was never actually used.)
+- **Marker:** a page that needs a screenshot carries an HTML comment `<!-- TODO PHOTO -->` at the spot. Find all pending visuals with `grep -rn "TODO PHOTO" src/content/docs/`. (There is no sidebar-label suffix convention; an earlier `(P)` scheme was never actually used.)
 - **Capture:** shoot in Obsidian's **dark theme** with a large, readable font, at 1920×1080 (see `VISUAL-CONTENT-TODO.md` for the per-view shot list and production notes).
 - **Storage:** save under `src/assets/screenshots/<area>/<name>.png` (e.g. `src/assets/screenshots/review/session-complete.png`).
 - **Embed:** plain Markdown from the page, with descriptive alt text and a relative path. From a page at `src/content/docs/<section>/<page>.md` the assets root is three levels up:

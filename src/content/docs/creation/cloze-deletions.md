@@ -8,7 +8,7 @@ description: "Create fill-in-the-blank flashcards using cloze deletion syntax wi
 :::caution[My Notes]
 :::
 
-Cloze deletions are fill-in-the-blank flashcards. You write a sentence with key terms wrapped in `{{c<number>::text}}` markers — each marker becomes a blank during review.
+Cloze deletions are fill-in-the-blank flashcards. You write a sentence with key terms wrapped in `{{c<number>::text}}` markers; each marker becomes a blank during review.
 
 ## Block Format
 
@@ -25,7 +25,7 @@ This creates one card where "mitochondria" is hidden:
 - **Front:** The [...] is the powerhouse of the cell.
 - **Back:** The **mitochondria** is the powerhouse of the cell.
 
-The `Extra` field is optional — it shows additional context on the answer side.
+The `Extra` field is optional; it shows additional context on the answer side.
 
 ## Multiple Clozes
 
@@ -38,7 +38,7 @@ Extra: Cardiovascular system
 ---
 ```
 
-This creates 3 cards — one hiding "heart", one hiding "blood", one hiding "circulatory system". Each card is scheduled independently.
+This creates 3 cards: one hiding "heart", one hiding "blood", one hiding "circulatory system". Each card is scheduled independently.
 
 ### Same Number = Same Card
 
@@ -64,7 +64,7 @@ Text: The {{c1::Paris::capital of France}} is known as the City of Light.
 
 The hint appears in the blank: `[capital of France]`
 
-Use hints when context alone isn't enough to distinguish similar answers. Don't add them to every cloze — they reduce the retrieval challenge.
+Use hints when context alone isn't enough to distinguish similar answers. Don't add them to every cloze; they reduce the retrieval challenge.
 
 ## Card Generation
 
@@ -126,7 +126,11 @@ def {{c1::greet}}(name):
 
 ## Converting Text to Cloze
 
-Select text in your note and use the [Selection Toolbar](/views/selection-toolbar/) → **Flashcards** to have AI generate cloze cards automatically when the content fits the cloze format. Or wrap terms manually: `{{c1::term}}`.
+Select text in your note and use the [Quick Actions Toolbar](/views/selection-toolbar/) → **Ask AI** with a generation preset to have AI generate cloze cards automatically when the content fits the cloze format. Or wrap terms manually: `{{c1::term}}`.
+
+### Keyboard shortcut in True Recall editors
+
+Inside True Recall's embedded editors (the [Flashcard Editor](/views/flashcard-editor/), the quick note editor, and the AI Workspace editors), select a term and press `Cmd/Ctrl + Shift + C`. The selection is wrapped as `{{cN::term}}`, where `N` is one higher than the largest cloze number already in the field. With nothing selected, an empty `{{cN::}}` marker is inserted with the cursor inside; pressing the shortcut on a selection that is already a cloze unwraps it. The same action is available from the formatting toolbar's cloze button.
 
 ## Tips for Good Cloze Cards
 
@@ -171,6 +175,6 @@ The {{c1::Mona Lisa}} was painted by {{c1::Leonardo da Vinci}}.
 
 ## What to Read Next
 
-- [Note Types](/creation/note-types/) — all built-in types and when to use each
-- [Creating Flashcards](/creation/creating-flashcards/) — block format syntax and the collection step
-- [Best Practices](/creation/best-practices/) — principles for writing cards that stick
+- [Note Types](/creation/note-types/): all built-in types and when to use each
+- [Creating Flashcards](/creation/creating-flashcards/): block format syntax and the collection step
+- [Best Practices](/creation/best-practices/): principles for writing cards that stick

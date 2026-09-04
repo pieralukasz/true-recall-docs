@@ -3,17 +3,17 @@ title: Flashcard Panel
 sidebar:
   label: "Flashcard Panel"
   order: 3
-description: The main sidebar panel for managing flashcards per note with collection, review actions, and AI generation.
+description: The main sidebar panel for managing flashcards per note with collection, review actions, Card Polish, and AI generation.
 ---
 
 :::caution[My Notes]
 :::
 
-The **Flashcard Panel** is one of the most important views in True Recall. This sidebar automatically follows the note you're editing, showing all its flashcards, their review status, and quick actions. It's your hub for collecting new cards, managing existing ones, launching reviews, and generating cards with AI.
+The **Flashcard Panel** is one of the most important views in True Recall. This sidebar automatically follows the note you're editing, showing all its flashcards, their review status, and quick actions. It's your hub for collecting new cards, managing existing ones, launching reviews, polishing cards with AI, and generating cards.
 
 ## Opening the Panel
 
-- **Command palette:** `Cmd/Ctrl + P` → "Open flashcard panel"
+- **Command palette:** `Cmd/Ctrl + P` → "Show flashcards for current note"
 - **File context menu:** Right-click any `.md` file → "Open flashcard panel"
 
 The panel opens in the right sidebar and immediately syncs with the active note.
@@ -22,33 +22,29 @@ The panel opens in the right sidebar and immediately syncs with the active note.
 
 The panel has these sections from top to bottom:
 
-1. **Header** — Card count badges, search bar, action buttons, more menu
-2. **Flashcards** — All collected cards with state badges and actions
-3. **Image Occlusion Groups** — IO cards grouped by source image
-4. **Empty State** — Generation options when no cards exist
+1. **Header**: card count, action buttons, search bar
+2. **Flashcards**: all collected cards with state badges and actions
+3. **Image Occlusion Groups**: IO cards grouped by source image
+4. **Empty State**: generation options when no cards exist
 
 ![Flashcard Panel listing the AI-generated cards for the active note](../../../assets/screenshots/panel/flashcard-panel.png)
 
 ## Header
 
-### Status Badges
+### Card count
 
-Color-coded badges show card counts by FSRS state:
-
-| Color  | State              |
-| ------ | ------------------ |
-| Green  | New                |
-| Orange | Learning           |
-| Blue   | Review (due today) |
+The header shows how many cards the note has and, when some are due, an orange "· N due" suffix.
 
 ### Action Buttons
 
 On the right side of the header:
 
-- **Collect** — Appears when uncollected flashcards exist in the note. Shows a count badge with a pulsing animation. Click to collect all detected flashcard syntax into the database.
-- **Review** — Launch a [review session](/review/review-interface/) for this note's cards.
-- **Add (+)** — Opens the [Flashcard Editor](/views/flashcard-editor/) to create a new card via a form. Includes a wand icon to run [Card Polish](/plugins/card-polish/) presets on the draft.
-- **More (...)** — Opens the [actions menu](#header-more-menu).
+- **Study This Note**: launch a [review session](/review/review-interface/) for this note's cards.
+- **Open Source Note**: shown while the panel follows a review session, jumps back to the card's note.
+- **Collect N Cards**: appears when uncollected flashcards exist in the note, with a pulsing animation. Click to collect all detected flashcard syntax into the database.
+- **Select Cards** (`Cmd/Ctrl + A`): enter selection mode.
+- **Add Card** (`N`): opens the [Flashcard Editor](/views/flashcard-editor/) to create a new card via a form.
+- **More Actions**: opens the [actions menu](#header-more-menu).
 
 ### Search Bar
 
@@ -56,22 +52,23 @@ A full-width search input filters cards in real time by matching against questio
 
 ### Follow Mode
 
-During a review session, a file icon appears in the header indicating the panel is following the current review card's source note. When the review session ends, the panel returns to following the active editor note.
+During a review session, the panel follows the current review card's source note and shows the **Open Source Note** button. When the review session ends, the panel returns to following the active editor note.
 
 ## Header More Menu
 
-Click the **...** button to access these actions:
+Click the **More Actions** button to access these actions:
 
 | Action                   | Description                                                                      |
 | ------------------------ | -------------------------------------------------------------------------------- |
 | Refresh                  | Reload flashcard data from the database                                          |
 | Open source note         | Open the linked source note in a new tab                                         |
 | Generate from highlights | AI-generate cards from `==highlighted==` text (only shown when highlights exist) |
-| Browse in card browser   | Open the [Card Browser](/views/card-browser/) filtered to this note              |
-| Copy to clipboard        | Copy all cards as a numbered `Q: ... A: ...` list                                |
-| Export as CSV            | Download cards as a CSV file                                                     |
-| Forget all flashcards    | Reset FSRS scheduling for every card to New state (confirmation required)        |
-| Delete all flashcards    | Permanently remove all cards from this note (confirmation required)              |
+| Open card browser        | Open the [Card Browser](/views/card-browser/) filtered to this note              |
+| Copy all                 | Copy all cards as a numbered `Q: ... A: ...` list                                |
+| Export CSV               | Download cards as a CSV file                                                     |
+| Forget all cards         | Reset FSRS scheduling for every card to New state (confirmation required)        |
+| Delete all cards         | Permanently remove all cards from this note (confirmation required)              |
+| Delete note & cards      | Delete the note file together with its cards (confirmation required)             |
 
 ## Card Display
 
@@ -93,9 +90,9 @@ Cards may display small badges next to the question:
 
 | Badge      | Meaning                                         |
 | ---------- | ----------------------------------------------- |
-| **S**      | Suspended — excluded from reviews               |
-| **B**      | Buried — hidden until tomorrow (hover for date) |
-| **C1, C2** | Cloze card — number indicates cloze index       |
+| **S**      | Suspended: excluded from reviews                |
+| **B**      | Buried: hidden until tomorrow (hover for date)  |
+| **C1, C2** | Cloze card, the number is the cloze index       |
 | **⇄**      | Reversed card                                   |
 
 ### Expanded View
@@ -103,10 +100,10 @@ Cards may display small badges next to the question:
 Click a card to expand it and reveal:
 
 - Full **answer text** rendered as Markdown
-- **Review count** — total number of reviews
-- **Stability** — memory stability in days (e.g., "S: 23.4d")
-- **Lapses** — times the card was forgotten (if any)
+- **Scheduling details**: review count, stability in days (e.g., "S: 23.4d"), lapses, next review
 - **Note type** name
+- **Polish Card (AI)**: a wand button that opens the [AI Workspace](/plugins/ai-assistant/) in card-polish mode on this card
+- **Card Polish**: a collapsible list of your [Card Polish](/plugins/card-polish/) presets; click one to run it on the card in one step (see below)
 
 <!-- TODO PHOTO -->
 
@@ -122,10 +119,12 @@ Right-click any card (or tap the three-dot icon) to open the context menu:
 | ------------------------------- | ---------------------------------------------------------------------- |
 | Preview                         | Open the [Card Preview modal](#card-preview-modal) with interactive rating |
 | Edit                            | Open card in the [Flashcard Editor](/views/flashcard-editor/)          |
+| Open Source                     | Jump to the card's source text in the note                             |
 | Copy                            | Copy card to clipboard as `Q: ... A: ...`                              |
 | Move                            | Transfer card to a different source note                               |
-| Change type                     | Convert card to a different note type (e.g., Basic → Cloze)            |
+| Change note type                | Convert card to a different note type (e.g., Basic → Cloze)            |
 | Make reversed / Remove reversed | Toggle a reversed pair for Basic cards. Not available for Cloze or IO. |
+| Polish with AI                  | Run a Card Polish preset on this card                                  |
 | Forget                          | Reset FSRS scheduling to New state and clear review history            |
 | Suspend / Unsuspend             | Toggle whether the card appears in review sessions                     |
 | Delete                          | Permanently remove the card                                            |
@@ -145,17 +144,27 @@ The **Preview** action opens the card in a modal with both sides rendered and an
 - The modal uses view transitions so flipping between sides feels instant
 - Esc or clicking outside closes without grading
 
-Preview is useful for checking a card out of session — rate a single card you just edited without starting a full review.
+Preview is useful for checking a card out of session: rate a single card you just edited without starting a full review.
 
 :::note
 **Forget** is only available for cards that have been reviewed at least once (non-New state).
-**Make reversed** is only available for Basic cards — not Cloze or Image Occlusion.
+**Make reversed** is only available for Basic cards, not Cloze or Image Occlusion.
 :::
+
+## Card Polish
+
+Since 2.2.0 the panel is a first-class surface for [Card Polish](/plugins/card-polish/), the AI presets that rewrite a card (formula check, deconstruction, simplification, and so on):
+
+- **One card**: expand it and click a preset in the **Card Polish** section, or click the wand (**Polish Card (AI)**) to open the AI Workspace on that card and type your own instruction.
+- **Many cards**: enter selection mode, open the **More** menu in the selection toolbar and choose **Polish with AI**, then pick a preset. Each preset shows how it runs (apply directly or preview first). Bulk polish sends one AI request per card, so since 2.3.0 it asks for confirmation before spending anything.
+
+Presets marked as `disabled` are hidden from these lists. Results land as proposals in the [AI Inbox](/views/ai-inbox/), unless the preset is set to auto-apply.
 
 ## Selection Mode & Bulk Operations
 
 ### Entering Selection Mode
 
+- Click **Select Cards** in the header or press `Cmd/Ctrl + A`
 - Right-click a card → **Select**
 - **Cmd/Ctrl + click** any card
 
@@ -167,11 +176,11 @@ A **selection toolbar** replaces the header, showing the selected count and bulk
 | ---------------- | ------------------------------------------------- |
 | Select All       | Select every card in the current note             |
 | Move             | Move all selected cards to another note           |
-| Change note type | Convert selected cards to a different type        |
-| Suspend          | Suspend all selected cards                        |
-| Unsuspend        | Unsuspend all selected cards                      |
-| Forget           | Reset scheduling for all selected cards           |
-| Delete           | Delete all selected cards (confirmation required) |
+| Suspend / Unsuspend | Toggle suspension for all selected cards       |
+| More → Change note type | Convert selected cards to a different type |
+| More → Polish with AI | Run a Card Polish preset on every selected card (asks first) |
+| More → Forget    | Reset scheduling for all selected cards           |
+| More → Delete    | Delete all selected cards (confirmation required) |
 
 Press the **X** button in the toolbar to exit selection mode.
 
@@ -190,40 +199,51 @@ IO cards are grouped by their source image rather than listed individually. Each
 
 - A preview of the source image
 - Region labels as clickable chips
-- Group-level actions: Edit regions, Move, Delete all
+- Group-level actions: Edit Occlusion, Move, Delete
 
 ## AI Generation
 
-Both panel-driven generation flows run through the [**AI Flashcard Generation**](/plugins/ai-flashcard-generation/) plugin and its [generation presets](/plugins/generation-presets/).
+Both panel-driven generation flows run through the [**Flashcard Generator**](/plugins/ai-flashcard-generation/) (part of the [AI Workspace](/plugins/ai-assistant/)) and its [generation presets](/plugins/generation-presets/). A **Preset** picker in the empty state lets you choose which preset runs.
 
 ### Generate from Note
 
-Use **More menu → Generate** or the empty state button to generate flashcards from the entire note content. The AI processes the note in chunks, streaming cards in real time with a progress counter (e.g., "Section 3/7"). Existing cards on the note are injected into the prompt so new generations don't duplicate what's already there.
+Use the empty state button to generate flashcards from the entire note content. The AI processes the note in chunks, streaming cards in real time with a progress counter (e.g., "Section 3/7"). Existing cards on the note are injected into the prompt so new generations don't duplicate what's already there.
 
 ### Generate from Highlights
 
-Use **More menu → Generate from highlights** to create cards only from `==highlighted==` text in the note. Highlights already covered by existing cards are automatically skipped — this means you won't generate duplicate flashcards from the same highlights. This is one of the most efficient ways to create flashcards in True Recall.
+Use **More Actions → Generate from highlights** to create cards only from `==highlighted==` text in the note. Highlights already covered by existing cards are automatically skipped, so you won't generate duplicate flashcards from the same highlights. This is one of the most efficient ways to create flashcards in True Recall. Mark passages with the **Highlight** or **#card** buttons of the [Quick Actions Toolbar](/views/selection-toolbar/) as you read.
 
 ## Panel Sync
 
 The panel stays in sync automatically:
 
-- **Active note** — switches when you open a different note in the editor
-- **Review session** — follows the current review card's source note (file icon indicator in header)
-- **Data changes** — reloads reactively when cards are added, edited, or deleted (via signals, no polling)
-- **Editor changes** — re-scans for uncollected flashcard syntax after edits (500ms debounce)
+- **Active note**: switches when you open a different note in the editor
+- **Review session**: follows the current review card's source note
+- **Data changes**: reloads reactively when cards are added, edited, or deleted (via signals, no polling)
+- **Editor changes**: re-scans for uncollected flashcard syntax after edits (500ms debounce)
 
 ## Export
 
-| Format            | How to Access          | Output                                                  |
-| ----------------- | ---------------------- | ------------------------------------------------------- |
-| Copy to clipboard | More menu → Copy       | Numbered list: `1. Q: ... A: ...`                       |
-| Export as CSV     | More menu → Export CSV | Downloads `<note-name>-flashcards.csv` with Q/A columns |
+| Format            | How to Access                  | Output                                                  |
+| ----------------- | ------------------------------ | ------------------------------------------------------- |
+| Copy to clipboard | More Actions → Copy all        | Numbered list: `1. Q: ... A: ...`                       |
+| Export as CSV     | More Actions → Export CSV      | Downloads `<note-name>-flashcards.csv` with Q/A columns |
+
+## On phones
+
+Since 2.2.0 the panel is fully usable on a phone. It gets a dedicated mobile header with **Search Cards** and **More Actions**, and card actions open from a tap-and-hold menu instead of a right-click.
 
 ## Tips
 
 - Leave the panel open while editing to see card status update in real time
-- Collect regularly — uncollected cards are not scheduled for review
+- Collect regularly: uncollected cards are not scheduled for review
 - Use selection mode for efficient bulk operations on multiple cards
 - Hover over cards to highlight their source text in the editor
 - Use the search bar to quickly find specific cards in notes with many flashcards
+
+## What to Read Next
+
+- [Flashcard Editor](/views/flashcard-editor/): the form that **Add Card** and **Edit** open
+- [Card Polish](/plugins/card-polish/): the presets behind the wand button
+- [AI Inbox](/views/ai-inbox/): where polish and generation proposals wait for review
+- [Card Browser](/views/card-browser/): the same cards across your whole collection

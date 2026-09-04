@@ -41,7 +41,7 @@ const offers = [
     "@type": "Offer",
     name: "Pro",
     description:
-      "AI study assistant — optimized generation, smart coaching, leech fixing, and more.",
+      "Managed AI with tuned prompts, plus Image Occlusion and Typed Answers with AI grading.",
     priceCurrency: "USD",
     url: "https://truerecall.app/pricing/",
     availability: "https://schema.org/InStock",
@@ -58,7 +58,7 @@ const offers = [
     "@type": "Offer",
     name: "BYOK (bring your own key)",
     description:
-      "Use your own OpenRouter API key and prompts. Unlimited generation, you pay OpenRouter directly.",
+      "Use your own OpenRouter, LM Studio or custom endpoint. Unlimited generation, you pay your provider directly.",
     price: 0,
     priceCurrency: "USD",
     url: "https://truerecall.app/getting-started/quick-start/",
