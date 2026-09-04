@@ -1,6 +1,11 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
+import {
+	canConnectDevice,
+	deviceLimitMessage,
+	syncPlanFor,
+} from "../../../lib/device-limit";
 import { getSupabaseAdmin } from "../../../lib/supabase-admin";
 
 function base64Url(bytes: Uint8Array): string {
@@ -81,6 +86,38 @@ export const POST: APIRoute = async ({ request }) => {
 		);
 	}
 
+	// Device limit before the code is claimed: a refused sign-in leaves the
+	// code usable, so signing out elsewhere and retrying works within its TTL.
+	const { data: userData } = await admin.auth.admin.getUserById(
+		authCode.user_id,
+	);
+	const email = userData.user?.email;
+	if (!email) {
+		return Response.json(
+			{ error: "Account email is unavailable" },
+			{ status: 500 },
+		);
+	}
+	const plan = syncPlanFor(userData.user?.app_metadata);
+	const { count: otherDevices, error: countError } = await admin
+		.from("cloud_sync_devices")
+		.select("id", { count: "exact", head: true })
+		.eq("user_id", authCode.user_id)
+		.is("revoked_at", null)
+		.neq("device_id", authCode.device_id);
+	if (countError) {
+		return Response.json(
+			{ error: "Could not check connected devices" },
+			{ status: 500 },
+		);
+	}
+	if (!canConnectDevice(plan, otherDevices ?? 0)) {
+		return Response.json(
+			{ error: deviceLimitMessage(plan), code: "device_limit" },
+			{ status: 403 },
+		);
+	}
+
 	const { data: claimed } = await admin
 		.from("auth_codes")
 		.update({ used_at: new Date().toISOString() })
@@ -115,14 +152,6 @@ export const POST: APIRoute = async ({ request }) => {
 		);
 	}
 
-	const { data: userData } = await admin.auth.admin.getUserById(authCode.user_id);
-	const email = userData.user?.email;
-	if (!email) {
-		return Response.json(
-			{ error: "Account email is unavailable" },
-			{ status: 500 },
-		);
-	}
 	return Response.json(
 		{ deviceToken, userId: authCode.user_id, email },
 		{ headers: { "Cache-Control": "no-store" } },

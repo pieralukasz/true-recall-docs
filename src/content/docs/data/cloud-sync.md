@@ -53,6 +53,15 @@ Sync settings travel with the vault (through iCloud, Obsidian Sync, or git), but
 When you request the sign-in email, open the link on the same device. The link completes sign-in in whichever browser opens it and then returns to Obsidian.
 :::
 
+## Device limits
+
+| Plan | Connected devices |
+|------|-------------------|
+| Free account | 2 |
+| Pro | 5 |
+
+The limit is checked when a device signs in. Signing out of Cloud Sync on a device (Settings → Integrations → Sign out) revokes its token and frees its slot immediately, so replacing a phone never needs support. A device that is over the limit sees the reason in the sign-in error and keeps working locally.
+
 ## The first sync
 
 The first exchange merges the local collection with the collection already associated with the account:
@@ -75,7 +84,7 @@ Synchronization runs:
 
 - shortly after a local card, note, or review change;
 - when Obsidian returns to the foreground;
-- periodically while the plugin is active;
+- every five minutes while the plugin is active, to pick up edits made on other devices;
 - after connecting an account;
 - manually through the command **Sync cloud now** (available only while Cloud Sync is enabled).
 

@@ -33,7 +33,7 @@ None of the following checks for a key. This is the whole spaced repetition syst
 - **Organization**: projects, folder includes, archiving, preset inheritance
 - **Views**: Dashboard, Flashcard Panel, Card Browser, Statistics, FSRS Simulator, Embedded Dashboards, Status Bar Summary, Link Progress Indicators
 - **Data**: backups, integrity check, device databases, Anki import and export, CSV export
-- **Cloud Sync**: free with a True Recall account. It does not require Pro. See [Cloud Sync](/data/cloud-sync/)
+- **Cloud Sync**: free with a True Recall account on up to 2 devices; Pro raises the limit to 5. See [Cloud Sync](/data/cloud-sync/)
 - **Local API, CLI and MCP server**: the assistant integrations run against your local plugin
 
 ## What BYOK Adds
@@ -85,7 +85,7 @@ There is no non-AI typed-answer mode in the current plugin. See [Typed Answers](
 ## What Pro Does Not Change
 
 - **Scheduling quality**. FSRS, optimization and load balancing are identical at every level.
-- **Cloud Sync**. Free with an account.
+- **Cloud Sync**. Free with an account. Pro only changes how many devices may connect: 5 instead of 2.
 - **Card Polish presets**. All built-in polish presets are BYOK; none is Pro-only today.
 - **Your data**. Everything stays in the SQLite database inside your vault. Pro only changes where AI requests are sent.
 
