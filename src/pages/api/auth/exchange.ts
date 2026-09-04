@@ -2,7 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import {
-	canConnectDevice,
+	deviceLimitFor,
 	deviceLimitMessage,
 	syncPlanFor,
 } from "../../../lib/device-limit";
@@ -66,6 +66,7 @@ export const POST: APIRoute = async ({ request }) => {
 		);
 	}
 
+	const codeChallenge = await challengeFor(body.verifier);
 	const admin = getSupabaseAdmin();
 	const { data: authCode } = await admin
 		.from("auth_codes")
@@ -78,7 +79,7 @@ export const POST: APIRoute = async ({ request }) => {
 		.maybeSingle();
 	if (
 		!authCode ||
-		authCode.code_challenge !== (await challengeFor(body.verifier))
+		authCode.code_challenge !== codeChallenge
 	) {
 		return Response.json(
 			{ error: "Invalid or expired authorization code" },
@@ -86,8 +87,6 @@ export const POST: APIRoute = async ({ request }) => {
 		);
 	}
 
-	// Device limit before the code is claimed: a refused sign-in leaves the
-	// code usable, so signing out elsewhere and retrying works within its TTL.
 	const { data: userData } = await admin.auth.admin.getUserById(
 		authCode.user_id,
 	);
@@ -99,56 +98,37 @@ export const POST: APIRoute = async ({ request }) => {
 		);
 	}
 	const plan = syncPlanFor(userData.user?.app_metadata);
-	const { count: otherDevices, error: countError } = await admin
-		.from("cloud_sync_devices")
-		.select("id", { count: "exact", head: true })
-		.eq("user_id", authCode.user_id)
-		.is("revoked_at", null)
-		.neq("device_id", authCode.device_id);
-	if (countError) {
+
+	const deviceToken = base64Url(crypto.getRandomValues(new Uint8Array(48)));
+	const tokenHash = await sha256(deviceToken);
+	const { data: claim, error: claimError } = await admin.rpc(
+		"claim_cloud_sync_device",
+		{
+			p_code: body.code,
+			p_state: body.state,
+			p_code_challenge: codeChallenge,
+			p_device_id: body.deviceId,
+			p_token_hash: tokenHash,
+			p_device_limit: deviceLimitFor(plan),
+		},
+	);
+	if (claimError) {
 		return Response.json(
-			{ error: "Could not check connected devices" },
+			{ error: "Could not create device session" },
 			{ status: 500 },
 		);
 	}
-	if (!canConnectDevice(plan, otherDevices ?? 0)) {
+	const result = claim as { result?: string; userId?: string } | null;
+	if (result?.result === "device_limit") {
 		return Response.json(
 			{ error: deviceLimitMessage(plan), code: "device_limit" },
 			{ status: 403 },
 		);
 	}
-
-	const { data: claimed } = await admin
-		.from("auth_codes")
-		.update({ used_at: new Date().toISOString() })
-		.eq("id", authCode.id)
-		.is("used_at", null)
-		.select("id")
-		.maybeSingle();
-	if (!claimed) {
+	if (result?.result !== "ok" || result.userId !== authCode.user_id) {
 		return Response.json(
-			{ error: "Authorization code was already used" },
+			{ error: "Invalid or expired authorization code" },
 			{ status: 401 },
-		);
-	}
-
-	const deviceToken = base64Url(crypto.getRandomValues(new Uint8Array(48)));
-	const tokenHash = await sha256(deviceToken);
-	const { error: deviceError } = await admin.from("cloud_sync_devices").upsert(
-		{
-			user_id: authCode.user_id,
-			device_id: authCode.device_id,
-			device_name: authCode.device_name,
-			token_hash: tokenHash,
-			revoked_at: null,
-			last_seen_at: new Date().toISOString(),
-		},
-		{ onConflict: "user_id,device_id" },
-	);
-	if (deviceError) {
-		return Response.json(
-			{ error: "Could not create device session" },
-			{ status: 500 },
 		);
 	}
 
