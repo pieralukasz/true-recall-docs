@@ -281,17 +281,24 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		budget_reset_at: string | null;
 		budget_duration: string | null;
 	}
+	type KeyLookup =
+		| { kind: "ok"; info: KeyInfo }
+		| { kind: "invalid" }
+		| { kind: "unavailable" };
 
-	async function fetchKeyInfo(key: string): Promise<KeyInfo | null> {
+	async function fetchKeyInfo(key: string): Promise<KeyLookup> {
 		try {
 			const res = await fetch(`${LITELLM_URL}/key/info`, {
 				headers: { Authorization: `Bearer ${key}` },
 			});
-			if (!res.ok) return null;
+			if (res.status === 401 || res.status === 403) {
+				return { kind: "invalid" };
+			}
+			if (!res.ok) return { kind: "unavailable" };
 			const data = await res.json();
-			return data.info ?? data;
+			return { kind: "ok", info: data.info ?? data };
 		} catch {
-			return null;
+			return { kind: "unavailable" };
 		}
 	}
 
@@ -326,7 +333,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		return budgetExceeded ? "trial-ended" : "trial";
 	}
 
-	function renderPlan(info: KeyInfo | null, hasKey: boolean) {
+	function renderPlan(lookup: KeyLookup, hasKey: boolean) {
 		if (!hasKey) {
 			noKeyCard.style.display = "block";
 			return;
@@ -334,13 +341,24 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 		keyCard.style.display = "block";
 
-		if (!info) {
+		if (lookup.kind === "invalid") {
+			planCard.style.display = "block";
+			planLabel.textContent = "Expired";
+			planDot.classList.add("dot-red");
+			planBadge.classList.add("badge-expired");
+			expiredNotice.style.display = "block";
+			keyCard.style.display = "none";
+			return;
+		}
+
+		if (lookup.kind === "unavailable") {
 			// LiteLLM unavailable — show key but no usage
 			planCard.style.display = "block";
 			planLabel.textContent = "Active";
 			planDot.classList.add("dot-green");
 			return;
 		}
+		const info = lookup.info;
 
 		const plan = detectPlan(info);
 
