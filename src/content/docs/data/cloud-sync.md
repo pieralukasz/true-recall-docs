@@ -47,6 +47,12 @@ If Obsidian does not open automatically:
 
 The authorization page includes the vault name in the Obsidian link. This matters when several vaults are available on the same device.
 
+:::note[Every device signs in on its own]
+Sync settings travel with the vault (through iCloud, Obsidian Sync, or git), but the sign-in does not. A phone that shares a vault with a signed-in desktop therefore shows Cloud Sync as turned on while the phone itself is not connected yet. The Dashboard shows a bar with **Sign in on this device** in that state, and Settings → Integrations says the same. Until you sign in there, reviews made on that device stay on that device.
+
+When you request the sign-in email, open the link on the same device. The link completes sign-in in whichever browser opens it and then returns to Obsidian.
+:::
+
 ## The first sync
 
 The first exchange merges the local collection with the collection already associated with the account:
@@ -55,7 +61,7 @@ The first exchange merges the local collection with the collection already assoc
 - if the local database is empty, Cloud data is downloaded;
 - if both contain data, changed records are merged using the normal conflict rules.
 
-The first sync may take longer for a large collection, but it does not block True Recall from loading. Reviews and edits continue to save locally while the exchange runs.
+The first sync may take longer for a large collection, but it does not block True Recall from loading. Reviews and edits continue to save locally while the exchange runs. Progress is saved after every page, so a dropped connection resumes where it stopped instead of starting over. On a phone, keep Obsidian in the foreground until the Dashboard shows **Synced just now**; tapping **Sync error** shows what went wrong and retries.
 
 :::caution[Connecting a different account]
 The local database belongs to the vault, not to a browser account. Connecting a vault containing cards to a different True Recall account can merge that local collection into the new account. Create a backup and verify the account email before switching accounts.

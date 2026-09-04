@@ -63,7 +63,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		const { error } = await supabase.auth.signInWithOtp({
 			email,
 			options: {
-				emailRedirectTo: `${window.location.origin}/auth/confirm`,
+				// The email template appends token_hash to this URL, so it must already
+				// carry a query string.
+				emailRedirectTo: `${window.location.origin}/auth/confirm?next=${encodeURIComponent("/dashboard")}`,
 			},
 		});
 

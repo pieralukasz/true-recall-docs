@@ -98,7 +98,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 		if (authError) fail(authError.message);
 		else {
 			form.style.display = "none";
-			status.textContent = "Check your email, then return here to finish connecting.";
+			status.textContent = "Check your email and open the link on this device. It finishes the connection and returns you to Obsidian.";
 		}
 	});
 

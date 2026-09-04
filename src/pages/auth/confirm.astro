@@ -11,7 +11,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 		<div id="error-state" style="display:none">
 			<h1>Confirmation Failed</h1>
 			<p id="error-message" class="error-message"></p>
-			<a href="/login" class="btn">Go to Sign In</a>
+			<a id="retry" href="/login" class="btn">Go to Sign In</a>
 		</div>
 	</div>
 </BaseLayout>
@@ -23,12 +23,32 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 	const code = params.get("code");
 	const tokenHash = params.get("token_hash");
 	const type = params.get("type");
-	const next = params.get("next");
+	const next = params.get("next") ?? nextFromRedirectTo(params.get("redirect_to"));
 	const safeNext = next?.startsWith("/auth/plugin?") ? next : "/dashboard";
 
 	const loadingEl = document.getElementById("loading")!;
 	const errorState = document.getElementById("error-state")!;
 	const errorMessage = document.getElementById("error-message")!;
+	const retry = document.getElementById("retry") as HTMLAnchorElement;
+	// A plugin sign-in that failed should restart on the plugin page, which
+	// still knows the device it was authorizing.
+	if (safeNext.startsWith("/auth/plugin?")) retry.href = safeNext;
+
+	/**
+	 * The magic-link email carries the requested redirect as `redirect_to`
+	 * (a token-hash link never passes through Supabase, so nothing else
+	 * forwards it). Only its `next` parameter is trusted, and only when the
+	 * redirect points at this very page.
+	 */
+	function nextFromRedirectTo(value: string | null): string | null {
+		if (!value) return null;
+		try {
+			const url = new URL(value, window.location.origin);
+			return url.pathname === "/auth/confirm" ? url.searchParams.get("next") : null;
+		} catch {
+			return null;
+		}
+	}
 
 	function showError(msg: string) {
 		loadingEl.style.display = "none";
@@ -36,11 +56,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 		errorState.style.display = "block";
 	}
 
+	function explain(message: string): string {
+		if (/code verifier/i.test(message)) {
+			return "This link was opened in a different browser than the one that asked for it, so it could not finish signing you in. Request a new link and open it on this device.";
+		}
+		return message;
+	}
+
 	async function handleConfirm() {
 		if (code) {
 			const { error } = await supabase.auth.exchangeCodeForSession(code);
 			if (error) {
-				showError(error.message);
+				showError(explain(error.message));
 				return;
 			}
 			window.location.href = safeNext;
