@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "test": "bun test src/lib/key-plan.test.ts src/lib/auth-routes.test.ts",
     "preview": "astro preview",
     "astro": "astro",
     "render:excalidraw": "bunx --bun excalirender"

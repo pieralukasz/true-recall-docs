@@ -8,6 +8,11 @@ import {
 } from "../../../lib/device-limit";
 import { getSupabaseAdmin } from "../../../lib/supabase-admin";
 
+export const ALL: APIRoute = () => Response.json(
+	{ error: "Method not allowed" },
+	{ status: 405, headers: { Allow: "POST" } },
+);
+
 function base64Url(bytes: Uint8Array): string {
 	let binary = "";
 	for (const byte of bytes) binary += String.fromCharCode(byte);
@@ -50,6 +55,11 @@ export const POST: APIRoute = async ({ request }) => {
 		return Response.json({ error: "Invalid JSON" }, { status: 400 });
 	}
 	if (
+		!body || typeof body !== "object" || Array.isArray(body) ||
+		typeof body.code !== "string" ||
+		typeof body.state !== "string" ||
+		typeof body.verifier !== "string" ||
+		typeof body.deviceId !== "string" ||
 		!body.code ||
 		body.code.length > 128 ||
 		!body.state ||

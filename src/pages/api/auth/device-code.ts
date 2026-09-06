@@ -6,6 +6,11 @@ import { getSupabaseAdmin } from "../../../lib/supabase-admin";
 
 const TOKEN_RE = /^[A-Za-z0-9_-]{32,128}$/;
 
+export const ALL: APIRoute = () => Response.json(
+	{ error: "Method not allowed" },
+	{ status: 405, headers: { Allow: "POST" } },
+);
+
 export const POST: APIRoute = async ({ request }) => {
 	const bearer = request.headers
 		.get("Authorization")
@@ -38,6 +43,11 @@ export const POST: APIRoute = async ({ request }) => {
 		return Response.json({ error: "Invalid JSON" }, { status: 400 });
 	}
 	if (
+		!body || typeof body !== "object" || Array.isArray(body) ||
+		typeof body.state !== "string" ||
+		typeof body.challenge !== "string" ||
+		typeof body.deviceId !== "string" ||
+		typeof body.deviceName !== "string" ||
 		!TOKEN_RE.test(body.state ?? "") ||
 		!TOKEN_RE.test(body.challenge ?? "") ||
 		!body.deviceId?.trim() ||
