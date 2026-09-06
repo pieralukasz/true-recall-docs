@@ -77,7 +77,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						Your key has expired. Subscribe to continue using AI
 						features.
 					</p>
-					<a href="#" class="btn btn-sm polar-checkout-link"
+					<a href="#" class="btn btn-sm polar-checkout-link" data-umami-event="checkout-started"
 						>Upgrade to Pro</a
 					>
 				</div>
@@ -88,7 +88,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 				<h2>Your Pro Key</h2>
 				<div class="key-row">
 					<code id="key-value" class="key-value"></code>
-					<button id="copy-btn" class="btn-copy">
+					<button id="copy-btn" class="btn-copy" data-umami-event="pro-key-copied">
 						<svg
 							id="copy-icon"
 							width="16"
@@ -147,7 +147,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 						You've used all your free AI generations. Subscribe to
 						continue.
 					</p>
-					<a href="#" class="btn polar-checkout-link"
+					<a href="#" class="btn polar-checkout-link" data-umami-event="checkout-started"
 						>Subscribe — $4/mo</a
 					>
 				</div>
@@ -379,6 +379,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 					plan === "pro-exceeded" ? "dot-yellow" : "dot-green"
 				);
 				manageLink.textContent = "Manage Subscription";
+				manageLink.dataset.umamiEvent = "subscription-portal-opened";
 				manageLink.addEventListener("click", async (e) => {
 					e.preventDefault();
 					const { data: sd } = await supabase.auth.getSession();
@@ -390,6 +391,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 				planLabel.textContent = "Free Trial";
 				planDot.classList.add("dot-yellow");
 				manageLink.textContent = "Upgrade to Pro";
+				manageLink.dataset.umamiEvent = "checkout-started";
 				manageLink.classList.add("polar-checkout-link");
 				break;
 			case "expired":

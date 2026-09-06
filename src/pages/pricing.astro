@@ -92,6 +92,8 @@ const plans = [
 						</ul>
 						<a
 							href={plan.ctaHref}
+							data-umami-event="pricing-cta-click"
+							data-umami-event-plan={plan.name}
 							class:list={[
 								"btn",
 								{ "btn-secondary": plan.secondary },

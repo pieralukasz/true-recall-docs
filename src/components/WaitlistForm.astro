@@ -64,6 +64,8 @@
 </section>
 
 <script>
+  import { trackAnalyticsEvent } from "../lib/analytics";
+
   const form = document.getElementById("waitlist-form") as HTMLFormElement;
   const submitBtn = document.getElementById(
     "waitlist-submit",
@@ -95,6 +97,7 @@
       const data = await res.json();
 
       if (data.success) {
+        trackAnalyticsEvent("newsletter-subscribed");
         form.style.display = "none";
         successEl.style.display = "block";
       } else {

@@ -2,6 +2,7 @@
 import StarlightHead from '@astrojs/starlight/components/Head.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
+import UmamiAnalytics from '../UmamiAnalytics.astro';
 import { truerecallGraph } from '../../lib/software-entity';
 
 // Starlight nie emituje żadnego JSON-LD, więc graf encji wstrzykujemy tutaj —
@@ -23,3 +24,4 @@ const graph = truerecallGraph({
 <script type="application/ld+json" set:html={JSON.stringify(graph)} />
 <Analytics />
 <SpeedInsights />
+<UmamiAnalytics />

@@ -1,0 +1,47 @@
+---
+const trackerUrl = "https://analytics.truerecall.app/script.js";
+const websiteId = "fe1c76a0-89bc-4d62-9cc8-f083ec2ee372";
+---
+
+<script
+	is:inline
+	defer
+	src={trackerUrl}
+	data-website-id={websiteId}
+	data-domains="truerecall.app,www.truerecall.app"
+	data-exclude-search="true"
+	data-exclude-hash="true"
+	data-do-not-track="true"
+></script>
+
+<script>
+	const trackedLinks: Array<[string, string]> = [
+		['a[href="/login"]', "signup-click"],
+		['a[href="/pricing"], a[href="/pricing/"]', "pricing-click"],
+		['a[href="/dashboard"]', "dashboard-click"],
+		['a[href="#install"]', "install-section-click"],
+		[
+			'a[href^="https://community.obsidian.md/plugins/true-recall"]',
+			"install-plugin-click",
+		],
+		[
+			'a[href^="https://github.com/pieralukasz/true-recall"]',
+			"github-click",
+		],
+	];
+
+	for (const [selector, eventName] of trackedLinks) {
+		for (const element of document.querySelectorAll<HTMLElement>(selector)) {
+			if (!element.dataset.umamiEvent) {
+				element.dataset.umamiEvent = eventName;
+			}
+		}
+	}
+
+	const searchButton = document.querySelector<HTMLElement>(
+		"button[data-open-modal]",
+	);
+	if (searchButton) {
+		searchButton.dataset.umamiEvent = "docs-search-opened";
+	}
+</script>

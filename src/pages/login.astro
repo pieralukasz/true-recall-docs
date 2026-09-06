@@ -34,6 +34,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
+	import { trackAnalyticsEvent } from "../lib/analytics";
 	import { supabase } from "../lib/supabase";
 
 	const { data: { session } } = await supabase.auth.getSession();
@@ -75,6 +76,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			submitBtn.disabled = false;
 			submitBtn.textContent = "Send Magic Link";
 		} else {
+			trackAnalyticsEvent("login-link-sent");
 			form.style.display = "none";
 			successCard.style.display = "block";
 		}

@@ -1,6 +1,7 @@
 ---
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import UmamiAnalytics from "../components/UmamiAnalytics.astro";
 import { truerecallGraph } from "../lib/software-entity";
 
 interface Props {
@@ -34,6 +35,7 @@ const graph = truerecallGraph({
 		<script type="application/ld+json" set:html={JSON.stringify(graph)} />
 		<Analytics />
 		<SpeedInsights />
+		<UmamiAnalytics />
 	</head>
 	<body>
 		<nav class="top-nav">
@@ -42,16 +44,16 @@ const graph = truerecallGraph({
 				<span>True Recall</span>
 			</a>
 			<div class="nav-links">
-				<a href="/getting-started/introduction">Docs</a>
-				<a href="/pricing">Pricing</a>
-				<a href="/login" class="btn btn-small" data-auth-btn>Sign Up</a>
+			<a href="/getting-started/introduction" data-umami-event="docs-click">Docs</a>
+			<a href="/pricing" data-umami-event="pricing-click">Pricing</a>
+			<a href="/login" class="btn btn-small" data-auth-btn data-umami-event="signup-click">Sign Up</a>
 				<div class="auth-avatar-wrap" data-auth-avatar>
 					<div class="auth-avatar">
 						<span data-auth-initial>U</span>
 					</div>
 					<div class="auth-dropdown" style="display:none">
-						<a href="/dashboard" class="auth-dropdown-item">Dashboard</a>
-						<button class="auth-dropdown-item" data-auth-signout>Log out</button>
+						<a href="/dashboard" class="auth-dropdown-item" data-umami-event="dashboard-click">Dashboard</a>
+						<button class="auth-dropdown-item" data-auth-signout data-umami-event="logout-click">Log out</button>
 					</div>
 				</div>
 			</div>

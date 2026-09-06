@@ -4,14 +4,14 @@ import ThemeSelect from "virtual:starlight/components/ThemeSelect";
 ---
 
 <div class="mobile-preferences sl-flex">
-	<a href="/login" class="auth-btn" data-auth-btn>Sign Up</a>
+	<a href="/login" class="auth-btn" data-auth-btn data-umami-event="signup-click">Sign Up</a>
 	<div class="auth-avatar-wrap" data-auth-avatar>
 		<div class="auth-avatar">
 			<span data-auth-initial>U</span>
 		</div>
 		<div class="auth-dropdown" style="display:none">
-			<a href="/dashboard" class="auth-dropdown-item">Dashboard</a>
-			<button class="auth-dropdown-item" data-auth-signout>Log out</button>
+			<a href="/dashboard" class="auth-dropdown-item" data-umami-event="dashboard-click">Dashboard</a>
+			<button class="auth-dropdown-item" data-auth-signout data-umami-event="logout-click">Log out</button>
 		</div>
 	</div>
 	<ThemeSelect />
