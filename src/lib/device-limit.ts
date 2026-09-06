@@ -14,7 +14,10 @@ export type SyncPlan = "free" | "pro";
 /** Paid Pro is recorded by the Polar webhook as `polar_subscription_id`; a revoked subscription clears it. */
 export function syncPlanFor(
 	appMetadata: Record<string, unknown> | null | undefined,
+	now = Date.now(),
 ): SyncPlan {
+	const expires = appMetadata?.pro_expires_at;
+	if (typeof expires === "string" && (!Number.isFinite(Date.parse(expires)) || Date.parse(expires) <= now)) return "free";
 	return typeof appMetadata?.polar_subscription_id === "string" &&
 		appMetadata.polar_subscription_id.length > 0
 		? "pro"

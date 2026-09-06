@@ -274,13 +274,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		});
 	}
 
-	interface KeyInfo {
-		expires: string | null;
-		spend: number;
-		max_budget: number | null;
-		budget_reset_at: string | null;
-		budget_duration: string | null;
-	}
+	import { detectPlan, periodUsage, nextBudgetDate, type KeyInfo } from "../lib/key-plan";
 	type KeyLookup =
 		| { kind: "ok"; info: KeyInfo }
 		| { kind: "invalid" }
@@ -307,31 +301,6 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		return new Date(expires) < new Date();
 	}
 
-	type PlanType =
-		| "pro"
-		| "pro-exceeded"
-		| "trial"
-		| "expired"
-		| "trial-ended"
-		| "blocked";
-
-	function detectPlan(info: KeyInfo): PlanType {
-		const expired = isExpired(info.expires);
-		if (expired) return "expired";
-
-		const budget = info.max_budget ?? 0;
-		if (budget === 0) return "blocked";
-
-		const spend = info.spend ?? 0;
-		const budgetExceeded = budget > 0 && spend >= budget;
-		const hasBudgetDuration = !!info.budget_duration;
-
-		// Pro: has budget_duration (monthly reset)
-		if (hasBudgetDuration) return budgetExceeded ? "pro-exceeded" : "pro";
-
-		// Trial: no budget_duration (one-time budget)
-		return budgetExceeded ? "trial-ended" : "trial";
-	}
 
 	function renderPlan(lookup: KeyLookup, hasKey: boolean) {
 		if (!hasKey) {
@@ -413,10 +382,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		}
 
 		// Usage bar — show as percentage only, never dollars
-		const budget = info.max_budget ?? 0;
+		const { budget, spend } = periodUsage(info);
 		if (budget > 0) {
 			usageSection.style.display = "block";
-			const spend = info.spend ?? 0;
 			const percent = Math.min(100, Math.round((spend / budget) * 100));
 
 			usageAmount.textContent = `${percent}%`;
@@ -428,15 +396,16 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 		// Stats row
 		let hasStats = false;
 
+		const resetDate = nextBudgetDate(info);
 		if (
-			info.budget_reset_at &&
+			resetDate &&
 			(plan === "pro" || plan === "pro-exceeded")
 		) {
 			statResets.style.display = "block";
 			statResetsValue.textContent =
 				plan === "pro-exceeded"
-					? formatDate(info.budget_reset_at) + " (limit reached)"
-					: formatDate(info.budget_reset_at);
+					? formatDate(resetDate) + " (limit reached)"
+					: formatDate(resetDate);
 			hasStats = true;
 		}
 
